@@ -35,7 +35,7 @@ In scenarios where user registration isn't required (e.g., news apps), and you w
 Purchasely helps you combine the power of [Server to Server notifications (S2S) ](server-to-server-notifications)with anonymous purchases.
 
 > 🚧 Exception for consumables and non-consumables
-> 
+>
 > Note that consumable and non-consumable items cannot be transferred from an anonymous user to an authenticated user.
 
 ## Handling anonymous purchasing
@@ -44,7 +44,7 @@ The Purchasely SDK automatically generates and assigns an **`anonymous_user_id`*
 
 1. **Purchase Initiation:** When an anonymous user makes a purchase, the Purchasely SDK generates an **`anonymous_user_id`**.
 2. **Webhook Event:** After validating the store receipt, an event containing the **`anonymous_user_id`** is sent to the webhook.
-3. **Database Association: ** The association between the **`anonymous_user_id`** and the  **Product**_  & _**Plan** purchased must be stored in your own database.
+3. **Database Association:** The association between the **`anonymous_user_id`** and the  **Product***&***Plan** purchased must be stored in your own database.
 4. **`SDK Access: `** Use the SDK method to retrieve the **`anonymous_user_id`** and verify the user's entitlements in your backend.
 
 ### 1. Proceeding with an anonymous Purchase
@@ -118,16 +118,16 @@ _purchasely.GetAnonymousUserId();
 ```
 
 > 🚧 Enhanced operational efficiency and Support
-> 
+>
 > To ease customer support, we advise you to display both **`anonymous_user_id`** and **`user_id`** inside your app (e.g. in the section "My Subscriptions", in the settings or in the contact-us mail). This will help you identify the user in the Purchasely Console or in your own logs.
 
 > 📘 Unlock content from Subscription Status
-> 
+>
 > If you don't want to manage anonymous users you could use our mobile API to check [subscription status](subscription-status) and unlock the content locally.
 
 # Authenticate users
 
-To authenticate an anonymous user, just provides your user id. Purchasely will save this user id for all sessions moving forward until you call `Purchasely.userLogout()` or the user uninstall the application.  
+To authenticate an anonymous user, just provides your user id. Purchasely will save this user id for all sessions moving forward until you call `Purchasely.userLogout()` or the user uninstall the application.\
 You can call the following method whenever you want and as much as you want, no network connection is required, the user id is saved directly if the SDK detect it has changed.
 
 ```swift Swift
@@ -159,32 +159,16 @@ Purchasely.UserLogin("123456789", (shouldRefresh) => {
 
 ## Authenticate from Purchasely Screen
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/7fceacb-spaces_KuAJGBnHJWZbqzA4g8yO_uploads_git-blob-214feda03fa9d8a5d7219b47bf05f3195cfdef83_IMG_17A67C0C9589-1.jpeg",
-        null,
-        ""
-      ],
-      "align": "center",
-      "sizing": "500px",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" width="500px" border={true} src="https://files.readme.io/7fceacb-spaces_KuAJGBnHJWZbqzA4g8yO_uploads_git-blob-214feda03fa9d8a5d7219b47bf05f3195cfdef83_IMG_17A67C0C9589-1.jpeg" />
 
-
-Every presentation, has a _Already subscribed? Sign-in_ button to let your customers connect to unlock a feature / access a content.  
+Every presentation, has a *Already subscribed? Sign-in* button to let your customers connect to unlock a feature / access a content.\
 This button is displayed if you did not set a user id with **`Purchasely.userLogin()`**. see [SDK implementation](sdk-implementation) for further information.
 
 To intercept this event, you can setup a global handler that passes you the source paywall controller / fragment above which to display login.
 
-- IF the user signs in AND has a subscription, you can dismiss the paywall controller
-- IF the user signs in AND doesn't have a subscription, dismiss your login controller and notify the SDK by calling the **`isLoggedIn`** closure with **`true`**
-- IF the user cancels sign-in, dismiss your login controller and notify the SDK by calling the `isLoggedIn` closure with `false`
+* IF the user signs in AND has a subscription, you can dismiss the paywall controller
+* IF the user signs in AND doesn't have a subscription, dismiss your login controller and notify the SDK by calling the **`isLoggedIn`** closure with **`true`**
+* IF the user cancels sign-in, dismiss your login controller and notify the SDK by calling the `isLoggedIn` closure with `false`
 
 ```swift Swift
 Purchasely.setPaywallActionsInterceptor { [weak self] (action, parameters, presentationInfo, proceed) in
@@ -281,14 +265,14 @@ private void OnPaywallActionIntercepted(PaywallAction action)
 ```
 
 > 🚧 Update your Screen
-> 
+>
 > Do not forget to call **`Purchasely.userLogin("YOUR_USER_ID")`** before returning the result to Purchasely to properly update the presentation without the sign-in button.
 
 <br />
 
 # Sign out users
 
-To sign out user with Purchasely, you just need to call `Purchasely.userLogout()`. The user id registered will be removed and Purchasely will use the auto generated anonymous user id to assign a variant for your A/B tests and to link a purchase.  
+To sign out user with Purchasely, you just need to call `Purchasely.userLogout()`. The user id registered will be removed and Purchasely will use the auto generated anonymous user id to assign a variant for your A/B tests and to link a purchase.\
 All [built-in attributes](user-attributes-list) and [customer user attributes](custom-user-attributes) will also be cleared by calling this method, you can prevent Purchasely from clearing your customer user attributes by adding `false` as argument of the method.
 
 ```swift Swift
@@ -377,7 +361,7 @@ If you need to manually, from your code based on your own logic, transfer a subs
 
 To provide users with the option to retrieve their subscription, you must set up a button in your application that triggers the `Purchasely.restoreAllPurchases()` method.
 
-Both methods work the same way, the main difference is that `synchronize()` will not trigger any Apple pop-in for user to login and is an automatic process done by your application.  
+Both methods work the same way, the main difference is that `synchronize()` will not trigger any Apple pop-in for user to login and is an automatic process done by your application.\
 `restoreAllPurchasely()` may trigger an Apple pop-in and should only be called from a user action.
 
 ## Webhook events
