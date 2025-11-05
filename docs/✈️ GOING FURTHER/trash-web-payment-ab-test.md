@@ -10,66 +10,51 @@ metadata:
 next:
   description: ''
 ---
-Jamais implémenté côté Back pour le ply_content, je remets la doc ici au cas où on souhaite garder une trace
+Jamais implémenté côté Back pour le ply\_content, je remets la doc ici au cas où on souhaite garder une trace
 
 <br />
 
 ## A/B testing with Purchasely the web checkout flow VS the in-app purchase flow
 
 > 🚧 Disclaimer about the current SDK capabilities (v5.2.0)
-> 
+>
 > A/B testing web flows with the current version of the SDK v5.2.0 is low-code rather than 100% no-code because it relies on passing a user context from the app to the website, which requires to involve the mobile engineers.
-> 
+>
 > In the following paragraphs, we describe low-code mechanisms and provide code sample, to give the possibility to track transactions performed outside of the application and A/B test different flows, with the current version of the SDK (v5.2.0).
-> 
+>
 > In the weeks to come, we will release a new version of the Purchasely SDK which will make this tracking 100% no code and we will update this documentation accordingly and inform you. 
-> 
+>
 > Stay tuned!
 
 As mentioned in the introduction of this page, according to Apple and the review guidelines, users need to have the choice between In-App Purchases and other options.
 
 This means that you are not supposed to A/B test:
 
-- a web checkout flow  
+* a web checkout flow\
   VS 
-- an In-App Purchase flow 
+* an In-App Purchase flow 
 
 but rather: 
 
-- a flow integrating In-App Purchase along side web payment  
+* a flow integrating In-App Purchase along side web payment\
   VS 
-- a flow integrating only In-App Purchase.
+* a flow integrating only In-App Purchase.
 
 ### Enriching the link opened with contextual user information
 
 To enrich your URL with extra user data, you should use the action **Deep link** instead. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/e91368f32dd72e2816aa25d0c2a24995a61472eae601fab5b698917635fedfe2-ezgif-89c4b032af5c29.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/e91368f32dd72e2816aa25d0c2a24995a61472eae601fab5b698917635fedfe2-ezgif-89c4b032af5c29.gif" />
 
 Using a deeplink will allow to attach an in-app context (the `ply_context` parameter described below) to link the web transaction handled by Stripe to in-app flow that was initiated within the app.
 
 To do so, follow this implementation guide:
 
-1. Map each picker with a deeplink handled by the app.  
-   E.g. _myappscheme://web_checkout/?plan_id=[stripe_price_id]_
+1. Map each picker with a deeplink handled by the app.\
+   E.g. *myappscheme://web\_checkout/?plan\_id=\[stripe\_price\_id]*
 2. When being called through the deeplink, the app makes the following processings:
    1. Extract the Deeplink data
-   2. Generate the context data for the web platform and encode it in `base64` (parameter `ply_context`)  
+   2. Generate the context data for the web platform and encode it in `base64` (parameter `ply_context`)\
       This data will be useful once the web transaction has been processed
    3. Append the parameter `ply_context` to the body of the HTTP POST request opening the web checkout URL
 
@@ -308,11 +293,11 @@ func sendEncryptedData(encryptedData: Data, to url: URL, completion: @escaping (
 ```
 
 > ❗️ Beware of the SDK version
-> 
-> Fetching the ab_test_id and ab_test_variant_id to generate the user context is only possible with SDK version v5.1 onwards. 
-> 
+>
+> Fetching the ab\_test\_id and ab\_test\_variant\_id to generate the user context is only possible with SDK version v5.1 onwards. 
+>
 > Do not forget to update the Purchasely SDK when you implement what's above and to add the minimal SDK version in your targetting
-> 
+>
 > ![](https://files.readme.io/ddf7e1f068a020e93093489d312352a3abf70c59aaaf2738397826461b0a777c-image.png)
 
 ### Processing the Stripe transaction and notifying the Purchasely Platform
@@ -325,11 +310,11 @@ Call this endpoint with the appropriate headers/body:
 
 To send us this information, simply call our API and provide it with:
 
-- `stripe_object_id`: the Stripe subscription ID
-- `stripe_price_id`: the Stripe Price Id for this subscription (ON STRIPE)
-- `user_id`: the user_id associated with the purchase, the same as you enter in [the SDK during configuration.](https://docs.purchasely.com/quick-start-1/sdk-configuration/config-appendices/set-user-id)
-- `stripe_object_type`: the type of Stripe object sent, currently we only accept `subscription`
-- `ply_context`: the `ply_context` parameter fetched from the POST request described above encoded in `base64`.
+* `stripe_object_id`: the Stripe subscription ID
+* `stripe_price_id`: the Stripe Price Id for this subscription (ON STRIPE)
+* `user_id`: the user\_id associated with the purchase, the same as you enter in [the SDK during configuration.](https://docs.purchasely.com/quick-start-1/sdk-configuration/config-appendices/set-user-id)
+* `stripe_object_type`: the type of Stripe object sent, currently we only accept `subscription`
+* `ply_context`: the `ply_context` parameter fetched from the POST request described above encoded in `base64`.
 
 ```curl
 curl \
