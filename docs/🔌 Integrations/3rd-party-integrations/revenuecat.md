@@ -22,13 +22,13 @@ One example is the Integration of Purchasely’s Paywall Builder with a 3rd part
 
 By adopting Purchasely on top of the existing payment infrastructure, you can achieve the following:
 
-- Creating paywalls in record time without coding
-- Determine the right pricing strategy and improve your value proposition
-- Optimizing user journey and maximizing conversion with an unlimited number of experiments
-- Ensure the best experience for your visitors on different devices
+* Creating paywalls in record time without coding
+* Determine the right pricing strategy and improve your value proposition
+* Optimizing user journey and maximizing conversion with an unlimited number of experiments
+* Ensure the best experience for your visitors on different devices
 
 > 📘 Works with any other in-app purchase platform
-> 
+>
 > Please note that the article provides a step-by-step guide to integrating Purchasely with RevenueCat, but the same process can apply to any third-party payment platform.
 
 **Prerequisite**: You must implement Purchasely SDK in your application and configure Server to Server notifications (S2S) to collect the RevenuCat generated subscription data in real-time.
@@ -42,7 +42,7 @@ Head to the [quick start guide](sdk-quick-start) to learn more about the app sto
 **Note**: **there is no need to configure S2S notifications** at this stage. The article explains the S2S setup in the dedicated section below.
 
 > 👍 Just an add-on
-> 
+>
 > This will not remove any existing setup you may have done with your system or RevenueCat, Purchasely will get the same access in addition to the ones you already provided to other services.
 
 ## Products and plans
@@ -51,10 +51,10 @@ Once you’ve given Purchasely permission to connect to app stores, you need to 
 
 When duplicating the information, **please be aware of the discrepancy in the definition of a “plan” and a “product” used by RevenueCat and Purchasely**.
 
-**In Purchasely’s terms**:  
+**In Purchasely’s terms**:\
 A “plan” is an item (SKU) you sell on Apple/Google, such as a subscription, consumable or non-consumable. A “product” is a group of plans where you can manage upgrades and downgrades.
 
-**In RevenueCat’s terms**:  
+**In RevenueCat’s terms**:\
 A “product” is an item (SKU) you sell on Apple/Google which is equivalent to what is defined as a “plan” by Purchasely.
 
 Refer to [help center](https://help.purchasely.com/en/collections/3507048-products-plans) to learn more.
@@ -161,7 +161,7 @@ The `userID` parameter is optional and allows you to associate the purchase to a
 The most important argument to set, besides `apiKey` , of course, is the `runningMode` in **paywallObserver**
 
 > 📘 Transactions
-> 
+>
 > In this mode, Purchasely will be able to display paywalls and observe transactions but **will not process** them and validate them with Apple and Google
 
 ## Display paywalls
@@ -173,7 +173,7 @@ A Placement represents a specific location in your user journey inside your app 
 Once the placements are defined and called from the app, you can change the displayed paywall remotely without any developer action.
 
 > 📘 Pre-fetching
-> 
+>
 > We show here how to retrieve easily the Purchasely Screen to display but you should consider [pre-fetching](pre-fetching) the screen to handle more features like not displaying a screen
 
 ```swift Swift
@@ -435,7 +435,7 @@ Purchasely.setPaywallActionInterceptorCallback((result) => {
 <br />
 
 > 🚧 Synchroniztation
-> 
+>
 > When **a purchase or a restoration** is made with your current flow, call the `Purchasely.synchronize()` method so that new transactions are [caught](https://docs.purchasely.com/quick-start-1/sdk-configuration/paywall-observer-mode#4-sync-your-purchases-android-only) by our SDK (but not processed)
 
 # Data processing
@@ -443,123 +443,46 @@ Purchasely.setPaywallActionInterceptorCallback((result) => {
 You can leverage Purchasely’s data processing capabilities in observer mode to get relevant and useful information about your user subscription journey. Purchasely computes and standardizes all data across stores in real-time.
 
 > 📘 Observer mode
-> 
+>
 > Purchasely only **observes** the data from the SDK or directly from the stores with Server to Server notifications. It does not validate them or grand entitlements, and this must still be done with your In-App Purchase service like RevenueCat.
 
 ## S2S notifications with Apple
 
-App Store Connect only allows setting **one** endpoint url for S2S in production and sandbox mode. To circumvent this limitation, you can enable our `S2S Forwardings` integration in Purchasely console.  
+App Store Connect only allows setting **one** endpoint url for S2S in production and sandbox mode. To circumvent this limitation, you can enable our `S2S Forwardings` integration in Purchasely console.\
 In App Store Connect, you need to set the Purchasely url for S2S instead of the RevenueCat url
 
-![](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FGgUdOzhqa07uh7nB2iZA%2Fuploads%2Ft2G6zCEZhHCqZXXwYGEl%2FSCR-20220927-osb.png?alt=media&token=1ac14bb5-7698-48e5-a073-21358e998a9c)Then in Purchasely Console, you can set up a **S2S Forwardings** integration for Apple with RevenueCat endpoints
+![](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FGgUdOzhqa07uh7nB2iZA%2Fuploads%2Ft2G6zCEZhHCqZXXwYGEl%2FSCR-20220927-osb.png?alt=media\&token=1ac14bb5-7698-48e5-a073-21358e998a9c)Then in Purchasely Console, you can set up a **S2S Forwardings** integration for Apple with RevenueCat endpoints
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/ac19717-Purchasely_RevenueCat.avif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/ac19717-Purchasely_RevenueCat.avif" />
 
-
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/0c3122b-Purchasely_RevenueCat_1.avif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/0c3122b-Purchasely_RevenueCat_1.avif" />
 
 You are all set! Purchasely and RevenueCat will communicate real-time information about your users' purchases with Apple.
 
 > 📘 Use your own forwarding system
-> 
+>
 > You can also do the opposite by forwarding yourself Apple S2S notifications to Purchasely. RevenueCat also [provides such functionality](https://www.revenuecat.com/docs/platform-resources/server-notifications/apple-server-notifications#option-1-recommended-setting-up-revenuecat-to-forward-apple-notifications-to-your-server) if you prefer to use their own forwarding system.
 
 ## S2S notifications with Google
 
-Server-to-Server notifications for Google are called [real-time developer notifications](https://developer.android.com/google/play/billing/rtdn-reference)  
-It is possible to set up as many endpoints as you want to receive those notifications so that you can set up another for Purchasely.  
+Server-to-Server notifications for Google are called [real-time developer notifications](https://developer.android.com/google/play/billing/rtdn-reference)\
+It is possible to set up as many endpoints as you want to receive those notifications so that you can set up another for Purchasely.\
 We provide an easy configuration in our console, where we connect directly to Google once you have provided your access key.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/d61ae2a-Purchasely_RevenueCat_2.avif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/d61ae2a-Purchasely_RevenueCat_2.avif" />
 
-
-It’s most likely that you’ve already setup S2S in the RevenueCat environment. This means a topic, probably named Play-Store-Notifications, has already been created on Google Pub/Sub.  
+It’s most likely that you’ve already setup S2S in the RevenueCat environment. This means a topic, probably named Play-Store-Notifications, has already been created on Google Pub/Sub.\
 Select this topic from the dropdown list to add Purchasely as a recipient of the same S2S (set as a subscription in Google console)
 
 > 🚧 Google Pub/Sub: One topic but multiple subscriptions
-> 
+>
 > Only one topic is set on Google Play Console to receive notifications in real time. A topic can have multiple endpoints (subscriptions in Google cloud console). Purchasely will add an endpoint to the same topic so that Google sends notifications to Purchasely and RevenueCat at the same time
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/4fd3f11-image_17.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "sizing": "600px",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" width="600px" border={true} src="https://files.readme.io/4fd3f11-image_17.png" />
 
 Once you have selected your topic (or created a new one if none exists), click on Next so that the setup can be done by Purchasely automatically.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/a8598fa-Purchasely_RevenueCat_3.avif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "sizing": "600px",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" width="600px" border={true} src="https://files.readme.io/a8598fa-Purchasely_RevenueCat_3.avif" />
 
 After that, you can follow the instructions to ensure the correct topic is configured on Google Play Console.
 
@@ -569,11 +492,11 @@ Finally you can [import your existing user base](subscribers-base-import) with a
 
 This will provide multiple benefits:
 
-- Accurate and relevant data in our [dashboard](console-dashboards) about your subscribers (active users, free trial, conversion, renewal disabled, grace period...)
-- [Cohorts](dashboard-cohorts) of your entire subscription base history
-- Historical reconstitution of every subscription with all [related events](server-events) coupled with financial data if the price was provided in the import file
-- Recommendations from our customer experience for growth
+* Accurate and relevant data in our [dashboard](console-dashboards) about your subscribers (active users, free trial, conversion, renewal disabled, grace period...)
+* [Cohorts](dashboard-cohorts) of your entire subscription base history
+* Historical reconstitution of every subscription with all [related events](server-events) coupled with financial data if the price was provided in the import file
+* Recommendations from our customer experience for growth
 
 > 📘 Google API limitation
-> 
+>
 > Due to a technical limitation from Google API, we will retrieve **full historical data of an active subscription** and up to **60 days for an inactive subscription** with Google Play Billing
