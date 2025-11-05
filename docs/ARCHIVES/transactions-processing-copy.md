@@ -12,11 +12,11 @@ next:
 ---
 Transaction processing differs depending on the SDK running mode.
 
-- In Full Mode, transactions are processed automatically by the Purchasely SDK.  
-  => [Implementation guide for processing transactions in Full Mode](process-transactions-full-mode)
-- In paywallObserver Mode, you need to use the <<glossary:Paywall Action Interceptor>> to intercept the click on the purchase button and process the transaction manually.  
-  => [Implementation guide for processing transactions using the Paywall Action Interceptor](process-transactions-with-paywall-action-interceptor)
-- <br />
+* In Full Mode, transactions are processed automatically by the Purchasely SDK.\
+  \=> [Implementation guide for processing transactions in Full Mode](process-transactions-full-mode)
+* In paywallObserver Mode, you need to use the <Glossary>Paywall Action Interceptor</Glossary> to intercept the click on the purchase button and process the transaction manually.\
+  \=> [Implementation guide for processing transactions using the Paywall Action Interceptor](process-transactions-with-paywall-action-interceptor)
+* <br />
 
 # Full mode
 
@@ -30,19 +30,19 @@ Most of Purchasely customers use this mode because it allows to take benefit of 
 
 This mode is particularly relevant for teams starting their journey with in-app subscriptions as it will avoid developers to:
 
-- code an in-house transaction processor, manage the subscribers lifecycle and produce store-specific code to plug with the app stores (3 to 6 months of work in average) 
-- waste time on developing the paywall(s)
+* code an in-house transaction processor, manage the subscribers lifecycle and produce store-specific code to plug with the app stores (3 to 6 months of work in average) 
+* waste time on developing the paywall(s)
 
 Instead, teams can focus on developing their core product and features and use subscriptions as a convenience.
 
 ## What can you do in this mode?
 
-- Display paywalls and change them remotely
-- Create as many paywalls as you want to multiply the touch points
-- Process transactions and extract meaningful data from stores receipts
-- Receive unified subscription events from our Webhook to trigger your automations
-- Connect this data with your marketing tools using our integrations
-- Analyse your business with the dashboards integrated in the Purchasely Console
+* Display paywalls and change them remotely
+* Create as many paywalls as you want to multiply the touch points
+* Process transactions and extract meaningful data from stores receipts
+* Receive unified subscription events from our Webhook to trigger your automations
+* Connect this data with your marketing tools using our integrations
+* Analyse your business with the dashboards integrated in the Purchasely Console
 
 ## Implementation
 
@@ -50,83 +50,83 @@ Instead, teams can focus on developing their core product and features and use s
 
 The first thing you need to do is to call the start method passing the mode `paywallObserver` / `PLYRunningModePaywallObserver`.
 
-[View implementation details](<>)
+[View implementation details]()
 
 ### 2. Set user identifier
 
 We need to know whenever a user is logged in or logged out to:
 
-- Hide the login button in the paywalls
-- Check if the user already used a trial and display the correct price
+* Hide the login button in the paywalls
+* Check if the user already used a trial and display the correct price
 
-[View implementation details](<>)
+[View implementation details]()
 
 ### 3. Configure and present paywalls
 
 To display a paywall, you need to can get a Controller / Fragment from Purchasely.
 
-[View implementation details](<>)
+[View implementation details]()
 
 ### 4. Save/Verify user subscriptions
 
-Purchases can be performed without any paywall involved. This is what happens for kids with ask-to-buy or with PSD2 flows.  
+Purchases can be performed without any paywall involved. This is what happens for kids with ask-to-buy or with PSD2 flows.\
 In these cases your app is notified by the SDK and you must unlock the content / service.
 
-[View implementation details](<>)
+[View implementation details]()
 
 After the initial purchase you will want to check the status. To do so you can use one of the following options:
 
-- Using your backend (if you implemented Webhook)
-- Using Firebase (if you have our Firebase extension)
-- Using the SDK's userSubscriptions method
+* Using your backend (if you implemented Webhook)
+* Using Firebase (if you have our Firebase extension)
+* Using the SDK's userSubscriptions method
 
 ### 5. Configure deeplinks (optional)
 
 Paywalls can be used in many othe ways that can be:
 
-- Promoted In-App Purchase
-- Deeplinks
-- Push notifications deeplinks
+* Promoted In-App Purchase
+* Deeplinks
+* Push notifications deeplinks
 
 ### 6. Migrate your existing subscriber base (optional)
 
 If your app already has subscribers, you must migrate them to Purchasely to:
 
-- Have complete dashboards including every subscriber acquired in the past
-- Handle status using the userSubscriptions
+* Have complete dashboards including every subscriber acquired in the past
+* Handle status using the userSubscriptions
 
-Follow [this guide](<>) to import your subscribers to Purchasely.
+Follow [this guide]() to import your subscribers to Purchasely.
 
 # PaywallObserver mode
 
 ## When to use it ?
 
-This mode is perfect to use Purchasely data and Purchasely paywalls without changing your existing purchase layer.  
+This mode is perfect to use Purchasely data and Purchasely paywalls without changing your existing purchase layer.\
 You can use this mode if you want to:
 
-- use Purchasely remotely modifiable paywalls
-- benefit of our unified data set of subscription events to get a better understanding of your subscribers' lifecycle
-- fuel your marketing tools with these events and create no-code automations
-- all this without changing your legacy transaction processor / backend
+* use Purchasely remotely modifiable paywalls
+* benefit of our unified data set of subscription events to get a better understanding of your subscribers' lifecycle
+* fuel your marketing tools with these events and create no-code automations
+* all this without changing your legacy transaction processor / backend
 
 ## What you can do in this mode ?
 
 You can:
 
-- Display paywalls and modify them remotely
-- Create as many paywalls as you need and multiply the touch points
-- Receive our subscription events from our Webhook to trigger your automations
-- Connect our data with your marketing tools using our integrations
-- Analyse your business with our great charts
+* Display paywalls and modify them remotely
+* Create as many paywalls as you need and multiply the touch points
+* Receive our subscription events from our Webhook to trigger your automations
+* Connect our data with your marketing tools using our integrations
+* Analyse your business with our great charts
 
 Purchasely will provide the controllers (iOS) and fragments (Android) for your paywalls and will inform you about subscription events through our Webhook and integrations.
 
 > ❗️ Important
-> 
+>
 > In this mode Purchasely won't consume your purchases or acknowledge purchases made.
-> 
-> - On iOS we won't finish the transaction of your consumables that will remain in the queue if you don't do that in your code.
-> - On Android the transactions will be cancelled and refunded after 3 days.
+>
+> * On iOS we won't finish the transaction of your consumables that will remain in the queue if you don't do that in your code.
+> * On Android the transactions will be cancelled and refunded after 3 days.
 
 ## Implementation
 
@@ -134,8 +134,8 @@ Purchasely will provide the controllers (iOS) and fragments (Android) for your p
 
 The `start` method must be called as soon as possible to catch every purchase / renewal.
 
-> 📘 
-> 
+> 📘
+>
 > In this mode, Purchasely will be able to display paywalls and observe transactions but will not process them and validate them with Apple and Google
 
 The most important argument to set, besides `apiKey` , of course, is the `runningMode` in **paywallObserver**
@@ -276,16 +276,16 @@ Purchasely.startWithAPIKey(
 );
 ```
 
-[View implementation details](<>)
+[View implementation details]()
 
 ### 2. Set user identifier
 
 We need to know whenever a user is logged in or logged out to:
 
-- Hide the login button in the paywalls
-- Check if the user already used a trial and display the correct price
+* Hide the login button in the paywalls
+* Check if the user already used a trial and display the correct price
 
-[View implementation details](<>)
+[View implementation details]()
 
 Use a PaywallActionInterceptor to handle login from a paywall and display your login screen
 
@@ -293,7 +293,7 @@ Use a PaywallActionInterceptor to handle login from a paywall and display your l
 
 To display a paywall, you need to can get a Controller / Fragment from Purchasely.
 
-[View implementation details](<>)
+[View implementation details]()
 
 Then you must use the Paywall Actions Interceptor to perform the purchase triggered from Purchasely's paywalls with your purchase system.
 
@@ -418,10 +418,8 @@ Purchasely.setPaywallActionInterceptorCallback((result) => {
   });
 ```
 ```coffeescript Flutter
-
 ```
 ```coffeescript Unity
-
 ```
 ```javascript Cordova
 Purchasely.setPaywallActionInterceptorCallback(
@@ -463,7 +461,6 @@ Purchasely.synchronize();
 Purchasely.synchronize
 ```
 ```coffeescript Unity
-
 ```
 ```javascript Cordova
 Purchasely.synchronize();
@@ -473,15 +470,15 @@ Purchasely.synchronize();
 
 Paywalls can be used in many othe ways that can be:
 
-- Promoted In-App Purchase
-- Deeplinks
-- Push notifications deeplinks
+* Promoted In-App Purchase
+* Deeplinks
+* Push notifications deeplinks
 
 ### 6. Migrate your existing subscriber base (optional)
 
 If your app already has subscribers, you must migrate them to Purchasely to:
 
-- Have complete dashboards including every subscriber acquired in the past
-- Handle status using the userSubscriptions
+* Have complete dashboards including every subscriber acquired in the past
+* Handle status using the userSubscriptions
 
-Follow [this guide](<>) to import your subscribers to Purchasely.
+Follow [this guide]() to import your subscribers to Purchasely.
