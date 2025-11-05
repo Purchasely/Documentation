@@ -30,18 +30,4 @@ It is composed of:
 2. **a robust backend** that can be used as a subscription infrastructure
 3. **a web Console** to craft visually appealing in-app user journeys, run campaigns and access a comprehensive set of analytics
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/004c51c-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/004c51c-image.png" />
