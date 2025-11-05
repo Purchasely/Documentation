@@ -69,82 +69,22 @@ In the Purchasely Console, navigate to the [Integrations](https://console.purcha
 2. Enter your API Key, that you can get in your Amplitude Console
 3. Select the server location of your Amplitude data
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/a5a352d-SCR-20240717-plrg.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/a5a352d-SCR-20240717-plrg.png" />
 
-
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/5686308-SCR-20240717-plyz.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/5686308-SCR-20240717-plyz.png" />
 
 ## Retrieve your Amplitude API Key
 
 To find your Amplitude project's unique API key and secret key, follow these steps.
 
-- In the Amplitude Analytics web app, click [Settings](http://analytics.amplitude.com/amp-dev-docs/settings/projects) in the upper right navigation.
-- Click Projects, then find your target project.
-- On the General tab, copy your API key.
+* In the Amplitude Analytics web app, click [Settings](http://analytics.amplitude.com/amp-dev-docs/settings/projects) in the upper right navigation.
+* Click Projects, then find your target project.
+* On the General tab, copy your API key.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/53b91c5-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/53b91c5-image.png" />
 
 ## Events
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/814f3da-SCR-20240717-pmjp.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/814f3da-SCR-20240717-pmjp.png" />
 
 <EventsIntegration />
