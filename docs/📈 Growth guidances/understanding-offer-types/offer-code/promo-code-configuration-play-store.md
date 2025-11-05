@@ -15,27 +15,12 @@ next:
 The offer code in the Google Play Console provides users using a free paid app, in-app product, or subscription with a promo code. The offer code is linked to the base plan of a subscription in the Google Play Console. 
 
 > 🚧 Warning
-> 
+>
 > In order to create codes, the subscription to which these codes are linked must be backward-compatible.
 
  In the Play Console, select your app, Go to Monetise -> Products -> Promo codes, and click Create Promo Code
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/8f96cad-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/8f96cad-image.png" />
 
 <br />
 
@@ -51,22 +36,7 @@ Promo code in Google Play Console can be created in three steps:
 2. **Start date and time**: start date and time of the promotion code.
 3. **End date and time**: end date and time of the promotion code.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/a2531bf-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/a2531bf-image.png" />
 
 <br />
 
@@ -78,22 +48,7 @@ Promo code in Google Play Console can be created in three steps:
 
 For this demo, we choose Promotion type as Subscription. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/78c66d5-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/78c66d5-image.png" />
 
 <br />
 
@@ -106,50 +61,20 @@ For this demo, we choose Promotion type as Subscription.
 
 If you’re adding a custom code, enter the code and the redemption limit. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/f3706d4-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/f3706d4-image.png" />
 
 Finally, click create on the pop-up that appears as below:
 
 <br />
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/62a9ca9-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/62a9ca9-image.png" />
 
 <br />
 
 > 🚧 Warning
-> 
+>
 > Custom codes must be unique per app, meaning you can’t reuse a custom code in the same app for a different campaign.
-> 
+>
 > Custom codes must be alphanumeric and are not case-sensitive.
-> 
+>
 > We recommend adding a year or date to the end of your custom code to make it easier to track when each code is enabled.
