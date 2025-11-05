@@ -19,7 +19,7 @@ next:
       title: Prerequisites & Flows Implementation
 ---
 > 🚧 SDK v5.5.0+ recommended
-> 
+>
 > Flows require to integrate SDK v5.3 and above. They are supported since this version, but we recommend v5.5.0 for a better stability and data consistency.
 
 In today’s saturated app market, the first few moments of a user's journey are make-or-break. Personalizing onboarding isn’t just a best practice - it’s a competitive necessity. By asking questions, segmenting users based on their answers, and aligning the experience with their goals using the Jobs-To-Be-Done (JTBD) framework, product teams can deeply connect with users' intent from the start.
@@ -32,22 +32,34 @@ Creating personalized sequences of Screens and onboarding, that collects user in
 
 This is precisely the role **Flows** are designed to fulfill:
 
-[block:html]
-{
-  "html": "<div style=\"margin: 30px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08);\">\n  <div style=\"position: relative; padding-bottom: 56.25%; height: 0;\">\n    <iframe \n      src=\"https://www.loom.com/embed/fbcccc1ca8c2489ca004af9e174aece4\"\n      frameborder=\"0\"\n      allowfullscreen\n      webkitallowfullscreen\n      mozallowfullscreen\n      style=\"position: absolute; top: 0; left: 0; width: 100%; height: 100%;\">\n    </iframe>\n  </div>\n</div>\n\n<p style=\"text-align:center; font-size:14px; color:#777; margin-top:8px;\">\n  🎬 Trailer — Discover how Flows transforms your onboarding experience\n</p>\n"
-}
-[/block]
+<HTMLBlock>{`
+<div style="margin: 30px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+    <iframe 
+      src="https://www.loom.com/embed/fbcccc1ca8c2489ca004af9e174aece4"
+      frameborder="0"
+      allowfullscreen
+      webkitallowfullscreen
+      mozallowfullscreen
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+    </iframe>
+  </div>
+</div>
 
+<p style="text-align:center; font-size:14px; color:#777; margin-top:8px;">
+  🎬 Trailer — Discover how Flows transforms your onboarding experience
+</p>
+`}</HTMLBlock>
 
 <br />
 
 **Flows** empower marketers and product teams to craft modular, dynamic onboarding and engagement journeys -without writing code. With visual control over decision trees, contextual screens, and logic-driven paths, Flows make it easy to:
 
-- Craft entire sequences of Screens designed with the Purchasely Screen Composer
-- Ask relevant questions (e.g., goals, motivations, usage preferences)
-- Personalize content and screens in real time,
-- Align messaging with user intent and JTBD insights,
-- Optimize conversion paths and continuously test variants.
+* Craft entire sequences of Screens designed with the Purchasely Screen Composer
+* Ask relevant questions (e.g., goals, motivations, usage preferences)
+* Personalize content and screens in real time,
+* Align messaging with user intent and JTBD insights,
+* Optimize conversion paths and continuously test variants.
 
 The result? A tailored native onboarding experience that feels smart, and deeply relevant - accelerating time-to-value and reducing churn from day one.
 
@@ -91,21 +103,33 @@ A Flow is composed of a sequence of Screens crafted with Purchasely Screen Compo
 
 📚 For more details, follow the [step by step Flow and configuration guide](flow-configuration)
 
-[block:html]
-{
-  "html": "<div style=\"margin: 30px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08);\">\n  <div style=\"position: relative; padding-bottom: 56.25%; height: 0;\">\n    <iframe \n      src=\"https://www.loom.com/embed/0e5369b8c0b04a60aa1528ee345d0aca\"\n      frameborder=\"0\"\n      allowfullscreen\n      webkitallowfullscreen\n      mozallowfullscreen\n      style=\"position: absolute; top: 0; left: 0; width: 100%; height: 100%;\">\n    </iframe>\n  </div>\n</div>\n\n<p style=\"text-align:center; font-size:14px; color:#777; margin-top:8px;\">\n  🎥 Tutorial — Create your first Flow in minutes\n</p>\n"
-}
-[/block]
+<HTMLBlock>{`
+<div style="margin: 30px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+    <iframe 
+      src="https://www.loom.com/embed/0e5369b8c0b04a60aa1528ee345d0aca"
+      frameborder="0"
+      allowfullscreen
+      webkitallowfullscreen
+      mozallowfullscreen
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+    </iframe>
+  </div>
+</div>
 
+<p style="text-align:center; font-size:14px; color:#777; margin-top:8px;">
+  🎥 Tutorial — Create your first Flow in minutes
+</p>
+`}</HTMLBlock>
 
 > 📘 Acknowledgement
-> 
+>
 > \_The flow presented in the video is a personalized user journey built for [Headspace](https://www.headspace.com) a leading app in meditation and well-being, and one of the most recognized for the personalization of its user journeys. 
-> 
-> - _It consists of a series of carefully crafted questions._
-> - _The user’s responses are used to personalize their experience by assigning them to a profile that reflects their goals, preferences, or challenges, allowing the app to recommend content that best matches their specific need_
-> 
-> _The Headspace Flow was imagined and designed by [Irrational Labs](https://irrationallabs.com/) - the leading behavioral science consultancy for designing better choices and aims to increase the user engagement during the free trial and the conversion to paid, by collecting user insights, personalizing the user journey and recommending the relevant contents for each user_
+>
+> * *It consists of a series of carefully crafted questions.*
+> * *The user’s responses are used to personalize their experience by assigning them to a profile that reflects their goals, preferences, or challenges, allowing the app to recommend content that best matches their specific need*
+>
+> *The Headspace Flow was imagined and designed by[Irrational Labs](https://irrationallabs.com/) - the leading behavioral science consultancy for designing better choices and aims to increase the user engagement during the free trial and the conversion to paid, by collecting user insights, personalizing the user journey and recommending the relevant contents for each user*
 
 # Going further
 
@@ -113,5 +137,5 @@ Flows can be personalized based on user insights.
 
 📚 Follow the guides to learn more: 
 
-- [Leveraging Quizzes to fetch user insights](user-insights)
-- [Tailoring Flows to the user insights](tailoring-flows-to-user-insights)
+* [Leveraging Quizzes to fetch user insights](user-insights)
+* [Tailoring Flows to the user insights](tailoring-flows-to-user-insights)
