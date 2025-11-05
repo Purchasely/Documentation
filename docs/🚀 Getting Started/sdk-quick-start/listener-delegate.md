@@ -50,9 +50,9 @@ By implementing Custom User Attribute listener, you will be able to:
 
 This feature is available starting from the following versions:
 
-- iOS: v5.0.2+
-- Android: v5.0.4+
-- React Native: v5.0.4+
+* iOS: v5.0.2+
+* Android: v5.0.4+
+* React Native: v5.0.4+
 
 ## Functionning
 
@@ -60,8 +60,8 @@ When the user submit their answer(s) to the Survey, if a user attribute has been
 
 After the app has been notified, it can: 
 
-- fetch the data `{attribute ID, type, value(s)}` 
-- and process it
+* fetch the data `{attribute ID, type, value(s)}` 
+* and process it
 
 ## Implementation
 
@@ -69,19 +69,19 @@ After the app has been notified, it can:
 
 The listener should be implemented for the following types of Custom User Attributes:
 
-- `String`
-- `Int`
-- `Float`
-- `Bool`
-- `Date`
-- `Array of Strings`
+* `String`
+* `Int`
+* `Float`
+* `Bool`
+* `Date`
+* `Array of Strings`
 
 > 📘 Surveys allowing multiple choice answers are associated with the type Array of Strings
-> 
+>
 > When configuring your survey, you can define whether multiple answers are allowed or not.
-> 
-> - If the Survey is configured to allow ONE single answer, the attribute returned will be a **String**
-> - If the Survey is configured to allow MULTIPLE answers, the attribute returned will be an **Array of Strings**.
+>
+> * If the Survey is configured to allow ONE single answer, the attribute returned will be a **String**
+> * If the Survey is configured to allow MULTIPLE answers, the attribute returned will be an **Array of Strings**.
 
 Once fetched, the data can be processed, which consist in sending it to your backend or any 3rd party integration directly from the app.
 
@@ -89,8 +89,8 @@ Once fetched, the data can be processed, which consist in sending it to your bac
 
 The `source` parameter of the listener/delegate methods indicates where the user attribute update originated. It can have two possible values:
 
-- **PURCHASELY**: The change was initiated internally by the Purchasely’s SDK. 
-- **CLIENT**: The change was triggered directly by your app. 
+* **PURCHASELY**: The change was initiated internally by the Purchasely’s SDK. 
+* **CLIENT**: The change was triggered directly by your app. 
 
 ```swift Swift
 @objc public enum PLYUserAttributeSource: Int {
@@ -119,7 +119,7 @@ enum PLYUserAttributeSource {
 This distinction helps you understand whether the attribute change was driven automatically by Purchasely's SDK or explicitly by your app's logic.
 
 > 🚧 Ignore the delegate when the parameter `source` is set to `client`
-> 
+>
 > When your app sets a [Custom User Attribute](custom-user-attributes), the listener / delegate will be called back by the SDK with the parameter `source` set to `client`.
-> 
+>
 > To avoid processing a data that you already have - because the app has set it in the first place - in most cases, you can ignore the event triggered when the parameter `source` is set to `client`.
