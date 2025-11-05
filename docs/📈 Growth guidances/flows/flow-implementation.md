@@ -17,7 +17,7 @@ next:
       title: Building a Flow with the Flow Composer
 ---
 > 🚧 SDK v5.5.0+ recommended
-> 
+>
 > Flows require to integrate SDK v5.3 and above. They are supported since this version, but we recommend v5.5.0 for a better stability and data consistency.
 
 <br />
@@ -44,37 +44,23 @@ To display a Flow, the recommended method consists in pre-fetching it ([more inf
 
 The `display()` method automatically:
 
-- Handles navigation inside the Flow (based on the transitions you configured in the Flow Composer)
-- Applies the Flow’s Display Mode (modal, fullscreen, push, drawer, pop‑in)
+* Handles navigation inside the Flow (based on the transitions you configured in the Flow Composer)
+* Applies the Flow’s Display Mode (modal, fullscreen, push, drawer, pop‑in)
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/a276eec6e01d7f867cef0337f4567a612c78e017326579818da016559673cd7f-display_mode.gif",
-        "",
-        "The display mode defines how the first Screen of the Flow should open"
-      ],
-      "align": "center",
-      "border": true,
-      "caption": "The display mode defines how the first Screen of the Flow should open"
-    }
-  ]
-}
-[/block]
+<Image alt="The display mode defines how the first Screen of the Flow should open" align="center" border={true} src="https://files.readme.io/a276eec6e01d7f867cef0337f4567a612c78e017326579818da016559673cd7f-display_mode.gif">
+  The display mode defines how the first Screen of the Flow should open
+</Image>
 
-
-- Works uniformly across all screen types (paywalls, quizzes, landing pages, etc.)
+* Works uniformly across all screen types (paywalls, quizzes, landing pages, etc.)
 
 > 🚧 Push display mode requires a navigation bar in the parent view
-> 
+>
 > The **Display mode** `Push` only works if the parent view already contains a navigation bar. 
-> 
+>
 > If you try to display a Screen/Flow associated with the `Push` display mode from a parent view which doesn't have a navigation bar associated, the display() method will fallback on the default display mode:
-> 
-> - Modal on iOS
-> - Full Screen on Android
+>
+> * Modal on iOS
+> * Full Screen on Android
 
 <br />
 
@@ -136,10 +122,10 @@ Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error -
 
 ## 3. Using the Flow deeplink
 
-To use this method, you need to have implemented [Deeplink management](deeplinks-management)  
+To use this method, you need to have implemented [Deeplink management](deeplinks-management)\
 You can trigger the display of a Flow using its deeplink, the SDK will automatically display it.
 
-You can also display the Flow yourself by implementing the [UIHandler](ui-handler-deeplinks)  
+You can also display the Flow yourself by implementing the [UIHandler](ui-handler-deeplinks)\
 Quick example:
 
 ```swift Swift
@@ -160,6 +146,6 @@ Purchasely.uiHandler = object : PLYUIHandler {
 
 ```
 
-In this case, the **Display mode** is automatically taken into consideration by the SDK if you call the method `display`.  
-Otherwise, you need to retrieve the display mode from the presentation object to display it accordingly.  
+In this case, the **Display mode** is automatically taken into consideration by the SDK if you call the method `display`.\
+Otherwise, you need to retrieve the display mode from the presentation object to display it accordingly.\
 Learn more in our dedicated section about the [UIHandler](ui-handler-deeplinks)
