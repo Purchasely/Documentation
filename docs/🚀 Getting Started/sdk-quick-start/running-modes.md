@@ -27,39 +27,10 @@ next:
 
 ## full mode
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/d185d5def6fa34fdba94e82c8ac2bc39031de68936e202558747301726670aa3-full_mode.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/d185d5def6fa34fdba94e82c8ac2bc39031de68936e202558747301726670aa3-full_mode.png" />
 
 <br />
 
 ## paywallObserver Mode
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/81acf4589eca92ebccd60b8499b6c8d955af45ffbd1161502e8b11369217af03-observer_mode.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/81acf4589eca92ebccd60b8499b6c8d955af45ffbd1161502e8b11369217af03-observer_mode.png" />
