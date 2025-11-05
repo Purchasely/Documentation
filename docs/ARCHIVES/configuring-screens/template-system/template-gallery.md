@@ -16,83 +16,83 @@ Screen templates are pre-designed frameworks used to create various screens in a
 
 1. Carousel
 
-   [block:image]{"images":[{"image":["https://files.readme.io/78652d6-carousel_2024-06-10T10_22_13.853Z.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/78652d6-carousel_2024-06-10T10_22_13.853Z.png" />
 2. Carousel & plan picker & steps & reviews
 
-   [block:image]{"images":[{"image":["https://files.readme.io/cafafa6-carousel-plan-picker-steps-review_2024-06-10T10_22_19.049Z.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/cafafa6-carousel-plan-picker-steps-review_2024-06-10T10_22_19.049Z.png" />
 3. Carousel & plan picker horizontal
 
-   [block:image]{"images":[{"image":["https://files.readme.io/24550db-carousel-plan-picker-horizontal_2024-06-10T10_24_05.296Z.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/24550db-carousel-plan-picker-horizontal_2024-06-10T10_24_05.296Z.png" />
 4. Carousel & Scrollable plan picker
 
-   [block:image]{"images":[{"image":["https://files.readme.io/7c5333c-carousel-scrollable-plan-picker_2024-06-10T10_24_09.829Z.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/7c5333c-carousel-scrollable-plan-picker_2024-06-10T10_24_09.829Z.png" />
 5. Carousel flow
 
-   [block:image]{"images":[{"image":["https://files.readme.io/860b3fb-carousel-flow_2024-06-10T10_24_14.832Z.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/860b3fb-carousel-flow_2024-06-10T10_24_14.832Z.png" />
 6. Carousel flow & plan picker horizontal
 
-   [block:image]{"images":[{"image":["https://files.readme.io/71c58b0-carousel-flow-plan-picker-horizontal_2024-06-10T10_24_19.525Z.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/71c58b0-carousel-flow-plan-picker-horizontal_2024-06-10T10_24_19.525Z.png" />
 7. Carousel overlay
 
-   [block:image]{"images":[{"image":["https://files.readme.io/2f18116-carousel-overlay_2024-06-10T10_24_23.831Z.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/2f18116-carousel-overlay_2024-06-10T10_24_23.831Z.png" />
 8. Carousel plan tiles
 
-   [block:image]{"images":[{"image":["https://files.readme.io/1128d0f-carousel-plan-tiles_2024-06-10T10_24_28.502Z.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/1128d0f-carousel-plan-tiles_2024-06-10T10_24_28.502Z.png" />
 9. Countdown
 
-   [block:image]{"images":[{"image":["https://files.readme.io/122611a-countdown_2024-06-10T10_25_57.051Z.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/122611a-countdown_2024-06-10T10_25_57.051Z.png" />
 10. Countdown absolute & feature list
 
-    [block:image]{"images":[{"image":["https://files.readme.io/5e64722-countdown-absolute-features-list_2024-06-10T10_25_59.863Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/5e64722-countdown-absolute-features-list_2024-06-10T10_25_59.863Z.png" />
 11. Features & tabs plan picker
 
-    [block:image]{"images":[{"image":["https://files.readme.io/07cac37-features-tabs-plan-picker_2024-06-10T10_26_22.635Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/07cac37-features-tabs-plan-picker_2024-06-10T10_26_22.635Z.png" />
 12. Features list
 
-    [block:image]{"images":[{"image":["https://files.readme.io/e3bb82b-features-list_2024-06-10T10_26_25.391Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/e3bb82b-features-list_2024-06-10T10_26_25.391Z.png" />
 13. Features list & countdown
 
-    [block:image]{"images":[{"image":["https://files.readme.io/7e69494-features-list-countdown_2024-06-10T10_26_28.180Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/7e69494-features-list-countdown_2024-06-10T10_26_28.180Z.png" />
 14. Features list & plan picker horizontal
 
-    [block:image]{"images":[{"image":["https://files.readme.io/358c0f0-features-list-plan-picker-horizontal_2024-06-10T10_26_31.690Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/358c0f0-features-list-plan-picker-horizontal_2024-06-10T10_26_31.690Z.png" />
 15. Features list & plan picker overlay
 
-    [block:image]{"images":[{"image":["https://files.readme.io/98bff67-features-list-plan-picker-overlay_2024-06-10T10_26_34.635Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/98bff67-features-list-plan-picker-overlay_2024-06-10T10_26_34.635Z.png" />
 16. Features list & plan picker with 2 columns
 
-    [block:image]{"images":[{"image":["https://files.readme.io/65b290b-features-list-plan-picker_2024-06-10T10_26_38.663Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/65b290b-features-list-plan-picker_2024-06-10T10_26_38.663Z.png" />
 17. Features list & plan picker with 3 columns
 
-    [block:image]{"images":[{"image":["https://files.readme.io/2eada92-features-list-plan-picker-three_2024-06-10T10_26_41.541Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/2eada92-features-list-plan-picker-three_2024-06-10T10_26_41.541Z.png" />
 18. Features list & Reviews
 
     ![](https://files.readme.io/f321483-features-list-ratings_2024-06-10T10_26_45.179Z.png)
 19. Features list & Steps
 
-    [block:image]{"images":[{"image":["https://files.readme.io/6b85a83-features-list-steps_2024-06-10T10_26_48.363Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/6b85a83-features-list-steps_2024-06-10T10_26_48.363Z.png" />
 20. Features list & Switch
 
-    [block:image]{"images":[{"image":["https://files.readme.io/6c787e6-features-list-switch_2024-06-10T10_26_51.881Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/6c787e6-features-list-switch_2024-06-10T10_26_51.881Z.png" />
 21. Features list & overlay
 
     ![](https://files.readme.io/f710189-features-list-overlay_2024-06-10T10_26_55.011Z.png)
 22. Features list reviews & plan picker horizontal
 
-    [block:image]{"images":[{"image":["https://files.readme.io/c367592-features-list-ratings-plan-picker-horizontal_2024-06-10T10_26_59.215Z.png",null,""],"align":"center","border":true}]}[/block]
-23. Features list reviews & steps[block:image]{"images":[{"image":["https://files.readme.io/9cc7ad6-features-list-ratings-steps_2024-06-10T10_27_02.514Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/c367592-features-list-ratings-plan-picker-horizontal_2024-06-10T10_26_59.215Z.png" />
+23. Features list reviews & steps\[block:image]\{"images":\[\{"image":["https://files.readme.io/9cc7ad6-features-list-ratings-steps_2024-06-10T10_27_02.514Z.png",null,""],"align":"center","border":true}]}\[/block]
 24. Landscape Carousel
 
-    [block:image]{"images":[{"image":["https://files.readme.io/33d48fc-landscape-carousel_2024-06-10T10_31_36.724Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/33d48fc-landscape-carousel_2024-06-10T10_31_36.724Z.png" />
 25. Landscape Carousel & plan picker horizontal
 
-    [block:image]{"images":[{"image":["https://files.readme.io/8268915-landscape-carousel-plan-picker-horizontal_2024-06-10T10_31_40.616Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/8268915-landscape-carousel-plan-picker-horizontal_2024-06-10T10_31_40.616Z.png" />
 26. Landscape features list & plan picker horizontal
 
-    [block:image]{"images":[{"image":["https://files.readme.io/1eeec45-landscape-features-list-plan-picker-horizontal_2024-06-10T10_31_43.857Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/1eeec45-landscape-features-list-plan-picker-horizontal_2024-06-10T10_31_43.857Z.png" />
 27. Landscape steps
 
-    [block:image]{"images":[{"image":["https://files.readme.io/ab8f934-landscape-steps_2024-06-10T10_31_46.725Z.png",null,""],"align":"center","border":true}]}[/block]
+    <Image align="center" className="border" border={true} src="https://files.readme.io/ab8f934-landscape-steps_2024-06-10T10_31_46.725Z.png" />
 28. Long Paywall
 
     ![](https://files.readme.io/cac15fd-long-paywall_2024-06-10T10_33_59.675Z.png)
@@ -181,189 +181,40 @@ Screen templates are pre-designed frameworks used to create various screens in a
 
 55. Table & Plan picker with 3 columns
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/4579ed8-table-plan-picker-three_2024-06-10T10_38_42.488Z.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/4579ed8-table-plan-picker-three_2024-06-10T10_38_42.488Z.png" />
 
 56. Table & Reviews
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/2ec4f81-table-ratings_2024-06-10T10_38_45.865Z.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/2ec4f81-table-ratings_2024-06-10T10_38_45.865Z.png" />
 
 57. Table V2
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b3b28f2-table-v2_2024-06-10T10_38_49.691Z.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/b3b28f2-table-v2_2024-06-10T10_38_49.691Z.png" />
 
 58. Table with four columns
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b322199-table-four-columns_2024-06-10T10_38_54.031Z.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/b322199-table-four-columns_2024-06-10T10_38_54.031Z.png" />
 
 59. Tabs
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/f11a139-tabs_2024-06-10T10_38_57.306Z.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/f11a139-tabs_2024-06-10T10_38_57.306Z.png" />
 
 60. Tabs & plan picker with 3 columns
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/5dacf83-tabs-plan-picker-three_2024-06-10T10_39_03.099Z.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/5dacf83-tabs-plan-picker-three_2024-06-10T10_39_03.099Z.png" />
 
 61. Tabs & plan picker with 3 columns (tiny)
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/4076075-tabs-plan-picker-three-tiny_2024-06-10T10_39_08.600Z.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/4076075-tabs-plan-picker-three-tiny_2024-06-10T10_39_08.600Z.png" />
 
 62. Tabs & plan picker with 4 columns
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/d8f48d8-tabs-plan-picker-four_2024-06-10T10_39_12.147Z.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/d8f48d8-tabs-plan-picker-four_2024-06-10T10_39_12.147Z.png" />
 
 63. Tabs & plan picker with 4 columns (tiny)
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/145135a-tabs-plan-picker-four-tiny_2024-06-10T10_39_15.058Z.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/145135a-tabs-plan-picker-four-tiny_2024-06-10T10_39_15.058Z.png" />
 
 64. Unsubscribe
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/7f26802-unsubscribe_2024-06-10T10_21_25.113Z.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/7f26802-unsubscribe_2024-06-10T10_21_25.113Z.png" />
