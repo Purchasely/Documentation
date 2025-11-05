@@ -18,9 +18,9 @@ next:
 
 ## Huawei Mobile Services
 
-Huawei requires you to provide the SHA-1 of your certificate and add their configuration file to your project (agconnect-services.json). Please refer to their documentation : <https://developer.huawei.com/consumer/en/doc/development/HMSCore-Guides-V5/config-agc-0000001050033072-V5>
+Huawei requires you to provide the SHA-1 of your certificate and add their configuration file to your project (agconnect-services.json). Please refer to their documentation : [https://developer.huawei.com/consumer/en/doc/development/HMSCore-Guides-V5/config-agc-0000001050033072-V5](https://developer.huawei.com/consumer/en/doc/development/HMSCore-Guides-V5/config-agc-0000001050033072-V5)
 
-To integrate Huawei Mobile Services, you need to add dependencies to huawei repository and plug-in as referred in their documentation : <https://developer.huawei.com/consumer/en/doc/development/HMSCore-Guides-V5/integrating-sdk-0000001050035023-V5>
+To integrate Huawei Mobile Services, you need to add dependencies to huawei repository and plug-in as referred in their documentation : [https://developer.huawei.com/consumer/en/doc/development/HMSCore-Guides-V5/integrating-sdk-0000001050035023-V5](https://developer.huawei.com/consumer/en/doc/development/HMSCore-Guides-V5/integrating-sdk-0000001050035023-V5)
 
 ```groovy project/build.gradle
 // Edit file android/build.gradle
