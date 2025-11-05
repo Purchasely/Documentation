@@ -18,7 +18,7 @@ next:
 
 ## Other stores
 
-Our Cordova SDK does not contains other stores to avoid unnecessary integrations. You have to specifically declare which stores you want.  
+Our Cordova SDK does not contains other stores to avoid unnecessary integrations. You have to specifically declare which stores you want.\
 To add our stores dependencies to your project, you just need to add them to the `app/build.gradle` file of your android folder in your project. The version must be the same than purchasely main dependency
 
 ```typescript build.gradle
