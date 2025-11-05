@@ -26,21 +26,7 @@ Using these tags will also ease to make your paywall compliant with the App Stor
 
 Tags can be used in any label on a Screen. You can add them by simply clicking on the `{{TAGS}}` inside the text field. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/1a358a8da1b12806e775d9a6030a7bdbe95a4c8076d0fc112c949c888315daf1-tags.gif",
-        "",
-        ""
-      ],
-      "align": "center"
-    }
-  ]
-}
-[/block]
-
+<Image align="center" src="https://files.readme.io/1a358a8da1b12806e775d9a6030a7bdbe95a4c8076d0fc112c949c888315daf1-tags.gif" />
 
 You can also directly type them in plain text. To do so, put the name of the tag between 2 pairs of curly brackets. Eg: `{{PRICE}}`
 
@@ -50,45 +36,31 @@ You can also directly type them in plain text. To do so, put the name of the tag
 
 You can use 2 types of tags.
 
-- Tags with no parameters refer to the Plan directly mapped with the parent element (eg: the picker to which the text belongs or the purchase button) or to the default Plan configured for this Screen. To use this kind of tags, simply click on the blue button inside the widget.
+* Tags with no parameters refer to the Plan directly mapped with the parent element (eg: the picker to which the text belongs or the purchase button) or to the default Plan configured for this Screen. To use this kind of tags, simply click on the blue button inside the widget.
 
-  [block:image]{"images":[{"image":["https://files.readme.io/02cf5c8eb4587ec6d48d21004892ddafe625c941022de32d3ea266070cb96e89-tags_no_param.gif","",""],"align":"center"}]}[/block]
+  <Image align="center" src="https://files.readme.io/02cf5c8eb4587ec6d48d21004892ddafe625c941022de32d3ea266070cb96e89-tags_no_param.gif" />
 
-  => This way, if you change the Plan associated with the button / picker (or run an Price A/B test), you won't need to update the tag.
-- Tags with parameters are mapped with a specific Plan. They appear with the reference of the Plan selected between brackets. If you want to use them, simply select the desired Plan in the widget. 
+  \=> This way, if you change the Plan associated with the button / picker (or run an Price A/B test), you won't need to update the tag.
+* Tags with parameters are mapped with a specific Plan. They appear with the reference of the Plan selected between brackets. If you want to use them, simply select the desired Plan in the widget. 
 
-  [block:image]{"images":[{"image":["https://files.readme.io/e8418dc4efcb59916fd79b06f439868751db70af03bb0e5697b8f1dcb168a0ab-tags_parameters.gif","",""],"align":"center"}]}[/block]
+  <Image align="center" src="https://files.readme.io/e8418dc4efcb59916fd79b06f439868751db70af03bb0e5697b8f1dcb168a0ab-tags_parameters.gif" />
 
   They can be used to reference another Plan in a picker or button than the one which it is mapped with, or to associate a Plan which is not the default one. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/3d21534-image.png",
-        null,
-        "The tag $59.99 references a different Plan than the one associated to the plan picker"
-      ],
-      "align": "center",
-      "border": true,
-      "caption": "The strikethrough price is a reference to another Plan than the one associated with the picker"
-    }
-  ]
-}
-[/block]
-
+<Image alt="The tag $59.99 references a different Plan than the one associated to the plan picker" align="center" border={true} src="https://files.readme.io/3d21534-image.png">
+  The strikethrough price is a reference to another Plan than the one associated with the picker
+</Image>
 
 <br />
 
 > 🚧 Why does the preview display a `$XX.XX` instead of the actual price?
-> 
+>
 > In some cases, tags cannot be displayed properly in the preview of the Console. They are replaced by XX.XX
-> 
+>
 > The reason is that the Purchasely Console is not directly interfaced with the App stores. Therefore, it can only know the price of a SKUs in each territory once a transaction has been processed or observed by the Platform. 
-> 
+>
 > As soon as it is the case, the XX.XX will be replace by the actual price in the appropriate currency. Eg: $9.99
-> 
+>
 > Be reassured however, the SDK fetches the information directly from the App stores, and therefore always displays the correct price, in the appropriate currency (the one from the user's App store territory).
 
 # Types of tags
@@ -97,35 +69,107 @@ You can use 2 types of tags.
 
 These tags are most common tags that used in all the paywalls. Purchasely checks if your paywall has either the `PRICE` tag or `AMOUNT`/`DURATION` or `AMOUNT`/`PERIOD` tag in the purchase buttons. 
 
-[block:parameters]
-{
-  "data": {
-    "h-0": "Tag",
-    "h-1": "Usage",
-    "h-2": "Example",
-    "0-0": "`PRICE`",
-    "0-1": "Displays the plan price with the period.",
-    "0-2": "For a renewing plan:  \n_  Subscription starting from **{{PRICE}}**._  \nThe output will be:  \n_  Subscription starting from $6.99/month._  \n  \nFor consumables / non-consumables :  \n_  Enjoy a lifetime plan at **{{PRICE}}**._  \nThe output will be:  \n_  Enjoy a lifetime at $83.99._",
-    "1-0": "`AMOUNT`",
-    "1-1": "Displays the plan price.",
-    "1-2": "For a renewing plan:  \n  _Subscription starting from **{{AMOUNT}}**_  \n  \nThe output will be:  \n  _Subscription starting from $6.99._  \n  \nFor consumables / non-consumables :  \n  _Enjoy a lifetime plan at **{{AMOUNT}}**._  \n  \nThe output will be:  \n  _Enjoy a lifetime plan at $83.99._",
-    "2-0": "`PERIOD`",
-    "2-1": "Displays the period of the plan.",
-    "2-2": "For a renewing plan:  \n_  Subscription starting from **{{AMOUNT}}/{{PERIOD}}**._  \n  \nThe output will be:  \n_  Subscription starting from $6.99/month._",
-    "3-0": "`DURATION`",
-    "3-1": "Displays the duration of the plan.",
-    "3-2": "For a renewing plan:  \n  _Subscription starting from **{{AMOUNT}}** for **{{DURATION}}**.  \n_  \nThe output will be:  \n_  Subscription starting from $6.99 for 1 month._"
-  },
-  "cols": 3,
-  "rows": 4,
-  "align": [
-    "left",
-    "left",
-    "left"
-  ]
-}
-[/block]
+<Table align={["left","left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Tag
+      </th>
 
+      <th>
+        Usage
+      </th>
+
+      <th>
+        Example
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        `PRICE`
+      </td>
+
+      <td>
+        Displays the plan price with the period.
+      </td>
+
+      <td>
+        For a renewing plan:\
+        *Subscription starting fro&#x6D;**\{\{PRICE}}**.*\
+        The output will be:\
+        *Subscription starting from $6.99/month.*  
+
+        For consumables / non-consumables :\
+        *Enjoy a lifetime plan a&#x74;**\{\{PRICE}}**.*\
+        The output will be:\
+        *Enjoy a lifetime at $83.99.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `AMOUNT`
+      </td>
+
+      <td>
+        Displays the plan price.
+      </td>
+
+      <td>
+        For a renewing plan:\
+          *Subscription starting fro&#x6D;**\{\{AMOUNT}}***  
+
+        The output will be:\
+          *Subscription starting from $6.99.*  
+
+        For consumables / non-consumables :\
+          *Enjoy a lifetime plan a&#x74;**\{\{AMOUNT}}**.*  
+
+        The output will be:\
+          *Enjoy a lifetime plan at $83.99.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `PERIOD`
+      </td>
+
+      <td>
+        Displays the period of the plan.
+      </td>
+
+      <td>
+        For a renewing plan:\
+        *Subscription starting fro&#x6D;**\{\{AMOUNT}}/\{\{PERIOD}}**.*  
+
+        The output will be:\
+        *Subscription starting from $6.99/month.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `DURATION`
+      </td>
+
+      <td>
+        Displays the duration of the plan.
+      </td>
+
+      <td>
+        For a renewing plan:  
+
+        * Subscription starting from **\{\{AMOUNT}}** for **\{\{DURATION}}**.  
+        * The output will be:\
+          *Subscription starting from $6.99 for 1 month.*
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 <br />
 
@@ -141,93 +185,323 @@ These tags displays the price and duration of the introductory offers or free tr
 
 These tags help you display the subscription duration in days, weeks , months and etc.
 
-[block:parameters]
-{
-  "data": {
-    "h-0": "Name",
-    "h-1": "Usage",
-    "h-2": "Example",
-    "0-0": "`DAYS_DURATION`",
-    "0-1": "Displays the subscription duration in days.",
-    "0-2": "For a renewing plan:  \n_  Subscription starting from **{{PRICE}}** is **{{DAILY_AMOUNT}}**/day during **{{DAYS_DURATION}}**.  \n_  \nThe output will be:  \n_  Subscription starting from $6.99/week is $0.99/day only during 7 days._",
-    "1-0": "`WEEKS_DURATION`",
-    "1-1": "Displays the subscription duration in weeks.",
-    "1-2": "For a renewing plan:  \n_Subscription starting from **{{PRICE}}** is **{{WEEKLY_AMOUNT}}**/week during **{{WEEKS_DURATION}}**.  \n_  \nThe output will be:  \n_  Subscription starting from $6.99/month is $1.75/week during 4 weeks._",
-    "2-0": "`MONTHS_DURATION`",
-    "2-1": "Displays the subscription duration in months.",
-    "2-2": "For a renewing plan:  \n_  Subscription starting from **{{PRICE}}** is **{{MONTHLY_AMOUNT}}**/month during **{{MONTHS_DURATION}}**.  \n_  \nThe output will be:  \n_  Subscription starting from $24.99/year is $2.08/month only during 12 months._",
-    "3-0": "`QUARTERS_DURATION`",
-    "3-1": "Displays the subscription duration in quarters.",
-    "3-2": "For a renewing plan:  \n_  Subscription starting from **{{PRICE}}** is **{{QUARTERLY_AMOUNT}}**/quarter during **{{QUARTERS_DURATION}}**._  \n  \nThe output will be:  \n_  Subscription starting from 24€99/year is $6.24/quarter only during 4 quarters._",
-    "4-0": "`YEARS_DURATION`",
-    "4-1": "Displays the subscription duration in years.  \nIf the subscription is less than a year, the output will be 0.",
-    "4-2": "For a renewing plan:  \n_  Subscription starting from **{{PRICE}}** is **{{YEARLY_AMOUNT}}**/year for **{{YEARS_DURATION}}**._  \n  \nThe output will be:  \n_  Subscription starting from $119.99/year is $119.99/year only for 1 year._"
-  },
-  "cols": 3,
-  "rows": 5,
-  "align": [
-    "left",
-    "left",
-    "left"
-  ]
-}
-[/block]
+<Table align={["left","left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
 
+      <th>
+        Usage
+      </th>
+
+      <th>
+        Example
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        `DAYS_DURATION`
+      </td>
+
+      <td>
+        Displays the subscription duration in days.
+      </td>
+
+      <td>
+        For a renewing plan:  
+
+        * Subscription starting from **\{\{PRICE}}** is **\{\{DAILY\_AMOUNT}}**/day during **\{\{DAYS\_DURATION}}**.  
+        * The output will be:\
+          *Subscription starting from $6.99/week is $0.99/day only during 7 days.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `WEEKS_DURATION`
+      </td>
+
+      <td>
+        Displays the subscription duration in weeks.
+      </td>
+
+      <td>
+        For a renewing plan:  
+
+        * Subscription starting from **\{\{PRICE}}** is **\{\{WEEKLY\_AMOUNT}}**/week during **\{\{WEEKS\_DURATION}}**.  
+        * The output will be:\
+          *Subscription starting from $6.99/month is $1.75/week during 4 weeks.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `MONTHS_DURATION`
+      </td>
+
+      <td>
+        Displays the subscription duration in months.
+      </td>
+
+      <td>
+        For a renewing plan:  
+
+        * Subscription starting from **\{\{PRICE}}** is **\{\{MONTHLY\_AMOUNT}}**/month during **\{\{MONTHS\_DURATION}}**.  
+        * The output will be:\
+          *Subscription starting from $24.99/year is $2.08/month only during 12 months.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `QUARTERS_DURATION`
+      </td>
+
+      <td>
+        Displays the subscription duration in quarters.
+      </td>
+
+      <td>
+        For a renewing plan:\
+        *Subscription starting fro&#x6D;**\{\{PRICE}}** is **\{\{QUARTERLY\_AMOUNT}}**/quarter during **\{\{QUARTERS\_DURATION}}**.*  
+
+        The output will be:\
+        *Subscription starting from 24€99/year is $6.24/quarter only during 4 quarters.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `YEARS_DURATION`
+      </td>
+
+      <td>
+        Displays the subscription duration in years.\
+        If the subscription is less than a year, the output will be 0.
+      </td>
+
+      <td>
+        For a renewing plan:\
+        *Subscription starting fro&#x6D;**\{\{PRICE}}** is **\{\{YEARLY\_AMOUNT}}**/year for **\{\{YEARS\_DURATION}}**.*  
+
+        The output will be:\
+        *Subscription starting from $119.99/year is $119.99/year only for 1 year.*
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 <br />
 
 ## Subscription cost per duration tags
 
-These tags helps you to display subscription cost per day, week or month and etc. They are convenient to compare together several plans with different periodicities.  
-_E.g.: compare the monthly price of a yearly subscription with a monthly subscription._
+These tags helps you to display subscription cost per day, week or month and etc. They are convenient to compare together several plans with different periodicities.\
+*E.g.: compare the monthly price of a yearly subscription with a monthly subscription.*
 
-[block:parameters]
-{
-  "data": {
-    "h-0": "Name",
-    "h-1": "Usage",
-    "h-2": "Example",
-    "0-0": "`DAILY_AMOUNT`",
-    "0-1": "Displays the cost of a plan per day.",
-    "0-2": "For a renewing plan:  \n_  Subscription costs **{{DAILY_AMOUNT}}** only per day.  \n_  \nThe output will be:  \n_  Subscription costs $0.49 only per day._",
-    "1-0": "`WEEKLY_AMOUNT`",
-    "1-1": "Displays the cost of a plan per week.",
-    "1-2": "For a renewing plan:  \n_  Subscription costs **{{WEEKLY_AMOUNT}}** only per week._  \n  \nThe output will be:  \n_  Subscription that costs $2.78 only per week._",
-    "2-0": "`MONTHLY_AMOUNT`",
-    "2-1": "Displays the cost of a plan per month.",
-    "2-2": "For a renewing plan:  \n_  Subscription costs **{{MONTHLY_AMOUNT}} **only per month.  \n_  \nThe output will be:  \n_  Subscription costs $6.99 only per month._",
-    "3-0": "`QUARTERLY_AMOUNT`",
-    "3-1": "Displays the cost of a plan per quarter.",
-    "3-2": "For a renewing plan:  \n_  Subscription costs **{{QUARTERLY_AMOUNT}}** only per quarter._  \n  \nThe output will be:  \n_  Subscription costs $18.99 only per quarter._",
-    "4-0": "`YEARLY_AMOUNT`",
-    "4-1": "Displays the cost of a plan per year.",
-    "4-2": "For a renewing plan:  \n_  Subscription costs **{{YEARLY_AMOUNT}}** only per year.  \n_  \nThe output will be:  \n_  Subscription costs $25.99 only per year._",
-    "5-0": "`OFFER_DAILY_AMOUNT`",
-    "5-1": "Displays the cost of the Introductory Offer or Promotional Offer of a Plan per day.",
-    "5-2": "For a renewing plan:  \n_  Special offer: **{{OFFER_DAILY_AMOUNT}}** only per day.  \n_  \nThe output will be:  \n_  Special offer: $0.49 only per day._",
-    "6-0": "`OFFER_WEEKLY_AMOUNT`",
-    "6-1": "Displays the cost of the Introductory Offer or Promotional Offer of a Plan per week.",
-    "6-2": "For a renewing plan:  \n_  Subscription costs **{{OFFER_WEEKLY_AMOUNT}}** only per week._  \n  \nThe output will be:  \n_  Subscription that costs $2.78 only per week._",
-    "7-0": "`OFFER_MONTHLY_AMOUNT`",
-    "7-1": "Displays the cost of the Introductory Offer or Promotional Offer of a Plan per month.",
-    "7-2": "For a renewing plan:  \n_  Subscription costs **{{OFFER_MONTHLY_AMOUNT}}**only per month.  \n_  \nThe output will be:  \n_  Subscription costs $6.99 only per month._",
-    "8-0": "`OFFER_QUARTERLY_AMOUNT`",
-    "8-1": "Displays the cost of the Introductory Offer or Promotional Offer of a Plan per quarter.",
-    "8-2": "For a renewing plan:  \n_  Subscription costs **{{OFFER_QUARTERLY_AMOUNT}}** only per quarter._  \n  \nThe output will be:  \n_  Subscription costs $18.99 only per quarter._",
-    "9-0": "`OFFER_YEARLY_AMOUNT`",
-    "9-1": "Displays the cost of the Introductory Offer or Promotional Offer of a Plan per year.",
-    "9-2": "For a renewing plan:  \n_  Subscription costs **{{OFFER_YEARLY_AMOUNT}}** only per year.  \n_  \nThe output will be:  \n_  Subscription costs $25.99 only per year._"
-  },
-  "cols": 3,
-  "rows": 10,
-  "align": [
-    "left",
-    "left",
-    "left"
-  ]
-}
-[/block]
+<Table align={["left","left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
 
+      <th>
+        Usage
+      </th>
+
+      <th>
+        Example
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        `DAILY_AMOUNT`
+      </td>
+
+      <td>
+        Displays the cost of a plan per day.
+      </td>
+
+      <td>
+        For a renewing plan:  
+
+        * Subscription costs **\{\{DAILY\_AMOUNT}}** only per day.  
+        * The output will be:\
+          *Subscription costs $0.49 only per day.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `WEEKLY_AMOUNT`
+      </td>
+
+      <td>
+        Displays the cost of a plan per week.
+      </td>
+
+      <td>
+        For a renewing plan:\
+        *Subscription cost&#x73;**\{\{WEEKLY\_AMOUNT}}** only per week.*  
+
+        The output will be:\
+        *Subscription that costs $2.78 only per week.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `MONTHLY_AMOUNT`
+      </td>
+
+      <td>
+        Displays the cost of a plan per month.
+      </td>
+
+      <td>
+        For a renewing plan:  
+
+        * Subscription costs **\{\{MONTHLY\_AMOUNT}}**&#x6F;nly per month.  
+        * The output will be:\
+          *Subscription costs $6.99 only per month.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `QUARTERLY_AMOUNT`
+      </td>
+
+      <td>
+        Displays the cost of a plan per quarter.
+      </td>
+
+      <td>
+        For a renewing plan:\
+        *Subscription cost&#x73;**\{\{QUARTERLY\_AMOUNT}}** only per quarter.*  
+
+        The output will be:\
+        *Subscription costs $18.99 only per quarter.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `YEARLY_AMOUNT`
+      </td>
+
+      <td>
+        Displays the cost of a plan per year.
+      </td>
+
+      <td>
+        For a renewing plan:  
+
+        * Subscription costs **\{\{YEARLY\_AMOUNT}}** only per year.  
+        * The output will be:\
+          *Subscription costs $25.99 only per year.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `OFFER_DAILY_AMOUNT`
+      </td>
+
+      <td>
+        Displays the cost of the Introductory Offer or Promotional Offer of a Plan per day.
+      </td>
+
+      <td>
+        For a renewing plan:  
+
+        * Special offer: **\{\{OFFER\_DAILY\_AMOUNT}}** only per day.  
+        * The output will be:\
+          *Special offer: $0.49 only per day.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `OFFER_WEEKLY_AMOUNT`
+      </td>
+
+      <td>
+        Displays the cost of the Introductory Offer or Promotional Offer of a Plan per week.
+      </td>
+
+      <td>
+        For a renewing plan:\
+        *Subscription cost&#x73;**\{\{OFFER\_WEEKLY\_AMOUNT}}** only per week.*  
+
+        The output will be:\
+        *Subscription that costs $2.78 only per week.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `OFFER_MONTHLY_AMOUNT`
+      </td>
+
+      <td>
+        Displays the cost of the Introductory Offer or Promotional Offer of a Plan per month.
+      </td>
+
+      <td>
+        For a renewing plan:  
+
+        * Subscription costs **\{\{OFFER\_MONTHLY\_AMOUNT}}**&#x6F;nly per month.  
+        * The output will be:\
+          *Subscription costs $6.99 only per month.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `OFFER_QUARTERLY_AMOUNT`
+      </td>
+
+      <td>
+        Displays the cost of the Introductory Offer or Promotional Offer of a Plan per quarter.
+      </td>
+
+      <td>
+        For a renewing plan:\
+        *Subscription cost&#x73;**\{\{OFFER\_QUARTERLY\_AMOUNT}}** only per quarter.*  
+
+        The output will be:\
+        *Subscription costs $18.99 only per quarter.*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `OFFER_YEARLY_AMOUNT`
+      </td>
+
+      <td>
+        Displays the cost of the Introductory Offer or Promotional Offer of a Plan per year.
+      </td>
+
+      <td>
+        For a renewing plan:  
+
+        * Subscription costs **\{\{OFFER\_YEARLY\_AMOUNT}}** only per year.  
+        * The output will be:\
+          *Subscription costs $25.99 only per year.*
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 <br />
 
@@ -235,35 +509,108 @@ _E.g.: compare the monthly price of a yearly subscription with a monthly subscri
 
 These tags comes handy for your to calculate percentage difference and the price difference between 2 different plans and show them automatically in the respective currency. 
 
-[block:parameters]
-{
-  "data": {
-    "h-0": "Name",
-    "h-1": "Usage",
-    "h-2": "Example",
-    "0-0": "`PERCENTAGE_COMPARISON`",
-    "0-1": "Displays the percentage difference between the plan in the purchase button and the plan chosen.",
-    "0-2": "With:  \n  \n- yearly: $99.99/year\n- monthly: $9.99/month  \n  _  \n   **{{PERCENTAGE_COMPARISON(YEARLY,MONTHLY)}}** will display 17%  \n    **{{PERCENTAGE_COMPARISON(MONTHLY,YEARLY)}}** will display 20%_",
-    "1-0": "`DISCOUNT_PERCENTAGE`",
-    "1-1": "Displays the discount percentage between the actual plan in the purchase button and the plan chosen.  \nThe order in which the plans are selected does not matter.",
-    "1-2": "With:  \n  \n- yearly: $99.99/year\n- monthly: $9.99/month  \n  _  \n  **{{DISCOUNT_PERCENTAGE(YEARLY,MONTHLY)}}** will display 17%  \n  **{{DISCOUNT_PERCENTAGE(MONTHLY,YEARLY)}}** will display 17%_",
-    "2-0": "`RAISE_PERCENTAGE`",
-    "2-1": "Displays the raise of price in percentage between the actual plan in the purchase button and the plan chosen.  \nThe order in which the plans are selected does not matter.",
-    "2-2": "With:  \n  \n- yearly: $99.99/year\n- monthly: $9.99/monthThe output will be:  \n  _  **{{RAISE_PERCENTAGE(YEARLY,MONTHLY)}}** will display 20%  \n    **{{RAISE_PERCENTAGE(MONTHLY,YEARLY)}}** will display 20%_",
-    "3-0": "`PRICE_COMPARISON`",
-    "3-1": "Displays the price difference between the plan in the purchase button and the plan chosen.  \nThe price difference is computed with the periodicity of the first plan selected.",
-    "3-2": "With:  \n  \n- yearly: $99.99/year\n- monthly: $9.99/month\n\n  _The output will be:  \n  **{{PRICE_COMPARISON(YEARLY,MONTHLY)}}** will display $19.89  \n    => the monthly plan costs $19.89 more than the yearly plan on a yearly base  \n      **{{PRICE_COMPARISON(MONTHLY,YEARLY)}}** will display $1.66  \n    => the monthly plan costs $1.66 more than the yearly plan on a monthly base_"
-  },
-  "cols": 3,
-  "rows": 4,
-  "align": [
-    "left",
-    "left",
-    "left"
-  ]
-}
-[/block]
+<Table align={["left","left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
 
+      <th>
+        Usage
+      </th>
+
+      <th>
+        Example
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        `PERCENTAGE_COMPARISON`
+      </td>
+
+      <td>
+        Displays the percentage difference between the plan in the purchase button and the plan chosen.
+      </td>
+
+      <td>
+        With:  
+
+        * yearly: $99.99/year
+        * monthly: $9.99/month  
+          * **\{\{PERCENTAGE\_COMPARISON(YEARLY,MONTHLY)}}** will display 17%  
+            * \*\{\{PERCENTAGE*COMPARISON(MONTHLY,YEARLY)}}\*\* will display 20%*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `DISCOUNT_PERCENTAGE`
+      </td>
+
+      <td>
+        Displays the discount percentage between the actual plan in the purchase button and the plan chosen.\
+        The order in which the plans are selected does not matter.
+      </td>
+
+      <td>
+        With:  
+
+        * yearly: $99.99/year
+        * monthly: $9.99/month  
+          * **\{\{DISCOUNT\_PERCENTAGE(YEARLY,MONTHLY)}}** will display 17%  
+          * \*\{\{DISCOUNT*PERCENTAGE(MONTHLY,YEARLY)}}\*\* will display 17%*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `RAISE_PERCENTAGE`
+      </td>
+
+      <td>
+        Displays the raise of price in percentage between the actual plan in the purchase button and the plan chosen.\
+        The order in which the plans are selected does not matter.
+      </td>
+
+      <td>
+        With:  
+
+        * yearly: $99.99/year
+        * monthly: $9.99/monthThe output will be:  
+          * **\{\{RAISE\_PERCENTAGE(YEARLY,MONTHLY)}}** will display 20%  
+            * \*\{\{RAISE*PERCENTAGE(MONTHLY,YEARLY)}}\*\* will display 20%*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `PRICE_COMPARISON`
+      </td>
+
+      <td>
+        Displays the price difference between the plan in the purchase button and the plan chosen.\
+        The price difference is computed with the periodicity of the first plan selected.
+      </td>
+
+      <td>
+        With:  
+
+        * yearly: $99.99/year
+        * monthly: $9.99/month
+
+          * The output will be:  
+          * \*\{\{PRICE\_COMPARISON(YEARLY,MONTHLY)}}\*\* will display $19.89\
+            \=> the monthly plan costs $19.89 more than the yearly plan on a yearly base  
+            * \*\{\{PRICE*COMPARISON(MONTHLY,YEARLY)}}\*\* will display $1.66\
+              \=> the monthly plan costs $1.66 more than the yearly plan on a monthly base*
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 <br />
 
@@ -277,11 +624,11 @@ These tags displays the price and duration of the winback/retention offers you h
 
 These set of tags are very useful to create dynamic countdowns. You can integrate them in any label of your Screen. 3 different types of Timers are offered:
 
-- [Relative countdown](#timer-relative)
-- [Absolute countdown](#timer-absolute)
-- [User countdown](#timer-user-countdown)
+* [Relative countdown](#timer-relative)
+* [Absolute countdown](#timer-absolute)
+* [User countdown](#timer-user-countdown)
 
-Timers are not only a simple tag but rather a _set of tags_ composed of different sub-tags (`TIMER(MONTHS)`, `TIMER(DAYS)`, `TIMER(MINUTES)`, `TIMER(SECONDS)`) that can be manipulated independently. 
+Timers are not only a simple tag but rather a *set of tags* composed of different sub-tags (`TIMER(MONTHS)`, `TIMER(DAYS)`, `TIMER(MINUTES)`, `TIMER(SECONDS)`) that can be manipulated independently. 
 
 Depending on the format you associate to the Tag, they will appear in the text field with the following format:
 
@@ -289,9 +636,9 @@ Depending on the format you associate to the Tag, they will appear in the text f
 
 They are actually a composition of several tags. In the case above:
 
-- one for hours
-- one for minutes
-- one for seconds
+* one for hours
+* one for minutes
+* one for seconds
 
 By default, the tags are separated by colon (":"). You can replace the colons by any string you want directly in the text field:
 
