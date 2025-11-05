@@ -16,20 +16,20 @@ A carousel in a paywall is a design component that displays key benefits, featur
 
 # Benefits of Carousel
 
-1. **Increases User Engagement**  
-   Interactive elements like swiping or clicking through the slides keep users engaged longer.  
+1. **Increases User Engagement**\
+   Interactive elements like swiping or clicking through the slides keep users engaged longer.\
    Active participation can make users more invested in the decision-making process.
-2. **Space Efficiency**  
-   Saves screen real estate by organizing content in a compact, swipeable format.  
+2. **Space Efficiency**\
+   Saves screen real estate by organizing content in a compact, swipeable format.\
    Especially useful for mobile paywalls where space is limited.
-3. **Appeals to Visual Learners**  
-   Using visuals or icons in each slide alongside concise text helps users quickly grasp the value of upgrading.  
+3. **Appeals to Visual Learners**\
+   Using visuals or icons in each slide alongside concise text helps users quickly grasp the value of upgrading.\
    Great for showcasing features in a visually appealing way.
-4. **Flexible Content Delivery**  
-   Carousels can feature dynamic content tailored to the user’s preferences or behavior.  
+4. **Flexible Content Delivery**\
+   Carousels can feature dynamic content tailored to the user’s preferences or behavior.\
    Example: "Based on your interests, you’ll enjoy personalized recommendations" in one slide.
-5. **Encourages Curiosity and Exploration**  
-   The ability to swipe or click invites users to explore what’s next, ensuring they see all the benefits.  
+5. **Encourages Curiosity and Exploration**\
+   The ability to swipe or click invites users to explore what’s next, ensuring they see all the benefits.\
    Increases the likelihood that users will notice key features they might have skipped in a static format.
 
 # Carousel Configuration
@@ -40,22 +40,7 @@ A carousel in a paywall is a design component that displays key benefits, featur
 
 **Slide**: In this part you can customize the each and every slide with specific asset and title, subtitle to the slide. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/785fddb08df97f4e31de7c2c320266fca15ed254ececb16c3e706904234e4391-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/785fddb08df97f4e31de7c2c320266fca15ed254ececb16c3e706904234e4391-image.png" />
 
 ### Carousel configuration
 
@@ -64,69 +49,24 @@ A carousel in a paywall is a design component that displays key benefits, featur
 3. **Page controls**: You can set the colour and position of the Carousel knot from here. 
 4. **Border**:  Set the border radius of the slide and you can add margin to the slides. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/35539472c82ff1d62e0f0c0f52e44b12a1d77754b30c9b1d934aba6dbc058e1b-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/35539472c82ff1d62e0f0c0f52e44b12a1d77754b30c9b1d934aba6dbc058e1b-image.png" />
 
 ### Slides configuration
 
 1. **Medias**: You can add images or videos or lottie animation to the carousel slides from here. 
 2. **Padding**: Padding is the space between the content of the carousel slide and its border
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/2c13e316b2146fff6926fe21f54f40e85ce4caeae622603c7c0243420e9b09fc-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/2c13e316b2146fff6926fe21f54f40e85ce4caeae622603c7c0243420e9b09fc-image.png" />
 
 ### Title configuration
 
 **Text**: You can add a title, add a price tag, customize the font type, size and colour and alignment.
 
-**Styles:**You can add a background colour and border to the title.
+**Styles:**&#x59;ou can add a background colour and border to the title.
 
 **Padding and Margin:** Padding is the space between the content of the title and its border. Margin is the space outside the border of a title, pushing it away from surrounding elements.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/42bea019cf39db34966d1c82bba1bd2b65caefc27d11b46b2540fc591c0e21b1-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/42bea019cf39db34966d1c82bba1bd2b65caefc27d11b46b2540fc591c0e21b1-image.png" />
 
 <br />
 
@@ -136,22 +76,8 @@ A carousel in a paywall is a design component that displays key benefits, featur
 
 **Text**: You can add the subtitle to the carousel, add a price tag, customize the font type, size and colour and text alignment.
 
-**Styles:**You can add a background colour and border to the subtitle.
+**Styles:**&#x59;ou can add a background colour and border to the subtitle.
 
 **Padding and Margin:** Padding is the space between the content of an element and its border. Margin is the space outside the border of an element, pushing it away from surrounding elements.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/3048987e250cbd6bd3f77d00a0b6b2e516c49a6f96d1f61c76d6d7054a8d53b8-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/3048987e250cbd6bd3f77d00a0b6b2e516c49a6f96d1f61c76d6d7054a8d53b8-image.png" />
