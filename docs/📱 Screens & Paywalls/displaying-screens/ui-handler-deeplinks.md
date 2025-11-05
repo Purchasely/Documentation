@@ -32,7 +32,7 @@ Purchasely.readyToOpenDeeplink = true
 
 ## Optional: Override display
 
-By default, Purchasely will display the presentation in its own UIWindow (iOS) or Activity (Android).  
+By default, Purchasely will display the presentation in its own UIWindow (iOS) or Activity (Android).\
 If you wish to display the deep link yourself accordingly to your navigation architecture, you can implement the **`PLYUIHandler`** interface to customize how Screens are displayed in your app.
 
 ### Interface
@@ -121,14 +121,14 @@ Purchasely.uiHandler = object : PLYUIHandler {
 ```
 
 > 🚧 Keep the PLYPresentation instance
-> 
+>
 > Purchasely SDK will store in the presentation returned in that method some very important information to track conversion data like:
-> 
-> - AB Test
-> - Audience
-> - Placement
-> - Campaign
-> - Flow
-> 
-> For this tracking to work, you need to display the presentation returned as the first parameter of this method.  
+>
+> * AB Test
+> * Audience
+> * Placement
+> * Campaign
+> * Flow
+>
+> For this tracking to work, you need to display the presentation returned as the first parameter of this method.\
 > **DO NOT fetch the presentation again** by its id or placement id, all context will be lost.
