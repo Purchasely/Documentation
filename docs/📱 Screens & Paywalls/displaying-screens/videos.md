@@ -22,37 +22,22 @@ Purchasely supports the integration of videos into your Screens, providing a ric
 
 Integrating video into your Purchasely Screens can significantly enhance the user experience. By choosing the appropriate video format (**HLS** or **MP4**) and optimizing your **MP4** files for fast playback, you can ensure a seamless and engaging experience for your users.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/3f45222-Jul-10-2024_14-38-41.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "sizing": "250px"
-    }
-  ]
-}
-[/block]
-
+<Image align="center" width="250px" src="https://files.readme.io/3f45222-Jul-10-2024_14-38-41.gif" />
 
 # Video Formats Supported
 
 ### **HLS** (HTTP Live Streaming)
 
-**HLS** is an adaptive bitrate streaming protocol developed by _Apple_. It is highly suitable for delivering video content over the internet, especially to users with varying network conditions.
+**HLS** is an adaptive bitrate streaming protocol developed by *Apple*. It is highly suitable for delivering video content over the internet, especially to users with varying network conditions.
 
 **Benefits:**
 
-- **Adaptive Bitrate Streaming:** **HLS** automatically adjusts the video quality based on the user's internet speed, ensuring smooth playback even with fluctuating bandwidth.
-- **Live Streaming:** Ideal for live video content, as it supports real-time broadcasting.
+* **Adaptive Bitrate Streaming:** **HLS** automatically adjusts the video quality based on the user's internet speed, ensuring smooth playback even with fluctuating bandwidth.
+* **Live Streaming:** Ideal for live video content, as it supports real-time broadcasting.
 
 **Considerations:**
 
-- **Server Configuration:** Requires a compatible server setup to segment and deliver the video content.
+* **Server Configuration:** Requires a compatible server setup to segment and deliver the video content.
 
 ### MP4
 
@@ -60,12 +45,12 @@ Integrating video into your Purchasely Screens can significantly enhance the use
 
 **Benefits:**
 
-- **Compatibility:** **MP4** is supported by virtually all media players and devices.
-- **Ease of Use:** Simple to implement without the need for server-side configurations.
+* **Compatibility:** **MP4** is supported by virtually all media players and devices.
+* **Ease of Use:** Simple to implement without the need for server-side configurations.
 
 **Considerations:**
 
-- **Startup Delay:** **MP4** videos might start slower compared to **HLS**, especially over slower network connections. This delay occurs because the entire file's metadata, stored in the **MOOV** atom, needs to be read before playback can begin.
+* **Startup Delay:** **MP4** videos might start slower compared to **HLS**, especially over slower network connections. This delay occurs because the entire file's metadata, stored in the **MOOV** atom, needs to be read before playback can begin.
 
 # Understanding the **MOOV** Atom
 
@@ -84,13 +69,13 @@ To ensure quicker playback, especially for streaming over the internet, it's imp
 Here are steps to optimize the **MOOV** atom placement:
 
 1. **Using FFmpeg:**
-   - You can use the FFmpeg tool to relocate the **MOOV** atom to the beginning of your **MP4** file. The following command achieves this:
+   * You can use the FFmpeg tool to relocate the **MOOV** atom to the beginning of your **MP4** file. The following command achieves this:
      ```python Bash
      ffmpeg -i input.mp4 -movflags faststart output.mp4
      ```
 
 2. **Using MP4Box:**
-   - MP4Box is another tool that can be used to place the **MOOV** atom at the start of the file:
+   * MP4Box is another tool that can be used to place the **MOOV** atom at the start of the file:
      ```python Bash
      MP4Box -add input.mp4 -new output.mp4
      ```
@@ -101,8 +86,8 @@ By ensuring the **MOOV** atom is positioned at the beginning of your **MP4** fil
 
 For the Android platform, displaying video content requires the integration of a video player, you have two options:
 
-- **Provide Your Own Video Player:** You can provide your own video player to integrate video content.
-- **Use the Purchasely Video Player:** You can use the Purchasely video player implementation by adding the necessary dependency.
+* **Provide Your Own Video Player:** You can provide your own video player to integrate video content.
+* **Use the Purchasely Video Player:** You can use the Purchasely video player implementation by adding the necessary dependency.
 
 For detailed instructions on both approaches, please refer to [Display video on Android](display-video-on-android).
 
