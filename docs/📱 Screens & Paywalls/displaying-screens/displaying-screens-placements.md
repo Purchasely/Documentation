@@ -22,79 +22,34 @@ next:
 
 Placements are a core principle of the Purchasely platform. To use our [Audience](segmenting-your-user-base) and [A/B tests](ab-tests) features, you need to use Placements.
 
-Placements are also useful for a common use case: changing the Screen to display by default at any time.  
+Placements are also useful for a common use case: changing the Screen to display by default at any time.\
 By calling a Placement from your application, you never have to change your code afterwards as any Screen, audience, or A/B test that you apply to that Placement will be live right away. You can also "disable" it by setting no Screen for a specific Audience or for the entire Placement.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/581b709-SCR-20240620-oatg.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/581b709-SCR-20240620-oatg.png" />
 
 ## Example with New Yorker application
 
 Let's take the example of the New Yorker app, which has many triggers to display paywalls.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/84f38f1-Paywalls_image.avif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/84f38f1-Paywalls_image.avif" />
 
 <br />
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/6c9ba6f-Paywalls_presentation.avif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/6c9ba6f-Paywalls_presentation.avif" />
 
 For this specific case the New Yorker should create 5 Placements:
 
-- App launch
-- Nav bar
-- Magazine issue
-- Toaster
-- Settings
+* App launch
+* Nav bar
+* Magazine issue
+* Toaster
+* Settings
 
 # Implementation
 
 ## Direct call
 
-In one line of code in your application, you can retrieve the UIViewController (iOS) / View (Android) to display it. It will be displayed automatically with our <<glossary:bridge sdk>>, unless you want to use a [nested view](nesting-views).
+In one line of code in your application, you can retrieve the UIViewController (iOS) / View (Android) to display it. It will be displayed automatically with our <Glossary>bridge sdk</Glossary>, unless you want to use a [nested view](nesting-views).
 
 ```swift Swift
 let placementId = "<<default_placement>>"
@@ -145,26 +100,11 @@ Purchasely.presentPresentationForPlacement('<<default_placement>>');
 
 ## Deeplinks
 
-Placements can also be shown directly from a deeplink if the [related implementation](deeplinks-management) has been completed.  
-A deeplink for a Placement can be copied directly from the console in the Placements section and should look like this:  
+Placements can also be shown directly from a deeplink if the [related implementation](deeplinks-management) has been completed.\
+A deeplink for a Placement can be copied directly from the console in the Placements section and should look like this:\
 `yourapp://ply/placements/{placement_id}`
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/6f2715c-SCR-20240620-papo.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/6f2715c-SCR-20240620-papo.png" />
 
 # Limitations
 
