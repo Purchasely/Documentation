@@ -30,11 +30,11 @@ This is precisely the role **Flows** are designed to fulfill.
 
 **Flows** empower marketers and product teams to craft modular, dynamic onboarding and engagement journeys -without writing code. With visual control over decision trees, contextual screens, and logic-driven paths, Flows make it easy to:
 
-- Craft entire sequences of Screens designed with the Purchasely Screen Composer
-- Ask relevant questions (e.g., goals, motivations, usage preferences)
-- Personalize content and screens in real time,
-- Align messaging with user intent and JTBD insights,
-- Optimize conversion paths and continuously test variants.
+* Craft entire sequences of Screens designed with the Purchasely Screen Composer
+* Ask relevant questions (e.g., goals, motivations, usage preferences)
+* Personalize content and screens in real time,
+* Align messaging with user intent and JTBD insights,
+* Optimize conversion paths and continuously test variants.
 
 The result? A tailored native onboarding experience that feels smart, and deeply relevant - accelerating time-to-value and reducing churn from day one.
 
@@ -64,48 +64,20 @@ If you're interested in enabling this feature, please contact your Customer Succ
 # Build sequences of Screens with Flows
 
 > 🚧 SDK v5.3.0+ required
-> 
+>
 > To leverage Flows, your app must be running [SDK version `v5.3.0`](https://docs.purchasely.com/changelog/53)
 
 ## General overlook
 
 Here is an example of a personalized user journey built for [Headspace](https://www.headspace.com/) a leading app in meditation and well-being.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b10fd734530e281d0f34918d2344ca7de4b098dfb32285709a75c1ee90053bf0-headspace_flow.gif",
-        "",
-        "This flow was imagined and designed by [Irrational Labs](https://irrationallabs.com/) - the leading behavioral science consultancy for designing better choices and aims to increase the user engagement during the free trial and the conversion to paid, by collecting user insights, personalizing the user journey and recommending the relevant contents for each user"
-      ],
-      "align": "center",
-      "border": true,
-      "caption": "This flow was imagined and designed by [Irrational Labs](https://irrationallabs.com/) - the leading behavioral science consultancy for designing better choices and aims to increase the user engagement during the free trial and the conversion to paid, by collecting user insights, personalizing the user journey and recommending the relevant contents for each user"
-    }
-  ]
-}
-[/block]
+<Image alt="This flow was imagined and designed by [Irrational Labs](https://irrationallabs.com/) - the leading behavioral science consultancy for designing better choices and aims to increase the user engagement during the free trial and the conversion to paid, by collecting user insights, personalizing the user journey and recommending the relevant contents for each user" align="center" border={true} src="https://files.readme.io/b10fd734530e281d0f34918d2344ca7de4b098dfb32285709a75c1ee90053bf0-headspace_flow.gif">
+  This flow was imagined and designed by [Irrational Labs](https://irrationallabs.com/) - the leading behavioral science consultancy for designing better choices and aims to increase the user engagement during the free trial and the conversion to paid, by collecting user insights, personalizing the user journey and recommending the relevant contents for each user
+</Image>
 
-
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/a6abfb503395afe9e9700da4404eea42fcc5de797ed71af42c789c3a86cf9959-headspace_flow_console.gif",
-        null,
-        "This Headspace Flow consists of a series of carefully crafted questions. The user’s responses are used to personalize their experience by assigning them to a profile that reflects their goals, preferences, or challenges, allowing the app to recommend content that best matches their specific needs"
-      ],
-      "align": "center",
-      "border": true,
-      "caption": "This Headspace Flow consists of a series of carefully crafted questions. The user’s responses are used to personalize their experience by assigning them to a profile that reflects their goals, preferences, or challenges, allowing the app to recommend content that best matches their specific needs"
-    }
-  ]
-}
-[/block]
-
+<Image alt="This Headspace Flow consists of a series of carefully crafted questions. The user’s responses are used to personalize their experience by assigning them to a profile that reflects their goals, preferences, or challenges, allowing the app to recommend content that best matches their specific needs" align="center" border={true} src="https://files.readme.io/a6abfb503395afe9e9700da4404eea42fcc5de797ed71af42c789c3a86cf9959-headspace_flow_console.gif">
+  This Headspace Flow consists of a series of carefully crafted questions. The user’s responses are used to personalize their experience by assigning them to a profile that reflects their goals, preferences, or challenges, allowing the app to recommend content that best matches their specific needs
+</Image>
 
 <br />
 
@@ -117,150 +89,60 @@ The **Flow Composer** lets you:
 
 1. drag and drop Screens built with the Purchasely Screen Composer, 
 2. organize them inside a canvas
-3. link them together with _Transitions_
+3. link them together with *Transitions*
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/ee8bf7617c07c37e33cb033a1158aa82757b63bbcc52334ebd21b604607cb579-flow_building.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/ee8bf7617c07c37e33cb033a1158aa82757b63bbcc52334ebd21b604607cb579-flow_building.gif" />
 
 <br />
 
-_Transitions_ allow you to link a component from a source Screen to the next Screen in the Flow. They can be defined for any interactive component - such as buttons, links, pickers or call-to-action elements - as long as they have an active action (i.e., an action other than “none” or "close"). These transitions allow you to override the default action configured at the Screen level. This makes it possible to reuse the same Screen across multiple Flows while customizing behavior as needed, significantly reducing duplication and improving maintainability.
+*Transitions* allow you to link a component from a source Screen to the next Screen in the Flow. They can be defined for any interactive component - such as buttons, links, pickers or call-to-action elements - as long as they have an active action (i.e., an action other than “none” or "close"). These transitions allow you to override the default action configured at the Screen level. This makes it possible to reuse the same Screen across multiple Flows while customizing behavior as needed, significantly reducing duplication and improving maintainability.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/9001640f6472fc7bbc3d0de39f1677d2a16279e26f6710c89cf5a26c6cef9d3e-transitions.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/9001640f6472fc7bbc3d0de39f1677d2a16279e26f6710c89cf5a26c6cef9d3e-transitions.gif" />
 
 The components names that appear in the cartridges next to the Screen in the Flow Composer are the names defined for each component in the Screen structure (in the left column of the Screen Composer). 
 
 You can rename a component by double-clicking on it in the Screen structure.
 
-Both the _Main action_ and the _Second action_ of a component can be re-mapped / overridden with a transition only if they are associated with one of the following values:
+Both the *Main action* and the *Second action* of a component can be re-mapped / overridden with a transition only if they are associated with one of the following values:
 
-- Open Screen
-- Open Placement
-- Deeplink
-- Web Page
+* Open Screen
+* Open Placement
+* Deeplink
+* Web Page
 
 For the sake of clarity, if they are associated with any other action value than the ones listed above, they are ignored.
 
 > 🚧 I can't see a cartridge matching my Screen component
-> 
+>
 > When drag & dropping a Screen into the Flow canvas, if you don't see the cartridge corresponding to one of the Screen Components, it's probably because the component isn't mapped with one of the authorized actions.
-> 
+>
 > In this case, simply edit the Screen by clicking on its name in the Flow canvas, then map the component with a compatible action (Open Screen, Open Placement, Web Page or Deeplink) and save.
-> 
-> [block:image]{"images":[{"image":["https://files.readme.io/a1b52740943773d2e38450aa95983e15deab83ee22596d3df0aa0ae14150f28b-no_action.gif","",""],"align":"center"}]}[/block]
+>
+> <Image align="center" src="https://files.readme.io/a1b52740943773d2e38450aa95983e15deab83ee22596d3df0aa0ae14150f28b-no_action.gif" />
 
-A _Transition_ can be associated with a "Type", 
+A *Transition* can be associated with a "Type", 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/aa98a791feb3d414337b700ab268ddeb39f0149f6a793409bdb69a16b144d5d3-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/aa98a791feb3d414337b700ab268ddeb39f0149f6a793409bdb69a16b144d5d3-image.png" />
 
 The transition type can take the following values:
 
-- `Push`
-- `Modal`
-- `Drawer`
-- `Pop-in`
-- `Full screen`
+* `Push`
+* `Modal`
+* `Drawer`
+* `Pop-in`
+* `Full screen`
 
 Here is how each Transition type looks like:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/4a3d4c0e5e7ea20876ed959f203e623858cd7e12ac9de95c8c9c6556382ee770-types.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/4a3d4c0e5e7ea20876ed959f203e623858cd7e12ac9de95c8c9c6556382ee770-types.gif" />
 
 For drawers and popins, you can set the desired height:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b355f6c38b89ae7c02b022e86cfdcc9c96aea71d57cc3ae9d7fee408efb7cf69-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/b355f6c38b89ae7c02b022e86cfdcc9c96aea71d57cc3ae9d7fee408efb7cf69-image.png" />
 
 To ensure a seamless user experience, the Flow Composer associate the background color of the destination Screen to the Transition (for both light mode and dark mode), but you can change that color if needed.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/8664a427ae09322cc531333e73d901013b6da9fdd6f1fcfe1b5acbf7c9a31dcb-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/8664a427ae09322cc531333e73d901013b6da9fdd6f1fcfe1b5acbf7c9a31dcb-image.png" />
 
 <br />
 
@@ -272,22 +154,7 @@ If you have the Flow feature integrated into your Plan, you can associate a Flow
 
 ## Mapping a Flow with a Placement
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/80c311eb197b69a6471f9db09ff67c3d6a67f844aac17ca9cf5efbd719c96ace-placement.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/80c311eb197b69a6471f9db09ff67c3d6a67f844aac17ca9cf5efbd719c96ace-placement.gif" />
 
 <br />
 
@@ -301,22 +168,7 @@ Flows can be associated with Campaigns to combine both feature: the ability to d
 
 This integration will automatically take the Display mode into consideration.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/3d1054aaeb42eeccbd0280f3588472d600b0f5bf02d12c3e117a8b0a0afbeabf-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/3d1054aaeb42eeccbd0280f3588472d600b0f5bf02d12c3e117a8b0a0afbeabf-image.png" />
 
 ## Running an A/B Test between 2 Flows
 
@@ -324,22 +176,7 @@ This capability is only opened to customers benefitting from the Flows Premium f
 
 You can configure an A/B Test between 2 Flows or 1 Flow vs a single Screen.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/9cf94e6d276d58c496fbb73761ae42bfa78d8ca448380a91aedb37967358265e-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/9cf94e6d276d58c496fbb73761ae42bfa78d8ca448380a91aedb37967358265e-image.png" />
 
 <br />
 
@@ -433,69 +270,40 @@ Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error -
 
 The main benefit of this method is that it is simple and automatically takes the **Display Mode** configured for the Flow into consideration for displaying the first Screen of the Flow.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/a276eec6e01d7f867cef0337f4567a612c78e017326579818da016559673cd7f-display_mode.gif",
-        "",
-        "The display mode defines how the first Screen of the Flow should open"
-      ],
-      "align": "center",
-      "border": true,
-      "caption": "The display mode defines how the first Screen of the Flow should open"
-    }
-  ]
-}
-[/block]
-
+<Image alt="The display mode defines how the first Screen of the Flow should open" align="center" border={true} src="https://files.readme.io/a276eec6e01d7f867cef0337f4567a612c78e017326579818da016559673cd7f-display_mode.gif">
+  The display mode defines how the first Screen of the Flow should open
+</Image>
 
 Here are how the different display modes look like:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/4a3d4c0e5e7ea20876ed959f203e623858cd7e12ac9de95c8c9c6556382ee770-types.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/4a3d4c0e5e7ea20876ed959f203e623858cd7e12ac9de95c8c9c6556382ee770-types.gif" />
 
 Notes:
 
-- The **Display mode** `Push` is only available on iOS, if the parent view already contains a navigation bar.  
+* The **Display mode** `Push` is only available on iOS, if the parent view already contains a navigation bar.\
   On Android or without a navigation bar, the **Display mode** will fallback to `Modal`
 
 > 📘 Difference between the Flow display mode and the Screen transition type
-> 
+>
 > When configuring a Flow, it’s important to distinguish between the **Flow Display Mode** and the Transition Type. Each plays a distinct role in how screens appear within your app.
-> 
+>
 > ### Flow Display Mode
-> 
+>
 > The **Display Mode** determines how the first Screen of the Flow is presented within the app.
-> 
+>
 > It defines the integration behavior between the Flow and the parent view managed by your app—such as whether the Flow is shown as a modal, fullscreen, embedded view, etc.
-> 
+>
 > This setting is configured at the Flow level and applies only to how the Flow starts.
-> 
+>
 > ### Screen Transition Type
-> 
+>
 > The Transition Type defines how navigation occurs between Screens within the Flow.
-> 
+>
 > It controls the animation or visual behavior when moving from one Screen to the next (e.g., slide, fade, instant).
-> 
+>
 > You can configure a default Transition Type at the Flow level, and optionally override it for individual Transitions to customize specific paths in the user journey.
-> 
-> [block:image]{"images":[{"image":["https://files.readme.io/5709953934e193f8100d1672d0dad747b394de8cfeaa430b8d02a369552c3751-image.png",null,""],"align":"center","border":true}]}[/block]
+>
+> <Image align="center" className="border" border={true} src="https://files.readme.io/5709953934e193f8100d1672d0dad747b394de8cfeaa430b8d02a369552c3751-image.png" />
 
 <br />
 
@@ -557,10 +365,10 @@ Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error -
 
 ## 3. Using the Flow deeplink
 
-To use this method, you need to have implemented [Deeplink management](deeplinks-management)  
+To use this method, you need to have implemented [Deeplink management](deeplinks-management)\
 You can trigger the display of a Flow using its deeplink, the SDK will automatically display it.
 
-You can also display the Flow yourself by implementing the [UIHandler](ui-handler-deeplinks)  
+You can also display the Flow yourself by implementing the [UIHandler](ui-handler-deeplinks)\
 Quick example:
 
 ```swift Swift
@@ -581,8 +389,8 @@ Purchasely.uiHandler = object : PLYUIHandler {
 
 ```
 
-In this case, the **Display mode** is automatically taken into consideration by the SDK if you call the method `display`.  
-Otherwise, you need to retrieve the display mode from the presentation object to display it accordingly.  
+In this case, the **Display mode** is automatically taken into consideration by the SDK if you call the method `display`.\
+Otherwise, you need to retrieve the display mode from the presentation object to display it accordingly.\
 Learn more in our dedicated section about the [UIHandler](ui-handler-deeplinks)
 
 # Going further
@@ -591,5 +399,5 @@ Flows can be personalized based on user insights.
 
 📚 Follow the guides to learn more: 
 
-- [Leveraging Quizzes to fetch user insights](user-insights)
-- [Tailoring Flows to the user insights](tailoring-flows-to-user-insights)
+* [Leveraging Quizzes to fetch user insights](user-insights)
+* [Tailoring Flows to the user insights](tailoring-flows-to-user-insights)
