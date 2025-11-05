@@ -20,22 +20,7 @@ Here’s a breakdown of them
 
 To provide a comprehensive list of both renewing and non-renewing subscriptions that have been purchased through your application. You can use this page to monitor and manage all the subscriptions, seeing their status, renewal dates, and other relevant details. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/60e0875-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/60e0875-image.png" />
 
 You can filter the list based on the country, platform, plans, offer types and etc. 
 
@@ -48,22 +33,7 @@ Even though the page looks self explanatory, there are some key points to rememb
 
 To provide a comprehensive list of both consumables and non consumables or lifetime purchases that have been purchased through your application. This page looks same as the subscription lookup we discussed above. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/484b604-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/484b604-image.png" />
 
 ## User Lookup
 
@@ -72,30 +42,15 @@ To offer a detailed view of the entire subscription evolution of an individual u
 You can search user with their user ID or anonymous ID. Purchasely doesn't contain or store their store ID. 
 
 > 🚧 Warning:
-> 
+>
 > An anonymous user who creates an account later, they cannot be found with their anonymous ID ever again in this page.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/85d8f02-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/85d8f02-image.png" />
 
 <br />
 
 > 📘 Note
-> 
+>
 > This page can provide you the history of subscribers or OTP purchased users only. You can not search for the users who had just seen the paywall.
 
  The user history page contains many useful information to know about the user subscription lifecycle. Let us say, this page contains three sections. 
@@ -104,4 +59,4 @@ You can search user with their user ID or anonymous ID. Purchasely doesn't conta
 2. Section 2 consists of the history of the user subscription
 3. Section 3 links to another page, which shows all the historique and the present Webhook events triggered for this specific user. 
 
-   [block:image]{"images":[{"image":["https://files.readme.io/96b071d-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/96b071d-image.png" />
