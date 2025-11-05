@@ -11,20 +11,20 @@ next:
   description: ''
 ---
 > 🚧 Minimum SDK versions
-> 
-> - iOS: 3.5.0
-> - Android: 3.5.0
-> - ReactNative: 2.5.0
-> - Cordova: 2.5.0
-> - Flutter: 1.5.0
+>
+> * iOS: 3.5.0
+> * Android: 3.5.0
+> * ReactNative: 2.5.0
+> * Cordova: 2.5.0
+> * Flutter: 1.5.0
 
 # Overview
 
 Using your custom paywall within a No-Code Screen environment may initially seem counterintuitive. However, it offers significant advantages:
 
-- **A/A Testing:** Compare your own Screen directly against Purchasely's one.
-- **Benchmarking:** Test your existing screen against Purchasely's No-Code Screens to find opportunities for improvement.
-- **Price A/B Testing:** Easily deploy price [A/B testing](https://help.purchasely.io/en/articles/6990589-price-a-b-test) infrastructure without changing your UI.
+* **A/A Testing:** Compare your own Screen directly against Purchasely's one.
+* **Benchmarking:** Test your existing screen against Purchasely's No-Code Screens to find opportunities for improvement.
+* **Price A/B Testing:** Easily deploy price [A/B testing](https://help.purchasely.io/en/articles/6990589-price-a-b-test) infrastructure without changing your UI.
 
 # Implementation
 
@@ -40,43 +40,13 @@ You will have to first fetch the Screen then check whether you should display yo
 
 To declare your own Screen on Purchasely's console, first go the the section **"Paywall and Screen"** and click on **"New Screen"**.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/21f7597-Capture_decran_2024-07-11_a_17.51.37.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/21f7597-Capture_decran_2024-07-11_a_17.51.37.png" />
 
-
-Then, in **"Template"** section select the template **"Your own Screen" **.
+Then, in **"Template"** section select the template **"Your own Screen"** .
 
 Don't forget to complete other mandatory information such as name and id in **"Information"** section, and the desired plans in the section **"Plans"**.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b55eb70-Capture_decran_2024-07-11_a_17.57.12.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/b55eb70-Capture_decran_2024-07-11_a_17.57.12.png" />
 
 ### Fetch and display your Screen
 
@@ -264,40 +234,25 @@ You can also trigger the purchase process manually from your own Screen by calli
 # Metadata
 
 > 🚧 Minimum SDK version
-> 
+>
 > This feature is available starting with SDK version 4.1.0
 
 Including metadata is essential for Purchasely to accurately compute conversions on your Screen and assess the performance of **A/B tests**. You can declare metadata for your own Screen, which supports the following types:
 
-- String (capable of representing various types, as shown in the example code below).
-- Boolean.
-- Image.
+* String (capable of representing various types, as shown in the example code below).
+* Boolean.
+* Image.
 
 ## Declare your Metadata
 
 To declare metadata for your screen, follow these steps:
 
-- Open the previously declared screen on the Purchasely console.
-- Navigate to the **"Metadata"** section.
-- Add your metadata by specifying a key, a type, and a value.
-- Click **"Publish"** to save and publish your changes.
+* Open the previously declared screen on the Purchasely console.
+* Navigate to the **"Metadata"** section.
+* Add your metadata by specifying a key, a type, and a value.
+* Click **"Publish"** to save and publish your changes.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b3fbac7-Capture_decran_2024-07-11_a_18.08.47.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/b3fbac7-Capture_decran_2024-07-11_a_18.08.47.png" />
 
 ## Retrieve your Metadata
 
