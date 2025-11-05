@@ -14,25 +14,9 @@ next:
 ---
 This is a simplified overview of the more detailed [console configuration](docs/application-configuration) section
 
-
-
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/95231f7-image.png",
-        null,
-        "_Create a New Application_"
-      ],
-      "align": "center",
-      "border": true,
-      "caption": "Create a New Application"
-    }
-  ]
-}
-[/block]
-
+<Image alt="_Create a New Application_" align="center" border={true} src="https://files.readme.io/95231f7-image.png">
+  Create a New Application
+</Image>
 
 3 steps are needed to create a new App in the Purchasely Console:
 
@@ -42,19 +26,6 @@ This is a simplified overview of the more detailed [console configuration](docs/
 
 Once you've saved your application, the Console will provide you with the API key, that you will need to start the SDK.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/432d7ca-image.png",
-        null,
-        "API key to be use when starting the SDK"
-      ],
-      "align": "center",
-      "border": true,
-      "caption": "API key to be used when starting the SDK"
-    }
-  ]
-}
-[/block]
+<Image alt="API key to be use when starting the SDK" align="center" border={true} src="https://files.readme.io/432d7ca-image.png">
+  API key to be used when starting the SDK
+</Image>
