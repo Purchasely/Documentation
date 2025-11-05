@@ -3,10 +3,10 @@ name: Entitlements management - sample backend code
 ---
 Sample backend code for:
 
-- receiving webhook events
-- extracting the relevant information
-- updating the entitlements in the database
-- acknowledging the processing of the events
+* receiving webhook events
+* extracting the relevant information
+* updating the entitlements in the database
+* acknowledging the processing of the events
 
 ```ruby Ruby
 # This example uses Sinatra and ActiveRecord as ORM
