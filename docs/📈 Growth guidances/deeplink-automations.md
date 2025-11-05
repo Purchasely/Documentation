@@ -41,11 +41,11 @@ To make these automations work, the following steps must be achieved:
 2. Configure the [audience matching the targeted users](understanding-audiences)
 3. [Map the screen with the audience together with the desired placement](displaying-screens-placements)
 4. Activate [the integration with the desired 3rd party engagement and CRM platform](engagement-crm) and definz which Server Events and User Properties must be forwarded to the 3rd party platform.
-   1. [Subscription Events](subscription-events) are convenient to play the role of trigger  
-      _E.g.: send a push notification when a user enters in Grace Period (Subscription Event `GRACE_PERIOD_STARTED` triggered)_
-   2. User Properties are convenient to create cohorts of users  
-      _E.g.: create a campaign for all users who are in Grace Period (User Property `subscription_status` = `IN_GRACE_PERIOD`_  
-      => They are updated at the same time a Subscription Event is generate in the Subscription Lifecycle.
+   1. [Subscription Events](subscription-events) are convenient to play the role of trigger\
+      *E.g.: send a push notification when a user enters in Grace Period (Subscription Event`GRACE_PERIOD_STARTED` triggered)*
+   2. User Properties are convenient to create cohorts of users\
+      *E.g.: create a campaign for all users who are in Grace Period (User Property`subscription_status` =`IN_GRACE_PERIOD`*\
+      \=> They are updated at the same time a Subscription Event is generate in the Subscription Lifecycle.
 5. Create an engagement campaign in the 3rd-party platform and associating it with the [placement deeplink (created at step 3)](deeplink-automations#supported-deeplinks)
 
 <br />
