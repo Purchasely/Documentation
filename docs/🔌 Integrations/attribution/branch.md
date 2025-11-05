@@ -22,11 +22,11 @@ The integration of Branch requires 2 steps:
 2. Activate the Branch integration in the Purchasely Console
 
 > 🚧 Version compatibility
-> 
+>
 > The minimal version of the Purchasely SDK supporting this integration is `v3.4.0`. 
-> 
+>
 > If the Purchasely SDK integrated in your app is under the minimal version, please upgrade it.
-> 
+>
 > The Branch SDK also needs to be integrated inside the app.
 
 ## 1. Associating users to events
@@ -48,13 +48,10 @@ Purchasely.setAttribute(Attribute.BRANCH_USER_DEVELOPER_IDENTITY, "Actual Branch
 Purchasely.setAttribute(Attributes.BRANCH_USER_DEVELOPER_IDENTITY, "Actual Branch User ID");
 ```
 ```coffeescript Flutter
-
 ```
 ```coffeescript Cordova
-
 ```
 ```coffeescript Unity
-
 ```
 
 ## 2. Activating the Branch integration
@@ -73,22 +70,7 @@ Purchasely.setAttribute(Attributes.BRANCH_USER_DEVELOPER_IDENTITY, "Actual Branc
 
 1. Go in the "External integrations" section, and open the edition form for Branch:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/bf70b0d-Capture_decran_2024-07-15_a_11.54.21.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/bf70b0d-Capture_decran_2024-07-15_a_11.54.21.png" />
 
 2. Enable the integration
 
@@ -96,41 +78,11 @@ Purchasely.setAttribute(Attributes.BRANCH_USER_DEVELOPER_IDENTITY, "Actual Branc
 
 4. Set your Branch API Secret
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/327ba78-Capture_decran_2024-07-15_a_11.55.56.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/327ba78-Capture_decran_2024-07-15_a_11.55.56.png" />
 
 5. Enable the events you want to be sent to Branch
 6. (Optional) Override the names of the events that will be sent to Branch
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/c8b9b3b-Capture_decran_2024-07-15_a_11.57.55.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/c8b9b3b-Capture_decran_2024-07-15_a_11.57.55.png" />
 
 7. Save
