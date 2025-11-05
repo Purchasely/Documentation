@@ -7,7 +7,7 @@ In-App Purchases let you offer additional features in your apps including digita
 
 Different types of In-App Purchases are:
 
-1. **Consumables**: this type of In-App Purchases can be purchased several times by a same user  
-   _Can be used to model virtual currencies (e.g. a stack of coins) or a movie rental _
-2. **Non consumables**: this type of In-App Purchases can be purchased only once by a same user. They keep it their entire life.  
-   _Can be used to model the purchase of a movie or a race track in a video game_
+1. **Consumables**: this type of In-App Purchases can be purchased several times by a same user\
+   *Can be used to model virtual currencies (e.g. a stack of coins) or a movie rental*
+2. **Non consumables**: this type of In-App Purchases can be purchased only once by a same user. They keep it their entire life.\
+   *Can be used to model the purchase of a movie or a race track in a video game*
