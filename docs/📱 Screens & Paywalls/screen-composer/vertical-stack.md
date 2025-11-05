@@ -16,18 +16,4 @@ For advanced designs, stacks can even be nested within each other, unlocking new
 
 This powerful feature brings greater responsiveness across devices and enables you to build visually compelling, modular screens with ease.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/99e637fd6fef7a622989e954e9733c9b9f01bc4e5fff884c7ae2b58d37f697cd-unnamed.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/99e637fd6fef7a622989e954e9733c9b9f01bc4e5fff884c7ae2b58d37f697cd-unnamed.gif" />
