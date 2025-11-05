@@ -23,12 +23,12 @@ The existing subscription infrastructure continues to process transactions and t
 A typical purchase flow will be as follows:
 
 1. the Paywall is displayed by the Purchasely SDK
-2. when the user clicks on a purchase button, the Purchasely SDK hands over to the app using the <<glossary:Paywall Action Interceptor>>, providing the app with the references of the plan that was tapped  
-   [More details on processing transactions with the <<glossary:Paywall Action Interceptor>>](process-transactions-with-paywall-action-interceptor)  
+2. when the user clicks on a purchase button, the Purchasely SDK hands over to the app using the <Glossary>Paywall Action Interceptor</Glossary>, providing the app with the references of the plan that was tapped\
+   [More details on processing transactions with the <Glossary>Paywall Action Interceptor</Glossary>](process-transactions-with-paywall-action-interceptor)\
    [More details on using Purchasely with RevenueCat](revenuecat)
 3. the app processes the transaction on its own
-   - either through a 3rd party SDK (like RevenueCat)
-   - or directly through StoreKit or Google Play Billing
+   * either through a 3rd party SDK (like RevenueCat)
+   * or directly through StoreKit or Google Play Billing
 4. once processed, the app synchronizes the transaction with the Purchasely SDK by calling the  `Purchasely.synchronize()` method
 5. and notifies the Purchasely SDK that the paywall can now be closed
 
@@ -42,18 +42,18 @@ The Paywall Action Interceptor allows to intercept and override every interactio
 
 This can be used to:
 
-- Intercept purchase and restore actions to perform them using your own code or another SDK
-- Intercept the login button tapped to display your login form
-- Force the explicit acceptance of terms and conditions before a purchase
-- Intercept the call to a webview to inject credentials and be directly logged in
-- Block promo codes in Kids category apps to add a parental permission gate
-- Block direct access to external content (webview or link to Safari) in Kids category apps to add a parental permission gate
+* Intercept purchase and restore actions to perform them using your own code or another SDK
+* Intercept the login button tapped to display your login form
+* Force the explicit acceptance of terms and conditions before a purchase
+* Intercept the call to a webview to inject credentials and be directly logged in
+* Block promo codes in Kids category apps to add a parental permission gate
+* Block direct access to external content (webview or link to Safari) in Kids category apps to add a parental permission gate
 
 With the action interceptor, you get everything you need to:
 
-- Get the action (and context)
-- Display views, errors, messages, … above the Purchasely Screens
-- Choose if Purchasely should continue the action or not
+* Get the action (and context)
+* Display views, errors, messages, … above the Purchasely Screens
+* Choose if Purchasely should continue the action or not
 
 <PaywallActionInterceptorActionsIntercepted />
 
@@ -61,14 +61,14 @@ With the action interceptor, you get everything you need to:
 
 You can intercept the following buttons being tapped:
 
-- Close
-- Login
-- Navigate (web or deeplink)
-- Purchase
-- Win-back / retention offer
-- Restore
-- Open another paywall
-- Promo code
+* Close
+* Login
+* Navigate (web or deeplink)
+* Purchase
+* Win-back / retention offer
+* Restore
+* Open another paywall
+* Promo code
 
 <PaywallObserverModeTransactionProcessing />
 
