@@ -9,27 +9,17 @@ metadata:
 # Swift
 
 ```Text Swift
-
 ```
-
-
 
 # Kotlin
 
-[block:html]
-{
-  "html": ""
-}
-[/block]
+<HTMLBlock>{`
 
-
-
+`}</HTMLBlock>
 
 ```Text Kotlin
 Purchasely.setPaywallActionInterceptor()
 ```
-
-
 
 # React Native
 
@@ -39,11 +29,7 @@ Purchasely.setPaywallActionInterceptor()
 
 # Unity
 
-
-
 ```Text Swift
-
 ```
 ```Text Kotlin
-
 ```
