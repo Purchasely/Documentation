@@ -12,11 +12,11 @@ next:
 ---
 Starting with the following versions of SDKs, you can set user attributes to build your Audiences:
 
-- iOS: 3.4.0
-- Android: 3.4.0
-- ReactNative: 2.4.0
-- Cordova: 2.4.0
-- Flutter: 1.4.0
+* iOS: 3.4.0
+* Android: 3.4.0
+* ReactNative: 2.4.0
+* Cordova: 2.4.0
+* Flutter: 1.4.0
 
 ## Sending user attributes
 
@@ -219,7 +219,7 @@ Purchasely.clearUserAttributes();
 ```
 
 > 👍 Clear after log out
-> 
+>
 > You should call `Purchasely.clearUserAttributes()` when a user is logged out, after calling `Purchasely.userLogout()`, so that he does not keep attributes you have set previously with his profile.
-> 
+>
 > Be aware though, this method remove all attributes so you must set device attributes again
