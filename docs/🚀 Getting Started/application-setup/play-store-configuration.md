@@ -5,6 +5,8 @@ excerpt: >-
   Purchasely Console
 deprecated: false
 hidden: false
+link:
+  new_tab: false
 metadata:
   title: ''
   description: >-
@@ -14,26 +16,26 @@ metadata:
     the API on Google Cloud, creating a Service Account, and granting access to
     the Service Account in the Google Play Console.
   robots: index
-next:
-  description: ''
 ---
-In order to connect your Google Play Store account with Purchasely, you have to provide the following parameters from the Play Store Console
+# Google Play Store Configuration
+
+To connect your Google Play Store account with Purchasely, you need to provide the following parameters from the Play Store Console:
 
 1. [Android App Bundle ID](#1-android-app-bundle-id)
 2. [App Scheme](#2-app-scheme)
 3. [Access Key (JSON)](#3-access-key-json)
 
-# 1. Android App Bundle ID
+## 1. Android App Bundle ID
 
 <PlayStoreAppBundleID />
 
 <br />
 
-# 2. App Scheme
+## 2. App Scheme
 
 <PlayStoreAppScheme />
 
-# 3. Access Key (JSON)
+## 3. Access Key (JSON)
 
 <PlayStoreAccessKeyJSON />
 
@@ -43,20 +45,20 @@ In order to connect your Google Play Store account with Purchasely, you have to 
 
 <EnableAPIOnGoogleCloud />
 
-### Creating a new Service Account
+### Creating a New Service Account
 
 <PlayStoreCreateANewServiceAccount />
 
-7. In the Purchasely Console, fill in the field `Access key (JSON)` with this JSON file
+7. In the Purchasely Console, fill in the `Access key (JSON)` field with this JSON file.
 
 <Image align="center" className="border" border={true} src="https://files.readme.io/1d5ec4b-image.png" />
 
 <br />
 
-### Granting access to the new Service Account
+### Granting Access to the New Service Account
 
 <PlayStoreGrantAccessToTheServiceAccount />
 
-### Server to Server notifications
+### Server-to-Server Notifications
 
 <PlayStoreS2SNotifications />
