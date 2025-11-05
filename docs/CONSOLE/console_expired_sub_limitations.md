@@ -14,8 +14,8 @@ next:
 
 The expired subscription attributes will not be set in the following cases:
 
-- Subscriptions that expired before the integration of Purchasely into your app.
-- Subscriptions that expired after the integration of Purchasely into your app but haven't been imported.
+* Subscriptions that expired before the integration of Purchasely into your app.
+* Subscriptions that expired after the integration of Purchasely into your app but haven't been imported.
 
 In these cases, only the attribute **Has expired subscription** will be set to true, as it is computed from the local receipt. The other attributes will not be set.
 
