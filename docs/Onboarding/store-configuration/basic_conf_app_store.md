@@ -20,22 +20,7 @@ The `Bundle ID` is used by the Purchasely Platform to validate that receipts are
 2. Navigate to the section General > App information
 3. Copy the value displayed in the field Bundle ID and paste in the the field APP BUNDLE ID of the Purchasely Console
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/5e36152-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/5e36152-image.png" />
 
 # Where can I find the App ID?
 
@@ -47,22 +32,7 @@ It is required to set up promo code deeplinks in paywalls.
 2. Navigate to the section General > App information
 3. Copy the value of the field Apple ID
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/6d6080e-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/6d6080e-image.png" />
 
 # Where can I find the Shared App Secret?
 
@@ -74,14 +44,12 @@ The `Shared App Secret` is used by Purchasely Platform and required to decode an
 2. Navigate to the section General > App information and browse down the screen
 3. Click on the link Manage in the section App-Specific Shared Secret
 
-   [block:image]{"images":[{"image":["https://files.readme.io/f2055de-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/f2055de-image.png" />
 4. Copy the value displayed on the following screen
 
-   [block:image]{"images":[{"image":["https://files.readme.io/c471118-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/c471118-image.png" />
 
 ⚠️ Don't forget to update the value in the Purchasely Console each time you regenerate a new App-Specific Shared Secret.
-
-
 
 # How can I create a StoreKit 2 private key file, Issuer ID and Key ID?
 
@@ -91,32 +59,16 @@ To make StoreKit 2 work, you need to grant the Purchasely Platform with a specif
 
 The Private key Id, Private key file and the Issuer Id are required by Apple APIs. We use them for :
 
-- StoreKit 2 APIs: to allow our server to verify your purchases
-- Promotional offers: to generate the signature allowing the purchase
-
-
+* StoreKit 2 APIs: to allow our server to verify your purchases
+* Promotional offers: to generate the signature allowing the purchase
 
 The configuration of StoreKit 2 requires to follow a few steps:
 
 1. Open App Store Connect
 2. Go to the section Users and Access > Integrations > In-App Purchase
-3. Click on the _+_ button to generate a new API key
+3. Click on the *+* button to generate a new API key
 4. Choose a name for the key and click "Generate"
-5. Download the API key file (.p8), and note the Key ID and Issuer ID.  
+5. Download the API key file (.p8), and note the Key ID and Issuer ID.\
    Keep the file secure, as you won't be able to download it again
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/14c8dcf-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/14c8dcf-image.png" />
