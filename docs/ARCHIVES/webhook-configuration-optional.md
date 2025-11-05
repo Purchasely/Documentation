@@ -40,51 +40,21 @@ The webhook will be useful for 2 main purposes:
 
 # Functioning of the webhook
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/8fbd263-webhook_anim.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/8fbd263-webhook_anim.gif" />
 
 # Configuring the webhook
 
 The configuration of the webhook is optional, in particular if you are running the SDK in `paywallObserver` mode. You can leave the parameter `Client webhook URL` empty. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/c3e93a7-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/c3e93a7-image.png" />
 
 If you configure an endpoint, every event sent on the webhook will need to be acknowledged with a `HTTP 200` response.
 
 > 📘 Visualizing webhook events
-> 
+>
 > If you want to see the events generated on the webhook, you can use a free service such as [webhook.site](https://webhook.site/), which will generate a unique and temporary URL that you can use as a a Client webhook URL.
-> 
-> _⚠️ The webhook.site URL will respond only for a few days so don't forget to renew it regularly or remove it once it's been deactivated to avoid seeing errors triggered by the SDK ⚠️_
+>
+> *⚠️ The webhook.site URL will respond only for a few days so don't forget to renew it regularly or remove it once it's been deactivated to avoid seeing errors triggered by the SDK ⚠️*
 
 Every event sent by Purchasely Cloud Platform on the webhook is signed using a `Client shared secret`.
 
