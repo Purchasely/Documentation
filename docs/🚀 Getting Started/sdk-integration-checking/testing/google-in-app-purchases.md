@@ -27,7 +27,7 @@ Ensure that the `com.android.vending.BILLING` permission is included in your And
 ```
 
 > 📘 Included with Purchasely SDK
-> 
+>
 > If you use the Google dependency of our SDK, this permission is included so you do not need to add it yourself.
 
 ## Upload to Internal Testing Track
@@ -42,11 +42,11 @@ Make sure you are added as a tester for the current testing track (internal, pri
 
 ### Be a License Tester
 
-In the Google Play Console, navigate to Settings > License Testing and add your Google email correspond to the account in your phone as a license tester.  
+In the Google Play Console, navigate to Settings > License Testing and add your Google email correspond to the account in your phone as a license tester.\
 Being a license tester allows you to make sandbox purchase for all versions of your application (internal, alpha, beta and production). 
 
 > 📘 Testing in production
-> 
+>
 > You do not need to test a "real" purchase in production to make sure it works but if you want to, you will need to remove yourself from the list of license tester as it is applied also in production.
 
 ## App Bundle ID and Version Code
@@ -69,27 +69,27 @@ After creating a subscription or In-App product in the Google Play Console, wait
 
 If In-App Purchases and subscriptions are still not available after a few hours, try the following steps:
 
-- Force stop the Google Play Store app.
-- Clear the cache of the Google Play Store app.
-- Reopen the Google Play Store app.
-- Kill and relaunch your application.
+* Force stop the Google Play Store app.
+* Clear the cache of the Google Play Store app.
+* Reopen the Google Play Store app.
+* Kill and relaunch your application.
 
 # Promo Codes
 
 Using promo codes is only possible if you are not a license tester. If you are, you need to remove your google account from the list and follow the step above to clear Play Store cache. It can take a few hours to be applied by Google.
 
-Purchasely will automatically retrieve the purchase with a promo code if you have enabled S2S.  
+Purchasely will automatically retrieve the purchase with a promo code if you have enabled S2S.\
 However the SDK will not be aware of the purchase so if a paywall was displayed it won't be automatically dismissed. 
 
 # Reset eligibility and change country
 
-You can use the [Play Billing Lab](https://play.google.com/store/apps/details?id=com.google.android.apps.play.billingtestcompanion&hl=fr) application from Google to change the country of your account and reset the eligibility of your user to offers. This allows you to test different countries and your offers as much as you want.  
+You can use the [Play Billing Lab](https://play.google.com/store/apps/details?id=com.google.android.apps.play.billingtestcompanion\&hl=fr) application from Google to change the country of your account and reset the eligibility of your user to offers. This allows you to test different countries and your offers as much as you want.\
 It requires your Google account to be a license tester of your application.
 
 [Learn more about Play Billing Lab](https://developer.android.com/google/play/billing/test?hl=fr#play-billing-lab)
 
 # Resources
 
-- [Google Play Console](https://play.google.com/console/u/0/developers)
-- [Google Play Billing Library](https://developer.android.com/google/play/billing)
-- [Test In-App Purchases](https://developer.android.com/google/play/billing/test)
+* [Google Play Console](https://play.google.com/console/u/0/developers)
+* [Google Play Billing Library](https://developer.android.com/google/play/billing)
+* [Test In-App Purchases](https://developer.android.com/google/play/billing/test)
