@@ -16,23 +16,9 @@ Purchasely lets you copy and paste customized components across multiple screens
 
 You can copy and paste a single component or an entire list of components from one screen to another.
 
-This approach:  
-✔ Saves time for designers.  
-✔ Reduces the chances of errors.  
+This approach:\
+✔ Saves time for designers.\
+✔ Reduces the chances of errors.\
 ✔ Enhances efficient scalability.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/ac9b0c5bfb57d3524281679f81340521e4c2f39a238bc743d39055e161ad3605-copy_paste.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/ac9b0c5bfb57d3524281679f81340521e4c2f39a238bc743d39055e161ad3605-copy_paste.gif" />
