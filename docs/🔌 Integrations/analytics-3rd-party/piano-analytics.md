@@ -31,7 +31,7 @@ The activation requires 7 steps
 1. Retrieving your `Site ID` from the Piano Dashboard
 2. Setting up a new Javascript Tag Composer Configuration in the Piano Dashboard
 3. Retrieving your `Collect Server` from the Piano Dashboard
-4. Picking a `Collect Path` (ie "_subscription_")
+4. Picking a `Collect Path` (ie "*subscription*")
 5. Configuring Piano to accept the event names you will be using
 6. Enabling the `Piano` integration in the Purchasely Console
 7. Enabling the forwarding of [Server Events](server-events) to Piano in the Purchasely Console
@@ -61,22 +61,7 @@ See the [CleverTap Documentation](https://developer.clevertap.com/docs/api-quick
 1. Log into your Piano Dashboard
 2. You will find your `Site ID` next to your site's name
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/4e7578fb8c9f0a26eacc0357a546dd1275a43dc3ae0094f5382b046eb15c8241-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/4e7578fb8c9f0a26eacc0357a546dd1275a43dc3ae0094f5382b046eb15c8241-image.png" />
 
 ## 3. Set up a new Javascript Tag Composer Configuration in the Piano Dashboard
 
@@ -113,22 +98,7 @@ See the [CleverTap Documentation](https://developer.clevertap.com/docs/api-quick
 
 1. Go in the "Integrations" section, and open the edition form for Piano:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/7610cc018ec62196e5d0d6e4bed941ca33ffcd06bed899b08e9045ef5ed3c29f-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/7610cc018ec62196e5d0d6e4bed941ca33ffcd06bed899b08e9045ef5ed3c29f-image.png" />
 
 2. Enable the integration
 3. Set your Piano `Collection Domains`
@@ -136,22 +106,7 @@ See the [CleverTap Documentation](https://developer.clevertap.com/docs/api-quick
 5. Set your Piano `Site ID`
 6. Save
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/c89c25a6183fe2e8f7ba921fd108efc7b6bad3f9decaade1d4eba95527a89d78-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/c89c25a6183fe2e8f7ba921fd108efc7b6bad3f9decaade1d4eba95527a89d78-image.png" />
 
 <br />
 
