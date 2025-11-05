@@ -27,22 +27,7 @@ In order to connect your Apple App Store account with Purchasely, you have to pr
 7. [StoreKit 2 - Issuer ID](#5-6-7-storekit-2-configuration)
 8. [The Server to Server End point](#8-the-server-to-server-end-point)
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/dc034ad-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/dc034ad-image.png" />
 
 <br />
 
@@ -64,8 +49,8 @@ The `App scheme` is required to make the paywalls preview work and enable deepli
 
 Enter your `App scheme`  (without the `://`) in the Purchasely Console in the field `App Scheme` . A universal link can also be used.
 
-- [More details on how to configure it for your iOS app](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app)
-- [More details on how to manage deeplinks with the Purchasely SDK](deeplinks-management)
+* [More details on how to configure it for your iOS app](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app)
+* [More details on how to manage deeplinks with the Purchasely SDK](deeplinks-management)
 
 # 4. Shared App Secret
 
@@ -78,7 +63,7 @@ Enter your `App scheme`  (without the `://`) in the Purchasely Console in the fi
 <br />
 
 > ❗️ StoreKit 1 is deprecated
-> 
+>
 > Since StoreKit1 is deprecated, please configure StoreKit2 and [use it in your app](sdk-initialization).
 
 <br />
@@ -93,22 +78,7 @@ Then, in the Purchasely Console:
 2. Upload the API Key file (`.p8`) previously downloaded in the field `Private Key File`
 3. Paste the value of the `Issuer ID` in the field `Issuer ID`
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/4979bcc-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/4979bcc-image.png" />
 
 [More details on StoreKit 2](app-store-storekit-1-vs-storekit-2)
 
