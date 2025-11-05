@@ -72,9 +72,9 @@ See the [CleverTap Documentation](https://developer.clevertap.com/docs/api-quick
 
 The activation requires 3 steps:
 
-- Retrieving your account's region from the CleverTap Dashboard.
-- Retrieving your account's ID and passcode from the CleverTap Dashboard.
-- Enabling the CleverTap integration in the Purchasely Console.
+* Retrieving your account's region from the CleverTap Dashboard.
+* Retrieving your account's ID and passcode from the CleverTap Dashboard.
+* Enabling the CleverTap integration in the Purchasely Console.
 
 <br />
 
@@ -96,22 +96,7 @@ The activation requires 3 steps:
 
 1. Go in the **"Integrations"** section, and open the edition form for CleverTap :
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/12d134e-Capture_decran_2024-07-09_a_15.57.39.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/12d134e-Capture_decran_2024-07-09_a_15.57.39.png" />
 
 2. Enable the integration
 
@@ -127,22 +112,7 @@ The activation requires 3 steps:
 
 In the Purchasely Console, under the tab Server Events, you can choose with Server Events must be forwarded to **Clevertap**.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/5838fc8-Capture_decran_2024-07-09_a_16.00.19.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/5838fc8-Capture_decran_2024-07-09_a_16.00.19.png" />
 
 (Optional) Events names can be overridden to match with your tacking plan.
 
@@ -152,22 +122,7 @@ In the Purchasely Console, under the tab Server Events, you can choose with Serv
 
 In the Purchasely Console, under the tab User Properties, you can choose with User Properties should be updated in real time along the subscription lifecycle.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/e701a3c-image.png",
-        null,
-        null
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/e701a3c-image.png" />
 
 (Optional) User Properties names can be overridden to match with your nomenclature.
 
