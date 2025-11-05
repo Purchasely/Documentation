@@ -12,7 +12,7 @@ next:
 ---
 Call this endpoint with the appropriate headers/body to delete data for a specific user.
 
-**POST <https://s2s.purchasely.io/user_deletion_requests>**
+**POST[https://s2s.purchasely.io/user\_deletion\_requests](https://s2s.purchasely.io/user_deletion_requests)**
 
 **HEADERS**
 
@@ -26,26 +26,41 @@ Call this endpoint with the appropriate headers/body to delete data for a specif
 
 **JSON BODY**
 
-[block:parameters]
-{
-  "data": {
-    "h-0": "Name",
-    "h-1": "Type",
-    "h-2": "Description",
-    "0-0": "user_id",
-    "0-1": "String",
-    "0-2": "Identifier of your user as defined in your backend.  \n  \nAll the data associated to this user will be removed or pseudonymized"
-  },
-  "cols": 3,
-  "rows": 1,
-  "align": [
-    "left",
-    "left",
-    "left"
-  ]
-}
-[/block]
+<Table align={["left","left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
 
+      <th>
+        Type
+      </th>
+
+      <th>
+        Description
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        user\_id
+      </td>
+
+      <td>
+        String
+      </td>
+
+      <td>
+        Identifier of your user as defined in your backend.  
+
+        All the data associated to this user will be removed or pseudonymized
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 <br />
 
@@ -122,9 +137,9 @@ end
 <br />
 
 > ❗️ Throttling
-> 
+>
 > You are limited to 50 requests per 10 minutes (if you need more, please contact us).
-> 
+>
 > In case this limit is reached, you'll get a `429` response and you will be blocked for 10 minutes.
 
 ## How to generate the Authorization header
@@ -133,21 +148,7 @@ You'll need your "Client shared secret" to sign the body of your request.
 
 It is available here:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/fba7003feee6da5c21cd6e555d4d5cd9aa36b35bde7f8d12bd33b6623388398d-Screenshot_2024-12-24_at_17.18.452x.png",
-        "",
-        ""
-      ],
-      "align": "center"
-    }
-  ]
-}
-[/block]
-
+<Image align="center" src="https://files.readme.io/fba7003feee6da5c21cd6e555d4d5cd9aa36b35bde7f8d12bd33b6623388398d-Screenshot_2024-12-24_at_17.18.452x.png" />
 
 <br />
 
