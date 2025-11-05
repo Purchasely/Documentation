@@ -16,35 +16,20 @@ next:
 
 Managing entitlements with your own backend is the most secure approach.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/89f01ba-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/89f01ba-image.png" />
 
 The Purchasely Platform is in charge of:
 
-- processing transactions and sending [Entitlement Events](entitlement-events) on the webhook interface every time entitlements should be updated for a user  
-  _Eg: when a subscription starts, is renewed, is terminated or refunded_
-- notifying the SDK and the app when entitlements have been properly updated by the backend
+* processing transactions and sending [Entitlement Events](entitlement-events) on the webhook interface every time entitlements should be updated for a user\
+  *Eg: when a subscription starts, is renewed, is terminated or refunded*
+* notifying the SDK and the app when entitlements have been properly updated by the backend
 
 The developer's backend is responsible of:
 
-- listening to Entitlement Events on Purchasely webhook, processing them and acknowledging them
-- granting / revoking entitlements to the users based on these events
-- providing an interface that the app can fetch to update users' entitlements
-- securing contents themselves (eg: with DRM for streaming platform) and managing accesses to contents depending on users' entitlements
+* listening to Entitlement Events on Purchasely webhook, processing them and acknowledging them
+* granting / revoking entitlements to the users based on these events
+* providing an interface that the app can fetch to update users' entitlements
+* securing contents themselves (eg: with DRM for streaming platform) and managing accesses to contents depending on users' entitlements
 
 <br />
 
@@ -52,20 +37,20 @@ The developer's backend is responsible of:
 
 To configure the webhoow follow these steps:
 
-1. Fill in [Client webhook URL in your Purchasely Console](https://console.purchasely.io//webhooks)  
-   _Purchasely Console > [YOUR APP] > Webhook_
+1. Fill in [Client webhook URL in your Purchasely Console](https://console.purchasely.io//webhooks)\
+   *Purchasely Console >[YOUR APP] > Webhook*
 
-   [block:image]{"images":[{"image":["https://files.readme.io/45bca19-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/45bca19-image.png" />
 2. Enable [Entitlement Events](entitlement-events) (`ACTIVATE` & `DEACTIVATE`)
 
-   [block:image]{"images":[{"image":["https://files.readme.io/433dcbd-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/433dcbd-image.png" />
 
 <br />
 
 > 📘 Event acknowledgement expected
-> 
+>
 > As soon as you have configured a Client webhook URL, the Purchasely Platform will expect an acknowledgement for the all events sent on the webhook. 
-> 
+>
 > You can start by implementing a simple `HTTP 200` response for every message sent on the webhook.
 
 # Managing webhook messages on your backend
@@ -85,23 +70,7 @@ Managing entitlements on your backend require 4 steps:
 
 Every entitlement update is sent on the webhook through 2 messages: `ACTIVATE` / `DEACTIVATE`.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/9e51f51-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "sizing": "500px",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" width="500px" border={true} src="https://files.readme.io/9e51f51-image.png" />
 
 <BackendEntitlementsAcknowledgingMessages />
 
