@@ -15,7 +15,7 @@ Lightweight, vectorial with a huge community, [Lottie](https://lottiefiles.com) 
 From now on you can add Lottie animations in Purchasely paywalls but it requires a little setup from your mobile developers.
 
 > 📘 Availability on Purchasely console
-> 
+>
 > This Lottie option is being added template by template. Don't hesitate to contact support to request a specific addition where you need it.
 
 ## Why is there any setup?
@@ -104,12 +104,12 @@ class PLYLottieBridge: NSObject {
 ### Android
 
 > 🚧 SDK 3.6.0 and up
-> 
+>
 > Lottie integration requires our SDK version 3.6.0 minimum
 
-- First you need to [add the Lottie dependency](http://airbnb.io/lottie/#/android) (if not already in your app)
-- Then implements `PLYLottieInterface`, you can copy the following sample `AnimationView` class
-- Finally add it to Purchasely with 
+* First you need to [add the Lottie dependency](http://airbnb.io/lottie/#/android) (if not already in your app)
+* Then implements `PLYLottieInterface`, you can copy the following sample `AnimationView` class
+* Finally add it to Purchasely with 
 
   ```
   Purchasely.lottieView = { AnimationView(context) }
