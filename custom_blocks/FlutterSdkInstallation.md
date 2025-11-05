@@ -39,13 +39,13 @@ allprojects {
 
 # Android setup
 
-We do include a store by default in our SDK, with Android you can choose to use Google and/or Huawei and/or Amazon.  
+We do include a store by default in our SDK, with Android you can choose to use Google and/or Huawei and/or Amazon.\
 See below to add the store you want to use
 
 > 📘 Versioning
-> 
+>
 > All your dependencies **must** always be at the **same version** for example
-> 
+>
 > ```yaml pubspec.yaml
 > dependencies:
 >   purchasely_flutter: ^<<current_flutter_version>>
@@ -73,7 +73,7 @@ await Purchasely.start(
 
 ## Video Player
 
-A video player is not provided by default on Android to avoid conflict with another dependency you may have  
+A video player is not provided by default on Android to avoid conflict with another dependency you may have\
 We provide one in an external dependency that is detected and handled automatically
 
 ```shell
