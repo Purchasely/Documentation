@@ -23,17 +23,148 @@ To create a new Custom User Attribute, you first need to declare it in the Purch
 1. Navigate to the section [User Attributes of your Purchasely Console](https://console.purchasely.io/user-attributes)
 2. Click on the button **`+ New user attribute`** in the upper right corner
 
-   [block:image]{"images":[{"image":["https://files.readme.io/40bd72a-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/40bd72a-image.png" />
 3. Fill in the following form:
 
    ![](https://files.readme.io/ad589ff-image.png)
 
-   - `Name`: display name in the Purchasely Console
-   - `Key`: name of the key that shall be used in the app code ([see below](custom-user-attributes#set-user-attributes))
+   * `Name`: display name in the Purchasely Console
+   * `Key`: name of the key that shall be used in the app code ([see below](custom-user-attributes#set-user-attributes))
 
-     - `Data type`: choose among the following data types:
+     * `Data type`: choose among the following data types:
 
-       [block:parameters]{"data":{"h-0":"Data type","h-1":"Description","h-2":"Available operators","0-0":"`String`","0-1":"Used for a sequence of characters","0-2":"`equals to`  \n`is different from`  \n`contains`  \n`does not contain`  \n`starts with`  \n`ends with`  \n`is empty or not set`  \n`is not empty`","1-0":"`Array of Strings`","1-1":"Array containing multiple sequences of characters","1-2":"`contains`  \n`does not contain`  \n`is empty or not set`  \n`is not empty`","2-0":"`Float`","2-1":"Used for numbers with decimals","2-2":"`is greater than`  \n`is greater than or equal`  \n`is lower than`  \n`is lower than or equal`  \n`equals to`  \n`is different from`","3-0":"`Int`","3-1":"Used for round numbers","3-2":"`is greater than`  \n`is greater than or equal`  \n`is lower than`  \n`is lower than or equal`  \n`equals to`  \n`is different from`","4-0":"`Bool`","4-1":"Used for yes or no attributes","4-2":"`is true`  \n`is true or not set`  \n`is false`  \n`is false or not set`","5-0":"`Date`","5-1":"Used for dates following universal timezone format (UTC)","5-2":"`is after`  \n`is before`  \n`is less than '{days}' days ago`  \n`is more than '{days}' days ago`  \n`is less than '{days}' days from now  `  \n`is more than '{days}' days from now`  \n`is false or not set`"},"cols":3,"rows":6,"align":["left","left","left"]}[/block]
+       <Table align={["left","left","left"]}>
+         <thead>
+           <tr>
+             <th style={{ textAlign: "left" }}>
+               Data type
+             </th>
+
+             <th style={{ textAlign: "left" }}>
+               Description
+             </th>
+
+             <th style={{ textAlign: "left" }}>
+               Available operators
+             </th>
+           </tr>
+         </thead>
+
+         <tbody>
+           <tr>
+             <td style={{ textAlign: "left" }}>
+               `String`
+             </td>
+
+             <td style={{ textAlign: "left" }}>
+               Used for a sequence of characters
+             </td>
+
+             <td style={{ textAlign: "left" }}>
+               `equals to`\
+               `is different from`\
+               `contains`\
+               `does not contain`\
+               `starts with`\
+               `ends with`\
+               `is empty or not set`\
+               `is not empty`
+             </td>
+           </tr>
+
+           <tr>
+             <td style={{ textAlign: "left" }}>
+               `Array of Strings`
+             </td>
+
+             <td style={{ textAlign: "left" }}>
+               Array containing multiple sequences of characters
+             </td>
+
+             <td style={{ textAlign: "left" }}>
+               `contains`\
+               `does not contain`\
+               `is empty or not set`\
+               `is not empty`
+             </td>
+           </tr>
+
+           <tr>
+             <td style={{ textAlign: "left" }}>
+               `Float`
+             </td>
+
+             <td style={{ textAlign: "left" }}>
+               Used for numbers with decimals
+             </td>
+
+             <td style={{ textAlign: "left" }}>
+               `is greater than`\
+               `is greater than or equal`\
+               `is lower than`\
+               `is lower than or equal`\
+               `equals to`\
+               `is different from`
+             </td>
+           </tr>
+
+           <tr>
+             <td style={{ textAlign: "left" }}>
+               `Int`
+             </td>
+
+             <td style={{ textAlign: "left" }}>
+               Used for round numbers
+             </td>
+
+             <td style={{ textAlign: "left" }}>
+               `is greater than`\
+               `is greater than or equal`\
+               `is lower than`\
+               `is lower than or equal`\
+               `equals to`\
+               `is different from`
+             </td>
+           </tr>
+
+           <tr>
+             <td style={{ textAlign: "left" }}>
+               `Bool`
+             </td>
+
+             <td style={{ textAlign: "left" }}>
+               Used for yes or no attributes
+             </td>
+
+             <td style={{ textAlign: "left" }}>
+               `is true`\
+               `is true or not set`\
+               `is false`\
+               `is false or not set`
+             </td>
+           </tr>
+
+           <tr>
+             <td style={{ textAlign: "left" }}>
+               `Date`
+             </td>
+
+             <td style={{ textAlign: "left" }}>
+               Used for dates following universal timezone format (UTC)
+             </td>
+
+             <td style={{ textAlign: "left" }}>
+               `is after`\
+               `is before`\
+               `is less than '{days}' days ago`\
+               `is more than '{days}' days ago`\
+               `is less than '{days}' days from now  `\
+               `is more than '{days}' days from now`\
+               `is false or not set`
+             </td>
+           </tr>
+         </tbody>
+       </Table>
 
        <br />
 4. Click on the **`Save`** button in the bottom right corner.
@@ -45,7 +176,7 @@ To modify an existing Custom User Attribute:
 1. click on the **`⋮`** button on the right of the attribute
 2. then on `Edit`
 
-   [block:image]{"images":[{"image":["https://files.readme.io/dd5bae7-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/dd5bae7-image.png" />
 
 <br />
 
@@ -56,7 +187,7 @@ To delete an existing Custom User Attribute:
 1. click on the **`⋮`** button on the right of the attribute
 2. then on `Delete`
 
-   [block:image]{"images":[{"image":["https://files.readme.io/1566d26-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/1566d26-image.png" />
 
 # Manipulating Customer User Attributes in the App code
 
@@ -305,9 +436,9 @@ _purchasely.ClearUserAttributes();
 ```
 
 > 👍 Clear after log out
-> 
+>
 > You should call `Purchasely.clearUserAttributes()` when a user is logged out, after calling `Purchasely.userLogout()`, so that he does not keep attributes you have set previously with his profile.
-> 
+>
 > Be aware though, this method remove all attributes so you must set device attributes again
 
 <br />
@@ -322,13 +453,13 @@ By default they are considered as optional.
 
 `essential` Custom User Attributes cannot be disabled as they are mandatory to deliver the service
 
-- They remain stored in the local storage even when users have revoked Data Processing #3 - All the operations enabling the customization of the User journey and of the commercial offers presented
-- Targeting based on `essential` user attributes keep on working for users who have revoked Data Processing #3.
+* They remain stored in the local storage even when users have revoked Data Processing #3 - All the operations enabling the customization of the User journey and of the commercial offers presented
+* Targeting based on `essential` user attributes keep on working for users who have revoked Data Processing #3.
 
 <br />
 
 > 📘 Example of `essential` Custom User Attribute
-> 
+>
 > If you set the Custom User Attribute `isWebSubscriber` (boolean) defined as `essential` to deliver the service, you will still be able to target web subscribers even if those who have revoke Data Processing #3.
 
 ```swift Swift
@@ -352,19 +483,14 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles", processingLegalBas
 Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7, processingLegalBasis: .essential)
 ```
 ```coffeescript Kotlin
-
 ```
 ```typescript React Native
-
 ```
 ```coffeescript Flutter
-
 ```
 ```javascript Cordova
-
 ```
 ```csharp Unity
-
 ```
 
 <br />
@@ -373,14 +499,14 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7, processin
 
 `optional` user attributes can be disabled.
 
-- Targeting based on `optional` user attributes stop working for users who have revoked Data Processing #3.
-- `optional` Custom User Attributes set prior to revoking Data Processing #3 will be wiped-off
-- setting a value to `optional` Custom User Attribute is not possible and no associated tracker is saved in the local storage.
+* Targeting based on `optional` user attributes stop working for users who have revoked Data Processing #3.
+* `optional` Custom User Attributes set prior to revoking Data Processing #3 will be wiped-off
+* setting a value to `optional` Custom User Attribute is not possible and no associated tracker is saved in the local storage.
 
 <br />
 
 > 📘 Example of `optional` Custom User Attribute
-> 
+>
 > If you set the Custom User Attribute `preferedTopics` (Array of Strings) defined as `optional` to deliver the service, you will not be able to target users who have revoked Data Processing #3 based on their `preferedTopics`.
 
 ```swift Swift
@@ -404,27 +530,22 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles", processingLegalBas
 Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7, processingLegalBasis: .optional)
 ```
 ```coffeescript Kotlin
-
 ```
 ```typescript React Native
-
 ```
 ```coffeescript Flutter
-
 ```
 ```javascript Cordova
-
 ```
 ```csharp Unity
-
 ```
 
 <br />
 
 > ❗️ Custom User Attributes set prior to the upgrading the SDK to version 5.4 onwards
-> 
-> All Custom User Attributes set prior to upgrading the SDK to version 5.4 are considered **by default as `optional` and will therefore be wiped off if the user revokes Processing #3**.
-> 
+>
+> All Custom User Attributes set prior to upgrading the SDK to version 5.4 are considered **by default as`optional` and will therefore be wiped off if the user revokes Processing #3**.
+>
 > If some of them should be considered as `essential`, do not forget to redefine their privacy setting to essential prior to revoking the Data Processing #3 for the user.
 
 <br />
