@@ -26,9 +26,9 @@ Introductory offers, such as free trials and discounted rates, enable users to e
 
 ## Types of Introductory Offers
 
-- **Free Trial**: Users access subscription content for free during a limited time.
-- **Pay As You Go**: Users pay a reduced price periodically during an initial promotional period.
-- **Pay Up Front**: Users pay once at a discounted rate, covering multiple billing cycles upfront.
+* **Free Trial**: Users access subscription content for free during a limited time.
+* **Pay As You Go**: Users pay a reduced price periodically during an initial promotional period.
+* **Pay Up Front**: Users pay once at a discounted rate, covering multiple billing cycles upfront.
 
 <br />
 
@@ -36,44 +36,44 @@ Introductory offers, such as free trials and discounted rates, enable users to e
 
 ### Setting Up Introductory Offers
 
-- Navigate to **App Store Connect → Features → In-App Purchases**.
-- Create or select an existing **Auto-Renewable Subscription**.
-- Under **Subscription Prices**, select **Create Introductory Offer**.
-- Choose the offer type (**Free Trial**, **Pay As You Go**, **Pay Up Front**), duration, and applicable regions.
+* Navigate to **App Store Connect → Features → In-App Purchases**.
+* Create or select an existing **Auto-Renewable Subscription**.
+* Under **Subscription Prices**, select **Create Introductory Offer**.
+* Choose the offer type (**Free Trial**, **Pay As You Go**, **Pay Up Front**), duration, and applicable regions.
 
 ### User Eligibility
 
-- Eligible if the user has never previously subscribed to any subscription within the same subscription group.
-- Ineligible if the user is a current or past subscriber within the subscription group.
+* Eligible if the user has never previously subscribed to any subscription within the same subscription group.
+* Ineligible if the user is a current or past subscriber within the subscription group.
 
 > 📘 Eligibility with StoreKit 1
-> 
+>
 > With StoreKit 1, user eligibility can only be determined by inspecting the user's purchase history through local receipts. However, this method is not entirely reliable because Apple may not update these receipts in real time, particularly during sandbox or TestFlight testing.
-> 
-> **Recommendation**:  
+>
+> **Recommendation**:\
 > For accurate and reliable eligibility checks, we strongly recommend configuring the Purchasely SDK to use StoreKit 2, which leverages Apple's [dedicated method](https://developer.apple.com/documentation/storekit/product/subscriptioninfo/iseligibleforintrooffer) to determine user eligibility more effectively.
 
 ## Google Play Billing
 
 ### Setting Up Introductory Offers
 
-- Navigate to **Google Play Console → Monetize → Products → Subscriptions**.
-- Create or select a subscription, then add a **Base Plan**.
-- Within the base plan, select **Add Offer** to create your introductory offer.
-- Configure offer details (pricing phases, duration, eligibility criteria).
+* Navigate to **Google Play Console → Monetize → Products → Subscriptions**.
+* Create or select a subscription, then add a **Base Plan**.
+* Within the base plan, select **Add Offer** to create your introductory offer.
+* Configure offer details (pricing phases, duration, eligibility criteria).
 
 ### User Eligibility
 
-- **New Customer Acquisition**: Automatically determined by Google Play based on user history.
-- **Developer Determined**: Custom eligibility criteria managed by your app logic.
-- **Upgrade Offers**: Offers targeted at users upgrading their subscription.
+* **New Customer Acquisition**: Automatically determined by Google Play based on user history.
+* **Developer Determined**: Custom eligibility criteria managed by your app logic.
+* **Upgrade Offers**: Offers targeted at users upgrading their subscription.
 
 <br />
 
 ## Displaying Introductory Offer in your app
 
-- Check user eligibility dynamically from your Purchasely plan (see below)
-- Eligibility to introductory offer is computed by Purchasely when the screen is visible to [display the offer](offer-mode) to the user
+* Check user eligibility dynamically from your Purchasely plan (see below)
+* Eligibility to introductory offer is computed by Purchasely when the screen is visible to [display the offer](offer-mode) to the user
 
 ### Get the information from the SDK
 
