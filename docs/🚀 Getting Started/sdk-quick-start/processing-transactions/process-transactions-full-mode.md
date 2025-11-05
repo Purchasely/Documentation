@@ -26,9 +26,9 @@ The only thing you will have to do is to update the entitlements once you have t
 
 After [displaying a placement](screens-display), you get the `result` of the user action on the paywall.
 
-- `Cancelled`: User did not purchase a plan
-- `Restored`: User restored a previous purchased plan
-- `Purchased`: User purchased a plan and the transaction was properly processed
+* `Cancelled`: User did not purchase a plan
+* `Restored`: User restored a previous purchased plan
+* `Purchased`: User purchased a plan and the transaction was properly processed
 
 You also have as a second argument the `plan` bought by the user, it is set to `nil` if no purchase was made.
 
