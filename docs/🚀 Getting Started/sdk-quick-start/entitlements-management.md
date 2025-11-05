@@ -29,7 +29,7 @@ next:
 
 ### Implementation
 
-=> [Implementation guide for managing entitlements with your own backend](backend-entitlements)
+\=> [Implementation guide for managing entitlements with your own backend](backend-entitlements)
 
 <FullModeManagingEntitlementsWithThePurchaselySDK />
 
@@ -37,4 +37,4 @@ next:
 
 ### Implementation
 
-=> [Implementation guide for managing entitlements through the Purchasely SDK](subscription-status)
+\=> [Implementation guide for managing entitlements through the Purchasely SDK](subscription-status)
