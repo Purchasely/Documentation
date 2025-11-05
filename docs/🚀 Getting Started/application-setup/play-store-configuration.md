@@ -17,8 +17,6 @@ metadata:
     the Service Account in the Google Play Console.
   robots: index
 ---
-# Google Play Store Configuration
-
 To connect your Google Play Store account with Purchasely, you need to provide the following parameters from the Play Store Console:
 
 1. [Android App Bundle ID](#1-android-app-bundle-id)
@@ -51,7 +49,7 @@ To connect your Google Play Store account with Purchasely, you need to provide t
 
 7. In the Purchasely Console, fill in the `Access key (JSON)` field with this JSON file.
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/1d5ec4b-image.png" />
+<Image align="center" border={true} src="https://files.readme.io/1d5ec4b-image.png" className="border" />
 
 <br />
 
