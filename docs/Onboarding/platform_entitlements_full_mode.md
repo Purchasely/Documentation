@@ -12,10 +12,6 @@ next:
 ---
 # How to manage entitlements and what are the limits of each solution?
 
-
-
 # Managing entitlements with my own backend
-
-
 
 # Managing entitlements with the Purchasely SDK?
