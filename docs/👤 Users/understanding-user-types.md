@@ -12,9 +12,9 @@ next:
 ---
 Purchasely’s servers have several ways to become aware of a new purchase:
 
-- via the Purchasely SDK
-- via a [manual import](subscribers-base-import)
-- via store notifications
+* via the Purchasely SDK
+* via a [manual import](subscribers-base-import)
+* via store notifications
 
 In the first two cases, since the information is provided by the SDK or your own servers, Purchasely’s servers know the user’s identity. These users may be connected to your app (**connected users**) or not (**anonymous users**).
 
@@ -46,22 +46,22 @@ Every webhook or data displayed in the Purchasely console for this type of user 
 
 # Unknown Users
 
-The purchase is known to Purchasely’s servers following the reception of a <<glossary:S2S>> notification. Purchasely has no way to know the identity of the buyer.
+The purchase is known to Purchasely’s servers following the reception of a <Glossary>S2S</Glossary> notification. Purchasely has no way to know the identity of the buyer.
 
 For this type of user:
 
-- No Purchasely webhook will be sent to you.
-- No data will be transmitted to the various integrations you may have configured.
-- The [S2S transfer](s2s-notifications-forwarding) will remain functional.
+* No Purchasely webhook will be sent to you.
+* No data will be transmitted to the various integrations you may have configured.
+* The [S2S transfer](s2s-notifications-forwarding) will remain functional.
 
 <br />
 
 ### When are Unknown Users created?
 
-- The purchase is made on a version of your app not using the Purchasely SDK.
-- The subscription was obtained through family sharing.
-- An error occurred during the purchase (app closed during the purchase, network issue).
-- You are in [observer mode](paywallobserver-mode) and do not call [Purchasely.synchronize()](process-transactions-with-paywall-action-interceptor#processing-transactions-with-your-in-house-system).
+* The purchase is made on a version of your app not using the Purchasely SDK.
+* The subscription was obtained through family sharing.
+* An error occurred during the purchase (app closed during the purchase, network issue).
+* You are in [observer mode](paywallobserver-mode) and do not call [Purchasely.synchronize()](process-transactions-with-paywall-action-interceptor#processing-transactions-with-your-in-house-system).
 
 <br />
 
@@ -75,9 +75,9 @@ Except for “family shared” subscriptions (whether unknown or known), they wi
 
 ### Can I reassign an identifier to these Purchasely users?
 
-- In the "family sharing" case: when the person opens their app, the subscription will automatically be associated with them. Therefore, there is nothing you need to do.
-- In the case of an error: a simple click on the “restore” link at the bottom of our paywalls will resolve the issue.
-- In other cases: please contact Purchasely.
+* In the "family sharing" case: when the person opens their app, the subscription will automatically be associated with them. Therefore, there is nothing you need to do.
+* In the case of an error: a simple click on the “restore” link at the bottom of our paywalls will resolve the issue.
+* In other cases: please contact Purchasely.
 
 <br />
 
@@ -85,11 +85,11 @@ Except for “family shared” subscriptions (whether unknown or known), they wi
 
 There is nothing special to do:
 
-- If you are subscribed to our webhooks, we do not send them in this case.
-- If you have connected integrations, likewise, nothing will be sent.
+* If you are subscribed to our webhooks, we do not send them in this case.
+* If you have connected integrations, likewise, nothing will be sent.
 
 <br />
 
 > 📘 I want to receive webhooks for unknown users
-> 
+>
 > No problem! Contact us and we can activate them for you
