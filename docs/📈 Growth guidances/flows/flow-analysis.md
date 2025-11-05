@@ -14,21 +14,7 @@ next:
 
 To help you better understand how users interact with your Flows, Purchasely provides a dedicated Sankey Diagram dashboard. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/87c2c90e910176899753920ab8bf3678929cd00f36643f4bc1868482a2eaf818-sankey.gif",
-        "",
-        ""
-      ],
-      "align": "center"
-    }
-  ]
-}
-[/block]
-
+<Image align="center" src="https://files.readme.io/87c2c90e910176899753920ab8bf3678929cd00f36643f4bc1868482a2eaf818-sankey.gif" />
 
 This visualization lets you see, at a glance, how users move from one screen to the next, which paths they follow, and where they drop off along the way.
 
