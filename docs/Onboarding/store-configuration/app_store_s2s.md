@@ -27,10 +27,10 @@ To plug App Store Server Notifications with the Purchasely platform, follow thes
 3. Navigate to the section General > App information
 4. In the sub-section App Store Server Notifications, edit the Product Server URL
 
-   [block:image]{"images":[{"image":["https://files.readme.io/7248fa4-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/7248fa4-image.png" />
 5. Paste the value from the field Server to server endpoint in the Purchasely Console
 
-   [block:image]{"images":[{"image":["https://files.readme.io/a511a4e-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/a511a4e-image.png" />
 
 # What are App Store Server Notifications used for?
 
@@ -40,12 +40,12 @@ App Store Server Notifications are used to receive real-time notifications about
 
 They consist in messages, sent by the App Store, every time an event occurs on a subscription. For instance, a message is sent when a subscription :
 
-- is purchased
-- is renewed
-- won't renew because the user as canceled the auto-renewal
-- is refund
-- gets expired
-- encounters a billing issue  
+* is purchased
+* is renewed
+* won't renew because the user as canceled the auto-renewal
+* is refund
+* gets expired
+* encounters a billing issue\
   …
 
 The server-to-server notifications are not mandatory for making subscriptions work, but they are very valuable in the sense that they bring a real-time and comprehensive vision for the app editor
