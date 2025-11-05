@@ -14,11 +14,11 @@ next:
 ---
 Starting with the following versions of SDKs, you can set Custom User attributes to build your Audiences:
 
-- iOS: 3.4.0
-- Android: 3.4.0
-- ReactNative: 2.4.0
-- Cordova: 2.4.0
-- Flutter: 1.4.0
+* iOS: 3.4.0
+* Android: 3.4.0
+* ReactNative: 2.4.0
+* Cordova: 2.4.0
+* Flutter: 1.4.0
 
 <br />
 
@@ -33,16 +33,16 @@ To create a new Custom User Attribute, you first need to declare it in the Purch
 1. Navigate to the section [User Attributes of your Purchasely Console](https://console.purchasely.io/user-attributes)
 2. Click on the button **`+ New user attribute`** in the upper right corner
 
-   [block:image]{"images":[{"image":["https://files.readme.io/40bd72a-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/40bd72a-image.png" />
 3. Fill in the following form:
 
    ![](https://files.readme.io/ad589ff-image.png)
 
-   - `Name`: display name in the Purchasely Console
-   - `Key`: name of the key that shall be used in the app code ([see below](custom-user-attributes#set-user-attributes))
-   - `Data type`: choose among the following data types:
+   * `Name`: display name in the Purchasely Console
+   * `Key`: name of the key that shall be used in the app code ([see below](custom-user-attributes#set-user-attributes))
+   * `Data type`: choose among the following data types:
 
-     [block:image]{"images":[{"image":["https://files.readme.io/ce4fba0-image.png",null,""],"align":"center","border":true}]}[/block]
+     <Image align="center" className="border" border={true} src="https://files.readme.io/ce4fba0-image.png" />
 
      Note: the types of operator varies for each type
 4. Click on the **`Save`** button in the bottom right corner.
@@ -54,7 +54,7 @@ To modify an existing Custom User Attribute:
 1. click on the **`⋮`** button on the right of the attribute
 2. then on `Edit`
 
-   [block:image]{"images":[{"image":["https://files.readme.io/dd5bae7-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/dd5bae7-image.png" />
 
 <br />
 
@@ -65,7 +65,7 @@ To delete an existing Custom User Attribute:
 1. click on the **`⋮`** button on the right of the attribute
 2. then on `Delete`
 
-   [block:image]{"images":[{"image":["https://files.readme.io/1566d26-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/1566d26-image.png" />
 
 # Manipulating Customer User Attributes in the App code
 
@@ -321,7 +321,7 @@ _purchasely.ClearUserAttributes();
 ```
 
 > 👍 Clear after log out
-> 
+>
 > You should call `Purchasely.clearUserAttributes()` when a user is logged out, after calling `Purchasely.userLogout()`, so that he does not keep attributes you have set previously with his profile.
-> 
+>
 > Be aware though, this method remove all attributes so you must set device attributes again
