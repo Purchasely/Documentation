@@ -38,16 +38,16 @@ The Purchasely Platform generates 2 types of analytics:
 
 # What can be done with these analytics?
 
-- **Server Events** can be sent to the [webhook](https://purchasely.readme.io/docs/webhook) or to 3rd party integrations.
-  - They can be used to:
-    - manage entitlements
-    - map the subscription events and revenue information with users (3rd party analytics tools)
-    - associate revenue information with ad-campaigns (3rd party MMP tools)
-    - trigger no-code automations (3rd party engagement and mCRM tools)
-  - They carry a set of attributes detailed [here](server-events-attributes)
-- **SDK / UI events** are sent to the Purchasely Platform but cannot be forwarded neither to the webhook nor to 3rd party integrations.
-  - They can be intercepted by the app (by using a event delegate / event listener) and from there, directly forwarded by the app to any 3rd-party SDK or in-house platform.  
+* **Server Events** can be sent to the [webhook](https://purchasely.readme.io/docs/webhook) or to 3rd party integrations.
+  * They can be used to:
+    * manage entitlements
+    * map the subscription events and revenue information with users (3rd party analytics tools)
+    * associate revenue information with ad-campaigns (3rd party MMP tools)
+    * trigger no-code automations (3rd party engagement and mCRM tools)
+  * They carry a set of attributes detailed [here](server-events-attributes)
+* **SDK / UI events** are sent to the Purchasely Platform but cannot be forwarded neither to the webhook nor to 3rd party integrations.
+  * They can be intercepted by the app (by using a event delegate / event listener) and from there, directly forwarded by the app to any 3rd-party SDK or in-house platform.\
     [Follow the implementation guide to do so](ui-sdk-events#leveraging-ui--sdk-events-in-your-app)
-  - They carry a set of attributes detailed [here](ui-sdk-events-attributes)
+  * They carry a set of attributes detailed [here](ui-sdk-events-attributes)
 
 All these events are also used by the Purchasely Platform to feed the dashboards & charts in the Purchasely Console.
