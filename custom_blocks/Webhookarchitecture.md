@@ -5,44 +5,13 @@ name: webhook-architecture
 
 Below is a typical architecture of the Purchasely subscriptions infrastructure.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/f70acc5-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/f70acc5-image.png" />
 
 Everything related to transaction, app store receipts & subscription updates is managed directly by the Purchasely Platform.
 
 Every entitlement update is sent on the webhook through 2 messages: **`ACTIVATE`** / **`DEACTIVATE`**.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/9e51f51-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "sizing": "500px",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" width="500px" border={true} src="https://files.readme.io/9e51f51-image.png" />
 
 On your end, what you have to do is:
 
@@ -52,15 +21,15 @@ On your end, what you have to do is:
 
 # UPDATING BACKEND ENTITLEMENTS
 
-The ACTIVATE / DEACTIVATE events are carrying the information needed to determined which entitlements shall be granted / revoked to which user:  
-the plan purchased  
-the store used for purchasing  
+The ACTIVATE / DEACTIVATE events are carrying the information needed to determined which entitlements shall be granted / revoked to which user:\
+the plan purchased\
+the store used for purchasing\
 the user (user ID if the user was logged in or anonymous ID if the user was logged out)
 
 Sample payload:
 
-- the subset tabs only displays the fields that are mandatory to look at to manage entitlements
-- the full payload tabs show the entire event payloads
+* the subset tabs only displays the fields that are mandatory to look at to manage entitlements
+* the full payload tabs show the entire event payloads
 
 ```json ACTIVATE (subset)
 {
@@ -158,31 +127,28 @@ Sample payload:
 ```
 
 > 🚧 Do not invalidate subscriptions on your end, by relying on the billing cycle end date
-> 
+>
 > Never use the `next_renewal_at` / `effective_next_renewal_at` to invalidate a subscription (and always use the webhook sent to you for this sole purpose). This date is only here to help your marketing team take actions (or if you want to display the next renewal date in your app).
-> 
+>
 > Indeed, in case of billing issue, if a grace period has been configured, the next renewal date might be expired when the subscription shall be actually terminated.
-> 
-> - Upon subscription renewal, the Purchasely Platform always sends a `ACTIVATE` message
-> - Upon subscription termination, the Purchasely Platform always sends a `DEACTIVATE` message in the right timing, in other words when the entitlements should be revoked, after the grace period has expired.
-> 
+>
+> * Upon subscription renewal, the Purchasely Platform always sends a `ACTIVATE` message
+> * Upon subscription termination, the Purchasely Platform always sends a `DEACTIVATE` message in the right timing, in other words when the entitlements should be revoked, after the grace period has expired.
+>
 > If you ever needed a fail safe to unsubscribe users in case an issue occurs with Apple/Google/Huawei/Purchasely/your servers, you should let at least a 24h-margin with the given `next_renewal_at` / `effective_next_renewal_at`.
 
 Sample backend code for:
 
-- receiving webhook events
-- extracting the relevant information
-- updating the entitlements in the database
-- acknowledging the processing of the events
+* receiving webhook events
+* extracting the relevant information
+* updating the entitlements in the database
+* acknowledging the processing of the events
 
 ```javascript
-
 ```
 ```ruby Ruby
-
 ```
 ```kotlin Kotlin
-
 ```
 
 # MANAGING APP ENTITLEMENTS
