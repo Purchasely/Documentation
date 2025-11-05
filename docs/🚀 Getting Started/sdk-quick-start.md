@@ -41,26 +41,93 @@ next:
 
 The Purchasely SDK is developed natively on the following platforms:
 
-- iOS - Swift (minimum version <<sdk_ios_minimum_version>>)
-- Android - Kotlin (minimum version <<sdk_android_minimum_version>>)
+* iOS - Swift (minimum version {user.sdk_ios_minimum_version})
+* Android - Kotlin (minimum version {user.sdk_android_minimum_version})
 
-For hybrid apps, our <<glossary:bridge sdk>>s are available for:
+For hybrid apps, our <Glossary>bridge sdk</Glossary>s are available for:
 
-- React Native
-- Flutter
-- Unity
-- Cordova
+* React Native
+* Flutter
+* Unity
+* Cordova
 
 # Current version per platform
 
-| Platform         | SDK Version                 |
-| :--------------- | :-------------------------- |
-| **iOS**          | <<current_ios_version>>     |
-| **Android**      | <<current_android_version>> |
-| **Flutter**      | <<current_flutter_version>> |
-| **React Native** | <<current_rn_version>>      |
-| **Cordova**      | <<current_cordova_version>> |
-| **Unity**        | <<current_unity_version>>   |
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Platform
+      </th>
+
+      <th>
+        SDK Version
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        **iOS**
+      </td>
+
+      <td>
+        {user.current_ios_version}
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        **Android**
+      </td>
+
+      <td>
+        {user.current_android_version}
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        **Flutter**
+      </td>
+
+      <td>
+        {user.current_flutter_version}
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        **React Native**
+      </td>
+
+      <td>
+        {user.current_rn_version}
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        **Cordova**
+      </td>
+
+      <td>
+        {user.current_cordova_version}
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        **Unity**
+      </td>
+
+      <td>
+        {user.current_unity_version}
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 # Implementation process
 
