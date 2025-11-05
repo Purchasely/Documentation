@@ -18,9 +18,9 @@ A/B testing paywalls are a great way to grow your business by minimizing risks a
 2. [Create a new Price A/B test](#create-a-new-price-ab-test)
 
 > 🚧 **Prerequisites**
-> 
+>
 > You should have: 3.2 SDK version or above
-> 
+>
 > Minimum of 1 placement and 2 Paywalls (Paywall published)
 
 ## Create a new UI A/B Test
@@ -46,25 +46,10 @@ Provide the mandatory fields- Name, ID, and Placement. You can add a short descr
 **Audience**: choose the audience you would like to run this test on. 
 
 > 🚧 Warning
-> 
+>
 > You can't run multiple A/B tests for the combination of same Audience and Placement
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/c069448-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/c069448-image.png" />
 
 ### Variant set up
 
@@ -78,24 +63,9 @@ Select paywalls for the A/B/C test respectively
 
 **Total weight**- your total weightage for all the tests you have created should be equivalent to 100. You can click on equalize to make them=100.
 
-You can click on **Save as a draft **and **Start A/B test** whenever you are ready to run it. 
+You can click on **Save as a draft** and **Start A/B test** whenever you are ready to run it. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/7624d64-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/7624d64-image.png" />
 
 <br />
 
@@ -106,7 +76,7 @@ You can click on **Save as a draft **and **Start A/B test** whenever you are rea
 To create a new price A/B test, you need to meet the following prerequisites:
 
 > 📘 Note
-> 
+>
 > Please make sure that you have more than one plan in the Products and Plan section in order to perform a price A/B test.
 
 ### A/B test set up
@@ -129,22 +99,7 @@ To create your new price A/B test, be sure to provide the mandatory fields such 
 
 **Paywall**: choose the paywall you want to run this test on. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/4007a37-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/4007a37-image.png" />
 
 ### Variant set up
 
@@ -157,29 +112,14 @@ Select plans for the A/B/C test variants, respectively
 **Plans used:** these are the plans you chose for this paywall in the paywall builder. 
 
 > 🚧 Warning:
-> 
+>
 > If you would like to change the plans for Variant A, you should do it from the paywall builder
 
 **Replaced by**: For variant B, select the plans you want to replace the plans in variant A with.
 
-You can click on **Save as a draft **and **Start A/B test** whenever you are ready to run it.
+You can click on **Save as a draft** and **Start A/B test** whenever you are ready to run it.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/868d56a-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/868d56a-image.png" />
 
 <br />
 
