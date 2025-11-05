@@ -22,45 +22,17 @@ Here is an example of a personalized user journey built for [Headspace](https://
 
 This flow was imagined and designed by [Irrational Labs](https://irrationallabs.com/) - the leading behavioral science consultancy for designing better choices.. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/5163e70c93ac5df593742006fa020ca245943c3e26b0e74383a1465dea19e56c-headspace_flow.png",
-        null,
-        "This user journey aims to increase the user engagement during the free trial and the conversion to paid, by collecting user insights, personalizing the user journey and recommending the relevant contents for each users"
-      ],
-      "align": "center",
-      "border": true,
-      "caption": "This user journey aims to increase the user engagement during the free trial and the conversion to paid, by collecting user insights, personalizing the user journey and recommending the relevant contents for each users"
-    }
-  ]
-}
-[/block]
-
+<Image alt="This user journey aims to increase the user engagement during the free trial and the conversion to paid, by collecting user insights, personalizing the user journey and recommending the relevant contents for each users" align="center" border={true} src="https://files.readme.io/5163e70c93ac5df593742006fa020ca245943c3e26b0e74383a1465dea19e56c-headspace_flow.png">
+  This user journey aims to increase the user engagement during the free trial and the conversion to paid, by collecting user insights, personalizing the user journey and recommending the relevant contents for each users
+</Image>
 
 <br />
 
 Here is a firsthand look at the app with this preview:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/bcdcbd9922ddb595fcd199edf1cb0a15a29dbe61a00e6609c5d78809dc6a13c3-headspace_reveal.gif",
-        "",
-        "Depending on user insights and the combination of answers, the reveal Screen can showcase multiple profiles: The Balance Builder or The Peaceful Thinker"
-      ],
-      "align": "center",
-      "border": true,
-      "caption": "Depending on user insights and the combination of answers, the reveal Screen can showcase multiple profiles: The Balance Builder or The Peaceful Thinker"
-    }
-  ]
-}
-[/block]
-
+<Image alt="Depending on user insights and the combination of answers, the reveal Screen can showcase multiple profiles: The Balance Builder or The Peaceful Thinker" align="center" border={true} src="https://files.readme.io/bcdcbd9922ddb595fcd199edf1cb0a15a29dbe61a00e6609c5d78809dc6a13c3-headspace_reveal.gif">
+  Depending on user insights and the combination of answers, the reveal Screen can showcase multiple profiles: The Balance Builder or The Peaceful Thinker
+</Image>
 
 <br />
 
@@ -68,11 +40,11 @@ Let’s explore how you can implement this!
 
 ## General functioning
 
-- The Purchasely Screen Composer allows you to integrate inside your Screens a **[Multiple Choice Question (MCQ)](mcq)** component.
-- With this component, you can ask users a Question and present different Answers that they can choose from
-- The answer(s) - depending on how you configure the component, it can allow multiple answers or not - can then be saved as a Custom User attribute: when the user picks an answer, the SDK will automatically save the corresponding value in the associated Custom User Attribute
-- The user data - the attribute, its type and the value()s picked up by the user - can be fetched in the app by using the [Event Listener / Delegate for Custom User Attributes](custom-user-attribute-listener).
-- These Custom User Attributes can then be reused to create Audiences. By leveraging Placements, you can personalize the Journey in real time, depending on the insights provided by the User
+* The Purchasely Screen Composer allows you to integrate inside your Screens a **[Multiple Choice Question (MCQ)](mcq)** component.
+* With this component, you can ask users a Question and present different Answers that they can choose from
+* The answer(s) - depending on how you configure the component, it can allow multiple answers or not - can then be saved as a Custom User attribute: when the user picks an answer, the SDK will automatically save the corresponding value in the associated Custom User Attribute
+* The user data - the attribute, its type and the value()s picked up by the user - can be fetched in the app by using the [Event Listener / Delegate for Custom User Attributes](custom-user-attribute-listener).
+* These Custom User Attributes can then be reused to create Audiences. By leveraging Placements, you can personalize the Journey in real time, depending on the insights provided by the User
 
 <br />
 
@@ -83,22 +55,22 @@ Follow the [guide](mcq)!
 When configuring the component, you should make sure that:
 
 1. the `Survey Id` configured has an explicit name which matches the question asked
-   - the default Survey Id `survey_1` can be changed by clicking on the button **+ Create new Survey Id**
+   * the default Survey Id `survey_1` can be changed by clicking on the button **+ Create new Survey Id**
 2. the parameter `Save answer in Custom User Attribute` is activated and associated with an attribute with the relevant type:
 
-   - if the parameter Allow multiple (answers) is deactivated, the associated Custom User Attribute type should be a `String`
+   * if the parameter Allow multiple (answers) is deactivated, the associated Custom User Attribute type should be a `String`
 
-     [block:image]{"images":[{"image":["https://files.readme.io/9af64264b2334a0a2a33da44215e48427b86cd281760e56a6147c5bdcbc1344f-goal.gif","",""],"align":"center","border":true}]}[/block]
-   - if the parameter Allow multiple (answers) is activated, the associated Custom User Attribute type should be an `Array of Strings`
+     <Image align="center" className="border" border={true} src="https://files.readme.io/9af64264b2334a0a2a33da44215e48427b86cd281760e56a6147c5bdcbc1344f-goal.gif" />
+   * if the parameter Allow multiple (answers) is activated, the associated Custom User Attribute type should be an `Array of Strings`
 
-     [block:image]{"images":[{"image":["https://files.readme.io/176bd69cd30e503757922fc0ba3737ebb55941f40d0580f55b5463f5756ad748-goals.gif","",""],"align":"center","border":true}]}[/block]
-   - you can directly create a new Custom User Attribute and associate the relevant type by clicking on the button **+ Create new User Attribute**
+     <Image align="center" className="border" border={true} src="https://files.readme.io/176bd69cd30e503757922fc0ba3737ebb55941f40d0580f55b5463f5756ad748-goals.gif" />
+   * you can directly create a new Custom User Attribute and associate the relevant type by clicking on the button **+ Create new User Attribute**
 3. Each Answer is associated with a `value`, consistent with the Text of the Answer.
 
-   [block:image]{"images":[{"image":["https://files.readme.io/49be6be00c2e443f18a40f5f5e5186738b7143f425e16d223dc00faf7709b2ff-answers.gif","",""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/49be6be00c2e443f18a40f5f5e5186738b7143f425e16d223dc00faf7709b2ff-answers.gif" />
 
-   - this is the value that you will get when fetching the data and processing it in the app
-   - it is the same value for all the languages
+   * this is the value that you will get when fetching the data and processing it in the app
+   * it is the same value for all the languages
 4. If the parameter `Validate on selection` is deactivated, your Screen should integrate a component CTA for Multiple Choice Question, associated with the same `Survey Id`
 
 <br />
@@ -111,18 +83,18 @@ Upon the submission of the user's Answer, if the MCQ has been associated with a 
 
 The SDK provides:
 
-- the `key` of the attribute
-- the `type` of the attribute
-  - `String` for single answer MCQs
-  - `Array of Strings` for multiple answers MCQs
-- the `value` (String - single answer) or `values` (Array of Strings - multiple answers) matching the Answers picked up by the user.
+* the `key` of the attribute
+* the `type` of the attribute
+  * `String` for single answer MCQs
+  * `Array of Strings` for multiple answers MCQs
+* the `value` (String - single answer) or `values` (Array of Strings - multiple answers) matching the Answers picked up by the user.
 
 <br />
 
 <EventListenerForCustomUserAttributesImplementation />
 
 > 📘 Value of the parameter source
-> 
+>
 > After the submission of the MCQ, the parameter `source` as the value `purchasely` to indicate to the app that the Custom User Attribute has been set by the SDK and not by the app.
 
 <br />
@@ -141,18 +113,18 @@ It's the same with 3rd party integrations. After fetching the Custom User Attrib
 
 For instance, this can be achieved with the following platforms (the list is not exhaustive):
 
-- [Amplitude](amplitude)
-- [Braze](braze)
-- [MixPanel](mixpanel)
-- [Iterable](iterable)
-- [Clevertap](clevertap)
-- [OneSignal](onesignal)
-- [Batch](batch)
-- [Google Analytics for Firebase](google-analytics-for-firebase)
-- [Piano analytics](piano-analytics)
-- [Airship](airship)
-- [MoEngage](moengage)
-- or any 3rd party SDK integrated inside your application
+* [Amplitude](amplitude)
+* [Braze](braze)
+* [MixPanel](mixpanel)
+* [Iterable](iterable)
+* [Clevertap](clevertap)
+* [OneSignal](onesignal)
+* [Batch](batch)
+* [Google Analytics for Firebase](google-analytics-for-firebase)
+* [Piano analytics](piano-analytics)
+* [Airship](airship)
+* [MoEngage](moengage)
+* or any 3rd party SDK integrated inside your application
 
 This processing has to be done by your app. Purchasely does not provide a server to server integration to do it.
 
@@ -175,31 +147,24 @@ to be completed
 
 To link Screens together, you can leverage the different [Action types](action-types) supported by the Screen Composer.
 
-- **Open Screen** allows you to link to another Screen built with the Screen Composer or the Legacy Paywall Builder
-- **Open Placement** allows you to link to a Placement - giving you opportunity to [create a personalized User Journey](https://docs.purchasely.com/docs/user-surveys#how-to-personalize-the-user-journey-based-on-the-insights-provided)
-- **Deeplink** allows you to link to any supported deeplink - either inside of the application or in another app
-- **Web Page** allows you to open a web page in the web browser (iOS) or in a web view inside the application (Android)
-- **Close** and **Close all** allow you to dismiss the current Screen or all the Screens from the sequence at once
+* **Open Screen** allows you to link to another Screen built with the Screen Composer or the Legacy Paywall Builder
+* **Open Placement** allows you to link to a Placement - giving you opportunity to [create a personalized User Journey](https://docs.purchasely.com/docs/user-surveys#how-to-personalize-the-user-journey-based-on-the-insights-provided)
+* **Deeplink** allows you to link to any supported deeplink - either inside of the application or in another app
+* **Web Page** allows you to open a web page in the web browser (iOS) or in a web view inside the application (Android)
+* **Close** and **Close all** allow you to dismiss the current Screen or all the Screens from the sequence at once
 
 <br />
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/9453ab7d72cbfc37669ace3e57d5f5667cb511ba3795e84e9985b0db1ebd5dda-image.png",
-        null,
-        "For 1 to 1 transitions => use the action **Open Screen**  \nFor 1 to N transitions => use the action **Open Placement**"
-      ],
-      "align": "center",
-      "border": true,
-      "caption": "For 1 to 1 transitions => use the action **Open Screen**  \nFor 1 to N transitions => use the action **Open Placement**"
-    }
-  ]
-}
-[/block]
-
+<Image
+  alt="For 1 to 1 transitions => use the action **Open Screen**  
+For 1 to N transitions => use the action **Open Placement**"
+  align="center"
+  border={true}
+  src="https://files.readme.io/9453ab7d72cbfc37669ace3e57d5f5667cb511ba3795e84e9985b0db1ebd5dda-image.png"
+>
+  For 1 to 1 transitions => use the action **Open Screen**\
+  For 1 to N transitions => use the action **Open Placement**
+</Image>
 
 <br />
 
@@ -213,23 +178,23 @@ When the next Screen (N+1) can vary depending on Audience, you need to use on th
 
 If you want to personalize the User Journey depending on the user insights provided, proceed as follows:
 
-1. For each MCQ component of your flow, activate the parameter `Save answer in custom user attribute` and map them with the desired Custom User Attribute  
-   _E.g.: _
-   - _the MCQ component of the Screen What is your experience in meditation? is mapped with the attribute experience (String) - single answer_
-   - _the MCQ component of the Screen What can Headspace help you improve? is mapped with the attribute goals (Array of Strings) - multiple answers_ 
+1. For each MCQ component of your flow, activate the parameter `Save answer in custom user attribute` and map them with the desired Custom User Attribute\
+   *E.g.:*
+   * *the MCQ component of the Screen What is your experience in meditation? is mapped with the attribute experience (String) - single answer*
+   * *the MCQ component of the Screen What can Headspace help you improve? is mapped with the attribute goals (Array of Strings) - multiple answers* 
      1. <br />
-2. Create the desired Audiences leveraging these Custom User Attributes  
-   _E.g.: _
+2. Create the desired Audiences leveraging these Custom User Attributes\
+   *E.g.:*
 
-   [block:image]{"images":[{"image":["https://files.readme.io/bec64538b5564775cf03139fbd23eb283840f091fb3e868eb1c564451e7179c9-image.png",null,""],"align":"center","sizing":"600px"}]}[/block]
+   <Image align="center" width="600px" src="https://files.readme.io/bec64538b5564775cf03139fbd23eb283840f091fb3e868eb1c564451e7179c9-image.png" />
 
    <br />
-3. Create a new Placement, and map the different Audiences created with each Screen  
-   _E.g.:_
+3. Create a new Placement, and map the different Audiences created with each Screen\
+   *E.g.:*
 
-   [block:image]{"images":[{"image":["https://files.readme.io/eeeefc057159772a4f7cc0840e026828f8127ed4217a6ff2e6ed19e96ee428b7-image.png",null,""],"align":"center","sizing":"3px"}]}[/block]
+   <Image align="center" width="3px" src="https://files.readme.io/eeeefc057159772a4f7cc0840e026828f8127ed4217a6ff2e6ed19e96ee428b7-image.png" />
 4. Map the action of the Screen N with action **Open Placement** and the Placement created
 
-   [block:image]{"images":[{"image":["https://files.readme.io/e469df40b297e59bac36b1f32505f69b8939b561530ab5ad9fb6de50e9e0e475-image.png",null,""],"align":"center","sizing":"400px"}]}[/block]
+   <Image align="center" width="400px" src="https://files.readme.io/e469df40b297e59bac36b1f32505f69b8939b561530ab5ad9fb6de50e9e0e475-image.png" />
 
 You're all set!
