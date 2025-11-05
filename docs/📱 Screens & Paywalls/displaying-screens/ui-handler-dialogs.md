@@ -20,15 +20,15 @@ When using the Purchasely SDK in full mode, various informational messages and e
 
 These include messages such as:
 
-- Purchase completed
-- Restoration completed
+* Purchase completed
+* Restoration completed
 
 and error messages like:
 
-- Network error
-- Product not found
-- Purchase impossible (or canceled) 
-- Restoration incomplete.
+* Network error
+* Product not found
+* Purchase impossible (or canceled) 
+* Restoration incomplete.
 
 All these alerts are managed by the **`PLYAlertMessage`** enum.
 
