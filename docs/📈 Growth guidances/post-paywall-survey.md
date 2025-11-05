@@ -40,29 +40,14 @@ Step 3: The Action
 
 ## How to create a survey to understand why the user have dismissed the Paywall
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/7e330692a118670dd2a52928e793353043ba64c299a93ce3cbe88518d2ee0e73-image.png",
-        null,
-        null
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/7e330692a118670dd2a52928e793353043ba64c299a93ce3cbe88518d2ee0e73-image.png" />
 
 ### Survey Configuration
 
-1. Survey ID:  
-   _eg: post_paywall_survey_
-2. Save answer in custom user attribute  
-   _eg: dismiss_reason / type: string_
+1. Survey ID:\
+   *eg: post\_paywall\_survey*
+2. Save answer in custom user attribute\
+   *eg: dismiss\_reason / type: string*
 3. Validation on selection: true
 
 <br />
