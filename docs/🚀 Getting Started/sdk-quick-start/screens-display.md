@@ -16,7 +16,7 @@ next:
       slug: processing-transactions
       title: Transactions processing
 ---
-Purchasely screens, also called presentations or paywalls, can be displayed directly via their identifier, but the preferred way is to use a <<glossary:placement>>.
+Purchasely screens, also called presentations or paywalls, can be displayed directly via their identifier, but the preferred way is to use a <Glossary>placement</Glossary>.
 
 You can learn more about [placements](displaying-screens-placements) & [screens](displaying-screens) in their dedicated article.
 
@@ -85,7 +85,7 @@ Purchasely.presentPresentationForPlacement('<<default_placement>>');
 
 # Close & Callback
 
-Once a successful purchase or restoration has occurred, Purchasely screens will be automatically closed by the SDK, except in Kotlin/Java, where you need to implement the `onClose` callback.  
+Once a successful purchase or restoration has occurred, Purchasely screens will be automatically closed by the SDK, except in Kotlin/Java, where you need to implement the `onClose` callback.\
 For more details on how to retrieve this information or manage it yourself in paywallObserver mode, refer to the [next step](processing-transactions).
 
 In all other cases, if you want to close the Purchasely presentation, you must do it manually.
