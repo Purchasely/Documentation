@@ -17,29 +17,14 @@ This lets you configure remotely how Screens created in no-code with the Screen 
 <br />
 
 > 🚧 SDK v5.3.0+ required
-> 
+>
 > To leverage Flows, your app must be running [SDK version `v5.3.0`](https://docs.purchasely.com/changelog/53)
 
 # Display modes available
 
 Here are how the different display modes available
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/4a3d4c0e5e7ea20876ed959f203e623858cd7e12ac9de95c8c9c6556382ee770-types.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/4a3d4c0e5e7ea20876ed959f203e623858cd7e12ac9de95c8c9c6556382ee770-types.gif" />
 
 <br />
 
@@ -49,43 +34,13 @@ Here are how the different display modes available
 
 You can change the display mode from the Screen Composer by clicking on the Screen name in the top bar and changing the parameter value.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/14c3fb70622f64c6161f57c939b82f3797c419c321dac1fc9ed8aebe475ff1cc-display_mode_console.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/14c3fb70622f64c6161f57c939b82f3797c419c321dac1fc9ed8aebe475ff1cc-display_mode_console.gif" />
 
 If no display mode has been configured, the default display mode is applied by the SDK is `Modal`. The default display mode will also be applied by versions of the SDK inferior to 5.3
 
 For drawers and popins, you can set the desired height:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b355f6c38b89ae7c02b022e86cfdcc9c96aea71d57cc3ae9d7fee408efb7cf69-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/b355f6c38b89ae7c02b022e86cfdcc9c96aea71d57cc3ae9d7fee408efb7cf69-image.png" />
 
 <br />
 
@@ -94,9 +49,9 @@ On iOS, the **Display mode** `Push` is only available, if the parent view alread
 On Android or without a navigation bar, the **Display mode** will fallback to `Modal`
 
 > 🚧 The configured display mode does not reflect in the preview of the Console
-> 
+>
 > This means that it will not reflect in the Console if you change it.
-> 
+>
 > This will require a bit more work and we hope to make it available soon... Stay tuned!
 
 # Implementation
@@ -104,7 +59,7 @@ On Android or without a navigation bar, the **Display mode** will fallback to `M
 To manage the display mode in the app, 2 different methods are available:
 
 1. The simplest one: by leverage the `display()` API of the SDK
-2. The manual one: by fetching the value of the display_mode parameter manually and handling it yourself
+2. The manual one: by fetching the value of the display\_mode parameter manually and handling it yourself
 
 <br />
 
