@@ -20,12 +20,12 @@ Dynamic Offering allows you to dynamically define which Offering a user should s
 
 With Dynamic Offering, you can:
 
-- Use a single Paywall to display multiple Offerings, depending on what is assigned to the user.
-- Offer free trials and fallback promotions in one unified Paywall setup:
-  - The Offering is linked to a Plan that includes a Free Trial (via Intro Offer) and a Promotional Offer that mirrors it.
-  - The SDK will automatically evaluate and apply the appropriate offer:
-    - ➕ If the user is eligible for the Intro Offer, it is applied.
-    - ➖ If the user is not eligible, the Promotional Offer will be applied instead.
+* Use a single Paywall to display multiple Offerings, depending on what is assigned to the user.
+* Offer free trials and fallback promotions in one unified Paywall setup:
+  * The Offering is linked to a Plan that includes a Free Trial (via Intro Offer) and a Promotional Offer that mirrors it.
+  * The SDK will automatically evaluate and apply the appropriate offer:
+    * ➕ If the user is eligible for the Intro Offer, it is applied.
+    * ➖ If the user is not eligible, the Promotional Offer will be applied instead.
 
 <br />
 
@@ -33,26 +33,11 @@ With Dynamic Offering, you can:
 
 In the Screen Composer, you define a default Offering for a user. An Offering includes:
 
-- `reference`: a unique identifier (letters, numbers, `_` or `-`)
-- `Plan`: choose one from the Plans configured in the Purchasely Console
-- (Optional) `Promotional Offer`: choose one from the Promotional Offers configured in the Purchasely Console
+* `reference`: a unique identifier (letters, numbers, `_` or `-`)
+* `Plan`: choose one from the Plans configured in the Purchasely Console
+* (Optional) `Promotional Offer`: choose one from the Promotional Offers configured in the Purchasely Console
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/26e142aab9f16320d99009473233835b7eb3a169054414059e6f15bee564ae70-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/26e142aab9f16320d99009473233835b7eb3a169054414059e6f15bee564ae70-image.png" />
 
 When your Offering has been configured, don't forget to click on the button `+ Add offering` to add it.
 
@@ -65,11 +50,11 @@ Each Offering reference can then be mapped to buttons, pickers, or calls to acti
 <br />
 
 > ⚠️ Legacy Paywalls Migration
-> 
+>
 > Paywalls created before May 7, 2025 used direct mapping between Promotional Offers and UI elements.
-> 
+>
 > Starting May 7, the mapping uses the Offering Reference instead. Purchasely has migrated legacy Paywalls accordingly.
-> 
+>
 > 🆘 Contact Purchasely Support if you experience any unexpected behavior with Promotional Offers after this change.
 
 <br />
