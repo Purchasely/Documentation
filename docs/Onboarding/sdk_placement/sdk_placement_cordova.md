@@ -16,4 +16,4 @@ next:
 Purchasely.presentPresentationForPlacement('SAMPLE_PLACEMENT');
 ```
 
-<br>
+<br />
