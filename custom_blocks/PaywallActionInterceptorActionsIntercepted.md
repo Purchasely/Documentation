@@ -5,11 +5,11 @@ name: Paywall Action Interceptor - actions intercepted
 
 You can intercept the following buttons being tapped:
 
-- Close
-- Login
-- Navigate (web or deeplink)
-- Purchase
-- Win-back / retention offer
-- Restore
-- Open another paywall
-- Promo code
+* Close
+* Login
+* Navigate (web or deeplink)
+* Purchase
+* Win-back / retention offer
+* Restore
+* Open another paywall
+* Promo code
