@@ -14,10 +14,10 @@ The **Campaigns** feature lets you create powerful no-code automations that will
 
 They are particularly useful to:
 
-- Convert users by proposing limited-time offers or discounts
-- Implement retention strategies leveraging Promotional Offers targeting active subscribers about to Churn (voluntarily or involuntarily)
-- Create win-back strategies leveraging Promotional Offer for lapsed subscribers
-- Run user research or collect user insights by publishing surveys to targeted users
+* Convert users by proposing limited-time offers or discounts
+* Implement retention strategies leveraging Promotional Offers targeting active subscribers about to Churn (voluntarily or involuntarily)
+* Create win-back strategies leveraging Promotional Offer for lapsed subscribers
+* Run user research or collect user insights by publishing surveys to targeted users
 
 <br />
 
@@ -33,9 +33,9 @@ They are particularly useful to:
 
 For each campaign, you can define:
 
-- **WHO** will be targeted by associating it with an Audience
-- **WHEN** the campaign should trigger and define capping parameters
-- **WHAT** Screen(s) should be displayed by selecting a Purchasely Screen or running an A/B test.
+* **WHO** will be targeted by associating it with an Audience
+* **WHEN** the campaign should trigger and define capping parameters
+* **WHAT** Screen(s) should be displayed by selecting a Purchasely Screen or running an A/B test.
 
 <br />
 
@@ -45,43 +45,13 @@ Set the name of your campaign and id. The name and ID you set here, helps you tr
 
 💡Adding a category lets you better organize the list of campaigns. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/8aefde9f6d1dbf09521a0caed643b7fe47d47dac5d0b1b16c1cccf7d609eb1ce-Screen_Recording_2025-03-17_at_08.18.47.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/8aefde9f6d1dbf09521a0caed643b7fe47d47dac5d0b1b16c1cccf7d609eb1ce-Screen_Recording_2025-03-17_at_08.18.47.gif" />
 
 ### WHO - Audience:
 
 Choose the [audience](https://docs.purchasely.com/docs/audiences) whom you would like to run this campaign for.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/39f15535bfa0e07b78da0bb8dd36249eebe44661cc65c629cbf5d5d0bea21add-who.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/39f15535bfa0e07b78da0bb8dd36249eebe44661cc65c629cbf5d5d0bea21add-who.gif" />
 
 If you haven't configured the desired audience yet, you can click on `+ Create new audience` and define your audience in the modale.
 
@@ -91,46 +61,46 @@ If you haven't configured the desired audience yet, you can click on `+ Create n
 
 You can customize the following parameters to fine-tune your campaign behavior:
 
-1. **Start date and time & end date & time** : Define the campaign’s activation and expiration times to automate promotional events (e.g., Black Friday sales) without requiring manual intervention in the Purchasely Console.  
+1. **Start date and time & end date & time** : Define the campaign’s activation and expiration times to automate promotional events (e.g., Black Friday sales) without requiring manual intervention in the Purchasely Console.\
    All times are expressed in UTC/GMT.
-2. **Trigger**:By default, a campaign starts when the APP_STARTED event is triggered. This event occurs:
-   - When the app is launched for the first time.
-   - After the app is restarted following termination by the operating system (typically due to prolonged inactivity).
-   - When the user manually relaunches the app.
+2. **Trigger**:By default, a campaign starts when the APP\_STARTED event is triggered. This event occurs:
+   * When the app is launched for the first time.
+   * After the app is restarted following termination by the operating system (typically due to prolonged inactivity).
+   * When the user manually relaunches the app.
      > ℹ️ `APP_STARTED` and other events
-     > 
+     >
      > For now, the `APP_STARTED` event is the only one allowed but new events will be possible to use as a trigger in the months to come.
-3. **Frequency cap**: Control how often the campaign is displayed to prevent overexposure and user fatigue. This configuration ensures a seamless and non-intrusive campaign experience for users while maximizing engagement.  
+3. **Frequency cap**: Control how often the campaign is displayed to prevent overexposure and user fatigue. This configuration ensures a seamless and non-intrusive campaign experience for users while maximizing engagement.\
    The frequency cap can be configured in two ways:
 
-   - **Session-based**: Limits campaign display based on app session count. 
+   * **Session-based**: Limits campaign display based on app session count. 
 
-     _Example: If set to trigger every 3 sessions, the campaign will appear at most once every 3 app launches._
+     *Example: If set to trigger every 3 sessions, the campaign will appear at most once every 3 app launches.*
 
-     [block:image]{"images":[{"image":["https://files.readme.io/79a76de98e475eeb7b6f87a7cf4502b584181da11166167e052555be65036a62-image.png",null,""],"align":"center","border":true}]}[/block]
+     <Image align="center" className="border" border={true} src="https://files.readme.io/79a76de98e475eeb7b6f87a7cf4502b584181da11166167e052555be65036a62-image.png" />
 
      Note: the SDK generates a new session after 30 minutes of inactivity
-   - **Period-based**: Enforces a minimum time gap between consecutive displays.
+   * **Period-based**: Enforces a minimum time gap between consecutive displays.
 
-     _Example: If set to a 2-day interval, the campaign will not be shown again until at least 48 hours have passed since the last display._
+     *Example: If set to a 2-day interval, the campaign will not be shown again until at least 48 hours have passed since the last display.*
 
-     [block:image]{"images":[{"image":["https://files.readme.io/eac0d395868e99e591d7f9062d723345a35d57545e56d88ebb2b9edfb0a1e008-image.png",null,""],"align":"center","border":true}]}[/block]
+     <Image align="center" className="border" border={true} src="https://files.readme.io/eac0d395868e99e591d7f9062d723345a35d57545e56d88ebb2b9edfb0a1e008-image.png" />
 
      <br />
 4. **Impression cap**: Restricts the total number of times a user can see the campaign throughout its duration.
 
-   _Example: If set to 3, the campaign will not be displayed to a user after they have seen it three times, regardless of triggers or frequency cap settings._
+   *Example: If set to 3, the campaign will not be displayed to a user after they have seen it three times, regardless of triggers or frequency cap settings.*
 
-   [block:image]{"images":[{"image":["https://files.readme.io/131318f1eb1915ffaf86d87db20f74746d78bd086982a539b789fbfb986ff9cc-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/131318f1eb1915ffaf86d87db20f74746d78bd086982a539b789fbfb986ff9cc-image.png" />
 
    <br />
 5. **Exposure window**: Defines the maximum time a user remains eligible to see the campaign after their first exposure. This is particularly useful for creating limited-time offers that expire after a defined period.
 
    It can be combined with a [countdown](countdown) component integrated into the Campaign Screen to reinforce urgency.
 
-   _Example: If set to 24 hours, the campaign will only be available to a user for 24 hours after their first exposure, even if the overall campaign period is longer._
+   *Example: If set to 24 hours, the campaign will only be available to a user for 24 hours after their first exposure, even if the overall campaign period is longer.*
 
-   [block:image]{"images":[{"image":["https://files.readme.io/d8a6662f73141d9eb4541c10a897b8115b2d43113764eebd1e6cec850129e14e-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/d8a6662f73141d9eb4541c10a897b8115b2d43113764eebd1e6cec850129e14e-image.png" />
 
    <br />
 
@@ -144,22 +114,7 @@ This Screen does not need to be necessarily a Paywall. It can also be an onboard
 
  For an A/B test, it can be either UI or Price A/B test. The following illustration shows how to choose a screen to display for this campaign. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/4b17afabacd455129049496f3408d5a87f06c5e46308b2fba51ae0082883408c-Screen_Recording_2025-03-17_at_09.15.05.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/4b17afabacd455129049496f3408d5a87f06c5e46308b2fba51ae0082883408c-Screen_Recording_2025-03-17_at_09.15.05.gif" />
 
 Once you are completed with your set up, click the Start button at the end of this page, to start the campaign.
 
@@ -175,22 +130,7 @@ For a user, if a Campaign is currently capped, the SDK will automatically go to 
 
 You can prioritize Campaigns by drag & dropping them in the desired order. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/d4203fd8d566dce53a10e4907f5f25b0583b8af691da0dd4db42fad5e34d0f6f-campaigns_prioritization.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/d4203fd8d566dce53a10e4907f5f25b0583b8af691da0dd4db42fad5e34d0f6f-campaigns_prioritization.gif" />
 
 Campaigns above have a higher priority.
 
@@ -224,30 +164,15 @@ _purchasely.SetIsReadyToOpenDeeplink(true);
 ```
 
 > ❗️ Important notice
-> 
-> - `readyToOpenDeeplink` must be called for a campaign to be shown as it works exactly like a [deep link](deeplinks-management) internally.
-> - If you have implemented the [UI Handler](ui-handler-deeplinks) to manage the display of deep links yourself, you must keep the presentation object returned and not fetch it again, otherwise campaign context will be lost.
+>
+> * `readyToOpenDeeplink` must be called for a campaign to be shown as it works exactly like a [deep link](deeplinks-management) internally.
+> * If you have implemented the [UI Handler](ui-handler-deeplinks) to manage the display of deep links yourself, you must keep the presentation object returned and not fetch it again, otherwise campaign context will be lost.
 
 # Following campaigns results
 
 The Campaigns features allow you to follow the monetization KPIs for each Campaign created.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/252364ade6b6fb37d613e910d2886464932fc7216e32f23bf75178d6911cae12-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/252364ade6b6fb37d613e910d2886464932fc7216e32f23bf75178d6911cae12-image.png" />
 
 The KPIs include the number of Screens displayed, Unique Viewers, Conversions and Aggregated Revenue.
 
@@ -325,7 +250,7 @@ The Conversion Rate to Regular displayed equals the`#CONVERSIONS_TO_REGULAR` / `
 
 This KPIs counts the **total number of Unique Users who purchased a One-Time Purchase** (either a consumable or non consumable) through a Screen associated with the Campaign. It leverages the event `TRANSACTION_PROCESSED` with the carrying the property `purchase_type` = `CONSUMABLE` or `NON_CONSUMABLE` and the property `campaign_id` matching the campaign.
 
-- **`#CONVERSIONS_TO_OTP`**=  
+* **`#CONVERSIONS_TO_OTP`**=\
   `#TRANSACTION_PROCESSED (with purchase_type = CONSUMABLE or NON_CONSUMABLE)`        // transactions associated with a One-Time Purchase.
 
 A same User triggering several conversion events is counted only once.
@@ -338,13 +263,13 @@ The Conversion Rate to OTP displayed equals the`#CONVERSIONS_TO_OTP` / `#UNIQUE 
 
 The revenue are aggregated depending on the Plan type (`SUBSCRIPTION` or `OTP`) and for subscriptions, depending on the type of Price paid by the subscriber (`OFFER` or `REGULAR`).
 
-It leverages the event TRANSACTION_PROCESSED carrying a property `campaign_id` matching the campaign and groups them by purchase_type and offer_type.
+It leverages the event TRANSACTION\_PROCESSED carrying a property `campaign_id` matching the campaign and groups them by purchase\_type and offer\_type.
 
-- **`AGGREGATED_REVENUE_OFFER`** =  
+* **`AGGREGATED_REVENUE_OFFER`** =\
   SUM OF `amount_in_xxx` values for all `TRANSACTION_PROCESSED` events  `(with purchase_type = RENEWING_SUBSCRIPTION or NON_RENEWING_SUBSCRIPTION and offer_type != NONE)`
-- **`AGGREGATED_REVENUE_REGULAR`** =  
+* **`AGGREGATED_REVENUE_REGULAR`** =\
   SUM OF `amount_in_xxx` values for all `TRANSACTION_PROCESSED` `(with purchase_type = RENEWING_SUBSCRIPTION or NON_RENEWING_SUBSCRIPTION and offer_type = NONE)`
-- **`AGGREGATED_REVENUE_OTP`** =  
+* **`AGGREGATED_REVENUE_OTP`** =\
   SUM OF `amount_in_xxx` values for all `TRANSACTION_PROCESSED` `(with purchase_type = CONSUMABLE or NON_CONSUMABLE)`
 
 For auto-renewing subscriptions, revenue include both the initial transaction and all the subsequent renewing until the actual termination of the subscription.
