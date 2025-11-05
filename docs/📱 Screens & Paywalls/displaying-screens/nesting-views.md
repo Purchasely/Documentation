@@ -21,7 +21,7 @@ However, for develops who want to customize the size of their paywalls,such as d
 Currently, this functionality is available for native technologies (`Swift` and `Kotlin`) as well as `Flutter` and `React Native`.
 
 > 🚧 Compatibility Notice
-> 
+>
 > Please note that this feature is not available for **`Cordova`** and **`Unity`**.
 
 # Swift
@@ -147,7 +147,7 @@ AndroidView(
 
 # Flutter
 
-Flutter developers can nest Purchasely Screen using the `StatelessWidget` returned by `Purchasely.getPresentationView()`  
+Flutter developers can nest Purchasely Screen using the `StatelessWidget` returned by `Purchasely.getPresentationView()`\
 Full example below:
 
 ```c Flutter
@@ -202,12 +202,12 @@ Since **PLYPresentationView** is a **StatelessWidget**, you can easily add it to
 # React Native
 
 > 📘 Contribution appreciated
-> 
-> We are working to make this feature available directly from our SDK without the need to manually copy the `PLYPresentationView.tsx` file.  
-> However, we are currently facing an issue with react dependencies that we haven't been able to resolve.  
-> You can test it by importing PLYPresentationViewBeta and using that view:  
+>
+> We are working to make this feature available directly from our SDK without the need to manually copy the `PLYPresentationView.tsx` file.\
+> However, we are currently facing an issue with react dependencies that we haven't been able to resolve.\
+> You can test it by importing PLYPresentationViewBeta and using that view:\
 > `import { PLYPresentationViewBeta } from 'react-native-purchasely';`
-> 
+>
 > We are primarily iOS and Android developers, so any help from the React Native community would be greatly appreciated!
 
 ## 1. Create the view component File
