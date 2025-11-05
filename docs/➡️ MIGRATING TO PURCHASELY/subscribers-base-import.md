@@ -14,7 +14,7 @@ next:
 ---
 # ⚠️ Prerequisites ⚠️
 
-To use any of the methods in this article, [you must have previously imported your catalog](catalogue-import), both current and past.  
+To use any of the methods in this article, [you must have previously imported your catalog](catalogue-import), both current and past.\
 Otherwise, we will not be able to import your subscribers.
 
 <br />
@@ -23,10 +23,10 @@ Otherwise, we will not be able to import your subscribers.
 
 There are several ways to import your users into the Purchasely platform:
 
-- **Using the “Server to Server” notifications from the stores** (not recommended)
-- **Using the Purchasely SDK** (for a team without backend developer, or if you don't have the raw receipts/tokens)
-- **Using our dedicated endpoint** (for less than 10k purchases)
-- **Bulk import** (for large imports)
+* **Using the “Server to Server” notifications from the stores** (not recommended)
+* **Using the Purchasely SDK** (for a team without backend developer, or if you don't have the raw receipts/tokens)
+* **Using our dedicated endpoint** (for less than 10k purchases)
+* **Bulk import** (for large imports)
 
 # Using Stores' S2S Notifications
 
@@ -38,8 +38,8 @@ The stores have the ability to call our servers to inform us of any status chang
 
 This method has significant limitations :
 
-- S2S notifications can take up to a year to reach us (at the renewal of an annual subscription) => this means you would have to wait that long to have updated dashboards
-- S2S notifications do not contain your user identifiers => it will be impossible for us to link these purchases to your internal identifiers. Users associated to a subscription generated from a S2S notification will be marked in the Purchasely Console as **Unknown users**.
+* S2S notifications can take up to a year to reach us (at the renewal of an annual subscription) => this means you would have to wait that long to have updated dashboards
+* S2S notifications do not contain your user identifiers => it will be impossible for us to link these purchases to your internal identifiers. Users associated to a subscription generated from a S2S notification will be marked in the Purchasely Console as **Unknown users**.
 
 For these two reasons, this migration method is not recommended.
 
@@ -47,8 +47,8 @@ For these two reasons, this migration method is not recommended.
 
 ## Steps
 
-- [Configure the Apple's App Store Server Notifications](app_store_s2s)
-- [Configure the Google's Real-Time Developer Notifications](play_store_s2s)
+* [Configure the Apple's App Store Server Notifications](app_store_s2s)
+* [Configure the Google's Real-Time Developer Notifications](play_store_s2s)
 
 <br />
 
@@ -64,8 +64,8 @@ This allows you to import your subscribers gradually as they update and launch y
 
 There are 2 limitations to this method:
 
-- it can take time for your users to update and launch your application for the first time
-- subscribers who are not using the app (e.g.: mobile subscribers using their premium membership only on the web or not using it but still paying for it) or a version of the app that contains the Purchasely SDK) will not be seen by the Purchasely Platform
+* it can take time for your users to update and launch your application for the first time
+* subscribers who are not using the app (e.g.: mobile subscribers using their premium membership only on the web or not using it but still paying for it) or a version of the app that contains the Purchasely SDK) will not be seen by the Purchasely Platform
 
 <br />
 
@@ -110,7 +110,7 @@ Body examples:
   "user_id": "1234",
 }
 ```
-```json Google Play Store - \< Billing v5
+```json Google Play Store - < Billing v5
 {
   // Mandatory
   "purchase_token": "aaaNNNcccDDDeeeFFF",
@@ -118,7 +118,7 @@ Body examples:
   "user_id": "1234",
 }
 ```
-```json Google Play Store - \< Billing v5
+```json Google Play Store - < Billing v5
 {
   // Mandatory
   "purchase_token": "aaaNNNcccDDDeeeFFF",
@@ -200,7 +200,7 @@ end
 This method is reserved for imports of more than 10k purchases. Please contact our team to schedule it.
 
 > 🚧 Good to Know
-> 
+>
 > Depending on the number of purchases, this import can take anywhere from several hours to several weeks. It might be including in your licence fee or require to pay an extra fee. Reach out to your Customer Success team to discuss it.
 
 To ensure we have all your subscriptions, you will need to proceed in two steps:
@@ -208,21 +208,7 @@ To ensure we have all your subscriptions, you will need to proceed in two steps:
 1. Use the endpoint described in the previous section to send us any new purchase made on a version of your application that does not contain the Purchasely SDK. From this date, we will be aware of all new subscriptions.
 2. Export all your existing active subscriptions. Up to this date, we will be aware of all existing purchases.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/4cbe9c3-import-migration.drawio.svg",
-        "",
-        ""
-      ],
-      "align": "center"
-    }
-  ]
-}
-[/block]
-
+<Image align="center" src="https://files.readme.io/4cbe9c3-import-migration.drawio.svg" />
 
 <br />
 
@@ -235,65 +221,224 @@ To ensure we have all your subscriptions, you will need to proceed in two steps:
 
 <br />
 
-[block:parameters]
-{
-  "data": {
-    "h-0": "Column name",
-    "h-1": "Type",
-    "h-2": "Mandatory for",
-    "h-3": "Description",
-    "0-0": "user_id",
-    "0-1": "String",
-    "0-2": "All",
-    "0-3": "Identifier of your user as defined in your backend (and declared to our SDK).  \n  \nThe purchase will be associated to this id in all Purchasely's platform (console, webhooks, integrations)",
-    "1-0": "store_product_id",
-    "1-1": "String",
-    "1-2": "All",
-    "1-3": "Product identifier, as defined in your store's console.  \n  \n⚠ if you're using Google Play Billing with a version >= 5, please format your store_product_id this way: `subscription_id:base_plan_id`",
-    "2-0": "original_transaction_id",
-    "2-1": "String",
-    "2-2": "Apple",
-    "2-3": "Only if **you have configured StoreKit2** on Purchasely (this value is exclusive with `receipt_data`).  \n  \n[original_transaction_id](https://developer.apple.com/documentation/appstoreserverapi/originaltransactionid) associated with your purchase.",
-    "3-0": "receipt_data",
-    "3-1": "String",
-    "3-2": "Apple",
-    "3-3": "Only if **you have NOT configured StoreKit2** on Purchasely (this value is exclusive with `original_transaction_id`).  \n  \nBase64 encoded receipt data given by the SDK during the purchase, used to request App Store servers.",
-    "4-0": "purchase_token",
-    "4-1": "String",
-    "4-2": "Google & Huawei",
-    "4-3": "Purchase token given by the SDK during the purchase, which is a unique identifier that represents the user and the product ID for the in-app product they purchased",
-    "5-0": "subscription_id",
-    "5-1": "String",
-    "5-2": "Huawei",
-    "5-3": "Huawei Subscription ID",
-    "6-0": "account_flag",
-    "6-1": "Integer",
-    "6-2": "Huawei",
-    "6-3": "possible values:  \n  \n- `0` for \"Germany\"\n- `1` for \"AppTouch site of Germany\"  \n  @see [Site Information](https://developer.huawei.com/consumer/en/doc/HMS-References/iap-api-specification-related-v4#h1-1578554539083-0)",
-    "7-0": "stripe_object_type",
-    "7-1": "String",
-    "7-2": "Stripe",
-    "7-3": "possible values:  \n  \n- `subscription`\n- `checkout_session`",
-    "8-0": "stripe_object_id",
-    "8-1": "String",
-    "8-2": "Stripe",
-    "8-3": "Stripe identifier of the [subscription](https://docs.stripe.com/api/subscriptions)/[checkout_session](https://docs.stripe.com/api/checkout/sessions)",
-    "9-0": "stripe_price_id",
-    "9-1": "String",
-    "9-2": "Stripe",
-    "9-3": "Stripe identifier for the [price](https://docs.stripe.com/api/prices) associated to your purchase"
-  },
-  "cols": 4,
-  "rows": 10,
-  "align": [
-    "left",
-    "left",
-    "left",
-    "left"
-  ]
-}
-[/block]
+<Table align={["left","left","left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Column name
+      </th>
 
+      <th>
+        Type
+      </th>
+
+      <th>
+        Mandatory for
+      </th>
+
+      <th>
+        Description
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        user\_id
+      </td>
+
+      <td>
+        String
+      </td>
+
+      <td>
+        All
+      </td>
+
+      <td>
+        Identifier of your user as defined in your backend (and declared to our SDK).  
+
+        The purchase will be associated to this id in all Purchasely's platform (console, webhooks, integrations)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        store\_product\_id
+      </td>
+
+      <td>
+        String
+      </td>
+
+      <td>
+        All
+      </td>
+
+      <td>
+        Product identifier, as defined in your store's console.  
+
+        ⚠ if you're using Google Play Billing with a version >= 5, please format your store\_product\_id this way: `subscription_id:base_plan_id`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        original\_transaction\_id
+      </td>
+
+      <td>
+        String
+      </td>
+
+      <td>
+        Apple
+      </td>
+
+      <td>
+        Only if **you have configured StoreKit2** on Purchasely (this value is exclusive with `receipt_data`).  
+
+        [original\_transaction\_id](https://developer.apple.com/documentation/appstoreserverapi/originaltransactionid) associated with your purchase.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        receipt\_data
+      </td>
+
+      <td>
+        String
+      </td>
+
+      <td>
+        Apple
+      </td>
+
+      <td>
+        Only if **you have NOT configured StoreKit2** on Purchasely (this value is exclusive with `original_transaction_id`).  
+
+        Base64 encoded receipt data given by the SDK during the purchase, used to request App Store servers.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        purchase\_token
+      </td>
+
+      <td>
+        String
+      </td>
+
+      <td>
+        Google & Huawei
+      </td>
+
+      <td>
+        Purchase token given by the SDK during the purchase, which is a unique identifier that represents the user and the product ID for the in-app product they purchased
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        subscription\_id
+      </td>
+
+      <td>
+        String
+      </td>
+
+      <td>
+        Huawei
+      </td>
+
+      <td>
+        Huawei Subscription ID
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        account\_flag
+      </td>
+
+      <td>
+        Integer
+      </td>
+
+      <td>
+        Huawei
+      </td>
+
+      <td>
+        possible values:  
+
+        * `0` for "Germany"
+        * `1` for "AppTouch site of Germany"\
+          @see [Site Information](https://developer.huawei.com/consumer/en/doc/HMS-References/iap-api-specification-related-v4#h1-1578554539083-0)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        stripe\_object\_type
+      </td>
+
+      <td>
+        String
+      </td>
+
+      <td>
+        Stripe
+      </td>
+
+      <td>
+        possible values:  
+
+        * `subscription`
+        * `checkout_session`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        stripe\_object\_id
+      </td>
+
+      <td>
+        String
+      </td>
+
+      <td>
+        Stripe
+      </td>
+
+      <td>
+        Stripe identifier of the [subscription](https://docs.stripe.com/api/subscriptions)/[checkout\_session](https://docs.stripe.com/api/checkout/sessions)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        stripe\_price\_id
+      </td>
+
+      <td>
+        String
+      </td>
+
+      <td>
+        Stripe
+      </td>
+
+      <td>
+        Stripe identifier for the [price](https://docs.stripe.com/api/prices) associated to your purchase
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 <br />
 
@@ -307,11 +452,11 @@ abcdFEbsbs;1234;FR
 original_transaction_id;user_id
 310001721313211;1234
 ```
-```json Google Play Store - \< Billing v5
+```json Google Play Store - < Billing v5
 purchase_token;store_product_id;user_id
 aaaNNNcccDDDeeeFFF;subscription_id;1234
 ```
-```json Google Play Store - \< Billing v5
+```json Google Play Store - < Billing v5
 purchase_token;store_product_id;user_id
 aaaNNNcccDDDeeeFFF;subscription_id:base_plan_id;1234
 ```
