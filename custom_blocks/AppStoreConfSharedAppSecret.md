@@ -7,10 +7,10 @@ The `Shared App Secret` is used by Purchasely Platform and required to decode an
 2. Navigate to the section General > App information and browse down the screen
 3. Click on the link Manage in the section App-Specific Shared Secret
 
-   [block:image]{"images":[{"image":["https://files.readme.io/f2055de-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/f2055de-image.png" />
 4. Copy the value displayed on the following screen
 
-   [block:image]{"images":[{"image":["https://files.readme.io/c471118-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/c471118-image.png" />
 
 <br />
 
