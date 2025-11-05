@@ -22,11 +22,11 @@ The integration of AppsFlyer requires 2 steps:
 2. Activate the AppsFlyer integration in the Purchasely Console
 
 > 🚧 Version compatibility
-> 
+>
 > The minimal version of the Purchasely SDK supporting this integration is `v3.2.0`. 
-> 
+>
 > If the Purchasely SDK integrated in your app is under the minimal version, please upgrade it.
-> 
+>
 > The AppsFlyer SDK also needs to be integrated inside the app.
 
 ## 1. Associating users to events
@@ -76,66 +76,21 @@ _purchasely.SetAttribute(PLYAttribute.APPSFLYER_ID, "test_appsflyer_id");
 
 ### Retrieving your app id in the AppsFlyer Dashboard
 
-1. Go to your AppsFlyer dashboard: <https://hq1.appsflyer.com/apps/myapps>
+1. Go to your AppsFlyer dashboard: [https://hq1.appsflyer.com/apps/myapps](https://hq1.appsflyer.com/apps/myapps)
 2. You will find your app's ids beneath their names
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/3fd09fd-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/3fd09fd-image.png" />
 
 ### Retrieving your API key in the AppsFlyer Dashboard
 
-1. Go to your AppsFlyer dashboard: <https://hq1.appsflyer.com/apps/myapps>
+1. Go to your AppsFlyer dashboard: [https://hq1.appsflyer.com/apps/myapps](https://hq1.appsflyer.com/apps/myapps)
 2. Using the app's top right menu, access your app's settings
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/597bf73-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/597bf73-image.png" />
 
 3. You will find your app's API key at the top of the page
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/fca3b46-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/fca3b46-image.png" />
 
 4. (optional) repeat for your Android / iOS app
 
@@ -144,22 +99,7 @@ _purchasely.SetAttribute(PLYAttribute.APPSFLYER_ID, "test_appsflyer_id");
 1. Visit your [Purchasely app's console](https://console.purchasely.io/)
 2. Access your apps Integrations settings
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/9f8ca67-Capture_decran_2024-07-15_a_11.33.57.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/9f8ca67-Capture_decran_2024-07-15_a_11.33.57.png" />
 
 3. Access the AppsFlyer Integration's Settings
 
@@ -169,22 +109,7 @@ _purchasely.SetAttribute(PLYAttribute.APPSFLYER_ID, "test_appsflyer_id");
 
 6. Set your **Android** AppsFlyer app's `API key` & `App ID`
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/65b729b-Capture_decran_2024-07-15_a_11.41.41.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/65b729b-Capture_decran_2024-07-15_a_11.41.41.png" />
 
 7. (optional) Override the name of events sent to AppsFlyer
 
