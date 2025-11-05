@@ -28,29 +28,29 @@ In this setup, responsibilities are shared between your servers and Purchasely�
 
 The **Purchasely's servers** are in charge of:
 
-- processing and verifying transactions
-- notifying your servers of any update concerning a user's entitlement (_eg: a subscription is renewed_)
-- notifying the SDK and your app of such entitlements updates
+* processing and verifying transactions
+* notifying your servers of any update concerning a user's entitlement (*eg: a subscription is renewed*)
+* notifying the SDK and your app of such entitlements updates
 
 <br />
 
 The **developer's servers** are responsible for:
 
-- listening to, processing and acknowledging [Entitlement Events](entitlement-events) sent through the Purchasely webhook
-- granting/revoking entitlements to the users based on these events
-- securing contents themselves (eg: with DRM for streaming platform) and managing accesses to contents depending on users' entitlements
+* listening to, processing and acknowledging [Entitlement Events](entitlement-events) sent through the Purchasely webhook
+* granting/revoking entitlements to the users based on these events
+* securing contents themselves (eg: with DRM for streaming platform) and managing accesses to contents depending on users' entitlements
 
 <br />
 
 A typical timeline is as follows:
 
-- The user opens a Purchasely paywall and makes a purchase.
-- This purchase is made through the store, which returns a receipt to the Purchasely SDK.
-- The receipt is sent by the SDK to Purchasely’s servers for verification and recording of the purchase.
-- The information about this purchase (user, plan, renewal date, etc.) is then sent to your servers via our webhook.
-- Your servers record the purchase information and confirm to our servers that they have acknowledged the purchase.
-- Our servers then pass the verified purchase information back to our SDK.
-- Finally, our SDK hands control back to your application
+* The user opens a Purchasely paywall and makes a purchase.
+* This purchase is made through the store, which returns a receipt to the Purchasely SDK.
+* The receipt is sent by the SDK to Purchasely’s servers for verification and recording of the purchase.
+* The information about this purchase (user, plan, renewal date, etc.) is then sent to your servers via our webhook.
+* Your servers record the purchase information and confirm to our servers that they have acknowledged the purchase.
+* Our servers then pass the verified purchase information back to our SDK.
+* Finally, our SDK hands control back to your application
 
 <br />
 
@@ -70,20 +70,20 @@ Purchasely’s servers will make HTTP calls to your servers to pass informations
 
 Here is how to configure them.
 
-1. Fill in [Client webhook URL in your Purchasely Console](https://console.purchasely.io/webhooks) (this is the URL that will be called to send you the webhooks)  
-   _Purchasely Console > [YOUR APP] > Webhooks_
+1. Fill in [Client webhook URL in your Purchasely Console](https://console.purchasely.io/webhooks) (this is the URL that will be called to send you the webhooks)\
+   *Purchasely Console >[YOUR APP] > Webhooks*
 
-   [block:image]{"images":[{"image":["https://files.readme.io/45bca19-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/45bca19-image.png" />
 2. Enable [Entitlement Events](entitlement-events) (`ACTIVATE` & `DEACTIVATE`)
 
-   [block:image]{"images":[{"image":["https://files.readme.io/433dcbd-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/433dcbd-image.png" />
 
 <br />
 
 > 📘 Event acknowledgement expected
-> 
+>
 > As soon as you have configured a Client webhook URL, the Purchasely Platform will expect an acknowledgement for the all events sent on the webhook. 
-> 
+>
 > You can start by implementing a simple `HTTP 200` response for every message sent on the webhook.
 
 <br />
@@ -105,23 +105,7 @@ Managing entitlements on your backend require 4 steps:
 
 Even if a lot of different events can be sent in the webhook, you should only listen to the `ACTIVATE` and `DEACTIVATE` events to manage your entitlements.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/9e51f51-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "sizing": "500px",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" width="500px" border={true} src="https://files.readme.io/9e51f51-image.png" />
 
 <BackendEntitlementsAcknowledgingMessages />
 
