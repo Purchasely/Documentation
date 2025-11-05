@@ -26,25 +26,11 @@ next:
 
 <PaywallObserverModeTransactionProcessing />
 
-The other mode available with the Purchasely SDK is the `full` mode.  
+The other mode available with the Purchasely SDK is the `full` mode.\
 [More details about the full mode](full-mode)
 
 <br />
 
 # Architecture diagram paywallObserver mode
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/45c44e0d9c111ecf892e178ce4311bce79e1961909f977e0728b51264d22a169-observer_mode_2.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/45c44e0d9c111ecf892e178ce4311bce79e1961909f977e0728b51264d22a169-observer_mode_2.png" />
