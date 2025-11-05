@@ -24,9 +24,9 @@ next:
 
 UI / SDK Events are useful to:
 
-- determine which Screens users are exposed to
-- understand how they navigate throughout the app and the different touch-points and Placements
-- understand how users interact with the Screens and Paywalls
+* determine which Screens users are exposed to
+* understand how they navigate throughout the app and the different touch-points and Placements
+* understand how users interact with the Screens and Paywalls
 
 They are sent to the Purchasely Platform to compute [Paywall Conversion Rates](dashboard-conversion).
 
