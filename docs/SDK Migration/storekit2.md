@@ -20,75 +20,45 @@ Configuring StoreKit 2 with App Store Connect to allow Purchasely to verify tran
 
 ## Enable App Store Connect API access
 
-- Sign in to [App Store Connect](https://appstoreconnect.apple.com/access/api/subs)
-- Go to "Users and Access"
-- Select "Keys" under the "In-App Purchase" section
-- Click on the "+" button to generate a new API key
-- Choose a name for the key and click "Generate"
-- Download the API key file (`.p8`), and note the **Key ID** and **Issuer ID**. Keep the file secure, as you won't be able to download it again
+* Sign in to [App Store Connect](https://appstoreconnect.apple.com/access/api/subs)
+* Go to "Users and Access"
+* Select "Keys" under the "In-App Purchase" section
+* Click on the "+" button to generate a new API key
+* Choose a name for the key and click "Generate"
+* Download the API key file (`.p8`), and note the **Key ID** and **Issuer ID**. Keep the file secure, as you won't be able to download it again
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/78c6635-SCR-20230403-nktk.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/78c6635-SCR-20230403-nktk.png" />
 
 <br />
 
 ## Setup StoreKit2 on Purchasely Console
 
-- Connect to [Purchasely Console](https://console.purchasely.io/)
-- Go to "App Settings"
-- Select Apple App Store" under the "Store configuration" section
-- Fill in the **Private Key Id** from the key you generated
-- Upload your Private Key File (.p8)
-- Fill your **Issuer Id**
-- Click on **Save** in the top right corner
+* Connect to [Purchasely Console](https://console.purchasely.io/)
+* Go to "App Settings"
+* Select Apple App Store" under the "Store configuration" section
+* Fill in the **Private Key Id** from the key you generated
+* Upload your Private Key File (.p8)
+* Fill your **Issuer Id**
+* Click on **Save** in the top right corner
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/d4fcacd-SCR-20230403-nefu.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/d4fcacd-SCR-20230403-nefu.png" />
 
 <br />
 
 # Implementation
 
 > 📘 SDK Initialization
-> 
+>
 > In [Purchasely.start()](sdk-initialization#start)method, either remove the `storekitSettings` parameter, or set it to `.storeKit2` to use StoreKit 2.
 
 The only change you need to make is if you are in observer mode, if you are in full mode you're all set!
 
 > ❗️ Handling purchases and restorations (Paywall Observer mode)
-> 
+>
 > If you are using the Purchasely SDK in [Paywall Observer mode](paywallobserver-mode), it is essential to call `Purchasely.syncPurchase()` once a purchase or restoration has been processed. This allows the SDK to be aware of new transactions and ensures accurate data reporting for A/B tests and paywall conversion.
-> 
+>
 > After processing a purchase or restoration, call
-> 
+>
 > ```swift Swift
 > try await Purchasely.syncPurchase(for: "apple product id")
 > ```
@@ -102,16 +72,16 @@ The only change you need to make is if you are in observer mode, if you are in f
 
 ## Purchasely SDK
 
-- **iOS**: 4.0.1
-- **Flutter**: 4.0.1
-- **React Native**: 4.0.1
-- **Unity**: 4.1.0
-- **Cordova**: 4.1.0
+* **iOS**: 4.0.1
+* **Flutter**: 4.0.1
+* **React Native**: 4.0.1
+* **Unity**: 4.1.0
+* **Cordova**: 4.1.0
 
 ## OS version (built with Xcode 14 or later)
 
-- iOS 15
-- iPadOS 15
-- macOS 12
-- tvOS 15
-- watchOS 8
+* iOS 15
+* iPadOS 15
+* macOS 12
+* tvOS 15
+* watchOS 8
