@@ -20,22 +20,7 @@ Thanks to a unified mechanism - [the listener for Custom User Attributes](custom
 
 Upon the submission of the user's Answer(s), if the option "Save answer(s) as an Insight Attribute" has been activated for the Quiz, the app will be notified via an [Event Listener for Custom User Attributes](custom-user-attribute-listener).
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/4682606832e9b598e142ed6ef812f6e63e398fe52a45bbd4c637dcfac1c2364e-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/4682606832e9b598e142ed6ef812f6e63e398fe52a45bbd4c637dcfac1c2364e-image.png" />
 
 To fetch and process the data, here is the generic piece of code to implement into your app
 
@@ -43,14 +28,14 @@ To fetch and process the data, here is the generic piece of code to implement in
 
 The SDK provides:
 
-- the `key` of the Insight attribute - the key retrieved corresponds to the `Quiz ID`.
-- the `type` of the attribute
-  - `String` for single answer Quizzes
-  - `Array of Strings` for multiple answers Quizzes
-- the `value` (String - single answer) or `values` (Array of Strings - multiple answers) matching the Answers picked up by the user.
+* the `key` of the Insight attribute - the key retrieved corresponds to the `Quiz ID`.
+* the `type` of the attribute
+  * `String` for single answer Quizzes
+  * `Array of Strings` for multiple answers Quizzes
+* the `value` (String - single answer) or `values` (Array of Strings - multiple answers) matching the Answers picked up by the user.
 
 > 📘 Value of the parameter source
-> 
+>
 > After the submission of the Quiz, the parameter `source` has the value `purchasely` to indicate to the app that the User Attribute has been set by the SDK and not by the app.
 
 ## How to send the insights to my backend?
@@ -65,17 +50,17 @@ It's the same with 3rd party integrations. After fetching the Custom User Attrib
 
 For instance, this can be achieved with the following platforms (the list is not exhaustive):
 
-- [Amplitude](amplitude)
-- [Braze](braze)
-- [MixPanel](mixpanel)
-- [Iterable](iterable)
-- [Clevertap](clevertap)
-- [OneSignal](onesignal)
-- [Batch](batch)
-- [Google Analytics for Firebase](google-analytics-for-firebase)
-- [Piano analytics](piano-analytics)
-- [Airship](airship)
-- [MoEngage](moengage)
-- or any 3rd party SDK integrated inside your application
+* [Amplitude](amplitude)
+* [Braze](braze)
+* [MixPanel](mixpanel)
+* [Iterable](iterable)
+* [Clevertap](clevertap)
+* [OneSignal](onesignal)
+* [Batch](batch)
+* [Google Analytics for Firebase](google-analytics-for-firebase)
+* [Piano analytics](piano-analytics)
+* [Airship](airship)
+* [MoEngage](moengage)
+* or any 3rd party SDK integrated inside your application
 
 This processing has to be done by your app. Purchasely does not provide a server to server integration to do it.
