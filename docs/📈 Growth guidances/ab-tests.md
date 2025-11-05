@@ -62,23 +62,14 @@ user_bucket_value = 36
   
 ```
 
-[block:embed]
-{
-  "html": "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?url=https%3A%2F%2Fjsfiddle.net%2Fhq1gauL4%2F2%2Fembedded%2Fresult&type=text%2Fhtml&schema=jsfiddle&display_name=jsFiddle&src=https%3A%2F%2Fjsfiddle.net%2Fhq1gauL4%2F2%2Fembedded%2Fresult\" width=\"600\" height=\"400\" scrolling=\"no\" title=\"jsFiddle embed\" frameborder=\"0\" allow=\"autoplay; fullscreen; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe>",
-  "url": "https://jsfiddle.net/hq1gauL4/2/embedded/result",
-  "provider": "jsfiddle.net",
-  "href": "https://jsfiddle.net/hq1gauL4/2/embedded/result",
-  "typeOfEmbed": "jsfiddle"
-}
-[/block]
-
+<Embed url="https://jsfiddle.net/hq1gauL4/2/embedded/result" provider="jsfiddle.net" href="https://jsfiddle.net/hq1gauL4/2/embedded/result" typeOfEmbed="jsfiddle" title="undefined" html="%3Ciframe%20class%3D%22embedly-embed%22%20src%3D%22%2F%2Fcdn.embedly.com%2Fwidgets%2Fmedia.html%3Furl%3Dhttps%253A%252F%252Fjsfiddle.net%252Fhq1gauL4%252F2%252Fembedded%252Fresult%26type%3Dtext%252Fhtml%26schema%3Djsfiddle%26display_name%3DjsFiddle%26src%3Dhttps%253A%252F%252Fjsfiddle.net%252Fhq1gauL4%252F2%252Fembedded%252Fresult%22%20width%3D%22600%22%20height%3D%22400%22%20scrolling%3D%22no%22%20title%3D%22jsFiddle%20embed%22%20frameborder%3D%220%22%20allow%3D%22autoplay%3B%20fullscreen%3B%20encrypted-media%3B%20picture-in-picture%3B%22%20allowfullscreen%3D%22true%22%3E%3C%2Fiframe%3E" />
 
 <br />
 
 Because the `user ID` / `anonymous ID` remain consistent over time, this user will remain assigned the same `user bucket value` as long as they don't:
 
-- sign-out or sign-in with a different user account for logged-in users
-- uninstall / reinstall the app for an anonymous user
+* sign-out or sign-in with a different user account for logged-in users
+* uninstall / reinstall the app for an anonymous user
 
 The cohort assignment by the Purchasely Platform works as follows:
 
@@ -107,8 +98,8 @@ Since the randomization process depends on different IDs based on whether the us
 
 To prevent this and ensure that the user consistently remains in the same cohort, regardless of their login status, you can set a custom value using a [Custom User Attribute](custom-user-attributes) called `ply_ab_test_user_id` (no need to declare it in the Console):
 
-- If you are using a third-party A/B testing platform, you can set the attribute `ply_ab_test_user_id` with the value of the `3rd-party user ID` or `3rd-party variant ID`.
-- If you wish to continue using the `anonymous user ID` even after the user signs in, you can assign the Purchasely `anonymous user ID` to it:
+* If you are using a third-party A/B testing platform, you can set the attribute `ply_ab_test_user_id` with the value of the `3rd-party user ID` or `3rd-party variant ID`.
+* If you wish to continue using the `anonymous user ID` even after the user signs in, you can assign the Purchasely `anonymous user ID` to it:
 
   <br />
 
@@ -187,24 +178,24 @@ The following events are captured:
 
 [UI / SDK Events](ui-sdk-events-list):
 
-- `PRESENTATION_VIEWED`
+* `PRESENTATION_VIEWED`
 
 [Lifecycle Events](lifecycle-events):
 
-- `SUBSCRIPTION_STARTED`
-- `SUBSCRIPTION_RENEWED`
-- `SUBSCRIPTION_TERMINATED`
-- `SUBSCRIPTION_REFUNDED_REVOKED`
+* `SUBSCRIPTION_STARTED`
+* `SUBSCRIPTION_RENEWED`
+* `SUBSCRIPTION_TERMINATED`
+* `SUBSCRIPTION_REFUNDED_REVOKED`
 
 [Offer Events](offer-events):
 
-- `TRIAL_STARTED` / `INTRO_STARTED`
-- `TRIAL_CONVERTED` / `INTRO_CONVERTED`
-- `TRIAL_NOT_CONVERTED` / `INTRO_NOT_CONVERTED`
+* `TRIAL_STARTED` / `INTRO_STARTED`
+* `TRIAL_CONVERTED` / `INTRO_CONVERTED`
+* `TRIAL_NOT_CONVERTED` / `INTRO_NOT_CONVERTED`
 
 [Transactional Event](transactional-event):
 
-- `TRANSACTION_PROCESSED`
+* `TRANSACTION_PROCESSED`
 
 <br />
 
@@ -212,14 +203,14 @@ The following events are captured:
 
 When configuring your A/B test, you can define an `ab_test_id` and `ab_test_variant_id` for each variant. 
 
-All the events listed above will carry the attributes `ab_test_id` and `ab_test_variant_id` when they are triggered from a {<<glossary:Placement>>, <<glossary:Audience>>} on which an A/B test is active. 
+All the events listed above will carry the attributes `ab_test_id` and `ab_test_variant_id` when they are triggered from a \{<Glossary>Placement</Glossary>, <Glossary>Audience</Glossary>} on which an A/B test is active. 
 
 The SDK and the backend are in charge of keeping things consistent:
 
-- On the backend side, every lifecycle, transactional or offer event following a subscription that started from an A/B test will carry the attributes.
-- On the SDK side, the attributes are attached to the `PRESENTATION_VIEWED`. They will be automatically forwarded for all the sub-sequent Paywalls / Screens that might be opened directly from this first Screen
-  - E.g.: if a second Paywall presenting all the plans is accessed by the User by clicking on a link “See all plans” from the first Paywall, the second Paywall will be considered as associated to the A/B test.
-  - However, if the user closes the Paywall, continues browsing the app and opens another Paywall from a different placement on which no A/B testis currently active, the events (both SDK side and server side) will not carry the attributes and therefore will not be counted in the A/B test data.
+* On the backend side, every lifecycle, transactional or offer event following a subscription that started from an A/B test will carry the attributes.
+* On the SDK side, the attributes are attached to the `PRESENTATION_VIEWED`. They will be automatically forwarded for all the sub-sequent Paywalls / Screens that might be opened directly from this first Screen
+  * E.g.: if a second Paywall presenting all the plans is accessed by the User by clicking on a link “See all plans” from the first Paywall, the second Paywall will be considered as associated to the A/B test.
+  * However, if the user closes the Paywall, continues browsing the app and opens another Paywall from a different placement on which no A/B testis currently active, the events (both SDK side and server side) will not carry the attributes and therefore will not be counted in the A/B test data.
 
 ## What is the Statistical Significance?
 
@@ -235,7 +226,7 @@ The Purchasely Platform uses a Bayesian test to compute the statistical signific
 
 In other words, the Statistical Significance is not computed by the Purchasely Platform when 3 variants or more have been created.
 
-The precise algorithm implemented is this one: <https://www.evanmiller.org/bayesian-ab-testing.html#mjx-eqn-binary_ab_pr_alpha_b>
+The precise algorithm implemented is this one: [https://www.evanmiller.org/bayesian-ab-testing.html#mjx-eqn-binary\_ab\_pr\_alpha\_b](https://www.evanmiller.org/bayesian-ab-testing.html#mjx-eqn-binary_ab_pr_alpha_b)
 
 It computes the likelihood of a variant to beat the other. For the sake of transparency, here is the code implementation of this algorithm on the Purchasely Platform:
 
@@ -295,25 +286,11 @@ export function getBestProbWithBayesianMethod(
 
 The `Statistical Significance` is computed by computing a `p-value` based on the number of occurrences for each variant of the same event.
 
-_E.g.: `# TRIAL_CONVERTED[variant A]` VS `# TRIAL_CONVERTED[variant B]`_ 
+*E.g.:`# TRIAL_CONVERTED[variant A]` VS`# TRIAL_CONVERTED[variant B]`* 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/a911258-image.png",
-        null,
-        "When the line Significance is in green, it means the p-value \\< 0.05. In this case, the winning variant appears in green too."
-      ],
-      "align": "center",
-      "border": true,
-      "caption": "When the line Significance is in green, it means the p-value \\< 0.05. In this case, the winning variant appears in green too."
-    }
-  ]
-}
-[/block]
-
+<Image alt="When the line Significance is in green, it means the p-value \< 0.05. In this case, the winning variant appears in green too." align="center" border={true} src="https://files.readme.io/a911258-image.png">
+  When the line Significance is in green, it means the p-value \< 0.05. In this case, the winning variant appears in green too.
+</Image>
 
 The Purchasely Console considers that an experiment is statistically significant when the `p-value` \< 0.05 and will put the winning variant and the statistical significance for the KPI in green.
 
@@ -329,18 +306,18 @@ The `ARPPU` (Average Revenue Per Paying User) is computed by dividing the aggreg
 
 The Purchasely Platform allow you to run the following A/B tests:
 
-- `UI A/B tests`: these are tests which involve different Screens.  
+* `UI A/B tests`: these are tests which involve different Screens.\
   These Screens can be:
-  - either configured via the Purchasely Screen Builder and rendered by the Purchasely SDK
-  - either handled directly by your app, such as your existing / legacy Paywall, by leveraging the feature [Use Your Own Paywall](use-your-own-paywall).  
+  * either configured via the Purchasely Screen Builder and rendered by the Purchasely SDK
+  * either handled directly by your app, such as your existing / legacy Paywall, by leveraging the feature [Use Your Own Paywall](use-your-own-paywall).\
     [More information on UI A/B tests here](ab-test-configuration#ui-ab-tests).
-- `Price A/B tests`: these are tests leveraging the same Screen, where it is possible to remap the Plans associated to the each variants, allowing to associate SKU with different Regular Price or Introductory Offers.  
+* `Price A/B tests`: these are tests leveraging the same Screen, where it is possible to remap the Plans associated to the each variants, allowing to associate SKU with different Regular Price or Introductory Offers.\
   [More information on Price A/B tests here](ab-test-configuration#price-ab-tests).
 
 > 📘 A/B tests results must be based on transactions
-> 
+>
 > Whatever A/B test you decide to run, the KPIs which will be used to compute the performance of each variant must be transaction related. 
-> 
+>
 > With the version 4.4 of the SDK, it is not possible yet to asset variants performances on KPIs which are not related to an In-App Transaction (purchase of a One-Time Purchase or of an In-App Subscription).
 
 <br />
@@ -349,26 +326,26 @@ The Purchasely Platform allow you to run the following A/B tests:
 
 When running A/B test, we advise you to:
 
-1. **Define hypothesis on what you are looking to validate**.  
-   By doing so, you will learn even when experiments fail (e.g.: variant B fails to beat variant A) or when it can't reach the Statistical Significance.  
-   _E.g.:_
-   1. \__We make the hypothesis that a Blinkist-like Paywall leveraging the Steps components might help build trust by reassure users and might therefore increase the conversion to trial and the conversion to paid._
-   2. _We make the hypothesis that adding social proof to the Paywall (reviews) might increase the conversion to trial and the conversion to paid._
-   3. _We make the hypothesis that increasing the price for the Yearly Plan by X% might decrease a the conversion by Y% but increase the ARPU (Average Revenue Per User) or ARPPU (Average Revenue Per Paying User) by Z%._
-2. **Be bold in your hypothesis but do not change everything**  
-   What you are trying to do at first, is to move the needle. Try to have substantial differences between the different variants of your Screen or between your Offers / Prices.  
-   When differences are too subtle, the Statistical Significance might be harder to get to, which will slow down your learning and growth pace.  
-   Start with bold choices and refine in a second time once you are sure that you've been able to move the needle and you know that you are working in the good direction.  
+1. **Define hypothesis on what you are looking to validate**.\
+   By doing so, you will learn even when experiments fail (e.g.: variant B fails to beat variant A) or when it can't reach the Statistical Significance.\
+   *E.g.:*
+   1. \_*We make the hypothesis that a Blinkist-like Paywall leveraging the Steps components might help build trust by reassure users and might therefore increase the conversion to trial and the conversion to paid.*
+   2. *We make the hypothesis that adding social proof to the Paywall (reviews) might increase the conversion to trial and the conversion to paid.*
+   3. *We make the hypothesis that increasing the price for the Yearly Plan by X% might decrease a the conversion by Y% but increase the ARPU (Average Revenue Per User) or ARPPU (Average Revenue Per Paying User) by Z%.*
+2. **Be bold in your hypothesis but do not change everything**\
+   What you are trying to do at first, is to move the needle. Try to have substantial differences between the different variants of your Screen or between your Offers / Prices.\
+   When differences are too subtle, the Statistical Significance might be harder to get to, which will slow down your learning and growth pace.\
+   Start with bold choices and refine in a second time once you are sure that you've been able to move the needle and you know that you are working in the good direction.\
    On the other hand, don't change everything between the different paywalls you are testing. If you do that, you will not be able to determine what was the key thing that you changed that made the difference.
-3. **Only configure 2 variants per A/B test**.  
-   => If you have more than 2 variants to test, run several A/B tests sequentially in time. Each new A/B test will try to beat the last winning variant.
-4. **Wait until you reach a statistical significance above 95%**.  
-   As long as the p-value is above 0.05%, the. fluctuations in the performance of each variant might be due to chance.  
+3. **Only configure 2 variants per A/B test**.\
+   \=> If you have more than 2 variants to test, run several A/B tests sequentially in time. Each new A/B test will try to beat the last winning variant.
+4. **Wait until you reach a statistical significance above 95%**.\
+   As long as the p-value is above 0.05%, the. fluctuations in the performance of each variant might be due to chance.\
    Note: the time it takes to reach this depends on 2 things:
 
-- the number of Users exposed to each variant - the bigger the sample the smaller the p-value.
-- the gap of performance between the 2 variants - the bigger the gap, the smaller the p-value.
+* the number of Users exposed to each variant - the bigger the sample the smaller the p-value.
+* the gap of performance between the 2 variants - the bigger the gap, the smaller the p-value.
 
-5. **Make sure that you run your A/B test on a period of time which is sufficiently representative of a typical business cycle**.  
-   Even if you reach the statistical significance quickly, we advise you to wait between 1 and 2 extra weeks before making conclusions.  
+5. **Make sure that you run your A/B test on a period of time which is sufficiently representative of a typical business cycle**.\
+   Even if you reach the statistical significance quickly, we advise you to wait between 1 and 2 extra weeks before making conclusions.\
    In the best case scenario, wait until the Introductory Offer is finished for most of the users.
