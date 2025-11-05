@@ -22,4 +22,4 @@ _purchasely.PresentPresentationForPlacement('SAMPLE_PLACEMENT',
 			OnPresentationContentClosed); 
 ```
 
-<br>
+<br />
