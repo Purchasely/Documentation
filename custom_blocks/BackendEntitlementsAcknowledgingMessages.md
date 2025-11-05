@@ -4,9 +4,9 @@ name: Backend Entitlements - Acknowledging messages
 Upon the reception of an event, you MUST return a `HTTP 200` to confirm to the Purchasely Platform that your backend has successfully handled the event.
 
 > 📘 Return (almost) always a `200` response.
-> 
+>
 > If you don't, the Purchasely Platform will continue sending you the message following our retry strategy. This table contains approximate retry waiting times:
-> 
+>
 > | #  | Next retry backoff | Total waiting time |
 > | :- | :----------------- | :----------------- |
 > | 1  | 0d 0h 0m 20s       | 0d 0h 0m 20s       |
@@ -34,19 +34,19 @@ Upon the reception of an event, you MUST return a `HTTP 200` to confirm to the P
 > | 23 | 2d 17h 6m 26s      | 13d 8h 18m 48s     |
 > | 24 | 3d 5h 46m 16s      | 16d 14h 5m 4s      |
 > | 25 | 3d 20h 11m 56s     | 20d 10h 17m 0s     |
-> 
+>
 > Any other response code than `HTTP 200` will generate a retry.
-> 
+>
 > > 🚧 Not returning a `200` will pause subsequent webhooks for the user.
-> > 
+> >
 > > To ensure webhooks are always sent in the correct order (otherwise an `ACTIVATE`/`DEACTIVATE` could become a `DEACTIVATE`/`ACTIVATE`, causing unintended access for your user), we will not send any subsequent webhooks for the affected user until the first one succeeds on your end (ie: until we receive a `200` response).
-> > 
+> >
 > > Once the first webhook succeeds, any paused webhooks will be sent immediately, maintaining the correct order.
-> 
+>
 > > 🚧 Anonymous users
-> > 
-> > Sometimes you way receive webhooks targeting an <<glossary:Anonymous User>>, even if you're not supposed to have one.
-> > 
+> >
+> > Sometimes you way receive webhooks targeting an <Glossary>Anonymous User</Glossary>, even if you're not supposed to have one.
+> >
 > > In this case, just return a `200` response and ignore the content of the webhook. When the user logs in, the subscription will be automatically associated with them, and you’ll receive the corresponding webhook.
-> > 
+> >
 > > If you don’t return a `200` response, we’ll keep sending the anonymous user’s webhook, and you’ll never receive the one for the connected user (because we want to guarantee the order of webhooks, as explained before).
