@@ -18,8 +18,6 @@ next:
 ---
 Purchasely is a SaaS platform empowering subscription apps.
 
-Test
-
 It helps mobile organisations:
 
 1. swiftly build their subscription stack by streamlining In-App Purchase integration with the major app stores (Apple App Store, Google Play Store, Huawei AppGallery, Amazon App store) and web payment platform (Stripe)
