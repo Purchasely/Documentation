@@ -36,45 +36,15 @@ The different types of actions that you can perform are:
 
 `Purchase` action lets you map the button or picker with a Plan
 
-=> When the user clicks on it, it will trigger a purchase action of that Plan.
+\=> When the user clicks on it, it will trigger a purchase action of that Plan.
 
 1. **ACTION**: `Purchase`
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b68c986-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/b68c986-image.png" />
 
 2. **PLAN**: Choose a plan from the dropdown list
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/c28254b-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/c28254b-image.png" />
 
 > 🚧 It's mandatory to use PRICE or AMOUNT + DURATION or AMOUNT + PERIOD for a `purchase` action.
 
@@ -88,13 +58,13 @@ Winback / retention offer can be used to display offers to expired users or exis
 
 1. **ACTION**: Winback / retention offer.
 
-   [block:image]{"images":[{"image":["https://files.readme.io/282d3b9-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/282d3b9-image.png" />
 2. **PLAN**: Choose a plan from the dropdown list that has promotional offer linked.
 
-   [block:image]{"images":[{"image":["https://files.readme.io/7c7a421-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/7c7a421-image.png" />
 3. **OFFER**: Choose the promotional offer you would like to display in this paywall.
 
-   [block:image]{"images":[{"image":["https://files.readme.io/f108507-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/f108507-image.png" />
 
 <br />
 
@@ -108,41 +78,11 @@ Close action lets you customize your CTA button to close the paywall.
 
 **ACTION**: Close
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/ea54c38-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/ea54c38-image.png" />
 
 This way, you can create a simple "No thanks" button, more discrete than the purchase buttons, to let users close the Screen. Combined with the removal of the Close button (X in the upper corner), this can be a good strategy to "force" users to read what you have to propose, and avoid clicking on the Close button instantly out of reflex.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/a150ae8-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/a150ae8-image.png" />
 
 <br />
 
@@ -154,34 +94,19 @@ Open presentation action lets you link one paywall with another.
 
 1. **ACTION**: Open presentation
 
-   [block:image]{"images":[{"image":["https://files.readme.io/b16f0e7-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/b16f0e7-image.png" />
 2. **PRESENTATION**: Choose a paywall from the dropdown list.
 
-   [block:image]{"images":[{"image":["https://files.readme.io/5d9c6e2-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/5d9c6e2-image.png" />
 
 Add text to display in the button:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/1d1d962-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/1d1d962-image.png" />
 
 <br />
 
 > 🚧 Please try to make a simple paywall link:
-> 
+>
 > If you try to link more paywalls, it will be difficult for you to track them. You can not see the flow of the linked paywall in the Purchasely paywall preview, you can test it in a device. The conversion rate and dashboard statistics will be calculated only for the paywall with which users made a purchase.
 
 ## Deeplink
@@ -192,23 +117,23 @@ Deeplink action lets you add a deeplinks to a page in your app or the Apple or G
 
 1. **ACTION**: Deeplink
 
-   [block:image]{"images":[{"image":["https://files.readme.io/88d257f-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/88d257f-image.png" />
 2. **LINK**: Add a deeplink URL
 
-   [block:image]{"images":[{"image":["https://files.readme.io/8ec13d3-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/8ec13d3-image.png" />
 
 ## Web page
 
 Webpage action lets you add a website URL.
 
-> 📘 For ex., You can provide a link to Q&A / Survey questionnaire / Terms and Conditions.
+> 📘 For ex., You can provide a link to Q\&A / Survey questionnaire / Terms and Conditions.
 
 1. **ACTION**: Webpage
 
-   [block:image]{"images":[{"image":["https://files.readme.io/c64f6cb-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/c64f6cb-image.png" />
 2. **LINK**: add a webpage URL
 
-   [block:image]{"images":[{"image":["https://files.readme.io/03e7c30-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/03e7c30-image.png" />
 
 > 🚧 You should not link to the page to purchase outside of the store.
 
@@ -218,7 +143,7 @@ Login action lets the user login to your application. You can intercept this log
 
 1. **ACTION**: Login
 
-   [block:image]{"images":[{"image":["https://files.readme.io/2752131-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/2752131-image.png" />
 
 ## Restore
 
@@ -226,7 +151,7 @@ Restore action lets the user restore their purchase.
 
 1. **ACTION**: Restore
 
-   [block:image]{"images":[{"image":["https://files.readme.io/c7d845c-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/c7d845c-image.png" />
 
 ## Promo code
 
@@ -236,10 +161,10 @@ Promo code action lets you make promo code campaigns by sharing a custom code.
 
 1. **ACTION**: Promo code
 
-   [block:image]{"images":[{"image":["https://files.readme.io/26a4718-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/26a4718-image.png" />
 2. **PROMO CODE**: Enable the **Open link on click** and fill in the **promo code**
 
-   [block:image]{"images":[{"image":["https://files.readme.io/dc8f874-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/dc8f874-image.png" />
 
 <br />
 
