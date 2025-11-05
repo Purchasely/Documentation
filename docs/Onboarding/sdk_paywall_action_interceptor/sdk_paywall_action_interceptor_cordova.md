@@ -12,8 +12,6 @@ next:
 ---
 Here is a code sample using the Paywall Action Interceptor to perform the purchase and restore actions triggered from Purchasely's paywall with your own purchase system
 
-
-
 ```kotlin In-House
 Purchasely.setPaywallActionInterceptorCallback((result) => {
     if (result.action === Purchasely.PaywallAction.purchase) {
