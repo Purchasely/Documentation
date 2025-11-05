@@ -21,84 +21,39 @@ next:
       title: Remotely configure your own screens
 ---
 > 🚧 The feature described in this section is supported on the following versions and above:
-> 
-> - iOS: **3.5.0**
-> - Android: **3.5.0**
-> - ReactNative: **2.5.0**
-> - Cordova:** 2.5.0**
-> - Flutter: **1.5.0**
+>
+> * iOS: **3.5.0**
+> * Android: **3.5.0**
+> * ReactNative: **2.5.0**
+> * Cordova: **2.5.0**
+> * Flutter: **1.5.0**
 
 It might seem odd to use your custom paywall in a No Code environment, but it can actually be very useful for:
 
-- Perform A/A testing of your paywall against the same one implemented using Purchasely's template
-- Test your existing paywall against one of our No Code paywalls and run tests to outperform your baseline
-- Easily deploy price A/B testing infrastructure without changing your UI
+* Perform A/A testing of your paywall against the same one implemented using Purchasely's template
+* Test your existing paywall against one of our No Code paywalls and run tests to outperform your baseline
+* Easily deploy price A/B testing infrastructure without changing your UI
 
 # Setup in the console
 
-In the [Paywalls and screens](configuring-screens) section of the console use the _new screen_ button.
+In the [Paywalls and screens](configuring-screens) section of the console use the *new screen* button.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/1907d30-Capture_decran_2024-07-01_a_09.53.53.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/1907d30-Capture_decran_2024-07-01_a_09.53.53.png" />
 
+In the **Template** section, select the *Your own paywall* template
 
-In the **Template** section, select the _Your own paywall_ template
-
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/ab51ea7-Capture_decran_2024-07-01_a_07.19.47.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/ab51ea7-Capture_decran_2024-07-01_a_07.19.47.png" />
 
 ## Declare your plans
 
-If you wish to retrieve the plans to offer in your own paywall or do an A/B test of your own paywalls with different plans, you can declare the plans of your paywall in Purchasely console and create a price A/B test of your paywall.  
+If you wish to retrieve the plans to offer in your own paywall or do an A/B test of your own paywalls with different plans, you can declare the plans of your paywall in Purchasely console and create a price A/B test of your paywall.\
 Purchasely will automatically return the plans that you should display according to the a/b test variant of your user.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/c2cfc02-SCR-20240702-netp.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/c2cfc02-SCR-20240702-netp.png" />
 
 # Implementation
 
-The basic paywall implementation directly returns a View which cannot work for your own screen.  
+The basic paywall implementation directly returns a View which cannot work for your own screen.\
 To be able to retrieve the information to display your own screen, you must use `Purchasely.fetchPresentation()` method.
 
 First, you must declare your own paywall in our console along with the plans you wish to offer on your paywall if you want to do price A/B tests
@@ -286,7 +241,7 @@ Purchasely.clientPresentationClosed(presentation);
 ```
 
 > 📘 Purchase with Purchasely SDK
-> 
+>
 > You can, of course, initiate the purchase from your own paywall using Purchasely by using `Purchasely.purchase(plan)`, more information [here](processing-transactions)
 
 # Improving the visibility by adding a screenshot
@@ -295,41 +250,11 @@ To enhance the visibility of your paywall, you can add a screenshot of your own 
 
 You can do this by uploading a screenshot in the information section.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/afd94b0-Capture_decran_2024-07-01_a_07.17.44.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/afd94b0-Capture_decran_2024-07-01_a_07.17.44.png" />
 
 Example:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/0f1dfbd-Capture_decran_2024-07-01_a_08.55.16.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/0f1dfbd-Capture_decran_2024-07-01_a_08.55.16.png" />
 
 # Use Metadata
 
