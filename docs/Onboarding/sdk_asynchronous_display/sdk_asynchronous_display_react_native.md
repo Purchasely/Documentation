@@ -66,10 +66,10 @@ class PLYPresentation(
 
 A presentation can be one of the following types:
 
-- **Normal**: The default behavior, a Purchasely paywall created from our console.
-- **Fallback**: A Purchasely paywall, but not the one you requested, as it could not be found.
-- **Deactivated**: No paywall associated with that placement, possibly for a specific A/B test or audience.
-- **Client**: You declared and associated **Your Own Paywall** in the console and should display it.  
+* **Normal**: The default behavior, a Purchasely paywall created from our console.
+* **Fallback**: A Purchasely paywall, but not the one you requested, as it could not be found.
+* **Deactivated**: No paywall associated with that placement, possibly for a specific A/B test or audience.
+* **Client**: You declared and associated **Your Own Paywall** in the console and should display it.\
   More information about this feature in the block on the right.
 
 To fetch a paywall and then display it, use the following code:
@@ -116,4 +116,4 @@ try {
 
 ### 3\. USING THE DEEPLINK
 
-<br>
+<br />
