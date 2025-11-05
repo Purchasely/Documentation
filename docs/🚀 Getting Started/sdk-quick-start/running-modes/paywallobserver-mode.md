@@ -26,5 +26,5 @@ next:
 
 <PaywallObserverModeTransactionProcessing />
 
-The other mode available with the Purchasely SDK is the `full` mode.  
+The other mode available with the Purchasely SDK is the `full` mode.\
 [More details about the full mode](full-mode)
