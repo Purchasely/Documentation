@@ -63,7 +63,7 @@ Purchasely also integrate [built-in attributes](built-in-native-attributes) rela
 
 ## 🔄 Get User Answers
 
-Automatically set and track user attributes through configurations in Screen Composer.  
+Automatically set and track user attributes through configurations in Screen Composer.\
 Use the [User Attribute Listener](custom-user-attribute-listener) to collect data from user interactions, such as [survey](mcq) responses, to enhance user insights and create personalized user journeys.
 
 ## 💡 Optimize with Offers
