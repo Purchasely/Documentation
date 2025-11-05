@@ -20,41 +20,11 @@ The Non-Renewing Subscriptions allows users to access content for a limited dura
 
 Go to [App Store Connect](https://appstoreconnect.apple.com/login)'s '**Apps**' page 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/0b4cbc8-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/0b4cbc8-image.png" />
 
 and select the **Name** of your app from the list.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/a30f4bf-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/a30f4bf-image.png" />
 
 In the sidebar, select '**Subscriptions**' under **Monetization**,
 
@@ -62,41 +32,11 @@ In the sidebar, select '**Subscriptions**' under **Monetization**,
 
 Click on **Manage** under the Non-Renewing Subscriptions:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/c86b70f-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/c86b70f-image.png" />
 
 Click on the "**+**" button to create your Non-Renewing Subscriptions:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/fa9915d-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/fa9915d-image.png" />
 
 Fill the 
 
@@ -104,22 +44,7 @@ Fill the
 
 `Product id`: A unique alphanumeric ID that is used for reporting. After you use a Product ID for one product, it can’t be used again, even if the product is deleted.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b0dc9f2-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/b0dc9f2-image.png" />
 
 ### Adding Availability
 
@@ -155,22 +80,7 @@ The next step is to set up localization information of the plan created above.  
 
 In the App Store Information section, click the Add localization button. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/aa4584e-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/aa4584e-image.png" />
 
 Choose the language, display name and add a description and click add once done. 
 
@@ -182,21 +92,7 @@ The Non-Renewing Subscription Display Name and Description will be visible to th
 
 The last part of setting up an Non-Renewing Subscription in iOS is adding information for the reviewer. This is a Screenshot, and optional Review Notes. You'll be unable to submit your product for review without it.
 
-Screenshot: A required image of your in-app purchase paywall for the reviewer. While testing, it's okay to upload an empty 640 x 920 image here of whatever you want. Before submitting for review, you should add a picture of your paywall.  
+Screenshot: A required image of your in-app purchase paywall for the reviewer. While testing, it's okay to upload an empty 640 x 920 image here of whatever you want. Before submitting for review, you should add a picture of your paywall.\
 Review Notes: An optional text area to clarify anything about your in-app purchase for the reviewer.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/66d19d1-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/66d19d1-image.png" />
