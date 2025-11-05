@@ -13,24 +13,24 @@ next:
   description: ''
 ---
 > 🚧 Minimum SDK versions
-> 
-> - iOS: 3.5.0
-> - Android: 3.5.0
-> - ReactNative: 2.5.0
-> - Cordova: 2.5.0
-> - Flutter: 1.5.0
-> - Unity: 4.1.0
+>
+> * iOS: 3.5.0
+> * Android: 3.5.0
+> * ReactNative: 2.5.0
+> * Cordova: 2.5.0
+> * Flutter: 1.5.0
+> * Unity: 4.1.0
 
 Purchasely, by default, [shows the Screen](displaying-your-first-screen) with a loading indicator while fetching the Screen from the network and preparing it for display.
 
 Using `Purchasely.fetchPresentation()` method, you can pre-fetch the Screen from the network before displaying it. This provides the following benefits:
 
-- Display the Screen only after it has been loaded from the network
-- Handle network errors gracefully
-- Show a custom loading screen
-- Pre-load the Screen while users navigate through your app, such as during onboarding screens
-- Choose [not to display a Screen](disable-placements.md) for a specific placement
-- Display [your own Screen](use-your-own-paywall.md)
+* Display the Screen only after it has been loaded from the network
+* Handle network errors gracefully
+* Show a custom loading screen
+* Pre-load the Screen while users navigate through your app, such as during onboarding screens
+* Choose [not to display a Screen](disable-placements.md) for a specific placement
+* Display [your own Screen](use-your-own-paywall.md)
 
 ## Implementation
 
@@ -72,10 +72,10 @@ data class PLYPresentation(
 
 A presentation can be one of the following types:
 
-- **Normal**: The default behavior, a Purchasely Screen created from our console.
-- **Fallback**: A Purchasely Screen, but not the one you requested, as it could not be found.
-- **Deactivated**: No [Screen associated](disable-placements.md) with that placement, possibly for a specific A/B test or an [audience](https://help.purchasely.io/en/articles/6940943-disable-a-paywall-for-a-placement).
-- **Client**: You declared [your own Screen in our console](https://help.purchasely.io/en/articles/6940803-your-own-paywall-in-the-purchasely-console) and should [display it](use-your-own-paywall.md). Use the list of plans to determine which offers to display to your users.
+* **Normal**: The default behavior, a Purchasely Screen created from our console.
+* **Fallback**: A Purchasely Screen, but not the one you requested, as it could not be found.
+* **Deactivated**: No [Screen associated](disable-placements.md) with that placement, possibly for a specific A/B test or an [audience](https://help.purchasely.io/en/articles/6940943-disable-a-paywall-for-a-placement).
+* **Client**: You declared [your own Screen in our console](https://help.purchasely.io/en/articles/6940803-your-own-paywall-in-the-purchasely-console) and should [display it](use-your-own-paywall.md). Use the list of plans to determine which offers to display to your users.
 
 ```swift Swift
 // fetch presentation for placement
