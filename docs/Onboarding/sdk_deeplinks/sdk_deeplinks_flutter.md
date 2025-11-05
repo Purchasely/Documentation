@@ -12,9 +12,9 @@ next:
 ---
 To manage deeplinks you need to do 2 things:
 
-- Pass the deeplink to the Purchasely SDK when it is received by the application
-- Allow the Purchasely SDK to display content over your interface
-- Set a default presentation handler to get the result of what was done by the user on the paywall / screen
+* Pass the deeplink to the Purchasely SDK when it is received by the application
+* Allow the Purchasely SDK to display content over your interface
+* Set a default presentation handler to get the result of what was done by the user on the paywall / screen
 
 ### PASSING THE DEEPLINK TO THE PURCHASELY SDK
 
