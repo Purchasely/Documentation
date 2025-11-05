@@ -11,5 +11,5 @@ next:
   description: ''
 ---
 > 🚧 Requirements
-> 
+>
 > To set a S2S endpoint in App Store Connect, you must have configured an in-app purchase or a subscription. Otherwise the option won't be available.
