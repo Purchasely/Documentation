@@ -30,61 +30,31 @@ To fetch the Store Product ID, you have to login to the [Apple App Store Connect
 
 Copy the `Product ID`
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/03c1101-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/03c1101-image.png" />
 
 And paste the `Product ID` in the [Purchasely console](https://start.purchasely.com/docs/product-plans-setup) and **Save**.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/8342c3a-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/8342c3a-image.png" />
 
 <br />
 
 > 🚧 Difference of ordering between the App Store Connect and the Purchasely Console
-> 
+>
 > When ordering subscriptions within a Subscription Group in the App Store, the value provided is a rank. Subscriptions are ordered by rank ascending.
-> 
-> In the App Store the highest value subscriptions have the lowest ranks.  
+>
+> In the App Store the highest value subscriptions have the lowest ranks.\
 > In the App Store the highest value subscriptions have the lowest ranks.
-> 
-> [block:image]{"images":[{"image":["https://files.readme.io/b0fb09e-image.png",null,""],"align":"center","border":true}]}[/block]
-> 
+>
+> <Image align="center" className="border" border={true} src="https://files.readme.io/b0fb09e-image.png" />
+>
 > In the Purchasely Console, Plans are ordered by Level descending. Highest value plans have therefore the highest Levels.
-> 
+>
 > ![](https://files.readme.io/cab45b6-image.png)
 
 > 👍 Introductory Offer
-> 
+>
 > You don't have to declare anything in the Purchasely console regarding the introductory offer. 
-> 
+>
 > ![](https://files.readme.io/35ca27d-image.png)
 
 # Promotional offers
@@ -95,45 +65,15 @@ To fetch the `Offer ID`, you have to login to the [Apple App Store Connect](http
 
 **Monetize** -> **Subscriptions** -> select the **Subscription group** and the Subscription that contains the promotional offer [plan](https://start.purchasely.com/docs/app-store-configuring-in-app-subscriptions#creating-a-subscription) and then click **View all Subscription Pricing**.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/f613238-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/f613238-image.png" />
 
 and then in the following screen, choose the **Promotional Offers** tab you will find a list as shown below. Copy the `Offer id `
 
-[block:image]{"images":[{"image":["https://files.readme.io/781913d-image.png",null,null],"align":"center","border":true}]}[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/781913d-image.png" />
 
 Paste the [Offer ID](https://start.purchasely.com/docs/retention-winback) in the Purchasely console and **Save**.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/81505c2-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/81505c2-image.png" />
 
 # In-App Purchases
 
@@ -141,37 +81,8 @@ To fetch the Store Product ID of an In-App Purchase you created, you have to log
 
 **Monetize** -> **Subscriptions** -> Click the **In App Purchases** that contains the [plan](https://start.purchasely.com/docs/app-store-configuring-in-app-subscriptions#creating-a-subscription) you have created and then in the following screen, you will find a list as shown below.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/e70b028-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/e70b028-image.png" />
 
 Paste the `Product ID` in the field `App Store Product id` and **Save**.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b5a1033-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/b5a1033-image.png" />
