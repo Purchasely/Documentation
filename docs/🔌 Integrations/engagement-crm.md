@@ -18,27 +18,12 @@ next:
 
 Activating the integration of Purchasely with one of the Engagement / CRM partners consists in 2 things:
 
-1. **Forwarding Purchasely [Server events](server-events)** including lifecycle events, offer events and transactional data such as aggregated revenue from the Purchasely Platform to the Engagement / CRM platform  
-   _E.g: the event TRIAL_CONVERTED can be forwarded from Purchasely to the Engagement / CRM platform_
-2. **Activating the real time update of User Properties** when something changes in their subscription lifecycle  
-   _E.g: the property subscription_status can be updated in real time in the Engagement / 3rd party Platform when a user cancels the auto-renewing of their subscription_
+1. **Forwarding Purchasely[Server events](server-events)** including lifecycle events, offer events and transactional data such as aggregated revenue from the Purchasely Platform to the Engagement / CRM platform\
+   *E.g: the event TRIAL\_CONVERTED can be forwarded from Purchasely to the Engagement / CRM platform*
+2. **Activating the real time update of User Properties** when something changes in their subscription lifecycle\
+   *E.g: the property subscription\_status can be updated in real time in the Engagement / 3rd party Platform when a user cancels the auto-renewing of their subscription*
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/19c5e72-batch-overview.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/19c5e72-batch-overview.gif" />
 
 <br />
 
@@ -46,12 +31,12 @@ Activating the integration of Purchasely with one of the Engagement / CRM partne
 
 The benefits are the following:
 
-- **CRM / Analytics: Completing the end user's 360 view** in the Engagement / CRM Platform with the subscription lifecycle events and subscription properties  
-  _E.g.: thanks to Purchasely data, it will be possible to know which users are subscribers (and if so which plan they have), how much revenue they've generated etc..._
-- **Engagement: Leveraging Purchasely's analytics to create automations or campaigns**  
-  _E.g.: when a subscriber cancels the auto-renewing of their subscription in their app settings, it is possible to leverage the event generate by Purchasely inside the Engagement / CRM Platform to trigger engagement messages such as Push Notifications or In-App messages._
-- **Conversion/Retention:** to close the loop and manage conversion, upsell or retention campaigns, these Engagement messages can be **linked back to Purchasely Screens using [deeplinks](https://start.purchasely.com/docs/deeplinks-management)** .  
-  _E.g.: a Screen to propose a retention offer is created in the Purchasely Platform and associated to a Push Notification sent by the Engagement / CRM Platform thanks to its deeplink._
+* **CRM / Analytics: Completing the end user's 360 view** in the Engagement / CRM Platform with the subscription lifecycle events and subscription properties\
+  *E.g.: thanks to Purchasely data, it will be possible to know which users are subscribers (and if so which plan they have), how much revenue they've generated etc...*
+* **Engagement: Leveraging Purchasely's analytics to create automations or campaigns**\
+  *E.g.: when a subscriber cancels the auto-renewing of their subscription in their app settings, it is possible to leverage the event generate by Purchasely inside the Engagement / CRM Platform to trigger engagement messages such as Push Notifications or In-App messages.*
+* **Conversion/Retention:** to close the loop and manage conversion, upsell or retention campaigns, these Engagement messages can be **linked back to Purchasely Screens using[deeplinks](https://start.purchasely.com/docs/deeplinks-management)** .\
+  *E.g.: a Screen to propose a retention offer is created in the Purchasely Platform and associated to a Push Notification sent by the Engagement / CRM Platform thanks to its deeplink.*
 
 <br />
 
@@ -91,23 +76,9 @@ You're all set! From now on, when specific conditions will be matched in the sub
 
 Purchasely Server Events are generated all along the subscription lifecycle. They can be forwarded to the 3rd party Engagement / CRM platform and play the role of trigger for automations.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/aae7fef-image.png",
-        null,
-        "Lifecycle Events, Offer Events and Transactional Event can be forwarded from Purchasely to 3rd-party Engagement / CRM Platform for various purposes"
-      ],
-      "align": "center",
-      "border": true,
-      "caption": "Lifecycle Events, Offer Events and Transactional Event can be forwarded from Purchasely to 3rd-party Engagement / CRM Platform for various purposes"
-    }
-  ]
-}
-[/block]
-
+<Image alt="Lifecycle Events, Offer Events and Transactional Event can be forwarded from Purchasely to 3rd-party Engagement / CRM Platform for various purposes" align="center" border={true} src="https://files.readme.io/aae7fef-image.png">
+  Lifecycle Events, Offer Events and Transactional Event can be forwarded from Purchasely to 3rd-party Engagement / CRM Platform for various purposes
+</Image>
 
 <br />
 
@@ -123,71 +94,174 @@ In Engagement / CRM Platforms, user properties are generally more convenient to 
 
 User properties are computed and updated throughout the subscription lifecycle. You can enable the live update in the Tab **User Properties** of your 3rd-party Integration.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/118fb1c-image.png",
-        null,
-        "When activating the forwarding of user properties, they will be updated in real time all along the subscription lifecycle. User properties name can be overridden to match your own nomenclature"
-      ],
-      "align": "center",
-      "border": true,
-      "caption": "When activating the forwarding of user properties, they will be updated in real time all along the subscription lifecycle. User properties name can be overridden to match your own nomenclature"
-    }
-  ]
-}
-[/block]
-
+<Image alt="When activating the forwarding of user properties, they will be updated in real time all along the subscription lifecycle. User properties name can be overridden to match your own nomenclature" align="center" border={true} src="https://files.readme.io/118fb1c-image.png">
+  When activating the forwarding of user properties, they will be updated in real time all along the subscription lifecycle. User properties name can be overridden to match your own nomenclature
+</Image>
 
 <br />
 
-If you need precise details on their value, please refer to [Server Events Attributes](server-events-attributes) and [User Attributes](<>).
+If you need precise details on their value, please refer to [Server Events Attributes](server-events-attributes) and [User Attributes]().
 
 Here is a sub-set of the User Properties that are particularly useful if you want to create powerful automations or campaigns in your CRM / engagement platform.
 
 <br />
 
-[block:parameters]
-{
-  "data": {
-    "h-0": "Property",
-    "h-1": "Description",
-    "0-0": "`anonymous_user_id`",
-    "0-1": "Can be leveraged for testing purposes, to target a specific anonymous user.",
-    "1-0": "`user_id`",
-    "1-1": "Can be leveraged for testing purposes, to target a specific connected user.",
-    "2-0": "`has_active_subscription`",
-    "2-1": "Can be leveraged to target active subscribers (`true`)",
-    "3-0": "`store`",
-    "3-1": "Can be leveraged to target subscribers from a specific app store.  \n  \nPossible values:  \n`APPLE_APP_STORE`  \n`GOOGLE_PLAY_STORE`  \n`AMAZON_APPSTORE`  \n`HUAWEI_APPGALLERY`  \n`STRIPE`",
-    "4-0": "`store_country`",
-    "4-1": "Can be leveraged to target users from a specific country. The attribute is filled with the country value provided by the app store.",
-    "5-0": "`plan`",
-    "5-1": "Can be leveraged to target subscribers with a specific plan.  \nContains the Plan ID.",
-    "6-0": "`subscription_status`",
-    "6-1": "Can be leveraged to target users who have canceled the auto-renewing of their subscription (`AUTO_RENEWING_CANCELED`) to try to retain them.  \n  \nAlso leveraged to target users in grace period to ask them to update their credit card information (`IN_GRACE_PERIOD`).  \n  \nOther possible values:  \n`CANCELED`  \n`DEACTIVATED`  \n`REVOKED`  \n`PAUSED`  \n`UNPAID`",
-    "7-0": "`offer_type`",
-    "7-1": "Can be leveraged to segment users in Free Trial (`FREE_TRIAL`), Intro Offer (`INTRO_OFFER`) or paying the regular price (`NONE`)  \n  \nOther possible values:  \n`PROMO_CODE`  \n`PROMOTIONAL_OFFER`",
-    "8-0": "`is_family_shared`",
-    "8-1": "Can be leveraged to exclude users benefiting from a subscription thanks to the family sharing (`true`)",
-    "9-0": "`subscription_started_at`",
-    "9-1": "Can be leveraged to determine when the subscription was started.",
-    "10-0": "`effective_next_renewal_at`",
-    "10-1": "Can be leveraged to know when the current billing cycle with be renewed.",
-    "11-0": "`promotional_offer_id`",
-    "11-1": "Can be leveraged to target users benefiting from a specific promotional offer."
-  },
-  "cols": 2,
-  "rows": 12,
-  "align": [
-    "left",
-    "left"
-  ]
-}
-[/block]
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Property
+      </th>
 
+      <th>
+        Description
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        `anonymous_user_id`
+      </td>
+
+      <td>
+        Can be leveraged for testing purposes, to target a specific anonymous user.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `user_id`
+      </td>
+
+      <td>
+        Can be leveraged for testing purposes, to target a specific connected user.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `has_active_subscription`
+      </td>
+
+      <td>
+        Can be leveraged to target active subscribers (`true`)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `store`
+      </td>
+
+      <td>
+        Can be leveraged to target subscribers from a specific app store.  
+
+        Possible values:\
+        `APPLE_APP_STORE`\
+        `GOOGLE_PLAY_STORE`\
+        `AMAZON_APPSTORE`\
+        `HUAWEI_APPGALLERY`\
+        `STRIPE`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `store_country`
+      </td>
+
+      <td>
+        Can be leveraged to target users from a specific country. The attribute is filled with the country value provided by the app store.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `plan`
+      </td>
+
+      <td>
+        Can be leveraged to target subscribers with a specific plan.\
+        Contains the Plan ID.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `subscription_status`
+      </td>
+
+      <td>
+        Can be leveraged to target users who have canceled the auto-renewing of their subscription (`AUTO_RENEWING_CANCELED`) to try to retain them.  
+
+        Also leveraged to target users in grace period to ask them to update their credit card information (`IN_GRACE_PERIOD`).  
+
+        Other possible values:\
+        `CANCELED`\
+        `DEACTIVATED`\
+        `REVOKED`\
+        `PAUSED`\
+        `UNPAID`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `offer_type`
+      </td>
+
+      <td>
+        Can be leveraged to segment users in Free Trial (`FREE_TRIAL`), Intro Offer (`INTRO_OFFER`) or paying the regular price (`NONE`)  
+
+        Other possible values:\
+        `PROMO_CODE`\
+        `PROMOTIONAL_OFFER`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `is_family_shared`
+      </td>
+
+      <td>
+        Can be leveraged to exclude users benefiting from a subscription thanks to the family sharing (`true`)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `subscription_started_at`
+      </td>
+
+      <td>
+        Can be leveraged to determine when the subscription was started.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `effective_next_renewal_at`
+      </td>
+
+      <td>
+        Can be leveraged to know when the current billing cycle with be renewed.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `promotional_offer_id`
+      </td>
+
+      <td>
+        Can be leveraged to target users benefiting from a specific promotional offer.
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 <br />
 
@@ -197,63 +271,153 @@ Here is a sub-set of the User Properties that are particularly useful if you wan
 
 Here is a typical retention automation you can set up by integrating Purchasely with your CRM / Engagement platform.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/e51610b-batch-automation-example.avif",
-        "",
-        "When a user cancels the auto-renewing of their subscription, (i) a Server Event `RENEWAL_DISABLED` is forwarded to the CRM / Engagement platform, (ii) an engagement message is configured to be triggered upon its reception, (iii) this engagement message is linked back to a Purchasely Screen or Placement through the associated deeplink"
-      ],
-      "align": "center",
-      "border": true,
-      "caption": "When a user cancels the auto-renewing of their subscription, (i) a Server Event `RENEWAL_DISABLED` is forwarded to the CRM / Engagement platform, (ii) an engagement message is configured to be triggered upon its reception, (iii) this engagement message is linked back to a Purchasely Screen or Placement through the associated deeplink"
-    }
-  ]
-}
-[/block]
-
+<Image alt="When a user cancels the auto-renewing of their subscription, (i) a Server Event `RENEWAL_DISABLED` is forwarded to the CRM / Engagement platform, (ii) an engagement message is configured to be triggered upon its reception, (iii) this engagement message is linked back to a Purchasely Screen or Placement through the associated deeplink" align="center" border={true} src="https://files.readme.io/e51610b-batch-automation-example.avif">
+  When a user cancels the auto-renewing of their subscription, (i) a Server Event `RENEWAL_DISABLED` is forwarded to the CRM / Engagement platform, (ii) an engagement message is configured to be triggered upon its reception, (iii) this engagement message is linked back to a Purchasely Screen or Placement through the associated deeplink
+</Image>
 
 To go further, we invite you to have a look at the Growth Guidances section, on [win-back and retention strategies](retention-winback).
 
 Below are a few examples that can be built.
 
-[block:parameters]
-{
-  "data": {
-    "h-0": "Campaign / Automation",
-    "h-1": "Purchasely Console  \nServer Events forwarding to enable",
-    "h-2": "Purchasely Console  \nUser Properties update to enable",
-    "h-3": "CRM / Engagement Platform  \nCampaign or automation to configure",
-    "0-0": "**CONVERSION TO PAID**  \nPropose a discount or free trial extension to free trial users who do not convert their free trial.",
-    "0-1": "Trigger: Server Event `TRIAL_NOT_CONVERTED` or `INTRO_OFFER_NOT_CONVERTED`",
-    "0-2": "**Lapsed Free Trial Users** have the common characteristics:  \n`offer_type`=`FREE_TRIAL` (or `INTRO_OFFER`).  \n`has_active_subscription`= `false` ",
-    "0-3": "Set up an automation that reacts to the reception of the event `TRIAL_NOT_CONVERTED`  \nor  \na campaign that targets **Lapsed Free Trial Users** and send them to a specific  offer thanks to a Placement or Paywall deeplink.",
-    "1-0": "**RETENTION**  \nPropose a promotional offer for paid users canceling the auto-renewing of their subscription)",
-    "1-1": "Trigger:  \nServer Event `RENEWAL_DISABLED`",
-    "1-2": "**Premium members who deactivated the auto-renewal** have the common characteristics:  \n`subscription_status`=`AUTO_RENEWING_CANCELED`  \n`offer_type` =`NONE` (meaning that they are paying the regular price)  \n  \nPro tip:  \nIf you want to have different levels of discounts depending on members' loyalty, you can create an Audience in the Purchasely's Console leveraging the [User Attributes](user-attributes-list#built-in-active-subscription-attributes) **Start date** or **Cumulated revenue in USD**",
-    "1-3": "Set up an automation that reacts to the reception of the event `RENEWAL_DISABLED`  \nor  \na campaign that targets **Premium Members** about to churn and send them to a specific offer thanks to a Placement or Paywall deeplink.",
-    "2-0": "**WIN-BACK**  \nPropose a win-back offer to lapsed subscribers",
-    "2-1": "Trigger:  \nServer Event `SUBSCRIPTION_TERMINATED`",
-    "2-2": "**Lapsed subscribers who churned voluntarily** have the common characteristics:  \n`subscription_status` =`DEACTIVATED`  \n`has_active_subscription`= `false`  \n  \nPro tip 1:  \nYou can leverage the User Property `offer_type` to split them between lapsed paid members benefiting from the regular offer (=`NONE`) and users who only benefited from an Introductory Offer (= `FREE_TRIAL` or `INTRO_OFFER`).  \n  \nPro tip 2:  \nIn the Purchasely Console, you can create different Audiences leveraging the [Built-in Expired Subscription Attributes](user-attributes-list#built-in-expired-subscription-attributes), such as the **Expired subscription duration (days)** or the **Expired Sub. Cumulated Revenue** to segment your users and propose them different levels of discount",
-    "2-3": "Set up an automation that reacts to the reception of the event `SUBSCRIPTION_TERMINATED` or a campaign that targets **Lapsed subscribers who churned voluntarily** send them to a specific offer thanks to a Placement or Paywall deeplink.",
-    "3-0": "**INVOLUNTARY CHURN MITIGATION**  \nInvite users in Grace Period to update their credit card",
-    "3-1": "Trigger:  \nServer Event `GRACE_PERIOD_STARTED`",
-    "3-2": "**Premium members in Grace Period** have the common characteristics:  \n`subscription_status`=`IN_GRACE_PERIOD`",
-    "3-3": "Set up an automation that reacts to the reception of the event `GRACE_PERIOD_STARTED` or a campaign that targets **Premium members in Grace Period** send them to a specific Screen inviting them to update their credit card information to avoid the suspension of their Premium membership thanks to the Screen or Placement deeplink."
-  },
-  "cols": 4,
-  "rows": 4,
-  "align": [
-    "left",
-    "left",
-    "left",
-    "left"
-  ]
-}
-[/block]
+<Table align={["left","left","left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Campaign / Automation
+      </th>
 
+      <th>
+        Purchasely Console
+
+
+
+
+        Server Events forwarding to enable
+      </th>
+
+      <th>
+        Purchasely Console
+
+
+
+
+        User Properties update to enable
+      </th>
+
+      <th>
+        CRM / Engagement Platform
+
+
+
+
+        Campaign or automation to configure
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        **CONVERSION TO PAID**
+        Propose a discount or free trial extension to free trial users who do not convert their free trial.
+      </td>
+
+      <td>
+        Trigger: Server Event `TRIAL_NOT_CONVERTED` or `INTRO_OFFER_NOT_CONVERTED`
+      </td>
+
+      <td>
+        * \*Lapsed Free Trial Users\*\* have the common characteristics:\
+          `offer_type`=`FREE_TRIAL` (or `INTRO_OFFER`).\
+          `has_active_subscription`= `false` 
+      </td>
+
+      <td>
+        Set up an automation that reacts to the reception of the event `TRIAL_NOT_CONVERTED`\
+        or\
+        a campaign that targets **Lapsed Free Trial Users** and send them to a specific  offer thanks to a Placement or Paywall deeplink.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        **RETENTION**\
+        Propose a promotional offer for paid users canceling the auto-renewing of their subscription)
+      </td>
+
+      <td>
+        Trigger:\
+        Server Event `RENEWAL_DISABLED`
+      </td>
+
+      <td>
+        * \*Premium members who deactivated the auto-renewal\*\* have the common characteristics:\
+          `subscription_status`=`AUTO_RENEWING_CANCELED`\
+          `offer_type` =`NONE` (meaning that they are paying the regular price)\
+            
+
+        Pro tip:\
+        If you want to have different levels of discounts depending on members' loyalty, you can create an Audience in the Purchasely's Console leveraging the [User Attributes](user-attributes-list#built-in-active-subscription-attributes) **Start date** or **Cumulated revenue in USD**
+      </td>
+
+      <td>
+        Set up an automation that reacts to the reception of the event `RENEWAL_DISABLED`\
+        or\
+        a campaign that targets **Premium Members** about to churn and send them to a specific offer thanks to a Placement or Paywall deeplink.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        **WIN-BACK**\
+        Propose a win-back offer to lapsed subscribers
+      </td>
+
+      <td>
+        Trigger:\
+        Server Event `SUBSCRIPTION_TERMINATED`
+      </td>
+
+      <td>
+        * \*Lapsed subscribers who churned voluntarily\*\* have the common characteristics:\
+          `subscription_status` =`DEACTIVATED`\
+          `has_active_subscription`= `false`\
+            
+
+        Pro tip 1:\
+        You can leverage the User Property `offer_type` to split them between lapsed paid members benefiting from the regular offer (=`NONE`) and users who only benefited from an Introductory Offer (= `FREE_TRIAL` or `INTRO_OFFER`).  
+
+        Pro tip 2:\
+        In the Purchasely Console, you can create different Audiences leveraging the [Built-in Expired Subscription Attributes](user-attributes-list#built-in-expired-subscription-attributes), such as the **Expired subscription duration (days)** or the **Expired Sub. Cumulated Revenue** to segment your users and propose them different levels of discount
+      </td>
+
+      <td>
+        Set up an automation that reacts to the reception of the event `SUBSCRIPTION_TERMINATED` or a campaign that targets **Lapsed subscribers who churned voluntarily** send them to a specific offer thanks to a Placement or Paywall deeplink.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        **INVOLUNTARY CHURN MITIGATION**\
+        Invite users in Grace Period to update their credit card
+      </td>
+
+      <td>
+        Trigger:\
+        Server Event `GRACE_PERIOD_STARTED`
+      </td>
+
+      <td>
+        * \*Premium members in Grace Period\*\* have the common characteristics:\
+          `subscription_status`=`IN_GRACE_PERIOD`
+      </td>
+
+      <td>
+        Set up an automation that reacts to the reception of the event `GRACE_PERIOD_STARTED` or a campaign that targets **Premium members in Grace Period** send them to a specific Screen inviting them to update their credit card information to avoid the suspension of their Premium membership thanks to the Screen or Placement deeplink.
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 <br />
 
@@ -261,12 +425,12 @@ Below are a few examples that can be built.
 
 Here is the list of CRM / Engagement platforms that can be integrated with Purchasely:
 
-- [Airship](airship)
-- [Batch](batch)
-- [Braze](braze)
-- [Clevertap](clevertap)
-- [Customer.io](customer-io)
-- [Brevo (ex Sendinblue)](brevo)
-- [Iterable](iterable)
-- [Moengage](moengage)
-- [OneSignal](onesignal)
+* [Airship](airship)
+* [Batch](batch)
+* [Braze](braze)
+* [Clevertap](clevertap)
+* [Customer.io](customer-io)
+* [Brevo (ex Sendinblue)](brevo)
+* [Iterable](iterable)
+* [Moengage](moengage)
+* [OneSignal](onesignal)
