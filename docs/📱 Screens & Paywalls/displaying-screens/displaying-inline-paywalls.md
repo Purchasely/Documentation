@@ -20,27 +20,25 @@ Let us see how you can do that.
 
 1. Create the desired paywall with the [Screen composer](screen-composer).
 
-   [block:image]{"images":[{"image":["https://files.readme.io/8e96ec8402d01f7a2af94bf5707519566404fa1986192cf8ed0e1321a25e82e6-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/8e96ec8402d01f7a2af94bf5707519566404fa1986192cf8ed0e1321a25e82e6-image.png" />
 
    <br />
 2. The desired height of the Purchasely view can be configured by clicking on the first item (the layout) in the Screen structure of the Screen composer
 
-   [block:image]{"images":[{"image":["https://files.readme.io/9276b84f2a2fe999f20c59fa746dfa69d095eb61a926fecf8c7c0d9cff19fda6-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/9276b84f2a2fe999f20c59fa746dfa69d095eb61a926fecf8c7c0d9cff19fda6-image.png" />
 
    <br />
 3. Once saved, this Paywall can then be associated to a given Placement (eg: `inline_paywall`) that will be called from the article.
 4. To display the block inline with the article, you need to [pre-fetch this Placement](pre-fetching) the Placement
-5. The height of the paywall is defined by the property `height` of the object `PLYPresentation` instance retrieved (SDK version >= 5.0.2 on iOS & 5.0.4 on Android)  
-   <PLYPresentation />  
-   <br />
+5. The height of the paywall is defined by the property `height` of the object `PLYPresentation` instance retrieved (SDK version >= 5.0.2 on iOS & 5.0.4 on Android)\ <PLYPresentation />\ <br />
 6. The view returned can then directly be [nested](nesting-views) in the viewController of the article displayed by the app.
 
 <br />
 
 The CTA inside the Paywall can either:
 
-- link to another full Screen also created with Purchasely. You can do that by associating the action `Open Screen` with the button
-- directly trigger the in-app purchase flow with the action `Purchase` but in this case, you should add a link to the Terms & Conditions inside of the block to be compliant with the app stores guidelines.
+* link to another full Screen also created with Purchasely. You can do that by associating the action `Open Screen` with the button
+* directly trigger the in-app purchase flow with the action `Purchase` but in this case, you should add a link to the Terms & Conditions inside of the block to be compliant with the app stores guidelines.
 
 <br />
 
