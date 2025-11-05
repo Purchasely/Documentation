@@ -24,22 +24,22 @@ next:
 
 The interceptor passes 4 parameters:
 
-- `action`: the `PLYPresentationAction` enum that gives the type of action
-- `parameters`: a dictionary that contains the objects needed to perform the action (like a `PLYPlan` for a purchase)
-- `info`: the `PLYPresentationInfo` object containing the controller of the paywall to dismiss it or display content / error messages above it, and the presentation id and content id associated to this paywall
-- `proceed`: a completion handler parameter with a boolean telling Purchasely if it should continue the action itself. In other words, returning `true` on a purchase action will lead the Purchasely SDK to trigger the native in-app purchase flow
+* `action`: the `PLYPresentationAction` enum that gives the type of action
+* `parameters`: a dictionary that contains the objects needed to perform the action (like a `PLYPlan` for a purchase)
+* `info`: the `PLYPresentationInfo` object containing the controller of the paywall to dismiss it or display content / error messages above it, and the presentation id and content id associated to this paywall
+* `proceed`: a completion handler parameter with a boolean telling Purchasely if it should continue the action itself. In other words, returning `true` on a purchase action will lead the Purchasely SDK to trigger the native in-app purchase flow
 
 > ⚠️ When should you call `proceed(true)`  after handling the action?
-> 
+>
 > On a `login` action, call `proceed(true)` to refresh the paywall if the user has logged in
-> 
+>
 > On a `purchase` action, if you've successfully handled the transaction, you should not call `proceed(true)` to avoid a second trigger of the native in-app purchase flow by the SDK
-> 
-> If you don't handle every action, you **HAVE TO ** call `proceed(true)` otherwise the bouton will keep spinning and nothing will happen.
+>
+> If you don't handle every action, you **HAVE TO** call `proceed(true)` otherwise the bouton will keep spinning and nothing will happen.
 
 ## Processing transactions with your in-house system
 
-Here is a code sample using the Paywall Action Interceptor to process transactions ** with your own in-house purchase system**, for the actions `purchase` and `restore`:
+Here is a code sample using the Paywall Action Interceptor to process transactions **with your own in-house purchase system** , for the actions `purchase` and `restore`:
 
 ```swift
 Purchasely.setPaywallActionsInterceptor { [weak self] (action, parameters, presentationInfos, proceed) in
@@ -261,12 +261,12 @@ private void OnPaywallActionIntercepted(PaywallAction action)
 ```
 
 > 🚧 Don't forget to call `synchronize()` after the transaction has been processed
-> 
+>
 > Calling this method allows the Purchasely SDK to observe the transaction, i.e fetch the receipt and pass it to the Purchasely Platform to extract the data out of it without interfering with it
 
 ## Processing transaction with RevenueCat
 
-Here is a code sample using the Paywall Action Interceptor to process transactions ** with RevenueCat**, for the actions `purchase` and `restore`:
+Here is a code sample using the Paywall Action Interceptor to process transactions **with RevenueCat** , for the actions `purchase` and `restore`:
 
 ```swift
 Purchasely.setPaywallActionsInterceptor { [weak self] (action, parameters, presentationInfos, proceed) in
@@ -586,7 +586,7 @@ private void OnPaywallActionIntercepted(PaywallAction action)
 <br />
 
 > 🚧 Don't forget to call `synchronize()` after the transaction has been processed
-> 
+>
 > Calling this method allows the Purchasely SDK to observe the transaction, i.e fetch the receipt and pass it to the Purchasely Platform to extract the data out of it without interfering with it
 
 <br />
