@@ -30,8 +30,8 @@ To ensure that Purchasely is ready as soon as possible, we advise starting the S
 
 <StoreKitDifferentVersions />
 
-You must specify which StoreKit version you want to use with Purchasely for iOS devices.  
-If you choose StoreKit 2 but the iOS version on your user's device is below 15, the Purchasely SDK will automatically use StoreKit 1.  
+You must specify which StoreKit version you want to use with Purchasely for iOS devices.\
+If you choose StoreKit 2 but the iOS version on your user's device is below 15, the Purchasely SDK will automatically use StoreKit 1.\
 If you are unsure about which version to use, opt for StoreKit 1.
 
 For more information, refer to our [StoreKit guide](app-store-storekit-1-vs-storekit-2).
@@ -40,8 +40,8 @@ For more information, refer to our [StoreKit guide](app-store-storekit-1-vs-stor
 
 There 3 types of users in Purchasely platform
 
-- <<glossary:connected user>>
-- <<glossary:anonymous user>>
-- <<glossary:unknown user>>
+* <Glossary>connected user</Glossary>
+* <Glossary>anonymous user</Glossary>
+* <Glossary>unknown user</Glossary>
 
 You can provide a user id with `Purchasely.start()` or `Purchasely.userLogin()` if the user logs in after your application starts
