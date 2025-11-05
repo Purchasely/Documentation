@@ -16,4 +16,4 @@ next:
 await Purchasely.presentPresentationForPlacement('SAMPLE_PLACEMENT');
 ```
 
-<br>
+<br />
