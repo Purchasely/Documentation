@@ -3,14 +3,14 @@ name: Backend Entitlements - updating entitlements
 ---
 The `ACTIVATE` / `DEACTIVATE` events are carrying the information needed to determined which entitlements shall be granted / revoked to which user:
 
-- the plan purchased
-- the store used for purchasing
-- the user will be identified by their user ID if they are logged in, or by an anonymous ID if they are not.
+* the plan purchased
+* the store used for purchasing
+* the user will be identified by their user ID if they are logged in, or by an anonymous ID if they are not.
 
 Sample payload:
 
-- the subset tabs display only the mandatory fields necessary for managing entitlements
-- the full payload tabs show the entire event payloads
+* the subset tabs display only the mandatory fields necessary for managing entitlements
+* the full payload tabs show the entire event payloads
 
 ```json ACTIVATE (subset)
 {
@@ -114,16 +114,16 @@ Sample payload:
 The users entitlements must be associated to the `user ID` or `anonymous user ID` and stored in your database. You must solely rely on the webhook events to update them.
 
 > 🚧 Do not rely on the "billing cycle end dates" to invalidate subscriptions on your end
-> 
+>
 > Never use the `next_renewal_at` / `effective_next_renewal_at` to invalidate a subscription and always use the `DEACTIVATE` event sent on the webhook for this sole purpose. These dates are only here to help your marketing team take actions (or if you want to display the next renewal date in your app).
-> 
+>
 > **Why is relying on these dates a mistake?**
-> 
+>
 > If your/Purchasely/stores's servers encounter an issue, you might invalidate a user's rights simply because your data isn't up to date and the `effective_next_renewal_at` seems to be in the past.
-> 
+>
 > **What should you do instead?**
-> 
-> - Upon subscription renewal, the Purchasely Platform always sends a `ACTIVATE` message
-> - Upon subscription termination, the Purchasely Platform always sends a `DEACTIVATE` message in the right timing, in other words when the entitlements should be revoked on your end
-> 
+>
+> * Upon subscription renewal, the Purchasely Platform always sends a `ACTIVATE` message
+> * Upon subscription termination, the Purchasely Platform always sends a `DEACTIVATE` message in the right timing, in other words when the entitlements should be revoked on your end
+>
 > If you ever need a fail safe to unsubscribe users in case an issue occurs with the Store/Purchasely/your servers, you should let at least a 24h-margin with the given `effective_next_renewal_at`.
