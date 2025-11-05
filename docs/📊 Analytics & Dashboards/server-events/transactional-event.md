@@ -22,8 +22,8 @@ It is composed of one event `TRANSACTION_PROCESSED` which consists in  a JSON pa
 
 <br />
 
-> 📘 Why a dedicated **TRANSACTION_PROCESSED** event?
-> 
+> 📘 Why a dedicated **TRANSACTION\_PROCESSED** event?
+>
 > Since multiple events can be sent for a same interaction (e.g., when a purchase is made with an introductory period, you will receive `ACTIVATE`, `SUBSCRIPTION_STARTED` and `INTRO_PERIOD_STARTED`), you could mistakenly count the same amount three times in your revenues.
-> 
+>
 > To prevent this, we’ve added a fourth event called `TRANSACTION_PROCESSED`, which should be your sole reference for tracking money.
