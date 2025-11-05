@@ -33,22 +33,7 @@ In a paywall, a footer serves as a supportive section at the bottom of the page 
 
 The Footer Structure:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/28a1e6bdbc21c112817b406a66eb06a85a4676d946c5feb957bf185c893903b1-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/28a1e6bdbc21c112817b406a66eb06a85a4676d946c5feb957bf185c893903b1-image.png" />
 
 <br />
 
@@ -75,63 +60,17 @@ To configure the Footer, here is the process:
 1. **Texts per row**: You can set if you want to show number of texts/links per line you can choose from 1 upto 4 texts per row at a time. 
 2. **Vertical spacing**: With this vertical spacing, you can determine the space between the texts/links it goes handy when you want to align more than 1 Texts per row.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/30dfe24b2e9a0fbb23db36ad6bad5f8d78c20a081878440c5ae89a8ec36861e2-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/30dfe24b2e9a0fbb23db36ad6bad5f8d78c20a081878440c5ae89a8ec36861e2-image.png" />
 
 ## Styles
 
 1. **Background**: You can change the background colour of the footer
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/3e8a7d8de9924fdd1d1cee078e4e7247fe2d565367e2232551f069fdbf7d2c6e-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/3e8a7d8de9924fdd1d1cee078e4e7247fe2d565367e2232551f069fdbf7d2c6e-image.png" />
 
 2. **Border**: You can add a border around the footer texts and set corner radius too. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/e2c2bc7906d208d8550ab8dd1540ac923d4fa6cd6ef05eabd606d8f8ee32d79c-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "sizing": "900px",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" width="900px" border={true} src="https://files.readme.io/e2c2bc7906d208d8550ab8dd1540ac923d4fa6cd6ef05eabd606d8f8ee32d79c-image.png" />
 
 <br />
 
@@ -144,20 +83,6 @@ Once you add a new Text to the footer and configure with following options.
 1. **Texts:** You can align the text, change the font, font weight and colour in this section. 
 2. **On Tap:** You can set what your text or link has to do when tapped or clicked. Here in this example, we chose Web page and added link to our Help centre. 
 3. **Styles**: You can set the background colour and add a border and corner radius. 
-4. **Padding and Margin: ** Padding is the space between the content of an element and its border. Margin is the space outside the border of an element, pushing it away from surrounding elements.
+4. **Padding and Margin:** Padding is the space between the content of an element and its border. Margin is the space outside the border of an element, pushing it away from surrounding elements.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/25f09921d74e4bbcbe8a5437fd373159b3e9b68ccf225c6448ab2d30740f4b96-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/25f09921d74e4bbcbe8a5437fd373159b3e9b68ccf225c6448ab2d30740f4b96-image.png" />
