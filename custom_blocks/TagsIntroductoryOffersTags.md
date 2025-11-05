@@ -1,40 +1,148 @@
 ---
 name: Tags - Introductory Offers tags
 ---
-[block:parameters]
-{
-  "data": {
-    "h-0": "Tag",
-    "h-1": "Usage",
-    "h-2": "Example",
-    "0-0": "`TRIAL_PRICE`",
-    "0-1": "Displays the intro price or discounted price(that you have configured in Apple or Google store) of the plan.",
-    "0-2": "For a discounted trial:  \n_Don't miss the intro offer of **{{TRIAL_PRICE}}** for the first week.  \n_  \nThe output will be:  \n_Don't miss the intro offer of $0.99/week for the first week._",
-    "1-0": "`TRIAL_AMOUNT`",
-    "1-1": "Displays the intro price or discounted price(that you have configured in Apple or Google store) of the plan.",
-    "1-2": "For a discounted trial:  \n_  Don't miss the intro offer of **{{TRIAL_AMOUNT}}** for the first month._  \n  \nThe output will be:  \n_  Don't miss the intro offer of $5.99 for the first month._",
-    "2-0": "`TRIAL_PERIOD`",
-    "2-1": "Displays the trial period or free trial (that you have configured in Apple or Google store) configured for the plan.",
-    "2-2": "For a free trial:  \n_Don't miss the free trial for a **{{TRIAL_PERIOD}}**.  \n_  \nThe output will be:  \n_  Don't miss the free trial for a week._",
-    "3-0": "`TRIAL_DURATION`",
-    "3-1": "Displays the trial period or free trial (that you have configured in Apple or Google store) configured for the plan.",
-    "3-2": "For a discounted trial:  \n_  Hurry up intro offer for **{{TRIAL_AMOUNT}}**/ **{{TRIAL_DURATION}}**.  \n_  \nThe output will be:  \n_  Hurry up intro offer for $0.99 / 1 week._",
-    "4-0": "`TRIAL_DAYS_DURATION`",
-    "4-1": "Displays the trial duration in the days count.",
-    "4-2": "For a free trial:  \n_  Don't miss the free trial for **{{TRIAL_DAYS_DURATION}}**  \n_  \nThe output will be:  \n_  Don't miss the free trial for 7 days_",
-    "5-0": "`TRIAL_DISCOUNT_PERCENTAGE`",
-    "5-1": "Displays the discount percentage between the trial (free or paid) and the regular price of the plan for the period of the subscription.",
-    "5-2": "For a free trial or intro price:  \n_  Don't miss this starting price with a discount of **{{TRIAL_DISCOUNT_PERCENTAGE}}**  \n_  \nThe output will be:  \n_  Don't miss this starting price with a discount of 67%_",
-    "6-0": "`TRIAL_PRICE_COMPARISON`",
-    "6-1": "Displays the price difference between the trial (free or paid) and the regular price of the plan for the period of the subscription.",
-    "6-2": "For a free trial or intro price:  \n_  Don't miss this starting price with a discount of **{{TRIAL_PRICE_COMPARISON}}**  \n_  \nThe output will be:  \n_  Don't miss this starting price with a discount of $24_"
-  },
-  "cols": 3,
-  "rows": 7,
-  "align": [
-    "left",
-    "left",
-    "left"
-  ]
-}
-[/block]
+<Table align={["left","left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left" }}>
+        Tag
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Usage
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Example
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `TRIAL_PRICE`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Displays the intro price or discounted price(that you have configured in Apple or Google store) of the plan.
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        For a discounted trial:  
+
+        * Don't miss the intro offer of **\{\{TRIAL\_PRICE}}** for the first week.  
+        * The output will be:\
+          *Don't miss the intro offer of $0.99/week for the first week.*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `TRIAL_AMOUNT`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Displays the intro price or discounted price(that you have configured in Apple or Google store) of the plan.
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        For a discounted trial:\
+        *Don't miss the intro offer o&#x66;**\{\{TRIAL\_AMOUNT}}** for the first month.*  
+
+        The output will be:\
+        *Don't miss the intro offer of $5.99 for the first month.*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `TRIAL_PERIOD`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Displays the trial period or free trial (that you have configured in Apple or Google store) configured for the plan.
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        For a free trial:  
+
+        * Don't miss the free trial for a **\{\{TRIAL\_PERIOD}}**.  
+        * The output will be:\
+          *Don't miss the free trial for a week.*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `TRIAL_DURATION`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Displays the trial period or free trial (that you have configured in Apple or Google store) configured for the plan.
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        For a discounted trial:  
+
+        * Hurry up intro offer for **\{\{TRIAL\_AMOUNT}}**/ **\{\{TRIAL\_DURATION}}**.  
+        * The output will be:\
+          *Hurry up intro offer for $0.99 / 1 week.*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `TRIAL_DAYS_DURATION`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Displays the trial duration in the days count.
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        For a free trial:  
+
+        * Don't miss the free trial for **\{\{TRIAL\_DAYS\_DURATION}}**  
+        * The output will be:\
+          *Don't miss the free trial for 7 days*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `TRIAL_DISCOUNT_PERCENTAGE`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Displays the discount percentage between the trial (free or paid) and the regular price of the plan for the period of the subscription.
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        For a free trial or intro price:  
+
+        * Don't miss this starting price with a discount of **\{\{TRIAL\_DISCOUNT\_PERCENTAGE}}**  
+        * The output will be:\
+          *Don't miss this starting price with a discount of 67%*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `TRIAL_PRICE_COMPARISON`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Displays the price difference between the trial (free or paid) and the regular price of the plan for the period of the subscription.
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        For a free trial or intro price:  
+
+        * Don't miss this starting price with a discount of **\{\{TRIAL\_PRICE\_COMPARISON}}**  
+        * The output will be:\
+          *Don't miss this starting price with a discount of $24*
+      </td>
+    </tr>
+  </tbody>
+</Table>
