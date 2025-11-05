@@ -33,57 +33,27 @@ The integration requires 5 steps:
 
 In the Purchasely Console, navigate to the [Integrations](https://console.purchasely.io/external-integrations) section and click on **Customer.io**
 
-- Activate the integration
-- Enter your API Key from **Customer.io** dashboard
-- Enter your Site ID from **Customer.io** dashboard
-- Set your region (US or EU)
+* Activate the integration
+* Enter your API Key from **Customer.io** dashboard
+* Enter your Site ID from **Customer.io** dashboard
+* Set your region (US or EU)
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/159a533-SCR-20240726-ojld.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/159a533-SCR-20240726-ojld.png" />
 
-
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/0a1a340-SCR-20240726-ojps.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/0a1a340-SCR-20240726-ojps.png" />
 
 ### Retrieve Customer.io information
 
 #### API Key
 
-- Access the Customer.io API [Credentials Management dashboard](<>)
-- If necessary, create a new Tracking API key for your app
-- Write down your API Key and Site ID
+* Access the Customer.io API [Credentials Management dashboard]()
+* If necessary, create a new Tracking API key for your app
+* Write down your API Key and Site ID
 
 #### Region
 
-- Follow [Customer.io documentation](https://customer.io/docs/data-centers/#how-do-i-know-what-region-my-data-is-in)
-- Write down your Region
+* Follow [Customer.io documentation](https://customer.io/docs/data-centers/#how-do-i-know-what-region-my-data-is-in)
+* Write down your Region
 
 <br />
 
@@ -91,22 +61,7 @@ In the Purchasely Console, navigate to the [Integrations](https://console.purcha
 
 In the Purchasely Console, under the tab Server Events, you can choose with Server Events must be forwarded to **Customer.io**.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/eba4247-SCR-20240726-ojws.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/eba4247-SCR-20240726-ojws.png" />
 
 (Optional) Events names can be overridden to match with your tacking plan.
 
@@ -126,7 +81,7 @@ Details on User Properties are accessible [here](engagement-crm#leveraging-user-
 
 ## 4 - Associate users with a Customer.io User ID (SDK implementation)
 
-To accurately map your Customer.IO user ID with your Purchasely user ID, you need to set the appropriate attribute in the Purchasely SDK. You can also setup a user email if needed.  
+To accurately map your Customer.IO user ID with your Purchasely user ID, you need to set the appropriate attribute in the Purchasely SDK. You can also setup a user email if needed.\
 Look at [Customer.IO Documentation](https://customer.io/docs/) to retrieve the mentioned properties.
 
 ```swift Swift
