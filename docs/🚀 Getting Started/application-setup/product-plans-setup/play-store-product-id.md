@@ -30,55 +30,25 @@ The Play Store Product ID of your plan can be found in the Play Store Console an
 
 In the Play Store, the subscription objects are currently structured as shown below:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/315b6ee-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/315b6ee-image.png" />
 
 To fetch the `Play Store Product ID`, you have to login to the [Google Play Console](https://play.google.com/console/developers/android/app?pli=1), choose the name of your app in the Home screen, then navigate to side pane, 
 
-**Monetise** -> **Products** -> **Subscriptions** -> Click the **Subscription ** that contains the [base plan](https://start.purchasely.com/docs/play-store-configuring-in-app-subscriptions) you have created and then in the following screen, you will find a list as shown below. 
+**Monetise** -> **Products** -> **Subscriptions** -> Click the **Subscription** that contains the [base plan](https://start.purchasely.com/docs/play-store-configuring-in-app-subscriptions) you have created and then in the following screen, you will find a list as shown below. 
 
  Copy the `Product ID`and the `Base plan ID`
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/d32e5cf-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/d32e5cf-image.png" />
 
 And paste the `Product ID` and `base plan ID` in the [Purchasely console](https://start.purchasely.com/docs/product-plans-setup). 
 
 ![](https://files.readme.io/4273c5d-image.png)
 
 > 👍 Introductory Offer
-> 
+>
 > You don't have to declare anything in the Purchasely console regarding the offer plan. Offer type= New customer acquisition. 
-> 
-> [block:image]{"images":[{"image":["https://files.readme.io/dd8498c-image.png",null,""],"align":"center","border":true}]}[/block]
+>
+> <Image align="center" className="border" border={true} src="https://files.readme.io/dd8498c-image.png" />
 
 <br />
 
@@ -88,45 +58,15 @@ To do a retention or winback campaign for Android users, you have to create a pr
 
 To fetch the offer id, you have to login to the [Google Play Console](https://play.google.com/console/developers/android/app?pli=1), choose the name of the app, then navigate to side pane, 
 
-**Monetise** -> **Products** ->**Subscriptions** -> Click the **Subscription ** that contains the [base plan](https://start.purchasely.com/docs/play-store-configuring-in-app-subscriptions) you have created and then in the following screen, you will find a list as shown below. 
+**Monetise** -> **Products** ->**Subscriptions** -> Click the **Subscription** that contains the [base plan](https://start.purchasely.com/docs/play-store-configuring-in-app-subscriptions) you have created and then in the following screen, you will find a list as shown below. 
 
 Copy the `Offer plan ID`
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/c0b957a-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/c0b957a-image.png" />
 
 Paste the [Offer ID](https://start.purchasely.com/docs/retention-winback) in the Purchasely console
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/7e577a9-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/7e577a9-image.png" />
 
 # In-App Purchases
 
@@ -136,23 +76,8 @@ To fetch the plan id of the In-App Purchases you created, you have to login to t
 
 Copy the `Product ID` of the plan 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/738c0db-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/738c0db-image.png" />
 
 And paste it in the Purchasely console and **Save**.
 
-[block:image]{"images":[{"image":["https://files.readme.io/998bfd3-image.png",null,null],"align":"center","border":true}]}[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/998bfd3-image.png" />
