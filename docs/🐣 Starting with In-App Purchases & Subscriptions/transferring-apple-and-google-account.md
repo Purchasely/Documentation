@@ -22,22 +22,7 @@ In both cases, we expect 5-10 mins of delay in getting the service back once the
 
 As far as I checked the console, you are using storekit 1, so all you have to do is check if this matches with the Apple App store configuration in the New account. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/518bcb7fc7294c0103a3877149e792441cfe27ca5b5f9c8648f3812fb6037ca5-image.png",
-        null,
-        null
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/518bcb7fc7294c0103a3877149e792441cfe27ca5b5f9c8648f3812fb6037ca5-image.png" />
 
 Most importantly, please check if the new account in Apple has paid app agreement signed and accepted. Without this the users will not be able to see the price in the paywalls. 
 
