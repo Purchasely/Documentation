@@ -15,8 +15,8 @@ next:
 ---
 Product not found iOS
 
-- sign paid apps agreement
+* sign paid apps agreement
 
 Purchase validation iOS
 
-- Not in simulator
+* Not in simulator
