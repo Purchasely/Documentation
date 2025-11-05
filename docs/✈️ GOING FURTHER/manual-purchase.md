@@ -1,0 +1,12 @@
+---
+title: Triggering manually In-App Purchases
+excerpt: ''
+deprecated: false
+hidden: true
+metadata:
+  title: ''
+  description: ''
+  robots: index
+next:
+  description: ''
+---
