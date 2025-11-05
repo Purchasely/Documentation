@@ -60,25 +60,10 @@ A sandbox purchase is a type of simulated transaction used in app development fo
 
 In the Apple StoreKit and Google Play Billing sandbox environment, subscription renewals happen more frequently to allow for rapid testing. Here are the time limitations for sandbox subscriptions:
 
-- **Monthly Subscription**: Renews every 5 minutes, up to a maximum of 6 renewals.
-- **Yearly Subscription**: Renews every 30 minutes, up to a maximum of 6 renewals.
+* **Monthly Subscription**: Renews every 5 minutes, up to a maximum of 6 renewals.
+* **Yearly Subscription**: Renews every 30 minutes, up to a maximum of 6 renewals.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/e97f469-image.jpeg",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/e97f469-image.jpeg" />
 
 # How to Cancel Sandbox Purchases
 
@@ -91,8 +76,8 @@ To cancel a sandbox subscription on Apple StoreKit:
 1. **Open the App Store**: On your test device, open the App Store.
 2. **Sign In**: Ensure you are signed in with your sandbox test account.
 3. **Manage Subscriptions**:
-   - Tap on your profile icon in the top right corner.
-   - Go to "Subscriptions".
+   * Tap on your profile icon in the top right corner.
+   * Go to "Subscriptions".
 4. **Cancel Subscription**: Find the subscription you want to cancel and tap "Cancel Subscription".
 
 ## Google Play Billing
@@ -104,6 +89,6 @@ To cancel a sandbox subscription on Google Play Billing:
 1. **Open Google Play Store**: On your test device, open the Google Play Store app.
 2. **Sign In**: Ensure you are signed in with your test account.
 3. **Manage Subscriptions**:
-   - Tap on the menu icon (three horizontal lines) in the top left corner.
-   - Select "Subscriptions".
+   * Tap on the menu icon (three horizontal lines) in the top left corner.
+   * Select "Subscriptions".
 4. **Cancel Subscription**: Find the subscription you want to cancel and tap "Cancel".
