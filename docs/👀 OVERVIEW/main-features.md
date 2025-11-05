@@ -16,14 +16,14 @@ next:
 ---
 # Subscription infrastructure
 
-Purchasely Cloud Platform can be used to process in-app transactions & manage subscribers entitlements. It manages all types of in-app purchases: _renewing subscriptions_, _non renewing subscriptions_, _consumables_ and _non-consumables_.
+Purchasely Cloud Platform can be used to process in-app transactions & manage subscribers entitlements. It manages all types of in-app purchases: *renewing subscriptions*, *non renewing subscriptions*, *consumables* and *non-consumables*.
 
 The Purchasely SDK is compatible with:
 
-- StoreKit 1, StoreKit 2 (App Store)
-- Google Billing v4, v5 and v6 (Play Store)
-- Huawei AppGallery HMS (Huawei Mobile Services)
-- Amazon Appstore Billing
+* StoreKit 1, StoreKit 2 (App Store)
+* Google Billing v4, v5 and v6 (Play Store)
+* Huawei AppGallery HMS (Huawei Mobile Services)
+* Amazon Appstore Billing
 
 # No-code native Screen & Paywall Builder
 
@@ -62,10 +62,10 @@ This avoids the long and painful process of managing entitlements & implementing
 
 Purchasely Cloud Platform can be natively integrated with 20 different 3rd-party platforms:
 
-- MMPs: Adjust, Appsflyer, Branch
-- Analytics: Amplitude, Clevertap, Google Analytics for Firebase, Mixpanel, mParticle, Piano (ex AT-Internet)
-- Mobile Engagement Platforms: Airship, Braze, Batch, Clevertap, Customer.io, Iterable, MoEngage, One Signal, Brevo (ex Sendinblue)
-- and other platforms such as Firebase, Segment, Slack
+* MMPs: Adjust, Appsflyer, Branch
+* Analytics: Amplitude, Clevertap, Google Analytics for Firebase, Mixpanel, mParticle, Piano (ex AT-Internet)
+* Mobile Engagement Platforms: Airship, Braze, Batch, Clevertap, Customer.io, Iterable, MoEngage, One Signal, Brevo (ex Sendinblue)
+* and other platforms such as Firebase, Segment, Slack
 
 # Retention & win-back automations
 
