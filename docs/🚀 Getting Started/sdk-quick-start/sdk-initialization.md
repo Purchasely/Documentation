@@ -173,16 +173,16 @@ The parameter `runningMode` allows you to choose between the `full` mode and the
 [More details on the SDK running modes.](running-modes)
 
 > 📘 This call is mandatory
-> 
-> Ensure that `Purchasely.start()` is **the first method executed** by your application.  
+>
+> Ensure that `Purchasely.start()` is **the first method executed** by your application.\
 > This process does not block the main thread, allowing you to call other SDK methods immediately after invoking this method.
 
 The following operations occur during initialization (non-exhaustive list):
 
-- Fetching your [products and plans](product-plans-setup).
-- Retrieving one-time purchases with StoreKit (Apple) or Play Billing (Google).
-- Retrieving subscriptions and related offers with StoreKit (Apple) or Play Billing (Google).
-- Fetching current and past subscriptions from the Purchasely platform (not executed every time, thanks to a caching system).
+* Fetching your [products and plans](product-plans-setup).
+* Retrieving one-time purchases with StoreKit (Apple) or Play Billing (Google).
+* Retrieving subscriptions and related offers with StoreKit (Apple) or Play Billing (Google).
+* Fetching current and past subscriptions from the Purchasely platform (not executed every time, thanks to a caching system).
 
 If you depend on any of this information at the start, you must wait for the [callback](#callback-on-initialization) to be triggered.
 
@@ -192,22 +192,7 @@ If you depend on any of this information at the start, you must wait for the [ca
 
 You can find your API Key in the section [App settings / Backend & SDK configuration](https://console.purchasely.io/settings?step=backend-sdk) of the Purchasely Console and copy it by clicking on the Copy button.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/92ea305-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/92ea305-image.png" />
 
 <br />
 
@@ -365,9 +350,9 @@ public class YourApplication extends  Application {
 
 On Android, you must decide which store you want to use, either:
 
-- Google Play Store
-- Amazon App Store
-- Huawei App Gallery
+* Google Play Store
+* Amazon App Store
+* Huawei App Gallery
 
 You can use multiple at the same time, but the first one available from the list you provide will be used by the SDK.
 
@@ -381,12 +366,12 @@ Each store has its own dependency that you must install. Read our [installation 
 
 ## Callback on initialization
 
-If you **rely on a specific user subscription status**, such as eligibility for an introductory offer or current active subscription, **wait for the start method callback**. At that point, the SDK will have gathered all the necessary information to provide an accurate answer.  
+If you **rely on a specific user subscription status**, such as eligibility for an introductory offer or current active subscription, **wait for the start method callback**. At that point, the SDK will have gathered all the necessary information to provide an accurate answer.\
 This **also applies when you want to display a placement** with an [Audience](segmenting-your-user-base) based on current or past subscription status.
 
 Otherwise, you can [display a screen](displaying-screens) without waiting, as the SDK will automatically update the screen displayed when all necessary information about pricing and offers for your plans have been fetched.
 
 The callback returns two values:
 
-- `success`:** true | false** to indicate whether the SDK was initialized successfully and whether the configuration is correct. If it returns false, you can still use Purchasely SDK.
-- `error`: Indicates the specific error that may have occurred when the `success` value is false.
+* `success`: **true | false** to indicate whether the SDK was initialized successfully and whether the configuration is correct. If it returns false, you can still use Purchasely SDK.
+* `error`: Indicates the specific error that may have occurred when the `success` value is false.
