@@ -12,116 +12,590 @@ next:
 ---
 # Events properties
 
-[block:parameters]
-{
-  "data": {
-    "h-0": "Attribute",
-    "h-1": "Mandatory",
-    "h-2": "Description",
-    "0-0": "`sdk_version`",
-    "0-1": "Yes",
-    "0-2": "**string**  \n  \nContains the SDK version.  \n  \nThis attribute will be filled for all events.",
-    "1-0": "`event_name`",
-    "1-1": "Yes",
-    "1-2": "**string**  \n  \nContains the name of the event.  \n[See the full list of SDK / UI Events](ui-sdk-events-list)",
-    "2-0": "`event_created_at_ms`",
-    "2-1": "Yes",
-    "2-2": "**int**  \n_in milliseconds since the Epoch_  \n  \nContains the date which the event was sent the first time. In case of retry that attribute will still be set with the time at the first try.",
-    "3-0": "`event_created_at`",
-    "3-1": "Yes",
-    "3-2": "**string**  \n_in ISO 8601_  \n  \nContains the date which the event was sent the first time. In case of retry that attribute will still be set with the time at the first try.",
-    "4-0": "`user_id`",
-    "4-1": "No",
-    "4-2": "**string**  \n  \nContains the `user_id` associated to the <<glossary:Connected User>> when they are logged-in.  \n  \nThis attribute or the `anonymous_user_id` will be filled for all events",
-    "5-0": "`anonymous_user_id`",
-    "5-1": "No",
-    "5-2": "**string**  \n  \nContains the `anonymous_user_id` associated to the <<glossary:Anonymous User>> when they are not logged-in (anonymous then)  \n  \nThis attribute or the `user_id` will be filled for all events",
-    "6-0": "`displayed_presentation`",
-    "6-1": "No",
-    "6-2": "**string**  \n  \nContains the Presentation ID (field `ID` in the Purchasely Screen & Paywall Builder) that was displayed to the user.  \n  \n_This attribute will be filled for every [UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)_",
-    "7-0": "`placement_id`",
-    "7-1": "No",
-    "7-2": "**string**  \n  \nContains the Placement ID from where the presentation was triggered if any.  \n  \n_This attribute will only be filled for [UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)_",
-    "8-0": "`audience_id`",
-    "8-1": "No",
-    "8-2": "**string**  \n  \nContains the Audience ID matched for the user.  \n  \n_This attribute will only be filled for [UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) _",
-    "9-0": "`ab_test_id`",
-    "9-1": "No",
-    "9-2": "**string**  \n  \nContains the AB test ID if the Event was triggered within an A/B Test.  \n  \n_This attribute will only be filled for [UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)_",
-    "10-0": "`ab_test_variant_id`",
-    "10-1": "No",
-    "10-2": "**string**  \n  \nContains the AB test variant ID if the Event was triggered within an A/B Test.  \n  \n_This attribute will only be filled for [UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) _",
-    "11-0": "`content_id`",
-    "11-1": "No",
-    "11-2": "**string**  \n  \nContains the [Content ID](associating-content) provided by the App.",
-    "12-0": "`deeplink_identifier`",
-    "12-1": "No",
-    "12-2": "**string**  \n  \nContains the deeplink used to display the Screen if any.  \n  \n_This attribute will only be filled for [UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) _",
-    "13-0": "`purchasable_plans`",
-    "13-1": "No",
-    "13-2": "**Array of Plans** (object described [here](#plans))  \n  \nContains all the Plans that are displayed in the Screen.  \n  \n_This attribute will be filled for every [UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)_",
-    "14-0": "`selected_plan`",
-    "14-1": "No",
-    "14-2": "**string**  \n  \nContains the Plan ID of the selected Plan if any (field `ID` of the Plan in the Purchasely Console)  \n  \n_This attribute will only be filled for [UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)_",
-    "15-0": "`previous_selected_plan`",
-    "15-1": "No",
-    "15-2": "**string**  \n  \nContains the Plan ID of the previously selected Plan if any (field `ID` of the Plan in the Purchasely Console)  \n  \n_This attribute will only be filled for the event `PLAN_SELECTED`_ ",
-    "16-0": "`link_identifier`",
-    "16-1": "No",
-    "16-2": "**string**  \n  \nContains the url of the link the user just tapped on.  \n  \n_This attribute will only be filled for the event `LINK_OPENED` _",
-    "17-0": "`carousels`",
-    "17-1": "No",
-    "17-2": "**Array of carousels** (object described [here](#carousels))  \n  \nContains all attributes for all displayed carousels in the Screen.  \n  \n_This attribute will only be filled for [UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)  if the Screen contains at least one carousel _",
-    "18-0": "`language`",
-    "18-1": "No",
-    "18-2": "**string**  \n_in ISO 639-1_  \n  \nContains the language used in the displayed Screen.  \n  \n_This attribute will be filled for every [UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)_",
-    "19-0": "`device`",
-    "19-1": "Yes",
-    "19-2": "string  \n  \nContains the device model used by the user.",
-    "20-0": "`os_version`",
-    "20-1": "Yes",
-    "20-2": "**string**  \n  \nContains the OS version running on the user's device.",
-    "21-0": "`type`",
-    "21-1": "Yes",
-    "21-2": "**string**  \n  \nContains the type of device used by the user.  \nPossible values:  \n  \n- `PHONE`\n- `TABLET`\n- `TV`",
-    "22-0": "`error_message`",
-    "22-1": "No",
-    "22-2": "**string**  \n  \nContains the error message the store returned when trying the action.  \n  \n\\_That attribute will be filled for the events:  \n  \n- `IN_APP_PURCHASE_FAILED`\n- `IN_APP_NOT_AVAILABLE`\n- `RESTORE_FAILED`\n- `RECEIPT_FAILED` \\_",
-    "23-0": "`plan`",
-    "23-1": "No",
-    "23-2": "**string**  \n  \nContains the Plan ID of the Plan associated to the action if any (field `ID` of the Plan in the Purchasely Console)  \n  \n\\_This attribute will be filled for events:  \n  \n- [In-App Purchase Flow](ui-sdk-events-list##in-app-purchase-flow-events)\n- [Restore](ui-sdk-events-list#restore-events)\n- [Receipts](ui-sdk-events-list#receipts-events)\n- `SUBSCRIPTION_CANCELLED_TAPPED`\n- `SUBSCRIPTION_PLAN_TAPPED`",
-    "24-0": "`selected_presentation`",
-    "24-1": "No",
-    "24-2": "**string**  \n  \nContains the currently selected Screen ID (field `ID` in the Screen & Paywall Builder).  \n  \n_This attribute will be filled for `OPEN_PRESENTATION` and `SELECTED_PRESENTATION`_",
-    "25-0": "`previous_selected_presentation`",
-    "25-1": "No",
-    "25-2": "**string**  \n  \nContains the previously selected Screen ID (field `ID` in the Screen & Paywall Builder).  \n  \n_This attribute will be filled for `OPEN_PRESENTATION` and `SELECTED_PRESENTATION`_",
-    "26-0": "`selected_product`",
-    "26-1": "No",
-    "26-2": "**string**  \n  \nContains the Product ID that is selected.  \n  \n_This attribute will be filled for `SUBSCRIPTION_DETAILS_VIEWED` event._",
-    "27-0": "`plan_change_type`",
-    "27-1": "No",
-    "27-2": "**string**  \n  \nContains the type of plan change the user did.  \nPossible values:  \n  \n- `CROSSGRADE`\n- `DOWNGRADE`\n- `UPGRADE`_This attribute will be filled for `SUBSCRIPTION_PLAN_TAPPED` event_",
-    "28-0": "`running_subscriptions`",
-    "28-1": "No",
-    "28-2": "**Array of string**  \n  \nContains pairs of Plan ID and Product ID for each active subscriptions the users has.  \n  \n_This attribute will be filled for every SDK events_",
-    "29-0": "`cancellation_reason_id`",
-    "29-1": "No",
-    "29-2": "**string**  \n  \nContains the ID of the reason the user answered through the cancellation survey triggered with Purchasely.  \n  \n_That attribute will be filled for `CANCELLATION_REASON_PUBLISHED` event_",
-    "30-0": "`cancellation_reason`",
-    "30-1": "No",
-    "30-2": "**string**  \n  \nContains the reason the user answered through the [cancellation survey](cancellation-survey) displayed by the Purchasely SDK.  \n  \n_This attribute will be filled for `CANCELLATION_REASON_PUBLISHED` event_"
-  },
-  "cols": 3,
-  "rows": 31,
-  "align": [
-    "left",
-    "left",
-    "left"
-  ]
-}
-[/block]
+<Table align={["left","left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left" }}>
+        Attribute
+      </th>
 
+      <th style={{ textAlign: "left" }}>
+        Mandatory
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Description
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `sdk_version`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Yes
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the SDK version.  
+
+        This attribute will be filled for all events.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `event_name`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Yes
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the name of the event.\
+        [See the full list of SDK / UI Events](ui-sdk-events-list)
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `event_created_at_ms`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Yes
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **int**\
+        *in milliseconds since the Epoch*  
+
+        Contains the date which the event was sent the first time. In case of retry that attribute will still be set with the time at the first try.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `event_created_at`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Yes
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**\
+        *in ISO 8601*  
+
+        Contains the date which the event was sent the first time. In case of retry that attribute will still be set with the time at the first try.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `user_id`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the `user_id` associated to the <Glossary>Connected User</Glossary> when they are logged-in.  
+
+        This attribute or the `anonymous_user_id` will be filled for all events
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `anonymous_user_id`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the `anonymous_user_id` associated to the <Glossary>Anonymous User</Glossary> when they are not logged-in (anonymous then)  
+
+        This attribute or the `user_id` will be filled for all events
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `displayed_presentation`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the Presentation ID (field `ID` in the Purchasely Screen & Paywall Builder) that was displayed to the user.  
+
+        *This attribute will be filled for every[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `placement_id`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the Placement ID from where the presentation was triggered if any.  
+
+        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `audience_id`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the Audience ID matched for the user.  
+
+        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) *
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `ab_test_id`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the AB test ID if the Event was triggered within an A/B Test.  
+
+        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `ab_test_variant_id`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the AB test variant ID if the Event was triggered within an A/B Test.  
+
+        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) *
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `content_id`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the [Content ID](associating-content) provided by the App.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `deeplink_identifier`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the deeplink used to display the Screen if any.  
+
+        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) *
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `purchasable_plans`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        * \*Array of Plans\*\* (object described [here](#plans))  
+
+        Contains all the Plans that are displayed in the Screen.  
+
+        *This attribute will be filled for every[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `selected_plan`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the Plan ID of the selected Plan if any (field `ID` of the Plan in the Purchasely Console)  
+
+        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `previous_selected_plan`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the Plan ID of the previously selected Plan if any (field `ID` of the Plan in the Purchasely Console)  
+
+        *This attribute will only be filled for the event`PLAN_SELECTED`* 
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `link_identifier`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the url of the link the user just tapped on.  
+
+        *This attribute will only be filled for the event`LINK_OPENED` *
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `carousels`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        * \*Array of carousels\*\* (object described [here](#carousels))  
+
+        Contains all attributes for all displayed carousels in the Screen.  
+
+        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)  if the Screen contains at least one carousel *
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `language`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**\
+        *in ISO 639-1*  
+
+        Contains the language used in the displayed Screen.  
+
+        *This attribute will be filled for every[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `device`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Yes
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        string  
+
+        Contains the device model used by the user.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `os_version`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Yes
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the OS version running on the user's device.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `type`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Yes
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the type of device used by the user.\
+        Possible values:  
+
+        * `PHONE`
+        * `TABLET`
+        * `TV`
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `error_message`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the error message the store returned when trying the action.  
+
+        * That attribute will be filled for the events:  
+        * `IN_APP_PURCHASE_FAILED`
+        * `IN_APP_NOT_AVAILABLE`
+        * `RESTORE_FAILED`
+        * `RECEIPT_FAILED` \_
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `plan`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the Plan ID of the Plan associated to the action if any (field `ID` of the Plan in the Purchasely Console)  
+
+        * This attribute will be filled for events:  
+        * [In-App Purchase Flow](ui-sdk-events-list##in-app-purchase-flow-events)
+        * [Restore](ui-sdk-events-list#restore-events)
+        * [Receipts](ui-sdk-events-list#receipts-events)
+        * `SUBSCRIPTION_CANCELLED_TAPPED`
+        * `SUBSCRIPTION_PLAN_TAPPED`
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `selected_presentation`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the currently selected Screen ID (field `ID` in the Screen & Paywall Builder).  
+
+        *This attribute will be filled for`OPEN_PRESENTATION` and `SELECTED_PRESENTATION`*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `previous_selected_presentation`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the previously selected Screen ID (field `ID` in the Screen & Paywall Builder).  
+
+        *This attribute will be filled for`OPEN_PRESENTATION` and `SELECTED_PRESENTATION`*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `selected_product`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the Product ID that is selected.  
+
+        *This attribute will be filled for`SUBSCRIPTION_DETAILS_VIEWED` event.*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `plan_change_type`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the type of plan change the user did.\
+        Possible values:  
+
+        * `CROSSGRADE`
+        * `DOWNGRADE`
+        * `UPGRADE`*This attribute will be filled for`SUBSCRIPTION_PLAN_TAPPED` event*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `running_subscriptions`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **Array of string**  
+
+        Contains pairs of Plan ID and Product ID for each active subscriptions the users has.  
+
+        *This attribute will be filled for every SDK events*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `cancellation_reason_id`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the ID of the reason the user answered through the cancellation survey triggered with Purchasely.  
+
+        *That attribute will be filled for`CANCELLATION_REASON_PUBLISHED` event*
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `cancellation_reason`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+
+        Contains the reason the user answered through the [cancellation survey](cancellation-survey) displayed by the Purchasely SDK.  
+
+        *This attribute will be filled for`CANCELLATION_REASON_PUBLISHED` event*
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 <br />
 
@@ -129,89 +603,372 @@ next:
 
 # Plans
 
-[block:parameters]
-{
-  "data": {
-    "h-0": "Attribute",
-    "h-1": "Description",
-    "0-0": "`type`",
-    "0-1": "**string**  \n  \nContains the string representation of the type of plan of one of the available plan.  \n  \nPossible values:  \n  \n- `CONSUMABLE`\n- `NON_CONSUMABLE`\n- `NON_CONSUMABLE`\n- `AUTO_RENEWING_SUBSCRIPTION`\n- `NON_RENEWING_SUBSCRIPTION`",
-    "1-0": "`purchasely_plan_id`",
-    "1-1": "**string**  \n  \nContains the Plan ID of one of the purchasable Plan  \n(field `ID` of the Plan in the Purchasely Console)",
-    "2-0": "`store`",
-    "2-1": "**string**  \n  \nContains the store on which is available one of the available plan.",
-    "3-0": "`store_country`",
-    "3-1": "**string**  \n_in ISO 3166_  \n  \nContains the store country to which the user store account is associated  \n_E.g.: US for an iOS user which Apple ID was created on the US App Store_",
-    "4-0": "`store_product_id`",
-    "4-1": "**string**  \n  \nContains the Product ID associated to the In-App Purchase or In-App Subscription in the store console (App Store Connect or Google Play Console)",
-    "5-0": "`price_in_customer_currency`",
-    "5-1": "**float**  \n  \nContains the standard price in the customer currency for one the available plan.",
-    "6-0": "`customer_currency`",
-    "6-1": "**string**  \n_in ISO 4217_  \n  \nContains the customer currency code.",
-    "7-0": "`period`",
-    "7-1": "**string**  \n  \nContains the string representation of the standard period of one of the available plan  \n  \nPossible values:  \n  \n- `DAY`\n- `WEEK`\n- `MONTH`\n- `YEAR`This attribute will be filled only if the \"type\" of the corresponding Plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION`",
-    "8-0": "`duration`",
-    "8-1": "**int**  \n  \nContains the string representation of the number \"period\" of the standard periodicity of one of the available Plan. To get the standard periodicity of the plan you have to concatenate \"duration\" and \"period\".  \n  \nThis attribute will be filled only if the \"type\" of the corresponding plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION`",
-    "9-0": "`intro_price_in_customer_currency`",
-    "9-1": "**float**  \n  \nContains the introductory offer price in the customer currency for one the available Plan.  \n  \nThat attribute will be filled only if the Plan has a introductory offer available.",
-    "10-0": "`intro_period`",
-    "10-1": "**string**  \n  \nContains the string representation of the introductory offer period of one of the available plan  \n  \nPossible values:  \n  \n- `DAY`\n- `WEEK`\n- `MONTH`\n- `YEAR`This attribute will be filled only if the \"type\" of the corresponding Plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION` only if the Plan has an introductory offer available.",
-    "11-0": "`intro_duration`",
-    "11-1": "**int**  \n  \nContains the string representation of the number \"period\" of the introductory offer periodicity of one of the available Plan. To get the introductory offer periodicity of the Plan you have to concatenate \"duration\" and \"period\".  \n  \nThis attribute will be filled only if the \"type\" of the corresponding Plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION`\" only if the Plan has an introductory offer available.",
-    "12-0": "`has_free_trial`",
-    "12-1": "**bool**  \n  \nTrue if a free trial is available for the plan.",
-    "13-0": "`free_trial_period`",
-    "13-1": "**string**  \n  \nContains the string representation of the free trial offer period of one of the available Plans  \n  \nPossible values:  \n  \n- `DAY`\n- `WEEK`\n- `MONTH`\n- `YEAR`This attribute will be filled only if the \"type\" of the corresponding Plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION` only if the Plan has an free trial offer available.",
-    "14-0": "`free_trial_duration`",
-    "14-1": "**int**  \n  \nContains the string representation of the number \"period\" of the free trial offer periodicity of one of the available Plan. To get the free trial periodicity of the plan you have to concatenate \"duration\" and \"period\".  \n  \nThis attribute will be filled only if the \"type\" of the corresponding Plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION` only if the Plan has an free trial offer available.",
-    "15-0": "`discount_referent`",
-    "15-1": "**string**  \n  \nContains the Plan ID of the Plan that is used on the presentation to make a pricing comparison.",
-    "16-0": "`discount_percentage_comparison_to_referent`",
-    "16-1": "**string**  \n  \nContains the percentage of discount the Plan offers in comparison to the referent.",
-    "17-0": "`discount_price_comparison_to_referent`",
-    "17-1": "**float**  \n  \nContains the price difference between, the Plan and the referent.",
-    "18-0": "`is_default`",
-    "18-1": "**bool**  \n  \nTrue if the Plan is selected by default in the Screen."
-  },
-  "cols": 2,
-  "rows": 19,
-  "align": [
-    "left",
-    "left"
-  ]
-}
-[/block]
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Attribute
+      </th>
 
+      <th>
+        Description
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        `type`
+      </td>
+
+      <td>
+        **string**  
+
+        Contains the string representation of the type of plan of one of the available plan.  
+
+        Possible values:  
+
+        * `CONSUMABLE`
+        * `NON_CONSUMABLE`
+        * `NON_CONSUMABLE`
+        * `AUTO_RENEWING_SUBSCRIPTION`
+        * `NON_RENEWING_SUBSCRIPTION`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `purchasely_plan_id`
+      </td>
+
+      <td>
+        **string**  
+
+        Contains the Plan ID of one of the purchasable Plan\
+        (field `ID` of the Plan in the Purchasely Console)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `store`
+      </td>
+
+      <td>
+        **string**  
+
+        Contains the store on which is available one of the available plan.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `store_country`
+      </td>
+
+      <td>
+        **string**\
+        *in ISO 3166*  
+
+        Contains the store country to which the user store account is associated\
+        *E.g.: US for an iOS user which Apple ID was created on the US App Store*
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `store_product_id`
+      </td>
+
+      <td>
+        **string**  
+
+        Contains the Product ID associated to the In-App Purchase or In-App Subscription in the store console (App Store Connect or Google Play Console)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `price_in_customer_currency`
+      </td>
+
+      <td>
+        **float**  
+
+        Contains the standard price in the customer currency for one the available plan.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `customer_currency`
+      </td>
+
+      <td>
+        **string**\
+        *in ISO 4217*  
+
+        Contains the customer currency code.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `period`
+      </td>
+
+      <td>
+        **string**  
+
+        Contains the string representation of the standard period of one of the available plan  
+
+        Possible values:  
+
+        * `DAY`
+        * `WEEK`
+        * `MONTH`
+        * `YEAR`This attribute will be filled only if the "type" of the corresponding Plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `duration`
+      </td>
+
+      <td>
+        **int**  
+
+        Contains the string representation of the number "period" of the standard periodicity of one of the available Plan. To get the standard periodicity of the plan you have to concatenate "duration" and "period".  
+
+        This attribute will be filled only if the "type" of the corresponding plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION`
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `intro_price_in_customer_currency`
+      </td>
+
+      <td>
+        **float**  
+
+        Contains the introductory offer price in the customer currency for one the available Plan.  
+
+        That attribute will be filled only if the Plan has a introductory offer available.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `intro_period`
+      </td>
+
+      <td>
+        **string**  
+
+        Contains the string representation of the introductory offer period of one of the available plan  
+
+        Possible values:  
+
+        * `DAY`
+        * `WEEK`
+        * `MONTH`
+        * `YEAR`This attribute will be filled only if the "type" of the corresponding Plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION` only if the Plan has an introductory offer available.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `intro_duration`
+      </td>
+
+      <td>
+        **int**  
+
+        Contains the string representation of the number "period" of the introductory offer periodicity of one of the available Plan. To get the introductory offer periodicity of the Plan you have to concatenate "duration" and "period".  
+
+        This attribute will be filled only if the "type" of the corresponding Plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION`" only if the Plan has an introductory offer available.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `has_free_trial`
+      </td>
+
+      <td>
+        **bool**  
+
+        True if a free trial is available for the plan.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `free_trial_period`
+      </td>
+
+      <td>
+        **string**  
+
+        Contains the string representation of the free trial offer period of one of the available Plans  
+
+        Possible values:  
+
+        * `DAY`
+        * `WEEK`
+        * `MONTH`
+        * `YEAR`This attribute will be filled only if the "type" of the corresponding Plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION` only if the Plan has an free trial offer available.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `free_trial_duration`
+      </td>
+
+      <td>
+        **int**  
+
+        Contains the string representation of the number "period" of the free trial offer periodicity of one of the available Plan. To get the free trial periodicity of the plan you have to concatenate "duration" and "period".  
+
+        This attribute will be filled only if the "type" of the corresponding Plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION` only if the Plan has an free trial offer available.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `discount_referent`
+      </td>
+
+      <td>
+        **string**  
+
+        Contains the Plan ID of the Plan that is used on the presentation to make a pricing comparison.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `discount_percentage_comparison_to_referent`
+      </td>
+
+      <td>
+        **string**  
+
+        Contains the percentage of discount the Plan offers in comparison to the referent.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `discount_price_comparison_to_referent`
+      </td>
+
+      <td>
+        **float**  
+
+        Contains the price difference between, the Plan and the referent.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `is_default`
+      </td>
+
+      <td>
+        **bool**  
+
+        True if the Plan is selected by default in the Screen.
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 <br />
 
 # Carousels
 
-[block:parameters]
-{
-  "data": {
-    "h-0": "Attribute",
-    "h-1": "Description",
-    "0-0": "`selected_slide`",
-    "0-1": "**int**  \n  \nContains the number of the current selected slide.",
-    "1-0": "`number_of_slides`",
-    "1-1": "**int**  \n  \nContains the total number of slides of the carousel.",
-    "2-0": "`is_carousel_auto_playing`",
-    "2-1": "**bool**  \n  \n`true` if the carousel's slides switch automatically.",
-    "3-0": "`default_slide`",
-    "3-1": "**int**  \n  \nContains the number of the default selected slide.",
-    "4-0": "`previous_slide`",
-    "4-1": "**int**  \n  \nContains the number of the previously selected slide.  \n  \nThat attribute will only be filled for the event `CAROUSEL_SLIDE_SWIPED`."
-  },
-  "cols": 2,
-  "rows": 5,
-  "align": [
-    "left",
-    "left"
-  ]
-}
-[/block]
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Attribute
+      </th>
 
+      <th>
+        Description
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        `selected_slide`
+      </td>
+
+      <td>
+        **int**  
+
+        Contains the number of the current selected slide.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `number_of_slides`
+      </td>
+
+      <td>
+        **int**  
+
+        Contains the total number of slides of the carousel.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `is_carousel_auto_playing`
+      </td>
+
+      <td>
+        **bool**  
+
+        `true` if the carousel's slides switch automatically.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `default_slide`
+      </td>
+
+      <td>
+        **int**  
+
+        Contains the number of the default selected slide.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `previous_slide`
+      </td>
+
+      <td>
+        **int**  
+
+        Contains the number of the previously selected slide.  
+
+        That attribute will only be filled for the event `CAROUSEL_SLIDE_SWIPED`.
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 <br />
 
@@ -219,27 +976,57 @@ next:
 
 The following properties are only set for the events `OPTIONS_SELECTED` and `OPTIONS_VALIDATED` which are triggered when users interact with a Survey (Multiple Choice Component) or a Switch Component.
 
-[block:parameters]
-{
-  "data": {
-    "h-0": "Attribute",
-    "h-1": "Description",
-    "0-0": "`selected_option_id`",
-    "0-1": "**string**  \n  \nContains the [Survey ID](https://docs.purchasely.com/docs/mcq#1-configuring-the-survey).",
-    "1-0": "`selected_options`",
-    "1-1": "**Array of Strings**  \n  \nContains answers selected (event `OPTIONS_SELECTED`) or validated (event `OPTIONS_VALIDATED`) by the user. The values provided match with the [Answers values](https://docs.purchasely.com/docs/mcq#4-configuring-the-answers-available-and-associated-texts) configured.",
-    "2-0": "`displayed_options`",
-    "2-1": "**Array of Strings**  \n  \nList of Answers values displayed to the user. The values provided match with the [Answers values](https://docs.purchasely.com/docs/mcq#4-configuring-the-answers-available-and-associated-texts)  configured."
-  },
-  "cols": 2,
-  "rows": 3,
-  "align": [
-    "left",
-    "left"
-  ]
-}
-[/block]
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Attribute
+      </th>
 
+      <th>
+        Description
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        `selected_option_id`
+      </td>
+
+      <td>
+        **string**  
+
+        Contains the [Survey ID](https://docs.purchasely.com/docs/mcq#1-configuring-the-survey).
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `selected_options`
+      </td>
+
+      <td>
+        **Array of Strings**  
+
+        Contains answers selected (event `OPTIONS_SELECTED`) or validated (event `OPTIONS_VALIDATED`) by the user. The values provided match with the [Answers values](https://docs.purchasely.com/docs/mcq#4-configuring-the-answers-available-and-associated-texts) configured.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `displayed_options`
+      </td>
+
+      <td>
+        **Array of Strings**  
+
+        List of Answers values displayed to the user. The values provided match with the [Answers values](https://docs.purchasely.com/docs/mcq#4-configuring-the-answers-available-and-associated-texts)  configured.
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 # Payload sample
 
