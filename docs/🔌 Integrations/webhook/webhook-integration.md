@@ -14,7 +14,7 @@ Comment utiliser le webhook par que pour les entitlements (déjà une page dédi
 
 Comment activer les autres events (or ACTIVATE / DEACTIVATE) vers le webhook et lien vers les pages Server Events / Lifecycle Events / Offer Events
 
-- Acknowledgement et que se passe-t-il si on acknowledge pas
-- Gestion des anonymes
-- screenshot de la console de la section Webhook qui explique comment on active / désactive
-- explications (contenu mutualisé avec backend entitlements) sur comment configurer le webhook
+* Acknowledgement et que se passe-t-il si on acknowledge pas
+* Gestion des anonymes
+* screenshot de la console de la section Webhook qui explique comment on active / désactive
+* explications (contenu mutualisé avec backend entitlements) sur comment configurer le webhook
