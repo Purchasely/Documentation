@@ -26,8 +26,8 @@ next:
       title: Control Screen visibility
 ---
 > 🚧 Native UI
-> 
-> Our SDK create Screen with native iOS and Android components, UI Kit and Android Views, for the best performance and compatibility. As such, some limitations may apply with a <<glossary:bridge sdk>>.
+>
+> Our SDK create Screen with native iOS and Android components, UI Kit and Android Views, for the best performance and compatibility. As such, some limitations may apply with a <Glossary>bridge sdk</Glossary>.
 
 Purchasely will provide a native view to display in your application, consequently you can completely customize its behavior and its allocated Screen space to decide for example if you want to display it in full mode or in a pop-in
 
@@ -37,14 +37,14 @@ Purchasely will provide a native view to display in your application, consequent
 
 Purchasely SDK will provide a native [UI View Controller](https://developer.apple.com/documentation/uikit/uiviewcontroller), you can [present](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621380-present) it in the way you like.
 
-The presentation will not respect safe areas, it is up to you to decide if you want to display it below or behind the notch.  
+The presentation will not respect safe areas, it is up to you to decide if you want to display it below or behind the notch.\
 However, the close button is rendered on top of the presentation and as such will respect automatically safe areas
 
 ## Android
 
 Purchasely SDK will provide a native [Android View](https://developer.android.com/reference/android/view/View), you must add it to your layout hierarchy to be visible. You are in full control of its container (another View, a Fragment or an Activity) so you can decide how it will be rendered.
 
-The presentation will not respect insets, it is up to you to decide if you want to display it below or behind the status bar and navigation bar.  
+The presentation will not respect insets, it is up to you to decide if you want to display it below or behind the status bar and navigation bar.\
 However, the close button is rendered on top of the presentation and as such will respect automatically the top inset in portrait mode and right inset in landscape mode.
 
 ## Flutter / React Native
@@ -59,7 +59,7 @@ Purchasely SDK will display a controller (iOS) / activity (android) on top of yo
 
 # Placements
 
-As a general rule, you should always use a <<glossary:Placement>> to display a Purchasely Screen. This allows you to display a different Screen based on an [Audience](segmenting-your-user-base) or an [A/B test](ab-tests) or just change it without updating your code.
+As a general rule, you should always use a <Glossary>Placement</Glossary> to display a Purchasely Screen. This allows you to display a different Screen based on an [Audience](segmenting-your-user-base) or an [A/B test](ab-tests) or just change it without updating your code.
 
 [Learn more about displaying Screen with placements](displaying-screens-placements)
 
@@ -67,7 +67,7 @@ As a general rule, you should always use a <<glossary:Placement>> to display a P
 
 You can pre-fetch a Screen with the method `Purchasely.fetchPresentation()` so that all processing is done before showing it to your user. You also get access to more information like the audience id or ab test variant id of your user for the placement you have requested.
 
-However, we do not advise to pre-fetch all screens at once as an <<glossary:Audience>> is attributed on request based on user attributes or subscription status that may change during the session of the user. Thus, we suggest to pre-fetch at start only your home placement and then fetch the <<glossary:Placement>> of the current touchpoint/Screen of your application when the user navigates.
+However, we do not advise to pre-fetch all screens at once as an <Glossary>Audience</Glossary> is attributed on request based on user attributes or subscription status that may change during the session of the user. Thus, we suggest to pre-fetch at start only your home placement and then fetch the <Glossary>Placement</Glossary> of the current touchpoint/Screen of your application when the user navigates.
 
 Lear more about [pre-fetching](pre-fetching) Screens
 
@@ -79,5 +79,5 @@ If you wish to change the layout of those dialogs or change the content, you can
 
 # Display deeplinks yourself
 
-If you have setup deeplinks with Purchasely, the SDK will automatically display them in a specific UIViewController (iOS) or Activity (Android).  
+If you have setup deeplinks with Purchasely, the SDK will automatically display them in a specific UIViewController (iOS) or Activity (Android).\
 However, you can display a Purchasely Screen yourself inside your own View if you [implement a PLYUIHandler](ui-handler-deeplinks).
