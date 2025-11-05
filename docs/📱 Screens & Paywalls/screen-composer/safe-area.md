@@ -24,22 +24,7 @@ Although the Screen Composer includes a preview section, enabling safe areas wit
 
 You can find **Add safe area on top** and **Add safe area at the bottom** at the Layout level of the Screen Composer. This option is available for all layouts provided in the Screen Composer.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/ea0cb182a038f413edceddac8bdaba29439544a81320c8534ff800b04f1783c6-ScreenRecording2025-10-15at16.28.30-ezgif.com-video-to-gif-converter.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/ea0cb182a038f413edceddac8bdaba29439544a81320c8534ff800b04f1783c6-ScreenRecording2025-10-15at16.28.30-ezgif.com-video-to-gif-converter.gif" />
 
 ***
 
@@ -57,22 +42,7 @@ This feature works based on the screen display mode you have set. You can apply 
 
 Purchasely has [5 display modes](https://docs.purchasely.com/docs/display-mode): Full, Push, Modal, Drawer and Pop-in.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/e195f76fb7f7298280712f5d0abb0d40ca5677d72d33e8059180ebf02d4b99de-ScreenRecording2025-10-15at17.30.56-ezgif.com-video-to-gif-converter.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/e195f76fb7f7298280712f5d0abb0d40ca5677d72d33e8059180ebf02d4b99de-ScreenRecording2025-10-15at17.30.56-ezgif.com-video-to-gif-converter.gif" />
 
 ***
 
@@ -90,23 +60,7 @@ Applies a margin at the bottom of the screen to ensure that elements such as foo
 
 This bottom safe area is applied when the display mode is set to any mode **except Pop-in**. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b80ac5996e8acb4facb51b08964355788303b05b728eb8a33cef62161108581b-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "sizing": "700px",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" width="700px" border={true} src="https://files.readme.io/b80ac5996e8acb4facb51b08964355788303b05b728eb8a33cef62161108581b-image.png" />
 
 <br />
 
@@ -118,46 +72,17 @@ This bottom safe area is applied when the display mode is set to any mode **exce
 
 Here are screenshots of screen rendered before and after applying safe areas on top is applied in full mode. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/cc2ba734b6d764656088cf7c6aa30ebc3c33b2c9a514bbc3c8a80beede9513cd-Docs_prep-3.jpg",
-        "",
-        ""
-      ],
-      "align": "center"
-    }
-  ]
-}
-[/block]
-
+<Image align="center" src="https://files.readme.io/cc2ba734b6d764656088cf7c6aa30ebc3c33b2c9a514bbc3c8a80beede9513cd-Docs_prep-3.jpg" />
 
 <br />
 
-### Safe areas and close / back buttons: 
+### Safe areas and close / back buttons:
 
 The Safe area of the [Close](close-button) and Back buttons always take the safe area into consideration even if you haven't activated it.
 
 If you need to align horizontally a Screen component (such as a progress bar image for instance) with a back button or a Close button, you should activate the safe area on top, and fine-tune the top margin of the Screen first component to align (e.g.: add 20px of top margin to the first component of the Screen)
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/f45e8e846297fe6af5a7eaffb35821ccbc06aa3d5c42ee9d4d4a5d7f5f2d9d84-image.png",
-        null,
-        null
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/f45e8e846297fe6af5a7eaffb35821ccbc06aa3d5c42ee9d4d4a5d7f5f2d9d84-image.png" />
 
 <br />
 
