@@ -1,10 +1,16 @@
 ---
-name: Play Store - Grant access to the Service Account
+name: PlayStoreGrantAccessToTheServiceAccount
 ---
-Grant access to the Service Account under the [Google Play Console](https://play.google.com/console/u/developers/users-and-permissions)\
-*Google Play Console> Users & Permissions > Invite new users*
+<Callout icon="⚠️">
+  Up to 72 hours delay
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/8aea72a-image.png" />
+  Once you **grant access** to the Service Account for your application, it may take **up to 72 hours** for the changes to take effect on Google’s side. During this time, the Service Account will be updated with the proper access rights to the selected applications.
+</Callout>
+
+Grant access to the Service Account under the [Google Play Console](https://play.google.com/console/u/developers/users-and-permissions)  
+_Google Play Console> Users & Permissions > Invite new users_
+
+<Image align="center" border={true} src="https://files.readme.io/8aea72a-image.png" className="border" />
 
 Then complete the 3 following steps
 
@@ -14,9 +20,7 @@ Then complete the 3 following steps
 4. Select it
 5. Apply
 
-<Image alt="Under the tab **App permissions**  select the application corresponding to the desired App Bundle ID" align="center" border={true} src="https://files.readme.io/ed81f52-image.png">
-  Under the tab **App permissions**  select the application corresponding to the desired App Bundle ID
-</Image>
+<Image align="center" alt="Under the tab **App permissions**  select the application corresponding to the desired App Bundle ID" border={true} caption="Under the tab **App permissions**  select the application corresponding to the desired App Bundle ID" src="https://files.readme.io/ed81f52-image.png" />
 
 Once you've clicked on Apply, make sure the following permissions are selected:
 
@@ -24,10 +28,8 @@ Once you've clicked on Apply, make sure the following permissions are selected:
 * [x] View financial data, orders, and cancellation survey responses
 * [x] Manage orders and subscriptions
 
-<Image alt="Select the appropriate permissions then click on Apply" align="center" border={true} src="https://files.readme.io/e12bb41-image.png">
-  Select the appropriate permissions then click on Apply
-</Image>
+<Image align="center" alt="Select the appropriate permissions then click on Apply" border={true} caption="Select the appropriate permissions then click on Apply" src="https://files.readme.io/e12bb41-image.png" />
 
 Finally, click on **Invite user** to grant access to your service account
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/f106fb3-image.png" />
+<Image align="center" border={true} src="https://files.readme.io/f106fb3-image.png" className="border" />
