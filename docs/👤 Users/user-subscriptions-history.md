@@ -12,17 +12,17 @@ next:
 ---
 ## Overview
 
-The Purchasely SDK provides the ability to retrieve the list of expired subscriptions for a user, which constitutes the user's subscriptions history, directly from your app without calling your backend.  
+The Purchasely SDK provides the ability to retrieve the list of expired subscriptions for a user, which constitutes the user's subscriptions history, directly from your app without calling your backend.\
 This feature is particularly useful for understanding user behavior, analyzing subscription trends, and enhancing user engagement strategies.
 
 > 🚧 Minimum SDK versions
-> 
-> - iOS: 4.4.0
-> - Android: 4.4.0
-> - Flutter: 4.4.0
-> - ReactNative: 4.4.0
-> - Cordova: 4.4.0
-> - Unity: 4.4.0
+>
+> * iOS: 4.4.0
+> * Android: 4.4.0
+> * Flutter: 4.4.0
+> * ReactNative: 4.4.0
+> * Cordova: 4.4.0
+> * Unity: 4.4.0
 
 ## Implementation
 
