@@ -18,22 +18,7 @@ Let us look at different localization options.
 
 When a new application is created in the Purchasely Console, you will be asked to choose the default language. Once you have chosen this language, you can't change it. This default language is automatically added to your paywall. The wording of the footer in the paywall will align with the language chosen under localization.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/57e33fc-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/57e33fc-image.png" />
 
 <br />
 
@@ -43,34 +28,19 @@ Paywalls can be localized in any number of languages. In order to add these lang
 
 desired paywall-> Localization tab-> Press + -> From the list choose and add as many languages as you support in your application. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/52e9dd1-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/52e9dd1-image.png" />
 
 Once you have added these different languages, you have to fill the correct translations of all your copies in every language you have added.
 
 By default, the images form the default language is transferred to the all the languages. 
 
 > 📘 Quick tip:
-> 
+>
 > You can click on copy button to copy the text and default language and then replace the appropriate translation. 
-> 
+>
 > If your texts doesn't have any text, then you can also click copy button in the image section to use the same image as in the default language. 
-> 
-> [block:image]{"images":[{"image":["https://files.readme.io/43bbfd5-image.png",null,""],"align":"center","border":true}]}[/block]
+>
+> <Image align="center" className="border" border={true} src="https://files.readme.io/43bbfd5-image.png" />
 
 <br />
 
@@ -97,7 +67,7 @@ Purchasely Paywall Builder provides a smart way to localize the paywall for more
 3. In the sample, you can find the key equivalent to the different titles, subtitles, promo titles etc
 4. The language added using the language code in the column title as shown below:
 
-   [block:image]{"images":[{"image":["https://files.readme.io/123fa33-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/123fa33-image.png" />
 5. Refer to this article before uploading your translation file- Tags article
 6. You will find the latest upload date of the translation file.
 
@@ -123,7 +93,7 @@ Save and publish 👍
 
 ⚠️ Please make sure to be transparent about the price of the plan in the CTA buttons.
 
-How to add a new language?  
+How to add a new language?\
 If you wish to add a new language,  you'll need to upload a translation file. 
 
 Once you have added the file, you will notice the paywalls that support localization are marked for localization updated.
@@ -132,44 +102,15 @@ Once you have added the file, you will notice the paywalls that support localiza
 
 You will see the newly added language and you'll need to provide the corresponding visuals.
 
-How to edit my existing translation?  
+How to edit my existing translation?\
 If you want to make changes to an existing translation, you'll need to upload a file containing the updated text.
 
 As soon as you uploaded a new file, you will see the paywalls that are localization enabled will be marked for localization updated.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/7780d17-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/7780d17-image.png" />
 
 <br />
 
 ### Step 4 you can choose which text to update by selecting it from the new file.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/0e65782-localization_1.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/0e65782-localization_1.gif" />
