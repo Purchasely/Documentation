@@ -27,7 +27,7 @@ Purchasely Android SDK does not include by default a video player starting with 
 If you have added a video to your Screen, you need to include our player dependency or implement **`PLYPlayerInterface`**.
 
 > 📘 Compatibility
-> 
+>
 > Our implementation utilizes version `1.1.1` of **[Jetpack Media3](https://developer.android.com/media/media3)**. If your project uses a different version of **Exoplayer/Media3** that is not compatible with this version, you will need to provide a custom class to the Purchasely SDK.
 
 # Purchasely video player
@@ -67,10 +67,10 @@ Already included in the SDK.
 # Custom video player
 
 > 🚧 Native only
-> 
-> A custom video player can only be provided natively. If you use one of our <<glossary:bridge sdk>> you can only provide a native custom video player.
+>
+> A custom video player can only be provided natively. If you use one of our <Glossary>bridge sdk</Glossary> you can only provide a native custom video player.
 
-You can use your own video player for Purchasely Screens.  
+You can use your own video player for Purchasely Screens.\
 This player needs to be a `View` and must implement `PLYPlayerInterface`.
 
 ```coffeescript Kotlin
@@ -82,14 +82,14 @@ interface PLYPlayerInterface {
 }
 ```
 
-You can declare it to the SDK either by specifying the path to your class:  
+You can declare it to the SDK either by specifying the path to your class:\
 (**Notice**: your class must **have a constructor** with `android.content.Context` as **unique parameter**)
 
 ```coffeescript Kotlin
 Purchasely.playerView = "com.myapp.ui.player.MyPlayerView"
 ```
 
-Or by providing an instance of your class:  
+Or by providing an instance of your class:\
 (**Notice**: you should set it to null when the player is no longer needed to avoid memory leaks)
 
 ```coffeescript Kotlin
