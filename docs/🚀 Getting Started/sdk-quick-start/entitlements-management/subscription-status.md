@@ -24,7 +24,7 @@ First of all, this approach can only be used in the following cases:
 
 Then, you should be aware that it is **less secured than checking with your server**.
 
-If your device obfuscates the content or block the features based on a server info telling you are subscribed, if this info is altered by a third party you would be offering the content. This is exactly the case of a **man in the middle approach**.  
+If your device obfuscates the content or block the features based on a server info telling you are subscribed, if this info is altered by a third party you would be offering the content. This is exactly the case of a **man in the middle approach**.\
 The most secure method is to manage the subscription through your backend and transmit the appropriate data based on the status.
 
 # Retrieve user subscriptions
@@ -116,7 +116,7 @@ Purchasely.userSubscriptions(subscriptions => {
 ```
 
 > 📘 Delay after a purchase or restoration
-> 
+>
 > There is a **few seconds delay** for `Purchasely.userSubscriptions()` to be updated after a purchase or a restoration. If you rely on this method to get the current subscription status of your user right after a purchase, you should **wait for 3 seconds** before calling this method
 
 # Subscription class
@@ -218,5 +218,5 @@ Purchasely.userSubscriptions(subscriptions => {
 ```
 
 > 🚧 Usage limitation
-> 
+>
 > This API is designed for robust and consistent performance, catering to heavy usage and ensuring high availability. Nevertheless, should we observe **exceptionally high usage** that deviates from normal patterns, please be advised that we may need to impose limitations or temporarily deactivate this feature for your account to maintain overall system stability.
