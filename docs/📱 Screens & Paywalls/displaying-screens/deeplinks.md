@@ -18,7 +18,7 @@ next:
 
 # Supported deeplinks to create automations
 
-Purchasely SDK supports the deeplink format with `app_scheme://ply` where _app_scheme_ is the application scheme you have declared to open deeplinks.  
+Purchasely SDK supports the deeplink format with `app_scheme://ply` where *app\_scheme* is the application scheme you have declared to open deeplinks.\
 On Android only, the SDK also supports universal links like `https://www.myapp.com/ply`
 
 ## Presentation / Screen
@@ -27,16 +27,16 @@ You can open a product presentation directly to the user with the default presen
 
 ⚠️ This kind of push requires users opt-in (see App Store Review Guidelines - 4.5.4).
 
-Open a screen directly  
+Open a screen directly\
 `app_scheme://ply/presentations/PRESENTATION_ID`
 
-Open your default screen  
+Open your default screen\
 `app_scheme://ply/presentations`
 
-Open a placement  
+Open a placement\
 `app_scheme://ply/placements/PLACEMENT_ID`
 
-Open your default placement  
+Open your default placement\
 `app_scheme://ply/placements`
 
 ## Subscriptions
@@ -120,7 +120,7 @@ _purchasely.SetDefaultPresentationResultHandler((result, plan) =>
 ```
 
 > 📘 Keep in mind
-> 
+>
 > The callback `PLYProductViewControllerResult`(iOS) / `ProductViewResultListener`(Android) is optional, you can set to null if you do not need it. You can override it when you display a presentation directly.
 
 # Override the display of deeplinks
