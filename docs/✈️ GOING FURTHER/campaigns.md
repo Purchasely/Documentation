@@ -25,22 +25,7 @@ They are particularly useful to:
 
 # Configuring a Campaign
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b58b9618f19b5bb0cb900db6d8ccf2f6d047d4fca6ee9b97bf743f8bc97fe520-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image src="https://files.readme.io/b58b9618f19b5bb0cb900db6d8ccf2f6d047d4fca6ee9b97bf743f8bc97fe520-image.png" alt="" align="center" border={true} />
 
 ## How to set up a Campaign ?
 
@@ -58,43 +43,13 @@ Set the name of your campaign and id. The name and ID you set here, helps you tr
 
 💡Adding a category lets you better organize the list of campaigns. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/8aefde9f6d1dbf09521a0caed643b7fe47d47dac5d0b1b16c1cccf7d609eb1ce-Screen_Recording_2025-03-17_at_08.18.47.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image src="https://files.readme.io/8aefde9f6d1dbf09521a0caed643b7fe47d47dac5d0b1b16c1cccf7d609eb1ce-Screen_Recording_2025-03-17_at_08.18.47.gif" alt="" align="center" border={true} />
 
 ### WHO - Audience:
 
 Choose the [audience](https://docs.purchasely.com/docs/audiences) whom you would like to run this campaign for.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/39f15535bfa0e07b78da0bb8dd36249eebe44661cc65c629cbf5d5d0bea21add-who.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image src="https://files.readme.io/39f15535bfa0e07b78da0bb8dd36249eebe44661cc65c629cbf5d5d0bea21add-who.gif" alt="" align="center" border={true} />
 
 If you haven't configured the desired audience yet, you can click on `+ Create new audience` and define your audience in the modale.
 
@@ -120,21 +75,21 @@ You can customize the following parameters to fine-tune your campaign behavior:
 
      _Example: If set to trigger every 3 sessions, the campaign will appear at most once every 3 app launches._
 
-     [block:image]{"images":[{"image":["https://files.readme.io/79a76de98e475eeb7b6f87a7cf4502b584181da11166167e052555be65036a62-image.png",null,""],"align":"center","border":true}]}[/block]
+     <Image src="https://files.readme.io/79a76de98e475eeb7b6f87a7cf4502b584181da11166167e052555be65036a62-image.png" alt="" align="center" border={true} />
 
      Note: the SDK generates a new session after 30 minutes of inactivity
    - **Period-based**: Enforces a minimum time gap between consecutive displays.
 
      _Example: If set to a 2-day interval, the campaign will not be shown again until at least 48 hours have passed since the last display._
 
-     [block:image]{"images":[{"image":["https://files.readme.io/eac0d395868e99e591d7f9062d723345a35d57545e56d88ebb2b9edfb0a1e008-image.png",null,""],"align":"center","border":true}]}[/block]
+<Image src="https://files.readme.io/eac0d395868e99e591d7f9062d723345a35d57545e56d88ebb2b9edfb0a1e008-image.png" alt="" align="center" border={true} />
 
      <br />
 4. **Impression cap**: Restricts the total number of times a user can see the campaign throughout its duration.
 
    _Example: If set to 3, the campaign will not be displayed to a user after they have seen it three times, regardless of triggers or frequency cap settings._
 
-   [block:image]{"images":[{"image":["https://files.readme.io/131318f1eb1915ffaf86d87db20f74746d78bd086982a539b789fbfb986ff9cc-image.png",null,""],"align":"center","border":true}]}[/block]
+  <Image src="https://files.readme.io/131318f1eb1915ffaf86d87db20f74746d78bd086982a539b789fbfb986ff9cc-image.png" alt="" align="center" border={true} />
 
    <br />
 5. **Exposure window**: Defines the maximum time a user remains eligible to see the campaign after their first exposure. This is particularly useful for creating limited-time offers that expire after a defined period.
@@ -143,7 +98,7 @@ You can customize the following parameters to fine-tune your campaign behavior:
 
    _Example: If set to 24 hours, the campaign will only be available to a user for 24 hours after their first exposure, even if the overall campaign period is longer._
 
-   [block:image]{"images":[{"image":["https://files.readme.io/d8a6662f73141d9eb4541c10a897b8115b2d43113764eebd1e6cec850129e14e-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image src="https://files.readme.io/d8a6662f73141d9eb4541c10a897b8115b2d43113764eebd1e6cec850129e14e-image.png" alt="" align="center" border={true} />
 
    <br />
 
@@ -157,22 +112,7 @@ This Screen does not need to be necessarily a Paywall. It can also be an onboard
 
  For an A/B test, it can be either UI or Price A/B test. The following illustration shows how to choose a screen to display for this campaign. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/4b17afabacd455129049496f3408d5a87f06c5e46308b2fba51ae0082883408c-Screen_Recording_2025-03-17_at_09.15.05.gif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image src="https://files.readme.io/4b17afabacd455129049496f3408d5a87f06c5e46308b2fba51ae0082883408c-Screen_Recording_2025-03-17_at_09.15.05.gif" alt="" align="center" border={true} />
 
 Once you are completed with your set up, click the Start button at the end of this page, to start the campaign.
 
