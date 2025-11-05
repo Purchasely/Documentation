@@ -20,7 +20,7 @@ next:
 
 To access the Purchasely Console, you need to get invited by the Purchasely Team.
 
-Check your email (and your spam messages if you did not receive the invitation after reaching out to us). The email will come from **account-update[at]purchasely.io**, with the object "**You've been invited to Purchasely**"
+Check your email (and your spam messages if you did not receive the invitation after reaching out to us). The email will come from **account-update\[at]purchasely.io**, with the object "**You've been invited to Purchasely**"
 
 Once you get the email, click on the button "Accept Invitation" inside it to define your password.
 
@@ -32,48 +32,18 @@ You can then invite the other members of your team.
 
 To do so, click on your name in the bottom left corner and then on Users & Access.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/100f9bf-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/100f9bf-image.png" />
 
 <br />
 
 For each user, enter fill in the following form:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/ed6281f-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/ed6281f-image.png" />
 
 Users can have one of the following roles:
 
-- `Admin`: they can invite other users
-- `Member`: they can't invite other users
+* `Admin`: they can invite other users
+* `Member`: they can't invite other users
 
 For each team member, you can control to which app they have access to. You can either enable each app individually or click on All apps to give them access to all the existing apps and the future ones that might be created later
 
