@@ -18,13 +18,13 @@ next:
 
 The authentication information is contained in the HEADER of the HTTP request :
 
-- X-PURCHASELY-REQUEST-SIGNATURE : request signature
-- X-PURCHASELY-TIMESTAMP : request timestamp
+* X-PURCHASELY-REQUEST-SIGNATURE : request signature
+* X-PURCHASELY-TIMESTAMP : request timestamp
 
 ⚠️ Depending on your framework, you may receive the headers under another format:
 
-- Ruby on Rails: HTTP_X_PURCHASELY_REQUEST_SIGNATURE
-- NestJS: x-purchasely-request-signature
+* Ruby on Rails: HTTP\_X\_PURCHASELY\_REQUEST\_SIGNATURE
+* NestJS: x-purchasely-request-signature
 
 ⚠️ Do not use the deprecated X-PURCHASELY-SIGNATURE header
 
