@@ -19,4 +19,4 @@ await Purchasely.presentPresentationForPlacement({
 });
 ```
 
-<br>
+<br />
