@@ -12,31 +12,31 @@ next:
 ---
 The SDK displays some text directly to the user (error messages, restore or login button text…). These texts are translated in **17 languages**:
 
-- English
-- French
-- German
-- Spanish
-- Portuguese
-- Italian
-- Czech
-- Polish
-- Greek
-- Chinese (Simplifed and traditional)
-- Japanese
-- Russian
-- Turkish
-- Swedish
-- Korean
-- Indonesian
+* English
+* French
+* German
+* Spanish
+* Portuguese
+* Italian
+* Czech
+* Polish
+* Greek
+* Chinese (Simplifed and traditional)
+* Japanese
+* Russian
+* Turkish
+* Swedish
+* Korean
+* Indonesian
 
 That means that every error message and UI element will automatically translated in the user device language (if matching). If the device or app language does not belong to this list, English will be used (fallback language).
 
 > 👍 Help us translate the SDK messages into new languages!
-> 
+>
 > As of today, the SDK supports natively these 17 languages. You can help us to support new languages in the SDK (for the future versions) by enriching this file
-> 
+>
 > [Purchasely i18n](https://docs.google.com/spreadsheets/d/1uLKp7QgLI9kXVPndeYhOwEUgQZHUrEIMK3mRKetXwp4/edit?gid=0#gid=0)
-> 
+>
 > Feel free to reach out to the support via the Purchasely Console to discuss it with us
 
 ## Set the language manually
@@ -89,12 +89,12 @@ _purchasely.SetLanguage("es");
 ```
 
 > 🚧 Keep in Mind
-> 
+>
 > If your paywall is not available in the language you have set, Purchasely will display text inside the paywall in the language of the paywall set in Purchasely console as default and not the language you have enforced for consistency.
 
 ## Override default localizations
 
-If you want to change the tone of the messages, you can override our translations and set yours. To do so, you just need to set the key and value corresponding to the message you want to change in your own `Localizable.strings` file (iOS) or `strings.xml` (Android) file.  
+If you want to change the tone of the messages, you can override our translations and set yours. To do so, you just need to set the key and value corresponding to the message you want to change in your own `Localizable.strings` file (iOS) or `strings.xml` (Android) file.\
 The keys that can be overrided are in the following with their value in English:
 
 ```python Localizable.strings (iOS)
