@@ -3,10 +3,10 @@ name: API /receipt (Stripe)
 ---
 To send us this information, simply call our API and provide it with
 
-- `stripe_object_id`: the Stripe subscription ID
-- `stripe_price_id`: the Stripe Price Id for this subscription (ON STRIPE)
-- `user_id`: the user\_id associated with the purchase, the same as you enter in [the SDK during configuration.](https://docs.purchasely.com/quick-start-1/sdk-configuration/config-appendices/set-user-id)
-- `stripe_object_type`: the type of Stripe object sent, currently we only accept `subscription`
+* `stripe_object_id`: the Stripe subscription ID
+* `stripe_price_id`: the Stripe Price Id for this subscription (ON STRIPE)
+* `user_id`: the user\_id associated with the purchase, the same as you enter in [the SDK during configuration.](https://docs.purchasely.com/quick-start-1/sdk-configuration/config-appendices/set-user-id)
+* `stripe_object_type`: the type of Stripe object sent, currently we only accept `subscription`
 
 ```curl
 curl \
