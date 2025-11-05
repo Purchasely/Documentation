@@ -60,82 +60,22 @@ The integration requires 5 steps:
 
 In the Purchasely Console, go to **"Integration » Airship"** and enable the integration.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/737b1ec-Capture_decran_2024-07-09_a_15.09.34.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/737b1ec-Capture_decran_2024-07-09_a_15.09.34.png" />
 
-
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/323e45d-Capture_decran_2024-07-09_a_15.13.29.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/323e45d-Capture_decran_2024-07-09_a_15.13.29.png" />
 
 You'll find your **"Airship API key"** in your Airship console, section **Settings » APIs & Integrations**:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/06b0b61-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/06b0b61-image.png" />
 
 You need to generate the **"Airship API token"** in your Airship console, section **Settings » APIs & Integrations » Tokens**, with the **"Audience Modification"** role:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/d6acb6b-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/d6acb6b-image.png" />
 
 Finally, the **"Server"** to use depends on your app.
 
-- If your Airship console is on the "go.airship.com" domain, then you'll need to choose the "go.urbanairship.com" server.
-- If your Airship console is on the "go.airship.eu" domain, then you'll need to choose the "go.airship.eu" server.
+* If your Airship console is on the "go.airship.com" domain, then you'll need to choose the "go.urbanairship.com" server.
+* If your Airship console is on the "go.airship.eu" domain, then you'll need to choose the "go.airship.eu" server.
 
 <br />
 
@@ -145,29 +85,14 @@ In the Purchasely Console, under the tab Server Events, you can choose with Serv
 
 If you want to, you can rename the events sent to Airship:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/f7764e7-Capture_decran_2024-07-09_a_15.16.32.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/f7764e7-Capture_decran_2024-07-09_a_15.16.32.png" />
 
 (Optional) Events names can be overridden to match with your tacking plan.
 
 > 📘 Keep in mind
-> 
+>
 > UI / SDK Events triggered by the Purchasely SDK cannot be forwarded to **Airship** directly from the Purchasely Console. 
-> 
+>
 > This has to be done at the app level by intercepting the [SDK events](https://start.purchasely.com/docs/ui-sdk-events) and forwarding them to the **Airship** SDK.
 
 **Sample event sent by Purchasely to Airship:**
@@ -202,32 +127,17 @@ If you want to, you can rename the events sent to Airship:
 
 In the Purchasely Console, under the tab User Properties, you can choose with User Properties should be updated in real time along the subscription lifecycle.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/5561282-Capture_decran_2024-07-09_a_15.17.12.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/5561282-Capture_decran_2024-07-09_a_15.17.12.png" />
 
 (Optional) User Properties names can be overridden to match with your nomenclature.
 
 > 📘 Keep in mind
-> 
+>
 > The overridden name must only contain alphanumeric lowercase characters, underscores and dashes, as specified in the [Airship documentation](https://docs.airship.com/api/ua/#schemas-customeventobject-body-name).
 
 ## 4 - Associate your users with an Airship ID
 
-Naming your users allows our servers to send purchase events to Airship on your behalf.  
+Naming your users allows our servers to send purchase events to Airship on your behalf.\
 You have two ways to associate your users:
 
 1. From within the app.
@@ -271,7 +181,7 @@ Purchasely.setAttribute(PLYAttribute.AIRSHIP_USER_ID, "userId");
 ```
 
 > 📘 For further information
-> 
+>
 > further information on **"named users"** can be found [here](https://support.airship.com/hc/en-us/articles/360012434371-Step-7-Named-User)
 
 ### From your server
