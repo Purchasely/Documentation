@@ -12,12 +12,12 @@ next:
 ---
 # How the languages are managed by the SDK?
 
-Any language available for iOS and Android can be used with the Purchasely Platform.  
-The Purchasely SDK fetches from the app, the preferred language that has been configured.  
+Any language available for iOS and Android can be used with the Purchasely Platform.\
+The Purchasely SDK fetches from the app, the preferred language that has been configured.\
 It can be either:
 
-- the default language of the OS
-- or the preferred language configured in the app settings
+* the default language of the OS
+* or the preferred language configured in the app settings
 
 ![](https://files.readme.io/1514105-image.png)
 
@@ -35,11 +35,11 @@ When a screen or paywalls has not been translated into the corresponding languag
 
 Eg: 
 
-- the default language for an app is English
-- the Onboarding paywall has not been translated in Italian
-- the  preferred language defined for the app is currently Italian
-- the paywall will be displayed in English instead (the default language)
-- If the paywall had been translated into Italian, it would have been displayed in Italian
+* the default language for an app is English
+* the Onboarding paywall has not been translated in Italian
+* the  preferred language defined for the app is currently Italian
+* the paywall will be displayed in English instead (the default language)
+* If the paywall had been translated into Italian, it would have been displayed in Italian
 
 If your app is available in multiple territories using different languages, we advise you to define English as the default language.
 
