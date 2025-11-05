@@ -33,45 +33,45 @@ next:
 ---
 # Supported Platforms
 
-Purchasely SDK supports multiple platforms. The SDK is developed in Swift for iOS and Kotlin for Android but you can use a <<glossary:bridge sdk>> to integrate it in hybrid apps. The supported platforms are:
+Purchasely SDK supports multiple platforms. The SDK is developed in Swift for iOS and Kotlin for Android but you can use a <Glossary>bridge sdk</Glossary> to integrate it in hybrid apps. The supported platforms are:
 
-- iOS (Swift)
--  Android (Kotlin)
-- React Native
-- Flutter
-- Unity
-- Cordova
+* iOS (Swift)
+* Android (Kotlin)
+* React Native
+* Flutter
+* Unity
+* Cordova
 
 # SDK Version Naming Convention
 
 The Purchasely SDK follows the version naming convention `x.y.z`:
 
-- **Major (x)**: Incremented for breaking changes.
-- **Minor (y)**: Incremented for new features, compatible with the current major version.
-- **Patch (z)**: Incremented for backward-compatible bug fixes.
+* **Major (x)**: Incremented for breaking changes.
+* **Minor (y)**: Incremented for new features, compatible with the current major version.
+* **Patch (z)**: Incremented for backward-compatible bug fixes.
 
-We recommend always using the latest version within the current major version (currently <<current_major_version>>). Here are the examples of the version nomenclature for different platforms:
+We recommend always using the latest version within the current major version (currently {user.current_major_version}). Here are the examples of the version nomenclature for different platforms:
 
-- **iOS (Swift, CocoaPods)**
+* **iOS (Swift, CocoaPods)**
   ```ruby Podfile
   pod 'Purchasely'
   ```
-- **Android (Kotlin, Gradle)**  
+* **Android (Kotlin, Gradle)**  
   ```groovy Gradle
   implementation 'io.purchasely.core:4.+'
   ```
-- **React Native**  
+* **React Native**  
   ```json package.json
   "dependencies": {  
     "react-native-purchasely": "^4.0.0"  
   }
   ```
-- **Flutter**
+* **Flutter**
   ```yaml pubspec.yaml
   dependencies:  
     purchasely: ^4.0.0
   ```
-- **Unity**  
+* **Unity**  
   ```xml
   <dependency>  
     <groupId>io.purchasely</groupId>  
@@ -79,7 +79,7 @@ We recommend always using the latest version within the current major version (c
     <version>[4.0,4.999]</version>  
   </dependency>
   ```
-- **Cordova**  
+* **Cordova**  
   ```json package.json
   "dependencies": {  
     "cordova-plugin-purchasely": "^4.0.0"  
@@ -94,9 +94,9 @@ By following this convention, you ensure that you always have the latest updates
 
 You can find the detailed installation guides for each platform via the following links:
 
-- **iOS (Swift)**: [iOS SDK Documentation](installation-swift)
-- **Android (Kotlin)**: [Android SDK Documentation](installation-kotlin)
-- **React Native**: [React Native SDK Documentation](installation-react-native)
-- **Flutter**: [Flutter SDK Documentation](installation-flutter)
-- **Unity**: [Unity SDK Documentation](installation-unity)
-- **Cordova**: [Cordova SDK Documentation](installation-cordova)
+* **iOS (Swift)**: [iOS SDK Documentation](installation-swift)
+* **Android (Kotlin)**: [Android SDK Documentation](installation-kotlin)
+* **React Native**: [React Native SDK Documentation](installation-react-native)
+* **Flutter**: [Flutter SDK Documentation](installation-flutter)
+* **Unity**: [Unity SDK Documentation](installation-unity)
+* **Cordova**: [Cordova SDK Documentation](installation-cordova)
