@@ -15,19 +15,19 @@ next:
       title: Nesting views
 ---
 > 🚧 Minimum SDK versions
-> 
-> - ReactNative: 4.0.1
-> - Cordova: 4.1.0
-> - Flutter: 4.0.0
-> - Unity: 4.1.0
+>
+> * ReactNative: 4.0.1
+> * Cordova: 4.1.0
+> * Flutter: 4.0.0
+> * Unity: 4.1.0
 
 ## Overview
 
 Managing the visibility of screens in your application is essential for providing a seamless user experience. The Purchasely SDK allows you to control the visibility of screens, enabling you to:
 
-- Hide a Screen.
-- Show again a hidden Screen.
-- Close permanently a Screen.
+* Hide a Screen.
+* Show again a hidden Screen.
+* Close permanently a Screen.
 
 To learn more about fetching and displaying screens using the Purchasely SDK, refer to the [displaying screens](displaying-screens) documentation.
 
@@ -35,7 +35,7 @@ To learn more about fetching and displaying screens using the Purchasely SDK, re
 
 ### Hide a Screen
 
-Use **`Purchasely.hidePresentation() `**to hide a screen without closing it. This method is useful when you want to temporarily hide the screen and bring it back later.
+Use **`Purchasely.hidePresentation() `**&#x74;o hide a screen without closing it. This method is useful when you want to temporarily hide the screen and bring it back later.
 
 ```coffeescript Flutter
 Purchasely.hidePresentation()
