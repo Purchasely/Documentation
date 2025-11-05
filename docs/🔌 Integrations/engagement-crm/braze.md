@@ -51,7 +51,7 @@ AppboyPlugin.changeUser("YOUR_USER_ID");
 
 **Handling anonymous users**
 
-If you have anonymous users in your app, you will need to add their Purchasely anonymous_id as a user alias to Braze
+If you have anonymous users in your app, you will need to add their Purchasely anonymous\_id as a user alias to Braze
 
 ```swift Swift
 Appboy.sharedInstance()?.user.addAlias(  
@@ -83,7 +83,7 @@ AppboyPlugin.addAlias(
 ```
 
 > 🚧 Keep the label provided above
-> 
+>
 > The label **must** be set to `purchasely_anonymous_id`, as our servers refer to this label when sending events while the user is anonymous.
 
 When the anonymous user later becomes logged in, Purchasely will automatically send following events using the provided user id
@@ -92,41 +92,11 @@ When the anonymous user later becomes logged in, Purchasely will automatically s
 
 To use Braze with Purchasely, go to the section [Integrations](https://console.purchasely.io/external-integrations) of Purchasely Console and click on Braze
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/64864c3-SCR-20240709-mwtr.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/64864c3-SCR-20240709-mwtr.png" />
 
 <br />
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/cd27542-SCR-20240709-mxcd.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/cd27542-SCR-20240709-mxcd.png" />
 
 You can:
 
@@ -134,69 +104,24 @@ You can:
 2. Set your API Key
 3. Set your iOS App ID
 4. Set your Android App ID
-5. Select the Braze Server you are using  
-   Refer to [Braze API Endpoints table](https://www.braze.com/docs/api/basics/#endpoints). You can use your Braze Dashboard URL find the correct server. E.g. if your dashboard is accessible at <https://dashboard-01.braze.eu>, then you should select the  
+5. Select the Braze Server you are using\
+   Refer to [Braze API Endpoints table](https://www.braze.com/docs/api/basics/#endpoints). You can use your Braze Dashboard URL find the correct server. E.g. if your dashboard is accessible at [https://dashboard-01.braze.eu](https://dashboard-01.braze.eu), then you should select the\
    EU-01 server.
 
 **Retrieving Braze API Key**
 
 Go to your Braze Developer Console, and click on "Create New API Key"
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/a8cfbb1-Braze_Purchasely_Image.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/a8cfbb1-Braze_Purchasely_Image.png" />
 
-
-Give a relevant name to your API Key. In the "User Data" permission area, check  
+Give a relevant name to your API Key. In the "User Data" permission area, check\
 `users.track` as our servers need this permission to report backend events to Braze.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/ef24404-Braze_Purchasely_Image.avif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/ef24404-Braze_Purchasely_Image.avif" />
 
 Click "Save API Key" at the bottom of the page.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/546e596-Braze_Purchasely_Image_1.avif",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/546e596-Braze_Purchasely_Image_1.avif" />
 
 <br />
 
@@ -204,29 +129,14 @@ Click "Save API Key" at the bottom of the page.
 
 In the Purchasely Console, under the tab Server Events, you can choose with Server Events must be forwarded to **Braze**.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/11ef011-SCR-20240709-mxkv.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/11ef011-SCR-20240709-mxkv.png" />
 
 (Optional) Events names can be overridden to match with your tacking plan.
 
 > 📘 Keep in mind
-> 
+>
 > UI / SDK Events triggered by the Purchasely SDK cannot be forwarded to **Braze** directly from the Purchasely Console. 
-> 
+>
 > This has to be done at the app level by intercepting the [SDK events](https://start.purchasely.com/docs/ui-sdk-events) and forwarding them to the **Braze** SDK.
 
 Each event sent to Braze carries a set of [properties](server-events-attributes) that you can use to further personalize your campaigns. 
@@ -235,22 +145,7 @@ Each event sent to Braze carries a set of [properties](server-events-attributes)
 
 In the Purchasely Console, under the tab User Properties, you can choose with User Properties should be updated in real time along the subscription lifecycle.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/76cc84f-SCR-20240709-mxpi.png",
-        "",
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/76cc84f-SCR-20240709-mxpi.png" />
 
 (Optional) User Properties names can be overridden to match with your nomenclature.
 
