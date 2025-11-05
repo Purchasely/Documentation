@@ -13,10 +13,10 @@ next:
   description: ''
 ---
 > 🚧 Native UI
-> 
-> Our SDK create Screen with native iOS and Android components, UI Kit and Android Views, for the best performance and compatibility.  
-> It means that it can only find a font that is available in the iOS or Android project.  
-> If you use a <<glossary:bridge sdk>> you need to add your font to the Android or iOS project as explained below.
+>
+> Our SDK create Screen with native iOS and Android components, UI Kit and Android Views, for the best performance and compatibility.\
+> It means that it can only find a font that is available in the iOS or Android project.\
+> If you use a <Glossary>bridge sdk</Glossary> you need to add your font to the Android or iOS project as explained below.
 
 ## iOS
 
@@ -28,8 +28,8 @@ If you are not sure about the name of your font, use the method `UIFont.familyNa
 
 You can add your font to either:
 
-- the `main/assets` folder of your project.
-- the [resources/font folder](https://developer.android.com/develop/ui/views/text-and-emoji/fonts-in-xml) of your project (preferred way).
+* the `main/assets` folder of your project.
+* the [resources/font folder](https://developer.android.com/develop/ui/views/text-and-emoji/fonts-in-xml) of your project (preferred way).
 
 Copy the name of your font to paste it in Purchasely Console (see below).
 
@@ -41,69 +41,25 @@ You can personalize texts used in your Screens with your custom fonts in the Pur
 
 ### How to upload a custom font:
 
-Navigate to_ **Settings** >** App settings** > **App custom fonts **> **Add a new font**_
+Navigate to ***Settings** > **App settings** > **App custom fonts** > **Add a new font***
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/1e29f85-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/1e29f85-image.png" />
 
 <br />
 
 In the following screen, fill in the following fields:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/e42a917-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/e42a917-image.png" />
 
 1. `Displayed font name`: the name listed Font in the Screen builder dropdown (refer to the screenshot below).
 2. `iOS font name`: the name of the font in your iOS application.
 3. `Android font name`: the name of the font in your Android application.
-4. `Font file`: you can upload or provide a link to your font file.  
-   This will only be used for the preview in the Purchasely Screen Builder.  
+4. `Font file`: you can upload or provide a link to your font file.\
+   This will only be used for the preview in the Purchasely Screen Builder.\
    Supported file formats are: `.otf`,` .ttf`, `.woff`, `.woff2`.
 
 <br />
 
 Once you have added your custom font in the console and made the set up in your iOS and Android application, you can fetch the font in the Screen under any text box. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/6c918625e7e25148eef08c91305ce6f7910dfeddb4255c1f3d180b147535df3a-image.png",
-        null,
-        null
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/6c918625e7e25148eef08c91305ce6f7910dfeddb4255c1f3d180b147535df3a-image.png" />
