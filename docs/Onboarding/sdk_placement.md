@@ -14,9 +14,9 @@ next:
 
 A Placement represents a specific location in your user journey inside your app (e.g. Onboarding, Settings, Home page, Article). 
 
-- A Placement can be created in the corresponding section of the Console
-- Then you can define the paywall associated to the placement (none, one paywall or several paywalls for several audiences)
-- A single paywall can be used for different Placements. 
+* A Placement can be created in the corresponding section of the Console
+* Then you can define the paywall associated to the placement (none, one paywall or several paywalls for several audiences)
+* A single paywall can be used for different Placements. 
 
 You can create as many Placements as you want in the section Placements of the Console
 
@@ -24,8 +24,8 @@ You can create as many Placements as you want in the section Placements of the C
 
 Placements can be displayed in 2 different ways:
 
-- By calling them directly in the app code
-- By using the associated deeplink
+* By calling them directly in the app code
+* By using the associated deeplink
 
 # When should I call the Placement from the app code?
 
@@ -51,11 +51,11 @@ Paywall pre-fetching is a mechanism offered by the Purchasely SDK to load paywal
 
 The benefits of using the pre-fetching are the following:
 
-- Display the paywall only after it has been loaded from the network
-- Handle network errors gracefully
-- Show a custom loading screen
-- Pre-load the paywall while users navigate through your app, such as during onboarding screens
-- [Deactivate a Placement](https://purchasely.readme.io/docs/disable-placements) (possibly for a particular Audience) by associating no paywall or screen with it
-- [Display **Your Own Paywall**](https://purchasely.readme.io/docs/use-your-own-paywall)\*\*\*\*
+* Display the paywall only after it has been loaded from the network
+* Handle network errors gracefully
+* Show a custom loading screen
+* Pre-load the paywall while users navigate through your app, such as during onboarding screens
+* [Deactivate a Placement](https://purchasely.readme.io/docs/disable-placements) (possibly for a particular Audience) by associating no paywall or screen with it
+* [Display **Your Own Paywall**](https://purchasely.readme.io/docs/use-your-own-paywall)\*\*\*\*
 
 More information [on pre-fetching available here](https://docs.purchasely.com/advanced-features/asynchronous-paywalls)
