@@ -23,7 +23,7 @@ To do so:
 3. Click on the button **`+ Customize for an audience`**
 4. Choose the desired audience and the associated paywall
 
-   [block:image]{"images":[{"image":["https://files.readme.io/bf220a9-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/bf220a9-image.png" />
 5. Then click on the **`Publish`** button in the bottom right corner
 
 > ℹ️ Immediately after publishing, the modifications become visible to the end users of the app
@@ -36,7 +36,7 @@ To do so:
 2. Then on `Prioritize audiences`
 3. Or simply use the handler **`⋮⋮`** on the left of each line to drag & drop each audience in the correct position
 
-   [block:image]{"images":[{"image":["https://files.readme.io/651ac08-image.png",null,""],"align":"center","border":true}]}[/block]
+   <Image align="center" className="border" border={true} src="https://files.readme.io/651ac08-image.png" />
 
 A user can belong to several audiences at the same time. The rule for choosing which screen shall be displayed for a user is the following:
 
@@ -46,10 +46,10 @@ A user can belong to several audiences at the same time. The rule for choosing w
 
 When a user interacts with a placement, an event (either a [UI/SDK event](ui-sdk-events) or a [Server event](server-events)) can be triggered.
 
-_Eg:_
+*Eg:*
 
-- _`PRESENTATION_VIEWED` (UI/SDK event) if a screen is displayed to the user_
-- _`SUBSCRIPTION_STARTED` (Server event) if the user purchases a new subscription from this screen_
+* *`PRESENTATION_VIEWED`(UI/SDK event) if a screen is displayed to the user*
+* *`SUBSCRIPTION_STARTED`(Server event) if the user purchases a new subscription from this screen*
 
 In both cases, if the user was matching an audience associated to the placement, the events will carry the parameter `audience_id`, filled in with the ID defined for that particular audience.
 
@@ -76,5 +76,5 @@ In both cases, if the user was matching an audience associated to the placement,
 }
 ```
 
-The Purchasely Platform will ensure that this parameter remains attached for subsequent server events in the subscription lifecycle.  
-_Eg: if the property `audience_id` = `apple` has been attached to a `SUBSCRIPTION_STARTED` event, the same property will be attached to the `SUBSCRIPTION_RENEWED` events that might follow when the subscription is renewed._
+The Purchasely Platform will ensure that this parameter remains attached for subsequent server events in the subscription lifecycle.\
+*Eg: if the property`audience_id` = `apple` has been attached to a `SUBSCRIPTION_STARTED` event, the same property will be attached to the `SUBSCRIPTION_RENEWED` events that might follow when the subscription is renewed.*
