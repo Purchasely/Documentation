@@ -20,25 +20,9 @@ A button is a generic clickable Screen component that can be mapped with differe
 
 Here is the structure of a button:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/0143e6c3178d71d97cca85383ea43d0d918b9aa3228e8f53f180a3fb919408e1-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "sizing": "400px",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" width="400px" border={true} src="https://files.readme.io/0143e6c3178d71d97cca85383ea43d0d918b9aa3228e8f53f180a3fb919408e1-image.png" />
 
-
-It is composed of a parent element (highlighted in the image above) and a set of _text collections_.
+It is composed of a parent element (highlighted in the image above) and a set of *text collections*.
 
 <br />
 
@@ -56,23 +40,7 @@ Eg: in the Sticky button layout, the Plan picker can be put in the surface **Bod
 
 Here is the list of actions that can be associated with a button:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/18b10d83f8f3e67b6d013fccc61679f8ba90ac87943fa743fe128e3bcae2c482-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "sizing": "400px",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" width="400px" border={true} src="https://files.readme.io/18b10d83f8f3e67b6d013fccc61679f8ba90ac87943fa743fe128e3bcae2c482-image.png" />
 
 <ActionList />
 
@@ -80,30 +48,16 @@ Here is the list of actions that can be associated with a button:
 
 ## Configuring the Texts associated with the button
 
-A button has 4 different _collections of Texts_: 
+A button has 4 different *collections of Texts*: 
 
-- promo label
-- Texts above button
-- Texts inside button
-- Texts below button
+* promo label
+* Texts above button
+* Texts inside button
+* Texts below button
 
 Each collection can be associated with 1 to 4 Texts. Click on the + button to add a new Text.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/8219004d782a07d81a3feeb231df3d009d11cd550ee14e388b56a62fee5b475d-ezgif-5-736ee43d12.gif",
-        "",
-        ""
-      ],
-      "align": "center"
-    }
-  ]
-}
-[/block]
-
+<Image align="center" src="https://files.readme.io/8219004d782a07d81a3feeb231df3d009d11cd550ee14e388b56a62fee5b475d-ezgif-5-736ee43d12.gif" />
 
 ## Leveraging tags
 
@@ -111,25 +65,10 @@ Each collection can be associated with 1 to 4 Texts. Click on the + button to ad
 
 If you want the tag to refer to the button mapped with the element, choose the option "Use element's plan / default plan" after selecting your tag:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/d3f414ad991b1762ae6c9fce2a8bbbd43f05157bed88c6bdf74dafff06de766f-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/d3f414ad991b1762ae6c9fce2a8bbbd43f05157bed88c6bdf74dafff06de766f-image.png" />
 
-
-- In this case, the tag should appear without parameters when displayed in the text field.
-- The advantage is that the tag will automatically be updated when another picker gets selected
+* In this case, the tag should appear without parameters when displayed in the text field.
+* The advantage is that the tag will automatically be updated when another picker gets selected
 
 If you want the tag to refer to another Plan (eg: to strike through a former price), you can pick the desired Plan directly
 
@@ -139,17 +78,4 @@ If you want the tag to refer to another Plan (eg: to strike through a former pri
 
 You can display a Promo overlay on any button / picker or CTA. A promo overlay is a Text with a background and a border. You can adjust its horizontal positioning by using changing the text alignement (left / center / right) and adjusting the left & right margin
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/2d098b184d87104964629dfc6c405359b42f3eeede0d8d429e640fb02616b38b-ezgif-3-f19a93e9c7.gif",
-        "",
-        ""
-      ],
-      "align": "center"
-    }
-  ]
-}
-[/block]
+<Image align="center" src="https://files.readme.io/2d098b184d87104964629dfc6c405359b42f3eeede0d8d429e640fb02616b38b-ezgif-3-f19a93e9c7.gif" />
