@@ -20,106 +20,31 @@ This guide assumes basic knowledge of Google Play Console, as well as having an 
 
 Every subscription consists of one or more base plans and one or more offer plans. To create an in-app subscription, go to Google Play Console's 'All Applications' page and select your app from the list.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/6a30228-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/6a30228-image.png" />
 
 <br />
 
-Then, Navigate to the following section:  
-_Google Play Console > All apps > [YOUR APP] > Monetize > Products > Subscriptions_
+Then, Navigate to the following section:\
+*Google Play Console > All apps >[YOUR APP] > Monetize > Products > Subscriptions*
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/526757b-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/526757b-image.png" />
 
 Click on `Create subscription`
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/9572228-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/9572228-image.png" />
 
 After clicking Create, provide a couple pieces of metadata to Google:
 
 Fill in the Product ID and description
 
-- `Product ID`: The product ID is a unique alphanumeric ID that is used for accessing your product. After you use a Product ID for one product in Google Play Console, it can’t be used again across any of your apps, even if the product is deleted. This `Product ID` will have to be mapped with the corresponding <<glossary:Plan>> in the Purchasely Console.  
+* `Product ID`: The product ID is a unique alphanumeric ID that is used for accessing your product. After you use a Product ID for one product in Google Play Console, it can’t be used again across any of your apps, even if the product is deleted. This `Product ID` will have to be mapped with the corresponding <Glossary>Plan</Glossary> in the Purchasely Console.\
   `Name`: A short name of the item, up to 55 characters. This will be displayed on your Google Play Store listing.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/352df45-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/352df45-image.png" />
 
 After creating a subscription, you have to add a basic package and activate it.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b66b671-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/b66b671-image.png" />
 
 ### Subscription modeling in the Play Store
 
@@ -135,44 +60,14 @@ Each base plan can then have multiple offers, which can be used for Introductory
 
 For subscription products, you'll need to add a base plan. Base plans define a billing period, price, and renewal type for purchasing your subscription. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b66b671-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/b66b671-image.png" />
 
 Click "Add base plan" and fill out the associated fields. 
 
 1. `Base plan id`: Before creating a base plan, carefully plan your base plan IDs. Base plan IDs must be unique to your app and can’t be changed or reused after they’ve been created.
 2. `Type of renewal`: We choose Auto-renewing for this demo. This type of subscription Automatically renews unless canceled by the user
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/3ca6177-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/3ca6177-image.png" />
 
 In the sub section of Auto renewing, you have the following information to choose
 
@@ -184,98 +79,23 @@ c. `Changes to basic package or customer offer`: Choose how to apply any remaini
 
 d. `Resubscribe`: Allow/deny the user from resubscribing after cancellation or expiration of their subscription.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/3454f6d-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/3454f6d-image.png" />
 
 Setting up tags are optional. Click on `Set price` to define price for this base plan. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/6d70f2f-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/6d70f2f-image.png" />
 
 You will be prompted to select the countries 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/ea6649d-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/ea6649d-image.png" />
 
 Once you have selected the country, you will see the option to type the price. Type the price and update. This price is tax excluded, once you select update, you will see the subscription price with tax.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/7b7169a-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/7b7169a-image.png" />
 
 If its good for you, please click on `Save`
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/63dfca2-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/63dfca2-image.png" />
 
 ## Creating Offer plans
 
@@ -283,22 +103,7 @@ If you decide to create an offer for your base plan, you can follow this step, e
 
 To create an offer plan, in the subscription page click `Add offer`.
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/df0e016-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/df0e016-image.png" />
 
 <br />
 
@@ -306,22 +111,7 @@ Types of offers can be free trials, discounts, or simply special price setups th
 
 Select the base plan you want this offer to be attached with and click on `Add offer`
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/68f730d-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/68f730d-image.png" />
 
 <br />
 
@@ -331,22 +121,7 @@ Select the base plan you want this offer to be attached with and click on `Add o
 
 `Eligibility criteria`: Select the offer's eligibility criteria to determine which customers the offer is available to
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/8352532-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/8352532-image.png" />
 
 In the Eligibility criteria option, you have different options for different types of of offer.
 
@@ -354,22 +129,7 @@ In the Eligibility criteria option, you have different options for different typ
 
 We create an offer for **new customer acquisition** in this demo: you can select if you would like to provide this offer to someone who already had this subscription or never had any subscription in your app. We chose the Never had any subscription option for this demo. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/1a237b5-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/1a237b5-image.png" />
 
 Tags: It's optional, tags are added to identify the base plan or the offer in the API. 
 
@@ -392,75 +152,16 @@ Other offers are:
 
 Free trial: 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/cfa7286-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/cfa7286-image.png" />
 
 For free trial you can type the number and choose the duration and then click on Apply button to finish the phase set up. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/62cba58-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/62cba58-image.png" />
 
 Click on the save in the Offer plan page to save the offer successfully to the base plan
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/b648567-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/b648567-image.png" />
 
 You can activate the offer whenever you wish to launch this offer. 
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/95e9930-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
+<Image align="center" className="border" border={true} src="https://files.readme.io/95e9930-image.png" />
