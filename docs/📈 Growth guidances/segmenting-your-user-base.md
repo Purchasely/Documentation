@@ -20,26 +20,28 @@ Purchasely allows to segment your user base into different segments by creating 
 
 # General functioning
 
-1. The Purchasely SDK handles <<glossary:User Attribute>>s. There are two sets of user attributes:
-   - **Built-in user attributes**: they are natively managed by the SDK and work without requiring any particular development.  
-     _Eg: app version, platform name, active subscription status, active subscription plan, user id, IP country, app sessions_  
+1. The Purchasely SDK handles <Glossary>User Attribute</Glossary>s. There are two sets of user attributes:
+   * **Built-in user attributes**: they are natively managed by the SDK and work without requiring any particular development.\
+     *Eg: app version, platform name, active subscription status, active subscription plan, user id, IP country, app sessions*\
      [View the full list of built-in user attributes](user-attributes-list)
-   - **Custom user attributes**: they are additional user properties that can be injected by the app into the Purchasely Platform through an API of the SDK. These custom user properties can be collected by the app during the onboarding or when users interact with the app.  
-     _Eg: gender, sign-up date, age, intent, current location, contents read, favorite team_  
+   * **Custom user attributes**: they are additional user properties that can be injected by the app into the Purchasely Platform through an API of the SDK. These custom user properties can be collected by the app during the onboarding or when users interact with the app.\
+     *Eg: gender, sign-up date, age, intent, current location, contents read, favorite team*\
      [How to manage Custom User Attributes](custom-user-attributes)
-2. These <<glossary:User Attribute>>s can be combined together with boolean operators to create an <<glossary:Audience>>.  
+2. These <Glossary>User Attribute</Glossary>s can be combined together with boolean operators to create an <Glossary>Audience</Glossary>.\
    [Build Audiences to segment your user base and tailor the screen displayed for each audience](audiences)
-   - All the users belonging to a same <<glossary:Audience>> share a common set of {attribute, value}
-   - One user can belong to several audiences at the same time
-3. For each <<glossary:Placement>>, you can customize the screen displayed for a particular audience. Each audience can be prioritised.
+   * All the users belonging to a same <Glossary>Audience</Glossary> share a common set of \{attribute, value}
+   * One user can belong to several audiences at the same time
+3. For each <Glossary>Placement</Glossary>, you can customize the screen displayed for a particular audience. Each audience can be prioritised.
 
-   [block:image]{"images":[{"image":["https://files.readme.io/caed4d3-image.png",null,"In the example above, iOS users in the US will see the \"Screen Guided tour /6\", whereas Android users in France will be exposed to an A/B test. Users who don't belong to any of the audiences associated will not see any screen displayed (NONE)."],"align":"center","border":true,"caption":"In the example above, iOS users in the US will see the \"Screen Guided tour /6\", whereas Android users in France will be exposed to an A/B test. Users who don't belong to any of the audiences associated will not see any screen displayed (NONE)."}]}[/block]
+   <Image alt="In the example above, iOS users in the US will see the &#x22;Screen Guided tour /6&#x22;, whereas Android users in France will be exposed to an A/B test. Users who don't belong to any of the audiences associated will not see any screen displayed (NONE)." align="center" border={true} src="https://files.readme.io/caed4d3-image.png">
+     In the example above, iOS users in the US will see the "Screen Guided tour /6", whereas Android users in France will be exposed to an A/B test. Users who don't belong to any of the audiences associated will not see any screen displayed (NONE).
+   </Image>
 
 <AudiencePrioritizationRuleForAPlacement />
 
 <br />
 
-[A/B tests](ab-tests) can also be configured specifically for a particular <<glossary:audience>>.
+[A/B tests](ab-tests) can also be configured specifically for a particular <Glossary>audience</Glossary>.
 
 # Limitations
 
