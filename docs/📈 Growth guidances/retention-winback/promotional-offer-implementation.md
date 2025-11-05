@@ -13,9 +13,9 @@ next:
   description: ''
 ---
 > 📘 Availability
-> 
+>
 > The feature described in this section is supported starting from version 4.0.0 of Purchasely SDK.
-> 
+>
 > If you use a prior version of the SDK your users won’t see a discount and will purchase at the regular price.
 
 Promotional offers can be used to offer a specific discount to current or past subscribers. It is a great way to retain or win-back a customer. You will be able to set up as many as you want by creating specific paywalls with those offers.
@@ -93,7 +93,7 @@ try {
 }
 ```
 
-# `paywallObserver` mode - Retrieve the offer to purchase 
+# `paywallObserver` mode - Retrieve the offer to purchase
 
 When you are using Purchasely in [`paywallObserver`](paywallobserver-mode) mode, you can:
 
@@ -106,8 +106,8 @@ When you are using Purchasely in [`paywallObserver`](paywallobserver-mode) mode,
 Here is a code sample to sign the offer on iOS:
 
 > 🚧 iOS applicationUserName or appAccountToken
-> 
-> On iOS, you must use Purchasely **anonymous user in lowercase** as **applicationUsername** with StoreKit1 or **appAccountToken** with StoreKit2 if you use `Purchasely.signPromotionalOffer()` method  
+>
+> On iOS, you must use Purchasely **anonymous user in lowercase** as **applicationUsername** with StoreKit1 or **appAccountToken** with StoreKit2 if you use `Purchasely.signPromotionalOffer()` method\
 > Please look at sample code below for more details
 
 ```swift Swift
