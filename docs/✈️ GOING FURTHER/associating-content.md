@@ -23,14 +23,14 @@ In some cases the identifier of the Plan purchased is not enough to precisely id
 
 There are many use cases in which you need to identify the content purchased:
 
-**Pay-per-view app / book store**  
-You will have several consumables that define the different possible prices of each movie on your platform. Several movies will have the same pricing and the plan identifier is not enough to know which movie was purchased as it only describes a price.  
+**Pay-per-view app / book store**\
+You will have several consumables that define the different possible prices of each movie on your platform. Several movies will have the same pricing and the plan identifier is not enough to know which movie was purchased as it only describes a price.\
 You will need to identify the program additionally.
 
-**Fantasy league**  
+**Fantasy league**\
 If you develop a fantasy league app with multiple leagues and you can unlock boosters, you will have to know which league the booster must be applied to.
 
-**Multiple user account app**  
+**Multiple user account app**\
 If your app or game has several profiles / accounts you will want to associate the account to the purchase.
 
 … in fact each time the plan identifier is not enough to identify what was purchased and unlock the feature, you will need to pass an additional identifier.
@@ -134,7 +134,7 @@ Purchasely.purchaseWithPlanVendorId("PLAN_VENDOR_ID", "my_content_id", (plan) =>
 _purchasely.Purchase(planId, LogPlan, Log, offerId, contentId);
 ```
 
-Once the Purchasely Platform have checked that the customer purchase is genuine and wasn't already used, it will send you the following event on the Webhook that includes content_id :
+Once the Purchasely Platform have checked that the customer purchase is genuine and wasn't already used, it will send you the following event on the Webhook that includes content\_id :
 
 ```json ACTIVATE
 {
