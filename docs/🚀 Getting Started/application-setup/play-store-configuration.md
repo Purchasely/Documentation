@@ -49,22 +49,7 @@ In order to connect your Google Play Store account with Purchasely, you have to 
 
 7. In the Purchasely Console, fill in the field `Access key (JSON)` with this JSON file
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/1d5ec4b-image.png",
-        null,
-        ""
-      ],
-      "align": "center",
-      "border": true
-    }
-  ]
-}
-[/block]
-
+<Image align="center" className="border" border={true} src="https://files.readme.io/1d5ec4b-image.png" />
 
 <br />
 
