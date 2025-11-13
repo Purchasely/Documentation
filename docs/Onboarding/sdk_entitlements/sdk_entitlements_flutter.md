@@ -1,6 +1,6 @@
 ---
 title: Flutter
-excerpt: ''
+excerpt: ' '
 deprecated: false
 hidden: true
 metadata:
