@@ -1,7 +1,7 @@
 ---
 title: Bring Your Own Screen
 deprecated: false
-hidden: false
+hidden: true
 metadata:
   robots: index
 ---
