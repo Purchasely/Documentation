@@ -32,7 +32,7 @@ When a Flow reaches a Custom Screen step, the same handover mechanism applies:
 4. The app manages all interactions on the Custom Screen while the Custom Screen is displayed
 5. The app resumes the Flow by calling the SDK’s execute method with the selected connection, and the Flow continues to the next mapped step.
 
-Additionally, when integrating a Custom Screen into a Flow, you can configure its display mode and transition type (modal, drawer, pop-in, full-screen, etc.) directly from the Console. The SDK will apply those transitions when displaying your native view controller.
+<br />
 
 ## Synchronizing Purchases
 
@@ -42,13 +42,5 @@ This allows the SDK to retrieve the latest receipt and extract the purchase info
 This is particularly important in A/B or A/A test scenarios, where accurate purchase tracking is required to attribute conversions correctly.
 
 # Implementation Guidelines
-
-You will find code snippets in the next section, but here is the general setup process:
-
-1. Create a Screen in the Screen Composer and choose the layout “Bring Your Own Screen”.
-2. Define its connections (e.g., login_success, create_account, cancel) — these determine the next step in the Flow.
-3. Implement the delegate/callback in your app to intercept the BYOS event from the SDK.
-4. Render your native screen and return it to the SDK that will display it
-5. Resume the Flow by calling  when the user completes the step - or Purchasely.backInFlow() to go back.
 
 <br />
