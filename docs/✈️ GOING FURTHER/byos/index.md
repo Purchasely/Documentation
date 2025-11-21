@@ -23,4 +23,12 @@ You should use BYOS in the following situations:
 
 <br />
 
-<br />
+# Useful links
+
+To configure Bring Your Own Screen, follow the guide 
+
+📚 [Configuring BYOS in the Purchasely Console](byos-configuration)
+
+To implement it in your app, follow the guide
+
+📚 [Implementing BYOS into the app](byos-implementation)
