@@ -7,29 +7,33 @@ metadata:
 ---
 # Creating a Bring Your Own Screen
 
-<br />
+1. Create a Screen in the Screen Composer and choose the layout **Bring Your Own Screen**.
+   <br />
+2. Associate a screenshot of the Screen as the background image to make it easy to recognize
+   <br />
+3. Define the connections (e.g., login_successful, signup, cancel) — these determine the possible exit points for the Screen
+   <br />
+4. Implement the delegate/callback in your app to intercept the BYOS event from the SDK.
+5. Render your native screen and return it to the SDK that will display it
+6. Resume the Flow by calling  when the user completes the step - or Purchasely.backInFlow() to go back.
 
 <br />
 
 <br />
 
-## Using BYOS Within a Flow
+## Bringing You Own Screen Within a Flow
 
 BYOS allows you to blend native app screens and Purchasely-generated screens into one seamless user journey.
 
 1. Insert your BYOS node anywhere in a Flow via the Console (it can even be in the first position)
-2. It behaves like any other step: you can set entry/exit transitions, tracking, and analytics.
-3. All events (viewed, closed, next) are automatically logged by the SDK.
+2. It behaves like any other step: you can set entry/exit transitions.
+3. All  events (viewed, closed, next) are automatically traked by the SDK.
 4. Each connection leads to the appropriate next screen or action, as defined in the Flow graph.
 
-Using BYOS Within a Paywall A/B Test
+<br />
 
-You can also include BYOS nodes inside paywall experiments to test different entry paths or onboarding variants:
+## Using BYOS Within a Paywall A/B Test
 
-Define the BYOS step within each test variant.
+You can also include BYOS nodes inside paywall experiments in A/A test or A/B test scenario.
 
-Use the same analytics logic — events from custom screens are tracked once the Flow resumes.
-
-Measure the impact of your native step (e.g., a custom login, survey, or tutorial) on conversion, engagement, or retention.
-
-BYOS ensures A/B tests remain consistent across both Purchasely-rendered and app-rendered experiences.
+<br />
