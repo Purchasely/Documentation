@@ -71,9 +71,17 @@ You can also include Custom Screen inside Paywall experiments in A/A test or A/B
 
 <br />
 
-# Using BYOS to reorder the steps of your native Flow
+# Using BYOS to reorder steps in your existing onboarding Flow without code
 
-<br />
+BYOS lets you recreate and manage your existing native onboarding flow inside Purchasely by representing each of your native screens as a Custom Screen node. Once mapped, you can reorder, insert, or remove steps directly from the Console — giving you full no-code control over the structure and sequencing of your onboarding while preserving your original UI.
+
+1. Create one Custom Screen for each native onboarding step, assign it a Screen ID, and define its connections (exit points).
+2. Add all these Custom Screens to a Flow in the Console.
+3. Drag and drop the nodes to reorder, insert, or remove steps as needed.
+4. Draw the transitions between nodes and attach the appropriate connections to each one.
+5. Publish the Flow so the SDK orchestrates your onboarding sequence according to your no-code configuration.
+
+Note: This requires having implemented BYOS in your app and mapping each onboarding view controller to its corresponding Screen ID and connections.
 
 # Tracking of the Custom Screens
 
