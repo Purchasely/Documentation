@@ -1,5 +1,9 @@
 ---
 title: BYOS - Implementation guide
+excerpt: >-
+  This page provides a comprensive overview of the implementation of Custom
+  Screens into your app and includes general functioning and code snippet both
+  inside and outside of a Flow
 deprecated: false
 hidden: false
 metadata:
@@ -36,44 +40,59 @@ When a Flow reaches a Custom Screen step, the same handover mechanism applies:
 
 # Implementation Guidelines
 
-## Implementing the Custom Screen callback into your app
+To integrate a Custom Screen using BYOS, you must implement three components on the app side:
 
-You can create as many Custom Screens as you need in the Purchasely Console. But all of them need to be mapped with the corresponding view controller in your app code.
+### 1. Handle the BYOS callback
 
-When the callback is called by the SDK, the ID of the Custom Screen and the array of connections configured are passed as entry parameters.
+Your app must implement the SDK delegate or callback that is triggered whenever a Custom Screen is retrieved.
+This callback gives you:
 
-Implement the following code snippet to match the Screen IDs with your in-house view controllers.
+* the Screen ID
+* the list of connections (exit points)
 
 ```swift
+@mobile team: setCallBack / setDelegate
 ```
 ```kotlin
 ```
 
 <br />
 
-## Executing the action associated with a specific connection
+### 2. Construct and return the native view controller
 
-You can create up to 20 different outgoing connections for a Custom Screen. But each connection ID configured needs to be mapped in your app code.
-
-Once the user has completed the step corresponding to the Custom Screen, call the method `exectue()` of the SDK with a connection ID. If no connection ID / an invalid connection ID has been provided, the SDK will execute the connection configured as default.
+Based on the Screen ID, your app should instantiate the corresponding native UI (Swift/Kotlin/RN/Flutter).
+You then return that view controller to the SDK, which inserts it into Purchasely’s navigation layer.
 
 ```swift
+@mobile team: 
+code de la methode PLYCustomScreenProvider / PLYCustomScreenViewDelegate / PLYCustomScreenViewControllerDelegate
 ```
 ```kotlin
 ```
 
 <br />
 
-### Within a Flow
+### 3. Resume execution by calling the SDK
 
-In the context of a Flow, calling this method will take the user to the next Screen in the Flow associated with the connection.
+When the user completes the Custom Screen, call the SDK’s `execute()` method with the chosen connection.
+
+This tells Purchasely what to do next (continue a Flow, trigger an action, etc.).
+
+```swift
+@mobile team: 
+code d'appel à la fonction execute depuis le viewController natif associé au Custom Screen
+```
+```kotlin
+```
+
+In the context of a Flow, calling this method will take the user to the next step in the Flow - the one associated with the connection.
 
 Example:
 
-1. Calling `execute()` with the connection ID `email` will get the user to the email checking screen - which is another Custom Screen
+1. Calling `execute(email)` will take the user to the email checking screen - which is another Custom Screen
 
    <Image align="center" border={true} src="https://files.readme.io/497f65ee3b2d20cb33e4b6494ee66eccde496f3185f974a67632015a4aeb1995-custom_screen_6.gif" className="border" />
-2. For social connections, the process is managed by the the app through the Custom Screen `sign_in_screen` view controller. Once the user has completed the social connection, calling `execute()` with the connection ID `social_connection_successful` will get the user to the final screen of the Flow, bypassing the email validation process.
+2. For social connections, the process is managed by the the app through the Custom Screen `sign_in_screen` view controller. Once the user has completed the social connection, calling `execute(social_connection_successful)` will take the user to the final screen of the Flow, bypassing the email validation process.
 
    <Image align="center" border={false} src="https://files.readme.io/7e2eea5bfb7a0f7f0d4a2398ccb8fdbe31350a21696d5f46f4c8a6892c35cf22-custom_screen_7.gif" />
 
@@ -87,6 +106,13 @@ Outside of Flow, calling the method `execute()` will trigger the action associat
 
 If a purchase is performed within a Custom Screen, your app must call the SDK’s `synchronize()` method.
 This allows the SDK to retrieve the latest receipt and extract the purchase information.
+
+```swift
+@mobile team: 
+appel à la méthode synchronize() après un achat
+```
+```kotlin
+```
 
 This is particularly important in A/B or A/A test scenarios, where accurate purchase tracking is required to attribute conversions correctly.
 
