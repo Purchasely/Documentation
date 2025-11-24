@@ -89,6 +89,10 @@ When a Flow is displayed by the SDK, Custom Screens are automatically tracked ju
 
 User interactions inside Custom Screens are not tracked by the SDK, since these screens are fully controlled by your app. If you need additional interaction analytics, you should instrument them directly within your client-side code.
 
-In a Paywall A/B test scenario, make sure with your engineering team that [the In-App Purchases performed inside the Custom Screen are properly synchronized](https://docs.purchasely.com/docs/byos-implementation#synchronizing-purchases).
+> ❗️ Don't forget to synchronizing purchases
+>
+> In a Paywall A/B test scenario, make sure with your engineering team that [the In-App Purchases performed inside the Custom Screen are properly synchronized](https://docs.purchasely.com/docs/byos-implementation#synchronizing-purchases).
+>
+> If purchases are not synchronized, in-app purchases happening on your Custom Paywall will not be counted by the SDK and integrated in the A/B test data.
 
 <br />
