@@ -4,7 +4,7 @@ excerpt: >-
   This page provides details on how to configure a Custom Screen in the
   Purchasely Console
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   robots: index
 ---
