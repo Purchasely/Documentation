@@ -29,7 +29,7 @@ metadata:
 
 <br />
 
-## Bringing You Own Screen Within a Flow
+# Bringing You Own Screen Within a Flow
 
 BYOS allows you to blend native app screens and Purchasely-generated screens into one seamless user journey.
 
@@ -52,7 +52,7 @@ You can also chain multiple Custom Screens together and control the transition o
 
 <br />
 
-## Using BYOS Within a Paywall A/B Test
+# Using BYOS Within a Paywall A/B Test
 
 You can also include Custom Screen inside Paywall experiments in A/A test or A/B test scenario.
 
@@ -65,7 +65,7 @@ You can also include Custom Screen inside Paywall experiments in A/A test or A/B
 
 <br />
 
-## Tracking of the Custom Screens
+# Tracking of the Custom Screens
 
 When a Flow is displayed by the SDK, Custom Screens are automatically tracked just like any other Purchasely Screen. Each time a Custom Screen appears, the SDK emits a `PRESENTATION_DISPLAYED` event containing the Screen ID (in the `displayed_presentation` property). This allows you to analyze user paths, visualize transitions, and measure drop-off at every step of the Flow.
 
