@@ -7,6 +7,12 @@ deprecated: false
 hidden: false
 metadata:
   robots: index
+next:
+  description: Follow the implementation guide to integrate BYOS into your app
+  pages:
+    - slug: byos-implementation
+      title: BYOS - Implementation guide
+      type: basic
 ---
 # Creating a Custom Screen
 
