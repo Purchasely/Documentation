@@ -5,7 +5,7 @@ hidden: true
 metadata:
   robots: index
 ---
-# Creating a Bring Your Own Screen
+# Creating a Custom Screen
 
 1. Create a Screen in the Screen Composer and choose the layout **Bring Your Own Screen**.
 
@@ -16,7 +16,9 @@ metadata:
 3. Define the connections (e.g., login_successful, signup, cancel) — these determine the possible exit points for the Screen
 
    <Image align="center" border={true} src="https://files.readme.io/19b9e55f71091b6bfd168577e87a893fdca4bd32719ef2998d163f3f54ad9e0e-custom_screen_3_-_connections.gif" className="border" />
-4. Implement BYOS into your app
+
+   Note: The IDs defined for the connections need to be decided with / provided to your mobile engineering team as they will need them in the code of the BYOS implementation.
+4. [Mobile engineers] Implement BYOS into your app
 
    📚 [Follow the guide to implement BYOS into your app](byos-implementation)
 
@@ -28,15 +30,42 @@ metadata:
 
 BYOS allows you to blend native app screens and Purchasely-generated screens into one seamless user journey.
 
-1. Insert your BYOS node anywhere in a Flow via the Console (it can even be in the first position)
-2. It behaves like any other step: you can set entry/exit transitions.
-3. All  events (viewed, closed, next) are automatically traked by the SDK.
-4. Each connection leads to the appropriate next screen or action, as defined in the Flow graph.
+1. Insert your Custom Screen node anywhere in the Flow from the Console — including as the very first step.
+
+   <Image align="center" border={true} src="https://files.readme.io/08df9e08ec7d4c74da0e92c1999496e257141159300ee66b34c87de61720b9d2-custom_screen_4_-_drag__drop.gif" className="border" />
+2. Connect it to other Screens in the Flow and define the transition type for each incoming and outgoing connection.
+
+   <Image align="center" border={true} src="https://files.readme.io/6d1a2fadb35fd34f2ae028cbbdef6f218c1b01f8ab5b77d8aa9b9cd86fbdbce1-custom_screen_5.gif" className="border" />
+
+<br />
+
+The Custom Screen will appear in the Flow’s navigation exactly according to the transition you configured.
+
+* Example: If the connection leading to your Custom Screen uses the pop-in transition, the SDK will display your native screen as a pop-in.
+
+You can also chain multiple Custom Screens together and control the transition of each link independently.
+
+* Example: If your sign-in process spans several native steps, each step can be mapped to its own Custom Screen node with its own transition.
+
+<br />
+
+## Tracking of the Custom Screens
+
+When a Flow is displayed by the SDK, Custom Screens are automatically tracked just like any other Purchasely Screen. Each time a Custom Screen appears, the SDK emits a `PRESENTATION_DISPLAYED` event containing the Screen ID (in the `displayed_presentation` property). This allows you to analyze user paths, visualize transitions, and measure drop-off at every step of the Flow.
+
+User interactions inside Custom Screens are not tracked by the SDK, since these screens are fully controlled by your app. If you need additional interaction analytics, you should instrument them directly within your client-side code.
+
+<br />
+
+1. All  events (viewed, closed, next) are automatically traked by the SDK.
+2. Each connection leads to the appropriate next screen or action, as defined in the Flow graph.
 
 <br />
 
 ## Using BYOS Within a Paywall A/B Test
 
 You can also include BYOS nodes inside paywall experiments in A/A test or A/B test scenario.
+
+To do that
 
 <br />
