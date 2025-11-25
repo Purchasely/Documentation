@@ -78,8 +78,6 @@ sealed class PLYCustomScreen {
 }
 
 
-
-
 /**
  * Interface for providing custom screens within Purchasely flows.
  *
