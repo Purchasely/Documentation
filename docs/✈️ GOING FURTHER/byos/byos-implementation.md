@@ -45,15 +45,128 @@ To integrate a Custom Screen using BYOS, you must implement three components on 
 ### 1. Handle the BYOS callback
 
 Your app must implement the SDK delegate or callback that is triggered whenever a Custom Screen is retrieved.
-This callback provides an instance of the `PLYPresentation` class containing:
+This callback gives you the `PLYPresentation` containing:
 
 * the Screen ID
 * the list of connections (exit points)
 
 ```swift
-@mobile team: setCallBack / setDelegate
+@objc public class PLYPresentation: NSObject {
+  @objc public let id: String?
+	@objc public let language: String
+	@objc public let placementId: String?
+  @objc public let audienceId: String?
+  @objc public let abTestId: String?
+  @objc public let abTestVariantId: String?
+  @objc public let campaignId: String?
+
+  // ...
+
+  @objc public var connections: Set<PLYConnection>
+}
+
+/**
+ * Represents a connection in a presentation that defines navigation or action paths.
+ * Connections allow custom screens to trigger actions such as navigating to other screens,
+ * completing flows, or executing other configured behaviors.
+ */
+@objc public class PLYConnection: NSObject, Identifiable {
+    /// Your Connection's ID, as set in the console
+    @objc public var id: String {
+        _connection.id
+    }
+}
+
+/**
+ * Used to provide a UIViewController for a given Custom Screen presentation when the SDK is to display a Custom Screen
+ */
+@objc public protocol PLYCustomScreenViewControllerDelegate {
+    /**
+     * Called when the Purchasely SDK is attempting to display a Custom Screen
+     * - Parameter presentation: the Custom Screen's presentation
+     *
+     * - Returns: a `UIViewController` or `nil` if no view should be displayed or the SDK should fall back to the `PLYCustomScreenViewDelegate`
+     */
+    @objc func viewController(for presentation: PLYPresentation) -> UIViewController?
+}
+
+/**
+ * Used to provide a SwiftUI View for a given Custom Screen presentation when the SDK is to display a Custom Screen
+ */
+public protocol PLYCustomScreenViewDelegate {
+    associatedtype Content: View
+    /**
+     * Called when the Purchasely SDK is attempting to display a Custom Screen
+     * - Parameter presentation: the Custom Screen's presentation
+     *
+     * - Returns: a SwiftUI `View` or `EmptyView` if no view should be displayed
+     */
+    @ViewBuilder func view(for presentation: PLYPresentation) -> Content
+}
+
+/**
+ * Sets the Custom Screen UIKit delegate.
+ *
+ * - Parameters:
+ * - delegate: An instance conforming to the `PLYCustomScreenViewControllerDelegate` protocol
+ *
+ * - Note: should be called after the SDK has started.
+ * - Note:
+ * Both a UIKit and SwiftUI Custom Screen delegate can be set.
+ * If set, the UIKit Custom Screen delegate will be called first. If it does not return a UIViewController, the SDK will fall back to the SwiftUI Custom Screen delegate.
+ * Should the SwiftUI Custom Screen delegate not be set or return an EmptyView, the view will be closed.
+ */
+class Purchasely.setCustomScreenViewControllerDelegate(_:)
+
+/**
+ * Clears the UIKit Custom Screen delegate.
+ */
+class Purchasely.removeCustomScreenViewControllerDelegate()
+
+/**
+ * Sets the Custom Screen SwiftUI delegate.
+ *
+ * - Parameters:
+ * - delegate: An instance conforming to the `PLYCustomScreenViewDelegate` protocol
+ *
+ * - Note: should be called after the SDK has started.
+ * - Note:
+ * Both a UIKit and SwiftUI Custom Screen delegate can be set.
+ * If set, the UIKit Custom Screen delegate will be called first. If it does not return a UIViewController, the SDK will fall back to the SwiftUI Custom Screen delegate.
+ * Should the SwiftUI Custom Screen delegate not be set or return an EmptyView, the view will be closed.
+ */
+class Purchasely.setCustomScreenViewDelegate(_:)
+
+/**
+ * Clears the SwiftUI Custom Screen delegate.
+ */
+class Purchasely.removeOwnScreenViewDelegate()
 ```
 ```kotlin
+
+/**
+ * Represents a custom screen that can be displayed within a Purchasely flow.
+ *
+ * Clients can provide either a View or a Fragment implementation when responding
+ * to custom screen requests via [PLYCustomScreenProvider].
+ *
+ * @see PLYCustomScreenProvider
+ */
+sealed class PLYCustomScreen {
+    /**
+     * A custom screen backed by an Android View.
+     * @property view The View to display
+     */
+    data class View(val view: android.view.View) : PLYCustomScreen()
+
+    /**
+     * A custom screen backed by an Android Fragment.
+     * @property fragment The Fragment to display
+     */
+    data class Fragment(val fragment: androidx.fragment.app.Fragment) : PLYCustomScreen()
+}
+
+
 /**
  * Interface for providing custom screens within Purchasely flows.
  *
@@ -81,7 +194,7 @@ interface PLYCustomScreenProvider {
 
 ### 2. Construct and return the native view controller
 
-Based on the Screen ID, your app should instantiate the corresponding native UI (Swift/Kotlin).
+Based on the Screen ID, your app should instantiate the corresponding native UI (Swift/Kotlin/RN/Flutter).
 You then return that view controller to the SDK, which inserts it into Purchasely’s navigation layer.
 
 ```swift
@@ -89,27 +202,6 @@ You then return that view controller to the SDK, which inserts it into Purchasel
 code de la methode PLYCustomScreenProvider / PLYCustomScreenViewDelegate / PLYCustomScreenViewControllerDelegate
 ```
 ```kotlin
-/**
- * Represents a custom screen that can be displayed within a Purchasely flow.
- *
- * Clients can provide either a View or a Fragment implementation when responding
- * to custom screen requests via [PLYCustomScreenProvider].
- *
- * @see PLYCustomScreenProvider
- */
-sealed class PLYCustomScreen {
-    /**
-     * A custom screen backed by an Android View.
-     * @property view The View to display
-     */
-    data class View(val view: android.view.View) : PLYCustomScreen()
-
-    /**
-     * A custom screen backed by an Android Fragment.
-     * @property fragment The Fragment to display
-     */
-    data class Fragment(val fragment: androidx.fragment.app.Fragment) : PLYCustomScreen()
-}
 ```
 
 <br />
@@ -121,17 +213,21 @@ When the user completes the Custom Screen, call the SDK’s `execute()` method w
 This tells Purchasely what to do next (continue a Flow, trigger an action, etc.).
 
 ```swift
-@mobile team: 
-code d'appel à la fonction execute depuis le viewController natif associé au Custom Screen
+/**
+ * Notifies the presentation a Connection should be executed.
+ * Call this method with the matching connection when a user performs an action on your Custom Screen
+ * - Parameter connection: The `PLYConnection` object representing the connection. If nil, will fall back to the presentation's default connection.
+ *
+ * Calling this method may trigger UI updates or other side effects related to the connection.
+ */
+PLYPresentation.executeConnection(_:)
+
+Example:
+
+let login = presentation.connections.first(where: { $0.id == "login" })
+presentation.exect
 ```
 ```kotlin
-/**
- * Executes actions of the provided connection.
- * If no connection is provided, it will execute the default connection's actions if any.
- *
- * @param connection The connection whose actions should be executed. If null, the default connection (if any) will be used.
- */
-fun execute(connection: PLYConnection? = null)
 ```
 
 In the context of a Flow, calling this method will take the user to the next step in the Flow - the one associated with the connection.
@@ -161,7 +257,6 @@ This allows the SDK to retrieve the latest receipt and extract the purchase info
 appel à la méthode synchronize() après un achat
 ```
 ```kotlin
-Purchasely.synchronize()
 ```
 
 This is particularly important in A/B or A/A test scenarios, where accurate purchase tracking is required to attribute conversions correctly.
@@ -175,46 +270,3 @@ When a Flow is displayed by the SDK, Custom Screens are automatically tracked ju
 User interactions inside Custom Screens are not tracked by the SDK, since these screens are fully controlled by your app. If you need additional interaction analytics, you should instrument them directly within your client-side code.
 
 <br />
-
-## Full sample snippet
-
-This sample assumes that you have two custom screens, identified by the presentation IDs `login` and `register`.
-It also assumes that your Swift/Kotlin UI components are named `LoginView` and `RegisterView` respectively.
-
-```swift
-@mobile team: full sample
-```
-```kotlin
-private fun setCustomScreensProvider()  {
-    Purchasely.setOwnScreenProvider(
-        object : PLYCustomScreenProvider {
-            override fun onCustomScreenRequested(presentation: PLYPresentation): PLYCustomScreen? {
-                val view = when(presentation.id) {
-                    "login" -> {
-                        val connection = presentation.connections.firstOrNull { it.vendorId == "to_home_screen" }
-                        LoginView(
-                            context = this,
-                            onLoginSuccess = { presentation.execute(connection) },
-                            onPrevious = { presentation.back() }
-                        )
-                    }
-                    "register" -> {
-                        val connection = presentation.connections.firstOrNull { it.vendorId == "to_profile_setup" }
-                        RegisterView(
-                            context = this,
-                            onRegisterSuccess = { presentation.execute(connection) },
-                            onPrevious = { presentation.back() }
-                        )
-                    }
-
-                    else -> {
-                        View(this)
-                    }
-                }
-
-                return PLYCustomScreen.View(view)
-            }
-        }
-    )
-}
-```
