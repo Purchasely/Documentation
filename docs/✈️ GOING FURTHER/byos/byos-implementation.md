@@ -89,6 +89,27 @@ You then return that view controller to the SDK, which inserts it into Purchasel
 code de la methode PLYCustomScreenProvider / PLYCustomScreenViewDelegate / PLYCustomScreenViewControllerDelegate
 ```
 ```kotlin
+/**
+ * Represents a custom screen that can be displayed within a Purchasely flow.
+ *
+ * Clients can provide either a View or a Fragment implementation when responding
+ * to custom screen requests via [PLYCustomScreenProvider].
+ *
+ * @see PLYCustomScreenProvider
+ */
+sealed class PLYCustomScreen {
+    /**
+     * A custom screen backed by an Android View.
+     * @property view The View to display
+     */
+    data class View(val view: android.view.View) : PLYCustomScreen()
+
+    /**
+     * A custom screen backed by an Android Fragment.
+     * @property fragment The Fragment to display
+     */
+    data class Fragment(val fragment: androidx.fragment.app.Fragment) : PLYCustomScreen()
+}
 ```
 
 <br />
@@ -104,6 +125,13 @@ This tells Purchasely what to do next (continue a Flow, trigger an action, etc.)
 code d'appel à la fonction execute depuis le viewController natif associé au Custom Screen
 ```
 ```kotlin
+/**
+ * Executes actions of the provided connection.
+ * If no connection is provided, it will execute the default connection's actions if any.
+ *
+ * @param connection The connection whose actions should be executed. If null, the default connection (if any) will be used.
+ */
+fun execute(connection: PLYConnection? = null)
 ```
 
 In the context of a Flow, calling this method will take the user to the next step in the Flow - the one associated with the connection.
