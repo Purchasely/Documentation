@@ -85,11 +85,21 @@ Note: This requires having implemented BYOS in your app and mapping each onboard
 
 # Tracking of the Custom Screens
 
-When a Flow is displayed by the SDK, Custom Screens are automatically tracked just like any other Purchasely Screen. Each time a Custom Screen appears, the SDK emits a `PRESENTATION_DISPLAYED` event containing the Screen ID (in the `displayed_presentation` property). This allows you to analyze user paths, visualize transitions, and measure drop-off at every step of the Flow.
+When a Flow is displayed by the SDK, Custom Screens are automatically tracked like any other Purchasely Screen.
+Each time a Custom Screen is shown, the SDK emits a `PRESENTATION_DISPLAYED` event containing the Screen ID (in the `displayed_presentation` property). This allows you to analyze user paths, visualize transitions, and measure drop-off at every step of the Flow. This is also used to compute conversion rates in A/B tests.
 
-User interactions inside Custom Screens are not tracked by the SDK, since these screens are fully controlled by your app. If you need additional interaction analytics, you should instrument them directly within your client-side code.
+Custom Screens are also tracked outside of a Flow, but only when displayed via the SDK’s `display()` method.
 
-> ❗️ Don't forget to synchronizing purchases
+If your app manually fetches Screens and displays the Custom Screen’s view controller itself - without using the SDK’s `display()` method - you must trigger the tracking events manually:
+
+* call `clientPresentationDisplayed(presentation)` when your Custom Screen is shown
+* call `clientPresentationClosed(presentation)` when it is dismissed
+
+These calls ensure the Custom Screen appears in your analytics.
+
+Finally, note that user interactions inside Custom Screens are not tracked by the SDK, since these screens are fully managed by your app. If you require interaction-level analytics, you should instrument them directly in your own client-side code.
+
+> ❗️ Don't forget to synchronize purchases
 >
 > In a Paywall A/B test scenario, make sure with your engineering team that [the In-App Purchases performed inside the Custom Screen are properly synchronized](https://docs.purchasely.com/docs/byos-implementation#synchronizing-purchases).
 >
