@@ -173,4 +173,12 @@ When a Flow is displayed by the SDK, Custom Screens are automatically tracked ju
 
 User interactions inside Custom Screens are not tracked by the SDK, since these screens are fully controlled by your app. If you need additional interaction analytics, you should instrument them directly within your client-side code.
 
-<br />
+## Full sample snippet
+
+```swift
+@mobile team: full sample
+```
+```kotlin
+```
+
+ 
