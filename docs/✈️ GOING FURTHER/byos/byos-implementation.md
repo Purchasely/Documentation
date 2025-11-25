@@ -54,6 +54,20 @@ This callback gives you:
 @mobile team: setCallBack / setDelegate
 ```
 ```kotlin
+
+Purchasely.setOwnScreenProvider(
+  object : PLYCustomScreenProvider {
+    override fun onCustomScreenRequested(presentation: PLYPresentation): PLYCustomScreen? {
+
+      val customView = MyCustomView(...)
+      return PLYCustomScreen.View(customView)
+
+      // OR 
+      val customFragment = MyCustomFragment(...)
+      return PLYCustomScreen.Fragment(customFragment)
+    }
+  }
+)
 ```
 
 <br />
