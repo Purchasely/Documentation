@@ -54,30 +54,6 @@ This callback gives you:
 @mobile team: setCallBack / setDelegate
 ```
 ```kotlin
-
-/**
- * Represents a custom screen that can be displayed within a Purchasely flow.
- *
- * Clients can provide either a View or a Fragment implementation when responding
- * to custom screen requests via [PLYCustomScreenProvider].
- *
- * @see PLYCustomScreenProvider
- */
-sealed class PLYCustomScreen {
-    /**
-     * A custom screen backed by an Android View.
-     * @property view The View to display
-     */
-    data class View(val view: android.view.View) : PLYCustomScreen()
-
-    /**
-     * A custom screen backed by an Android Fragment.
-     * @property fragment The Fragment to display
-     */
-    data class Fragment(val fragment: androidx.fragment.app.Fragment) : PLYCustomScreen()
-}
-
-
 /**
  * Interface for providing custom screens within Purchasely flows.
  *
@@ -114,19 +90,33 @@ code de la methode PLYCustomScreenProvider / PLYCustomScreenViewDelegate / PLYCu
 ```
 ```kotlin
 /**
- * Executes actions of the provided connection.
- * If no connection is provided, it will execute the default connection's actions if any.
+ * Represents a custom screen that can be displayed within a Purchasely flow.
  *
- * @param connection The connection whose actions should be executed. If null, the default connection (if any) will be used.
+ * Clients can provide either a View or a Fragment implementation when responding
+ * to custom screen requests via [PLYCustomScreenProvider].
+ *
+ * @see PLYCustomScreenProvider
  */
-fun execute(connection: PLYConnection? = null)
+sealed class PLYCustomScreen {
+    /**
+     * A custom screen backed by an Android View.
+     * @property view The View to display
+     */
+    data class View(val view: android.view.View) : PLYCustomScreen()
+
+    /**
+     * A custom screen backed by an Android Fragment.
+     * @property fragment The Fragment to display
+     */
+    data class Fragment(val fragment: androidx.fragment.app.Fragment) : PLYCustomScreen()
+}
 ```
 
 <br />
 
 ### 3. Resume execution by calling the SDK
 
-When the user completes the Custom Screen, call the SDK’s `execute()` method with the chosen connection.
+When the user completes the Custom Screen, call the SDK’s `execute()` method of the class `PLYPresentation` with the chosen connection.
 
 This tells Purchasely what to do next (continue a Flow, trigger an action, etc.).
 
@@ -135,6 +125,13 @@ This tells Purchasely what to do next (continue a Flow, trigger an action, etc.)
 code d'appel à la fonction execute depuis le viewController natif associé au Custom Screen
 ```
 ```kotlin
+/**
+ * Executes actions of the provided connection.
+ * If no connection is provided, it will execute the default connection's actions if any.
+ *
+ * @param connection The connection whose actions should be executed. If null, the default connection (if any) will be used.
+ */
+fun execute(connection: PLYConnection? = null)
 ```
 
 In the context of a Flow, calling this method will take the user to the next step in the Flow - the one associated with the connection.
