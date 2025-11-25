@@ -105,7 +105,7 @@ interface PLYCustomScreenProvider {
 
 ### 2. Construct and return the native view controller
 
-Based on the Screen ID, your app should instantiate the corresponding native UI (Swift/Kotlin/RN/Flutter).
+Based on the Screen ID, your app should instantiate the corresponding native UI (Swift/Kotlin).
 You then return that view controller to the SDK, which inserts it into Purchasely’s navigation layer.
 
 ```swift
