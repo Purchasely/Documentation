@@ -201,24 +201,40 @@ You then return that view controller to the SDK, which inserts it into Purchasel
 // SwiftUI
 
 public class CustomScreenViewDelegate: PLYCustomScreenViewDelegate {
-
+    
     @ViewBuilder public func view(for presentation: PLYPresentation) -> some View {
-        VStack {
-            Spacer()
-            Text("Hello Purchasely!")
-            Spacer()
-            Button(action: {
-                presentation.executeConnection(presentation.connections.first(where: { $0.id == "login" } ))
-            }, label: {
-                Text("Login")
-                    .font(.largeTitle)
-                    .padding()
-                    .background(.white)
-            })
+        switch presentation.id {
+        case "login":
+            VStack {
+                Spacer()
+                Text("Hello Purchasely!")
+                Spacer()
+                Button(action: {
+                    presentation.executeConnection(presentation.connections.first(where: { $0.id == "login" } ))
+                }, label: {
+                    Text("Login")
+                        .font(.largeTitle)
+                        .padding()
+                })
+            }
+        default:
+            EmptyView()
         }
     }
 }
 
+
+// UIKit
+public class MyCustomScreenViewControllerDelegate: PLYCustomScreenViewControllerDelegate {
+    public func viewController(for presentation: PLYPresentation) -> UIViewController? {
+        switch presentation.id {
+        case "login":
+            LoginViewController()
+        default:
+            nil
+        }
+    }
+}
 ```
 ```kotlin
 ```
