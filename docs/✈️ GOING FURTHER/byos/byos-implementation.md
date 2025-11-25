@@ -161,6 +161,7 @@ This allows the SDK to retrieve the latest receipt and extract the purchase info
 appel à la méthode synchronize() après un achat
 ```
 ```kotlin
+Purchasely.synchronize()
 ```
 
 This is particularly important in A/B or A/A test scenarios, where accurate purchase tracking is required to attribute conversions correctly.
@@ -174,3 +175,46 @@ When a Flow is displayed by the SDK, Custom Screens are automatically tracked ju
 User interactions inside Custom Screens are not tracked by the SDK, since these screens are fully controlled by your app. If you need additional interaction analytics, you should instrument them directly within your client-side code.
 
 <br />
+
+## Full sample snippet
+
+This sample assumes that you have two custom screens, identified by the presentation IDs `login` and `register`.
+It also assumes that your Swift/Kotlin UI components are named `LoginView` and `RegisterView` respectively.
+
+```swift
+@mobile team: full sample
+```
+```kotlin
+private fun setCustomScreensProvider()  {
+    Purchasely.setOwnScreenProvider(
+        object : PLYCustomScreenProvider {
+            override fun onCustomScreenRequested(presentation: PLYPresentation): PLYCustomScreen? {
+                val view = when(presentation.id) {
+                    "login" -> {
+                        val connection = presentation.connections.firstOrNull { it.vendorId == "to_home_screen" }
+                        LoginView(
+                            context = this,
+                            onLoginSuccess = { presentation.execute(connection) },
+                            onPrevious = { presentation.back() }
+                        )
+                    }
+                    "register" -> {
+                        val connection = presentation.connections.firstOrNull { it.vendorId == "to_profile_setup" }
+                        RegisterView(
+                            context = this,
+                            onRegisterSuccess = { presentation.execute(connection) },
+                            onPrevious = { presentation.back() }
+                        )
+                    }
+
+                    else -> {
+                        View(this)
+                    }
+                }
+
+                return PLYCustomScreen.View(view)
+            }
+        }
+    )
+}
+```
