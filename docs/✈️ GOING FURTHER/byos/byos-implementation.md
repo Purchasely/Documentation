@@ -55,19 +55,52 @@ This callback gives you:
 ```
 ```kotlin
 
-Purchasely.setOwnScreenProvider(
-  object : PLYCustomScreenProvider {
-    override fun onCustomScreenRequested(presentation: PLYPresentation): PLYCustomScreen? {
+/**
+ * Represents a custom screen that can be displayed within a Purchasely flow.
+ *
+ * Clients can provide either a View or a Fragment implementation when responding
+ * to custom screen requests via [PLYCustomScreenProvider].
+ *
+ * @see PLYCustomScreenProvider
+ */
+sealed class PLYCustomScreen {
+    /**
+     * A custom screen backed by an Android View.
+     * @property view The View to display
+     */
+    data class View(val view: android.view.View) : PLYCustomScreen()
 
-      val customView = MyCustomView(...)
-      return PLYCustomScreen.View(customView)
+    /**
+     * A custom screen backed by an Android Fragment.
+     * @property fragment The Fragment to display
+     */
+    data class Fragment(val fragment: androidx.fragment.app.Fragment) : PLYCustomScreen()
+}
 
-      // OR 
-      val customFragment = MyCustomFragment(...)
-      return PLYCustomScreen.Fragment(customFragment)
-    }
-  }
-)
+
+
+
+/**
+ * Interface for providing custom screens within Purchasely flows.
+ *
+ * Clients should implement this interface and register it via
+ * [Purchasely.setOwnScreenProvider] to provide their own UI for specific presentations.
+ *
+ * When a presentation is marked as client-controlled (type == CLIENT), the SDK will
+ * invoke [onCustomScreenRequested] to obtain the custom screen implementation.
+ *
+ * @see PLYCustomScreen
+ * @see Purchasely.setOwnScreenProvider
+ */
+interface PLYCustomScreenProvider {
+    /**
+     * Called when the SDK needs a custom screen for the given presentation.
+     *
+     * @param presentation The presentation requesting a custom screen
+     * @return A [PLYCustomScreen] containing either a View or Fragment, or null if no custom screen is available
+     */
+    fun onCustomScreenRequested(presentation: PLYPresentation): PLYCustomScreen?
+}
 ```
 
 <br />
