@@ -113,6 +113,13 @@ You then return that view controller to the SDK, which inserts it into Purchasel
 code de la methode PLYCustomScreenProvider / PLYCustomScreenViewDelegate / PLYCustomScreenViewControllerDelegate
 ```
 ```kotlin
+/**
+ * Executes actions of the provided connection.
+ * If no connection is provided, it will execute the default connection's actions if any.
+ *
+ * @param connection The connection whose actions should be executed. If null, the default connection (if any) will be used.
+ */
+fun execute(connection: PLYConnection? = null)
 ```
 
 <br />
