@@ -224,8 +224,8 @@ PLYPresentation.executeConnection(_:)
 
 Example:
 
-let login = presentation.connections.first(where: { $0.id == "login" })
-presentation.exect
+let loginConnection = presentation.connections.first(where: { $0.id == "login" })
+presentation.executeConnection(loginConnection)
 ```
 ```kotlin
 ```
