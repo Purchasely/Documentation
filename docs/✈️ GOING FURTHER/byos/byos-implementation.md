@@ -45,7 +45,7 @@ To integrate a Custom Screen using BYOS, you must implement three components on 
 ### 1. Handle the BYOS callback
 
 Your app must implement the SDK delegate or callback that is triggered whenever a Custom Screen is retrieved.
-This callback gives you:
+This callback provides an instance of the `PLYPresentation` class containing:
 
 * the Screen ID
 * the list of connections (exit points)
