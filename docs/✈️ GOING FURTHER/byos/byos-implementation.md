@@ -198,8 +198,27 @@ Based on the Screen ID, your app should instantiate the corresponding native UI 
 You then return that view controller to the SDK, which inserts it into Purchasely’s navigation layer.
 
 ```swift
-@mobile team: 
-code de la methode PLYCustomScreenProvider / PLYCustomScreenViewDelegate / PLYCustomScreenViewControllerDelegate
+// SwiftUI
+
+public class CustomScreenViewDelegate: PLYCustomScreenViewDelegate {
+
+    @ViewBuilder public func view(for presentation: PLYPresentation) -> some View {
+        VStack {
+            Spacer()
+            Text("Hello Purchasely!")
+            Spacer()
+            Button(action: {
+                presentation.executeConnection(presentation.connections.first(where: { $0.id == "login" } ))
+            }, label: {
+                Text("Login")
+                    .font(.largeTitle)
+                    .padding()
+                    .background(.white)
+            })
+        }
+    }
+}
+
 ```
 ```kotlin
 ```
@@ -222,8 +241,8 @@ This tells Purchasely what to do next (continue a Flow, trigger an action, etc.)
  */
 PLYPresentation.executeConnection(_:)
 
-Example:
 
+Example (supposing a PLYPresentation variable / parameter named "presentation"):
 let loginConnection = presentation.connections.first(where: { $0.id == "login" })
 presentation.executeConnection(loginConnection)
 ```
