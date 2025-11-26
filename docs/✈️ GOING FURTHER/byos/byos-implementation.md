@@ -155,7 +155,7 @@ interface PLYCustomScreenProvider {
 
 (TODO: wording @Nico) Implementation examples:
 
-Based on the Screen ID, your delegate / provider should instantiate the corresponding native UI (Swift/Kotlin/RN/Flutter) and return it to the SDK, which inserts it into Purchasely’s navigation layer.
+Based on the Screen ID, your delegate / provider should instantiate the corresponding native UI (Swift/Kotlin) and return it to the SDK, which inserts it into Purchasely’s navigation layer.
 
 ```swift
 // SwiftUI
