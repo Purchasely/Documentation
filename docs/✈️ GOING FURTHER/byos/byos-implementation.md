@@ -273,6 +273,29 @@ let customScreenDelegate = CustomScreenViewDelegate()
 Purchasely.setCustomScreenViewDelegate(customScreenDelegate)
 ```
 ```kotlin
+val customScreenProvider = CustomScreenProvider()
+Purchasely.setCustomScreenProvider(customScreenProvider)
+
+// OR using anonymous implementation
+Purchasely.setCustomScreenProvider(
+    object : PLYCustomScreenProvider {
+        override fun onCustomScreenRequested(presentation: PLYPresentation): PLYCustomScreen? {
+            return when(presentation.id) {
+                "login" -> {
+                    // Custom Login View
+                    PLYCustomScreen.View(yourCustomLoginView)
+
+                    // Or Custom Login Fragment
+                    // PLYCustomScreen.Fragment(yourCustomLoginFragment())
+
+                }
+                else -> {
+                    return null
+                }
+            }
+        }
+    }
+)
 ```
 
 <br />
