@@ -42,10 +42,10 @@ When a Flow reaches a Custom Screen step, the same handover mechanism applies:
 
 To integrate a Custom Screen using BYOS, you must implement three components on the app side:
 
-### 1. Handle the BYOS callback
+### 1. Implement the Custom Screen Delegate (iOS) / Provider (Android)
 
-Your app must implement the SDK delegate or callback that is triggered whenever a Custom Screen is retrieved.
-This callback gives you the `PLYPresentation` containing:
+Your app must implement the SDK delegate or provider that is called whenever a Custom Screen is retrieved.
+This callback gives you the `PLYPresentation`containing:
 
 * the Screen ID
 * the list of connections (exit points)
@@ -188,14 +188,12 @@ interface PLYCustomScreenProvider {
      */
     fun onCustomScreenRequested(presentation: PLYPresentation): PLYCustomScreen?
 }
+
 ```
 
-<br />
+(TODO: wording @Nico) Implementation examples:
 
-### 2. Construct and return the native view controller
-
-Based on the Screen ID, your app should instantiate the corresponding native UI (Swift/Kotlin/RN/Flutter).
-You then return that view controller to the SDK, which inserts it into Purchasely’s navigation layer.
+Based on the Screen ID, your delegate / provider should instantiate the corresponding native UI (Swift/Kotlin/RN/Flutter) and return it to the SDK, which inserts it into Purchasely’s navigation layer.
 
 ```swift
 // SwiftUI
@@ -237,6 +235,60 @@ public class MyCustomScreenViewControllerDelegate: PLYCustomScreenViewController
 }
 ```
 ```kotlin
+```
+
+### 2. Provide the delegate / provider to the SDK
+
+Based on the Screen ID, your app should instantiate the corresponding native UI (Swift/Kotlin/RN/Flutter).
+You then return that view controller to the SDK, which inserts it into Purchasely’s navigation layer.
+
+```swift
+/**
+ * Sets the Custom Screen UIKit delegate.
+ *
+ * - Parameters:
+ * - delegate: An instance conforming to the `PLYCustomScreenViewControllerDelegate` protocol
+ *
+ * - Note: should be called after the SDK has started.
+ * - Note:
+ * Both a UIKit and SwiftUI Custom Screen delegate can be set.
+ * If set, the UIKit Custom Screen delegate will be called first. If it does not return a UIViewController, the SDK will fall back to the SwiftUI Custom Screen delegate.
+ * Should the SwiftUI Custom Screen delegate not be set or return an EmptyView, the view will be closed.
+ */
+class Purchasely.setCustomScreenViewControllerDelegate(_:)
+
+/**
+* Clears the UIKit Custom Screen delegate.
+*/
+class Purchasely.removeCustomScreenViewControllerDelegate()
+
+/**
+ * Sets the Custom Screen SwiftUI delegate.
+ *
+ * - Parameters:
+ * - delegate: An instance conforming to the `PLYCustomScreenViewDelegate` protocol
+ *
+ * - Note: should be called after the SDK has started.
+ * - Note:
+ * Both a UIKit and SwiftUI Custom Screen delegate can be set.
+ * If set, the UIKit Custom Screen delegate will be called first. If it does not return a UIViewController, the SDK will fall back to the SwiftUI Custom Screen delegate.
+ * Should the SwiftUI Custom Screen delegate not be set or return an EmptyView, the view will be closed.
+ */
+class Purchasely.setCustomScreenViewDelegate(_:)
+
+/**
+ * Clears the SwiftUI Custom Screen delegate.
+ */
+class Purchasely.removeOwnScreenViewDelegate()
+```
+```kotlin
+```
+
+(TODO: wording @Nico) Example:
+
+```
+let customScreenDelegate = CustomScreenViewDelegate()
+Purchasely.setCustomScreenViewDelegate(customScreenDelegate)
 ```
 
 <br />
