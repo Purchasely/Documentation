@@ -153,12 +153,13 @@ interface PLYCustomScreenProvider {
 
 ```
 
-**Implementation example:**
+(TODO: wording @Nico) Implementation examples:
 
-Based on the Screen ID, your delegate / provider should instantiate the corresponding native UI (Swift/Kotlin/RN/Flutter) and return it to the SDK, which inserts it into Purchasely’s navigation layer.
+Based on the Screen ID, your delegate / provider should instantiate the corresponding native UI (Swift/Kotlin) and return it to the SDK, which inserts it into Purchasely’s navigation layer.
 
 ```swift
 // SwiftUI
+
 public class CustomScreenViewDelegate: PLYCustomScreenViewDelegate {
     
     @ViewBuilder public func view(for presentation: PLYPresentation) -> some View {
@@ -239,12 +240,12 @@ class Purchasely.setCustomScreenViewDelegate(_:)
 /**
  * Clears the SwiftUI Custom Screen delegate.
  */
-class Purchasely.removeOwnScreenViewDelegate()
+class Purchasely.removeCustomScreenViewDelegate()
 ```
 ```kotlin
 ```
 
-**Usage example:**
+(TODO: wording @Nico) Usage example:
 
 ```swift
 let customScreenDelegate = CustomScreenViewDelegate()
@@ -274,9 +275,7 @@ PLYPresentation.executeConnection(_:)
 ```kotlin
 ```
 
-**Standalone usage example:**
-
-(supposing a PLYPresentation variable / parameter named "presentation")
+(TODO: wording @Nico) standalone usage example (Example (supposing a PLYPresentation variable / parameter named "presentation")
 
 ```swift
 let loginConnection = presentation.connections.first(where: { $0.id == "login" })
@@ -285,7 +284,7 @@ presentation.executeConnection(loginConnection)
 ```kotlin
 ```
 
-**Delegate usage example:**
+(TODO: wording @Nico) Delegate usage example:
 
 ```swift
 // SwiftUI
