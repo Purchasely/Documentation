@@ -276,7 +276,7 @@ Purchasely.setCustomScreenViewDelegate(customScreenDelegate)
 val customScreenProvider = CustomScreenProvider()
 Purchasely.setCustomScreenProvider(customScreenProvider)
 
-// OR using anonymous implementation
+// OR using anonymous object implementation
 Purchasely.setCustomScreenProvider(
     object : PLYCustomScreenProvider {
         override fun onCustomScreenRequested(presentation: PLYPresentation): PLYCustomScreen? {
