@@ -358,6 +358,7 @@ This allows the SDK to retrieve the latest receipt and extract the purchase info
 appel à la méthode synchronize() après un achat
 ```
 ```kotlin
+Purchasely.synchronize()
 ```
 
 This is particularly important in A/B or A/A test scenarios, where accurate purchase tracking is required to attribute conversions correctly.
