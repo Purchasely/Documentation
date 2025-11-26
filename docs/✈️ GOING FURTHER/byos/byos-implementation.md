@@ -153,7 +153,7 @@ interface PLYCustomScreenProvider {
 
 ```
 
-(TODO: wording @Nico) Implementation examples:
+**Implementation examples:**
 
 Based on the Screen ID, your delegate / provider should instantiate the corresponding native UI (Swift/Kotlin) and return it to the SDK, which inserts it into Purchasely’s navigation layer.
 
@@ -245,7 +245,7 @@ class Purchasely.removeCustomScreenViewDelegate()
 ```kotlin
 ```
 
-(TODO: wording @Nico) Usage example:
+**Usage example:**
 
 ```swift
 let customScreenDelegate = CustomScreenViewDelegate()
@@ -275,7 +275,7 @@ PLYPresentation.executeConnection(_:)
 ```kotlin
 ```
 
-(TODO: wording @Nico) standalone usage example (Example (supposing a PLYPresentation variable / parameter named "presentation")
+Standalone usage example (Example (supposing a PLYPresentation variable / parameter named "presentation")
 
 ```swift
 let loginConnection = presentation.connections.first(where: { $0.id == "login" })
@@ -284,7 +284,7 @@ presentation.executeConnection(loginConnection)
 ```kotlin
 ```
 
-(TODO: wording @Nico) Delegate usage example:
+**Delegate usage example:**
 
 ```swift
 // SwiftUI
@@ -332,14 +332,14 @@ public class MyCustomScreenViewControllerDelegate: PLYCustomScreenViewController
 
 In the context of a Flow, calling this method will take the user to the next step in the Flow - the one associated with the connection.
 
-Example:
+**Delegate usage example in the context of a Flow**:
 
 1. Calling `executeConnection(email)` will take the user to the email checking screen - which is another Custom Screen
 
    <Image align="center" border={true} src="https://files.readme.io/497f65ee3b2d20cb33e4b6494ee66eccde496f3185f974a67632015a4aeb1995-custom_screen_6.gif" className="border" />
 2. For social connections, the process is managed by the the app through the Custom Screen `sign_in_screen` view controller. Once the user has completed the social connection, calling `executeConnection(social_connection_successful)` will take the user to the final screen of the Flow, bypassing the email validation process.
 
-   <Image align="center" border={false} src="https://files.readme.io/7e2eea5bfb7a0f7f0d4a2398ccb8fdbe31350a21696d5f46f4c8a6892c35cf22-custom_screen_7.gif" />
+   <Image align="center" border={true} src="https://files.readme.io/7e2eea5bfb7a0f7f0d4a2398ccb8fdbe31350a21696d5f46f4c8a6892c35cf22-custom_screen_7.gif" className="border" />
 
 ### Outside of a Flow
 
