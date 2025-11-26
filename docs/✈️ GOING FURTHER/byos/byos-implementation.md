@@ -208,7 +208,6 @@ public class CustomScreenViewDelegate: PLYCustomScreenViewDelegate {
                 Text("Hello Purchasely!")
                 Spacer()
                 Button(action: {
-                    presentation.executeConnection(presentation.connections.first(where: { $0.id == "login" } ))
                 }, label: {
                     Text("Login")
                         .font(.largeTitle)
@@ -286,16 +285,18 @@ class Purchasely.removeOwnScreenViewDelegate()
 
 (TODO: wording @Nico) Example:
 
-```
+```swift
 let customScreenDelegate = CustomScreenViewDelegate()
 Purchasely.setCustomScreenViewDelegate(customScreenDelegate)
+```
+```kotlin
 ```
 
 <br />
 
 ### 3. Resume execution by calling the SDK
 
-When the user completes the Custom Screen, call the SDK’s `execute()` method with the chosen connection.
+When the user completes the Custom Screen, call the presentation's (or screen, how do we call those PLYPresentation in the doc? @Nico?)`executeConnection()` method with the chosen connection.
 
 This tells Purchasely what to do next (continue a Flow, trigger an action, etc.).
 
@@ -316,6 +317,52 @@ presentation.executeConnection(loginConnection)
 ```
 ```kotlin
 ```
+
+(TODO: wording @Nico) Example:
+
+```swift
+// SwiftUI
+
+public class CustomScreenViewDelegate: PLYCustomScreenViewDelegate {
+    
+    @ViewBuilder public func view(for presentation: PLYPresentation) -> some View {
+        switch presentation.id {
+        case "login":
+            VStack {
+                Spacer()
+                Text("Hello Purchasely!")
+                Spacer()
+                Button(action: {
+                    presentation.executeConnection(presentation.connections.first(where: { $0.id == "login" } ))
+                }, label: {
+                    Text("Login")
+                        .font(.largeTitle)
+                        .padding()
+                })
+            }
+        default:
+            EmptyView()
+        }
+    }
+}
+
+
+// UIKit
+public class MyCustomScreenViewControllerDelegate: PLYCustomScreenViewControllerDelegate {
+    public func viewController(for presentation: PLYPresentation) -> UIViewController? {
+        switch presentation.id {
+        case "login":
+            LoginViewController()
+        default:
+            nil
+        }
+    }
+}
+```
+```kotlin
+```
+
+<br />
 
 In the context of a Flow, calling this method will take the user to the next step in the Flow - the one associated with the connection.
 
