@@ -301,8 +301,6 @@ PLYPresentation.executeConnection(_:)
 /**
  * Executes actions of the provided connection.
  * If no connection is provided, it will execute the default connection's actions if any.
- *
- * @param connection The connection whose actions should be executed. If null, the default connection (if any) will be used.
  */
 fun PLYPresentation.execute(connection: PLYConnection? = null) 
 ```
