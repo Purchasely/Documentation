@@ -309,16 +309,20 @@ This tells Purchasely what to do next (continue a Flow, trigger an action, etc.)
  * Calling this method may trigger UI updates or other side effects related to the connection.
  */
 PLYPresentation.executeConnection(_:)
+```
+```kotlin
+```
 
+(TODO: wording @Nico) standalone example (Example (supposing a PLYPresentation variable / parameter named "presentation")
 
-Example (supposing a PLYPresentation variable / parameter named "presentation"):
+```swift
 let loginConnection = presentation.connections.first(where: { $0.id == "login" })
 presentation.executeConnection(loginConnection)
 ```
 ```kotlin
 ```
 
-(TODO: wording @Nico) Example:
+(TODO: wording @Nico) Delegate example:
 
 ```swift
 // SwiftUI
