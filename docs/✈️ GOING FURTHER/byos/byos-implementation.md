@@ -298,6 +298,13 @@ This tells Purchasely what to do next (continue a Flow, trigger an action, etc.)
 PLYPresentation.executeConnection(_:)
 ```
 ```kotlin
+/**
+ * Executes actions of the provided connection.
+ * If no connection is provided, it will execute the default connection's actions if any.
+ *
+ * @param connection The connection whose actions should be executed. If null, the default connection (if any) will be used.
+ */
+fun PLYPresentation.execute(connection: PLYConnection? = null) 
 ```
 
 Standalone usage example (Example (supposing a PLYPresentation variable / parameter named "presentation")
