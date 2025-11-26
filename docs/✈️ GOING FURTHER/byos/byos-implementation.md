@@ -103,44 +103,6 @@ public protocol PLYCustomScreenViewDelegate {
      */
     @ViewBuilder func view(for presentation: PLYPresentation) -> Content
 }
-
-/**
- * Sets the Custom Screen UIKit delegate.
- *
- * - Parameters:
- * - delegate: An instance conforming to the `PLYCustomScreenViewControllerDelegate` protocol
- *
- * - Note: should be called after the SDK has started.
- * - Note:
- * Both a UIKit and SwiftUI Custom Screen delegate can be set.
- * If set, the UIKit Custom Screen delegate will be called first. If it does not return a UIViewController, the SDK will fall back to the SwiftUI Custom Screen delegate.
- * Should the SwiftUI Custom Screen delegate not be set or return an EmptyView, the view will be closed.
- */
-class Purchasely.setCustomScreenViewControllerDelegate(_:)
-
-/**
- * Clears the UIKit Custom Screen delegate.
- */
-class Purchasely.removeCustomScreenViewControllerDelegate()
-
-/**
- * Sets the Custom Screen SwiftUI delegate.
- *
- * - Parameters:
- * - delegate: An instance conforming to the `PLYCustomScreenViewDelegate` protocol
- *
- * - Note: should be called after the SDK has started.
- * - Note:
- * Both a UIKit and SwiftUI Custom Screen delegate can be set.
- * If set, the UIKit Custom Screen delegate will be called first. If it does not return a UIViewController, the SDK will fall back to the SwiftUI Custom Screen delegate.
- * Should the SwiftUI Custom Screen delegate not be set or return an EmptyView, the view will be closed.
- */
-class Purchasely.setCustomScreenViewDelegate(_:)
-
-/**
- * Clears the SwiftUI Custom Screen delegate.
- */
-class Purchasely.removeOwnScreenViewDelegate()
 ```
 ```kotlin
 
@@ -283,7 +245,7 @@ class Purchasely.removeOwnScreenViewDelegate()
 ```kotlin
 ```
 
-(TODO: wording @Nico) Example:
+(TODO: wording @Nico) Usage example:
 
 ```swift
 let customScreenDelegate = CustomScreenViewDelegate()
@@ -313,7 +275,7 @@ PLYPresentation.executeConnection(_:)
 ```kotlin
 ```
 
-(TODO: wording @Nico) standalone example (Example (supposing a PLYPresentation variable / parameter named "presentation")
+(TODO: wording @Nico) standalone usage example (Example (supposing a PLYPresentation variable / parameter named "presentation")
 
 ```swift
 let loginConnection = presentation.connections.first(where: { $0.id == "login" })
@@ -322,7 +284,7 @@ presentation.executeConnection(loginConnection)
 ```kotlin
 ```
 
-(TODO: wording @Nico) Delegate example:
+(TODO: wording @Nico) Delegate usage example:
 
 ```swift
 // SwiftUI
