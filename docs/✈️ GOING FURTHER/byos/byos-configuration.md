@@ -18,13 +18,13 @@ next:
 
 1. Create a new Screen in the Screen Composer and choose the layout **Bring Your Own Screen**.
 
-   <Image align="center" border={true} src="https://files.readme.io/152ce49725316e7d5201e370242da14dfb4afad365a010b46e4e530c00bc6ab1-custom_screen_1.gif" className="border" />
+   <Image align="center" border={true} src="https://files.readme.io/24a01f0bb80056fea3a71f2d3d2359b17417cd32abd6ba6c71f45a70c79f1fd2-custom_screen.gif" className="border" />
 2. Associate a screenshot of the Screen as the background image to make it easy to recognize
 
-   <Image align="center" border={true} src="https://files.readme.io/fc5efa816ce5c7e8a54db41d0d6b0f41f44041133059af31e468c32924152a16-custom_screen_2.gif" className="border" />
+   <Image align="center" border={true} src="https://files.readme.io/cd011ef37a883192a723edeb05afb2d959b1909ea7afd3de0f023d43a41df2c6-custom_screen_3.gif" className="border" />
 3. Define the connections (e.g., login_successful, signup, cancel) — these determine the possible exit points for the Screen
 
-   <Image align="center" border={true} src="https://files.readme.io/19b9e55f71091b6bfd168577e87a893fdca4bd32719ef2998d163f3f54ad9e0e-custom_screen_3_-_connections.gif" className="border" />
+   <Image align="center" border={true} src="https://files.readme.io/a0f2da3de5d3d473957f00cb9310a45f62ffe3f8c71c1da9e1d88af2566f98b3-custom_screen_2.gif" className="border" />
 
    Note: The IDs defined for the connections need to be decided with / provided to your mobile engineering team as they will need them in the code of the BYOS implementation.
 4. [Mobile engineers] Implement BYOS into your app
@@ -41,10 +41,10 @@ BYOS allows you to blend native app screens and Purchasely-generated screens int
 
 1. Insert your Custom Screen anywhere in the Flow from the Console — including as the very first step.
 
-   <Image align="center" border={true} src="https://files.readme.io/08df9e08ec7d4c74da0e92c1999496e257141159300ee66b34c87de61720b9d2-custom_screen_4_-_drag__drop.gif" className="border" />
+   <Image align="center" border={true} src="https://files.readme.io/b40487455bd22f205ac7760714651307cd7072e68d58535a1e3f0cb8e6811b89-custom_screen_flow.gif" className="border" />
 2. Connect it to other Screens in the Flow and define the transition type for each incoming and outgoing connection.
 
-   <Image align="center" border={true} src="https://files.readme.io/6d1a2fadb35fd34f2ae028cbbdef6f218c1b01f8ab5b77d8aa9b9cd86fbdbce1-custom_screen_5.gif" className="border" />
+   <Image align="center" border={true} src="https://files.readme.io/b17360c683d2f65696b5cded60b54d926e37ef504c16cfa725116bdeaf751c6b-custom_screen_flow_2.gif" className="border" />
 
 <br />
 
@@ -64,10 +64,10 @@ You can also include Custom Screen inside Paywall experiments in A/A test or A/B
 
 1. create a Custom Screen corresponding to your existing in-house Paywall - don't forget the Screenshot!
 
-   <Image align="center" border={true} src="https://files.readme.io/9fc04be352a7e35a931ef03e1998cb29f5fe302e25f81e7286ff77c99e17afaa-custom_paywall.gif" className="border" />
+   <Image align="center" border={true} src="https://files.readme.io/d4e9d9fd4bcaa1b9a1de76966d807e3e96c4a1885a2e26515f63bcb9a48e4d0c-custom_paywall.gif" className="border" />
 2. Integrate it in your A/B test as the control variant
 
-   <Image align="center" border={true} src="https://files.readme.io/8431bd8e9a63f6f5c892a6d73af18092368930e1fbaacd12a3f89dd34757e69c-custom_paywall_ab_test.gif" className="border" />
+   <Image align="center" border={true} src="https://files.readme.io/9e69f2d071f18843953e23a06ca82ee34f0acaf4b8f5918dd9eff8806ee683ca-ab_test.gif" className="border" />
 
 <br />
 
