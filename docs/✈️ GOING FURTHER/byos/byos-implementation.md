@@ -242,8 +242,33 @@ class Purchasely.setCustomScreenViewDelegate(_:)
  */
 class Purchasely.removeCustomScreenViewDelegate()
 ```
-```kotlin
-```
+````kotlin
+    /**
+     * Sets a custom screen provider to handle presentations marked as client-controlled.
+     *
+     * Use this method to provide your own UI implementations for specific presentations
+     * within flows. When the SDK encounters a presentation with type CLIENT, it will
+     * invoke the provider's onCustomScreenRequested method.
+     *
+     * This should typically be set during application initialization, before any
+     * presentations are displayed.
+     *
+     * @param provider The custom screen provider, or null to remove the current provider
+     *
+     * Example:
+     * ```
+     * Purchasely.setCustomScreenProvider(object : PLYCustomScreenProvider {
+     *     override fun onCustomScreenRequested(presentation: PLYPresentation): PLYCustomScreen? {
+     *         return PLYCustomScreen.View(MyCustomView(presentation))
+     *     }
+     * })
+     * ```
+     *
+     * @see PLYCustomScreenProvider
+     * @see PLYCustomScreen
+     */
+    fun Purchasely.setCustomScreenProvider(provider: PLYCustomScreenProvider?)
+````
 
 **Usage example:**
 
