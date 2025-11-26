@@ -331,6 +331,8 @@ let loginConnection = presentation.connections.first(where: { $0.id == "login" }
 presentation.executeConnection(loginConnection)
 ```
 ```kotlin
+val connection = presentation.connections.firstOrNull { it.id == "login" }
+presentation.execute(connection)
 ```
 
 **Delegate usage example:**
