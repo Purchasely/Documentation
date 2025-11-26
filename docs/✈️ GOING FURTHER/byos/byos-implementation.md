@@ -334,16 +334,16 @@ In the context of a Flow, calling this method will take the user to the next ste
 
 Example:
 
-1. Calling `execute(email)` will take the user to the email checking screen - which is another Custom Screen
+1. Calling `executeConnection(email)` will take the user to the email checking screen - which is another Custom Screen
 
    <Image align="center" border={true} src="https://files.readme.io/497f65ee3b2d20cb33e4b6494ee66eccde496f3185f974a67632015a4aeb1995-custom_screen_6.gif" className="border" />
-2. For social connections, the process is managed by the the app through the Custom Screen `sign_in_screen` view controller. Once the user has completed the social connection, calling `execute(social_connection_successful)` will take the user to the final screen of the Flow, bypassing the email validation process.
+2. For social connections, the process is managed by the the app through the Custom Screen `sign_in_screen` view controller. Once the user has completed the social connection, calling `executeConnection(social_connection_successful)` will take the user to the final screen of the Flow, bypassing the email validation process.
 
    <Image align="center" border={false} src="https://files.readme.io/7e2eea5bfb7a0f7f0d4a2398ccb8fdbe31350a21696d5f46f4c8a6892c35cf22-custom_screen_7.gif" />
 
 ### Outside of a Flow
 
-Outside of Flow, calling the method `execute()` will trigger the action associated with the connection passed in parameter (Purchase, Open Screen, Open Placement, Deeplink, Close, Close all etc...)
+Outside of Flow, calling the method `executeConnection()` will trigger the action associated with the connection passed in parameter (Purchase, Open Screen, Open Placement, Deeplink, Close, Close all etc...)
 
 <br />
 
