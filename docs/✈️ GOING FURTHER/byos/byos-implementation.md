@@ -155,7 +155,7 @@ interface PLYCustomScreenProvider {
 
 **Implementation example:**
 
-Based on the Screen ID, your delegate / provider should instantiate the corresponding native UI (Swift/Kotlin) and return it to the SDK, which inserts it into Purchasely’s navigation layer.
+Based on the Screen ID, your delegate / provider should instantiate the corresponding native UI (Swift/Kotlin/RN/Flutter) and return it to the SDK, which inserts it into Purchasely’s navigation layer.
 
 ```swift
 // SwiftUI
@@ -358,7 +358,6 @@ This allows the SDK to retrieve the latest receipt and extract the purchase info
 appel à la méthode synchronize() après un achat
 ```
 ```kotlin
-Purchasely.synchronize()
 ```
 
 This is particularly important in A/B or A/A test scenarios, where accurate purchase tracking is required to attribute conversions correctly.
