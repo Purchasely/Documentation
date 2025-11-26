@@ -188,6 +188,24 @@ public class MyCustomScreenViewControllerDelegate: PLYCustomScreenViewController
 }
 ```
 ```kotlin
+class CustomScreenProvider(private val context: Context) : PLYCustomScreenProvider {
+
+    override fun onCustomScreenRequested(presentation: PLYPresentation): PLYCustomScreen? {
+        return when(presentation.id) {
+            "login" -> {
+                // Custom Login View
+                PLYCustomScreen.View(yourCustomLoginView) 
+                
+                // Or Custom Login Fragment
+                // PLYCustomScreen.Fragment(yourCustomLoginFragment())
+                
+            }
+            else -> {
+                return null
+            }
+        }
+    }
+}
 ```
 
 ### 2. Provide the delegate / provider to the SDK
