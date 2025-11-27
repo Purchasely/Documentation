@@ -42,6 +42,9 @@ It has zero impact on your production Audiences or Paywall exposure.
 
    * Your device will prompt the Purchasely SDK.
    * A Purchasely Floating Debug Button appears on top of your app UI.
+
+     <Image align="center" border={true} width="300px" src="https://files.readme.io/2385df1fadfdf69ac652e2ebc77bce30ac5b031412d698c98ec8fe0dcefb66a1-image.png" className="border" />
+
      <br />
 3. **Open the Floating Debug Button**
 
@@ -52,6 +55,8 @@ It has zero impact on your production Audiences or Paywall exposure.
    * The SDK version installed on the device
    * User ID and User Anonymous ID
    * Current screen information and associated meta data (Placement, Flow, Campaign, Audience, A/B test, A/B test variant etc...)
+
+   <Image align="center" border={true} width="300px" src="https://files.readme.io/d0861b64a1ac24266cf22d8b00e644ae80e237876a13e36f6b60964aa16557e9-Screenshot_20251127-183959.png" className="border" />
 4. **Activate Debug Mode**
 
    From the Debug Panel, you can Enable Debug Mode by activating the Switch
