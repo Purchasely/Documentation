@@ -1,5 +1,8 @@
 ---
 title: Bring Your Own Screen
+excerpt: >-
+  This page explains the different use cases for Bring Your Own Screen and when
+  it should be used.
 deprecated: false
 hidden: false
 metadata:
@@ -17,14 +20,34 @@ You should use BYOS in the following situations:
 
 1. **Integrating a Custom Screen inside a Purchasely Flow**
    When you need a step that cannot be built with the Screen Composer — such as authentication, forms, or screens with complex logic — BYOS lets you plug your native screen directly into the Flow.
+
+   <Image align="center" border={true} caption="BYOS let you integrate your native sign-in process into a Flow" src="https://files.readme.io/36f0aa40539778160a7ec230511f25c7a69c6b491a7414e968a89af8d523b780-image.png" />
+
+   <br />
 2. **Running an A/B test between your existing paywall and a Purchasely paywall**
    BYOS allows you to include your legacy paywall as a variant in a Purchasely experiment without rebuilding it in the Console.
+
+   <Image align="center" border={true} src="https://files.readme.io/78b8f6f704524eab24b3da03b1cf51d0287b2cddc4f2cc68827446cc7cee68a8-image.png" className="border" />
+
+   <br />
 3. **Running an A/A test between your existing paywall and its Purchasely version**
    If you reimplemented your paywall using Purchasely’s Screen Composer, BYOS lets you compare both versions under identical conditions to validate performance and consistency.
+
+   <Image align="center" border={true} src="https://files.readme.io/eb624073adbc49da047d8943136efa597ec9b8bd3274071e7aaad9d8ecf1b70b-image.png" className="border" />
+
+   <br />
 4. **Reordering steps in your existing onboarding flow without code**
    BYOS allows you to orchestrate the sequence of your native onboarding screens around Purchasely screens — letting you reorder, insert, or remove steps entirely in no-code.
 
+   <Image border={false} src="https://files.readme.io/b388730187059df321f7fff1f9a91622d56b727146e333ac0cf614a0110d1a8b-image.png" />
+
+   <br />
+
 <br />
+
+> 🚧 SDK v5.6.0+ mandatory
+>
+> BYOS requires to integrate SDK v5.6 and above and to use the `display()` method of the SDK to display Screens.
 
 # Useful links
 
