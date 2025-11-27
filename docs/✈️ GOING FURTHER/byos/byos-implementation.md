@@ -9,6 +9,10 @@ hidden: false
 metadata:
   robots: index
 ---
+> 🚧 SDK v5.6.0+ mandatory
+>
+> BYOS requires to integrate SDK v5.6 and above and to use the `display()` method of the SDK to display In-App Experiences.
+
 # How It Works
 
 BYOS relies on a simple handover mechanism between the Purchasely SDK and your application.
