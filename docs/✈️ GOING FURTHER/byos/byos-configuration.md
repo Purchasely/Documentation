@@ -14,6 +14,12 @@ next:
       title: BYOS - Implementation guide
       type: basic
 ---
+<br />
+
+> 🚧 SDK v5.6.0+ mandatory
+>
+> BYOS requires to integrate SDK v5.6 and above and to use the `display()` method of the SDK to display Screens.
+
 # Creating a Custom Screen
 
 1. Create a new Screen in the Screen Composer and choose the layout **Bring Your Own Screen**.
