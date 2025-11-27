@@ -43,11 +43,9 @@ You should use BYOS in the following situations:
 
    <br />
 
-<br />
-
 > 🚧 SDK v5.6.0+ mandatory
 >
-> BYOS requires to integrate SDK v5.6 and above and to use the `display()` method of the SDK to display Screens.
+> BYOS requires to integrate SDK v5.6 and above and to use the `display()` method of the SDK to display In-App Experiences.
 
 # Useful links
 
