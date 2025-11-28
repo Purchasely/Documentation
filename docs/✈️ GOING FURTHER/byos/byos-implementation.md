@@ -1,7 +1,7 @@
 ---
 title: BYOS - Implementation guide
 excerpt: >-
-  This page provides a comprensive overview of the implementation of Custom
+  This page provides a comprehensive overview of the implementation of Custom
   Screens into your app and includes general functioning and code snippet both
   inside and outside of a Flow
 deprecated: false
