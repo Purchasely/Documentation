@@ -385,8 +385,6 @@ public class MyCustomScreenViewControllerDelegate: PLYCustomScreenViewController
 ```kotlin
 ```
 
-<br />
-
 In the context of a Flow, calling this method will take the user to the next step in the Flow - the one associated with the connection.
 
 **Delegate usage example in the context of a Flow**:
