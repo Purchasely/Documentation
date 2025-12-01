@@ -402,8 +402,11 @@ Purchasely.setCustomScreenProvider(
                         }
                     }
 
-                    // Return custom screen
+                    // Return your custom screen as a View
                     PLYCustomScreen.View(yourCustomLoginView)
+                    
+                    // OR return custom screen as a Fragment
+                    //PLYCustomScreen.Fragment(YourCustomFragment())
 
                 }
                 else -> {
