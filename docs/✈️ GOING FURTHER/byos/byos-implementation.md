@@ -383,6 +383,36 @@ public class MyCustomScreenViewControllerDelegate: PLYCustomScreenViewController
 }
 ```
 ```kotlin
+Purchasely.setCustomScreenProvider(
+    object : PLYCustomScreenProvider {
+        override fun onCustomScreenRequested(presentation: PLYPresentation): PLYCustomScreen? {
+            return when(presentation.id) {
+                "login" -> {
+                    // Find connection
+                    val connection = presentation.connections.firstOrNull { it.id == "login" }
+
+                    // Custom Login View
+                    val yourCustomLoginView = TextView(context).apply {
+                        text = "This is a dummy custom login view. Click to execute login connection."
+                        setOnClickListener {
+                            connection?.let {
+                                // Execute connection on click
+                                presentation.execute(it)
+                            }
+                        }
+                    }
+
+                    // Return custom screen
+                    PLYCustomScreen.View(yourCustomLoginView)
+
+                }
+                else -> {
+                    return null
+                }
+            }
+        }
+    }
+)
 ```
 
 In the context of a Flow, calling this method will take the user to the next step in the Flow - the one associated with the connection.
