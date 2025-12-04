@@ -30,8 +30,6 @@ Here are how the different display modes available
 
 <br />
 
-<br />
-
 # Changing the display mode
 
 You can set the display mode when creating a new screen. After clicking “**New screen**”, you’ll see options to choose both the screen **Layout** and the **Display mode**.
