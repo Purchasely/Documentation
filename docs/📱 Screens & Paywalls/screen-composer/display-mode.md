@@ -1,6 +1,8 @@
 ---
 title: Managing the display mode
-excerpt: ''
+excerpt: >-
+  This page describes about the different display modes available in Screen
+  Composer and how to use them. 
 deprecated: false
 hidden: false
 metadata:
