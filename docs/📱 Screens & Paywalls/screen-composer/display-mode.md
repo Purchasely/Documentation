@@ -24,7 +24,7 @@ This lets you configure remotely how Screens created in no-code with the Screen 
 
 Here are how the different display modes available
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/4a3d4c0e5e7ea20876ed959f203e623858cd7e12ac9de95c8c9c6556382ee770-types.gif" />
+<Image align="center" border={true} src="https://files.readme.io/4a3d4c0e5e7ea20876ed959f203e623858cd7e12ac9de95c8c9c6556382ee770-types.gif" className="border" />
 
 <br />
 
@@ -32,15 +32,19 @@ Here are how the different display modes available
 
 # Changing the display mode
 
-You can change the display mode from the Screen Composer by clicking on the Screen name in the top bar and changing the parameter value.
+You can set the display mode when creating a new screen. After clicking “**New screen**”, you’ll see options to choose both the screen **layout** and the **display mode**. 
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/14c3fb70622f64c6161f57c939b82f3797c419c321dac1fc9ed8aebe475ff1cc-display_mode_console.gif" />
+<Image align="center" border={true} src="https://files.readme.io/9047cf70a2b5c6272209ee27995fb3fe1e1dca4abf7fc610a28d24ed52127dad-ScreenRecording2025-12-04at16.25.28-ezgif.com-video-to-gif-converter_1.gif" className="border" />
+
+We have added back button in the console to preview the back button for a push display mode. 
+
+<Image align="center" border={true} src="https://files.readme.io/80c1138e59360dc762b1838e23c53c8d869994e709fd16aca5ba57e06cc5d50c-ScreenRecording2025-12-04at16.25.28-ezgif.com-video-to-gif-converter_2.gif" className="border" />
 
 If no display mode has been configured, the default display mode is applied by the SDK is `Modal`. The default display mode will also be applied by versions of the SDK inferior to 5.3
 
-For drawers and popins, you can set the desired height:
+For drawers and popins, you can set the desired height in percentage:
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/b355f6c38b89ae7c02b022e86cfdcc9c96aea71d57cc3ae9d7fee408efb7cf69-image.png" />
+<Image align="center" border={true} src="https://files.readme.io/b355f6c38b89ae7c02b022e86cfdcc9c96aea71d57cc3ae9d7fee408efb7cf69-image.png" className="border" />
 
 <br />
 
@@ -61,7 +65,7 @@ On Android or without a navigation bar, the **Display mode** will fallback to `M
 To manage the display mode in the app, 2 different methods are available:
 
 1. The simplest one: by leverage the `display()` API of the SDK
-2. The manual one: by fetching the value of the display\_mode parameter manually and handling it yourself
+2. The manual one: by fetching the value of the display_mode parameter manually and handling it yourself
 
 <br />
 
@@ -77,7 +81,7 @@ You can simply pre-fetch a presentation (e.g.: from the Placement ID associated 
 
 > 🚧 Push display mode requires a navigation bar in the parent view
 >
-> The **Display mode** `Push` only works if the parent view already contains a navigation bar. 
+> The **Display mode** `Push` only works if the parent view already contains a navigation bar.
 >
 > If you try to display a Screen/Flow associated with the `Push` display mode from a parent view which doesn't have a navigation bar associated, the display() method will fallback on the default display mode:
 >
@@ -106,7 +110,7 @@ You can simply pre-fetch a presentation (e.g.: from the Placement ID associated 
 >
 > You can configure a default Transition Type at the Flow level, and optionally override it for individual Transitions to customize specific paths in the user journey.
 >
-> <Image align="center" className="border" border={true} src="https://files.readme.io/5709953934e193f8100d1672d0dad747b394de8cfeaa430b8d02a369552c3751-image.png" />
+> <Image align="center" border={true} src="https://files.readme.io/5709953934e193f8100d1672d0dad747b394de8cfeaa430b8d02a369552c3751-image.png" className="border" />
 
 ## Manually fetching the the display mode from the SDK
 
