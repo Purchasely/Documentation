@@ -34,33 +34,27 @@ Here are how the different display modes available
 
 # Changing the display mode
 
-You can set the display mode when creating a new screen. After clicking “**New screen**”, you’ll see options to choose both the screen **layout** and the **display mode**. 
+You can set the display mode when creating a new screen. After clicking “**New screen**”, you’ll see options to choose both the screen **Layout** and the **Display mode**.
 
 <Image align="center" border={true} src="https://files.readme.io/9047cf70a2b5c6272209ee27995fb3fe1e1dca4abf7fc610a28d24ed52127dad-ScreenRecording2025-12-04at16.25.28-ezgif.com-video-to-gif-converter_1.gif" className="border" />
 
-We have added back button in the console to preview the back button for a push display mode. 
+We have added back button in the console to preview the back button for a **Push** display mode.
 
 <Image align="center" border={true} src="https://files.readme.io/80c1138e59360dc762b1838e23c53c8d869994e709fd16aca5ba57e06cc5d50c-ScreenRecording2025-12-04at16.25.28-ezgif.com-video-to-gif-converter_2.gif" className="border" />
 
 If no display mode has been configured, the default display mode is applied by the SDK is `Modal`. The default display mode will also be applied by versions of the SDK inferior to 5.3
 
-For drawers and popins, you can set the desired height in percentage:
+For **Drawers** and **Popins**, you can set the desired height in percentage:
 
-<Image align="center" border={true} src="https://files.readme.io/b355f6c38b89ae7c02b022e86cfdcc9c96aea71d57cc3ae9d7fee408efb7cf69-image.png" className="border" />
+<Image align="center" border={true} src="https://files.readme.io/d1b9ed0b06c8c4ec84b479a233faff4675446f0ef4d6f6a36cf00badc6260889-image.png" className="border" />
 
-<br />
+For Inline mode, you have to set the maximum height in pixel
+
+<Image align="center" border={true} src="https://files.readme.io/d41f853570cf99097b3a1cdc838388e11262a62cc21d76c4a6911a2a00a3466f-image.png" className="border" />
 
 On iOS, the **Display mode** `Push` is only available, if the parent view already contains a navigation bar.
 
 On Android or without a navigation bar, the **Display mode** will fallback to `Modal`
-
-> 🚧 The configured display mode does not reflect in the preview of the Console
->
-> This means that it will not reflect in the Console if you change it.
->
-> This will require a bit more work and we hope to make it available soon... Stay tuned!
-
-<br />
 
 # Implementation
 
