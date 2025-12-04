@@ -46,13 +46,19 @@ For **Drawers** and **Popins**, you can set the desired height in percentage:
 
 <Image align="center" border={true} src="https://files.readme.io/d1b9ed0b06c8c4ec84b479a233faff4675446f0ef4d6f6a36cf00badc6260889-image.png" className="border" />
 
-For Inline mode, you have to set the maximum height in pixel
+For Inline mode, you have to set the maximum height in pixels.
 
-<Image align="center" border={true} src="https://files.readme.io/d41f853570cf99097b3a1cdc838388e11262a62cc21d76c4a6911a2a00a3466f-image.png" className="border" />
+<Image border={false} src="https://files.readme.io/102c348f241df82cb501cbf3e47a66e00890218e5f334e75bf6f9407c96790c5-image.png" />
 
-On iOS, the **Display mode** `Push` is only available, if the parent view already contains a navigation bar.
+<br />
 
-On Android or without a navigation bar, the **Display mode** will fallback to `Modal`
+<Callout icon="📘" theme="info">
+  On iOS, the **Display mode** `Push` is only available, if the parent view already contains a navigation bar.
+
+  On Android or without a navigation bar, the **Display mode** will fallback to `Modal`
+</Callout>
+
+<br />
 
 # Implementation
 
