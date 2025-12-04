@@ -2,7 +2,7 @@
 title: Troubleshoot guide & FAQ
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 link:
   new_tab: true
   url: https://help.purchasely.io
