@@ -301,7 +301,7 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **float**    
+        **float**
 
         ⚠️ Only available for the event `TRANSACTION_PROCESSED`.
 
@@ -323,9 +323,9 @@ next:
       <td style={{ textAlign: "left" }}>
         **float**
 
-        ⚠️ Only available for the event `TRANSACTION_PROCESSED`.  
+        ⚠️ Only available for the event `TRANSACTION_PROCESSED`.
 
-        `xxx` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code of the currency and will be replaced accordingly to the selected currency in the settings.  
+        `xxx` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code of the currency and will be replaced accordingly to the selected currency in the settings.
 
         ⚠️ This field is only present if the selected currency in the settings is different from USD
 
@@ -402,6 +402,27 @@ next:
         **string**
 
         Contains the Plan vendor id the customer used to have before changing plan.
+
+        Used with for the following events:  
+        `SUBSCRIPTION_CROSSGRADED`  
+        `SUBSCRIPTION_DOWNGRADED`  
+        `SUBSCRIPTION_UPGRADED`
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `previous_store_product_id`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**
+
+        Contains the store `product_id` the customer used to have before changing plan.
 
         Used with for the following events:  
         `SUBSCRIPTION_CROSSGRADED`  
@@ -540,7 +561,7 @@ next:
       <td style={{ textAlign: "left" }}>
         **string**
 
-        Contains the `product_id` you created in the store console.
+        Contains the `product_id` you created in the store (Apple App Store, Google Play Console...)
       </td>
     </tr>
 
