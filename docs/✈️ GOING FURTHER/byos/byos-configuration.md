@@ -25,15 +25,20 @@ next:
 1. Create a new Screen in the Screen Composer and choose the layout **Bring Your Own Screen**.
 
    <Image align="center" border={true} src="https://files.readme.io/24a01f0bb80056fea3a71f2d3d2359b17417cd32abd6ba6c71f45a70c79f1fd2-custom_screen.gif" className="border" />
-2. Associate a screenshot of the Screen as the background image to make it easy to recognize
+2. Enter the Screen ID for your Custom Screen. This Screen ID needs to be communicated to your mobile engineers as they will need it to know which custom screen shall be displayed.
+
+   <Image align="center" border={true} src="https://files.readme.io/c05e9e22184602922a4589b90ae7eb5544f9d776b47c31f2826f5b0dc0bf95e1-image.png" className="border" />
+
+   <br />
+3. Associate a screenshot of the Screen as the background image to make it easy to recognize
 
    <Image align="center" border={true} src="https://files.readme.io/cd011ef37a883192a723edeb05afb2d959b1909ea7afd3de0f023d43a41df2c6-custom_screen_3.gif" className="border" />
-3. Define the connections (e.g., login_successful, signup, cancel) — these determine the possible exit points for the Screen
+4. Define the connections (e.g., login_successful, signup, cancel) — these determine the possible exit points for the Screen
 
    <Image align="center" border={true} src="https://files.readme.io/a0f2da3de5d3d473957f00cb9310a45f62ffe3f8c71c1da9e1d88af2566f98b3-custom_screen_2.gif" className="border" />
 
    Note: The IDs defined for the connections need to be decided with / provided to your mobile engineering team as they will need them in the code of the BYOS implementation.
-4. [Mobile engineers] Implement BYOS into your app
+5. [Mobile engineers] Implement BYOS into your app
 
    📚 [Follow the guide to implement BYOS into your app](byos-implementation)
 
