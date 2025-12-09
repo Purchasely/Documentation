@@ -51,6 +51,8 @@ Current Steps: Current step number is the actual position of the screen you are 
 
 For an instance ,if the current screen is the first screen of your Onboarding flow, the Current step =1
 
+<Image border={false} src="https://files.readme.io/f5a5119843636ce8af62769a7764105676f10a78bb4fe6501db8cb6aae0cca4d-image.png" />
+
 ### Size
 
 ### Styles 
