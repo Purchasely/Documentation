@@ -23,10 +23,10 @@ To create a new Custom User Attribute, you first need to declare it in the Purch
 1. Navigate to the section [User Attributes of your Purchasely Console](https://console.purchasely.io/user-attributes)
 2. Click on the button **`+ New user attribute`** in the upper right corner
 
-   <Image align="center" className="border" border={true} src="https://files.readme.io/40bd72a-image.png" />
+   <Image align="center" border={true} src="https://files.readme.io/40bd72a-image.png" className="border" />
 3. Fill in the following form:
 
-   ![](https://files.readme.io/ad589ff-image.png)
+   <Image border={false} src="https://files.readme.io/ad589ff-image.png" />
 
    * `Name`: display name in the Purchasely Console
    * `Key`: name of the key that shall be used in the app code ([see below](custom-user-attributes#set-user-attributes))
@@ -61,13 +61,13 @@ To create a new Custom User Attribute, you first need to declare it in the Purch
              </td>
 
              <td style={{ textAlign: "left" }}>
-               `equals to`\
-               `is different from`\
-               `contains`\
-               `does not contain`\
-               `starts with`\
-               `ends with`\
-               `is empty or not set`\
+               `equals to`  
+               `is different from`  
+               `contains`  
+               `does not contain`  
+               `starts with`  
+               `ends with`  
+               `is empty or not set`  
                `is not empty`
              </td>
            </tr>
@@ -82,9 +82,9 @@ To create a new Custom User Attribute, you first need to declare it in the Purch
              </td>
 
              <td style={{ textAlign: "left" }}>
-               `contains`\
-               `does not contain`\
-               `is empty or not set`\
+               `contains`  
+               `does not contain`  
+               `is empty or not set`  
                `is not empty`
              </td>
            </tr>
@@ -99,11 +99,11 @@ To create a new Custom User Attribute, you first need to declare it in the Purch
              </td>
 
              <td style={{ textAlign: "left" }}>
-               `is greater than`\
-               `is greater than or equal`\
-               `is lower than`\
-               `is lower than or equal`\
-               `equals to`\
+               `is greater than`  
+               `is greater than or equal`  
+               `is lower than`  
+               `is lower than or equal`  
+               `equals to`  
                `is different from`
              </td>
            </tr>
@@ -118,11 +118,11 @@ To create a new Custom User Attribute, you first need to declare it in the Purch
              </td>
 
              <td style={{ textAlign: "left" }}>
-               `is greater than`\
-               `is greater than or equal`\
-               `is lower than`\
-               `is lower than or equal`\
-               `equals to`\
+               `is greater than`  
+               `is greater than or equal`  
+               `is lower than`  
+               `is lower than or equal`  
+               `equals to`  
                `is different from`
              </td>
            </tr>
@@ -137,9 +137,9 @@ To create a new Custom User Attribute, you first need to declare it in the Purch
              </td>
 
              <td style={{ textAlign: "left" }}>
-               `is true`\
-               `is true or not set`\
-               `is false`\
+               `is true`  
+               `is true or not set`  
+               `is false`  
                `is false or not set`
              </td>
            </tr>
@@ -154,12 +154,12 @@ To create a new Custom User Attribute, you first need to declare it in the Purch
              </td>
 
              <td style={{ textAlign: "left" }}>
-               `is after`\
-               `is before`\
-               `is less than '{days}' days ago`\
-               `is more than '{days}' days ago`\
-               `is less than '{days}' days from now  `\
-               `is more than '{days}' days from now`\
+               `is after`  
+               `is before`  
+               `is less than '{days}' days ago`  
+               `is more than '{days}' days ago`  
+               `is less than '{days}' days from now  `  
+               `is more than '{days}' days from now`  
                `is false or not set`
              </td>
            </tr>
@@ -176,7 +176,7 @@ To modify an existing Custom User Attribute:
 1. click on the **`⋮`** button on the right of the attribute
 2. then on `Edit`
 
-   <Image align="center" className="border" border={true} src="https://files.readme.io/dd5bae7-image.png" />
+   <Image align="center" border={true} src="https://files.readme.io/dd5bae7-image.png" className="border" />
 
 <br />
 
@@ -187,7 +187,7 @@ To delete an existing Custom User Attribute:
 1. click on the **`⋮`** button on the right of the attribute
 2. then on `Delete`
 
-   <Image align="center" className="border" border={true} src="https://files.readme.io/1566d26-image.png" />
+   <Image align="center" border={true} src="https://files.readme.io/1566d26-image.png" className="border" />
 
 # Manipulating Customer User Attributes in the App code
 
@@ -437,9 +437,9 @@ _purchasely.ClearUserAttributes();
 
 > 👍 Clear after log out
 >
-> You should call `Purchasely.clearUserAttributes()` when a user is logged out, after calling `Purchasely.userLogout()`, so that he does not keep attributes you have set previously with his profile.
+> Purchasely SDK will automatically clear all your user attributes when you call `Purchasely.userLogout()` unless you call `Purchasely.userLogout(false)`    
 >
-> Be aware though, this method remove all attributes so you must set device attributes again
+> Make sure to pass that argument if you do not wish to clear all your custom user attributes when your user logs out of his account and return to the status of anonymous user.
 
 <br />
 
