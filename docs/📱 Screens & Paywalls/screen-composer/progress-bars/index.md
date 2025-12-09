@@ -8,7 +8,15 @@ hidden: false
 metadata:
   robots: index
 ---
-Adding a progress bar in a paywall is a UX strategy that increases conversions and reduces drop-off. Here’s why it works:
+<br />
+
+Using a progress bar in a paywall helps reduce friction by showing users exactly where they are in the process and how much is left to complete. This creates clarity, lowers anxiety, and leverages the goal-gradient effect—people are more likely to finish when they feel close to completion. As a result, the paywall feels smoother, more transparent, and more user-friendly, which can significantly boost conversion rates.
+
+***
+
+<br />
+
+## **Benefits of using Progress bars**
 
 1. Creates a Sense of Completion (Goal-Gradient Effect)
 2. Reduces Anxiety & Uncertainty
@@ -17,7 +25,11 @@ Adding a progress bar in a paywall is a UX strategy that increases conversions a
 5. Improves Trust
 6. Better for Multi-Step Paywalls
 
-Purchasely provides you with 2 type of progress bars. 
+***
+
+<br />
+
+Purchasely provides you with 2 type of progress bars.
 
 1. Linear Progress Bar
 2. Segmented Progress Bar
