@@ -8,11 +8,7 @@ hidden: false
 metadata:
   robots: index
 ---
-<br />
-
 Using a progress bar in a paywall helps reduce friction by showing users exactly where they are in the process and how much is left to complete. This creates clarity, lowers anxiety, and leverages the goal-gradient effect—people are more likely to finish when they feel close to completion. As a result, the paywall feels smoother, more transparent, and more user-friendly, which can significantly boost conversion rates.
-
-***
 
 <br />
 
@@ -26,8 +22,6 @@ Using a progress bar in a paywall helps reduce friction by showing users exactly
 6. Better for Multi-Step Paywalls
 
 ***
-
-<br />
 
 Purchasely provides you with 2 type of progress bars.
 
