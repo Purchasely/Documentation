@@ -14,7 +14,7 @@ next:
       slug: audiences
       title: Configuring Audiences
 ---
-User attributes are user-specific information that you can pass through your mobile application and it can be used to segment your user base, thanks to the Audience feature. Purchasely offers different types of Built-in User Attributes and also lets you create Custom User Attributes. 
+User attributes are user-specific information that you can pass through your mobile application and it can be used to segment your user base, thanks to the Audience feature. Purchasely offers different types of Built-in User Attributes and also lets you create Custom User Attributes.
 
 The different types of attributes are:
 
@@ -93,7 +93,7 @@ This set of attributes are built-in (automatically gathered by the SDK) and conc
       </td>
 
       <td>
-        The user device type. It will be one of the following: ***Phone, Pad, TV, Computer, Car* **and**unknown**.
+        The user device type. It will be one of the following: **_Phone, Pad, TV, Computer, Car_ **and**unknown**.
       </td>
 
       <td>
@@ -111,8 +111,8 @@ This set of attributes are built-in (automatically gathered by the SDK) and conc
       </td>
 
       <td>
-        This parameter is generally defined at the device level, but can be overriden at the app level in the phone settings.\
-        App language: ***en,fr,ja***.
+        This parameter is generally defined at the device level, but can be overriden at the app level in the phone settings.  
+        App language: _**en,fr,ja**_.
       </td>
 
       <td>
@@ -130,9 +130,9 @@ This set of attributes are built-in (automatically gathered by the SDK) and conc
       </td>
 
       <td>
-        User iOS store country:  
+        User iOS store country:
 
-        * \*JPN,USA,RUS\*\*.
+        * *JPN,USA,RUS**.
       </td>
 
       <td>
@@ -150,7 +150,7 @@ This set of attributes are built-in (automatically gathered by the SDK) and conc
       </td>
 
       <td>
-        App store name: ***Apple App Store, Google Play Store***.
+        App store name: _**Apple App Store, Google Play Store**_.
       </td>
 
       <td>
@@ -204,7 +204,7 @@ This set of attributes are built-in (automatically gathered by the SDK) and conc
       </td>
 
       <td>
-        If the user didn't create an account, Purchasely creates anonymous id.\
+        If the user didn't create an account, Purchasely creates anonymous id.  
         This attribute is meant to be used rather for testing purposes to target a specific anonymous user.
       </td>
 
@@ -293,9 +293,9 @@ This set of attributes are built-in (automatically gathered by the SDK) and conc
 
 ## Built-in Engagement Attributes
 
-*SDK requirement: 4.2.0 and above*
+_SDK requirement: 4.2.0 and above_
 
-These attributes correspond to data about the user engagement in your application. The elements we take into account are app sessions, interaction with paywalls and placements. 
+These attributes correspond to data about the user engagement in your application. The elements we take into account are app sessions, interaction with paywalls and placements.
 
 You can leverage them to determine how engaged is a user how they've been exposed to paywalls and screens managed by the Purchasely SDK.
 
@@ -327,7 +327,7 @@ You can leverage them to determine how engaged is a user how they've been expose
       </td>
 
       <td>
-        Number of times the app was launched by the user. A new session is counted:  
+        Number of times the app was launched by the user. A new session is counted:
 
         * When the SDK is initialized (restarted after being killed by the user or the operating system).
         * When the application has been in background for more than 30 minutes
@@ -724,8 +724,8 @@ You can leverage them to determine how engaged is a user how they've been expose
 
 ## Built-in Active Subscription Attributes
 
-*SDK requirement: 4.2.0 and above*\
-*OS Version requirement: iOS 15 and above*
+_SDK requirement: 4.2.0 and above_  
+_OS Version requirement: iOS 15 and above_
 
 These attributes allow you to target any subscribers that have active subscriptions at the given moment.
 
@@ -757,13 +757,13 @@ These attributes allow you to target any subscribers that have active subscripti
       </td>
 
       <td>
-        The type of special offer the user is enjoying right now. It can be either one of the following:  
+        The type of special offer the user is enjoying right now. It can be either one of the following:
 
-        * **Free trial**\_: User is in free trial  
-        * **Promotional Offer**\_: User is benefitting from a promotional offer.  
-        * **Intro Offer**\_: User is benefitting from a discounted introductory price (not free).  
-        * **Promo code**\_: User has redeemed a Promo code and the associated promotion is still valid.  
-        * \**None*\*\*: User is paying the full price (regular price) for the subscription.
+        * **Free trial**_: User is in free trial
+        * **Promotional Offer**_: User is benefitting from a promotional offer.
+        * **Intro Offer**_: User is benefitting from a discounted introductory price (not free).
+        * **Promo code**_: User has redeemed a Promo code and the associated promotion is still valid.
+        * *_None_**: User is paying the full price (regular price) for the subscription.
       </td>
 
       <td>
@@ -781,7 +781,7 @@ These attributes allow you to target any subscribers that have active subscripti
       </td>
 
       <td>
-        The name of the plan the user is currently in and actively renewing.  
+        The name of the plan the user is currently in and actively renewing.
 
         It is either one of the plans you have created in products and plans in the Purchasely console.
       </td>
@@ -801,9 +801,9 @@ These attributes allow you to target any subscribers that have active subscripti
       </td>
 
       <td>
-        The name of the promotional offer (if any) the user is currently benefitting.  
+        The name of the promotional offer (if any) the user is currently benefitting.
 
-        If the value is set, the attribute Active offer type will be set to Promotional offer.  
+        If the value is set, the attribute Active offer type will be set to Promotional offer.
 
         It is either one of the promotional offers created in the products and plans in the Purchasely console.
       </td>
@@ -823,9 +823,9 @@ These attributes allow you to target any subscribers that have active subscripti
       </td>
 
       <td>
-        If the user has an active subscription.  
+        If the user has an active subscription.
 
-        It can be either ***true*** or ***false***.
+        It can be either _**true**_ or _**false**_.
       </td>
 
       <td>
@@ -843,13 +843,13 @@ These attributes allow you to target any subscribers that have active subscripti
       </td>
 
       <td>
-        If the user had a subscription in the past.  
+        If the user had a subscription in the past.
 
-        It can be either ***true*** or ***false***.  
+        It can be either _**true**_ or _**false**_.
 
-        To target lapsed users, you will need to build an audience combining Has active subscription = false.  
+        To target lapsed users, you will need to build an audience combining Has active subscription = false.
 
-        and  
+        and
 
         Has expired subscription = true.
       </td>
@@ -869,9 +869,9 @@ These attributes allow you to target any subscribers that have active subscripti
       </td>
 
       <td>
-        If the user has purchased non consumable. This type of plan is also used to model Lifetime subscriptions.  
+        If the user has purchased non consumable. This type of plan is also used to model Lifetime subscriptions.
 
-        It can be either ***true*** or ***false***.
+        It can be either _**true**_ or _**false**_.
       </td>
 
       <td>
@@ -907,7 +907,7 @@ These attributes allow you to target any subscribers that have active subscripti
       </td>
 
       <td>
-        The date and time of the next billing of the user subscription.  
+        The date and time of the next billing of the user subscription.
 
         If the user is in **Free trial** or **Intro offer**, the next renewal date will be filled in with the end date of the **Free trial** or **Intro offer**.
       </td>
@@ -927,11 +927,11 @@ These attributes allow you to target any subscribers that have active subscripti
       </td>
 
       <td>
-        The status of the subscription. It can be either one of the below:  
+        The status of the subscription. It can be either one of the below:
 
-        * **Auto Renewing**\_: Subscribers with an active auto-renewing subscription.  
-        * \**Auto Renewing canceled*\*\*: Subscribers who have canceled the auto-renewing of their subscription.  
-        * \**Grace period*\*\*: Subscribers who are past their billing date but still enjoying their premium features.
+        * **Auto Renewing**_: Subscribers with an active auto-renewing subscription.
+        * *_Auto Renewing canceled_**: Subscribers who have canceled the auto-renewing of their subscription.
+        * *_Grace period_**: Subscribers who are past their billing date but still enjoying their premium features.
       </td>
 
       <td>
@@ -947,10 +947,10 @@ These attributes allow you to target any subscribers that have active subscripti
 
 ## Built-in Expired Subscription Attributes
 
-*SDK requirement: 4.4.0 and above*\
-*OS Version requirement: iOS 15 and above*
+_SDK requirement: 4.4.0 and above_  
+_OS Version requirement: iOS 15 and above_
 
-These attributes allow you to target users that have expired subscriptions at the given moment. 
+These attributes allow you to target users that have expired subscriptions at the given moment.
 
 For this set of attributes to work, it is mandatory that the transaction has been processed (`full` mode) OR observed (`paywallObserver` mode) by the Purchasely Platform, so that we can keep a record of the subscription in our database.
 
@@ -1002,13 +1002,13 @@ Depending on whether an import has been made or not and on the duration of the p
       </td>
 
       <td>
-        If the user had a subscription in the past.  
+        If the user had a subscription in the past.
 
-        It can be either ***true*** or ***false***.  
+        It can be either _**true**_ or _**false**_.
 
-        To target lapsed subscribers, you will need to build an audience combining Has active subscription = false.  
+        To target lapsed subscribers, you will need to build an audience combining Has active subscription = false.
 
-        and  
+        and
 
         Has expired subscription = true.
       </td>
@@ -1028,13 +1028,13 @@ Depending on whether an import has been made or not and on the duration of the p
       </td>
 
       <td>
-        The lapsed subscription status. It will be either one of the following:  
+        The lapsed subscription status. It will be either one of the following:
 
-        * **Onhold**\_: The user is in the billing retry state.  
-        * **Deactivated**\_: The user voluntarily terminated their subscription.  
-        * **Revoked**\_: The user requested for the refund and revoked their subscription.  
-        * **Paused**\_: The user has paused the subscription instead of terminated it. It is available only for Android users.  
-        * \**Unpaid*\*\*: The billing retry has ended. 
+        * **Onhold**_: The user is in the billing retry state.
+        * **Deactivated**_: The user voluntarily terminated their subscription.
+        * **Revoked**_: The user requested for the refund and revoked their subscription.
+        * **Paused**_: The user has paused the subscription instead of terminated it. It is available only for Android users.
+        * *_Unpaid_**: The billing retry has ended.
       </td>
 
       <td>
@@ -1052,13 +1052,13 @@ Depending on whether an import has been made or not and on the duration of the p
       </td>
 
       <td>
-        The offer type of the expired subscription when it got terminated. It can have one of the following values:  
+        The offer type of the expired subscription when it got terminated. It can have one of the following values:
 
-        * \*Free Trial\*\*: User was in Free Trial.  
-        * \*Promotional Offer\*\*: User was benefitting from a promotional offer.  
-        * \*Intro Offer\*\*: User was benefitting from a discounted introductory price (not free)  
-        * \*Promo Code\*\*: User was benifiting from a Promo Code.  
-        * \*None\*\*: User was paying the full price (regular price) for the subscription
+        * *Free Trial**: User was in Free Trial.
+        * *Promotional Offer**: User was benefitting from a promotional offer.
+        * *Intro Offer**: User was benefitting from a discounted introductory price (not free)
+        * *Promo Code**: User was benifiting from a Promo Code.
+        * *None**: User was paying the full price (regular price) for the subscription
       </td>
 
       <td>
@@ -1094,9 +1094,9 @@ Depending on whether an import has been made or not and on the duration of the p
       </td>
 
       <td>
-        The name of the promotional offer the user had before their subscription expired.  
+        The name of the promotional offer the user had before their subscription expired.
 
-        If the value is set, the attribute**Expired subscription offer type** will be set to Promotional offer.  
+        If the value is set, the attribute**Expired subscription offer type** will be set to Promotional offer.
 
         The value is the promotional offers you have created in the products and plans in the Purchasely console.
       </td>
@@ -1202,16 +1202,29 @@ Depending on whether an import has been made or not and on the duration of the p
   </tbody>
 </Table>
 
-<br />
+## Clear Built-In Attributes
+
+If you want to remove all built-in attributes registered by Purchasely (listed above), you can call:
+
+`Purchasely.clearBuiltInAttributes()`
+
+This action is irreversible. It clears all Built-In attributes, including Engagement, Active Subscription, and Expired Subscription attributes.
+
+After calling this method:
+
+* Targeting based on screen views, engagement, or subscription status will no longer apply until the user interacts with your application again (e.g., opens a new screen or completes a purchase).
+* **Campaigns using impression- or session-based triggers will be reset**, which may affect ongoing audience targeting or automation flows.
+
+Use this method cautiously, as it resets the user's internal state within Purchasely.
 
 ## About privacy settings
 
 Since SDK version 5.4, Built-in User Attributes have been defined as `essential` or `optional`:
 
-* `essential` user attributes cannot be disabled as they are mandatory to deliver the service\
-  \=> Targeting based on `essential` user attributes keep on working for users who have revoked Data Processing #3.
-* `optional` user attributes can be disabled\
-  \=> Targeting based on `optional` user attributes stop working for users who have revoked Data Processing #3.
+* `essential` user attributes cannot be disabled as they are mandatory to deliver the service  
+  => Targeting based on `essential` user attributes keep on working for users who have revoked Data Processing #3.
+* `optional` user attributes can be disabled  
+  => Targeting based on `optional` user attributes stop working for users who have revoked Data Processing #3.
 
 📚 [For more information on managing privacy, see the documentation](privacy-settings).
 
