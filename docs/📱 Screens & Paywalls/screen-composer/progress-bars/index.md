@@ -28,6 +28,8 @@ Purchasely provides you with 2 type of progress bars.
 1. Linear Progress Bar
 2. Segmented Progress Bar
 
-<Image align="center" border={true} src="https://files.readme.io/997ea229ee33beb2f792c80485049253e43f662ad880d440da7cd7c33ae1d04a-image.png" className="border" />
+<br />
+
+<Image align="center" border={true} src="https://files.readme.io/ae5b2f7d85178631f18a53f6b20660b9176c12b1bce2d452d732e3db1014dbd9-image.png" className="border" />
 
 <br />
