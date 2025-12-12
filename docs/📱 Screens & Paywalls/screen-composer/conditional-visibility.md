@@ -56,21 +56,25 @@ To assign a visibility condition to a particular picker:
 
 * Enable the condition visibility 
 
-  <Image align="center" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
 * Condition type: select "Screen interactions"
 
-  <Image align="center" border={true} width="400px" src="https://files.readme.io/614b56c28698dcd3eda488bad4701c32f2ad8c9c1a8560f8fe2af51c7e929a44-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/614b56c28698dcd3eda488bad4701c32f2ad8c9c1a8560f8fe2af51c7e929a44-image.png" className="border" />
 * Interaction trigger: select "Plan selected"
 
-  <Image align="center" border={true} width="400px" src="https://files.readme.io/bbfc055a955e7e1024eb938024034f8b8926888f0681a15f8bfefde6e81c4f93-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/bbfc055a955e7e1024eb938024034f8b8926888f0681a15f8bfefde6e81c4f93-image.png" className="border" />
 * Then select the desired Plan picker ID y
 
-  <Image align="center" border={true} width="400px" src="https://files.readme.io/5255f60dd2c491d79a1126d02a1603d0bb6d29cbb93a606877f37643c5cc377f-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/5255f60dd2c491d79a1126d02a1603d0bb6d29cbb93a606877f37643c5cc377f-image.png" className="border" />
 * And finally select the desired Plan 
 
-  <Image align="center" border={true} width="400px" src="https://files.readme.io/477cd41b5afe9c801077f413c595b83b83a997fbb4eeab4ad6d4f5feea3733d0-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/477cd41b5afe9c801077f413c595b83b83a997fbb4eeab4ad6d4f5feea3733d0-image.png" className="border" />
 
   <br />
+
+<br />
+
+<br />
 
 **Example**:
 
@@ -100,7 +104,37 @@ This interaction lets you show a component only when a particular answer is sele
 To assign a visibility condition to a particular picker:
 
 * enable the condition visibility
+
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
 * Condition type: select "Screen interactions"
-* Interaction trigger: select "Plan selected"
-* Then select then select the plan picker ID you want
-* And finally select the Plan you want
+
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/614b56c28698dcd3eda488bad4701c32f2ad8c9c1a8560f8fe2af51c7e929a44-image.png" className="border" />
+* Interaction trigger: select "Quiz answer selected"
+
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/e14287a5754137376df5cc1ea2988ca0c76faba437cdadf75a0fbd2f2ab1b639-image.png" className="border" />
+
+  <br />
+* Then select the desired Quiz ID
+
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/bcf1bd1044fe71703b319970f4504aaae4929155fb077c414e96a3b12c3d96f6-image.png" className="border" />
+
+  <br />
+* And finally select the desired Answer
+
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/02ddf2634e7f42931f015b2790d335f13d87f4e65fc39d18d9c369ebbbe49e8a-image.png" className="border" />
+
+  <br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+**Example:**
+
+<Image align="center" border={true} src="https://files.readme.io/fa77584faeef40e38f91b3f0d736ea18e681d4065d363ee025e5e4b9929cc347-fitness30.gif" className="border" />
+
+<br />
