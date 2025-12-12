@@ -101,7 +101,7 @@ In the example below, the Yearly Plan has a free trial but not the Weekly Plan.
 
 This interaction lets you show a component only when a particular answer is selected in a Quiz. This can be useful if you want to display additional information when the user selects a particular answer.
 
-To assign a visibility condition to a particular picker:
+To assign a visibility condition to a Quiz answer:
 
 * enable the condition visibility
 
@@ -136,5 +136,53 @@ To assign a visibility condition to a particular picker:
 **Example:**
 
 <Image align="center" border={true} src="https://files.readme.io/fa77584faeef40e38f91b3f0d736ea18e681d4065d363ee025e5e4b9929cc347-fitness30.gif" className="border" />
+
+<br />
+
+### Switch state
+
+<Callout icon="📘" theme="info">
+  **Compatible with SDK v5.0**
+
+  This feature is retro-compatible until SDK v5.0
+</Callout>
+
+This interaction lets you show a component depending on whether a switch is selected or not. This can be useful if you want to make the activation of a free trial optional.
+
+<br />
+
+To assign a visibility condition to a Switch state:
+
+* enable the condition visibility
+
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
+* Condition type: select "Screen interactions"
+
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/614b56c28698dcd3eda488bad4701c32f2ad8c9c1a8560f8fe2af51c7e929a44-image.png" className="border" />
+* Interaction trigger: select "Switch state"
+
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/10ccfe1b1f9707ae4f382f37d162f52c0926390e152d219a528e9da245aec119-image.png" className="border" />
+
+  <br />
+* Then select the desired Switch ID
+
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/055ad62c4d87a85d458706f6a2f6107e321c2b5535e1f3734c2d48fb3c8a3705-image.png" className="border" />
+* And finally select the desired state (`on` or `off`)
+
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/22585862032dc1b5a31aa836272456d2ec382dac0c949e55e1a02bcd8d8fe96c-image.png" className="border" />
+
+  <br />
+
+<br />
+
+<br />
+
+**Example:**
+
+<Image align="center" border={true} src="https://files.readme.io/97a382a7d072a18744d58ded423af828326cc7d1cd41710fdf9308bc2f0ad6d0-switch.gif" className="border" />
+
+<br />
+
+### Tab selected
 
 <br />
