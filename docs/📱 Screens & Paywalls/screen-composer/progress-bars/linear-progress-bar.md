@@ -44,13 +44,17 @@ The Linear Progress Bar is just one parent component with no sub section to it.
 
 ### Progress Steps
 
-**Total Steps**: Total Steps is exactly equivalent to the number of slides your entire Flow consists of.
+**Total Steps**
+Represents the total number of screens (or slides) in your entire flow.
 
-For an instance, if this is a onboarding flow and it has 7 screens, the Total Step =7
+Example:
+If your onboarding flow contains 7 screens, then Total Steps = 7.
 
-**Current Steps**: Current step number is the actual position of the screen you are customizing.
+**Current Step**
+Indicates the position of the screen currently being customized within the flow.
 
-For an instance ,if the current screen is the first screen of your Onboarding flow, the Current step =1
+Example:
+If you are configuring the first screen of the onboarding flow, then Current Step = 1.
 
 <Image align="center" border={true} src="https://files.readme.io/f5a5119843636ce8af62769a7764105676f10a78bb4fe6501db8cb6aae0cca4d-image.png" className="border" />
 
