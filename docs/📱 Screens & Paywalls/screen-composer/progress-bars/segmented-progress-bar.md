@@ -31,7 +31,7 @@ Purchasely’s Segmented Progress Bar is composed of three elements:
 
 ## Segmented Progress Bar Structure:
 
-The Segmented Progress Bar is just one parent component with no sub section to it.
+The Segmented Progress Bar is a single parent component and does not contain any subsections.
 
 <Image align="center" border={true} src="https://files.readme.io/d6c9e1096edea47f43193d0d8ddd4450339fba8cf16028c893dc12ba135abd32-image.png" className="border" />
 
