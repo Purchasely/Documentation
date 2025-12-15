@@ -73,6 +73,6 @@ Size section has options to set the width and height of the progress bar.
 
 Under Styles, you can customize the background color of the progress and the not progress section of the progress bar. You can also set the border radius and width.
 
-<Image align="center" border={true} src="https://files.readme.io/92aa7cccb9e023b2b1dd36b634f50fd2c079c462ff56f20d6d8d51919d5631af-image.png" className="border" />
+<Image align="center" border={true} src="https://files.readme.io/f578cc2fea1f21d4dcc9d7e3f319946773a162886fcbbcf1c7aa196d29ad4524-image.png" className="border" />
 
-<Image align="center" border={true} src="https://files.readme.io/6cabedd5c826f15806cae6ce26a32b9662830ead2559bd8e17ccd2b2226c4b7f-image.png" className="border" />
+<br />
