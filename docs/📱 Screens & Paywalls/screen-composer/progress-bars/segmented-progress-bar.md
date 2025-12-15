@@ -51,7 +51,7 @@ For an instance, if this is a onboarding flow and it has 7 screens, the Total St
 
 For an instance ,if the current screen is the first screen of your Onboarding flow, the Current step =1
 
-**Gap between steps**: To set upi the space between the steps, you can set the gap in pixel int his section. 
+**Gap between steps**: To set up the space between the steps, you can set the gap in pixel int his section. 
 
 <Image align="center" border={true} src="https://files.readme.io/feb98d3c10e21031641a4f63ccf332d31da37266a0e6c7cf4ef54a5b0cea0b0f-image.png" className="border" />
 
