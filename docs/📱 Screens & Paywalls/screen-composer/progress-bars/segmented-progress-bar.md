@@ -1,16 +1,16 @@
 ---
 title: Segmented Progress Bar
 excerpt: >-
-  This page describes how to configure Segmented Progress bar in Purchasley
+  This page describes how to configure Segmented Progress Bar in Purchasley
   Console
 deprecated: false
 hidden: false
 metadata:
   robots: index
 ---
-A segmented progress bar is a progress indicator divided into distinct sections (segments) rather than a single continuous bar.
+A Segmented Progress Bar is a progress indicator divided into distinct sections (segments) rather than a single continuous bar.
 
-<Image align="center" border={false} src="https://files.readme.io/c3c96240d989efcd77095aea4feca11a82191f47be59cfe86aed7c879d21997f-Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story.jpg" />
+<Image align="center" border={true} src="https://files.readme.io/c3c96240d989efcd77095aea4feca11a82191f47be59cfe86aed7c879d21997f-Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story.jpg" className="border" />
 
 Each segment usually represents:
 
