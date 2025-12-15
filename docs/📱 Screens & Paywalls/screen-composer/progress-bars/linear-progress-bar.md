@@ -1,6 +1,6 @@
 ---
 title: Linear Progress bar
-excerpt: This page describes how Linear Progress bar works in Purchasley Console
+excerpt: This page describes how to configure Linear Progress bar in Purchasley Console
 deprecated: false
 hidden: false
 metadata:
