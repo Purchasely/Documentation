@@ -83,7 +83,7 @@ In the example below, the Yearly Plan has a free trial but not the Weekly Plan.
 <Image
   align="center"
   border={true}
-  caption="To show different CTA copies depending on the Plan selected:  
+  caption="To display different CTA copies depending on the Plan selected:  
 1. duplicate your CTA and adapt the copy  
 2. configure a Conditional visibility rule for each button and associate with the desired plan"
   src="https://files.readme.io/d1de49fd10e3ccfabec3f3b4568f0efc9fb2aaa315aedeba2b3bd347f8000912-photoroom_cv.gif"
@@ -184,5 +184,7 @@ To assign a visibility condition to a Switch state:
 <br />
 
 ### Tab selected
+
+<br />
 
 <br />
