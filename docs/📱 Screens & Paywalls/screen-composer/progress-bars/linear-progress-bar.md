@@ -80,7 +80,3 @@ Under Styles, you can customize the background color of the progress and the not
 **Padding and Margin**
 
 Padding and Margin: Padding is the space between the content of an element and its border. Margin is the space outside the border of an element, pushing it away from surrounding elements.
-
-<br />
-
-<br />
