@@ -32,7 +32,7 @@ Overall, this style works best in short, guided, multi-step experiences where yo
 
 ## Linear Progress Bar Structure:
 
-The Linear Progress Bar is is a single parent component and does not contain any subsections.
+The Linear Progress Bar is a single parent component and does not contain any subsections.
 
 <Image align="center" border={true} src="https://files.readme.io/2431a6930a0e5514a2d850e7c720ae76855f88706aeb2b2c0507356375f2de1f-image.png" className="border" />
 
