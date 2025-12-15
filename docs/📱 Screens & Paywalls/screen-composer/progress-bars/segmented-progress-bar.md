@@ -37,7 +37,7 @@ The Segmented Progress Bar is a single parent component and does not contain any
 
 ***
 
-## Segmented progress Bar configuration:
+## Segmented Progress Bar configuration:
 
 <Image align="center" border={true} src="https://files.readme.io/ffc39510c46a5c743ade930784532166b3698a2d3244fb2df85ab82474ed9847-image.png" className="border" />
 
@@ -84,17 +84,17 @@ The Size section allows you to configure the width and height of the progress ba
 
 In the Styles section, you can customize:
 
-* the background colour of the completed progress
-* he background colour of the current progress
-* the background colour of the remaining (not completed) progress
-* the border radius
-* the border width
+* The background colour of the completed progress
+* The background colour of the current progress
+* The background colour of the remaining (not completed) progress
+* The border radius
+* The border width
 
 <Image align="center" border={true} src="https://files.readme.io/f578cc2fea1f21d4dcc9d7e3f319946773a162886fcbbcf1c7aa196d29ad4524-image.png" className="border" />
 
 **Margin**
 
-The Margin option lets you define the space outside the progress bar’s border, pushing it away from surrounding elements..
+The Margin option lets you define the space outside the progress bar’s border, pushing it away from surrounding elements.
 
 <Image align="center" border={true} src="https://files.readme.io/03ae1204ecfe75a7bdc2cfe420632f68eec7cfbbe367f3860c9dc3775421754c-image.png" className="border" />
 
