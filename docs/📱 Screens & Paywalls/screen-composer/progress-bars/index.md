@@ -30,4 +30,6 @@ Purchasely provides you with 2 type of progress bars.
 
 <Image align="center" border={true} src="https://files.readme.io/ae5b2f7d85178631f18a53f6b20660b9176c12b1bce2d452d732e3db1014dbd9-image.png" className="border" />
 
-<br />
+<Image align="center" border={false} src="https://files.readme.io/ba477765544bc83996b7eab48d11eac7f0914760a4bd924ef82e97f7f14d15cb-duolingo_goals_2025-12-15T10_07_03.668Z.png" />
+
+<Image align="center" border={true} src="https://files.readme.io/cea7337be5e466037caef0ae2d4b1ddc481fc7d858112e6fab6e0314d6a4b138-Duolingo_-_how_did_you_hear_about_us_2025-12-15T10_08_02.015Z.png" className="border" />
