@@ -68,13 +68,17 @@ The value is set in pixels.
 
 ### Size
 
-Size section has options to set the width and height of the progress bar.
+The Size section allows you to configure the width and height of the progress bar.
 
-**Width**: Fill option will fill the progress bar component. Fixed option will have to be filled by your in pixels. Relative option will have to be filled in percentage.
+**Width**
+
+* Fill: The progress bar fills the available container width.
+* Fixed: The width is defined in pixels.
+* Relative: The width is defined as a percentage.
 
 <Image align="center" border={true} src="https://files.readme.io/9254c7e678663f37d794084def6788392fe3a0706e78e2574c3878829ba92637-image.png" className="border" />
 
-**Height**: You can set the height of the progress bar in pixel.
+**Height**: Sets the height of the progress bar in pixels.
 
 <Image align="center" border={true} src="https://files.readme.io/f5e73aa8dca8293b1bf6ff24089b052a03fdc3ce038c02937bb28cdc1238c720-image.png" className="border" />
 
