@@ -1,5 +1,5 @@
 ---
-title: Segmented Progress bar
+title: Segmented Progress Bar
 excerpt: >-
   This page describes how to configure Segmented Progress bar in Purchasley
   Console
