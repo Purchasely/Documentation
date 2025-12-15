@@ -51,7 +51,11 @@ For an instance, if this is a onboarding flow and it has 7 screens, the Total St
 
 For an instance ,if the current screen is the first screen of your Onboarding flow, the Current step =1
 
-<Image align="center" border={true} src="https://files.readme.io/f5a5119843636ce8af62769a7764105676f10a78bb4fe6501db8cb6aae0cca4d-image.png" className="border" />
+**Gap between steps**: To set upi the space between the steps, you can set the gap in pixel int his section. 
+
+<Image align="center" border={true} src="https://files.readme.io/feb98d3c10e21031641a4f63ccf332d31da37266a0e6c7cf4ef54a5b0cea0b0f-image.png" className="border" />
+
+<br />
 
 ### Size
 
