@@ -75,8 +75,6 @@ In the Styles section, you can customize:
 * the border radius
 * the border width
 
-.
-
 <Image align="center" border={true} src="https://files.readme.io/92aa7cccb9e023b2b1dd36b634f50fd2c079c462ff56f20d6d8d51919d5631af-image.png" className="border" />
 
 <br />
