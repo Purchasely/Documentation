@@ -47,15 +47,20 @@ The Segmented Progress Bar is a single parent component and does not contain any
 
 ### Progress Steps
 
-**Total Steps**: Total Steps is exactly equivalent to the number of slides your entire Flow consists of.
+**Total Steps**
+Represents the total number of screens (or slides) in your entire flow.
 
-For an instance, if this is a onboarding flow and it has 7 screens, the Total Step =7
+Example:
+If your onboarding flow contains 7 screens, then Total Steps = 7.
 
-**Current Steps**: Current step number is the actual position of the screen you are customizing.
+**Current Step**
+Indicates the position of the screen currently being customized within the flow.
 
-For an instance ,if the current screen is the first screen of your Onboarding flow, the Current step =1
+Example:
+If you are configuring the first screen of the onboarding flow, then Current Step = 1.
 
-**Gap between steps**: To set up the space between the steps, you can set the gap in pixel int his section.
+**Gap Between Steps:**Defines the spacing between each step in the progress bar.
+The value is set in pixels.
 
 <Image align="center" border={true} src="https://files.readme.io/feb98d3c10e21031641a4f63ccf332d31da37266a0e6c7cf4ef54a5b0cea0b0f-image.png" className="border" />
 
