@@ -23,8 +23,8 @@ Using a progress bar in a paywall helps reduce friction by showing users exactly
 
 Purchasely provides you with 2 type of progress bars.
 
-1. Linear Progress Bar
-2. Segmented Progress Bar
+1. [Linear Progress Bar](https://docs.purchasely.com/docs/linear-progress-bar)
+2. [Segmented Progress Bar](https://docs.purchasely.com/docs/segmented-progress-bar)
 
 <br />
 
