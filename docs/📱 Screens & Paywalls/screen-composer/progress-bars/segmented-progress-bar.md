@@ -25,17 +25,21 @@ Purchasely's Segmented Progress bar consists of three parts: Total progress, ste
 
 <br />
 
-## Linear Progress Bar Structure:
+## Segmented Progress Bar Structure:
 
-The Linear Progress Bar is just one parent component with no sub section to it.
+The Segmented Progress Bar is just one parent component with no sub section to it.
 
-<Image align="center" border={true} src="https://files.readme.io/2431a6930a0e5514a2d850e7c720ae76855f88706aeb2b2c0507356375f2de1f-image.png" className="border" />
+<Image align="center" border={true} src="https://files.readme.io/d6c9e1096edea47f43193d0d8ddd4450339fba8cf16028c893dc12ba135abd32-image.png" className="border" />
+
+<br />
 
 ***
 
-## Linear progress Bar configuration:
+## Segmented progress Bar configuration:
 
-<Image align="center" border={true} src="https://files.readme.io/bcb1f80644bf1e05760a96ebd07eb3f8c330557a5bb54d933421491325e0ae24-image.png" className="border" />
+<Image align="center" border={true} src="https://files.readme.io/ffc39510c46a5c743ade930784532166b3698a2d3244fb2df85ab82474ed9847-image.png" className="border" />
+
+<br />
 
 ### Progress Steps
 
