@@ -76,4 +76,8 @@ Under Styles, you can customize the background color of the progress and the not
 
 **Margin**
 
-Padding and Margin: Padding is the space between the content of an element and its border. Margin is the space outside the border of an element, pushing it away from surrounding elements.
+You can set the space outside the border of an progress bar, pushing it away from surrounding elements.
+
+<Image align="center" border={true} src="https://files.readme.io/5715541ece08f641af3cace4e17710e42a034bb90edaadb81ea9304ddeb1ae92-image.png" className="border" />
+
+<br />
