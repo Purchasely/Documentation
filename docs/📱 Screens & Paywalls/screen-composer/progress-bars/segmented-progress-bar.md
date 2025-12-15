@@ -84,13 +84,19 @@ The Size section allows you to configure the width and height of the progress ba
 
 **Styles**
 
-Under Styles, you can customize the background color of the progress and the not progress section of the progress bar. You can also set the border radius and width.
+In the Styles section, you can customize:
+
+* the background colour of the completed progress
+* he background colour of the current progress
+* the background colour of the remaining (not completed) progress
+* the border radius
+* the border width
 
 <Image align="center" border={true} src="https://files.readme.io/f578cc2fea1f21d4dcc9d7e3f319946773a162886fcbbcf1c7aa196d29ad4524-image.png" className="border" />
 
 **Margin**
 
-You can set the space outside the border of an progress bar, pushing it away from surrounding elements.
+The Margin option lets you define the space outside the progress bar’s border, pushing it away from surrounding elements..
 
 <Image align="center" border={true} src="https://files.readme.io/03ae1204ecfe75a7bdc2cfe420632f68eec7cfbbe367f3860c9dc3775421754c-image.png" className="border" />
 
