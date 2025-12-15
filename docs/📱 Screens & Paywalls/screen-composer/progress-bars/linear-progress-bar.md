@@ -56,9 +56,13 @@ For an instance ,if the current screen is the first screen of your Onboarding fl
 
 ### Size
 
-Size section has options to set the width and height of the progress bar.
+The Size section allows you to configure the width and height of the progress bar.
 
-**Width**: Fill option will fill the progress bar component. Fixed option will have to be filled by your in pixels. Relative option will have to be filled in percentage.
+**Width**
+
+* Fill: The progress bar fills the available container width.
+* Fixed: The width is defined in pixels.
+* Relative: The width is defined as a percentage.
 
 <Image align="center" border={true} src="https://files.readme.io/9254c7e678663f37d794084def6788392fe3a0706e78e2574c3878829ba92637-image.png" className="border" />
 
