@@ -8,7 +8,7 @@ metadata:
 ---
 This type of simple, low-profile progress bar is commonly used in places where you want to show quick, lightweight progress without taking up much screen space.
 
-<Image align="center" border={true} src="https://files.readme.io/b691a5c1f1179cfcbdbabc9e5794207fb0ac5deb7184e54bdb7b36715073071e-duolingo_goals_2025-12-15T10_07_03.668Z.png" className="border" />
+<Image align="center" border={true} src="https://files.readme.io/e7feed5ece1d80ea78a6b89c74ac3b5c5dad3821bbcadaa15becc75ffe06638f-Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story-2.jpg" className="border" />
 
 # Benefits of this progress bar:
 
