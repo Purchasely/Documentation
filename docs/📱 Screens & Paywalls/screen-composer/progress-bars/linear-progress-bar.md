@@ -1,6 +1,6 @@
 ---
 title: Linear Progress Bar
-excerpt: This page describes how to configure Linear Progress bar in Purchasley Console
+excerpt: This page describes how to configure Linear Progress Bar in Purchasley Console
 deprecated: false
 hidden: false
 metadata:
@@ -10,7 +10,7 @@ This type of simple, low-profile progress bar is commonly used in places where y
 
 <Image align="center" border={true} src="https://files.readme.io/e7feed5ece1d80ea78a6b89c74ac3b5c5dad3821bbcadaa15becc75ffe06638f-Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story-2.jpg" className="border" />
 
-# Benefits of this progress bar:
+# Benefits of Linear Progress Bar:
 
 It’s especially useful in:
 
