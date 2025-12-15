@@ -17,7 +17,7 @@ Each segment usually represents:
 * a step in a multi-step process
 * a portion of total progress (for example, milestones, tasks, or phases).
 
-Segmented progress bars are commonly used in onboarding flows, checkout processes, surveys, fitness goals, dashboards, and learning platforms.
+Segmented Progress bars are commonly used in onboarding flows, checkout processes, surveys, fitness goals, dashboards, and learning platforms.
 
 Purchasely’s Segmented Progress Bar is composed of three elements:
 
