@@ -38,9 +38,7 @@ The Linear Progress Bar is a single parent component and does not contain any su
 
 ***
 
-<br />
-
-## Linear progress Bar configuration:
+## Linear Progress Bar configuration:
 
 <Image align="center" border={true} src="https://files.readme.io/bcb1f80644bf1e05760a96ebd07eb3f8c330557a5bb54d933421491325e0ae24-image.png" className="border" />
 
