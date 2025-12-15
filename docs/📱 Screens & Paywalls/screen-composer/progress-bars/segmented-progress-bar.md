@@ -8,16 +8,20 @@ hidden: false
 metadata:
   robots: index
 ---
-A segmented progress bar is a progress indicator divided into distinct sections (segments) instead of one continuous bar.
+A segmented progress bar is a progress indicator divided into distinct sections (segments) rather than a single continuous bar.
+
 Each segment usually represents:
 
-a step in a multi-step process, or
+* a step in a multi-step process
+* a portion of total progress (for example, milestones, tasks, or phases).
 
-a portion of total progress (e.g., milestones, tasks, phases).
+Segmented progress bars are commonly used in onboarding flows, checkout processes, surveys, fitness goals, dashboards, and learning platforms.
 
-You’ll often see it in onboarding flows, checkout processes, surveys, fitness goals, dashboards, and learning platforms.
+Purchasely’s Segmented Progress Bar is composed of three elements:
 
-Purchasely's Segmented Progress bar consists of three parts: Total progress, steps completed and the current step.
+* Total progress
+* Completed steps
+* Current step
 
 <br />
 
@@ -79,6 +83,6 @@ Under Styles, you can customize the background color of the progress and the not
 
 You can set the space outside the border of an progress bar, pushing it away from surrounding elements.
 
-<Image border={false} src="https://files.readme.io/03ae1204ecfe75a7bdc2cfe420632f68eec7cfbbe367f3860c9dc3775421754c-image.png" />
+<Image align="center" border={true} src="https://files.readme.io/03ae1204ecfe75a7bdc2cfe420632f68eec7cfbbe367f3860c9dc3775421754c-image.png" className="border" />
 
 <br />
