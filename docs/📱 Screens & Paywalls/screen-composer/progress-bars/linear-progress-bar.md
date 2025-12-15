@@ -68,7 +68,14 @@ Size section has options to set the width and height of the progress bar.
 
 **Styles**
 
-Under Styles, you can customize the background color of the progress and the not progress section of the progress bar. You can also set the border radius and width.
+In the Styles section, you can customize:
+
+* the background colour of the completed progress
+* the background colour of the remaining (not completed) progress
+* the border radius
+* the border width
+
+.
 
 <Image align="center" border={true} src="https://files.readme.io/92aa7cccb9e023b2b1dd36b634f50fd2c079c462ff56f20d6d8d51919d5631af-image.png" className="border" />
 
