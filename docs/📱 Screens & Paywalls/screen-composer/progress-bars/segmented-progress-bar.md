@@ -10,6 +10,8 @@ metadata:
 ---
 A segmented progress bar is a progress indicator divided into distinct sections (segments) rather than a single continuous bar.
 
+<Image align="center" border={false} src="https://files.readme.io/117b7a0d265c716930472384b4a68eec1447f8b28069f737879765830879773e-Duolingo_-_how_did_you_hear_about_us_2025-12-15T10_08_02.015Z.png" />
+
 Each segment usually represents:
 
 * a step in a multi-step process
