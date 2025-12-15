@@ -1,8 +1,6 @@
 ---
 title: Progress bars
-excerpt: >-
-  This page describes about the Progress bar component in Purchasely Screen
-  Composer
+excerpt: This page describes the Progress bar component in Purchasely Screen Composer
 deprecated: false
 hidden: false
 metadata:
@@ -21,7 +19,7 @@ Using a progress bar in a paywall helps reduce friction by showing users exactly
 
 ***
 
-Purchasely provides you with 2 type of progress bars.
+Purchasely provides you with 2 types of progress bars.
 
 1. [Linear Progress Bar](https://docs.purchasely.com/docs/linear-progress-bar)
 2. [Segmented Progress Bar](https://docs.purchasely.com/docs/segmented-progress-bar)
