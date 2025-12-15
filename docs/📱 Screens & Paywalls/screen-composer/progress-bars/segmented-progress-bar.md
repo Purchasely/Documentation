@@ -51,7 +51,7 @@ For an instance, if this is a onboarding flow and it has 7 screens, the Total St
 
 For an instance ,if the current screen is the first screen of your Onboarding flow, the Current step =1
 
-**Gap between steps**: To set up the space between the steps, you can set the gap in pixel int his section. 
+**Gap between steps**: To set up the space between the steps, you can set the gap in pixel int his section.
 
 <Image align="center" border={true} src="https://files.readme.io/feb98d3c10e21031641a4f63ccf332d31da37266a0e6c7cf4ef54a5b0cea0b0f-image.png" className="border" />
 
@@ -74,5 +74,11 @@ Size section has options to set the width and height of the progress bar.
 Under Styles, you can customize the background color of the progress and the not progress section of the progress bar. You can also set the border radius and width.
 
 <Image align="center" border={true} src="https://files.readme.io/f578cc2fea1f21d4dcc9d7e3f319946773a162886fcbbcf1c7aa196d29ad4524-image.png" className="border" />
+
+**Margin**
+
+You can se the the space between the progress bar and its border. 
+
+<Image border={false} src="https://files.readme.io/03ae1204ecfe75a7bdc2cfe420632f68eec7cfbbe367f3860c9dc3775421754c-image.png" />
 
 <br />
