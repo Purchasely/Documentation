@@ -77,7 +77,7 @@ Under Styles, you can customize the background color of the progress and the not
 
 **Margin**
 
-You can se the the space between the progress bar and its border. 
+You can set the space outside the border of an progress bar, pushing it away from surrounding elements.
 
 <Image border={false} src="https://files.readme.io/03ae1204ecfe75a7bdc2cfe420632f68eec7cfbbe367f3860c9dc3775421754c-image.png" />
 
