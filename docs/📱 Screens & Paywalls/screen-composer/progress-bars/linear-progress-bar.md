@@ -76,8 +76,6 @@ Under Styles, you can customize the background color of the progress and the not
 
 **Margin**
 
-You can set the space outside the border of an progress bar, pushing it away from surrounding elements.
+The Margin option lets you define the space outside the progress bar’s border, pushing it away from surrounding elements.
 
-<Image align="center" border={true} src="https://files.readme.io/5715541ece08f641af3cace4e17710e42a034bb90edaadb81ea9304ddeb1ae92-image.png" className="border" />
-
-<br />
+<Image align="center" border={true} src="https://files.readme.io/03ae1204ecfe75a7bdc2cfe420632f68eec7cfbbe367f3860c9dc3775421754c-image.png" className="border" />
