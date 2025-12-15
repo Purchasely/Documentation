@@ -23,11 +23,7 @@ Purchasely’s Segmented Progress Bar is composed of three elements:
 * Completed steps
 * Current step
 
-<br />
-
 # General Overview
-
-<br />
 
 ## Segmented Progress Bar Structure:
 
