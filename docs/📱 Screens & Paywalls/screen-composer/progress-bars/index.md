@@ -1,5 +1,5 @@
 ---
-title: Progress bars
+title: Progress Bars
 excerpt: This page describes the Progress bar component in Purchasely Screen Composer
 deprecated: false
 hidden: false
@@ -8,7 +8,7 @@ metadata:
 ---
 Using a progress bar in a paywall helps reduce friction by showing users exactly where they are in the process and how much is left to complete. This creates clarity, lowers anxiety, and leverages the goal-gradient effect—people are more likely to finish when they feel close to completion. As a result, the paywall feels smoother, more transparent, and more user-friendly, which can significantly boost conversion rates.
 
-## **Benefits of using Progress bars**
+## **Benefits of using Progress Bars**
 
 1. Creates a Sense of Completion (Goal-Gradient Effect)
 2. Reduces Anxiety & Uncertainty
