@@ -11,10 +11,11 @@ You can intercept the following buttons being tapped:
 * Purchase
 * Win-back / retention offer
 * Restore
-* Open another paywall
+* Open Screen
+* Open Placement
 * Promo code
 
-<Callout icon="🚧">
+<Callout icon="🚧" theme="warn">
   Overriding the **open_presentation** or **open_placement** actions is not recommended.
 
   These actions are tightly coupled with Purchasely’s internal context. Overriding them can break the SDK’s ability to properly track A/B tests, audiences, and campaigns, leading to incorrect analytics and unexpected behavior.
