@@ -5,7 +5,7 @@ excerpt: >-
   based on user interactions or user data. It helps you build dynamic,
   personalized Screens without needing to duplicate them.
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   robots: index
 ---
