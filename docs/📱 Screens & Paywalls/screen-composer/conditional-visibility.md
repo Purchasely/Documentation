@@ -363,3 +363,19 @@ If you want to visualize a component associated with a user attribute, you can u
 More info about the [Preview](preview)
 
 <br />
+
+### User belonging to an Audience
+
+<Callout icon="📘" theme="info">
+  **Compatible with SDK v5.0**
+
+  This conditional visibility rule is retro-compatible until SDK v5.0
+</Callout>
+
+<Callout icon="❗️">
+  **Only works with a Placement or within a Flow**
+
+  For this conditional visibility rule to work, you need to fetch the Screen through a Placement.
+
+  If the Screen containing the rule is directly fetched or opened from another Screen (using the Open Screen action), the Audience will not be evaluated and therefore the component associated with the Audience will not get displayed.
+</Callout>
