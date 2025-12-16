@@ -385,3 +385,17 @@ More info about the [Preview](preview)
 This user condition lets you display a component depending on whether the user belongs to a particular Audience. This is particularly useful to tailor the Screen or Paywall based on the user insights. The [Audiences](audiences) used are the same ones as thoses used for target users in a Placement.
 
 <br />
+
+To assign a visibility condition based on a user attribute:
+
+* enable the condition visibility
+
+<Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
+
+* Condition type: select "User data"
+
+<Image align="left" border={true} width="400px" src="https://files.readme.io/dc082c5e96333518fe07d5e4d4c58ae4eb31d717abcf6f0a667e71187e38be37-image.png" className="border" />
+
+* User condition: select User attribute value
+
+<br />
