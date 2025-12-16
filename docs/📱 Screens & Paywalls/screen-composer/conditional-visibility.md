@@ -308,7 +308,7 @@ attribute:
   This user-attribute-based rules are retro-compatible until SDK v5.0
 </Callout>
 
-This user condition left you display a component depending on the value of a user attribute. This is particularly useful if you want to tailor your Paywall / Screen based on the user insights (e.g.: how the user has responsed to a Quiz).
+This user condition let you display a component depending on the value of a user attribute. This is particularly useful if you want to tailor your Paywall / Screen based on the user insights (e.g.: how the user has responsed to a Quiz).
 
 To assign a visibility condition based on a user attribute:
 
