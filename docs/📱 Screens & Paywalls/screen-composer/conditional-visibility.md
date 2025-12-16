@@ -24,8 +24,12 @@ Conditions can be based on:
 
 1. Select a component in the Screen composer.
 2. Enable Conditional visibility.
-3. Choose a Condition type.
-4. Configure the condition that determines when the component is shown.
+
+   <Image align="left" border={true} width="400px" src="https://files.readme.io/240a7415a56dcbb0010bac781741127d203c1a2407097ffad406a7813a4a5776-image.png" className="border" />
+3. Choose a Condition type
+
+   <Image align="left" border={true} width="400px" src="https://files.readme.io/8b7889302dd0d93d78cfe974bb93a0565fe37d02c43c865a8199b30f6bd406d8-image.png" className="border" />
+4. Configure the condition that determines when the component is shown (see below)
 
 <br />
 
@@ -36,15 +40,15 @@ Use Screen interactions to control visibility based on the user’s actions with
 Available interaction triggers:
 
 * [Plan selected](conditional-visibility#plan-selected) – a specific plan is selected in a plan picker
-* Quiz answer selected – a specific answer is selected in a quiz
-* Switch state – a switch is ON or OFF
-* Tab selected – a specific tab (segmented control) is selected
+* [Quiz answer selected](conditional-visibility#quiz-answer-selected) – a specific answer is selected in a quiz
+* [Switch state](conditional-visibility#switch-state) – a switch is ON or OFF
+* [Tab selected](conditional-visibility#tab-selected) – a specific tab (segmented control) is selected
 
 <br />
 
 ### Plan selected
 
-<Callout icon="📘">
+<Callout icon="📘" theme="info">
   **Compatible with SDK v5.0**
 
   This feature is retro-compatible until SDK v5.0
@@ -54,7 +58,7 @@ This interaction lets you show a component only when a particular plan is select
 
 To assign a visibility condition to a particular picker:
 
-* Enable the condition visibility 
+* Enable the condition visibility
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
 * Condition type: select "Screen interactions"
@@ -66,7 +70,7 @@ To assign a visibility condition to a particular picker:
 * Then select the desired Plan picker ID y
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/5255f60dd2c491d79a1126d02a1603d0bb6d29cbb93a606877f37643c5cc377f-image.png" className="border" />
-* And finally select the desired Plan 
+* And finally select the desired Plan
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/477cd41b5afe9c801077f413c595b83b83a997fbb4eeab4ad6d4f5feea3733d0-image.png" className="border" />
 
@@ -83,8 +87,9 @@ In the example below, the Yearly Plan has a free trial but not the Weekly Plan.
 <Image
   align="center"
   border={true}
-  caption="To display different CTA copies depending on the Plan selected:  
-1. duplicate your CTA and adapt the copy  
+  caption="To display different CTA copies depending on the Plan selected:
+
+1. duplicate your CTA and adapt the copy
 2. configure a Conditional visibility rule for each button and associate with the desired plan"
   src="https://files.readme.io/d1de49fd10e3ccfabec3f3b4568f0efc9fb2aaa315aedeba2b3bd347f8000912-photoroom_cv.gif"
 />
@@ -185,6 +190,68 @@ To assign a visibility condition to a Switch state:
 
 ### Tab selected
 
+<Callout icon="📘" theme="info">
+  **Compatible with SDK v5.0**
+
+  This feature is retro-compatible until SDK v5.0
+</Callout>
+
+This interaction lets you show a component depending on whether a particular tab / segmented control is selected or not. This can be update the header of a paywall based on the plan selected
+
+To assign a visibility condition to a Tab selected:
+
+* enable the condition visibility
+
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
+* Condition type: select "Screen interactions"
+
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/614b56c28698dcd3eda488bad4701c32f2ad8c9c1a8560f8fe2af51c7e929a44-image.png" className="border" />
+* Interaction trigger: select "Tab selected"
+
+  <Image align="left" border={false} width="400px" src="https://files.readme.io/1340a79ba22bb2d83ded37b15e2eb45585c3ce158a33d060f281053a285b8244-image.png" />
+* Then select the desired Tab component
+
+  <Image align="left" border={false} width="400px" src="https://files.readme.io/68e8aa271fb27f7b06448c724d2c9d1de7132e0853d7c4154708dd801c7557a0-image.png" />
+
+  <br />
+* And finally select the desired tab
+
+  <Image align="left" border={false} width="400px" src="https://files.readme.io/599afca6198a7d983cf2bccfb4fd79a96be02067b8a0eb26785a1a4eff02f9ce-image.png" />
+
+  <br />
+
 <br />
 
 <br />
+
+<br />
+
+**Example:**
+
+<Image align="center" border={true} src="https://files.readme.io/a2f2c8fdcedc33fb3527fc7d915e7ad929909cb88fb9bea21bdfd71bab07cce6-headspace_pw.gif" className="border" />
+
+## User data
+
+Use User data to control visibility based on the user’s properties. 
+
+Available user conditions are:
+
+* Eligibility for an Offer
+* User attribute value
+* User belonging to an Audience
+
+<br />
+
+### Eligibility for an Offer
+
+<Callout icon="📘" theme="info">
+  **Compatible with SDK v5.6**
+
+  This feature is NOT retro-compatible with SDK below v5.6. You should upgrade to SDK v5.6 and above to use it. If your Screen is displayed by a SDK version below v5.6, components associated with this type of Conditional visibility rule will simply not be displayed.
+</Callout>
+
+This user condition left you display a component if the user is / is not eligible to the introductory offer of one of the plans associated with the Paywall. It's particularly useful when you want to display a component such as the "Blinkist timeline" - explaining how the free trial works - only when the user can still benefit from the free trial.
+
+To assign a visibility condition base on the user eligibility for an offer
+
+
