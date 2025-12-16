@@ -382,7 +382,7 @@ More info about the [Preview](preview)
   If the Screen containing the rule is directly fetched or opened from another Screen (using the Open Screen action), the Audience will not be evaluated and therefore the component associated with the Audience will not be displayed.
 </Callout>
 
-This user condition lets you display a component depending on whether the user belongs to a particular Audience. This is particularly useful to tailor the Screen or Paywall based on the user insights. The [Audiences](audiences) used are the same ones as thoses used for target users in a Placement.
+This user condition lets you display a component depending on whether the user belongs to a particular Audience. This is particularly useful to tailor the Screen or Paywall based on the user insights. The [Audiences](audiences) used are the same ones as those used for target users in a Placement.
 
 <br />
 
@@ -396,6 +396,32 @@ To assign a visibility condition based on a user attribute:
 
 <Image align="left" border={true} width="400px" src="https://files.readme.io/dc082c5e96333518fe07d5e4d4c58ae4eb31d717abcf6f0a667e71187e38be37-image.png" className="border" />
 
-* User condition: select User attribute value
+<br />
+
+* User condition: select Audience
+
+<Image align="left" border={false} width="400px" src="https://files.readme.io/476cf9be1b7df4c7c7c0be2371bc4bf1a79dd01c2f997dca445e2aa918e5b379-image.png" />
+
+<br />
+
+<br />
+
+<br />
+
+* Finally select the desired Audience or create a new one
+
+<Image align="left" border={true} width="400px" src="https://files.readme.io/cadc8b30b7c83d7e937f6767c923148b93baa46285d32489aa9e5a595f8cd8db-image.png" className="border" />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+**Example:**
+
+<Image align="center" border={true} src="https://files.readme.io/811864fb3cdcb75e15cac730730c6f740c1ab4b1f4b8400470f1867bc4760a3a-photoroom.gif" className="border" />
 
 <br />
