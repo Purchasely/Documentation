@@ -308,7 +308,7 @@ Purchasely.setCustomScreenProvider(
 
 ### 3. Resume execution by calling the SDK
 
-When the user completes the Custom Screen, call the presentation's (or screen, how do we call those PLYPresentation in the doc? @Nico?)`executeConnection()` method with the chosen connection.
+When the user completes the Custom Screen, call the presentation's`executeConnection()` method with the chosen connection.
 
 This tells Purchasely what to do next (continue a Flow, trigger an action, etc.).
 
@@ -330,7 +330,7 @@ PLYPresentation.executeConnection(_:)
 fun PLYPresentation.execute(connection: PLYConnection? = null) 
 ```
 
-Standalone usage example (Example (supposing a PLYPresentation variable / parameter named "presentation")
+Standalone usage example
 
 ```swift
 let loginConnection = presentation.connections.first(where: { $0.id == "login" })
