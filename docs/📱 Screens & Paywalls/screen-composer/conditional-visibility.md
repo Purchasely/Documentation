@@ -245,22 +245,53 @@ Available user conditions are:
 ### Eligibility for an Offer
 
 <Callout icon="📘" theme="info">
-  **Compatible with SDK v5.0**
+**Compatible with SDK v5.6**
+v5.0**
 
-  This feature is retro-compatible until SDK v5.0
+This feature is NOT retro-compatible with SDK below v5.6. You should upgrade to until SDK v5.6 and above to use it. If your Screen is displayed by a SDK version below v5.6, components associated with this type of Conditional visibility rule will simply not be displayed.
+v5.0
 </Callout>
 
-This user condition left you display a component if a user attribute has a specific value. This is particularly useful when you want to personalize your Paywall or a Screen depending on the user insights (e.g.: how they answered to a Quiz).
+This user condition left you display a component if the a user is / is not eligible to the introductory offer of one of the plans associated with the Paywall. Combined with [Offer mode text override capabilities](offer-mode), this feature attribute has a specific value. This is particularly useful when you want to display personalize your Paywall or a component such as Screen depending on the "Blinkist timeline" - explaining user insights (e.g.: how the free trial works - only when the user can still benefit from the free trial.
+they answered to a Quiz).
 
-To assign a visibility condition based on a user attribute:
+To assign a visibility condition base based on the a user eligibility for an offer
+attribute:
 
 * enable the condition visibility
 
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
+<Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
 
 <br />
 
 <br />
+
+* Condition type: select "User data"
+
+<Image align="left" border={true} width="400px" src="https://files.readme.io/7b3cdbbdad8a6415ff04a5b8f32a4eefad25a0f6846e5aba3be48e0bc7459d07-image.png" className="border" />
+
+<br />
+
+<br />
+
+* User condition: select Eligibility to an Offer
+
+<Image align="left" border={true} width="400px" src="https://files.readme.io/30432644ed0550dd3266ee360b19c85b6164cee44518ccafd7c8acdf35dda6e2-image.png" className="border" />
+
+<br />
+
+<br />
+
+<br />
+
+* And finally select the eligibility rule: is eligible / is not available for the introductory offer
+
+<Image align="left" border={true} width="400px" src="https://files.readme.io/4dbd068f3b3b7c0359c8065c0cdf369402fe8e40f501b6e907b53f4c7bcc5673-image.png" className="border" />
+
+<br />
+
+<br />
+
 
 * Condition type: select "User data"
 
