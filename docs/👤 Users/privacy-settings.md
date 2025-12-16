@@ -12,7 +12,7 @@ metadata:
 next:
   description: ''
 ---
-*Requires[SDK version 5.4.0](/changelog/54) or newer.*
+_Requires[SDK version 5.4.0](/changelog/54) or newer._
 
 This page explains how you can respect end-user privacy by matching Purchasely SDK behavior to user consent, including how to disable data processing features when required.
 
@@ -43,9 +43,9 @@ Below is a summary (excerpt) of the categories of processing conducted by Purcha
 | Processing        | Processing designation                                                                                          | Legal Basis                                                  | Revokable |
 | :---------------- | :-------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------- | :-------- |
 | **Processing #1** | All the operations are strictly mandatory to allow the Services to be managed technically and operationally     | Performance of contract (or action at user request)          | No        |
-| **Processing #2** | All the operations enabling the statistical analysis, audience measurement and optimization of the User Journey | Data Controller's legitimate interest *or* with user consent | Yes       |
-| **Processing #3** | All the operations enabling the customization of the User journey and of the commercial offers presented        | Data Controller's legitimate interest *or* with user consent | Yes       |
-| **Processing #4** | All the operations enabling the recommendation of commercial offers displayed spontaneously                     | Data Controller's legitimate interest *or* with user consent | Yes       |
+| **Processing #2** | All the operations enabling the statistical analysis, audience measurement and optimization of the User Journey | Data Controller's legitimate interest _or_ with user consent | Yes       |
+| **Processing #3** | All the operations enabling the customization of the User journey and of the commercial offers presented        | Data Controller's legitimate interest _or_ with user consent | Yes       |
+| **Processing #4** | All the operations enabling the recommendation of commercial offers displayed spontaneously                     | Data Controller's legitimate interest _or_ with user consent | Yes       |
 
 More details on each processing are provided in the [Data Processing Agreement](https://www.purchasely.com/hubfs/PURCHASELY-DATA-PROCESSING-AGREEMENT.pdf).
 
@@ -53,7 +53,7 @@ More details on each processing are provided in the [Data Processing Agreement](
 
 > ℹ️ About Processing #1
 >
-> Processing #1 is essential to the functioning of the product (subscriptions), and cannot be turned off. If the user has agreed to your Terms & Conditions and activates a subscription, you have implicitly authorized that.\
+> Processing #1 is essential to the functioning of the product (subscriptions), and cannot be turned off. If the user has agreed to your Terms & Conditions and activates a subscription, you have implicitly authorized that.  
 > For details, consult the full Data Processing Agreement. (See link at end.)
 
 <br />
@@ -79,7 +79,7 @@ Here’s a recommended lifecycle to match SDK behavior with the user’s privacy
 
 > 🚧 There is no direct interface between the CMP and the Purchasely SDK
 >
-> The Purchasely SDK is not directly interfaced with the CMP integrated into your app. 
+> The Purchasely SDK is not directly interfaced with the CMP integrated into your app.
 >
 > The app has the responsibility to revoke the data processing to match the user choices provided by the CMP.
 
@@ -134,8 +134,8 @@ Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.identif
 <br />
 
 * **When to revoke?**
-  * if the Processing is necessary for the purposes of the Data Controller's legitimate interest => only revoke it if the user has *opted-out*
-  * if the Processing requires the User explicit consent => revoke it if the user *has not given their consent*.
+  * if the Processing is necessary for the purposes of the Data Controller's legitimate interest => only revoke it if the user has _opted-out_
+  * if the Processing requires the User explicit consent => revoke it if the user _has not given their consent_.
 
 <br />
 
@@ -169,7 +169,12 @@ Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.identif
 >
 > In certain sensitive contexts — such as apps targeting children or privacy-focused apps like VPNs — you may choose to completely disable all UI and SDK event tracking.
 >
-> When this option is enabled, no analytics data will be collected, making it impossible for the Purchasely Platform to measure displayed Screens, Paywalls, or conversion rates.\
+> When this option is enabled, UI / SDK events will be triggered (and collected) by the SDK, making it impossible for the Purchasely Platform to:
+>
+> *  measure Screens or Paywalls displayed
+> * measure conversion rates
+> * fetch user insights generated when responding to a Quiz
+>
 > As a result, all related metrics — including Screens displayed, Paywalls displayed, Placements displayed, etc. — will be missing from the Console, especially in the Conversion Dashboard and A/B Tests reports.
 >
 > ⚠️ **Important**: This configuration should only be used as a last resort, as it will introduce significant data gaps and biases across all Dashboards relying on UI / SDK events and disable conversion reporting.
@@ -201,8 +206,8 @@ Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.identif
 <br />
 
 * **When to revoke?**
-  * if the Processing is necessary for the purposes of your legitimate interest => revoke it if only if the user has *opted-out*.
-  * if the Processing requires the User explicit consent => revoke it if the user *has not given their consent*.
+  * if the Processing is necessary for the purposes of your legitimate interest => revoke it if only if the user has _opted-out_.
+  * if the Processing requires the User explicit consent => revoke it if the user _has not given their consent_.
 
 <br />
 
@@ -228,10 +233,10 @@ Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.identif
 * **Effect**
 
   * Optional (non-essential) user attributes are wiped and not considered in audience matching.
-  * If an audience rule depends solely on optional attributes, the user may fall into a default group (*Everyone else*)
+  * If an audience rule depends solely on optional attributes, the user may fall into a default group (_Everyone else_)
   * Screen logic that uses only essential attributes will still function normally.
 
-    <Image alt="Note: if an audience only relies on `essential` user attributes, it will still be possible for a user with Processing #3 revoked to match it" align="center" src="https://files.readme.io/d2303b6ac62df96b4b7bb237f01cca5dec24d0c525899a9d9eac2ff07d61b2c3-image.png" />
+    <Image align="center" alt="Note: if an audience only relies on `essential` user attributes, it will still be possible for a user with Processing #3 revoked to match it" border={false} src="https://files.readme.io/d2303b6ac62df96b4b7bb237f01cca5dec24d0c525899a9d9eac2ff07d61b2c3-image.png" />
 
 <br />
 
@@ -241,10 +246,10 @@ Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.identif
 >
 > 📚 More details in the [built-in user attribute list](user-attributes-list)
 >
-> Custom User Attributes can be defined as `essential` or `optional` too: 
+> Custom User Attributes can be defined as `essential` or `optional` too:
 >
 > * when you set a Custom User Attribute, you must define its privacy setting
-> * by default, a user attribute is `optional` (if privacy setting has been set). 
+> * by default, a user attribute is `optional` (if privacy setting has been set).
 > * Custom User Attributes set prior to the update of the SDK to `v5.4` are classified as `optional` too.
 > * User Attributes rely on local storage trackers.
 >
@@ -252,14 +257,14 @@ Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.identif
 
 ## Processing #4 - Spontaneous Campaign/Offers
 
-* **Purpose**: Automatically trigger in-app experiences (e.g. promotion banners) without explicit user action, upon the app start\
+* **Purpose**: Automatically trigger in-app experiences (e.g. promotion banners) without explicit user action, upon the app start  
   📚 See the [documentation about Campaigns](campaigns).
 
 <br />
 
 * **When to revoke?**
-  * if the Processing is necessary for the purposes of your legitimate interest => revoke it if only if the user has *opted-out*.
-  * if the Processing requires the User explicit consent => revoke it if the user *has not given their consent*.
+  * if the Processing is necessary for the purposes of your legitimate interest => revoke it if only if the user has _opted-out_.
+  * if the Processing requires the User explicit consent => revoke it if the user _has not given their consent_.
 
 <br />
 
