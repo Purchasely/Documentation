@@ -300,7 +300,7 @@ attribute:
 
 <br />
 
-### User attribute
+### User attribute value
 
 <Callout icon="📘" theme="info">
   **Compatible with SDK v5.0**
@@ -313,3 +313,53 @@ This user condition left you display a component depending on the value of a use
 To assign a visibility condition based on a user attribute:
 
 * enable the condition visibility
+
+<Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
+
+<br />
+
+<br />
+
+* Condition type: select "User data"
+
+<Image align="left" border={true} width="400px" src="https://files.readme.io/dc082c5e96333518fe07d5e4d4c58ae4eb31d717abcf6f0a667e71187e38be37-image.png" className="border" />
+
+<br />
+
+<br />
+
+* User condition: select User attribute value
+
+<Image align="left" border={true} width="400px" src="https://files.readme.io/1e7bfc7d00aa9a832bfb1f1d9663b6357787e163e4a3ae112ac1a126cca11ce3-image.png" className="border" />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+* And finally select / type the desired value
+
+<Image align="left" border={true} width="400px" src="https://files.readme.io/2ce65518201ee18cc835eccf11aff40e52600e54365d099374c091b148c242ba-image.png" className="border" />
+
+<br />
+
+**Example:**
+
+<Image align="center" border={true} src="https://files.readme.io/6b47f4bfaff486ef9329d8a54e72c1bf9125a9cc8e548931120f506266dfe266-headspace_pw3.gif" className="border" />
+
+<br />
+
+If you want to visualize a component associated with a user attribute, you can use the Preview widget and check the desired rule.
+
+<Image align="center" border={true} src="https://files.readme.io/f3c9a66e44ace9f4000f06d23b5f5d1326699cd4b96cbeb34b3d70a1b2342f2e-image.png" className="border" />
+
+More info about the [Preview](preview)
+
+<br />
