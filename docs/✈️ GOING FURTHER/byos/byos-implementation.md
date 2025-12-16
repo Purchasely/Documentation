@@ -441,11 +441,10 @@ If a purchase is performed within a Custom Screen, your app must call the SDK’
 This allows the SDK to retrieve the latest receipt and extract the purchase information.
 
 ```swift
-@mobile team: 
-appel à la méthode synchronize() après un achat
+Purchasely.synchronize()
 ```
 ```kotlin
-fun Purchasely.synchronize()
+Purchasely.synchronize()
 ```
 
 This is particularly important in A/B or A/A test scenarios, where accurate purchase tracking is required to attribute conversions correctly.
