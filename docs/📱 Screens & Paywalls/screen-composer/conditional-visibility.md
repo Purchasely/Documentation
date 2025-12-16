@@ -316,15 +316,15 @@ To assign a visibility condition based on a user attribute:
 
 * enable the condition visibility
 
-<Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/a3a4de535bae97a896f31de2cbaa963b3b60407b21e9b09446d309bfe3fede84-image.png" className="border" />
 
-<br />
+  <br />
 
 <br />
 
 * Condition type: select "User data"
 
-<Image align="left" border={true} width="400px" src="https://files.readme.io/dc082c5e96333518fe07d5e4d4c58ae4eb31d717abcf6f0a667e71187e38be37-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/dc082c5e96333518fe07d5e4d4c58ae4eb31d717abcf6f0a667e71187e38be37-image.png" className="border" />
 
 <br />
 
@@ -332,7 +332,7 @@ To assign a visibility condition based on a user attribute:
 
 * User condition: select User attribute value
 
-<Image align="left" border={true} width="400px" src="https://files.readme.io/1e7bfc7d00aa9a832bfb1f1d9663b6357787e163e4a3ae112ac1a126cca11ce3-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/1e7bfc7d00aa9a832bfb1f1d9663b6357787e163e4a3ae112ac1a126cca11ce3-image.png" className="border" />
 
 <br />
 
@@ -348,7 +348,7 @@ To assign a visibility condition based on a user attribute:
 
 * And finally select / type the desired value
 
-<Image align="left" border={true} width="400px" src="https://files.readme.io/2ce65518201ee18cc835eccf11aff40e52600e54365d099374c091b148c242ba-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/2ce65518201ee18cc835eccf11aff40e52600e54365d099374c091b148c242ba-image.png" className="border" />
 
 <br />
 
@@ -390,17 +390,21 @@ To assign a visibility condition based on a user attribute:
 
 * enable the condition visibility
 
-<Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
+
+<br />
+
+<br />
 
 * Condition type: select "User data"
 
-<Image align="left" border={true} width="400px" src="https://files.readme.io/dc082c5e96333518fe07d5e4d4c58ae4eb31d717abcf6f0a667e71187e38be37-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/dc082c5e96333518fe07d5e4d4c58ae4eb31d717abcf6f0a667e71187e38be37-image.png" className="border" />
 
 <br />
 
 * User condition: select Audience
 
-<Image align="left" border={false} width="400px" src="https://files.readme.io/476cf9be1b7df4c7c7c0be2371bc4bf1a79dd01c2f997dca445e2aa918e5b379-image.png" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/476cf9be1b7df4c7c7c0be2371bc4bf1a79dd01c2f997dca445e2aa918e5b379-image.png" className="border" />
 
 <br />
 
@@ -410,7 +414,7 @@ To assign a visibility condition based on a user attribute:
 
 * Finally select the desired Audience or create a new one
 
-<Image align="left" border={true} width="400px" src="https://files.readme.io/cadc8b30b7c83d7e937f6767c923148b93baa46285d32489aa9e5a595f8cd8db-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/cadc8b30b7c83d7e937f6767c923148b93baa46285d32489aa9e5a595f8cd8db-image.png" className="border" />
 
 <br />
 
