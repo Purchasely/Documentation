@@ -424,4 +424,8 @@ To assign a visibility condition based on a user attribute:
 
 <Image align="center" border={true} src="https://files.readme.io/811864fb3cdcb75e15cac730730c6f740c1ab4b1f4b8400470f1867bc4760a3a-photoroom.gif" className="border" />
 
-<br />
+If you want to visualize a component associated with an Audience, you can use the Preview widget and check the desired rule.
+
+<Image align="center" border={true} src="https://files.readme.io/b7704a188be6afedff9c7c48a9c6564001425ac2cd90ea5b85679aa666c4e1b0-image.png" className="border" />
+
+More info about the [Preview](preview)
