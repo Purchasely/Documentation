@@ -245,14 +245,14 @@ Available user conditions are:
 ### Eligibility for an Offer
 
 <Callout icon="📘" theme="info">
-  **Compatible with SDK v5.6**
+  **Compatible with SDK v5.0**
 
-  This feature is NOT retro-compatible with SDK below v5.6. You should upgrade to SDK v5.6 and above to use it. If your Screen is displayed by a SDK version below v5.6, components associated with this type of Conditional visibility rule will simply not be displayed.
+  This feature is retro-compatible until SDK v5.0
 </Callout>
 
-This user condition left you display a component if the user is / is not eligible to the introductory offer of one of the plans associated with the Paywall. Combined with [Offer mode text override capabilities](offer-mode), this feature is particularly useful when you want to display a component such as the "Blinkist timeline" - explaining how the free trial works - only when the user can still benefit from the free trial.
+This user condition left you display a component if a user attribute has a specific value. This is particularly useful when you want to personalize your Paywall or a Screen depending on the user insights (e.g.: how they answered to a Quiz).
 
-To assign a visibility condition base on the user eligibility for an offer
+To assign a visibility condition based on a user attribute:
 
 * enable the condition visibility
 
@@ -271,10 +271,6 @@ To assign a visibility condition base on the user eligibility for an offer
 <br />
 
 * User condition: select Eligibility to an Offer
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/30432644ed0550dd3266ee360b19c85b6164cee44518ccafd7c8acdf35dda6e2-image.png" className="border" />
-
-<br />
 
 <br />
 
@@ -295,3 +291,15 @@ To assign a visibility condition base on the user eligibility for an offer
 <Image align="center" border={true} src="https://files.readme.io/a12d5e2951c3aae805fa1fad7571c2c8613c680be5d9879220c1634139ed18a0-heaspace_pw2.gif" className="border" />
 
 <br />
+
+### User attribute
+
+<Callout icon="📘" theme="info">
+  **Compatible with SDK v5.6**
+
+  This feature is NOT retro-compatible with SDK below v5.6. You should upgrade to SDK v5.6 and above to use it. If your Screen is displayed by a SDK version below v5.6, components associated with this type of Conditional visibility rule will simply not be displayed.
+</Callout>
+
+This user condition left you display a component if the user is / is not eligible to the introductory offer of one of the plans associated with the Paywall. Combined with [Offer mode text override capabilities](offer-mode), this feature is particularly useful when you want to display a component such as the "Blinkist timeline" - explaining how the free trial works - only when the user can still benefit from the free trial.
+
+
