@@ -295,11 +295,13 @@ To assign a visibility condition based on a user attribute:
 ### User attribute
 
 <Callout icon="📘" theme="info">
-  **Compatible with SDK v5.6**
+  **Compatible with SDK v5.0**
 
-  This feature is NOT retro-compatible with SDK below v5.6. You should upgrade to SDK v5.6 and above to use it. If your Screen is displayed by a SDK version below v5.6, components associated with this type of Conditional visibility rule will simply not be displayed.
+  This feature is retro-compatible until SDK v5.0
 </Callout>
 
-This user condition left you display a component if the user is / is not eligible to the introductory offer of one of the plans associated with the Paywall. Combined with [Offer mode text override capabilities](offer-mode), this feature is particularly useful when you want to display a component such as the "Blinkist timeline" - explaining how the free trial works - only when the user can still benefit from the free trial.
+This user condition left you display a component depending on the value of a user attribute. This is particularly useful if you want to tailor your Paywall / Screen based on the user insights (e.g.: how the user has responsed to a Quiz).
 
+To assign a visibility condition based on a user attribute:
 
+* enable the condition visibility
