@@ -260,15 +260,15 @@ attribute:
 
 * enable the condition visibility
 
-<Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/df90612b7cf117b34107864db34e6ff4cc58777c74539738c66cf8ad487381a5-image.png" className="border" />
 
-<br />
+  <br />
 
 <br />
 
 * Condition type: select "User data"
 
-<Image align="left" border={true} width="400px" src="https://files.readme.io/7b3cdbbdad8a6415ff04a5b8f32a4eefad25a0f6846e5aba3be48e0bc7459d07-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/7b3cdbbdad8a6415ff04a5b8f32a4eefad25a0f6846e5aba3be48e0bc7459d07-image.png" className="border" />
 
 <br />
 
@@ -276,7 +276,7 @@ attribute:
 
 * User condition: select Eligibility to an Offer
 
-<Image align="left" border={true} width="400px" src="https://files.readme.io/30432644ed0550dd3266ee360b19c85b6164cee44518ccafd7c8acdf35dda6e2-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/30432644ed0550dd3266ee360b19c85b6164cee44518ccafd7c8acdf35dda6e2-image.png" className="border" />
 
 <br />
 
@@ -286,7 +286,7 @@ attribute:
 
 * And finally select the eligibility rule: is eligible / is not available for the introductory offer
 
-<Image align="left" border={true} width="400px" src="https://files.readme.io/4dbd068f3b3b7c0359c8065c0cdf369402fe8e40f501b6e907b53f4c7bcc5673-image.png" className="border" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/4dbd068f3b3b7c0359c8065c0cdf369402fe8e40f501b6e907b53f4c7bcc5673-image.png" className="border" />
 
 <br />
 
