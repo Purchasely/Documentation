@@ -51,7 +51,7 @@ Available interaction triggers:
 <Callout icon="📘" theme="info">
   **Compatible with SDK v5.0**
 
-  This feature is retro-compatible until SDK v5.0
+  Plan-based rules are retro-compatible until SDK v5.0
 </Callout>
 
 This interaction lets you show a component only when a particular plan is selected. This is particularly useful when you want to change the price or CTA.
@@ -101,7 +101,7 @@ In the example below, the Yearly Plan has a free trial but not the Weekly Plan.
 <Callout icon="📘" theme="info">
   **Compatible with SDK v5.0**
 
-  This feature is retro-compatible until SDK v5.0
+  Answer-based rules are retro-compatible until SDK v5.0
 </Callout>
 
 This interaction lets you show a component only when a particular answer is selected in a Quiz. This can be useful if you want to display additional information when the user selects a particular answer.
@@ -149,7 +149,7 @@ To assign a visibility condition to a Quiz answer:
 <Callout icon="📘" theme="info">
   **Compatible with SDK v5.0**
 
-  This feature is retro-compatible until SDK v5.0
+  Switch-based rules are retro-compatible until SDK v5.0
 </Callout>
 
 This interaction lets you show a component depending on whether a switch is selected or not. This can be useful if you want to make the activation of a free trial optional.
@@ -193,7 +193,7 @@ To assign a visibility condition to a Switch state:
 <Callout icon="📘" theme="info">
   **Compatible with SDK v5.0**
 
-  This feature is retro-compatible until SDK v5.0
+  Tab-based rules are retro-compatible until SDK v5.0
 </Callout>
 
 This interaction lets you show a component depending on whether a particular tab / segmented control is selected or not. This can be update the header of a paywall based on the plan selected
@@ -244,12 +244,12 @@ Available user conditions are:
 
 ### Eligibility for an Offer
 
-<Callout icon="📘" theme="info">
-  **Compatible with SDK v5.6**
-  v5.0**
+<Callout icon="❗️">
+  **Requires SDK v5.6 and above**
 
-  This feature is NOT retro-compatible with SDK below v5.6. You should upgrade to until SDK v5.6 and above to use it. If your Screen is displayed by a SDK version below v5.6, components associated with this type of Conditional visibility rule will simply not be displayed.
-  v5.0
+  Eligibility-based rules are NOT retro-compatible with SDK below v5.6. You should upgrade to until SDK v5.6 and above to use them. 
+
+  If your Screen is displayed by a SDK version below v5.6, components associated with this type of Conditional visibility ruled will simply not be displayed.
 </Callout>
 
 This user condition left you display a component if the a user is / is not eligible to the introductory offer of one of the plans associated with the Paywall. Combined with [Offer mode text override capabilities](offer-mode), this feature attribute has a specific value. This is particularly useful when you want to display personalize your Paywall or a component such as Screen depending on the "Blinkist timeline" - explaining user insights (e.g.: how the free trial works - only when the user can still benefit from the free trial.
@@ -305,7 +305,7 @@ attribute:
 <Callout icon="📘" theme="info">
   **Compatible with SDK v5.0**
 
-  This feature is retro-compatible until SDK v5.0
+  This user-attribute-based rules are retro-compatible until SDK v5.0
 </Callout>
 
 This user condition left you display a component depending on the value of a user attribute. This is particularly useful if you want to tailor your Paywall / Screen based on the user insights (e.g.: how the user has responsed to a Quiz).
@@ -375,7 +375,9 @@ More info about the [Preview](preview)
 <Callout icon="❗️">
   **Only works with a Placement or within a Flow**
 
-  For this conditional visibility rule to work, you need to fetch the Screen through a Placement.
+  For an audience-based rule to work, you need to display or fetch the Screen through a Placement.
 
   If the Screen containing the rule is directly fetched or opened from another Screen (using the Open Screen action), the Audience will not be evaluated and therefore the component associated with the Audience will not get displayed.
 </Callout>
+
+<br />
