@@ -252,7 +252,7 @@ Available user conditions are:
   If your Screen is displayed by a SDK version below v5.6, components associated with this type of Conditional visibility ruled will simply not be displayed.
 </Callout>
 
-This user condition left you display a component if the a user is / is not eligible to the introductory offer of one of the plans associated with the Paywall. Combined with [Offer mode text override capabilities](offer-mode), this feature attribute has a specific value. This is particularly useful when you want to display personalize your Paywall or a component such as Screen depending on the "Blinkist timeline" - explaining user insights (e.g.: how the free trial works - only when the user can still benefit from the free trial.
+This user condition lets you display a component if the a user is / is not eligible to the introductory offer of one of the plans associated with the Paywall. Combined with [Offer mode text override capabilities](offer-mode), this feature attribute has a specific value. This is particularly useful when you want to display personalize your Paywall or a component such as Screen depending on the "Blinkist timeline" - explaining user insights (e.g.: how the free trial works - only when the user can still benefit from the free trial.
 they answered to a Quiz).
 
 To assign a visibility condition base based on the a user eligibility for an offer
@@ -308,7 +308,9 @@ attribute:
   This user-attribute-based rules are retro-compatible until SDK v5.0
 </Callout>
 
-This user condition let you display a component depending on the value of a user attribute. This is particularly useful if you want to tailor your Paywall / Screen based on the user insights (e.g.: how the user has responsed to a Quiz).
+This user condition lets you display a component depending on the value of a user attribute. This is particularly useful if you want to tailor your Paywall / Screen based on the user insights (e.g.: how the user has responsed to a Quiz).
+
+It is limited to one single user attribute and 1 single value. If you want to combine several user attributes and values, check [Audience-based conditional visibility rules](conditional-visibility#user-belonging-to-an-audience) below.
 
 To assign a visibility condition based on a user attribute:
 
@@ -377,7 +379,9 @@ More info about the [Preview](preview)
 
   For an audience-based rule to work, you need to display or fetch the Screen through a Placement.
 
-  If the Screen containing the rule is directly fetched or opened from another Screen (using the Open Screen action), the Audience will not be evaluated and therefore the component associated with the Audience will not get displayed.
+  If the Screen containing the rule is directly fetched or opened from another Screen (using the Open Screen action), the Audience will not be evaluated and therefore the component associated with the Audience will not be displayed.
 </Callout>
+
+This user condition lets you display a component depending on whether the user belongs to a particular Audience. This is particularly useful to tailor the Screen or Paywall based on the user insights. The [Audiences](audiences) used are the same ones as thoses used for target users in a Placement.
 
 <br />
