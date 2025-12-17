@@ -14,13 +14,8 @@ Purchasely Debug Mode allows you to preview the In-App Experiences crafted in th
 
 With Debug Mode activated on a device, you can:
 
-* Preview any In-App Experience created in the Purchasely Console (Paywalls, Screens, Flows…)
-* The draft version is visible
-* Test localization: switch between all available languages.
-* Test appearance: toggle between Light Mode and Dark Mode.
-* Test Introductory Offer eligibility: simulate eligible or non-eligible users.
-* Simulate how a Screen integrates with any Placement by targeting the `Internal Testers` Audience and giving it the highest priority
-* Safely validate Flows before enabling them for real users.
+* Preview any In-App Experience created in the Purchasely Console (Paywalls, Screens, Flows…): the draft version is visible
+* Simulate how an In-App Experience integrates with any Placement - by targeting the `Internal Testers` Audience and giving it the highest priority - before making it visible to real users.
 
 Debug Mode only affects the device on which it is activated.
 
@@ -28,32 +23,39 @@ It has zero impact on your production Audiences or Paywall exposure.
 
 <br />
 
-# ✅ Enabling Debug Mode
+# Enabling Debug Mode
 
 1. **Open the preview QR code of any Screen the Purchasely Console**
 
-   When editing an Experience, Flow, or Paywall, the Console shows a Preview QR Code.
+   When editing a Screen, the Console shows a Preview QR Code.
 
-   This QR code contains all the metadata needed for your device to load the preview.
+   <br />
 
    <Image border={false} src="https://files.readme.io/76a2a89a2ce6c57ff1cd7cbeacbfb991b3f2440baba8c5832b6a52d3b9f319a0-image.png" />
 
+     
+
+   This QR code contains all the metadata needed for your device to load the preview.    
+
    <br />
+
+   > ⚠️ Deeplink management required
+   >
+   > To make the Preview work, you must have implemented [Deeplinks management](deeplinks-management).
 
 <br />
 
 2. **Scan the QR code with your test device**
 
-Open your camera on the device that runs your app with the Purchasely SDK integrated.
+   Open your camera on the device that runs your app with the Purchasely SDK integrated.
 
-After scanning:
+   After scanning:
+   * Your device will open the app and prompt the Purchasely SDK to display the Screen
+   * A Purchasely Floating Debug Button appears on  top of your app UI in the bottom right corner.
 
-* Your device will open the app and prompt the Purchasely SDK to display the Screen
-* A Purchasely Floating Debug Button appears on  top of your app UI in the bottom right corner.
+<Image align="center" border={true} width="300px" src="https://files.readme.io/2385df1fadfdf69ac652e2ebc77bce30ac5b031412d698c98ec8fe0dcefb66a1-image.png" className="border" />
 
-  <Image align="center" border={true} width="300px" src="https://files.readme.io/2385df1fadfdf69ac652e2ebc77bce30ac5b031412d698c98ec8fe0dcefb66a1-image.png" className="border" />
-
-  <br />
+<br />
 
 3. **Open the Floating Debug Button**
 
@@ -68,25 +70,31 @@ After scanning:
 
 4. **Activate Debug Mode**
 
-   From the Debug Panel, you can Enable Debug Mode by activating the Switch.
+   From the Debug Panel, you can Enable Debug Mode by activating the switch.
 
    Once activated:
    * Your device enters the Internal Testers audience (Built-in User attribute `debug mode` = `true`)
    * You can now close the Debug Panel and Screen displayed and browse your application
-5. **Map the Screens / Flows you want to test, with the Audience `Internal Testers`**
+   <br />
+5. **Target In-App Experiences to `Internal Testers`**
 
-   In the Console, you can map the Screen / Paywall you are working on with the Audience `Internal Testers` and any Placement and put it in first position (with the highest priority).
+   In the Console, you can map an In-App Experience with the Audience `Internal Testers` and any Placement.
+
+   <br />
 
    <Image align="center" border={false} width="400px" src="https://files.readme.io/b77fe7976ba3df286a6acd24986608f54d75f519fa8dd16e7c63523ab7f08d75-image.png" />
 
-   <br />
-6. **Navigate in your app or use the Placement deeplink**
-
-   When you'll hit a Placement, your device with the debug mode activated will match the Audience Internal Testers and you will be able to see the corresponding Screen / Paywall (in the draft version). 
+   Put that Audience in first position (with the highest priority) to make sure that test devices will not match another condition with a higher priority.
 
 <br />
 
-# 🔧 How Debug Mode Works
+6. **Navigate in your app or use the Placement deeplink**
+
+   When you'll hit a Placement, your device with the debug mode activated will match the Audience `Internal Testers` and you will be able to see the corresponding Screen / Paywall (in the draft version). 
+
+<br />
+
+# How Debug Mode Works
 
 The Audience `Internal Testers` leverages the Built-in User attribute `debug mode`. 
 
@@ -94,7 +102,7 @@ When you activate the Debug Mode by scanning a QR code from the Console, this se
 
 <Image align="center" border={false} width="400px" src="https://files.readme.io/7782f09e7c19b44fd6c37cbf679695e7ed5afbf4bb8dc73b77d9881f2ca133d1-image.png" />
 
-Your real users do not match this Audience and Experiences targeted to the `Internal Testers` Audience are shown only to devices with the Debug mode activated.
+Your real users do not match this Audience and In-App Experiences targeted to the `Internal Testers` Audience are shown only to devices with the Debug Mode activated.
 
 This Audience can be used as a targeting condition for any:
 
