@@ -307,11 +307,11 @@ To assign a Visibility Condition based on the a user eligibility for an Introduc
 
 This user condition lets you display a component depending on the value of a user attribute. This is particularly useful if you want to tailor your Paywall / Screen based on the user insights (e.g.: how the user has responsed to a Quiz).
 
-It is limited to one single user attribute and 1 single value. If you want to combine several user attributes and values, check [Audience-based conditional visibility rules](conditional-visibility#audience) below.
+It is limited to one single user attribute and one single value. If you want to combine several User attributes and values with Boolean Operators, check [Audience-based conditional visibility rules](conditional-visibility#audience) below.
 
-To assign a visibility condition based on a user attribute:
+To assign a Visibility Condition based on a User attribute:
 
-* enable the condition visibility
+* Turn on Conditional Visibility
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/a3a4de535bae97a896f31de2cbaa963b3b60407b21e9b09446d309bfe3fede84-image.png" className="border" />
 
@@ -343,7 +343,7 @@ To assign a visibility condition based on a user attribute:
 
 <br />
 
-* And finally select / type the desired value
+* And finally select / type the desired User attribute value
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/2ce65518201ee18cc835eccf11aff40e52600e54365d099374c091b148c242ba-image.png" className="border" />
 
@@ -351,7 +351,7 @@ To assign a visibility condition based on a user attribute:
 
 **Example:**
 
-<Image align="center" border={true} src="https://files.readme.io/6b47f4bfaff486ef9329d8a54e72c1bf9125a9cc8e548931120f506266dfe266-headspace_pw3.gif" className="border" />
+<Image align="center" border={true} caption="In this famous Paywall by Headspace, a benefit tailored to the user insights fetched during the onboarding has been added as a subtitle." src="https://files.readme.io/6b47f4bfaff486ef9329d8a54e72c1bf9125a9cc8e548931120f506266dfe266-headspace_pw3.gif" />
 
 <br />
 
