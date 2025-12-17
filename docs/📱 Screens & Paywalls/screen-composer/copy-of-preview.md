@@ -55,13 +55,41 @@ You can preview your Screen across multiple device contexts to validate layout a
 * **Specific devices**: Choose from a predefined list
 * **Orientation**: Portrait or Landscape
 
+<Image align="center" border={true} src="https://files.readme.io/58939678f8c7ccedfc86365367b0318836f02e22575d997b63a0fe8b02bc7659-devices.gif" className="border" />
+
 This helps anticipate layout constraints across form factors early in the design process.
 
-<br />
+<Callout icon="📘" theme="info">
+  **Adapting Screens to device types**
+
+  When switching to another device type (for example from Smartphone to Tablet), you can override the widths, heights and media of any component for that particular device type. 
+
+  📚 More information: [adapting Screens to devices](composer-adapting-screens-to-devices)
+</Callout>
 
 <br />
 
+### Visual & Contextual Variations
+
+The Preview allows you to simulate multiple visual and commercial contexts:
+
+* Light mode / Dark mode
+  <br />
+  📚 More information: [Dark mode vs Light mode](dark-mode)
+* Regular mode / Offer mode
+  <br />
+  📚 More information: [understanding the Offer mode](offer-mode)
+* Languages (localization preview)
+  <br />
+  📚 More information: [localizing your Screens](composer-localization)
+* Store fronts (App Store / Google Play) and store territories
+  <br />
+
+All these combination can be tested thanks to the Preview widget.
+
 <br />
+
+This is especially useful to validate localized copy, pricing layout, and offer emphasis.
 
 <br />
 
