@@ -11,38 +11,37 @@ metadata:
 ---
 # What is Conditional Visibility?
 
-Conditional visibility controls whether a component is displayed or hidden at runtime, depending on predefined conditions.
+Conditional Visibility lets you control whether a component is displayed or hidden in a Screen based on:
 
-Conditions can be based on:
+* Screen interactions - what the user does in the current Screen
+* User data - who the user is, what attributes they have, or audiences they belong to
 
-* Screen interactions (what the user does in the Screen)
-* User data (who the user is or what is known about them)
-
-<br />
+Use this to personalize Screens without duplicating content.
 
 # Enabling Conditional Visibility
 
-1. Select a component in the Screen composer.
-2. Enable Conditional visibility.
+1. Select any component in the Screen composer.
+2. Turn on Conditional visibility.
 
    <Image align="left" border={true} width="400px" src="https://files.readme.io/240a7415a56dcbb0010bac781741127d203c1a2407097ffad406a7813a4a5776-image.png" className="border" />
 3. Choose a Condition type
 
    <Image align="left" border={true} width="400px" src="https://files.readme.io/8b7889302dd0d93d78cfe974bb93a0565fe37d02c43c865a8199b30f6bd406d8-image.png" className="border" />
 4. Configure the condition that determines when the component is shown (see below)
+5. Preview your Screen in different combinations of conditions
 
 <br />
 
 ## Screen Interactions
 
-Use Screen interactions to control visibility based on the user’s actions within the current Screen.
+Use when visibility depends on actions the user takes in the current Screen.
 
 Available interaction triggers:
 
-* [Plan selected](conditional-visibility#plan-selected) – a specific plan is selected in a plan picker
-* [Quiz answer selected](conditional-visibility#quiz-answer-selected) – a specific answer is selected in a quiz
+* [Plan selected](conditional-visibility#plan-selected) – a plan/an offering is selected in a plan picker
+* [Quiz answer selected](conditional-visibility#quiz-answer-selected) – a quiz answer is chosen
 * [Switch state](conditional-visibility#switch-state) – a switch is ON or OFF
-* [Tab selected](conditional-visibility#tab-selected) – a specific tab (segmented control) is selected
+* [Tab selected](conditional-visibility#tab-selected) – a tab / segmented control is selected
 
 <br />
 
@@ -56,9 +55,9 @@ Available interaction triggers:
 
 This interaction lets you show a component only when a particular plan is selected. This is particularly useful when you want to change the price or CTA.
 
-To assign a visibility condition to a particular picker:
+To assign a visibility condition to a particular plan:
 
-* Enable the condition visibility
+* Turn on Conditional Visibility
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
 * Condition type: select "Screen interactions"
@@ -67,7 +66,7 @@ To assign a visibility condition to a particular picker:
 * Interaction trigger: select "Plan selected"
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/bbfc055a955e7e1024eb938024034f8b8926888f0681a15f8bfefde6e81c4f93-image.png" className="border" />
-* Then select the desired Plan picker ID y
+* Then select the desired Plan picker ID
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/5255f60dd2c491d79a1126d02a1603d0bb6d29cbb93a606877f37643c5cc377f-image.png" className="border" />
 * And finally select the desired Plan
@@ -82,17 +81,19 @@ To assign a visibility condition to a particular picker:
 
 **Example**:
 
-In the example below, the Yearly Plan has a free trial but not the Weekly Plan.
+In the example below, the Yearly Plan has a free trial (and the CTA copy should therefore reflect that) but not the Weekly Plan.
 
-<Image
-  align="center"
-  border={true}
-  caption="To display different CTA copies depending on the Plan selected:
+<Image align="center" border={true} src="https://files.readme.io/d1de49fd10e3ccfabec3f3b4568f0efc9fb2aaa315aedeba2b3bd347f8000912-photoroom_cv.gif" className="border" />
 
-1. duplicate your CTA and adapt the copy
-2. configure a Conditional visibility rule for each button and associate with the desired plan"
-  src="https://files.readme.io/d1de49fd10e3ccfabec3f3b4568f0efc9fb2aaa315aedeba2b3bd347f8000912-photoroom_cv.gif"
-/>
+<br />
+
+To display different CTA copies depending on the Plan selected:
+
+1. duplicate your Button / CTA and adapt the copy to each Plan
+2. configure a Conditional Visibility rule for each CTA / Button and associate with the desired Plan
+3. the CTA will then automatically hide / show when the associated Plan is selected
+
+<br />
 
 <br />
 
@@ -232,7 +233,7 @@ To assign a visibility condition to a Tab selected:
 
 ## User data
 
-Use User data to control visibility based on the user’s properties.
+Use when visibility depends on the user profile or context.
 
 Available user conditions are:
 
@@ -433,3 +434,5 @@ If you want to visualize a component associated with an Audience, you can use th
 <Image align="center" border={true} src="https://files.readme.io/b7704a188be6afedff9c7c48a9c6564001425ac2cd90ea5b85679aa666c4e1b0-image.png" className="border" />
 
 More info about the [Preview](preview)
+
+<br />
