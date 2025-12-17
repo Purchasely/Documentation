@@ -29,6 +29,7 @@
 - expand-to-fill
 - switches
 - preview
+- copy-of-preview
 - selectable-button
 - horizontal-stack
 - vertical-stack
@@ -37,4 +38,3 @@
 - safe-area
 - conditional-visibility
 - progress-bars
-- copy-of-preview
