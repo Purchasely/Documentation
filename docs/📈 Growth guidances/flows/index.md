@@ -26,7 +26,7 @@ In today’s saturated app market, the first few moments of a user's journey are
 
 Instead of guiding everyone through a one-size-fits-all journey, a personalized flow adapts the experience: showing the right value proposition, surfacing the right features, and triggering the right messages at the right time. This not only boosts activation and engagement but also dramatically increases conversion into paying, loyal subscribers.
 
->  **74% of users** expect apps to be **personalized** to their needs and interests. 
+> **74% of users** expect apps to be **personalized** to their needs and interests.
 
 Creating personalized sequences of Screens and onboarding, that collects user insights and surface their jobs to be done is a key element to engage them, convert them into loyal subscribers and retain them.
 
@@ -73,23 +73,23 @@ To create additional Flows you need to have the Flows module integrated in your 
 
 If you're interested in enabling this feature, please contact your Customer Success Manager. We’ll be happy to walk you through the upgrade options and help you get started.
 
-| Benefit / feature                                                                                       | Flows Freemium version | Flows Premium version                |
-| :------------------------------------------------------------------------------------------------------ | :--------------------- | :----------------------------------- |
-| Create, publish and modify a Flow into your app                                                         | ✅                      | ✅                                    |
-| Leverage Quizzes to collect user insights                                                               | ✅                      | ✅                                    |
-| Tailor Flows to the user insights                                                                       | ✅                      | ✅                                    |
-| Associate a Flow with a Placement                                                                       | ✅                      | ✅                                    |
-| Access Flow analytics and Flow dedicated dashboard to measure your funnel's performance and optimize it | ✅                      | ✅                                    |
-| Number of Flows                                                                                         | Limited to 1           | Unlimited                            |
-| Number of Screens per Flow                                                                              | Limited to 5           | Unlimited                            |
-| A/B test different Flows to optimize conversion and retention                                           | ❌                      | ✅                                    |
-| Integrate your own Screens into a Flow                                                                  | ❌                      | ✅ (Coming soon with SDK version 5.6) |
+| Benefit / feature                                                                            | Flows Freemium version | Flows Premium version |
+| :------------------------------------------------------------------------------------------- | :--------------------- | :-------------------- |
+| Create, publish and modify a Flow into your app                                              | ✅                      | ✅                     |
+| Leverage Quizzes to collect user insights                                                    | ✅                      | ✅                     |
+| Tailor Flows to the user insights                                                            | ✅                      | ✅                     |
+| Associate a Flow with a Placement                                                            | ✅                      | ✅                     |
+| Access [Flow analytics](flow-analytics) to measure your funnel's performance and optimize it | ✅                      | ✅                     |
+| [Bring Your Own Screens](byos) into a Flow                                                   | ✅                      | ✅                     |
+| Number of Flows                                                                              | Limited to 1           | Unlimited             |
+| Number of Screens per Flow                                                                   | Limited to 5           | Unlimited             |
+| A/B test different Flows to optimize conversion and retention                                | ❌                      | ✅                     |
 
 <br />
 
 # Pre-requisites & Implementation
 
-To implement Flows into your app, you should use Purchasely [SDK version 5.5.0](https://docs.purchasely.com/changelog/55) 
+To implement Flows into your app, you should use Purchasely [SDK version 5.5.0](https://docs.purchasely.com/changelog/55)
 
 Prefetch the Flow presentation associated to a Placement, then call the new `display()` of the SDK.
 
@@ -124,18 +124,18 @@ A Flow is composed of a sequence of Screens crafted with Purchasely Screen Compo
 
 > 📘 Acknowledgement
 >
-> \_The flow presented in the video is a personalized user journey built for [Headspace](https://www.headspace.com) a leading app in meditation and well-being, and one of the most recognized for the personalization of its user journeys. 
+> _The flow presented in the video is a personalized user journey built for [Headspace](https://www.headspace.com) a leading app in meditation and well-being, and one of the most recognized for the personalization of its user journeys.
 >
-> * *It consists of a series of carefully crafted questions.*
-> * *The user’s responses are used to personalize their experience by assigning them to a profile that reflects their goals, preferences, or challenges, allowing the app to recommend content that best matches their specific need*
+> * _It consists of a series of carefully crafted questions._
+> * _The user’s responses are used to personalize their experience by assigning them to a profile that reflects their goals, preferences, or challenges, allowing the app to recommend content that best matches their specific need_
 >
-> *The Headspace Flow was imagined and designed by[Irrational Labs](https://irrationallabs.com/) - the leading behavioral science consultancy for designing better choices and aims to increase the user engagement during the free trial and the conversion to paid, by collecting user insights, personalizing the user journey and recommending the relevant contents for each user*
+> _The Headspace Flow was imagined and designed by[Irrational Labs](https://irrationallabs.com/) - the leading behavioral science consultancy for designing better choices and aims to increase the user engagement during the free trial and the conversion to paid, by collecting user insights, personalizing the user journey and recommending the relevant contents for each user_
 
 # Going further
 
-Flows can be personalized based on user insights. 
+Flows can be personalized based on user insights.
 
-📚 Follow the guides to learn more: 
+📚 Follow the guides to learn more:
 
 * [Leveraging Quizzes to fetch user insights](user-insights)
 * [Tailoring Flows to the user insights](tailoring-flows-to-user-insights)
