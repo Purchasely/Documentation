@@ -33,7 +33,7 @@ It has zero impact on your production Audiences or Paywall exposure.
 
    <Image border={false} src="https://files.readme.io/76a2a89a2ce6c57ff1cd7cbeacbfb991b3f2440baba8c5832b6a52d3b9f319a0-image.png" />
 
-     
+   <br />
 
    This QR code contains all the metadata needed for your device to load the preview.    
 
