@@ -74,22 +74,43 @@ This helps anticipate layout constraints across form factors early in the design
 The Preview allows you to simulate multiple visual and commercial contexts:
 
 * Light mode / Dark mode
-  <br />
+
+  <Image align="center" border={true} src="https://files.readme.io/0d4dc8b6d62a7daf48d4551a2845a0a3dad093c0bc819b83439e6f9666bb4f65-dark_mode.gif" className="border" />
+
   📚 More information: [Dark mode vs Light mode](dark-mode)
 * Regular mode / Offer mode
-  <br />
+
+  <Image align="center" border={true} src="https://files.readme.io/5d49d06ade1b57b8179d93b9d33a7770b51cbccb033a55122a36484237b388bb-offer-mode.gif" className="border" />
+
   📚 More information: [understanding the Offer mode](offer-mode)
 * Languages (localization preview)
-  <br />
+
+  <Image align="center" border={true} src="https://files.readme.io/b6e0257e174caef7fe073f658442c8ce39dca5535b5b66e44dcac2bc7e6263ec-language.gif" className="border" />
+
   📚 More information: [localizing your Screens](composer-localization)
 * Store fronts (App Store / Google Play) and store territories
-  <br />
 
-All these combination can be tested thanks to the Preview widget.
+  <Image align="center" border={false} src="https://files.readme.io/3c513fa3c7e46c12bbfc8c2e357dd75e7f495ace044d294824e98a2b27ebe70c-storefronts.gif" />
 
 <br />
 
+> 📘 Seeing prices displayed as $X,XX in the console preview instead of the real price ?
+>
+> We are using data sent alongside previous transactions. So we need to have a transaction performed in the selected country to display a price.
+>
+> As soon as the first transactions are processed or observed for this particular product, the X.XX will be replaced by the pricing observed for this product. You will see the correct price in the deivce instead of X.XX
+>
+> Note that the pricing can be different from one territory to the other. As soon as a transaction has been processed in a specific store & territory, you will be able to preview the price in this territory.
+
+All these combination can be tested thanks to the Preview widget.
+
+<Image align="center" border={true} src="https://files.readme.io/38333036fffe24aaa0e8b8cddae8cfaa56ef50d387318c19c31a0320c7229d51-widget.gif" className="border" />
+
 This is especially useful to validate localized copy, pricing layout, and offer emphasis.
+
+<br />
+
+<br />
 
 <br />
 
