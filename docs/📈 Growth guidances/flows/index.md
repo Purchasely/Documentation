@@ -140,6 +140,6 @@ Flows can be personalized based on user insights.
 * [Leveraging Quizzes to fetch user insights](user-insights)
 * [Tailoring Flows to the user insights](tailoring-flows-to-user-insights)
 
-To go further in Screen personalization, you can also leverage [Conditional Visibility to tailor the Screen themselves based on the User profile](conditional-visibility#user-data).
+To go further in the User journey personalization, you can also leverage [Conditional Visibility to tailor the Screen themselves based on the User profile](conditional-visibility#user-data).
 
 <br />
