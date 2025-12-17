@@ -8,6 +8,61 @@ hidden: true
 metadata:
   robots: index
 ---
+# Previewing Screens in Purchasely
+
+The Preview feature lets you validate how a Screen will look and behave before exposing it to end users.
+Purchasely provides two complementary preview mechanisms:
+
+1. Console Preview – fast iteration and visual checks directly in the Console
+2. In-App Preview – native rendering inside your app, as your users will see it
+
+Both should be used together to ensure design accuracy, functional correctness, and confidence before launch.
+
+<br />
+
+<br />
+
+# 1. Preview Inside the Purchasely Console
+
+The Console Preview is available directly in the Screen Composer and is designed for rapid iteration and visual validation. 
+
+<br />
+
+### Build Mode vs Preview Mode
+
+The Screen Composer offers two complementary modes:
+
+* Build Mode
+  * Select components directly from the preview
+  * Visualize padding, margin and safe areas
+* Preview Mode
+  * Interact with the Screen as an end user
+  * No overlays or editor controls
+
+Switching between both modes allows you to design and validate interaction flows without friction.
+
+<Image align="center" border={true} src="https://files.readme.io/434bb97cb27e941d1709f779eae16abdff31877c052eaac7fada5ddb7123e5b1-build_vs_preview.gif" className="border" />
+
+<br />
+
+<br />
+
+### Device & Layout Simulation
+
+You can preview your Screen across multiple device contexts to validate layout and responsiveness:
+
+* **Device types**: Smartphone, Tablet, TV
+* **Specific devices**: Choose from a predefined list
+* **Orientation**: Portrait or Landscape
+
+This helps anticipate layout constraints across form factors early in the design process.
+
+<br />
+
+<br />
+
+<br />
+
 <br />
 
 <br />
