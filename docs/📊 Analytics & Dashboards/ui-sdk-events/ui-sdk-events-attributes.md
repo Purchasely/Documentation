@@ -40,9 +40,9 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the SDK version.  
+        Contains the SDK version.
 
         This attribute will be filled for all events.
       </td>
@@ -58,9 +58,9 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the name of the event.\
+        Contains the name of the event.  
         [See the full list of SDK / UI Events](ui-sdk-events-list)
       </td>
     </tr>
@@ -75,8 +75,8 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **int**\
-        *in milliseconds since the Epoch*  
+        **int**  
+        _in milliseconds since the Epoch_
 
         Contains the date which the event was sent the first time. In case of retry that attribute will still be set with the time at the first try.
       </td>
@@ -92,8 +92,8 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**\
-        *in ISO 8601*  
+        **string**  
+        _in ISO 8601_
 
         Contains the date which the event was sent the first time. In case of retry that attribute will still be set with the time at the first try.
       </td>
@@ -109,9 +109,9 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the `user_id` associated to the <Glossary>Connected User</Glossary> when they are logged-in.  
+        Contains the `user_id` associated to the <Glossary>Connected User</Glossary> when they are logged-in.
 
         This attribute or the `anonymous_user_id` will be filled for all events
       </td>
@@ -127,9 +127,9 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the `anonymous_user_id` associated to the <Glossary>Anonymous User</Glossary> when they are not logged-in (anonymous then)  
+        Contains the `anonymous_user_id` associated to the <Glossary>Anonymous User</Glossary> when they are not logged-in (anonymous then)
 
         This attribute or the `user_id` will be filled for all events
       </td>
@@ -145,11 +145,11 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the Presentation ID (field `ID` in the Purchasely Screen & Paywall Builder) that was displayed to the user.  
+        Contains the Presentation ID (field `ID` in the Purchasely Screen & Paywall Builder) that was displayed to the user.
 
-        *This attribute will be filled for every[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)*
+        _This attribute will be filled for every[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)_
       </td>
     </tr>
 
@@ -163,11 +163,11 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the Placement ID from where the presentation was triggered if any.  
+        Contains the Placement ID from where the presentation was triggered if any.
 
-        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)*
+        _This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)_
       </td>
     </tr>
 
@@ -181,9 +181,9 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the Audience ID matched for the user.  
+        Contains the Audience ID matched for the user.
 
         *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) *
       </td>
@@ -199,11 +199,11 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the AB test ID if the Event was triggered within an A/B Test.  
+        Contains the AB test ID if the Event was triggered within an A/B Test.
 
-        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)*
+        _This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)_
       </td>
     </tr>
 
@@ -217,9 +217,142 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the AB test variant ID if the Event was triggered within an A/B Test.  
+        Contains the AB test variant ID if the Event was triggered within an A/B Test.
+
+        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) *
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `flow_id`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**
+
+        Contains the Flow ID if the Event was triggered within a Flow.
+
+        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) *
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `step_id`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**
+
+        Contains the Flow Step ID if the Event was triggered within a Flow.
+
+        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) *
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `flow_version`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**
+
+        Contains the Flow Version ID if the Event was triggered within a Flow.
+
+        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) *
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `from_action_id`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**
+
+        Contains the Flow Action Id of the previous step if the Event was triggered within a Flow as a next step.
+
+        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) *
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `from_step_id`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**
+
+        Contains the previous Flow Step ID if the Event was triggered within a Flow.
+
+        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) *
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `flow_session_id`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**
+
+        Contains the Flow Session ID if the Event was triggered within a Flow.
+
+        *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) *
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `display_mode`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**
+
+        Contains the Display Mode of the Screen if the Event was triggered.  
+        It can be:  
+
+        * full_screen
+        * push
+        * modal
+        * drawer
+        * popin
 
         *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) *
       </td>
@@ -235,7 +368,7 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
         Contains the [Content ID](associating-content) provided by the App.
       </td>
@@ -251,9 +384,9 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the deeplink used to display the Screen if any.  
+        Contains the deeplink used to display the Screen if any.
 
         *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events) *
       </td>
@@ -269,11 +402,11 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        * \*Array of Plans\*\* (object described [here](#plans))  
+        * *Array of Plans** (object described [here](#plans))
 
-        Contains all the Plans that are displayed in the Screen.  
+        Contains all the Plans that are displayed in the Screen.
 
-        *This attribute will be filled for every[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)*
+        _This attribute will be filled for every[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)_
       </td>
     </tr>
 
@@ -287,9 +420,9 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the url of the link the user just tapped on.  
+        Contains the url of the link the user just tapped on.
 
         *This attribute will only be filled for the event`LINK_OPENED` *
       </td>
@@ -305,9 +438,9 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        * \*Array of carousels\*\* (object described [here](#carousels))  
+        * *Array of carousels** (object described [here](#carousels))
 
-        Contains all attributes for all displayed carousels in the Screen.  
+        Contains all attributes for all displayed carousels in the Screen.
 
         *This attribute will only be filled for[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)  if the Screen contains at least one carousel *
       </td>
@@ -323,12 +456,12 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**\
-        *in ISO 639-1*  
+        **string**  
+        _in ISO 639-1_
 
-        Contains the language used in the displayed Screen.  
+        Contains the language used in the displayed Screen.
 
-        *This attribute will be filled for every[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)*
+        _This attribute will be filled for every[UI & User Behavior events](ui-sdk-events-list#ui--user-behavioral-events)_
       </td>
     </tr>
 
@@ -342,7 +475,7 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        string  
+        string
 
         Contains the device model used by the user.
       </td>
@@ -358,7 +491,7 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
         Contains the OS version running on the user's device.
       </td>
@@ -374,10 +507,10 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the type of device used by the user.\
-        Possible values:  
+        Contains the type of device used by the user.  
+        Possible values:
 
         * `PHONE`
         * `TABLET`
@@ -395,15 +528,15 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the error message the store returned when trying the action.  
+        Contains the error message the store returned when trying the action.
 
-        * That attribute will be filled for the events:  
+        * That attribute will be filled for the events:
         * `IN_APP_PURCHASE_FAILED`
         * `IN_APP_NOT_AVAILABLE`
         * `RESTORE_FAILED`
-        * `RECEIPT_FAILED` \_
+        * `RECEIPT_FAILED` _
       </td>
     </tr>
 
@@ -417,11 +550,11 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the Plan ID of the Plan associated to the action if any (field `ID` of the Plan in the Purchasely Console)  
+        Contains the Plan ID of the Plan associated to the action if any (field `ID` of the Plan in the Purchasely Console)
 
-        * This attribute will be filled for events:  
+        * This attribute will be filled for events:
         * [In-App Purchase Flow](ui-sdk-events-list##in-app-purchase-flow-events)
         * [Restore](ui-sdk-events-list#restore-events)
         * [Receipts](ui-sdk-events-list#receipts-events)
@@ -440,11 +573,11 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the currently selected Screen ID (field `ID` in the Screen & Paywall Builder).  
+        Contains the currently selected Screen ID (field `ID` in the Screen & Paywall Builder).
 
-        *This attribute will be filled for`OPEN_PRESENTATION` and `SELECTED_PRESENTATION`*
+        _This attribute will be filled for`OPEN_PRESENTATION` and `SELECTED_PRESENTATION`_
       </td>
     </tr>
 
@@ -458,11 +591,11 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the previously selected Screen ID (field `ID` in the Screen & Paywall Builder).  
+        Contains the previously selected Screen ID (field `ID` in the Screen & Paywall Builder).
 
-        *This attribute will be filled for`OPEN_PRESENTATION` and `SELECTED_PRESENTATION`*
+        _This attribute will be filled for`OPEN_PRESENTATION` and `SELECTED_PRESENTATION`_
       </td>
     </tr>
 
@@ -476,11 +609,11 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the Product ID that is selected.  
+        Contains the Product ID that is selected.
 
-        *This attribute will be filled for`SUBSCRIPTION_DETAILS_VIEWED` event.*
+        _This attribute will be filled for`SUBSCRIPTION_DETAILS_VIEWED` event._
       </td>
     </tr>
 
@@ -494,14 +627,14 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the type of plan change the user did.\
-        Possible values:  
+        Contains the type of plan change the user did.  
+        Possible values:
 
         * `CROSSGRADE`
         * `DOWNGRADE`
-        * `UPGRADE`*This attribute will be filled for`SUBSCRIPTION_PLAN_TAPPED` event*
+        * `UPGRADE`_This attribute will be filled for`SUBSCRIPTION_PLAN_TAPPED` event_
       </td>
     </tr>
 
@@ -515,11 +648,11 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **Array of string**  
+        **Array of string**
 
-        Contains pairs of Plan ID and Product ID for each active subscriptions the users has.  
+        Contains pairs of Plan ID and Product ID for each active subscriptions the users has.
 
-        *This attribute will be filled for every SDK events*
+        _This attribute will be filled for every SDK events_
       </td>
     </tr>
 
@@ -533,11 +666,11 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the ID of the reason the user answered through the cancellation survey triggered with Purchasely.  
+        Contains the ID of the reason the user answered through the cancellation survey triggered with Purchasely.
 
-        *That attribute will be filled for`CANCELLATION_REASON_PUBLISHED` event*
+        _That attribute will be filled for`CANCELLATION_REASON_PUBLISHED` event_
       </td>
     </tr>
 
@@ -551,11 +684,11 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the reason the user answered through the [cancellation survey](cancellation-survey) displayed by the Purchasely SDK.  
+        Contains the reason the user answered through the [cancellation survey](cancellation-survey) displayed by the Purchasely SDK.
 
-        *This attribute will be filled for`CANCELLATION_REASON_PUBLISHED` event*
+        _This attribute will be filled for`CANCELLATION_REASON_PUBLISHED` event_
       </td>
     </tr>
 
@@ -569,9 +702,9 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the reason the user answered through the [cancellation survey](cancellation-survey)  displayed by the Purchasely SDK.  
+        Contains the reason the user answered through the [cancellation survey](cancellation-survey)  displayed by the Purchasely SDK.
 
         * This attribute will be filled for `OPTIONS_SELECTED` and `OPTIONS_VALIDATED` events
       </td>
@@ -587,11 +720,11 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **string**  
+        **string**
 
-        Contains the Option Id as set in the [Screen Composer](screen-composer) for a [plan picker](plan-pickers-horizontal), [survey](mcq), [faq](faq) or switch component.  
+        Contains the Option Id as set in the [Screen Composer](screen-composer) for a [plan picker](plan-pickers-horizontal), [survey](mcq), [faq](faq) or switch component.
 
-        *This attribute will be filled for`OPTIONS_SELECTED` and `OPTIONS_VALIDATED` events*
+        _This attribute will be filled for`OPTIONS_SELECTED` and `OPTIONS_VALIDATED` events_
       </td>
     </tr>
 
@@ -605,11 +738,11 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **Array of Strings**  
+        **Array of Strings**
 
-        Contains options selected (event `OPTIONS_SELECTED`) or validated (event `OPTIONS_VALIDATED`) by the user. The values provided match with the options configured in the [Screen Composer](screen-composer).  
+        Contains options selected (event `OPTIONS_SELECTED`) or validated (event `OPTIONS_VALIDATED`) by the user. The values provided match with the options configured in the [Screen Composer](screen-composer).
 
-        *This attribute will be filled for`OPTIONS_SELECTED` and `OPTIONS_VALIDATED` events*
+        _This attribute will be filled for`OPTIONS_SELECTED` and `OPTIONS_VALIDATED` events_
       </td>
     </tr>
 
@@ -623,11 +756,11 @@ next:
       </td>
 
       <td style={{ textAlign: "left" }}>
-        **Array of Strings**  
+        **Array of Strings**
 
-        List of options values displayed to the user. The values provided match with the options configured in the [Screen Composer](screen-composer).  
+        List of options values displayed to the user. The values provided match with the options configured in the [Screen Composer](screen-composer).
 
-        *This attribute will be filled for`OPTIONS_SELECTED` and `OPTIONS_VALIDATED` events*
+        _This attribute will be filled for`OPTIONS_SELECTED` and `OPTIONS_VALIDATED` events_
       </td>
     </tr>
   </tbody>
@@ -657,11 +790,11 @@ next:
       </td>
 
       <td>
-        **string**  
+        **string**
 
-        Contains the string representation of the type of plan of one of the available plan.  
+        Contains the string representation of the type of plan of one of the available plan.
 
-        Possible values:  
+        Possible values:
 
         * `CONSUMABLE`
         * `NON_CONSUMABLE`
@@ -677,9 +810,9 @@ next:
       </td>
 
       <td>
-        **string**  
+        **string**
 
-        Contains the Plan ID of one of the purchasable Plan\
+        Contains the Plan ID of one of the purchasable Plan  
         (field `ID` of the Plan in the Purchasely Console)
       </td>
     </tr>
@@ -690,7 +823,7 @@ next:
       </td>
 
       <td>
-        **string**  
+        **string**
 
         Contains the store on which is available one of the available plan.
       </td>
@@ -702,11 +835,11 @@ next:
       </td>
 
       <td>
-        **string**\
-        *in ISO 3166*  
+        **string**  
+        _in ISO 3166_
 
-        Contains the store country to which the user store account is associated\
-        *E.g.: US for an iOS user which Apple ID was created on the US App Store*
+        Contains the store country to which the user store account is associated  
+        _E.g.: US for an iOS user which Apple ID was created on the US App Store_
       </td>
     </tr>
 
@@ -716,7 +849,7 @@ next:
       </td>
 
       <td>
-        **string**  
+        **string**
 
         Contains the Product ID associated to the In-App Purchase or In-App Subscription in the store console (App Store Connect or Google Play Console)
       </td>
@@ -728,7 +861,7 @@ next:
       </td>
 
       <td>
-        **float**  
+        **float**
 
         Contains the standard price in the customer currency for one the available plan.
       </td>
@@ -740,8 +873,8 @@ next:
       </td>
 
       <td>
-        **string**\
-        *in ISO 4217*  
+        **string**  
+        _in ISO 4217_
 
         Contains the customer currency code.
       </td>
@@ -753,11 +886,11 @@ next:
       </td>
 
       <td>
-        **string**  
+        **string**
 
-        Contains the string representation of the standard period of one of the available plan  
+        Contains the string representation of the standard period of one of the available plan
 
-        Possible values:  
+        Possible values:
 
         * `DAY`
         * `WEEK`
@@ -772,9 +905,9 @@ next:
       </td>
 
       <td>
-        **int**  
+        **int**
 
-        Contains the string representation of the number "period" of the standard periodicity of one of the available Plan. To get the standard periodicity of the plan you have to concatenate "duration" and "period".  
+        Contains the string representation of the number "period" of the standard periodicity of one of the available Plan. To get the standard periodicity of the plan you have to concatenate "duration" and "period".
 
         This attribute will be filled only if the "type" of the corresponding plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION`
       </td>
@@ -786,9 +919,9 @@ next:
       </td>
 
       <td>
-        **float**  
+        **float**
 
-        Contains the introductory offer price in the customer currency for one the available Plan.  
+        Contains the introductory offer price in the customer currency for one the available Plan.
 
         That attribute will be filled only if the Plan has a introductory offer available.
       </td>
@@ -800,11 +933,11 @@ next:
       </td>
 
       <td>
-        **string**  
+        **string**
 
-        Contains the string representation of the introductory offer period of one of the available plan  
+        Contains the string representation of the introductory offer period of one of the available plan
 
-        Possible values:  
+        Possible values:
 
         * `DAY`
         * `WEEK`
@@ -819,9 +952,9 @@ next:
       </td>
 
       <td>
-        **int**  
+        **int**
 
-        Contains the string representation of the number "period" of the introductory offer periodicity of one of the available Plan. To get the introductory offer periodicity of the Plan you have to concatenate "duration" and "period".  
+        Contains the string representation of the number "period" of the introductory offer periodicity of one of the available Plan. To get the introductory offer periodicity of the Plan you have to concatenate "duration" and "period".
 
         This attribute will be filled only if the "type" of the corresponding Plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION`" only if the Plan has an introductory offer available.
       </td>
@@ -833,7 +966,7 @@ next:
       </td>
 
       <td>
-        **bool**  
+        **bool**
 
         True if a free trial is available for the plan.
       </td>
@@ -845,11 +978,11 @@ next:
       </td>
 
       <td>
-        **string**  
+        **string**
 
-        Contains the string representation of the free trial offer period of one of the available Plans  
+        Contains the string representation of the free trial offer period of one of the available Plans
 
-        Possible values:  
+        Possible values:
 
         * `DAY`
         * `WEEK`
@@ -864,9 +997,9 @@ next:
       </td>
 
       <td>
-        **int**  
+        **int**
 
-        Contains the string representation of the number "period" of the free trial offer periodicity of one of the available Plan. To get the free trial periodicity of the plan you have to concatenate "duration" and "period".  
+        Contains the string representation of the number "period" of the free trial offer periodicity of one of the available Plan. To get the free trial periodicity of the plan you have to concatenate "duration" and "period".
 
         This attribute will be filled only if the "type" of the corresponding Plan is `AUTO_RENEWING_SUBSCRIPTION` and `NON_RENEWING_SUBSCRIPTION` only if the Plan has an free trial offer available.
       </td>
@@ -878,7 +1011,7 @@ next:
       </td>
 
       <td>
-        **string**  
+        **string**
 
         Contains the Plan ID of the Plan that is used on the presentation to make a pricing comparison.
       </td>
@@ -890,7 +1023,7 @@ next:
       </td>
 
       <td>
-        **string**  
+        **string**
 
         Contains the percentage of discount the Plan offers in comparison to the referent.
       </td>
@@ -902,7 +1035,7 @@ next:
       </td>
 
       <td>
-        **float**  
+        **float**
 
         Contains the price difference between, the Plan and the referent.
       </td>
@@ -914,7 +1047,7 @@ next:
       </td>
 
       <td>
-        **bool**  
+        **bool**
 
         True if the Plan is selected by default in the Screen.
       </td>
@@ -946,7 +1079,7 @@ next:
       </td>
 
       <td>
-        **int**  
+        **int**
 
         Contains the number of the current selected slide.
       </td>
@@ -958,7 +1091,7 @@ next:
       </td>
 
       <td>
-        **int**  
+        **int**
 
         Contains the total number of slides of the carousel.
       </td>
@@ -970,7 +1103,7 @@ next:
       </td>
 
       <td>
-        **bool**  
+        **bool**
 
         `true` if the carousel's slides switch automatically.
       </td>
@@ -982,7 +1115,7 @@ next:
       </td>
 
       <td>
-        **int**  
+        **int**
 
         Contains the number of the default selected slide.
       </td>
@@ -994,9 +1127,9 @@ next:
       </td>
 
       <td>
-        **int**  
+        **int**
 
-        Contains the number of the previously selected slide.  
+        Contains the number of the previously selected slide.
 
         That attribute will only be filled for the event `CAROUSEL_SLIDE_SWIPED`.
       </td>
@@ -1030,7 +1163,7 @@ The following properties are only set for the events `OPTIONS_SELECTED` and `OPT
       </td>
 
       <td>
-        **string**  
+        **string**
 
         Contains the [Survey ID](https://docs.purchasely.com/docs/mcq#1-configuring-the-survey).
       </td>
@@ -1042,7 +1175,7 @@ The following properties are only set for the events `OPTIONS_SELECTED` and `OPT
       </td>
 
       <td>
-        **Array of Strings**  
+        **Array of Strings**
 
         Contains answers selected (event `OPTIONS_SELECTED`) or validated (event `OPTIONS_VALIDATED`) by the user. The values provided match with the [Answers values](https://docs.purchasely.com/docs/mcq#4-configuring-the-answers-available-and-associated-texts) configured.
       </td>
@@ -1054,7 +1187,7 @@ The following properties are only set for the events `OPTIONS_SELECTED` and `OPT
       </td>
 
       <td>
-        **Array of Strings**  
+        **Array of Strings**
 
         List of Answers values displayed to the user. The values provided match with the [Answers values](https://docs.purchasely.com/docs/mcq#4-configuring-the-answers-available-and-associated-texts)  configured.
       </td>
