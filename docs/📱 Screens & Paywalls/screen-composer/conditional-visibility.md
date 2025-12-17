@@ -105,11 +105,11 @@ To display different CTA copies depending on the Plan selected:
   Answer-based rules are retro-compatible until SDK v5.0
 </Callout>
 
-This interaction lets you show a component only when a particular answer is selected in a Quiz. This can be useful if you want to display additional information when the user selects a particular answer.
+This interaction lets you show a component only when a particular answer is selected in a [Quiz](quiz). This can be useful if you want to display additional information when the user selects a particular answer.
 
 To assign a visibility condition to a Quiz answer:
 
-* enable the condition visibility
+* Turn on Conditional Visibility
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
 * Condition type: select "Screen interactions"
@@ -153,13 +153,11 @@ To assign a visibility condition to a Quiz answer:
   Switch-based rules are retro-compatible until SDK v5.0
 </Callout>
 
-This interaction lets you show a component depending on whether a switch is selected or not. This can be useful if you want to make the activation of a free trial optional.
-
-<br />
+This interaction lets you show a component depending on whether a Switch is ON or OFF. This can be useful activate an optional free trial and adjust the copy / components accordingly.
 
 To assign a visibility condition to a Switch state:
 
-* enable the condition visibility
+* Turn on Conditional Visibility
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
 * Condition type: select "Screen interactions"
@@ -197,11 +195,11 @@ To assign a visibility condition to a Switch state:
   Tab-based rules are retro-compatible until SDK v5.0
 </Callout>
 
-This interaction lets you show a component depending on whether a particular tab / segmented control is selected or not. This can be update the header of a paywall based on the plan selected
+This interaction lets you show a component depending on whether a particular Tab / segmented control is selected or not. This can be update the header of a paywall based on the Tab / segmented control selected
 
 To assign a visibility condition to a Tab selected:
 
-* enable the condition visibility
+* Turn on Conditional Visibility
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
 * Condition type: select "Screen interactions"
@@ -209,15 +207,15 @@ To assign a visibility condition to a Tab selected:
   <Image align="left" border={true} width="400px" src="https://files.readme.io/614b56c28698dcd3eda488bad4701c32f2ad8c9c1a8560f8fe2af51c7e929a44-image.png" className="border" />
 * Interaction trigger: select "Tab selected"
 
-  <Image align="left" border={false} width="400px" src="https://files.readme.io/1340a79ba22bb2d83ded37b15e2eb45585c3ce158a33d060f281053a285b8244-image.png" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/1340a79ba22bb2d83ded37b15e2eb45585c3ce158a33d060f281053a285b8244-image.png" className="border" />
 * Then select the desired Tab component
 
-  <Image align="left" border={false} width="400px" src="https://files.readme.io/68e8aa271fb27f7b06448c724d2c9d1de7132e0853d7c4154708dd801c7557a0-image.png" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/68e8aa271fb27f7b06448c724d2c9d1de7132e0853d7c4154708dd801c7557a0-image.png" className="border" />
 
   <br />
 * And finally select the desired tab
 
-  <Image align="left" border={false} width="400px" src="https://files.readme.io/599afca6198a7d983cf2bccfb4fd79a96be02067b8a0eb26785a1a4eff02f9ce-image.png" />
+  <Image align="left" border={true} width="400px" src="https://files.readme.io/599afca6198a7d983cf2bccfb4fd79a96be02067b8a0eb26785a1a4eff02f9ce-image.png" className="border" />
 
   <br />
 
@@ -235,11 +233,11 @@ To assign a visibility condition to a Tab selected:
 
 Use when visibility depends on the user profile or context.
 
-Available user conditions are:
+Available User conditions are:
 
-* Eligibility for an Offer
-* User attribute value
-* User belonging to an Audience
+* [Eligibility for an Offer](conditional-visibility#eligibility-for-an-offer) - User is eligible / not eligible to the Introductory Offer
+* [User attribute value](conditional-visibility#user-attribute-value) - User has a given `User attribute, value`
+* [Audience](conditional-visibility#audience) - User belongs to an Audience
 
 <br />
 
@@ -253,13 +251,11 @@ Available user conditions are:
   If your Screen is displayed by a SDK version below v5.6, components associated with this type of Conditional visibility ruled will simply not be displayed.
 </Callout>
 
-This user condition lets you display a component if the a user is / is not eligible to the introductory offer of one of the plans associated with the Paywall. Combined with [Offer mode text override capabilities](offer-mode), this feature attribute has a specific value. This is particularly useful when you want to display personalize your Paywall or a component such as Screen depending on the "Blinkist timeline" - explaining user insights (e.g.: how the free trial works - only when the user can still benefit from the free trial.
-they answered to a Quiz).
+This user condition lets you display a component if the a user is eligible / not eligible to the Introductory Offer of any of the Offerings associated with the Paywall. Combined with [Offer mode text override capabilities](offer-mode), it is particularly useful when you want to personalize your Paywall with a "Blinkist timeline" component - explaining how the free trial works - only when the user can still benefit from the free trial.
 
-To assign a visibility condition base based on the a user eligibility for an offer
-attribute:
+To assign a Visibility Condition based on the a user eligibility for an Introductory Offer:
 
-* enable the condition visibility
+* Turn on Conditional visibility
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/df90612b7cf117b34107864db34e6ff4cc58777c74539738c66cf8ad487381a5-image.png" className="border" />
 
@@ -285,9 +281,9 @@ attribute:
 
 <br />
 
-* And finally select the eligibility rule: is eligible / is not available for the introductory offer
+* And finally select the eligibility rule: is eligible / is not available for the Introductory Offer
 
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/4dbd068f3b3b7c0359c8065c0cdf369402fe8e40f501b6e907b53f4c7bcc5673-image.png" className="border" />
+<Image align="left" border={true} width="400px" src="https://files.readme.io/4dbd068f3b3b7c0359c8065c0cdf369402fe8e40f501b6e907b53f4c7bcc5673-image.png" className="border" />
 
 <br />
 
@@ -311,7 +307,7 @@ attribute:
 
 This user condition lets you display a component depending on the value of a user attribute. This is particularly useful if you want to tailor your Paywall / Screen based on the user insights (e.g.: how the user has responsed to a Quiz).
 
-It is limited to one single user attribute and 1 single value. If you want to combine several user attributes and values, check [Audience-based conditional visibility rules](conditional-visibility#user-belonging-to-an-audience) below.
+It is limited to one single user attribute and 1 single value. If you want to combine several user attributes and values, check [Audience-based conditional visibility rules](conditional-visibility#audience) below.
 
 To assign a visibility condition based on a user attribute:
 
@@ -367,7 +363,7 @@ More info about the [Preview](preview)
 
 <br />
 
-### User belonging to an Audience
+### Audience
 
 <Callout icon="📘" theme="info">
   **Compatible with SDK v5.0**
