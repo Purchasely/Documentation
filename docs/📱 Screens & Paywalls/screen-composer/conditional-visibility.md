@@ -355,7 +355,7 @@ To assign a Visibility Condition based on a User attribute:
 
 <br />
 
-If you want to visualize a component associated with a user attribute, you can use the Preview widget and check the desired rule.
+To visualize a component associated with a User attribute value, use the Preview widget and check the corresponding rule(s).
 
 <Image align="center" border={true} src="https://files.readme.io/f3c9a66e44ace9f4000f06d23b5f5d1326699cd4b96cbeb34b3d70a1b2342f2e-image.png" className="border" />
 
@@ -374,18 +374,16 @@ More info about the [Preview](preview)
 <Callout icon="❗️">
   **Only works with a Placement or within a Flow**
 
-  For an audience-based rule to work, you need to display or fetch the Screen through a Placement.
+  For an Audience-based rule to work, you need to display or fetch the Screen through a Placement or the Screen must be integrated inside a Flow.
 
   If the Screen containing the rule is directly fetched or opened from another Screen (using the Open Screen action), the Audience will not be evaluated and therefore the component associated with the Audience will not be displayed.
 </Callout>
 
-This user condition lets you display a component depending on whether the user belongs to a particular Audience. This is particularly useful to tailor the Screen or Paywall based on the user insights. The [Audiences](audiences) used are the same ones as those used for target users in a Placement.
+This user condition lets you display a component only if the User belongs to a particular Audience. This is particularly useful to tailor the Screen or Paywall to the user insights. The [Audiences](audiences) used are the same ones as those used to target users in a Placement.
 
-<br />
+To assign a Visibility Condition based on an Audience:
 
-To assign a visibility condition based on a user attribute:
-
-* enable the condition visibility
+* Turn on Conditional Visibility
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
 
@@ -399,7 +397,7 @@ To assign a visibility condition based on a user attribute:
 
 <br />
 
-* User condition: select Audience
+* User condition: select "Audience"
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/476cf9be1b7df4c7c7c0be2371bc4bf1a79dd01c2f997dca445e2aa918e5b379-image.png" className="border" />
 
@@ -425,7 +423,7 @@ To assign a visibility condition based on a user attribute:
 
 <Image align="center" border={true} src="https://files.readme.io/811864fb3cdcb75e15cac730730c6f740c1ab4b1f4b8400470f1867bc4760a3a-photoroom.gif" className="border" />
 
-If you want to visualize a component associated with an Audience, you can use the Preview widget and check the desired rule.
+To visualize a component associated with an Audience, use the Preview widget and check the corresponding rule(s).
 
 <Image align="center" border={true} src="https://files.readme.io/b7704a188be6afedff9c7c48a9c6564001425ac2cd90ea5b85679aa666c4e1b0-image.png" className="border" />
 
