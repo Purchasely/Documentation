@@ -4,7 +4,7 @@ excerpt: >-
   This page describes how you can Preview your Screens in the Console and in
   your app before publishing them to real users
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   robots: index
 ---
