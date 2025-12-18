@@ -4,7 +4,7 @@ excerpt: >-
   This page describes different menu options available in the Purchasely Screen
   preview section
 deprecated: false
-hidden: false
+hidden: true
 metadata:
   title: ''
   description: ''
