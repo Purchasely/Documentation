@@ -55,6 +55,7 @@ Purchasely.fetchPresentation(
            presentation.display(from: myUIViewController)
            
            // alternatively: get the UIViewController to manage the transition yourself
+					// note: this method won't work with Flows
 					let purchaselyController = presentation.controller
 
              
@@ -96,19 +97,16 @@ Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error -
     Log.d("Purchasely", "Error fetching Screen", error)
     return@fetchPresentation
   }
-  
-  // Easy: call display
-  presentation?.display()
-  
-
-  // Only for Flow:
-  if (presentation?.flowId != null) {
-		presentation?.display()
-	}
 
   when(presentation?.type) {
     PLYPresentationType.NORMAL,
     PLYPresentationType.FALLBACK -> {
+      
+			// Easy: just call display
+  		presentation?.display()
+      
+      // Intermediate: build the view to display it yourself in your layout for specific use cases
+			// Note: this won't work with Flows
       val screenView = presentation.buildView(
         context = this@MainActivity,
         properties = PLYPresentationProperties(
