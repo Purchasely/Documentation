@@ -26,7 +26,7 @@ next:
 
 There are several ways to display a Flow inside of the app:
 
-1. Pre-fetching the Flow and using the `display()` method 
+1. Pre-fetching the Flow and using the `display()` method
 2. Manually integrating the Flow inside of your app (Android only)
 3. Using the Flow deeplink
 
@@ -36,7 +36,7 @@ Let's dig into each of them
 
 In the Purchasely Console, [Flows can be associated with a Placement](flows#mapping-a-flow-with-a-placement).
 
-To display a Flow, the recommended method consists in pre-fetching it ([more information on pre-fetching](pre-fetching)) and then showing it to the user using the `display()` method. This new method has been added along with the `v5.3.0` of the SDK
+To display a Flow, the recommended method consists in pre-fetching it ([more information on pre-fetching](pre-fetching)) and then showing it to the user using the `display()` method. This new method has been added along with the `v5.3.0` of the SDK. The PLYPresentation object also contains properties related to a flow like `flowId`.
 
 <SDKDisplayMethodCodeSnipped />
 
@@ -47,15 +47,13 @@ The `display()` method automatically:
 * Handles navigation inside the Flow (based on the transitions you configured in the Flow Composer)
 * Applies the Flow’s Display Mode (modal, fullscreen, push, drawer, pop‑in)
 
-<Image alt="The display mode defines how the first Screen of the Flow should open" align="center" border={true} src="https://files.readme.io/a276eec6e01d7f867cef0337f4567a612c78e017326579818da016559673cd7f-display_mode.gif">
-  The display mode defines how the first Screen of the Flow should open
-</Image>
+<Image align="center" alt="The display mode defines how the first Screen of the Flow should open" border={true} caption="The display mode defines how the first Screen of the Flow should open" src="https://files.readme.io/a276eec6e01d7f867cef0337f4567a612c78e017326579818da016559673cd7f-display_mode.gif" />
 
 * Works uniformly across all screen types (paywalls, quizzes, landing pages, etc.)
 
 > 🚧 Push display mode requires a navigation bar in the parent view
 >
-> The **Display mode** `Push` only works if the parent view already contains a navigation bar. 
+> The **Display mode** `Push` only works if the parent view already contains a navigation bar.
 >
 > If you try to display a Screen/Flow associated with the `Push` display mode from a parent view which doesn't have a navigation bar associated, the display() method will fallback on the default display mode:
 >
@@ -122,10 +120,10 @@ Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error -
 
 ## 3. Using the Flow deeplink
 
-To use this method, you need to have implemented [Deeplink management](deeplinks-management)\
+To use this method, you need to have implemented [Deeplink management](deeplinks-management)  
 You can trigger the display of a Flow using its deeplink, the SDK will automatically display it.
 
-You can also display the Flow yourself by implementing the [UIHandler](ui-handler-deeplinks)\
+You can also display the Flow yourself by implementing the [UIHandler](ui-handler-deeplinks)  
 Quick example:
 
 ```swift Swift
@@ -146,6 +144,6 @@ Purchasely.uiHandler = object : PLYUIHandler {
 
 ```
 
-In this case, the **Display mode** is automatically taken into consideration by the SDK if you call the method `display`.\
-Otherwise, you need to retrieve the display mode from the presentation object to display it accordingly.\
+In this case, the **Display mode** is automatically taken into consideration by the SDK if you call the method `display`.  
+Otherwise, you need to retrieve the display mode from the presentation object to display it accordingly.  
 Learn more in our dedicated section about the [UIHandler](ui-handler-deeplinks)
