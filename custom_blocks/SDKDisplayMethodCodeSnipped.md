@@ -9,7 +9,14 @@ Purchasely.fetchPresentation(for: "onboarding", fetchCompletion: { presentation,
      // Calling display() to launch the flow
 		 // Source UIViewController is optional 
      presentation.display(from: myUIViewController) 
+
 })
+
+// If for some specific configuration you need to check if the presentation is a flow, that's possible but it should only be done is required by your implementation
+if presentation.isFlow {
+	// presentation is a flow
+}
+
 ```
 ```kotlin Kotlin
 Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error ->
@@ -20,6 +27,11 @@ Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error -
   
   // Calling display() to launch the flow 
   presentation?.display(context)
+}
+
+// If for some specific configuration you need to check if the presentation is a flow, that's possible but it should only be done is required by your implementation
+if (presentation.flowId != null) {
+	// presentation is a flow
 }
 ```
 ```javascript React Native
