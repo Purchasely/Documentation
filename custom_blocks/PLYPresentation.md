@@ -5,7 +5,7 @@ name: PLYPresentation
 class PLYPresentation {
   let id: String?
   let height: Int?
-  let language: String
+    let language: String
   let placementId: String?
   let audienceId: String?
   let abTestId: String?
@@ -21,7 +21,8 @@ class PLYPresentation {
 ```coffeescript Kotlin
 data class PLYPresentation(
     val id: String?,
-    val height: Int?,
+  	val height: Int?,
+		val flowId: String?,
     val placementId: String?,
     val audienceId: String?,
     val abTestId: String?,
