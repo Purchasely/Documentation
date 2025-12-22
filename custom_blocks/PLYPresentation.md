@@ -5,7 +5,8 @@ name: PLYPresentation
 class PLYPresentation {
   let id: String?
   let height: Int?
-    let language: String
+  let language: String
+	let flowId: String?
   let placementId: String?
   let audienceId: String?
   let abTestId: String?
