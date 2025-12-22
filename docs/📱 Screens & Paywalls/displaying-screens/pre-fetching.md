@@ -96,6 +96,15 @@ Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error -
     Log.d("Purchasely", "Error fetching Screen", error)
     return@fetchPresentation
   }
+  
+  // Easy: call display
+  presentation?.display()
+  
+
+  // Only for Flow:
+  if (presentation?.flowId != null) {
+		presentation?.display()
+	}
 
   when(presentation?.type) {
     PLYPresentationType.NORMAL,
