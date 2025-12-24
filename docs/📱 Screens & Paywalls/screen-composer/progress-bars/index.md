@@ -23,10 +23,4 @@ Purchasely provides you with 2 types of progress bars.
 1. [Linear Progress Bar](https://docs.purchasely.com/docs/linear-progress-bar)
 2. [Segmented Progress Bar](https://docs.purchasely.com/docs/segmented-progress-bar)
 
-<br />
-
-<Image align="center" border={true} src="https://files.readme.io/ae5b2f7d85178631f18a53f6b20660b9176c12b1bce2d452d732e3db1014dbd9-image.png" className="border" />
-
-<Image align="left" border={true} width="380px" src="https://files.readme.io/44f6ddac98c9e637d5b0985243ac2ea38f10ec40225acef5cbee920d177e4fe2-Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story-2.jpg" className="border" />
-
-<Image align="right" border={true} width="400px" src="https://files.readme.io/ff1e5aaf927179d0d35a7e6730ea89ec813b2c5abf13072126344abdc32636b8-Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story.jpg" className="border" />
+<Image align="center" border={false} src="https://files.readme.io/9eabec51e5f0bddea0fea8383a7f307a9e626e4ca02ce3f8be550ee0633dd9f5-Progress_Bars.gif" />
