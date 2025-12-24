@@ -12,9 +12,9 @@ They are especially useful in **Flows**, **onboarding journeys**, **questionnair
 
 ## **Benefits of using Progress Bars**
 
-1. Give users a clear sense of where they are and what’s left;
-2. Reinforce engagement by making progress visible and rewarding;
-3. Create smoother, more transparent user journeys across your app.
+1. Give users a **clear** sense of where they are and what’s left;
+2. **Reinforce engagement** by making progress **visible** and **rewarding**;
+3. Create **smoother**, more **transparent** user journeys across your app.
 
 ***
 
@@ -23,4 +23,4 @@ Purchasely provides you with 2 types of progress bars.
 1. [Linear Progress Bar](https://docs.purchasely.com/docs/linear-progress-bar)
 2. [Segmented Progress Bar](https://docs.purchasely.com/docs/segmented-progress-bar)
 
-<Image align="center" border={false} src="https://files.readme.io/9eabec51e5f0bddea0fea8383a7f307a9e626e4ca02ce3f8be550ee0633dd9f5-Progress_Bars.gif" />
+<Image align="center" border={false} src="https://files.readme.io/c3d4318799f58e6b142ca1fd39e986058d87a4e201a8257c16cb58b297ef930c-Progress_bars.gif" />
