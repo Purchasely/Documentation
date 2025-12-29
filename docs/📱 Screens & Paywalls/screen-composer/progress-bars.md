@@ -35,9 +35,11 @@ Progress Bars rely on a **very simple step-based configuration.**
 To set them up, you only need to:
 
 1. **Define the total number of steps** in the journey
-2. **Specify the current step** for the screen where the Progress Bar is displayed
+2. **Specify the current step** for the screen where the Progress Bar is displayed  
 
-That’s it.
+<Image align="center" border={false} src="https://files.readme.io/07cf68e24e1098430634012785bfabe373abb63c81e3480aeb6ee020131b6103-progress_steps.gif" />
+
+That’s it!
 
 The Progress Bar automatically calculates and displays the corresponding progress, making it **easy to reflect user advancement without complex logic or dependencies**.
 
@@ -47,13 +49,13 @@ This lightweight setup allows you to quickly add Progress Bars to any step-based
 
 You can adjust the dimensions of the Progress Bar to fit different screen contexts:
 
-**Width:** Define how the Progress Bar adapts to the screen or container:  
+**Width:** Define how the Progress Bar adapts to the screen or container
 
-<Image border={false} />
+<Image align="center" border={false} src="https://files.readme.io/9e431c9997767318f57b7e371f729beba96808d526ca17fa01b9add543a42303-width.gif" />
 
 **Height:** Control the bar thickness for subtle or more prominent displays
 
-<Image border={false} />
+<Image align="center" border={false} src="https://files.readme.io/840fa7c2e6860fd1498103e10bda4c2c02bf4f230bd5bcd0bbe6c95f7c9fe13e-height.gif" />
 
 ### Styles
 
@@ -66,3 +68,5 @@ Progress Bars can be styled to **align perfectly with your brand guidelines**:
 **Border color and thickness** for clearer visual separation
 
 You can also use a **gradient background** for the filled portion of the Progress Bar, enabling **more dynamic** and **visually engaging** designs.
+
+<br />
