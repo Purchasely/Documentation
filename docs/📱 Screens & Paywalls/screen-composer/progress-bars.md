@@ -69,4 +69,4 @@ Progress Bars can be styled to **align perfectly with your brand guidelines**:
 
 You can also use a **gradient background** for the filled portion of the Progress Bar, enabling **more dynamic** and **visually engaging** designs.
 
-<br />
+<Image align="center" border={false} src="https://files.readme.io/36d6fd3da26d69d9358bb9311a7912b8b4cd5e4203abca9e0a2cf72d797febf3-gradient.gif" />
