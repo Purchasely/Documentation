@@ -18,9 +18,51 @@ They are especially useful in **Flows**, **onboarding journeys**, **questionnair
 
 ***
 
-Purchasely provides you with 2 types of progress bars.
-
-1. [Linear Progress Bar](https://docs.purchasely.com/docs/linear-progress-bar)
-2. [Segmented Progress Bar](https://docs.purchasely.com/docs/segmented-progress-bar)
+Purchasely provides you with 2 types of progress bars:
 
 <Image align="center" border={false} src="https://files.readme.io/c3d4318799f58e6b142ca1fd39e986058d87a4e201a8257c16cb58b297ef930c-Progress_bars.gif" />
+
+<br />
+
+## **Progress Bars Configuration**
+
+Progress Bars are **fully customizable** to match your app’s layout and **visual identity**.
+
+### Steps-based logic
+
+Progress Bars rely on a **very simple step-based configuration.**
+
+To set them up, you only need to:
+
+1. **Define the total number of steps** in the journey
+2. **Specify the current step** for the screen where the Progress Bar is displayed
+
+That’s it.
+
+The Progress Bar automatically calculates and displays the corresponding progress, making it **easy to reflect user advancement without complex logic or dependencies**.
+
+This lightweight setup allows you to quickly add Progress Bars to any step-based experience, while keeping full control over how progress is represented across screens.
+
+### Size
+
+You can adjust the dimensions of the Progress Bar to fit different screen contexts:
+
+**Width:** Define how the Progress Bar adapts to the screen or container:  
+
+<Image border={false} />
+
+**Height:** Control the bar thickness for subtle or more prominent displays
+
+<Image border={false} />
+
+### Styles
+
+Progress Bars can be styled to **align perfectly with your brand guidelines**:
+
+**Background color** for the unfilled portion of the bar
+
+**Fill color** for the progress indicator
+
+**Border color and thickness** for clearer visual separation
+
+You can also use a **gradient background** for the filled portion of the Progress Bar, enabling **more dynamic** and **visually engaging** designs.
