@@ -35,7 +35,7 @@ Progress Bars rely on a **very simple step-based configuration.**
 To set them up, you only need to:
 
 1. **Define the total number of steps** in the journey
-2. **Specify the current step** for the screen where the Progress Bar is displayed  
+2. **Specify the current step** for the screen where the Progress Bar is displayed
 
 <Image align="center" border={false} src="https://files.readme.io/07cf68e24e1098430634012785bfabe373abb63c81e3480aeb6ee020131b6103-progress_steps.gif" />
 
@@ -61,11 +61,9 @@ You can adjust the dimensions of the Progress Bar to fit different screen contex
 
 Progress Bars can be styled to **align perfectly with your brand guidelines**:
 
-**Background color** for the unfilled portion of the bar
+**Background color** to highlight the Progress Bar section
 
-**Fill color** for the progress indicator
-
-**Border color and thickness** for clearer visual separation
+**Border color** for clearer visual separation
 
 You can also use a **gradient background** for the filled portion of the Progress Bar, enabling **more dynamic** and **visually engaging** designs.
 
