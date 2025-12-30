@@ -281,7 +281,7 @@ To assign a Visibility Condition based on the a user eligibility for an Introduc
 
 <br />
 
-* And finally select the eligibility rule: is eligible / is not available for the Introductory Offer  
+* And finally select the eligibility rule: is eligible / is not available for the Introductory Offer
 
   <Image align="left" border={false} width="400px" src="https://files.readme.io/16d4b216c9aba657d97792bca83af73c4f2deed8400092f27945e44786890198-image.png" />
 
@@ -412,6 +412,8 @@ To assign a Visibility Condition based on an Audience:
 * Finally select the desired Audience or create a new one
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/cadc8b30b7c83d7e937f6767c923148b93baa46285d32489aa9e5a595f8cd8db-image.png" className="border" />
+
+<br />
 
 <br />
 
