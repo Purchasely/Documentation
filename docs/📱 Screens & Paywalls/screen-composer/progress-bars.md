@@ -8,7 +8,7 @@ metadata:
 ---
 Progress Bars help you **visualize user progression**at a glance and **guide** users through **multi-step experiences** with clarity and motivation.
 
-They are especially useful in **Flows**, **onboarding journeys**, **questionnaires**, or any **step-based experience**, where showing progress helps reduce friction, set expectations, and increase completion rates.
+They are especially useful in **Flows**, **onboarding journeys**, **questionnaires**, or any **step-based experience**, where showing progress helps **reduce friction**, **set expectations**, and **increase completion rates**.
 
 ## **Benefits of using Progress Bars**
 
