@@ -59,12 +59,30 @@ You can adjust the dimensions of the Progress Bar to fit different screen contex
 
 ### Styles
 
-Progress Bars can be styled to **align perfectly with your brand guidelines**:
+Progress Bars offer **flexible styling options** depending on the selected type.
 
-**Background color** to highlight the Progress Bar section
+For **Linear Progress Bars**, you can define different colors for:
 
-**Border color** for clearer visual separation
+* Completed steps
+* Upcoming steps
+
+<Image align="center" border={false} src="https://files.readme.io/ad049ec721557cf950cfaf83b0dd32ac268a12e95de4f318eba32f661aef5ddd-inear.gif" />
+
+For **Segmented Progress Bars**, you can configure distinct colors for:
+
+* Completed steps
+* Current step
+* Upcoming steps
+
+<Image align="center" border={false} src="https://files.readme.io/604a4045587e6126d9ccd3fb4f40ef9ac06b67c11b7df0d277b40d7984203ad6-progress.gif" />
+
+This allows you to clearly differentiate progress states and make the user’s current position immediately understandable.
 
 You can also use a **gradient background** for the filled portion of the Progress Bar, enabling **more dynamic** and **visually engaging** designs.
 
 <Image align="center" border={false} src="https://files.readme.io/36d6fd3da26d69d9358bb9311a7912b8b4cd5e4203abca9e0a2cf72d797febf3-gradient.gif" />
+
+In addition, you can further customize the Progress Bar appearance by configuring:
+
+* **Background color** to highlight the Progress Bar section
+* **Border color** for clearer visual separation
