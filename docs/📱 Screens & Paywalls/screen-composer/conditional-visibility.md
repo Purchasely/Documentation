@@ -243,10 +243,10 @@ Available User conditions are:
 
 ### Eligibility for an Offer
 
-<Callout icon="❗️">
+<Callout icon="❗️" theme="error">
   **Requires SDK v5.6 and above**
 
-  Eligibility-based rules are NOT retro-compatible with SDK below v5.6. You should upgrade to until SDK v5.6 and above to use them. 
+  Eligibility-based rules are NOT retro-compatible with SDK below v5.6. You should upgrade to until SDK v5.6 and above to use them.
 
   If your Screen is displayed by a SDK version below v5.6, components associated with this type of Conditional visibility ruled will simply not be displayed.
 </Callout>
@@ -281,9 +281,11 @@ To assign a Visibility Condition based on the a user eligibility for an Introduc
 
 <br />
 
-* And finally select the eligibility rule: is eligible / is not available for the Introductory Offer
+* And finally select the eligibility rule: is eligible / is not available for the Introductory Offer  
 
-<Image align="left" border={true} width="400px" src="https://files.readme.io/4dbd068f3b3b7c0359c8065c0cdf369402fe8e40f501b6e907b53f4c7bcc5673-image.png" className="border" />
+  <Image align="left" border={false} width="400px" src="https://files.readme.io/16d4b216c9aba657d97792bca83af73c4f2deed8400092f27945e44786890198-image.png" />
+
+  <br />
 
 <br />
 
@@ -371,7 +373,7 @@ More info about the [Preview](preview)
   This conditional visibility rule is retro-compatible until SDK v5.0
 </Callout>
 
-<Callout icon="❗️">
+<Callout icon="❗️" theme="error">
   **Only works with a Placement or within a Flow**
 
   For an Audience-based rule to work, you need to display or fetch the Screen through a Placement or the Screen must be integrated inside a Flow.
@@ -410,6 +412,8 @@ To assign a Visibility Condition based on an Audience:
 * Finally select the desired Audience or create a new one
 
   <Image align="left" border={true} width="400px" src="https://files.readme.io/cadc8b30b7c83d7e937f6767c923148b93baa46285d32489aa9e5a595f8cd8db-image.png" className="border" />
+
+<br />
 
 <br />
 
