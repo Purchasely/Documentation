@@ -25,15 +25,15 @@ name: Tags - Promotional Offers Tags
       </td>
 
       <td style={{ textAlign: "left" }}>
-        Displays the winback offer price.
+        Offer price with period
       </td>
 
       <td style={{ textAlign: "left" }}>
-        For a winback offer :  
+        For a winback offer :
 
-        * Don't miss the intro offer of **\{\{OFFER\_PRICE}}** for the first week.  
-        * The output will be:\
-          *Don't miss the intro offer of $0.99/week for the first week.*
+        * Don't miss the intro offer of **\{\{OFFER_PRICE}}** for the first week.
+        * The output will be:  
+          _Don't miss the intro offer of $0.99/week for the first week._
       </td>
     </tr>
 
@@ -43,15 +43,15 @@ name: Tags - Promotional Offers Tags
       </td>
 
       <td style={{ textAlign: "left" }}>
-        Displays the winback offer amount.
+        Offer price without period (e.g., $9.99).
       </td>
 
       <td style={{ textAlign: "left" }}>
-        For a winback offer :  
+        For a winback offer :
 
-        * Don't miss the intro offer of **\{\{OFFER\_AMOUNT}}** for the first month.  
-        * The output will be:\
-          *Don't miss the intro offer of $5.99 for the first month.*
+        * Don't miss the intro offer of **\{\{OFFER_AMOUNT}}** for the first month.
+        * The output will be:  
+          _Don't miss the intro offer of $5.99 for the first month._
       </td>
     </tr>
 
@@ -61,15 +61,15 @@ name: Tags - Promotional Offers Tags
       </td>
 
       <td style={{ textAlign: "left" }}>
-        Displays the winback offer period.
+        Billing period during offer
       </td>
 
       <td style={{ textAlign: "left" }}>
-        For an extension of a free trial:  
+        For an extension of a free trial:
 
-        * Don't miss the free trial for a **\{\{OFFER\_PERIOD}}**.  
-        * The output will be:\
-          *Don't miss the free trial for a week.*
+        * Don't miss the free trial for a **\{\{OFFER_PERIOD}}**.
+        * The output will be:  
+          _Don't miss the free trial for a week._
       </td>
     </tr>
 
@@ -79,15 +79,15 @@ name: Tags - Promotional Offers Tags
       </td>
 
       <td style={{ textAlign: "left" }}>
-        Displays the winback offer duration.
+        Total offer length
       </td>
 
       <td style={{ textAlign: "left" }}>
-        For a winback:  
+        For a winback:
 
-        * Hurry up intro offer for **\{\{OFFER\_AMOUNT}}**/ **\{\{OFFER\_DURATION}}**.  
-        * The output will be:\
-          *Hurry up intro offer for $0.99 / 1week.*
+        * Hurry up intro offer for **\{\{OFFER_AMOUNT}}**/ **\{\{OFFER_DURATION}}**.
+        * The output will be:  
+          _Hurry up intro offer for $0.99 / 1week._
       </td>
     </tr>
 
@@ -101,11 +101,11 @@ name: Tags - Promotional Offers Tags
       </td>
 
       <td style={{ textAlign: "left" }}>
-        With:  
+        With:
 
         * offer price: $99.99/year
-        * monthly: $9.99/month  
-          * \*\{\{OFFER\_PRICE\_COMPARISON}}\*\* will display $19.89
+        * monthly: $9.99/month
+          * *\{\{OFFER_PRICE_COMPARISON}}** will display $19.89
       </td>
     </tr>
 
@@ -115,15 +115,18 @@ name: Tags - Promotional Offers Tags
       </td>
 
       <td style={{ textAlign: "left" }}>
-        Displays the discount percentage between the discounted offer and the regular price of the plan.
+        % discount of an Offer price vs Full price.
+
+        * If only one Offering is selected, compares the discount percentage of the Offer (Introductory Offer or Promotional Offer) with the full price. 
+        * If 2 different Offerings are selected, compares the discount percentage of the Offer (Introductory Offer or Promotional Offer) from the first Offering, with the full price of the second Offering
       </td>
 
       <td style={{ textAlign: "left" }}>
-        With:  
+        With:
 
         * offer price: $99.99/year
-        * monthly: $9.99/month  
-          * \*\{\{OFFER\_DISCOUNT\_PERCENTAGE(plan1,plan2)}}\*\* will display 17%
+        * monthly: $9.99/month
+          * *\{\{OFFER_DISCOUNT_PERCENTAGE(plan1,plan2)}}** will display 17%
       </td>
     </tr>
   </tbody>
