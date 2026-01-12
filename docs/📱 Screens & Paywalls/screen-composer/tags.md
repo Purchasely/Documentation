@@ -14,9 +14,9 @@ next:
 ---
 # What are tag used for?
 
-Purchasely has a tagging system to fetch information about the price and duration of subscriptions and one-time purchases, as well as the Introductory Offer (for user acquisition) and Promotional Offer (winback/retention) prices and durations. 
+Purchasely has a tagging system to fetch information about the price and duration of subscriptions and one-time purchases, as well as the Introductory Offer (for user acquisition) and Promotional Offer (winback/retention) prices and durations.
 
-Thanks to these tags, you don't have to hard code price for each and every stores in your screens and paywalls. 
+Thanks to these tags, you don't have to hard code price for each and every stores in your screens and paywalls.
 
 Using these tags will also ease to make your paywall compliant with the App Store Guidelines.
 
@@ -24,9 +24,9 @@ Using these tags will also ease to make your paywall compliant with the App Stor
 
 ## Where can you use tags?
 
-Tags can be used in any label on a Screen. You can add them by simply clicking on the `{{TAGS}}` inside the text field. 
+Tags can be used in any label on a Screen. You can add them by simply clicking on the `{{TAGS}}` inside the text field.
 
-<Image align="center" src="https://files.readme.io/1a358a8da1b12806e775d9a6030a7bdbe95a4c8076d0fc112c949c888315daf1-tags.gif" />
+<Image align="center" border={false} src="https://files.readme.io/1a358a8da1b12806e775d9a6030a7bdbe95a4c8076d0fc112c949c888315daf1-tags.gif" />
 
 You can also directly type them in plain text. To do so, put the name of the tag between 2 pairs of curly brackets. Eg: `{{PRICE}}`
 
@@ -38,18 +38,16 @@ You can use 2 types of tags.
 
 * Tags with no parameters refer to the Plan directly mapped with the parent element (eg: the picker to which the text belongs or the purchase button) or to the default Plan configured for this Screen. To use this kind of tags, simply click on the blue button inside the widget.
 
-  <Image align="center" src="https://files.readme.io/02cf5c8eb4587ec6d48d21004892ddafe625c941022de32d3ea266070cb96e89-tags_no_param.gif" />
+  <Image align="center" border={false} src="https://files.readme.io/02cf5c8eb4587ec6d48d21004892ddafe625c941022de32d3ea266070cb96e89-tags_no_param.gif" />
 
-  \=> This way, if you change the Plan associated with the button / picker (or run an Price A/B test), you won't need to update the tag.
-* Tags with parameters are mapped with a specific Plan. They appear with the reference of the Plan selected between brackets. If you want to use them, simply select the desired Plan in the widget. 
+  => This way, if you change the Plan associated with the button / picker (or run an Price A/B test), you won't need to update the tag.
+* Tags with parameters are mapped with a specific Plan. They appear with the reference of the Plan selected between brackets. If you want to use them, simply select the desired Plan in the widget.
 
-  <Image align="center" src="https://files.readme.io/e8418dc4efcb59916fd79b06f439868751db70af03bb0e5697b8f1dcb168a0ab-tags_parameters.gif" />
+  <Image align="center" border={false} src="https://files.readme.io/e8418dc4efcb59916fd79b06f439868751db70af03bb0e5697b8f1dcb168a0ab-tags_parameters.gif" />
 
-  They can be used to reference another Plan in a picker or button than the one which it is mapped with, or to associate a Plan which is not the default one. 
+  They can be used to reference another Plan in a picker or button than the one which it is mapped with, or to associate a Plan which is not the default one.
 
-<Image alt="The tag $59.99 references a different Plan than the one associated to the plan picker" align="center" border={true} src="https://files.readme.io/3d21534-image.png">
-  The strikethrough price is a reference to another Plan than the one associated with the picker
-</Image>
+<Image align="center" alt="The tag $59.99 references a different Plan than the one associated to the plan picker" border={true} caption="The strikethrough price is a reference to another Plan than the one associated with the picker" src="https://files.readme.io/3d21534-image.png" />
 
 <br />
 
@@ -57,7 +55,7 @@ You can use 2 types of tags.
 >
 > In some cases, tags cannot be displayed properly in the preview of the Console. They are replaced by XX.XX
 >
-> The reason is that the Purchasely Console is not directly interfaced with the App stores. Therefore, it can only know the price of a SKUs in each territory once a transaction has been processed or observed by the Platform. 
+> The reason is that the Purchasely Console is not directly interfaced with the App stores. Therefore, it can only know the price of a SKUs in each territory once a transaction has been processed or observed by the Platform.
 >
 > As soon as it is the case, the XX.XX will be replace by the actual price in the appropriate currency. Eg: $9.99
 >
@@ -67,7 +65,7 @@ You can use 2 types of tags.
 
 ## General tags:
 
-These tags are most common tags that used in all the paywalls. Purchasely checks if your paywall has either the `PRICE` tag or `AMOUNT`/`DURATION` or `AMOUNT`/`PERIOD` tag in the purchase buttons. 
+These tags are most common tags that used in all the paywalls. 
 
 <Table align={["left","left","left"]}>
   <thead>
@@ -93,19 +91,11 @@ These tags are most common tags that used in all the paywalls. Purchasely checks
       </td>
 
       <td>
-        Displays the plan price with the period.
+        Full price with period (e.g., $9.99/month)
       </td>
 
       <td>
-        For a renewing plan:\
-        *Subscription starting fro&#x6D;**\{\{PRICE}}**.*\
-        The output will be:\
-        *Subscription starting from $6.99/month.*  
-
-        For consumables / non-consumables :\
-        *Enjoy a lifetime plan a&#x74;**\{\{PRICE}}**.*\
-        The output will be:\
-        *Enjoy a lifetime at $83.99.*
+        "Subscription will be renewed at \{\{PRICE\}\}"
       </td>
     </tr>
 
@@ -115,21 +105,11 @@ These tags are most common tags that used in all the paywalls. Purchasely checks
       </td>
 
       <td>
-        Displays the plan price.
+        Price without period (e.g., $9.99)
       </td>
 
       <td>
-        For a renewing plan:\
-          *Subscription starting fro&#x6D;**\{\{AMOUNT}}***  
-
-        The output will be:\
-          *Subscription starting from $6.99.*  
-
-        For consumables / non-consumables :\
-          *Enjoy a lifetime plan a&#x74;**\{\{AMOUNT}}**.*  
-
-        The output will be:\
-          *Enjoy a lifetime plan at $83.99.*
+        "Your lifetime plan costs \{\{AMOUNT\}\}"  
       </td>
     </tr>
 
@@ -139,15 +119,11 @@ These tags are most common tags that used in all the paywalls. Purchasely checks
       </td>
 
       <td>
-        Displays the period of the plan.
+        Billing period unit (e.g., month, year)
       </td>
 
       <td>
-        For a renewing plan:\
-        *Subscription starting fro&#x6D;**\{\{AMOUNT}}/\{\{PERIOD}}**.*  
-
-        The output will be:\
-        *Subscription starting from $6.99/month.*
+        Billed every \{\{PERIOD\}\}
       </td>
     </tr>
 
@@ -157,15 +133,12 @@ These tags are most common tags that used in all the paywalls. Purchasely checks
       </td>
 
       <td>
-        Displays the duration of the plan.
+        Total duration   
+        (e.g., 1 month, 1 year).
       </td>
 
       <td>
-        For a renewing plan:  
-
-        * Subscription starting from **\{\{AMOUNT}}** for **\{\{DURATION}}**.  
-        * The output will be:\
-          *Subscription starting from $6.99 for 1 month.*
+        Access for \{\{DURATION\}\}
       </td>
     </tr>
   </tbody>
@@ -201,15 +174,15 @@ These tags help you display the subscription duration in days, weeks , months an
       </td>
 
       <td>
-        Displays the subscription duration in days.
+        Duration in days
       </td>
 
       <td>
-        For a renewing plan:  
+        For a renewing plan:
 
-        * Subscription starting from **\{\{PRICE}}** is **\{\{DAILY\_AMOUNT}}**/day during **\{\{DAYS\_DURATION}}**.  
-        * The output will be:\
-          *Subscription starting from $6.99/week is $0.99/day only during 7 days.*
+        * Subscription starting from **\{\{PRICE}}** is **\{\{DAILY_AMOUNT}}**/day during **\{\{DAYS_DURATION}}**.
+        * The output will be:  
+          _Subscription starting from $6.99/week is $0.99/day only during 7 days._
       </td>
     </tr>
 
@@ -219,15 +192,15 @@ These tags help you display the subscription duration in days, weeks , months an
       </td>
 
       <td>
-        Displays the subscription duration in weeks.
+        Duration in weeks
       </td>
 
       <td>
-        For a renewing plan:  
+        For a renewing plan:
 
-        * Subscription starting from **\{\{PRICE}}** is **\{\{WEEKLY\_AMOUNT}}**/week during **\{\{WEEKS\_DURATION}}**.  
-        * The output will be:\
-          *Subscription starting from $6.99/month is $1.75/week during 4 weeks.*
+        * Subscription starting from **\{\{PRICE}}** is **\{\{WEEKLY_AMOUNT}}**/week during **\{\{WEEKS_DURATION}}**.
+        * The output will be:  
+          _Subscription starting from $6.99/month is $1.75/week during 4 weeks._
       </td>
     </tr>
 
@@ -237,15 +210,15 @@ These tags help you display the subscription duration in days, weeks , months an
       </td>
 
       <td>
-        Displays the subscription duration in months.
+        Duration in months
       </td>
 
       <td>
-        For a renewing plan:  
+        For a renewing plan:
 
-        * Subscription starting from **\{\{PRICE}}** is **\{\{MONTHLY\_AMOUNT}}**/month during **\{\{MONTHS\_DURATION}}**.  
-        * The output will be:\
-          *Subscription starting from $24.99/year is $2.08/month only during 12 months.*
+        * Subscription starting from **\{\{PRICE}}** is **\{\{MONTHLY_AMOUNT}}**/month during **\{\{MONTHS_DURATION}}**.
+        * The output will be:  
+          _Subscription starting from $24.99/year is $2.08/month only during 12 months._
       </td>
     </tr>
 
@@ -255,15 +228,15 @@ These tags help you display the subscription duration in days, weeks , months an
       </td>
 
       <td>
-        Displays the subscription duration in quarters.
+        Duration in quarters
       </td>
 
       <td>
-        For a renewing plan:\
-        *Subscription starting fro&#x6D;**\{\{PRICE}}** is **\{\{QUARTERLY\_AMOUNT}}**/quarter during **\{\{QUARTERS\_DURATION}}**.*  
+        For a renewing plan:  
+        _Subscription starting from**\{\{PRICE}}** is **\{\{QUARTERLY_AMOUNT}}**/quarter during **\{\{QUARTERS_DURATION}}**._
 
-        The output will be:\
-        *Subscription starting from 24€99/year is $6.24/quarter only during 4 quarters.*
+        The output will be:  
+        _Subscription starting from 24€99/year is $6.24/quarter only during 4 quarters._
       </td>
     </tr>
 
@@ -273,16 +246,16 @@ These tags help you display the subscription duration in days, weeks , months an
       </td>
 
       <td>
-        Displays the subscription duration in years.\
+        Duration in years.
         If the subscription is less than a year, the output will be 0.
       </td>
 
       <td>
-        For a renewing plan:\
-        *Subscription starting fro&#x6D;**\{\{PRICE}}** is **\{\{YEARLY\_AMOUNT}}**/year for **\{\{YEARS\_DURATION}}**.*  
+        For a renewing plan:  
+        _Subscription starting from**\{\{PRICE}}** is **\{\{YEARLY_AMOUNT}}**/year for **\{\{YEARS_DURATION}}**._
 
-        The output will be:\
-        *Subscription starting from $119.99/year is $119.99/year only for 1 year.*
+        The output will be:  
+        _Subscription starting from $119.99/year is $119.99/year only for 1 year._
       </td>
     </tr>
   </tbody>
@@ -292,8 +265,7 @@ These tags help you display the subscription duration in days, weeks , months an
 
 ## Subscription cost per duration tags
 
-These tags helps you to display subscription cost per day, week or month and etc. They are convenient to compare together several plans with different periodicities.\
-*E.g.: compare the monthly price of a yearly subscription with a monthly subscription.*
+Perfect for showing equivalent cost breakdowns, useful when comparing plans.
 
 <Table align={["left","left","left"]}>
   <thead>
@@ -319,15 +291,15 @@ These tags helps you to display subscription cost per day, week or month and etc
       </td>
 
       <td>
-        Displays the cost of a plan per day.
+        Cost per day
       </td>
 
       <td>
-        For a renewing plan:  
+        For a renewing plan:
 
-        * Subscription costs **\{\{DAILY\_AMOUNT}}** only per day.  
-        * The output will be:\
-          *Subscription costs $0.49 only per day.*
+        * Subscription costs **\{\{DAILY_AMOUNT}}** only per day.
+        * The output will be:  
+          _Subscription costs $0.49 only per day._
       </td>
     </tr>
 
@@ -337,15 +309,15 @@ These tags helps you to display subscription cost per day, week or month and etc
       </td>
 
       <td>
-        Displays the cost of a plan per week.
+        Cost per week
       </td>
 
       <td>
-        For a renewing plan:\
-        *Subscription cost&#x73;**\{\{WEEKLY\_AMOUNT}}** only per week.*  
+        For a renewing plan:  
+        _Subscription costs**\{\{WEEKLY_AMOUNT}}** only per week._
 
-        The output will be:\
-        *Subscription that costs $2.78 only per week.*
+        The output will be:  
+        _Subscription that costs $2.78 only per week._
       </td>
     </tr>
 
@@ -355,15 +327,15 @@ These tags helps you to display subscription cost per day, week or month and etc
       </td>
 
       <td>
-        Displays the cost of a plan per month.
+        Cost per month
       </td>
 
       <td>
-        For a renewing plan:  
+        For a renewing plan:
 
-        * Subscription costs **\{\{MONTHLY\_AMOUNT}}**&#x6F;nly per month.  
-        * The output will be:\
-          *Subscription costs $6.99 only per month.*
+        * Subscription costs **\{\{MONTHLY_AMOUNT}}**only per month.
+        * The output will be:  
+          _Subscription costs $6.99 only per month._
       </td>
     </tr>
 
@@ -373,15 +345,15 @@ These tags helps you to display subscription cost per day, week or month and etc
       </td>
 
       <td>
-        Displays the cost of a plan per quarter.
+        Cost per quarter
       </td>
 
       <td>
-        For a renewing plan:\
-        *Subscription cost&#x73;**\{\{QUARTERLY\_AMOUNT}}** only per quarter.*  
+        For a renewing plan:  
+        _Subscription costs**\{\{QUARTERLY_AMOUNT}}** only per quarter._
 
-        The output will be:\
-        *Subscription costs $18.99 only per quarter.*
+        The output will be:  
+        _Subscription costs $18.99 only per quarter._
       </td>
     </tr>
 
@@ -391,15 +363,15 @@ These tags helps you to display subscription cost per day, week or month and etc
       </td>
 
       <td>
-        Displays the cost of a plan per year.
+        Cost per year
       </td>
 
       <td>
-        For a renewing plan:  
+        For a renewing plan:
 
-        * Subscription costs **\{\{YEARLY\_AMOUNT}}** only per year.  
-        * The output will be:\
-          *Subscription costs $25.99 only per year.*
+        * Subscription costs **\{\{YEARLY_AMOUNT}}** only per year.
+        * The output will be:  
+          _Subscription costs $25.99 only per year._
       </td>
     </tr>
 
@@ -413,11 +385,11 @@ These tags helps you to display subscription cost per day, week or month and etc
       </td>
 
       <td>
-        For a renewing plan:  
+        For a renewing plan:
 
-        * Special offer: **\{\{OFFER\_DAILY\_AMOUNT}}** only per day.  
-        * The output will be:\
-          *Special offer: $0.49 only per day.*
+        * Special offer: **\{\{OFFER_DAILY_AMOUNT}}** only per day.
+        * The output will be:  
+          _Special offer: $0.49 only per day._
       </td>
     </tr>
 
@@ -431,11 +403,11 @@ These tags helps you to display subscription cost per day, week or month and etc
       </td>
 
       <td>
-        For a renewing plan:\
-        *Subscription cost&#x73;**\{\{OFFER\_WEEKLY\_AMOUNT}}** only per week.*  
+        For a renewing plan:  
+        _Subscription costs**\{\{OFFER_WEEKLY_AMOUNT}}** only per week._
 
-        The output will be:\
-        *Subscription that costs $2.78 only per week.*
+        The output will be:  
+        _Subscription that costs $2.78 only per week._
       </td>
     </tr>
 
@@ -449,11 +421,11 @@ These tags helps you to display subscription cost per day, week or month and etc
       </td>
 
       <td>
-        For a renewing plan:  
+        For a renewing plan:
 
-        * Subscription costs **\{\{OFFER\_MONTHLY\_AMOUNT}}**&#x6F;nly per month.  
-        * The output will be:\
-          *Subscription costs $6.99 only per month.*
+        * Subscription costs **\{\{OFFER_MONTHLY_AMOUNT}}**only per month.
+        * The output will be:  
+          _Subscription costs $6.99 only per month._
       </td>
     </tr>
 
@@ -467,11 +439,11 @@ These tags helps you to display subscription cost per day, week or month and etc
       </td>
 
       <td>
-        For a renewing plan:\
-        *Subscription cost&#x73;**\{\{OFFER\_QUARTERLY\_AMOUNT}}** only per quarter.*  
+        For a renewing plan:  
+        _Subscription costs**\{\{OFFER_QUARTERLY_AMOUNT}}** only per quarter._
 
-        The output will be:\
-        *Subscription costs $18.99 only per quarter.*
+        The output will be:  
+        _Subscription costs $18.99 only per quarter._
       </td>
     </tr>
 
@@ -485,11 +457,11 @@ These tags helps you to display subscription cost per day, week or month and etc
       </td>
 
       <td>
-        For a renewing plan:  
+        For a renewing plan:
 
-        * Subscription costs **\{\{OFFER\_YEARLY\_AMOUNT}}** only per year.  
-        * The output will be:\
-          *Subscription costs $25.99 only per year.*
+        * Subscription costs **\{\{OFFER_YEARLY_AMOUNT}}** only per year.
+        * The output will be:  
+          _Subscription costs $25.99 only per year._
       </td>
     </tr>
   </tbody>
@@ -499,7 +471,7 @@ These tags helps you to display subscription cost per day, week or month and etc
 
 ## Price & Percentage comparison tags
 
-These tags comes handy for your to calculate percentage difference and the price difference between 2 different plans and show them automatically in the respective currency. 
+These tags comes handy for your to calculate percentage difference and the price difference between 2 different plans and show them automatically in the respective currency.
 
 <Table align={["left","left","left"]}>
   <thead>
@@ -525,16 +497,16 @@ These tags comes handy for your to calculate percentage difference and the price
       </td>
 
       <td>
-        Displays the percentage difference between the plan in the purchase button and the plan chosen.
+        Compares the first plan against the second one
       </td>
 
       <td>
-        With:  
+        With:
 
         * yearly: $99.99/year
-        * monthly: $9.99/month  
-          * **\{\{PERCENTAGE\_COMPARISON(YEARLY,MONTHLY)}}** will display 17%  
-            * \*\{\{PERCENTAGE*COMPARISON(MONTHLY,YEARLY)}}\*\* will display 20%*
+        * monthly: $9.99/month
+          * **\{\{PERCENTAGE_COMPARISON(YEARLY,MONTHLY)}}** will display 17%
+          * **\{\{PERCENTAGE_COMPARISON(MONTHLY,YEARLY)}}** will display 20%_
       </td>
     </tr>
 
@@ -544,17 +516,18 @@ These tags comes handy for your to calculate percentage difference and the price
       </td>
 
       <td>
-        Displays the discount percentage between the actual plan in the purchase button and the plan chosen.\
-        The order in which the plans are selected does not matter.
+        Discount % between two plans.  
+        The first plan is the one being described. The second is the one to compare it with.   
+        The order in which the plans are selected matters.
       </td>
 
       <td>
-        With:  
+        With:
 
         * yearly: $99.99/year
-        * monthly: $9.99/month  
-          * **\{\{DISCOUNT\_PERCENTAGE(YEARLY,MONTHLY)}}** will display 17%  
-          * \*\{\{DISCOUNT*PERCENTAGE(MONTHLY,YEARLY)}}\*\* will display 17%*
+        * monthly: $9.99/month
+          * **\{\{DISCOUNT_PERCENTAGE(YEARLY,MONTHLY)}}** will display 17%
+          * *\{\{DISCOUNT_PERCENTAGE(MONTHLY,YEARLY)}}** will display 17%_
       </td>
     </tr>
 
@@ -564,17 +537,17 @@ These tags comes handy for your to calculate percentage difference and the price
       </td>
 
       <td>
-        Displays the raise of price in percentage between the actual plan in the purchase button and the plan chosen.\
-        The order in which the plans are selected does not matter.
+        % increase between plans. 
+        The order in which the plans are selected **does not** matter.
       </td>
 
       <td>
-        With:  
+        With:
 
         * yearly: $99.99/year
-        * monthly: $9.99/monthThe output will be:  
-          * **\{\{RAISE\_PERCENTAGE(YEARLY,MONTHLY)}}** will display 20%  
-            * \*\{\{RAISE*PERCENTAGE(MONTHLY,YEARLY)}}\*\* will display 20%*
+        * monthly: $9.99/monthThe output will be:
+          * **\{\{RAISE_PERCENTAGE(YEARLY,MONTHLY)}}** will display 20%
+            * *\{\{RAISE_PERCENTAGE(MONTHLY,YEARLY)}}** will display 20%_
       </td>
     </tr>
 
@@ -584,21 +557,21 @@ These tags comes handy for your to calculate percentage difference and the price
       </td>
 
       <td>
-        Displays the price difference between the plan in the purchase button and the plan chosen.\
+        Raw price difference.  
         The price difference is computed with the periodicity of the first plan selected.
       </td>
 
       <td>
-        With:  
+        With:
 
         * yearly: $99.99/year
         * monthly: $9.99/month
 
-          * The output will be:  
-          * \*\{\{PRICE\_COMPARISON(YEARLY,MONTHLY)}}\*\* will display $19.89\
-            \=> the monthly plan costs $19.89 more than the yearly plan on a yearly base  
-            * \*\{\{PRICE*COMPARISON(MONTHLY,YEARLY)}}\*\* will display $1.66\
-              \=> the monthly plan costs $1.66 more than the yearly plan on a monthly base*
+          * The output will be:
+          * *\{\{PRICE_COMPARISON(YEARLY,MONTHLY)}}** will display $19.89  
+            => the monthly plan costs $19.89 more than the yearly plan on a yearly base
+            * *\{\{PRICE_COMPARISON(MONTHLY,YEARLY)}}** will display $1.66  
+              => the monthly plan costs $1.66 more than the yearly plan on a monthly base_
       </td>
     </tr>
   </tbody>
@@ -608,7 +581,7 @@ These tags comes handy for your to calculate percentage difference and the price
 
 ## Offer tags
 
-These tags can be used to display the price and duration of the both introductory/new user acquisition offers and Winback/retention offers you have created in the stores and declared in the Purchasely console. 
+These tags can be used to display the price and duration of the both introductory/new user acquisition offers and Winback/retention offers you have created in the stores and declared in the Purchasely console.
 
 <TagsPromotionOffersTags />
 
@@ -620,11 +593,11 @@ These set of tags are very useful to create dynamic countdowns. You can integrat
 * [Absolute countdown](#timer-absolute)
 * [User countdown](#timer-user-countdown)
 
-Timers are not only a simple tag but rather a *set of tags* composed of different sub-tags (`TIMER(MONTHS)`, `TIMER(DAYS)`, `TIMER(MINUTES)`, `TIMER(SECONDS)`) that can be manipulated independently. 
+Timers are not only a simple tag but rather a _set of tags_ composed of different sub-tags (`TIMER(MONTHS)`, `TIMER(DAYS)`, `TIMER(MINUTES)`, `TIMER(SECONDS)`) that can be manipulated independently.
 
 Depending on the format you associate to the Tag, they will appear in the text field with the following format:
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/fd75492fac841c3cab8c4e8944bd4b21ca81813e0fa640520a6645ada12e34d2-image.png" />
+<Image align="center" border={true} src="https://files.readme.io/fd75492fac841c3cab8c4e8944bd4b21ca81813e0fa640520a6645ada12e34d2-image.png" className="border" />
 
 They are actually a composition of several tags. In the case above:
 
@@ -634,7 +607,7 @@ They are actually a composition of several tags. In the case above:
 
 By default, the tags are separated by colon (":"). You can replace the colons by any string you want directly in the text field:
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/e64ffadbb3bef77f124e4b896f6349365761e55b1bd7d8d3d255c2c11c102801-image.png" />
+<Image align="center" border={true} src="https://files.readme.io/e64ffadbb3bef77f124e4b896f6349365761e55b1bd7d8d3d255c2c11c102801-image.png" className="border" />
 
 <br />
 
