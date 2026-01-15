@@ -12,7 +12,7 @@ Purchasely.fetchPresentation(for: "onboarding", fetchCompletion: { presentation,
 
 })
 
-// If for some specific configuration you need to check if the presentation is a flow, that's possible but it should only be done is required by your implementation
+// If for some specific configuration you need to check if the presentation is a flow, that's possible but it should only be done if required by your implementation
 if presentation.isFlow {
 	// presentation is a flow
 }
