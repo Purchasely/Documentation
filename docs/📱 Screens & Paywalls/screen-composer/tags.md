@@ -36,14 +36,12 @@ You can also directly type them in plain text. To do so, put the name of the tag
 
 You can use 2 types of tags.
 
-* Tags with no parameters refer to the Plan directly mapped with the parent element (eg: the picker to which the text belongs or the purchase button) or to the default Plan configured for this Screen. To use this kind of tags, simply click on the blue button inside the widget.
-
-  <Image align="center" border={false} src="https://files.readme.io/02cf5c8eb4587ec6d48d21004892ddafe625c941022de32d3ea266070cb96e89-tags_no_param.gif" />
+* Tags with no parameters refer to the Plan directly mapped with the parent element (eg: the picker to which the text belongs or the purchase button) or to the default Plan configured for this Screen. 
 
   => This way, if you change the Plan associated with the button / picker (or run an Price A/B test), you won't need to update the tag.
 * Tags with parameters are mapped with a specific Plan. They appear with the reference of the Plan selected between brackets. If you want to use them, simply select the desired Plan in the widget.
 
-  <Image align="center" border={false} src="https://files.readme.io/e8418dc4efcb59916fd79b06f439868751db70af03bb0e5697b8f1dcb168a0ab-tags_parameters.gif" />
+  <Image align="center" border={true} src="https://files.readme.io/e8418dc4efcb59916fd79b06f439868751db70af03bb0e5697b8f1dcb168a0ab-tags_parameters.gif" className="border" />
 
   They can be used to reference another Plan in a picker or button than the one which it is mapped with, or to associate a Plan which is not the default one.
 
