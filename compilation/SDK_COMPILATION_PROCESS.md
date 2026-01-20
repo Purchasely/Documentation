@@ -283,18 +283,39 @@ Use this checklist when creating documentation for a new platform:
 
 ---
 
-## Output File Naming Convention
+## Output File Location
+
+All compiled platform documentation files are stored in the `platform/` folder:
 
 ```
-{platform}.md
+platform/{platform}.md
 ```
 
 Examples:
-- `android.md` - Android/Kotlin
-- `ios.md` - iOS/Swift
-- `react-native.md` - React Native
-- `flutter.md` - Flutter
-- `cordova.md` - Cordova
+- `platform/android.md` - Android/Kotlin
+- `platform/ios.md` - iOS/Swift
+- `platform/react-native.md` - React Native
+- `platform/flutter.md` - Flutter
+- `platform/cordova.md` - Cordova
+
+### Folder Structure
+
+```
+Documentation/
+├── platform/                    # Compiled SDK documentation (output)
+│   ├── android.md
+│   ├── ios.md
+│   ├── react-native.md
+│   ├── flutter.md
+│   └── cordova.md
+├── compilation/                 # Compilation tooling and instructions
+│   ├── SDK_COMPILATION_PROCESS.md
+│   ├── compile_sdk_docs.sh
+│   └── COMPILE_*_INSTRUCTION.md
+├── docs/                        # Source documentation (input)
+├── custom_blocks/               # Reusable content blocks (input)
+└── CLAUDE.md                    # Repository context
+```
 
 ---
 

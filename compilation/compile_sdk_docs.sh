@@ -13,9 +13,17 @@ BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Script directory
+# Script directory (compilation/)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Root directory (parent of compilation/)
+ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+# Platform output directory
+PLATFORM_DIR="$ROOT_DIR/platform"
+
 cd "$SCRIPT_DIR"
+
+# Ensure platform directory exists
+mkdir -p "$PLATFORM_DIR"
 
 # Function to print colored output
 print_info() {
@@ -34,7 +42,7 @@ print_warning() {
 generate_prompt() {
     local platform=$1
     local platform_upper=$(echo "$platform" | tr '[:lower:]' '[:upper:]')
-    local output_file="${platform}.md"
+    local output_file="platform/${platform}.md"
 
     cat > "compile_${platform}_prompt.txt" << EOF
 Create a comprehensive ${platform_upper} SDK documentation file following the SDK_COMPILATION_PROCESS.md guidelines.
@@ -44,7 +52,7 @@ TASK: Create ${output_file}
 PLATFORM: ${platform_upper}
 
 PROCESS TO FOLLOW:
-1. Read SDK_COMPILATION_PROCESS.md to understand the complete compilation process
+1. Read compilation/SDK_COMPILATION_PROCESS.md to understand the complete compilation process
 2. Follow the step-by-step process documented there
 3. Extract all ${platform}-specific code from the documentation files
 4. Compile into a single ${output_file} file using the standard structure
@@ -71,7 +79,7 @@ KEY REQUIREMENTS:
 - Extract code blocks marked with the appropriate language identifier
 - Follow the checklist in SDK_COMPILATION_PROCESS.md
 - Ensure all code is syntactically correct
-- Use the same quality standards as android.md
+- Use the same quality standards as platform/android.md
 
 SOURCE DIRECTORIES (from SDK_COMPILATION_PROCESS.md):
 - docs/🚀 Getting Started/sdk-quick-start/sdk-installation/
@@ -85,12 +93,12 @@ SOURCE DIRECTORIES (from SDK_COMPILATION_PROCESS.md):
 - custom_blocks/
 
 REFERENCE:
-- Check android.md as a reference for structure and quality
+- Check platform/android.md as a reference for structure and quality
 - Follow the platform-specific notes in SDK_COMPILATION_PROCESS.md
 - Use the code block identifiers documented in the process file
 
 OUTPUT:
-Create ${output_file} in /Users/kevin/Purchasely/Documentation/
+Create ${platform}.md in the platform/ folder
 
 Please proceed with the compilation process.
 EOF
@@ -104,9 +112,9 @@ compile_platform() {
 
     print_info "Starting compilation for ${platform}..."
 
-    # Check if already exists
-    if [ -f "${platform}.md" ]; then
-        print_warning "${platform}.md already exists. Skipping..."
+    # Check if already exists in platform/ directory
+    if [ -f "$PLATFORM_DIR/${platform}.md" ]; then
+        print_warning "platform/${platform}.md already exists. Skipping..."
         return
     fi
 
@@ -126,15 +134,15 @@ main() {
     print_info "Purchasely SDK Documentation Compiler"
     echo ""
 
-    # Check if SDK_COMPILATION_PROCESS.md exists
-    if [ ! -f "SDK_COMPILATION_PROCESS.md" ]; then
-        echo "Error: SDK_COMPILATION_PROCESS.md not found!"
+    # Check if SDK_COMPILATION_PROCESS.md exists (in compilation/ folder)
+    if [ ! -f "$SCRIPT_DIR/SDK_COMPILATION_PROCESS.md" ]; then
+        echo "Error: SDK_COMPILATION_PROCESS.md not found in compilation/!"
         exit 1
     fi
 
-    # Check if CLAUDE.md exists
-    if [ ! -f "CLAUDE.md" ]; then
-        echo "Error: CLAUDE.md not found!"
+    # Check if CLAUDE.md exists (in root folder)
+    if [ ! -f "$ROOT_DIR/CLAUDE.md" ]; then
+        echo "Error: CLAUDE.md not found in root directory!"
         exit 1
     fi
 
@@ -205,16 +213,16 @@ Please compile SDK documentation for all remaining platforms following the proce
 
 ## Process for Each Platform
 
-1. Read SDK_COMPILATION_PROCESS.md for the complete process
+1. Read compilation/SDK_COMPILATION_PROCESS.md for the complete process
 2. Follow the step-by-step instructions
-3. Use the standard 13-section structure
+3. Use the standard 15-section structure
 4. Extract platform-specific code from source files
 5. Follow the quality checklist
-6. Create the {platform}.md file
+6. Create the platform/{platform}.md file
 
 ## Quality Standards
 
-- Match the quality and completeness of android.md
+- Match the quality and completeness of platform/android.md
 - All code must be syntactically correct
 - No placeholder values except intentional ones
 - Consistent formatting throughout
@@ -235,11 +243,11 @@ EOF
 
             platforms=("android" "ios" "react-native" "flutter" "cordova")
             for plat in "${platforms[@]}"; do
-                if [ -f "${plat}.md" ]; then
-                    size=$(wc -l < "${plat}.md")
-                    print_success "${plat}.md - COMPLETE (${size} lines)"
+                if [ -f "$PLATFORM_DIR/${plat}.md" ]; then
+                    size=$(wc -l < "$PLATFORM_DIR/${plat}.md")
+                    print_success "platform/${plat}.md - COMPLETE (${size} lines)"
                 else
-                    print_warning "${plat}.md - PENDING"
+                    print_warning "platform/${plat}.md - PENDING"
                 fi
             done
             echo ""
