@@ -16,7 +16,7 @@ next:
 ---
 ## Overview
 
-When integrating the Purchasely SDK into your app, managing deeplinks becomes essential for handling various in-app events seamlessly. Deeplinks can initiate presentations that need to integrate smoothly with your app's user interface. 
+When integrating the Purchasely SDK into your app, managing deeplinks becomes essential for handling various in-app events seamlessly. Deeplinks can initiate presentations that need to integrate smoothly with your app's user interface.
 
 ## Notify the SDK
 
@@ -32,8 +32,26 @@ Purchasely.readyToOpenDeeplink = true
 
 ## Optional: Override display
 
-By default, Purchasely will display the presentation in its own UIWindow (iOS) or Activity (Android).\
+By default, Purchasely will display the presentation in its own UIWindow (iOS) or Activity (Android).  
 If you wish to display the deep link yourself accordingly to your navigation architecture, you can implement the **`PLYUIHandler`** interface to customize how Screens are displayed in your app.
+
+<Callout icon="⚠️">
+  **Be cautious when overriding Purchasely UI**
+
+  Implementing a `PLYUIHandler` means **you take full control** of how the Presentation is displayed.  
+  While the Purchasely SDK provides a ready-to-render view/controller, it will be presented inside **your own UI context** (navigation stack, layout constraints, safe areas, etc.).
+
+  As a result, you may experience unexpected UI issues, for example:
+
+  * a **blank/white bar at the top** of the screen (e.g. when presented inside a `UINavigationController`)
+  * your app **navigation bar / status bar behavior being kept**
+  * safe-area / insets issues, incorrect spacing, or unwanted animations
+
+  **Important:** if the deeplink triggers a _Flow_, it will **not work correctly** unless you call: `presentation.display()`
+
+  For these reasons, we recommend implementing a custom `UIHandler` **only for specific, controlled use-cases**.  
+  In most cases, not implementing `PLYUIHandler` or letting the SDK handle the display via `proceed()` will provide the most consistent result.
+</Callout>
 
 ### Interface
 
@@ -130,5 +148,5 @@ Purchasely.uiHandler = object : PLYUIHandler {
 > * Campaign
 > * Flow
 >
-> For this tracking to work, you need to display the presentation returned as the first parameter of this method.\
+> For this tracking to work, you need to display the presentation returned as the first parameter of this method.  
 > **DO NOT fetch the presentation again** by its id or placement id, all context will be lost.
