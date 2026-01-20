@@ -1,0 +1,130 @@
+# Purchasely Documentation - AI Assistant Guide
+
+> This file helps AI assistants find the most relevant documentation for developers integrating Purchasely.
+
+## Quick Reference
+
+Purchasely is a SaaS platform for mobile subscription apps. It provides:
+- Mobile SDKs for in-app purchases and paywalls
+- No-code paywall builder with A/B testing
+- Subscription analytics and management
+
+Documentation: https://docs.purchasely.com
+Console: https://console.purchasely.io
+
+---
+
+## Platform-Specific SDK Documentation
+
+**IMPORTANT**: For complete SDK integration guides with all methods and code examples, use these compiled documentation files:
+
+| Platform | File | Description |
+|----------|------|-------------|
+| Android/Kotlin | `platform/android.md` | Complete Android SDK guide (914 lines) |
+| iOS/Swift | `platform/ios.md` | Complete iOS SDK guide (900 lines) |
+| React Native | `platform/react-native.md` | Complete React Native SDK guide (756 lines) |
+| Flutter/Dart | `platform/flutter.md` | Complete Flutter SDK guide (767 lines) |
+| Cordova | `platform/cordova.md` | Complete Cordova SDK guide (672 lines) |
+
+### When to Use Platform Docs
+
+Use `platform/{platform}.md` when the user:
+- Is integrating Purchasely SDK for the first time
+- Asks about SDK initialization or configuration
+- Needs code examples for a specific platform
+- Wants to know available SDK methods
+- Is troubleshooting SDK issues
+- Asks about purchases, paywalls, or subscriptions in their app
+
+### What Platform Docs Contain
+
+Each platform documentation file includes:
+1. Requirements and Installation
+2. SDK Initialization (Full Mode & PaywallObserver Mode)
+3. Displaying Paywalls with Placements
+4. Processing Transactions
+5. Paywall Action Interceptor (purchase, restore, login, close, navigate)
+6. User Identification (login/logout)
+7. Subscription Status & Entitlements
+8. Custom User Attributes
+9. Event Listeners
+10. Pre-fetching Screens
+11. Deeplinks Management
+12. Platform-Specific Features
+13. Troubleshooting
+
+---
+
+## Key Concepts
+
+### Running Modes
+
+- **Full Mode**: Purchasely handles entire purchase flow (recommended for new apps)
+- **PaywallObserver Mode**: Use with existing IAP infrastructure (RevenueCat, etc.)
+
+### Placements
+
+A Placement is a location in the user journey where a paywall can appear (e.g., "ONBOARDING", "SETTINGS", "PREMIUM_FEATURE"). Use placements to display paywalls:
+
+```
+// Pseudocode - see platform docs for actual syntax
+Purchasely.presentPresentationForPlacement("ONBOARDING")
+```
+
+### Android Dependencies (Cross-Platform SDKs)
+
+For React Native, Flutter, and Cordova: the main SDK package does NOT include Google Play Billing. You must install a separate package:
+
+| Platform | Google Play Billing Package |
+|----------|----------------------------|
+| React Native | `@purchasely/react-native-purchasely-google` |
+| Flutter | `purchasely_google` |
+| Cordova | `@purchasely/cordova-plugin-purchasely-google` |
+
+---
+
+## File Structure
+
+```
+Documentation/
+├── platform/           # <-- COMPILED SDK DOCS (use these!)
+│   ├── android.md
+│   ├── ios.md
+│   ├── react-native.md
+│   ├── flutter.md
+│   └── cordova.md
+├── docs/               # Source documentation pages
+├── custom_blocks/      # Reusable content components
+├── CLAUDE.md           # Repository context
+└── llms.txt            # This file
+```
+
+---
+
+## Common Tasks
+
+### "How do I install the SDK?"
+→ Read `platform/{platform}.md` section "Installation"
+
+### "How do I show a paywall?"
+→ Read `platform/{platform}.md` section "Displaying Paywalls"
+
+### "How do I handle purchases?"
+→ Read `platform/{platform}.md` section "Processing Transactions"
+
+### "How do I check subscription status?"
+→ Read `platform/{platform}.md` section "Subscription Status & Entitlements"
+
+### "How do I set up user login?"
+→ Read `platform/{platform}.md` section "User Identification"
+
+---
+
+## API Key Location
+
+The API key is found in Purchasely Console: **App settings > Backend & SDK configuration**
+
+---
+
+*Last updated: January 2026*
+*SDK Version: 5.x*

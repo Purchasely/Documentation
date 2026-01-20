@@ -26,7 +26,14 @@ Purchasely is a **SaaS platform empowering subscription apps**. It helps mobile 
 
 ```
 Documentation/
-├── docs/                    # Main documentation pages
+├── platform/                # ⭐ COMPILED SDK DOCS - Complete guides per platform
+│   ├── android.md           # Android/Kotlin SDK (914 lines)
+│   ├── ios.md               # iOS/Swift SDK (900 lines)
+│   ├── react-native.md      # React Native SDK (756 lines)
+│   ├── flutter.md           # Flutter/Dart SDK (767 lines)
+│   └── cordova.md           # Cordova SDK (672 lines)
+├── compilation/             # SDK documentation compilation tooling
+├── docs/                    # Main documentation pages (source)
 │   ├── 👀 OVERVIEW/         # Platform introduction
 │   ├── 🚀 Getting Started/  # SDK setup and configuration
 │   ├── 📱 Screens & Paywalls/  # Paywall builder documentation
@@ -39,8 +46,50 @@ Documentation/
 ├── custom_blocks/           # Reusable content blocks (MDX)
 ├── custom_pages/            # Special custom pages
 ├── recipes/                 # Implementation recipes
-└── reference/               # API reference and ReadMe config
+├── reference/               # API reference and ReadMe config
+└── llms.txt                 # AI assistant guide
 ```
+
+---
+
+## Platform SDK Documentation (For AI Assistants)
+
+> **IMPORTANT FOR AI/LLM**: When helping developers integrate Purchasely SDK, use the compiled platform documentation files. They contain ALL methods, code examples, and integration details in one place.
+
+| Platform | File | Use When |
+|----------|------|----------|
+| Android/Kotlin | `platform/android.md` | User developing Android app |
+| iOS/Swift | `platform/ios.md` | User developing iOS app |
+| React Native | `platform/react-native.md` | User using React Native |
+| Flutter/Dart | `platform/flutter.md` | User using Flutter |
+| Cordova | `platform/cordova.md` | User using Cordova |
+
+### What Platform Docs Contain
+
+Each file is a complete SDK integration guide with:
+- Requirements and Installation (including Android dependencies)
+- SDK Initialization (Full Mode & PaywallObserver Mode)
+- Displaying Paywalls with Placements
+- Processing Transactions
+- Paywall Action Interceptor
+- User Identification
+- Subscription Status & Entitlements
+- Custom User Attributes
+- Event Listeners
+- Pre-fetching Screens
+- Deeplinks Management
+- Platform-Specific Features
+- Troubleshooting
+
+### Cross-Platform Android Dependencies
+
+For React Native, Flutter, and Cordova: the main SDK does NOT include Google Play Billing. A separate package is required:
+
+| Platform | Main Package | Google Play Billing |
+|----------|--------------|---------------------|
+| React Native | `react-native-purchasely` | `@purchasely/react-native-purchasely-google` |
+| Flutter | `purchasely_flutter` | `purchasely_google` |
+| Cordova | `@purchasely/cordova-plugin-purchasely` | `@purchasely/cordova-plugin-purchasely-google` |
 
 ---
 
@@ -228,9 +277,14 @@ The documentation uses custom MDX components:
 
 | Purpose | Location |
 |---------|----------|
+| **AI assistant guide** | `llms.txt` |
 | **Claude context file** | `CLAUDE.md` (this file) |
-| **SDK compilation process** | `SDK_COMPILATION_PROCESS.md` |
-| **Compiled Android SDK docs** | `android.md` |
+| **Android SDK docs** | `platform/android.md` |
+| **iOS SDK docs** | `platform/ios.md` |
+| **React Native SDK docs** | `platform/react-native.md` |
+| **Flutter SDK docs** | `platform/flutter.md` |
+| **Cordova SDK docs** | `platform/cordova.md` |
+| SDK compilation process | `compilation/SDK_COMPILATION_PROCESS.md` |
 | Platform overview | `docs/👀 OVERVIEW/whats-purchasely.md` |
 | SDK installation | `docs/🚀 Getting Started/sdk-quick-start/sdk-installation/` |
 | Running modes | `custom_blocks/UnderstandingRunningModesFullModePaywallObserverModeQuickOverviewAndBenefits.md` |
@@ -276,33 +330,28 @@ Custom blocks are reusable MDX components in `custom_blocks/` that can be includ
 
 ## SDK Compilation Process
 
-For creating comprehensive, client-facing SDK documentation files for each platform, refer to:
+For creating or updating platform-specific SDK documentation files, refer to:
 
-**`SDK_COMPILATION_PROCESS.md`**
+**`compilation/SDK_COMPILATION_PROCESS.md`**
 
-This document contains the complete process for compiling platform-specific SDK documentation files:
+### Compiled Documentation Status
 
-### When to Use
-- Creating new platform documentation (e.g., `ios.md`, `react-native.md`, `flutter.md`)
-- Updating existing platform documentation for new SDK versions
-- Ensuring consistency across all platform documentation
+All platform documentation is complete and located in `platform/`:
 
-### What It Contains
-1. **Step-by-step compilation process** - How to identify and extract platform-specific content
-2. **File mapping** - Source documentation files for each topic (installation, initialization, display, etc.)
-3. **Code extraction patterns** - How to identify platform-specific code blocks in markdown
-4. **Standard document structure** - 13-section template used across all platforms
-5. **Platform-specific notes** - Unique considerations for Android, iOS, React Native, Flutter, Cordova
-6. **Custom blocks reference** - Reusable content components
-7. **Quality checklists** - Pre-publication verification steps
-8. **Automation commands** - Grep patterns to find relevant files quickly
+| Platform | File | Lines | Status |
+|----------|------|-------|--------|
+| Android/Kotlin | `platform/android.md` | 914 | ✅ Complete |
+| iOS/Swift | `platform/ios.md` | 900 | ✅ Complete |
+| React Native | `platform/react-native.md` | 756 | ✅ Complete |
+| Flutter/Dart | `platform/flutter.md` | 767 | ✅ Complete |
+| Cordova | `platform/cordova.md` | 672 | ✅ Complete |
 
-### Current Compiled Documentation
-- ✅ **`android.md`** - Complete Android/Kotlin SDK guide (v5.x)
-- ⏳ **`ios.md`** - iOS/Swift SDK guide (pending)
-- ⏳ **`react-native.md`** - React Native SDK guide (pending)
-- ⏳ **`flutter.md`** - Flutter SDK guide (pending)
-- ⏳ **`cordova.md`** - Cordova SDK guide (pending)
+### Verification Script
+
+Run from repository root:
+```bash
+./compilation/compile_sdk_docs.sh check
+```
 
 ### Key Source Directories for SDK Documentation
 ```
