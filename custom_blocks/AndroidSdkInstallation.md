@@ -58,8 +58,8 @@ Our SDK integrates Google Play Billing Client version 7.1.1, you must not use an
 
 This dependency contains the class `GoogleStore` that you must add to `Purchasely.Builder` to be used by the SDK.
 
-<Callout icon="📘" theme="info">
-  Google Play Billing v8
+<Callout icon="⚠️">
+  **Google Play Billing v8**
 
   If you use Google Play Billing in version 8, please [read this](google-play-billing-v8) to make it work with Purchasely
 </Callout>
