@@ -61,7 +61,7 @@ This dependency contains the class `GoogleStore` that you must add to `Purchasel
 <Callout icon="📘" theme="info">
   Google Play Billing v8
 
-  If you use Google Play Billing in version 8, please read this to make it work with Purchasely
+  If you use Google Play Billing in version 8, please [read this](google-play-billing-v8) to make it work with Purchasely
 </Callout>
 
 ## Video Player
