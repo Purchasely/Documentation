@@ -6,15 +6,6 @@ hidden: false
 metadata:
   robots: index
 ---
-```kotlin Gradle
-configurations.all {
-    resolutionStrategy {
-        force("com.android.billingclient:billing:8.3.0")
-        force("com.android.billingclient:billing-ktx:8.3.0")
-    }
-}
-```
-
 ## Symptoms
 
 After migrating to **Google Play Billing 8.x**, some apps may experience that prices are not displayed in Purchasely Screens.
@@ -38,7 +29,9 @@ while the Purchasely SDK relies on:
 
 * `com.android.billingclient:billing-ktx`.
 
-> ⚠️ We suspect an internal behavior change in **Google Play Billing v8 non-KTX** that can cause a request to hang indefinitely (no success callback, no error callback).
+<Callout icon="⚠️" theme="warn">
+  We suspect an internal behavior change in **Google Play Billing v8 non-KTX** that can cause a request to hang indefinitely (no success callback, no error callback).
+</Callout>
 
 ***
 
@@ -52,7 +45,7 @@ dependencies {
 }
 ```
 
-✅ Fix #2 — Force Gradle resolution to Billing v8 (workaround)
+## ✅ Fix #2 — Force Gradle resolution to Billing v8 (workaround)
 
 If another dependency forces billing (non-KTX), you can force dependency resolution to ensure both artifacts are aligned:
 
@@ -67,8 +60,6 @@ configurations.all {
 
 If the issue persists after applying these fixes, please contact our support team with:
 
-Purchasely SDK version
-
-Google Play Billing version
-
-a list of dependencies bringing Billing into the project (e.g., RevenueCat)
+* Purchasely SDK version
+* Google Play Billing version
+* a list of dependencies bringing Billing into the project (e.g., RevenueCat)
