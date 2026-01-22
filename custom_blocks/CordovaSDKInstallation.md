@@ -39,7 +39,7 @@ allprojects {
 
 # Android setup
 
-We do include a store by default in our SDK, with Android you can choose to use Google and/or Huawei and/or Amazon.\
+We do include a store by default in our SDK, with Android you can choose to use Google and/or Huawei and/or Amazon.  
 See below to add the store you want to use
 
 > 📘 Versioning
@@ -73,3 +73,11 @@ Purchasely.startWithAPIKey(
     Purchasely.RunningMode.full
 );
 ```
+
+<br />
+
+<Callout icon="⚠️" theme="warn">
+  **Google Play Billing v8**
+
+  If you use Google Play Billing in version 8, please [read this](google-play-billing-v8) to make it work with Purchasely
+</Callout>
