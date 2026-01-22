@@ -23,7 +23,7 @@ allprojects {
 
 > 📘 Android TV
 >
-> Our SDK is compatible with Android TV and thus declare in its manifest:\
+> Our SDK is compatible with Android TV and thus declare in its manifest:  
 > `<uses-feature
 >         android:name="android.software.leanback"
 >         android:required="false" />`
@@ -52,18 +52,24 @@ This dependency contains everything you need to make purchasely run **except** t
 
 ## Google Play Billing
 
-Our SDK integrates Google Play Billing Client version 6.2.1, you must not use another dependency with an older version in your project.
+Our SDK integrates Google Play Billing Client version 7.1.1, you must not use another dependency with an older version in your project.
 
 `implementation 'io.purchasely:google-play:<<current_major_version>>.+'`
 
-This dependency contains the class `GoogleStore` that you must add to `Purchasely.Builder` to be used by the SDK
+This dependency contains the class `GoogleStore` that you must add to `Purchasely.Builder` to be used by the SDK.
+
+<Callout icon="📘" theme="info">
+  Google Play Billing v8
+
+  If you use Google Play Billing in version 8, please read this to make it work with Purchasely
+</Callout>
 
 ## Video Player
 
-If you have videos in your paywall, you must provide a video player to play them.\
+If you have videos in your paywall, you must provide a video player to play them.  
 Purchasely core dependency does not include a video player to avoid dependency conflicts, specifically with [Media3 Exoplayer](https://developer.android.com/guide/topics/media/exoplayer)
 
-We do provide a player dependency which will be detected automatically by our SDK if you do not have a video player in your application\
+We do provide a player dependency which will be detected automatically by our SDK if you do not have a video player in your application  
 `implementation 'io.purchasely:player:<<current_major_version>>.+'`
 
 If you already have your own player that support HLS video, you can also provide your own player view, more information [here](https://help.purchasely.io/en/articles/5963004-displaying-a-video-on-android-devices)
