@@ -368,8 +368,7 @@ next:
         Contains the name of the subscription event which was associated with the event. This is useful for events such as:   
         `ACTIVATE`  
         `DEACTIVATE`   
-        `SUBSCRIPTION_TRANSFERRED`
-        `SUBSCRIPTION_RECEIVED`  
+        `TRANSACTION_PROCESSED`
       </td>
     </tr>
 
