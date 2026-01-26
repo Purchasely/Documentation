@@ -365,9 +365,9 @@ next:
       <td style={{ textAlign: "left" }}>
         **string**
 
-        Contains the name of the subscription event which was associated with the event. This is useful for events such as:   
+        Contains the name of the subscription event which was associated with the event. This is useful for events such as:  
         `ACTIVATE`  
-        `DEACTIVATE`   
+        `DEACTIVATE`  
         `TRANSACTION_PROCESSED`
       </td>
     </tr>
@@ -1275,6 +1275,7 @@ next:
   "store_product_id": "com.purchasely.plus.monthly",
   "customer_currency": "EUR",
   "plan_price_in_eur": 9.99,
+	"source_event_name": "SUBSCRIPTION_RENEWED",
   "next_renewal_at_ms": 1702390991777,
   "event_created_at_ms": 1702390766120,
   "previous_offer_type": "NONE",
@@ -1301,6 +1302,7 @@ next:
   "event_name": "TRANSACTION_PROCESSED",
   "offer_type": "NONE",
   "api_version": 3,
+	"device_id": "1234567890abcdef",
   "device_type": "PHONE",
   "environment": "SANDBOX",
   "purchased_at": "2023-12-12T14:13:11.777Z",
