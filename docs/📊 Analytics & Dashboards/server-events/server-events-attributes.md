@@ -365,9 +365,11 @@ next:
       <td style={{ textAlign: "left" }}>
         **string**
 
-        ⚠️ Only available for the event `TRANSACTION_PROCESSED`.
-
-        Contains the name of the subscription event which was associated with the event `TRANSACTION_PROCESSED`.
+        Contains the name of the subscription event which was associated with the event. This is useful for events such as:   
+        `ACTIVATE`  
+        `DEACTIVATE`   
+        `SUBSCRIPTION_TRANSFERRED`
+        `SUBSCRIPTION_RECEIVED`  
       </td>
     </tr>
 
