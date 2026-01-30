@@ -21,7 +21,7 @@ To connect your Google Play Store account with Purchasely, you need to provide t
 
 1. [Android App Bundle ID](#1-android-app-bundle-id)
 2. [App Scheme](#2-app-scheme)
-3. [Access Key (JSON)](#3-access-key-json)
+3. [Access Key (JSON)](#3-access-key-json) - only for subscription apps
 
 ## 1. Android App Bundle ID
 
@@ -33,7 +33,7 @@ To connect your Google Play Store account with Purchasely, you need to provide t
 
 <PlayStoreAppScheme />
 
-## 3. Access Key (JSON)
+## 3. Access Key (JSON) - only for subscription apps
 
 <PlayStoreAccessKeyJSON />
 
