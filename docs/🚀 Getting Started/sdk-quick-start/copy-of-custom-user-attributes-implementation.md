@@ -1,5 +1,5 @@
 ---
-title: Copy of Custom User Attributes Implementation
+title: Custom User Attributes Implementation
 excerpt: >-
   This page provides an overview of how to leverage Custom User Attributes to
   personalize the user journey and target specific user segments
