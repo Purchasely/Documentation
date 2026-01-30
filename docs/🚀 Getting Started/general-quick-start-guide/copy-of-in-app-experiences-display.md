@@ -1,5 +1,5 @@
 ---
-title: Copy of In-App Experiences display
+title: In-App Experiences display
 excerpt: >-
   This sections details how to display a Purchasely screen in a few lines of
   code
