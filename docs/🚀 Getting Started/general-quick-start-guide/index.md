@@ -1,5 +1,5 @@
 ---
-title: Quick start for non subscription apps
+title: Quick start Guide
 excerpt: >-
   In this section you will find the details to implement the Purchasely SDK into
   your app
