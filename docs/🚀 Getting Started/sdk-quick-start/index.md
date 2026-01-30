@@ -1,5 +1,5 @@
 ---
-title: Quick start for subscription apps
+title: Quick Start Guide for Subscription Apps
 excerpt: >-
   In this section you will find the details to implement the Purchasely SDK into
   your app
