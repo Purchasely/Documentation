@@ -12,59 +12,89 @@ next:
       title: Purchasely advantages
       type: basic
 ---
-# Subscription infrastructure
+Purchasely helps mobile teams build, personalize, automate, and measure native in-app experiences—and, for subscription apps, also provides a full monetization layer (stores, transactions, entitlements, offers).
 
-Purchasely Cloud Platform can be used to process in-app transactions & manage subscribers entitlements. It manages all types of in-app purchases: *renewing subscriptions*, *non renewing subscriptions*, *consumables* and *non-consumables*.
+# Features available to all apps
 
-The Purchasely SDK is compatible with:
+### In-App Experience builder (Screens)
 
-* StoreKit 1, StoreKit 2 (App Store)
-* Google Billing v4, v5 and v6 (Play Store)
-* Huawei AppGallery HMS (Huawei Mobile Services)
-* Amazon Appstore Billing
+Create and iterate on native Screens in no-code with the [Screen Composer](screen-composer) (including surveys and Quizzes).
 
-# No-code native Screen & Paywall Builder
+### Display & In-App orchestration (Placements, priorities, deeplinks)
 
-Purchasely offers the most advanced **paywall and in-app screen builder** of the market. In-app screens can be built and modified remotely, without involving developers (no-code) or submitting a new version of the app for review, and are rendered natively by the Purchasely SDK. 
+Deliver the right In-App Experience at the right time by associating content to [Placements](placements), mapping different Audiences to different experiences, and managing overlaps with priorities—all without an app release.
 
-It can be used for building paywalls and embeds a set of controls to ensure that your paywall remains compliant with the App store guidelines.
+### Personalized journeys (Flows)
 
-It can also be used to create engaging onboarding and activation flows.
+Build multi-step [Flows](flows) to guide users through onboarding, activation, feature discovery, and engagement paths. Flows can branch dynamically based on user insights and conditions.
 
-The Purchasely SDK automatically detects the current display mode (light mode or dark mode) and applies the appropriate color set.
+You can also use [Conditional Visibility](conditional-visibility) to show or hide components within each Screen (inside a Flow) based on user data or Screen interactions, for deeper personalization without duplicating Screens.
 
-# A/B tests
+### User insights (Quizzes)
 
-Thanks to its built-in A/B test feature, you can run UI or price experiments and turn intuition into data-driven experimentations to optimize your in-app funnel.
+Collect structured user insights (preferences, motivations, feedback) through [Quizzes](quizzes) embedded in Screens, then:
 
-# Audience targeting
+* visualize results in the Console,
+* leverage answers to personalize experiences.
 
-Purchasely SDK provide a comprehensive set of built-in attributes that can be combined to create audiences.
+### Audience targeting & personalization rules
 
-You can also set your own user attributes. These audiences allow you to target specific user segments, run experiments, create automated campaigns and personalize the user journey.
+Create [Audiences](audiences) using built-in and custom user attributes to:
 
-# UI and subscription analytics
+* target specific segments,
+* personalize which experience is shown,
+* support automation.
 
-The Purchasely Platform manages 2 different sets of analytics:
+### No-code automations (Campaigns)
 
-1. Subscription analytics: a set comprehensive set of events that map the entire subscriber lifecycle
-2. UI analytics: each paywall or in-app screen displayed by the Purchasely SDK comes along with its whole set of off-the-shelf UI events that avoid a fastidious work of tracking plan implementation.
+Use [Campaigns](campaigns) to automatically display a specific Screen to a specific Audience at app start, with capping controls. Campaigns are commonly used for:
 
-# Webhook
+* onboarding and activation pushes,
+* surveys / user research,
+* targeted re-engagement.
 
-The Purchasely Cloud Platform manages the entire subscriber lifecycles and generates a comprehensive and universal set of events for all the stores. These events can be automatically forwarded to your backend using a realtime webhook. 
+### Integrations & event forwarding (analytics / CRM)
 
-This avoids the long and painful process of managing entitlements & implementing S2S notifications with each store by yourself.
+Connect Purchasely-generated [UI/SDK events](ui-sdk-events) to your analytics or CRM stack by implementing SDK listeners/delegates, enabling consistent tracking of user journeys and actions.
 
-# 3rd party integrations
+# Features specific to subscription apps
 
-Purchasely Cloud Platform can be natively integrated with 20 different 3rd-party platforms:
+### Subscription infrastructure
 
-* MMPs: Adjust, Appsflyer, Branch
-* Analytics: Amplitude, Clevertap, Google Analytics for Firebase, Mixpanel, mParticle, Piano (ex AT-Internet)
-* Mobile Engagement Platforms: Airship, Braze, Batch, Clevertap, Customer.io, Iterable, MoEngage, One Signal, Brevo (ex Sendinblue)
-* and other platforms such as Firebase, Segment, Slack
+Purchasely can act as your subscription infrastructure (depending on running mode), including store integrations, transaction processing, and entitlement lifecycle management
 
-# Retention & win-back automations
+* **Webhook for entitlements and subscription lifecycle**
 
-The Purchasely Platform allows to manage the entire subscription lifecycle and can help you implement advanced retention and win-back strategies. It is compatible with the features [Promotional offers (App Store)](https://developer.apple.com/documentation/storekit/in-app_purchase/original_api_for_in-app_purchase/subscriptions_and_offers/implementing_promotional_offers_in_your_app) and [Offers (Play Store)](https://support.google.com/googleplay/android-developer/answer/12154973?hl=en), [Offer Code (App Store)](https://developer.apple.com/documentation/storekit/in-app_purchase/original_api_for_in-app_purchase/subscriptions_and_offers/implementing_offer_codes_in_your_app) and [Promotions (Play Store)](https://support.google.com/googleplay/android-developer/answer/6321495?hl=en).
+  The Purchasely Platform manages the entire subscriber lifecycles and generates a comprehensive and universal set of events for all the stores. These events can be automatically forwarded to your backend using a realtime webhook.
+
+  This avoids the long and painful process of managing entitlements & implementing S2S notifications with each store by yourself.
+* **3rd party integrations for subscription lifecycle**
+
+  The Purchasely Platform can be natively integrated with 20 different 3rd-party platforms:
+  * MMPs: Adjust, Appsflyer, Branch
+  * Analytics: Amplitude, Clevertap, Google Analytics for Firebase, Mixpanel, mParticle, Piano (ex AT-Internet)
+  * Mobile Engagement Platforms: Airship, Braze, Batch, Clevertap, Customer.io, Iterable, MoEngage, One Signal, Brevo (ex Sendinblue)
+  * and other platforms such as Firebase, Segment, Slack
+
+### Subscription and In-App Purchases dashboards (analyze your subscription business)
+
+Purchasely includes dedicated Console Dashboards to monitor and analyze your subscription business end-to-end, including:
+
+* Live snapshot of your subscriber base and lifecycle events,
+* Conversion analysis across paywalls, countries, offers, and segments,
+* Subscriptions and One-Time Purchases performance,
+* MRR and Cohorts to track recurring revenue and retention over time,
+* Trials and Promotional Offers to assess offer performance and conversion dynamics.
+
+### Products, offers, and subscription lifecycle tooling
+
+Subscription apps can leverage Purchasely capabilities for:
+
+* store configuration and subscription catalogue management,
+* retention / win-back mechanics via promotional offers.
+
+### A/B tests
+
+Purchasely includes built-in [A/B tests](ab-tests) for UI and price experiments, designed to optimize in-app purchase performance. In the current state, A/B tests are limited to subscription apps because results are measured on IAP KPIs.
+
+<br />
