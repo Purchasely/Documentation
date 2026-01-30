@@ -1,5 +1,5 @@
 ---
-title: Quick start
+title: Quick start for subscription apps
 excerpt: >-
   In this section you will find the details to implement the Purchasely SDK into
   your app
@@ -48,86 +48,17 @@ For hybrid apps, our <Glossary>bridge sdk</Glossary>s are available for:
 
 * React Native
 * Flutter
-* Unity
 * Cordova
 
 # Current version per platform
 
-<Table align={["left","left"]}>
-  <thead>
-    <tr>
-      <th>
-        Platform
-      </th>
-
-      <th>
-        SDK Version
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td>
-        **iOS**
-      </td>
-
-      <td>
-        {user.current_ios_version}
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        **Android**
-      </td>
-
-      <td>
-        {user.current_android_version}
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        **Flutter**
-      </td>
-
-      <td>
-        {user.current_flutter_version}
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        **React Native**
-      </td>
-
-      <td>
-        {user.current_rn_version}
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        **Cordova**
-      </td>
-
-      <td>
-        {user.current_cordova_version}
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        **Unity**
-      </td>
-
-      <td>
-        {user.current_unity_version}
-      </td>
-    </tr>
-  </tbody>
-</Table>
+| Platform         | SDK Version                    |
+| :--------------- | :----------------------------- |
+| **iOS**          | {user.current_ios_version}     |
+| **Android**      | {user.current_android_version} |
+| **Flutter**      | {user.current_flutter_version} |
+| **React Native** | {user.current_rn_version}      |
+| **Cordova**      | {user.current_cordova_version} |
 
 # Implementation process
 
