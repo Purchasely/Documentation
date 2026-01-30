@@ -1,5 +1,5 @@
 ---
-title: Subscription apps only
+title: Checking the processing of In-App Transactions - subscription apps only
 deprecated: false
 hidden: false
 metadata:
