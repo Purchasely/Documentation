@@ -13,7 +13,7 @@ next:
     transactions are properly processed
   pages:
     - slug: subscription-app-implementation-checking
-      title: Subscription apps only
+      title: Subscription apps transaction management testing
       type: basic
 ---
 Here is a checklist for your Purchasely Integration
