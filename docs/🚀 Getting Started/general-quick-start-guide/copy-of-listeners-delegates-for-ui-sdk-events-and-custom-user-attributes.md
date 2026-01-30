@@ -1,5 +1,5 @@
 ---
-title: Copy of Listeners / Delegates for UI / SDK events and Custom User Attributes
+title: Connecting Analytics
 excerpt: >-
   This page describes how to implement listeners / delegates for UI / SDK events
   and Custom User Attributes
@@ -8,15 +8,13 @@ hidden: false
 metadata:
   robots: index
 ---
-To enhance your integration and gain deeper insights into user interactions, implement the following event listeners.
-
-While these steps are not mandatory strictly speaking to make the Purchasely SDK work, we encourage you to implement them as it only takes a few minutes of work.
+To enhance your integration and gain deeper insights into user interactions, implement the following event listeners. This will allow you to forward 
 
 <br />
 
 # UI / SDK Events Listener
 
-When users interact with Purchasely Screens, the Purchasely SDK triggers [UI / SDK events](ui-sdk-events). 
+When users interact with Purchasely Screens, the Purchasely SDK triggers [UI / SDK events](ui-sdk-events).
 
 These events are triggered internally inside the application and sent to the Purchasely Platform, to compute all the KPIs related to conversion. However, contrary to Server events, these UI / SDK events cannot be forwarded to a 3rd party integration using a server-to-server integration, directly from the Console.
 
@@ -36,7 +34,7 @@ When a user validates an answer to a survey, a Custom User Attribute can be set 
 
 By implementing Custom User Attribute listener, you will be able to:
 
-1. publish surveys in no-code using the Screen Composer 
+1. publish surveys in no-code using the Screen Composer
 2. automatically fetch the user data `{attribute, type, value(s)}` in the app
 3. and process it to send it to your backend or any 3 party integration
 
@@ -52,11 +50,11 @@ This feature is available starting from the following versions:
 
 ## Functionning
 
-When the user submit their answer(s) to the Survey, if a user attribute has been associated to the survey, this listener / delegate will automatically be called by the SDK to handover to the app. 
+When the user submit their answer(s) to the Survey, if a user attribute has been associated to the survey, this listener / delegate will automatically be called by the SDK to handover to the app.
 
-After the app has been notified, it can: 
+After the app has been notified, it can:
 
-* fetch the data `{attribute ID, type, value(s)}` 
+* fetch the data `{attribute ID, type, value(s)}`
 * and process it
 
 ## Implementation
@@ -85,8 +83,8 @@ Once fetched, the data can be processed, which consist in sending it to your bac
 
 The `source` parameter of the listener/delegate methods indicates where the user attribute update originated. It can have two possible values:
 
-* **PURCHASELY**: The change was initiated internally by the Purchasely’s SDK. 
-* **CLIENT**: The change was triggered directly by your app. 
+* **PURCHASELY**: The change was initiated internally by the Purchasely’s SDK.
+* **CLIENT**: The change was triggered directly by your app.
 
 ```swift Swift
 @objc public enum PLYUserAttributeSource: Int {
