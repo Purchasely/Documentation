@@ -8,7 +8,13 @@ metadata:
   description: ''
   robots: index
 next:
-  description: ''
+  description: >-
+    If your app is a subscription app, check that In-App Purchases and
+    transactions are properly processed
+  pages:
+    - slug: subscription-app-implementation-checking
+      title: Subscription apps only
+      type: basic
 ---
 Here is a checklist for your Purchasely Integration
 
