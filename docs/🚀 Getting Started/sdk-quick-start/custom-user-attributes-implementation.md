@@ -365,6 +365,14 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7, processin
 ```csharp Unity
 ```
 
+<br />
+
+> ❗️ Custom User Attributes set prior to the upgrading the SDK to version 5.4 onwards
+>
+> All Custom User Attributes set prior to upgrading the SDK to version 5.4 are considered **by default as`optional` and will therefore be wiped off if the user revokes Processing #3**.
+>
+> If some of them should be considered as `essential`, do not forget to redefine their privacy setting to essential prior to revoking the Data Processing #3 for the user.
+
 📚 [For more information on managing privacy, see the documentation](privacy-settings).
 
 <br />
