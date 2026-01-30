@@ -9,13 +9,12 @@ Here are the actions Purchasely supports:
 
 * Display a paywall
 * Display a placement
-* Update credit card (Deeplink to App Store)
-* Display the user subscriptions
+* Update credit card (deeplink to App Store or Play Store credit card information) - subscription apps only
 
-Deeplinks are also used to preview paywalls and screen on your device (directly inside your app) by scanning a QR code displayed in the upper right corner of the Paywall builder inside the Console.
+Deeplinks are also used to preview Screens on your device (directly inside your app) by scanning a QR code displayed in the upper right corner of the Screen Composer inside the Console.
 
-<Image align="center" className="border" width="350px" border={true} src="https://files.readme.io/543fe33-image.png" />
+<Image align="center" border={true} width="350px" src="https://files.readme.io/543fe33-image.png" className="border" />
 
-Only a certain type of deeplinks, matching a specific pattern are recognized and handled by Purchasely. 
+Only a certain type of deeplinks, matching a specific pattern are recognized and handled by Purchasely.
 
 Deeplinks which do not match the pattern are just ignored
