@@ -1,5 +1,5 @@
 ---
-title: Copy of React Native
+title: React Native
 deprecated: false
 hidden: false
 metadata:
