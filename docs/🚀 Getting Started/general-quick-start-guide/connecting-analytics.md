@@ -1,5 +1,5 @@
 ---
-title: Connecting Analytics
+title: Analytics Integration
 excerpt: >-
   This page describes how to implement listeners / delegates for UI / SDK events
   and Custom User Attributes
