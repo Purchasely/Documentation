@@ -1,5 +1,5 @@
 ---
-title: Copy of Deeplinks management
+title: Deeplinks management
 excerpt: >-
   The section provided details on how to implement deeplink management with the
   Purchasely SDK
