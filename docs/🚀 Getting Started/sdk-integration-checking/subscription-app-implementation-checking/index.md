@@ -1,5 +1,5 @@
 ---
-title: Subscription apps
+title: Subscription apps only
 deprecated: false
 hidden: false
 metadata:
