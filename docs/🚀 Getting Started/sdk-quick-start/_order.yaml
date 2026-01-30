@@ -2,10 +2,10 @@
 - running-modes
 - sdk-initialization
 - deeplinks-management
+- copy-of-deeplinks-management
 - in-app-experiences-display
 - screens-display
 - processing-transactions
 - entitlements-management
 - listener-delegate
 - apples-privacy-manifest-requirement
-- copy-of-deeplinks-management
