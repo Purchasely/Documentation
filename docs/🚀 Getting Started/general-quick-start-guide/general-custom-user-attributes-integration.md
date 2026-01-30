@@ -12,4 +12,6 @@ metadata:
 
 <br />
 
+<CustomUserAttributesImplementation />
+
 <br />
