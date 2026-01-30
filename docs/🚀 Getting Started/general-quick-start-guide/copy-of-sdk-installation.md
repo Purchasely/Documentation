@@ -1,5 +1,5 @@
 ---
-title: Copy of SDK installation
+title: SDK installation
 excerpt: >-
   This section provides a quick overivew of the supported platform and SDK
   version naming convention
