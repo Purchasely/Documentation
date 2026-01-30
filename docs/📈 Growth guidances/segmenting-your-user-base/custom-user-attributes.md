@@ -437,7 +437,7 @@ _purchasely.ClearUserAttributes();
 
 > 👍 Clear after log out
 >
-> Purchasely SDK will automatically clear all your user attributes when you call `Purchasely.userLogout()` unless you call `Purchasely.userLogout(false)`    
+> Purchasely SDK will automatically clear all your user attributes when you call `Purchasely.userLogout()` unless you call `Purchasely.userLogout(false)`
 >
 > Make sure to pass that argument if you do not wish to clear all your custom user attributes when your user logs out of his account and return to the status of anonymous user.
 
@@ -551,3 +551,11 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7, processin
 <br />
 
 📚 [For more information on managing privacy, see the documentation](privacy-settings).
+
+<br />
+
+# Implementing Custom User Attributes into your app code
+
+Once configured in the Console, Custom User Attributes can be injected by the app.
+
+📚 [Follow the guide](custom-user-attributes-implementation)
