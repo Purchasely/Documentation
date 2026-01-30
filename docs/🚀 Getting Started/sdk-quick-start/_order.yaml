@@ -1,4 +1,5 @@
 - sdk-installation
+- copy-of-sdk-installation
 - running-modes
 - sdk-initialization
 - deeplinks-management
@@ -8,4 +9,3 @@
 - entitlements-management
 - listener-delegate
 - apples-privacy-manifest-requirement
-- copy-of-sdk-installation
