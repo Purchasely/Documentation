@@ -1,5 +1,5 @@
 ---
-title: Copy of Flutter
+title: Flutter
 deprecated: false
 hidden: false
 metadata:
