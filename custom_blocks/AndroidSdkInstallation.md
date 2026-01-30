@@ -50,7 +50,7 @@ This dependency contains everything you need to make purchasely run **except** t
 > implementation 'io.purchasely:player:<<current_android_version>>'
 > ```
 
-## Google Play Billing
+## Google Play Billing - Only for Subscription Apps
 
 Our SDK integrates Google Play Billing Client version 7.1.1, you must not use another dependency with an older version in your project.
 
@@ -58,7 +58,7 @@ Our SDK integrates Google Play Billing Client version 7.1.1, you must not use an
 
 This dependency contains the class `GoogleStore` that you must add to `Purchasely.Builder` to be used by the SDK.
 
-<Callout icon="⚠️">
+<Callout icon="⚠️" theme="warn">
   **Google Play Billing v8**
 
   If you use Google Play Billing in version 8, please [read this](google-play-billing-v8) to make it work with Purchasely
