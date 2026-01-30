@@ -4,7 +4,7 @@ excerpt: >-
   In this section you will find the details to implement the Purchasely SDK into
   your app
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   robots: index
 next:
