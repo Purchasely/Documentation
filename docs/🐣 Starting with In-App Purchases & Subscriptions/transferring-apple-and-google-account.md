@@ -4,7 +4,7 @@ excerpt: >-
   This article will guide you through process of transferring your Apple and
   Google account from one developer to another
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
