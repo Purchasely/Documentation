@@ -1,5 +1,5 @@
 ---
-title: Product & plans setup
+title: Product & plans setup - subscription apps only
 excerpt: >-
   This section explains how to manage the catalogue of In-App Purchases and
   Subscriptions in the Purchasely Console
