@@ -96,6 +96,8 @@ It is composed of:
 # What’s next
 
 * To understand the platform foundations: [General principles](general-principles)
+* To explore Purchasely main features: [Main features](main-features)
+* To discover the advantages of using Purchasely for in-app experiences and growth: [Why use Purchasely](purchasely-advantages)
 * To start implementation: 
   * Subscription apps: [Quick Start Guide for Subscription Apps](sdk-quick-start)
   * Non subscription apps: [Quick start](general-quick-start-guide)
