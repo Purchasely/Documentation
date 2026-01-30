@@ -10,23 +10,63 @@ metadata:
 next:
   description: ''
 ---
-The Purchasely Platform is composed of 3 major components: 
+<br />
 
-1. The mobile SDK that needs to be integrated to the mobile app
-2. The Purchasely Cloud Platform that can be used as the Subscription Infrastructure
-3. The Purchasely Console (web interface to configure the app, access the paywall & in-app screen builder and the dashboard)
+# Components of the platform
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/004c51c-image.png" />
+Purchasely is composed of 3 major components:
 
-The Purchasely Platform can be used in 2 different setups:
+1. **The mobile SDK** integrated in your app
 
-1. `full mode`: in this mode, the Purchasely Platform is in charge of processing in-app transactions and managing entitlements. 
-   * It plays the role of Subscription Infrastructure and avoids building your own
-   * On top of that, it provides [subscription enablers](main-features) that can be used by marketing teams to grow their revenue\
-     \=> This mode is particularly useful if you start your journey in subscription or want to migrate your current Subscription Infrastructure.
-2. `paywallObserver mode`: in this mode, the Purchasely Platform works on top of an existing Subscription Infrastructure (either built in-house or using a 3rd party platform such as RevenueCat). 
-   * In this mode, the transactions are not managed by Purchasely. They are just observed by the Purchasely SDK to feed the dashboard.
-   * All the [no-code growth features](main-features) are available for marketers.\
-     \=> This mode is particularly useful if you are happy with your existing Subscription Infrastructure or don't want to change it, and wish to use the Purchasely SDK to run growth experiments, create automated campaigns and optimize your funnel thanks to its no-code capabilities and native paywall & in-app screen builder.
+   Renders Purchasely experiences natively and exposes SDK/UI events to your codebase.
+2. **The Purchasely Console** (web interface)
 
-[More details about the running modes](running-modes)
+   Configure your app, build Screens, create Flows, manage targeting/experiments, and access dashboards.
+3. **The Purchasely Cloud Platform**
+
+   Hosts your configuration and content, and powers analytics.
+
+   For subscription apps, it can also be used as the subscription infrastructure (transactions + entitlements)
+
+<br />
+
+<br />
+
+How Purchasely is used
+
+
+
+### For apps: In-app experiences (default setup)
+
+Apps typically start by using Purchasely to:
+
+* build Screens (including Quizzes) and Flows in no-code,
+* display them in the app (placements / deeplinks),
+* track interactions through SDK/UI events and connect them to analytics/CRM.
+
+<br />
+
+### For subscription apps: choose a running mode
+
+For subscription apps, Purchasely can be used in two running modes, depending on whether you want Purchasely to manage in-app transactions or not.
+
+1. **`full` mode**
+
+   In this mode, Purchasely manages in-app transactions and entitlements. It acts as the subscription infrastructure and avoids building your own.
+
+   Use this mode if you:
+   * start a subscription app from scratch, or
+   * want to migrate your existing subscription infrastructure.
+2. **`paywallObserver` mode**
+
+   In this mode, Purchasely works on top of your existing subscription infrastructure (in-house or a third-party solution such as RevenueCat). Purchasely does not process transactions; transactions are observed by the SDK to feed dashboards.
+
+   Use this mode if you:
+   * want Purchasely Paywalls/Screens and no-code growth features,
+   * without changing your current transaction processor / backend.
+
+✅ In both modes, the same [no-code growth features](main-features) are available.
+
+➡️ More details: [Running modes](running-modes).
+
+<br />
