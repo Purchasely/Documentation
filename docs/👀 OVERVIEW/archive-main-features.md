@@ -1,5 +1,5 @@
 ---
-title: Archive - Main features
+title: Main features
 excerpt: This section describes the main features of the Purchasely Platform
 deprecated: false
 hidden: true
