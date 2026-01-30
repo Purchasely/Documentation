@@ -38,6 +38,9 @@ Here is a checklist for your Purchasely Integration
 ## 2. Paywalls are properly displayed through Placements
 
 * [ ] You have displayed a Paywall by associating it with a Placement and by making a direct call to the placement on the app side (📚 [documentation](displaying-screens-placements#direct-call))
+
+<br />
+
 * [ ] Prices for your Plans are properly displayed with their currency when using [tags](tags)
 
 <br />
@@ -52,6 +55,9 @@ Here is a checklist for your Purchasely Integration
 ## 5. Transactions are properly processed
 
 * [ ] A [Plan has been properly configured](product-plans-setup) and mapped with a Paywall
+
+<br />
+
 * [ ] When users tap on the purchase button, you leverage the Paywall Action Interceptor to process the transaction (📚 [documentation](paywall-action-interceptor))
 
 <br />
