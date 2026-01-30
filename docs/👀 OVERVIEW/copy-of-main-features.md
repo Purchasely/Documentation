@@ -1,8 +1,8 @@
 ---
-title: Copy of Main features
+title: Archive - Main features
 excerpt: This section describes the main features of the Purchasely Platform
 deprecated: false
-hidden: false
+hidden: true
 metadata:
   robots: index
 next:
