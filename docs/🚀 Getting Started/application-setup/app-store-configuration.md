@@ -21,13 +21,13 @@ In order to connect your Apple App Store account with Purchasely, you have to pr
 1. [App bundle ID](#1-app-bundle-id)
 2. [App ID](#2-app-id)
 3. [App scheme](#3-app-scheme-optional)
-4. [Shared App Secret](#4-shared-app-secret)
-5. [StoreKit 2 - Private key ID](#5-6-7-storekit-2-configuration)
-6. [StoreKit 2 - Private key file](#5-6-7-storekit-2-configuration)
-7. [StoreKit 2 - Issuer ID](#5-6-7-storekit-2-configuration)
-8. [The Server to Server End point](#8-the-server-to-server-end-point)
+4. [Shared App Secret](#4-shared-app-secret) - only for subscription apps
+5. [StoreKit 2 - Private key ID](#5-6-7-storekit-2-configuration) - only for subscription apps
+6. [StoreKit 2 - Private key file](#5-6-7-storekit-2-configuration) - only for subscription apps
+7. [StoreKit 2 - Issuer ID](#5-6-7-storekit-2-configuration) - only for subscription apps
+8. [The Server to Server End point](#8-the-server-to-server-end-point) - only for subscription apps
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/dc034ad-image.png" />
+<Image align="center" border={true} src="https://files.readme.io/dc034ad-image.png" className="border" />
 
 <br />
 
@@ -52,13 +52,13 @@ Enter your `App scheme`  (without the `://`) in the Purchasely Console in the fi
 * [More details on how to configure it for your iOS app](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app)
 * [More details on how to manage deeplinks with the Purchasely SDK](deeplinks-management)
 
-# 4. Shared App Secret
+# 4. Shared App Secret - only for subscription apps
 
 <AppStoreConfSharedAppSecret />
 
 <br />
 
-# 5, 6, 7. StoreKit 2 configuration
+# 5, 6, 7. StoreKit 2 configuration - only for subscription apps
 
 <br />
 
@@ -78,13 +78,13 @@ Then, in the Purchasely Console:
 2. Upload the API Key file (`.p8`) previously downloaded in the field `Private Key File`
 3. Paste the value of the `Issuer ID` in the field `Issuer ID`
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/4979bcc-image.png" />
+<Image align="center" border={true} src="https://files.readme.io/4979bcc-image.png" className="border" />
 
 [More details on StoreKit 2](app-store-storekit-1-vs-storekit-2)
 
 <br />
 
-# 8. The Server to Server End Point
+# 8. The Server to Server End Point - only for subscription apps
 
 <AppStoreConfS2SNotifications />
 
