@@ -1,5 +1,5 @@
 ---
-title: Copy of Identifying Users
+title: User identification
 excerpt: >-
   This section covers subscription transfer and event handling during user
   authentication.
