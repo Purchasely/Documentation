@@ -10,18 +10,67 @@ next:
       title: SDK initialization
       type: basic
 ---
-<FlutterSdkInstallation />
+We rely on [Pub.dev](https://pub.dev/packages/purchasely_flutter/install) to distribute our Flutter SDK
 
-## Other stores
+# Main dependency
 
-Our Flutter SDK does not contains other stores to avoid unnecessary integrations. You have to specifically declare which stores you want. To add our stores dependencies to your project, you just need to add them to the `app/build.gradle` file of your android folder in your project. The version must be the same than purchasely main dependency
+```shell
+flutter pub add purchasely_flutter
+```
 
-```typescript build.gradle
-dependencies {
-    //Amazon App Store
-    implementation 'io.purchasely:amazon:<<current_android_version>>'
-    
-    //Huawei Mobile Services
-    implementation 'io.purchasely:huawei-services:<<current_android_version>>'
+Don't forget to change the minimum OS versions to match Purchasely requirements ({user.sdk_ios_minimum_version} / Android {user.sdk_android_minimum_version})
+
+```yaml iOS
+// Podfile
+
+...
+
+platform :ios, '<<sdk_ios_minimum_version>>.0'
+
+...
+```
+```groovy Android
+// Edit file android/build.gradle
+buildscript {
+    ext {
+        minSdkVersion = 21 //min version must not be below 21
+        compileSdkVersion = 33
+        targetSdkVersion = 33
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
 }
 ```
+
+# Android setup
+
+We do include a store by default in our SDK, with Android you can choose to use Google and/or Huawei and/or Amazon.  
+See below to add the store you want to use
+
+> 📘 Versioning
+>
+> All your dependencies **must** always be at the **same version** for example
+>
+> ```yaml pubspec.yaml
+> dependencies:
+>   purchasely_flutter: ^<<current_flutter_version>>
+>   purchasely_google: ^<<current_flutter_version>>
+>   purchasely_android_player: ^<<current_flutter_version>>
+> ```
+
+<br />
+
+## Video Player
+
+A video player is not provided by default on Android to avoid conflict with another dependency you may have  
+We provide one in an external dependency that is detected and handled automatically
+
+```shell
+flutter pub add purchasely_android_player
+```
+
+<br />
