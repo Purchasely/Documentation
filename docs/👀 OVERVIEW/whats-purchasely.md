@@ -9,12 +9,6 @@ metadata:
   title: ''
   description: ''
   robots: index
-next:
-  description: Want to understand how it works? Have a look at the following pages
-  pages:
-    - type: basic
-      slug: general-functionning
-      title: General functioning
 ---
 Purchasely is a platform to build, personalize, and measure native in-app experiences—and, for subscription apps, to also streamline in-app purchase processing and entitlement management.
 
@@ -73,19 +67,19 @@ This monetization layer is optional and depends on your setup and running mode.
 
 It is composed of:
 
-1. A mobile SDK (iOS, Android, and bridges) integrated in your app to render experiences and emit events.
-2. A web Console to build Screens, create Flows, configure targeting and experiments, and access analytics.
-3. A platform which can also serve as subscription infrastructure for subscription apps.
+1. **A mobile SDK** (iOS, Android, and bridges) integrated in your app to render experiences and emit events.
+2. **A web Console** to build Screens, create Flows, configure targeting and experiments, and access analytics.
+3. **A platform** which can also serve as subscription infrastructure for subscription apps.
 
 <br />
 
-## Platform Components
+### Platform Components
 
 <Image border={false} src="https://files.readme.io/b3a78cf17de41fdccaedad9c1da8fa4c6bc3fd5b056a6c8620b7de5d935562a9-image.png" />
 
 <br />
 
-## Architecture for subscription apps
+### Typical architecture for subscription apps
 
 <Image align="center" border={true} src="https://files.readme.io/004c51c-image.png" className="border" />
 
