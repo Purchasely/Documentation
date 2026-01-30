@@ -2,7 +2,7 @@
 title: What you can do with Purchasely
 excerpt: 'This page provides an overview of how '
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   robots: index
 ---
