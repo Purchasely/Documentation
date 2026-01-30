@@ -8,11 +8,15 @@ hidden: false
 metadata:
   robots: index
 ---
-Purchasely allow you to display native In-App Experiences, such as Screens, Paywalls, Surveys or Flows.
+Purchasely allow you to display native In-App Experiences, such as Screens, Quizzes or Flows.
 
-In the code, In-App Experiences are called Presentations (object `PLYPresentation`). Purchasely SDK automatically renders the view to display, which can be configured entirely remotely from the Purchasely console. The view is rendered with native components, using UI Kit on iOS and View on Android, making it fully compatible with iOS & Android phones, tablets, and TVs.
+In the code, In-App Experiences are called Presentations (object `PLYPresentation`).
 
-There are several ways to display In-App Experiences that are detailed here (LINK TO BE INSERTED), but the preferred and most convenient way is to use a <Glossary>placement</Glossary>.
+Purchasely SDK automatically renders the view to display, which can be configured entirely remotely from the Purchasely console. 
+
+The view is rendered with native components, using UI Kit on iOS and View on Android, making it fully compatible with iOS & Android phones, tablets, and TVs.
+
+There most straightforward way to display In-App Experiences is to use a <Glossary>placement</Glossary>.
 
 <br />
 
@@ -24,7 +28,7 @@ There are several ways to display In-App Experiences that are detailed here (LIN
 
 # How to display an In-App Experience associated to a Placement?
 
-The most universal method consists in: 
+The most universal method consists in:
 
 * pre-fetching the Placement by calling the SDK method `fetchPresentation()`
 * and then calling the `display()` method of the `PLYPresentation` object fetched
