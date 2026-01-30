@@ -1,5 +1,5 @@
 ---
-title: Checking the processing of In-App Transactions - subscription apps only
+title: Subscription apps transaction management testing
 deprecated: false
 hidden: false
 metadata:
