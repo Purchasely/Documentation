@@ -45,6 +45,10 @@ Create [Audiences](audiences) using built-in and custom user attributes to:
 * personalize which experience is shown,
 * support automation.
 
+### A/B tests
+
+Purchasely can randomize users into variants and keep assignments consistent across sessions. Experiment outcome should be measured in your own analytics stack (e.g., Amplitude), based on the KPIs that matter for your app (activation, engagement, retention).
+
 ### No-code automations (Campaigns)
 
 Use [Campaigns](campaigns) to automatically display a specific Screen to a specific Audience at app start, with capping controls. Campaigns are commonly used for:
@@ -71,6 +75,7 @@ Purchasely can act as your subscription infrastructure (depending on running mod
 * **3rd party integrations for subscription lifecycle**
 
   The Purchasely Platform can be natively integrated with 20 different 3rd-party platforms:
+
   * MMPs: Adjust, Appsflyer, Branch
   * Analytics: Amplitude, Clevertap, Google Analytics for Firebase, Mixpanel, mParticle, Piano (ex AT-Internet)
   * Mobile Engagement Platforms: Airship, Braze, Batch, Clevertap, Customer.io, Iterable, MoEngage, One Signal, Brevo (ex Sendinblue)
