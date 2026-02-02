@@ -65,11 +65,10 @@ Follow these steps to implement the SDK into your app:
 1. [Install the SDK](sdk-installation) by importing it into your app project
 2. [Initialize the SDK](sdk-initialization) when the app starts
 3. [Manage deeplinks](deeplinks-management) to enable no-code automations
-4. [Display your first In-App Experience](in-app-experience-display)
-5. Identify users upon sign-in / sign-up
-6. [Process transaction](processing-transactions) when a user makes a purchase
-7. [Manage entitlements](entitlements-management) to enable users to access the premium benefits of their purchases
-8. [Listeners / delegates for UI / SDK Events and Custom User Attributes](listener-delegate) to gain real-time insights on user's interactions with Purchasely Screens and personalize the user experience (optional but recommended)
+4. [Display your first In-App Experience](general-in-app-experiences-display)
+5. [Identify users upon sign-in / sign-up](general-user-identification)
+6. [Implement Custom User Attributes](general-custom-user-attributes-implementation) letting you segment your user base
+7. [Integrate Purchasely Analytics](analytics-integraton)
 
 <br />
 
