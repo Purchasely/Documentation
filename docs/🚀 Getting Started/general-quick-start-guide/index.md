@@ -1,5 +1,5 @@
 ---
-title: Quick start Guide
+title: Quick start Guide for all apps
 excerpt: >-
   In this section you will find the details to implement the Purchasely SDK into
   your app
@@ -63,10 +63,10 @@ For hybrid apps, our <Glossary>bridge sdk</Glossary>s are available for:
 Follow these steps to implement the SDK into your app:
 
 1. [Install the SDK](sdk-installation) by importing it into your app project
-2. [Choose your running mode](running-modes) that suits your needs
-3. [Initialize the SDK](sdk-initialization) when the app starts
-4. [Manage deeplinks](deeplinks-management) to enable no-code automations
-5. [Display your first In-App Experience](in-app-experience-display)
+2. [Initialize the SDK](sdk-initialization) when the app starts
+3. [Manage deeplinks](deeplinks-management) to enable no-code automations
+4. [Display your first In-App Experience](in-app-experience-display)
+5. Identify users upon sign-in / sign-up
 6. [Process transaction](processing-transactions) when a user makes a purchase
 7. [Manage entitlements](entitlements-management) to enable users to access the premium benefits of their purchases
 8. [Listeners / delegates for UI / SDK Events and Custom User Attributes](listener-delegate) to gain real-time insights on user's interactions with Purchasely Screens and personalize the user experience (optional but recommended)
