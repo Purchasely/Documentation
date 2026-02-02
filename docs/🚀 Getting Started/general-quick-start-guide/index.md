@@ -10,29 +10,26 @@ metadata:
 next:
   description: Direct access to the different steps
   pages:
-    - slug: sdk-installation
+    - slug: general-sdk-installation
       title: SDK installation
       type: basic
-    - slug: sdk-initialization
+    - slug: general-sdk-initialization
       title: SDK initialization
       type: basic
-    - slug: running-modes
-      title: Running modes
+    - slug: general-deeplinks
+      title: Deeplinks management
       type: basic
-    - slug: sdk_deeplinks
-      title: SDK Deeplinks
+    - slug: general-in-app-experiences-display
+      title: In-App Experiences display
       type: basic
-    - slug: screens-display
-      title: Screens display
+    - slug: general-user-identification
+      title: User identification
       type: basic
-    - slug: processing-transactions
-      title: Transactions processing
+    - slug: general-custom-user-attributes-integration
+      title: Custom User Attributes Implementation
       type: basic
-    - slug: entitlements-management
-      title: Entitlements management
-      type: basic
-    - slug: testing
-      title: Testing
+    - slug: analytics-integration
+      title: Analytics Integration
       type: basic
 ---
 # Technologies available for the SDK
