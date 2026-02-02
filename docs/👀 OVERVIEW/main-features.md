@@ -47,7 +47,9 @@ Create [Audiences](audiences) using built-in and custom user attributes to:
 
 ### A/B tests
 
-Purchasely can randomize users into variants and keep assignments consistent across sessions. Experiment outcome should be measured in your own analytics stack (e.g., Amplitude), based on the KPIs that matter for your app (activation, engagement, retention).
+Purchasely can randomize users into variants and keep assignments consistent across sessions, letting you target a specific user segment and expose them to different In-App Experiences. 
+
+Experiment outcome should be measured in your own analytics stack (e.g., Amplitude), based on the KPIs that matter for your app (activation, engagement, retention).
 
 ### No-code automations (Campaigns)
 
