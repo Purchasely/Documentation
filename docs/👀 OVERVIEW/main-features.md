@@ -47,7 +47,7 @@ Create [Audiences](audiences) using built-in and custom user attributes to:
 
 ### A/B tests
 
-Purchasely can randomize users into variants and keep assignments consistent across sessions, letting you target a specific user segment and expose them to different In-App Experiences. 
+Purchasely can randomize users into variants and keep assignments consistent across sessions, letting you target a specific user segment and expose them to different In-App Experiences.
 
 Experiment outcome should be measured in your own analytics stack (e.g., Amplitude), based on the KPIs that matter for your app (activation, engagement, retention).
 
@@ -103,5 +103,9 @@ Subscription apps can leverage Purchasely capabilities for:
 ### A/B tests
 
 Purchasely includes built-in [A/B tests](ab-tests) for UI and price experiments, designed to optimize in-app purchase performance. In the current state, A/B tests are limited to subscription apps because results are measured on IAP KPIs.
+
+### Dynamic offering
+
+Dynamic Offering allows you to dynamically define which Offering a user should see - without duplicating Paywalls just to display different SKUs.
 
 <br />
