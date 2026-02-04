@@ -1,7 +1,7 @@
 ---
 title: Importing Screens from Figma
 deprecated: false
-hidden: false
+hidden: true
 metadata:
   robots: index
 ---
