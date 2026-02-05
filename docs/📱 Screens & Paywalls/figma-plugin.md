@@ -1,10 +1,39 @@
 ---
-title: Importing Screens from Figma
+title: Importing screens from Figma
 deprecated: false
 hidden: true
 metadata:
   robots: index
 ---
+Purchasely offers you a way to skip rebuilding Figma screens in its console by directly exporting the designs thanks to its <Anchor label="Figma plugin" target="_blank" href="https://www.figma.com/community/plugin/1600830924110318702/purchasely">Figma plugin</Anchor>. This saves you hours and the entire process of design to production is now a matter of minutes.
+
+<br />
+
+# Plugin installation
+
+<br />
+
+1. Open the <Anchor label="plugin page" target="_blank" href="https://www.figma.com/community/plugin/1600830924110318702/purchasely">plugin page</Anchor>
+2. Click **install** to add the plugin
+3. In Figma, open the menu _Plugins > Purchasely_
+4. Click on **Connect**
+5. Set your API Key
+
+<br />
+
+<br />
+
+# Export your first screen
+
+You can export any frame it will be exported as an entire screen.  
+
+1. Select the frame
+2. <br />
+
+<br />
+
+# Export an entire flow
+
 <br />
 
 The usual process of conception of flows and paywalls usually starts in Figma where designers and product managers iterate before deciding to publish it. Purchasely offers the best tool to rebuild these screens in No Code in a tool close to Figma but it feels like an extra step no?
