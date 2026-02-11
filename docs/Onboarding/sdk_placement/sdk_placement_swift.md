@@ -13,7 +13,16 @@ next:
 ### CALLING A PLACEMENT FROM THE APP CODE
 
 ```swift
-let placementId = "ONBOARDING"
-paywallCtrl = Purchasely.presentationController(for: placementId, contentId: contentId, loaded: { _, _, _ in
-            }, completion: completion)
+Purchasely.fetchPresentation(
+    for: "ONBOARDING",
+    fetchCompletion: { presentation, error in
+         guard let presentation = presentation, error == nil else {
+             print("Error while fetching presentation: \(error?.localizedDescription ?? "unknown")")
+             return
+         }
+         
+         // call the display method and provide the currently displayed UIViewController
+         presentation.display(from: myUIViewController)
+    }
+)
 ```
