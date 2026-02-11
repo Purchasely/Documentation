@@ -13,7 +13,14 @@ next:
 ### CALLING A PLACEMENT FROM THE APP CODE
 
 ```swift Flutter
-await Purchasely.presentPresentationForPlacement('SAMPLE_PLACEMENT');
+try {
+  var presentation = await Purchasely.fetchPresentation("ONBOARDING");
+
+  //Display Purchasely Screen
+  var presentResult = await Purchasely.presentPresentation(presentation);
+} catch (e) {
+  print(e);
+}
 ```
 
 <br />
