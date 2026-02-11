@@ -13,10 +13,18 @@ next:
 ### CALLING A PLACEMENT FROM THE APP CODE
 
 ```javascript React Native
-await Purchasely.presentPresentationForPlacement({
-    placementVendorId: 'SAMPLE_PLACEMENT',
-    isFullscreen: true,
-});
+try {
+  const presentation = await Purchasely.fetchPresentation({
+      placementId: 'ONBOARDING'
+  })
+
+  //Display Purchasely Screen
+  const result = await Purchasely.presentPresentation({
+    presentation: presentation
+  })
+} catch (e) {
+  console.error(e);
+}
 ```
 
 <br />
