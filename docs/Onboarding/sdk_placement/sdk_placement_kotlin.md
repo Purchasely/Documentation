@@ -13,7 +13,13 @@ next:
 ### CALLING A PLACEMENT FROM THE APP CODE
 
 ```kotlin
-let placementId = "SAMPLE_PLACEMENT"
-paywallCtrl = Purchasely.presentationController(for: placementId, contentId: contentId, loaded: { _, _, _ in
-            }, completion: completion)
+Purchasely.fetchPresentation(placementId = "ONBOARDING") { presentation, error ->
+  if(error != null) {
+    Log.d("Purchasely", "Error fetching Screen", error)
+    return@fetchPresentation
+  }
+
+  // call the display method and provide your Activity
+  presentation.display(activity)
+}
 ```
