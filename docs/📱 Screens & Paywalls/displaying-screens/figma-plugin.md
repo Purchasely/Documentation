@@ -21,12 +21,14 @@ Purchasely's Figma plugin offers unbeatable features that you need:
 
 # Your first export
 
-<Image align="center" src="https://files.readme.io/81b0913f6fb27899064337ec828951d05d2cdeb4b8e4b4e3ce3314e35b5fdad1-Adobe_Express_-_Adobe_Express_-_Figma_Flow_Demo.gif" />
-
-1. Select the frames to export
+1. Select one frame or multiple frames (screens) to export
 2. Open Purchasely plugin
 3. Export
 4. Enjoy ☕️
+
+<br />
+
+<Image align="center" src="https://files.readme.io/81b0913f6fb27899064337ec828951d05d2cdeb4b8e4b4e3ce3314e35b5fdad1-Adobe_Express_-_Adobe_Express_-_Figma_Flow_Demo.gif" />
 
 <br />
 
