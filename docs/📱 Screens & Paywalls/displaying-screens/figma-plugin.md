@@ -23,4 +23,4 @@ Purchasely's Figma plugin offers unbeatable features that you need:
 
 <br />
 
-# Type your frames
+# Make your design smarter by typing your frames
