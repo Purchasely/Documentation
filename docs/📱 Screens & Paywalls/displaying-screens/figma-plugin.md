@@ -8,3 +8,4 @@ hidden: false
 metadata:
   robots: index
 ---
+Purchasely introduces its Figma plugin, the fastest and easiest way to move from a Figma design into a live funnel on your mobile app.
