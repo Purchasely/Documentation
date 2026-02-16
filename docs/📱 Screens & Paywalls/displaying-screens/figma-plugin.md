@@ -32,13 +32,13 @@ Purchasely's Figma plugin offers unbeatable features that you need:
 
 # Make your design smarter by typing your frames
 
-Your designs cannot describe your app and brutally exporting frames into stacks won't work:
+Your designs cannot describe your app and raw exporting frames into stacks won't be enough:
 
 * Buttons have actions and **highlighted states**
 * Pickers and Quizzes have **selected states**
-* Some frames are just design placeholders (status bar, dynamic island…) and shall not be exported
+* Some frames are just design placeholders (status bar, dynamic island…) and **shall not be exported**
 
-We provide an easy way for you to type them **directly from Figma **and make sure they will be **exported smartly** so that you don't spend time fixing that in Purchasely console.
+We provide an easy way for you to **type** them **directly from Figma** and make sure they will be **exported smartly** so that you don't spend time fixing that in Purchasely console.
 
 <br />
 
