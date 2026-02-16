@@ -5,7 +5,7 @@ hidden: true
 metadata:
   robots: index
 ---
-Purchasely offers you a way to skip rebuilding Figma screens in its console by directly exporting the designs thanks to its <Anchor label="Figma plugin" target="_blank" href="https://www.figma.com/community/plugin/1600830924110318702/purchasely">Figma plugin</Anchor>. This saves you hours and the entire process of design to production is now a matter of minutes.
+Purchasely offers you a way to skip rebuilding Figma screens in its console by directly exporting the designs thanks to its <Anchor label="Figma plugin" target="_blank" href="https://www.figma.com/community/plugin/1600830924110318702/purchasely">Figma plugin</Anchor>. This saves you hours and the entire process of turning a design into a screen in production in your app is now a matter of minutes.
 
 <br />
 
@@ -13,11 +13,11 @@ Purchasely offers you a way to skip rebuilding Figma screens in its console by d
 
 <br />
 
-1. Open the <Anchor label="plugin page" target="_blank" href="https://www.figma.com/community/plugin/1600830924110318702/purchasely">plugin page</Anchor>
+1. Visit the <Anchor label="Purchasely Figma plugin page" target="_blank" href="https://www.figma.com/community/plugin/1600830924110318702/purchasely">Purchasely Figma plugin page</Anchor>
 2. Click **install** to add the plugin
 3. In Figma, open the menu _Plugins > Purchasely_
 4. Click on **Connect**
-5. Set your API Key
+5. Set your API Key from Purchasely console
 
 <br />
 
