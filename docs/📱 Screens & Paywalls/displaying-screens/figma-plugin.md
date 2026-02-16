@@ -42,4 +42,4 @@ We provide an easy way for you to **type** them **directly from Figma** and make
 
 <br />
 
-<Image align="center" caption="Override automatic typing to create smart high level objects in Purchasely" src="https://files.readme.io/b343e7eaa07cea677249483227384977405440d25e090937e3006177d89e3ec4-Frame_typing.gif" />
+<Image align="center" caption="Override automatic typing to create smart high level objects in Purchasely" src="https://files.readme.io/b343e7eaa07cea677249483227384977405440d25e090937e3006177d89e3ec4-Frame_typing.gif" width="500px" />
