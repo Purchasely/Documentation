@@ -23,6 +23,11 @@ Purchasely's Figma plugin offers unbeatable features that you need:
 
 ![]()
 
+1. Select the frames to export
+2. Open Purchasely plugin
+3. Export
+4. Enjoy
+
 <br />
 
 # Make your design smarter by typing your frames
