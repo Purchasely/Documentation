@@ -8,7 +8,7 @@ hidden: false
 metadata:
   robots: index
 ---
-[Purchasely Figma plugin]() is the fastest and **easiest way to create a live native funnels in your mobile app from a Figma design**.
+[Purchasely Figma plugin](https://www.figma.com/community/plugin/1600830924110318702/purchasely) is the **fastest and easiest way to create a live native funnels in your mobile app from a Figma design**.
 
 Purchasely's Figma plugin offers unbeatable features that you need:
 
