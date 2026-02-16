@@ -8,7 +8,7 @@ hidden: false
 metadata:
   robots: index
 ---
-Purchasely Figma plugin is the fastest and easiest way to move from a Figma design into a live funnel on your mobile app.
+Purchasely Figma plugin is the fastest and **easiest way to create a live-native funnel in your mobile app from a Figma design**.
 
 Purchasely's Figma plugin offers unbeatable features that you need:
 
@@ -21,6 +21,20 @@ Purchasely's Figma plugin offers unbeatable features that you need:
 
 # Your first export
 
-<br />
+![]()
 
 # Make your design smarter by typing your frames
+
+Your designs cannot describe your app and brutally exporting frames into stacks won't work:
+
+* Buttons have actions and **highlighted states**
+* Pickers and Quizzes have **selected states**
+* Some frames are just design placeholders (status bar, dynamic island…) and shall not be exported
+
+<br />
+
+We provide an easy way for you to type them **directly from Figma **and make sure they will be **exported smartly** so that you don't spend time fixing that in Purchasely console.
+
+<br />
+
+<Image align="center" src="https://files.readme.io/b343e7eaa07cea677249483227384977405440d25e090937e3006177d89e3ec4-Frame_typing.gif" />
