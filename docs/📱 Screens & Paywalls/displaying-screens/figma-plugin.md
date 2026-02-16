@@ -21,7 +21,7 @@ Purchasely's Figma plugin offers unbeatable features that you need:
 
 # Your first export
 
-![]()
+<Image align="center" src="https://files.readme.io/6638fda09908b075d265401c6eb1ecf02e4d1116e4733655d2a22ab0a1a02971-ezgif-1b9671c1d495a91e.gif" />
 
 1. Select the frames to export
 2. Open Purchasely plugin
