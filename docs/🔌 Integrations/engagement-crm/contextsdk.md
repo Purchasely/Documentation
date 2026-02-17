@@ -1,5 +1,10 @@
 ---
 title: ContextSDK
+excerpt: >-
+  Learn how to integrate ContextSDK with Purchasely to optimize paywall timing
+  using real-time ML-driven context. This guide explains how to pass the
+  `shouldUpsell` signal as a user attribute, configure audience rules, log
+  outcomes, and maximize conversion and revenue performance.
 deprecated: false
 hidden: false
 metadata:
@@ -16,7 +21,7 @@ ContextSDK is a machine learning–powered decision engine that helps determine 
 When integrated with Purchasely, ContextSDK enables smarter paywall timing by reducing interruptions during low-intent moments and maximizing conversions when user intent is high.
 
 For setup instructions and full integration details, see the official ContextSDK setup guide:
-[https://docs.contextsdk.com/setup](https://docs.contextsdk.com/setup)
+[https://docs.contextsdk.com](https://docs.contextsdk.com)
 
 ## How it works
 
