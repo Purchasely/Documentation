@@ -9,6 +9,15 @@ metadata:
 
 ContextSDK integrates seamlessly with Purchasely to help you show paywalls at the perfect moment. This integration leverages ContextSDK's ML-powered recommendations to optimize when Purchasely displays paywalls, improving conversion rates.
 
+## About ContextSDK
+
+ContextSDK is a machine learning–powered decision engine that helps determine the best moment to present in-app experiences, such as paywalls. By analyzing real-time contextual signals, it predicts whether a user is in a favorable moment for an upsell and exposes this decision through the `shouldUpsell` property.
+
+When integrated with Purchasely, ContextSDK enables smarter paywall timing by reducing interruptions during low-intent moments and maximizing conversions when user intent is high.
+
+For setup instructions and full integration details, see the official ContextSDK setup guide:
+[https://docs.contextsdk.com/setup](https://docs.contextsdk.com/setup)
+
 ## How it works
 
 ContextSDK provides real-time context about whether it's a good moment to show a paywall through the **`shouldUpsell`** property - a boolean indicating whether it's a good moment to show a paywall.
@@ -137,7 +146,11 @@ let paywallController = Purchasely.presentationController(
 )
 ```
 
-Revenue logging helps ContextSDK optimize not just for conversion rates, but for revenue maximization. Higher-value purchases can be weighted differently in the ML model training.
+<br />
+
+<Callout icon="📘" theme="info">
+  Revenue logging helps ContextSDK optimize not just for conversion rates, but for revenue maximization. Higher-value purchases can be weighted differently in the ML model training.
+</Callout>
 
 ## Best Practices
 
@@ -242,4 +255,8 @@ Your ContextSDK flow names don't need to match your Purchasely placement IDs, bu
 * [Logging Conversions](https://docs.contextsdk.com/context-decision/logging-conversions) - General guide to logging outcomes
 * [Custom Outcome Metadata](https://docs.contextsdk.com/context-decision/advanced/custom-outcome-metadata) - Track additional purchase context
 
-ContextSDK's ML models learn from your outcome data. The more purchases you log with `log(.positive)` or `logRevenueOutcome()`, the better the model becomes at predicting optimal moments to show paywalls.
+<Callout icon="👍">
+  ContextSDK's ML models learn from your outcome data. 
+
+  The more purchases you log with `log(.positive)` or `logRevenueOutcome()`, the better the model becomes at predicting optimal moments to show paywalls.
+</Callout>
