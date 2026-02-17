@@ -138,9 +138,6 @@ let paywallController = Purchasely.presentationController(
 ```
 
 Revenue logging helps ContextSDK optimize not just for conversion rates, but for revenue maximization. Higher-value purchases can be weighted differently in the ML model training.
-<Callout theme="info">
-Revenue logging helps ContextSDK optimize not just for conversion rates, but for revenue maximization. Higher-value purchases can be weighted differently in the ML model training.
-</Callout>
 
 ## Best Practices
 
@@ -242,9 +239,7 @@ Your ContextSDK flow names don't need to match your Purchasely placement IDs, bu
 ## Related Documentation
 
 * [Revenue Outcomes](https://docs.contextsdk.com/context-decision/revenue-outcomes) - Learn more about logging revenue outcomes
+* [Logging Conversions](https://docs.contextsdk.com/context-decision/logging-conversions) - General guide to logging outcomes
 * [Custom Outcome Metadata](https://docs.contextsdk.com/context-decision/advanced/custom-outcome-metadata) - Track additional purchase context
 
 ContextSDK's ML models learn from your outcome data. The more purchases you log with `log(.positive)` or `logRevenueOutcome()`, the better the model becomes at predicting optimal moments to show paywalls.
-<Callout theme="success">
-ContextSDK's ML models learn from your outcome data. The more purchases you log with `log(.positive)` or `logRevenueOutcome()`, the better the model becomes at predicting optimal moments to show paywalls.
-</Callout>
