@@ -8,6 +8,28 @@ excerpt: >-
 deprecated: false
 hidden: false
 metadata:
+  title: >-
+    ContextSDKContextSDK, Purchasely, paywall optimization, in-app purchases,
+    ML-powered upsell, shouldUpsell, audience rules, conversion optimization,
+    revenue logging, mobile monetization, SDK integration, real-time context
+  description: >-
+    Integrate ContextSDK with Purchasely to show paywalls at the optimal moment.
+    Use ML-powered context signals, configure audience rules, and log revenue
+    outcomes to improve conversion rates and maximize in-app purchase
+    performance.
+  keywords:
+    - ContextSDK
+    - Purchasely
+    - paywall optimization
+    - in-app purchases
+    - ML-powered upsell
+    - shouldUpsell
+    - audience rules
+    - conversion optimization
+    - revenue logging
+    - mobile monetization
+    - SDK integration
+    - real-time context
   robots: index
 ---
 # Using ContextSDK with Purchasely
