@@ -34,11 +34,11 @@ metadata:
 ---
 # Using ContextSDK with Purchasely
 
-ContextSDK integrates seamlessly with Purchasely to help you show paywalls at the perfect moment. This integration leverages ContextSDK's ML-powered recommendations to optimize when Purchasely displays paywalls, improving conversion rates.
+ContextSDK integrates seamlessly with Purchasely to help you show paywalls at the perfect moment. This integration leverages real-world ML-driven context to optimize when Purchasely displays paywalls, improving conversion rates.
 
 ## About ContextSDK
 
-ContextSDK is a machine learning–powered decision engine that helps determine the best moment to present in-app experiences, such as paywalls. By analyzing real-time contextual signals, it predicts whether a user is in a favorable moment for an upsell and exposes this decision through the `shouldUpsell` property.
+ContextSDK is a machine learning–powered decision engine that helps determine the best moment to present in-app experiences, such as paywalls. By analyzing real-world contextual signals, it predicts whether a user is in a favorable moment for an upsell and exposes this decision through the `shouldUpsell` property.
 
 When integrated with Purchasely, ContextSDK enables smarter paywall timing by reducing interruptions during low-intent moments and maximizing conversions when user intent is high.
 
@@ -282,8 +282,8 @@ Your ContextSDK flow names don't need to match your Purchasely placement IDs, bu
 * [Logging Conversions](https://docs.contextsdk.com/context-decision/logging-conversions) - General guide to logging outcomes
 * [Custom Outcome Metadata](https://docs.contextsdk.com/context-decision/advanced/custom-outcome-metadata) - Track additional purchase context
 
-<Callout icon="👍">
-  ContextSDK's ML models learn from your outcome data. 
+<Callout icon="👍" theme="okay">
+  ContextSDK's ML models learn from your outcome data.
 
   The more purchases you log with `log(.positive)` or `logRevenueOutcome()`, the better the model becomes at predicting optimal moments to show paywalls.
 </Callout>
