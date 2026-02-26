@@ -40,7 +40,7 @@ The integration requires 5 steps:
 Associate the user to events by providing the `MoEngage Unique ID` to the Purchasely SDK
 
 ```Text Swift
-Purchasely.setAttribute(.moEngageUnqueId, value: "your moEngage Unique Id")
+Purchasely.setAttribute(.moEngageUniqueId, value: "your moEngage Unique Id")
 ```
 ```Text Kotlin
 Purchasely.setAttribute(Attribute.MOENGAGE_UNIQUE_ID, "Your unique id")
@@ -68,32 +68,32 @@ See the[ MoEngage Documentation ](https://developers.moengage.com/)for more info
 
 Go in the "External integrations" section, and open the edition form for **MoEngage**:
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/3b289d3-Capture_decran_2024-07-22_a_15.45.06.png" />
+<Image align="center" border={true} src="https://files.readme.io/3b289d3-Capture_decran_2024-07-22_a_15.45.06.png" className="border" />
 
 Enable the integration and configure it
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/ef5e3b2-Capture_decran_2024-07-22_a_15.45.16.png" />
+<Image align="center" border={true} src="https://files.readme.io/ef5e3b2-Capture_decran_2024-07-22_a_15.45.16.png" className="border" />
 
-1. Set your **MoEngage** *APP\_ID*
-2. Set your **MoEngage** *DATA API ID*
-3. Set your **MoEngage***DATA API KEY*
+1. Set your **MoEngage** _APP_ID_
+2. Set your **MoEngage** _DATA API ID_
+3. Set your **MoEngage**_DATA API KEY_
 
 <br />
 
 ### Retrieving your MoEngage APP ID from MoEngage's dashboard
 
-* The *APP\_ID* for your MoEngage account is available on the MoEngage Dashboard in *Settings > App Settings > General Settings > Account Settings > APP ID*.
-* Write down your *APP ID*
+* The _APP_ID_ for your MoEngage account is available on the MoEngage Dashboard in _Settings > App Settings > General Settings > Account Settings > APP ID_.
+* Write down your _APP ID_
 
 ### Retrieving your MoEngage DATA API ID from MoEngage's dashboard
 
-* The *APP\_ID* for your MoEngage account is available on the MoEngage Dashboard in *Settings > App Settings > General Settings > Data API settings > DATA API ID*
-* Write down your *DATA API ID*
+* The _APP_ID_ for your MoEngage account is available on the MoEngage Dashboard in _Settings > App Settings > General Settings > Data API settings > DATA API ID_
+* Write down your _DATA API ID_
 
 ### Retrieve your MoEngage DATA API ID from MoEngage's dashboard
 
-* The *APP\_ID* for your MoEngage account is available on the MoEngage Dashboard in *Settings > App Settings > General Settings > Data API settings > DATA API KEY*
-* Write down your *DATA API KEY*
+* The _APP_ID_ for your MoEngage account is available on the MoEngage Dashboard in _Settings > App Settings > General Settings > Data API settings > DATA API KEY_
+* Write down your _DATA API KEY_
 
 <br />
 
@@ -103,7 +103,7 @@ Enable the integration and configure it
 
 1. Enable the events you want to be sent to **MoEngage**
 
-   <Image align="center" className="border" border={true} src="https://files.readme.io/6d41eba-Capture_decran_2024-07-22_a_15.45.27.png" />
+   <Image align="center" border={true} src="https://files.readme.io/6d41eba-Capture_decran_2024-07-22_a_15.45.27.png" className="border" />
 
 (Optional) Events names can be overridden to match with your tacking plan.
 
