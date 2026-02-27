@@ -109,7 +109,7 @@ class PLYLottieBridge: NSObject {
 
 * First you need to [add the Lottie dependency](http://airbnb.io/lottie/#/android) (if not already in your app)
 * Then implements `PLYLottieInterface`, you can copy the following sample `AnimationView` class
-* Finally add it to Purchasely with 
+* Finally add it to Purchasely with
 
   ```
   Purchasely.lottieView = { AnimationView(context) }
@@ -154,3 +154,27 @@ class AnimationView(context: Context) : LottieAnimationView(context), PLYLottieI
 ```
 
 **🎉 You are all set!**
+
+<br />
+
+## Troubleshooting
+
+When a Lottie animation does not work, there are 3 possible causes:
+
+### 1. File size too large
+
+Make sure your Lottie file does not exceed **2 MB**. Larger files can cause memory issues and may fail to render properly.
+
+### 2. Bridge not implemented
+
+The Lottie bridge must be implemented in your application to support Lottie animations in Purchasely screens. Follow the integration guide to set it up:
+
+👉 [Lottie Animations - Bridge Implementation](https://docs.purchasely.com/docs/lottie-animations)
+
+### 3. Issue with the Lottie animation itself
+
+If the file is under 2 MB and the bridge is correctly implemented, the problem is likely with the Lottie animation file itself. You should:
+
+* Test the animation on [LottieFiles Preview](https://app.lottiefiles.com/preview)
+* Verify it was exported correctly from After Effects / Figma
+* Check for unsupported features (expressions, effects, etc.)
