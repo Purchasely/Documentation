@@ -152,6 +152,50 @@ curl \
   https://s2s.purchasely.io/receipts
 ```
 
+## Passing integration attributes (optional)
+
+You can include `integration_*` fields in the JSON body so that Purchasely associates the subscriber with your analytics and engagement platforms (Amplitude, Mixpanel, Airship, Adjust, etc.). This lets those platforms receive subscription lifecycle events automatically.
+
+```curl
+curl \
+  --request POST \
+  -i \
+  -H "Content-Type: application/json" \
+  -H "X-API-KEY:{{YOUR_API_KEY}}" \
+  -H "X-PLATFORM-TYPE:STRIPE" \
+  --data '{
+    "stripe_object_id":"sub_1MluxqJaEiB9UwXB34gmtzCB",
+    "stripe_price_id":"price_1MbKJHJaEiB9UwXBPt0fFq4O",
+    "user_id":"jdo-cus_Msq9YfCiFkFzVx",
+    "stripe_object_type":"subscription",
+    "integration_amplitude_user_id":"amp-12345",
+    "integration_adjust_id":"adj-67890",
+    "integration_mixpanel_distinct_id":"mx-abcde"
+  }' \
+  https://s2s.purchasely.io/receipts
+```
+
+> All fields are optional. Include only the ones for the platforms you use.
+
+| Platform | Field(s) |
+|---|---|
+| Adjust | `integration_adjust_id` |
+| Airship | `integration_airship_channel_id`, `integration_airship_user_id` |
+| Amplitude | `integration_amplitude_user_id`, `integration_amplitude_device_id`, `integration_amplitude_session_id` |
+| Appsflyer | `integration_appsflyer_id` |
+| AT Internet | `integration_at_internet_id_client` |
+| Batch | `integration_batch_installation_id`, `integration_batch_custom_user_id` |
+| Branch | `integration_branch_user_developer_identity` |
+| CleverTap | `integration_clevertap_id` |
+| Customer.io | `integration_customerio_user_id`, `integration_customerio_user_email` |
+| Firebase / Google Analytics | `integration_firebase_app_instance_id` |
+| Iterable | `integration_iterable_user_email`, `integration_iterable_user_id` |
+| Mixpanel | `integration_mixpanel_distinct_id` |
+| MoEngage | `integration_moengage_unique_id` |
+| mParticle | `integration_mparticle_user_id` |
+| OneSignal | `integration_one_signal_player_id`, `integration_one_signal_user_id`, `integration_one_signal_external_id`, `integration_one_signal_external_user_id` |
+| Sendinblue (Brevo) | `integration_sendinblue_user_email` |
+
 > 👍 Real-Time Events
 >
 > Purchasely relies on Stripe [webhooks](https://docs.stripe.com/webhooks) to get the information about a known subscription in real time. This information is processed by our system to create Purchasely [events](server-events) and then sent to your webhook, if [configured](backend-entitlements#configuring-the-webhook).
