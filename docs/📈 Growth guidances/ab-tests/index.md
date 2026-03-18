@@ -349,3 +349,7 @@ When running A/B test, we advise you to:
 5. **Make sure that you run your A/B test on a period of time which is sufficiently representative of a typical business cycle**.\
    Even if you reach the statistical significance quickly, we advise you to wait between 1 and 2 extra weeks before making conclusions.\
    In the best case scenario, wait until the Introductory Offer is finished for most of the users.
+
+> 📘 Going further: measuring business impact
+>
+> A/B test results in the Console show leading KPIs (conversion, uplift). To measure the downstream business impact (retention, revenue, LTV), see [Measuring the Impact of In-App Experiences](measuring-experiment-impact).
