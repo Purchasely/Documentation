@@ -1,7 +1,7 @@
 ---
-title: Segments API
+title: Custom Audiences API
 excerpt: >-
-  Sync user segments from your CRM, CDP, or any third-party tool to Purchasely
+  Sync user custom audiences from your CRM, CDP, or any third-party tool to Purchasely
   using the Client API
 deprecated: false
 hidden: false
@@ -14,21 +14,21 @@ next:
   pages: []
 ---
 
-The Segments API allows you to create and manage user segments in Purchasely programmatically. Unlike <Glossary>Audience</Glossary>s — which are rule-based and evaluated dynamically from user attributes — **Segments** are static lists of user identifiers that you sync from external tools such as Braze, Amplitude, or your own backend.
+The Custom Audiences API allows you to create and manage user custom audiences in Purchasely programmatically. Unlike <Glossary>Audience</Glossary>s — which are rule-based and evaluated dynamically from user attributes — **Custom Audiences** are static lists of user identifiers that you sync from external tools such as Braze, Amplitude, or your own backend.
 
-Once synced, Segments can be used in <Glossary>Placement</Glossary>s just like Audiences, allowing you to display different screens to specific groups of users.
+Once synced, Custom Audiences can be used in <Glossary>Placement</Glossary>s just like Audiences, allowing you to display different screens to specific groups of users.
 
-> 📘 Segments vs Audiences
+> 📘 Custom Audiences vs Audiences
 >
 > **Audiences** are dynamic: they are defined by combining user attribute conditions (e.g. "iOS users in the US with an active subscription"). Membership is evaluated in real-time.
 >
-> **Segments** are static: they are explicit lists of user identifiers that you push to Purchasely via the API. Membership is determined by the list you provide.
+> **Custom Audiences** are static: they are explicit lists of user identifiers that you push to Purchasely via the API. Membership is determined by the list you provide.
 
 # Prerequisites
 
 ## Feature access
 
-The Segments feature requires activation on your Purchasely account. Contact your Purchasely account manager or support to enable it.
+The Custom Audiences feature requires activation on your Purchasely account. Contact your Purchasely account manager or support to enable it.
 
 ## API Key
 
@@ -62,21 +62,21 @@ The Client API enforces a rate limit of **60 requests per minute** per API key. 
 
 The maximum request body size is **10 MB**.
 
-# Managing Segments
+# Managing Custom Audiences
 
-## Create a segment
+## Create a custom audience
 
-Creates a new segment for your application.
+Creates a new custom audience for your application.
 
 ```
-POST /client/mobile_applications/{app_id}/segments
+POST /client/mobile_applications/{app_id}/custom_audiences
 ```
 
 **Request body:**
 
 ```json
 {
-  "segment": {
+  "custom_audience": {
     "vendor_id": "premium_users",
     "name": "Premium Users",
     "identifier_type": "user_id"
@@ -86,16 +86,16 @@ POST /client/mobile_applications/{app_id}/segments
 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
-| `vendor_id` | string | Yes | Your unique identifier for this segment |
-| `name` | string | Yes | A display name for the segment |
+| `vendor_id` | string | Yes | Your unique identifier for this custom audience |
+| `name` | string | Yes | A display name for the custom audience |
 | `identifier_type` | string | Yes | The type of user identifier. One of: `user_id`, `anonymous_id`, `batch_custom_user_id`, `braze_user_id` |
 
 **Response** `201 Created`:
 
 ```json
 {
-  "segment": {
-    "id": "seg_xxxx",
+  "custom_audience": {
+    "id": "caud_xxxx",
     "vendor_id": "premium_users",
     "name": "Premium Users",
     "identifier_type": "user_id",
@@ -109,12 +109,12 @@ POST /client/mobile_applications/{app_id}/segments
 }
 ```
 
-## List segments
+## List custom audiences
 
-Returns all active segments for your application.
+Returns all active custom audiences for your application.
 
 ```
-GET /client/mobile_applications/{app_id}/segments
+GET /client/mobile_applications/{app_id}/custom_audiences
 ```
 
 | Parameter | Type | Required | Description |
@@ -125,9 +125,9 @@ GET /client/mobile_applications/{app_id}/segments
 
 ```json
 {
-  "segments": [
+  "custom_audiences": [
     {
-      "id": "seg_xxxx",
+      "id": "caud_xxxx",
       "vendor_id": "premium_users",
       "name": "Premium Users",
       "identifier_type": "user_id",
@@ -146,20 +146,20 @@ GET /client/mobile_applications/{app_id}/segments
 }
 ```
 
-## Get a segment
+## Get a custom audience
 
-Returns a single segment by its `vendor_id`.
+Returns a single custom audience by its `vendor_id`.
 
 ```
-GET /client/mobile_applications/{app_id}/segments/{vendor_id}
+GET /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}
 ```
 
 **Response** `200 OK`:
 
 ```json
 {
-  "segment": {
-    "id": "seg_xxxx",
+  "custom_audience": {
+    "id": "caud_xxxx",
     "vendor_id": "premium_users",
     "name": "Premium Users",
     "identifier_type": "user_id",
@@ -173,20 +173,20 @@ GET /client/mobile_applications/{app_id}/segments/{vendor_id}
 }
 ```
 
-## Delete a segment
+## Delete a custom audience
 
-Archives a segment. The segment will no longer appear in the list but its data is retained.
+Archives a custom audience. The custom audience will no longer appear in the list but its data is retained.
 
 ```
-DELETE /client/mobile_applications/{app_id}/segments/{vendor_id}
+DELETE /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}
 ```
 
 **Response** `200 OK`:
 
 ```json
 {
-  "segment": {
-    "id": "seg_xxxx",
+  "custom_audience": {
+    "id": "caud_xxxx",
     "vendor_id": "premium_users",
     "name": "Premium Users",
     "identifier_type": "user_id",
@@ -202,22 +202,22 @@ DELETE /client/mobile_applications/{app_id}/segments/{vendor_id}
 
 > 🚧 Cannot delete while processing
 >
-> If a mutation is currently processing for this segment, the deletion will be rejected with a `409 Conflict` error. Wait for the mutation to complete before retrying.
+> If a mutation is currently processing for this custom audience, the deletion will be rejected with a `409 Conflict` error. Wait for the mutation to complete before retrying.
 
-# Managing Segment Users
+# Managing Custom Audience Users
 
-All user mutation operations are **asynchronous**. They return `202 Accepted` immediately and process in the background. The segment's `status` field transitions to `"processing"` while the mutation is running, then back to `"ready"` (or `"failed"`) when complete.
+All user mutation operations are **asynchronous**. They return `202 Accepted` immediately and process in the background. The custom audience's `status` field transitions to `"processing"` while the mutation is running, then back to `"ready"` (or `"failed"`) when complete.
 
 > ❗️ One mutation at a time
 >
-> Only one mutation can run at a time per segment. If you attempt to start a mutation while one is already processing, the API will respond with a `409 Conflict` error.
+> Only one mutation can run at a time per custom audience. If you attempt to start a mutation while one is already processing, the API will respond with a `409 Conflict` error.
 
 ## Add and remove users
 
-Add and/or remove users from a segment in a single request.
+Add and/or remove users from a custom audience in a single request.
 
 ```
-POST /client/mobile_applications/{app_id}/segments/{vendor_id}/users
+POST /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}/users
 ```
 
 **Request body:**
@@ -231,8 +231,8 @@ POST /client/mobile_applications/{app_id}/segments/{vendor_id}/users
 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
-| `add` | array of strings | No* | User identifiers to add to the segment |
-| `remove` | array of strings | No* | User identifiers to remove from the segment |
+| `add` | array of strings | No* | User identifiers to add to the custom audience |
+| `remove` | array of strings | No* | User identifiers to remove from the custom audience |
 
 \* At least one of `add` or `remove` must be provided.
 
@@ -240,8 +240,8 @@ POST /client/mobile_applications/{app_id}/segments/{vendor_id}/users
 
 ```json
 {
-  "segment": {
-    "id": "seg_xxxx",
+  "custom_audience": {
+    "id": "caud_xxxx",
     "vendor_id": "premium_users",
     "status": "processing",
     "..."
@@ -251,10 +251,10 @@ POST /client/mobile_applications/{app_id}/segments/{vendor_id}/users
 
 ## Replace all users
 
-Replaces the entire segment membership with the provided list. All existing users are removed and the new list is set.
+Replaces the entire custom audience membership with the provided list. All existing users are removed and the new list is set.
 
 ```
-PUT /client/mobile_applications/{app_id}/segments/{vendor_id}/users/replace
+PUT /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}/users/replace
 ```
 
 **Request body:**
@@ -267,26 +267,26 @@ PUT /client/mobile_applications/{app_id}/segments/{vendor_id}/users/replace
 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
-| `users` | array of strings | Yes | The complete list of user identifiers for the segment |
+| `users` | array of strings | Yes | The complete list of user identifiers for the custom audience |
 
 **Response** `202 Accepted`
 
 ## Clear all users
 
-Removes all users from the segment.
+Removes all users from the custom audience.
 
 ```
-DELETE /client/mobile_applications/{app_id}/segments/{vendor_id}/users/clear
+DELETE /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}/users/clear
 ```
 
 **Response** `202 Accepted`
 
 ## List users
 
-Returns the list of user identifiers currently in the segment, with cursor-based pagination.
+Returns the list of user identifiers currently in the custom audience, with cursor-based pagination.
 
 ```
-GET /client/mobile_applications/{app_id}/segments/{vendor_id}/users
+GET /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}/users
 ```
 
 | Parameter | Type | Required | Description |
@@ -307,15 +307,15 @@ GET /client/mobile_applications/{app_id}/segments/{vendor_id}/users
 
 > 📘 Listing users while processing
 >
-> If the segment is currently processing a mutation, the `users` array will be empty and a `warning` message will be returned: `"Segment is currently being updated"`.
+> If the custom audience is currently processing a mutation, the `users` array will be empty and a `warning` message will be returned: `"Custom audience is currently being updated"`.
 
-# Segment status
+# Custom audience status
 
-The `status` field on a segment indicates its current state:
+The `status` field on a custom audience indicates its current state:
 
 | Status | Description |
 | --- | --- |
-| `ready` | The segment is idle and ready for mutations |
+| `ready` | The custom audience is idle and ready for mutations |
 | `processing` | A mutation is currently being processed |
 | `failed` | The last mutation failed — check `last_job_result` for details |
 
@@ -348,9 +348,9 @@ All errors follow this format:
 | --- | --- | --- |
 | `401` | `UNAUTHORIZED` | Missing or invalid API key |
 | `403` | `FORBIDDEN` | API key does not have access to this application |
-| `404` | `SEGMENT_NOT_FOUND` | No segment found with this vendor_id |
-| `409` | `MUTATION_IN_PROGRESS` | A mutation is already running for this segment |
-| `409` | `CANNOT_ARCHIVE_WHILE_PROCESSING` | Cannot delete a segment while a mutation is processing |
+| `404` | `CUSTOM_AUDIENCE_NOT_FOUND` | No custom audience found with this vendor_id |
+| `409` | `MUTATION_IN_PROGRESS` | A mutation is already running for this custom audience |
+| `409` | `CANNOT_ARCHIVE_WHILE_PROCESSING` | Cannot delete a custom audience while a mutation is processing |
 | `413` | `PAYLOAD_TOO_LARGE` | Request body exceeds 10 MB |
 | `422` | `VALIDATION_FAILED` | Missing or invalid required fields |
 | `422` | `EMPTY_PAYLOAD` | No users provided in the mutation request |
@@ -359,35 +359,35 @@ All errors follow this format:
 
 # Example: full sync workflow
 
-Here is a typical workflow to sync a segment from an external tool:
+Here is a typical workflow to sync a custom audience from an external tool:
 
 ```bash
-# 1. Create the segment
-curl -X POST https://api.purchasely.io/client/mobile_applications/app_xxxx/segments \
+# 1. Create the custom audience
+curl -X POST https://api.purchasely.io/client/mobile_applications/app_xxxx/custom_audiences \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "segment": {
+    "custom_audience": {
       "vendor_id": "braze_high_value",
       "name": "High-Value Users (Braze)",
       "identifier_type": "user_id"
     }
   }'
 
-# 2. Populate the segment with users
-curl -X PUT https://api.purchasely.io/client/mobile_applications/app_xxxx/segments/braze_high_value/users/replace \
+# 2. Populate the custom audience with users
+curl -X PUT https://api.purchasely.io/client/mobile_applications/app_xxxx/custom_audiences/braze_high_value/users/replace \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "users": ["uid_001", "uid_002", "uid_003"]
   }'
 
-# 3. Check the segment status
-curl https://api.purchasely.io/client/mobile_applications/app_xxxx/segments/braze_high_value \
+# 3. Check the custom audience status
+curl https://api.purchasely.io/client/mobile_applications/app_xxxx/custom_audiences/braze_high_value \
   -H "Authorization: Bearer YOUR_API_KEY"
 
 # 4. Later, incrementally update
-curl -X POST https://api.purchasely.io/client/mobile_applications/app_xxxx/segments/braze_high_value/users \
+curl -X POST https://api.purchasely.io/client/mobile_applications/app_xxxx/custom_audiences/braze_high_value/users \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -396,4 +396,4 @@ curl -X POST https://api.purchasely.io/client/mobile_applications/app_xxxx/segme
   }'
 ```
 
-Once your segment is synced, you can associate it with a <Glossary>Placement</Glossary> in the Purchasely Console to display a specific screen to users in that segment.
+Once your custom audience is synced, you can associate it with a <Glossary>Placement</Glossary> in the Purchasely Console to display a specific screen to users in that custom audience.

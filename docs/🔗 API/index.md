@@ -12,8 +12,8 @@ next:
   description: ''
   pages:
     - type: basic
-      slug: segments-api
-      title: Segments API
+      slug: custom-audiences-api
+      title: Custom Audiences API
 ---
 
 The Purchasely Client API allows you to interact with your Purchasely data programmatically. Use it to sync data from your CRM, CDP, or backend systems.
@@ -34,4 +34,4 @@ https://api.purchasely.io/client/mobile_applications/{app_id}
 
 ## Available APIs
 
-* [Segments API](segments-api) — Create and sync user segments from external tools
+* [Custom Audiences API](custom-audiences-api) — Create and sync user custom audiences from external tools
