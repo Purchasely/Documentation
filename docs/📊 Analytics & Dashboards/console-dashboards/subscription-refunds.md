@@ -1,5 +1,5 @@
 ---
-title: Subscription refunds
+title: Subscription Refunds
 ---
 # About this chart
 
