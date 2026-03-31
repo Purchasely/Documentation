@@ -7,7 +7,7 @@ metadata:
 ---
 The Subscription Retention chart tracks how many paid subscriptions remain active over time after their initial purchase. It helps you measure subscriber loyalty, identify when users tend to churn, and evaluate the long-term impact of your acquisition and retention strategies.
 
-## How to read the chart
+# How to read the chart
 
 The chart is a **cohort retention table**. Each row represents a group (cohort) of subscriptions that started during the same time period.
 
@@ -21,7 +21,7 @@ The chart is a **cohort retention table**. Each row represents a group (cohort) 
 
 The diagonal staircase pattern is normal: recent cohorts have fewer columns because not enough time has elapsed to measure later periods.
 
-## Display modes
+# KPI displayed
 
 Use the **Show** dropdown to switch between:
 
@@ -30,7 +30,7 @@ Use the **Show** dropdown to switch between:
 | **Subscriptions retained (rates)**   | Percentage of the cohort still active at each period (e.g., 96.7% means 96.7% of the original cohort is still subscribed) |
 | **Subscriptions retained (numbers)** | Absolute count of subscriptions still active at each period                                                               |
 
-## Segments
+# Segments
 
 Use the **Segment** dropdown to focus on a subset of subscriptions:
 
@@ -39,7 +39,7 @@ Use the **Segment** dropdown to focus on a subset of subscriptions:
 | **All subscriptions**        | Includes all paid subscriptions: trials that converted, intro offers, promo offers, and direct full-price purchases |
 | **Full-price subscriptions** | Only subscriptions that started at full price (excludes trials, intro offers, and promo offers)                     |
 
-## Granularity
+# Granularity
 
 Use the **Daily / Weekly / Monthly** selector to control the time resolution of cohorts and retention periods.
 
@@ -85,7 +85,7 @@ The wider the time bucket, the more of these temporary churn-and-recovery pairs 
 * Use **weekly or monthly** for trend analysis, but keep in mind that cohort sizes and retention rates will be slightly optimistic due to this smoothing effect.
 * Don't try to reconcile weekly totals with monthly totals — the difference is an expected artifact of billing retry, not a data discrepancy.
 
-## Filters
+# Filters
 
 Click **Filters** to narrow the data. You can combine multiple filters.
 
@@ -102,7 +102,7 @@ Click **Filters** to narrow the data. You can combine multiple filters.
 | **A/B tests**        | Filter by A/B test the user was enrolled in                                        |
 | **Campaigns**        | Filter by campaign attribution                                                     |
 
-## Common use cases
+# Common use cases
 
 * **Compare trial vs. full-price retention** — Use the Segment dropdown to switch between "All subscriptions" and "Full-price subscriptions". If full-price retention is significantly higher, your trials may be attracting lower-intent users.
 * **Measure the impact of a paywall change** — Filter by Screen or A/B test and compare cohort retention before and after the change.
