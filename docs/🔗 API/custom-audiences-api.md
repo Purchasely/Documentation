@@ -28,7 +28,9 @@ Once synced, Custom Audiences can be used in <Glossary>Placement</Glossary>s jus
 
 ## Feature access
 
-The Custom Audiences feature requires activation on your Purchasely account. Contact your Purchasely account manager or support to enable it.
+The Custom Audiences feature requires the `custom-audiences` feature flag to be enabled on your Purchasely account. Without it, all Custom Audiences API endpoints will return `403 FEATURE_NOT_ENABLED`.
+
+Contact your Purchasely account manager or support to enable it.
 
 ## API Key
 
@@ -60,6 +62,8 @@ Replace `{app_id}` with your application's Purchasely ID (e.g. `app_xxxx`).
 
 The Client API enforces a rate limit of **60 requests per minute** per API key. Requests exceeding this limit will receive a `429 Too Many Requests` response.
 
+Additionally, the **Replace all users** endpoint (`PUT .../users/replace`) is limited to **1 call per custom audience every 12 hours**. Use the incremental add/remove endpoint for frequent updates.
+
 The maximum request body size is **10 MB**.
 
 # Managing Custom Audiences
@@ -88,7 +92,7 @@ POST /client/mobile_applications/{app_id}/custom_audiences
 | --- | --- | --- | --- |
 | `vendor_id` | string | Yes | Your unique identifier for this custom audience |
 | `name` | string | Yes | A display name for the custom audience |
-| `identifier_type` | string | Yes | The type of user identifier. One of: `user_id`, `anonymous_id`, `batch_custom_user_id`, `braze_user_id` |
+| `identifier_type` | string | Yes | The type of user identifier. One of: `user_id`, `anonymous_id` |
 
 **Response** `201 Created`:
 
@@ -271,6 +275,10 @@ PUT /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}/users/repl
 
 **Response** `202 Accepted`
 
+> 🚧 Rate limit
+>
+> This endpoint is limited to **1 call per custom audience every 12 hours**. For frequent updates, use the incremental [Add and remove users](#add-and-remove-users) endpoint instead.
+
 ## Clear all users
 
 Removes all users from the custom audience.
@@ -348,6 +356,7 @@ All errors follow this format:
 | --- | --- | --- |
 | `401` | `UNAUTHORIZED` | Missing or invalid API key |
 | `403` | `FORBIDDEN` | API key does not have access to this application |
+| `403` | `FEATURE_NOT_ENABLED` | Custom audiences feature is not enabled for this account |
 | `404` | `CUSTOM_AUDIENCE_NOT_FOUND` | No custom audience found with this vendor_id |
 | `409` | `MUTATION_IN_PROGRESS` | A mutation is already running for this custom audience |
 | `409` | `CANNOT_ARCHIVE_WHILE_PROCESSING` | Cannot delete a custom audience while a mutation is processing |
@@ -355,7 +364,7 @@ All errors follow this format:
 | `422` | `VALIDATION_FAILED` | Missing or invalid required fields |
 | `422` | `EMPTY_PAYLOAD` | No users provided in the mutation request |
 | `422` | `INVALID_PAYLOAD` | `add`, `remove`, or `users` must be arrays of strings |
-| `429` | - | Rate limit exceeded (60 requests/minute) |
+| `429` | - | Rate limit exceeded (60 requests/minute, or 1/12h for replace) |
 
 # Example: full sync workflow
 
