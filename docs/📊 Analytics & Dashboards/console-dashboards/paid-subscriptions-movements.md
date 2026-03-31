@@ -1,3 +1,6 @@
+---
+title: Paid subscriptions movements
+---
 # About this chart
 
 The Paid Subscriptions Movements chart tracks the flow of paid subscriptions entering and leaving your app over time. It combines new subscriptions (inflows) and churned subscriptions (outflows) into a single view, making it easy to see whether your subscriber base is growing, shrinking, or stable.
