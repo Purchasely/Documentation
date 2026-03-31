@@ -1,5 +1,5 @@
 ---
-title: Webhook integration
+title: Webhook
 excerpt: Receive real-time server events about your subscribers' lifecycle
 deprecated: false
 hidden: false
@@ -32,6 +32,7 @@ Receiving server events on your backend unlocks several capabilities:
 * **Data pipeline** — Feed your data warehouse, BI tools or analytics platforms with granular subscription data for cohort analysis, churn prediction and LTV modeling
 * **Internal tooling** — Power customer support dashboards with real-time subscription status, billing issue alerts and transaction history
 * **Revenue tracking** — Use `TRANSACTION_PROCESSED` events to reconcile revenue across stores and currencies in your own systems
+* **Server Event forwarding** — If you rely on a 3rd party platform which is not natively supported by Purchasely, you can leverage the webhook to receive the events and forward them directly to your 3rd-party platform directly from your backend
 
 <br />
 
@@ -53,7 +54,9 @@ Enter your **Client webhook URL** — this is the HTTPS endpoint on your backend
 
 Scroll down to the **Subscription events** section. Here you can toggle individual events on or off depending on your needs.
 
-<Image align="center" border={true} src="https://files.readme.io/433dcbd-image.png" className="border" />
+<Image align="center" border={true} src="https://files.readme.io/dd7c900e0c73e3e33d3288c92c4e2ea0bd283b711ad4f382fe62cae796bb5d74-image.png" className="border" />
+
+<br />
 
 Events are organized by category:
 
