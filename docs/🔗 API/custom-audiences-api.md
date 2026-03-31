@@ -92,7 +92,7 @@ POST /client/mobile_applications/{app_id}/custom_audiences
 | --- | --- | --- | --- |
 | `vendor_id` | string | Yes | Your unique identifier for this custom audience |
 | `name` | string | Yes | A display name for the custom audience |
-| `identifier_type` | string | Yes | The type of user identifier. One of: `user_id`, `anonymous_id` |
+| `identifier_type` | string | No | The type of user identifier. One of: `user_id`, `anonymous_id`. Defaults to `user_id` |
 
 **Response** `201 Created`:
 
