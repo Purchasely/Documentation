@@ -106,6 +106,12 @@ An activation is recorded the moment a user starts a new subscription. This incl
 
 Paid Subscriptions Movements tracks subscriptions that have entered a paid state. Free trials are not included in the "New" count of that chart until the trial converts to a paid subscription. Subscription Activations counts all new subscription starts immediately, including free trials. Use Activations to measure top-of-funnel acquisition volume, and Paid Subscriptions Movements to measure paying subscriber growth.
 
+## How do pending purchases and acknowledgement affect activations?
+
+On Google Play, a subscription must be **acknowledged** by the app within 3 days of purchase, otherwise it is automatically refunded. If your app has an acknowledgement delay (e.g., the user purchases but does not open the app immediately), the activation may be recorded slightly after the actual purchase date. In rare cases where acknowledgement fails entirely, the subscription is refunded and will not appear as an activation.
+
+Additionally, Google Play supports **deferred purchases** (e.g., the user selects a slow payment method). The activation is only recorded once the payment is confirmed, not when the user initiates the purchase flow.
+
 ## Why do weekly totals not match the sum of daily totals?
 
 When using Daily granularity, each bar represents a single day. Weekly bars aggregate an entire week. Due to how time boundaries are aligned (weeks start on Monday), partial weeks at the beginning or end of the selected date range may cause slight differences when you manually sum daily values and compare them to weekly values. This is normal behavior.
