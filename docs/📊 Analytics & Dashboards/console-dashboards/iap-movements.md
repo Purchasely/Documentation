@@ -1,3 +1,6 @@
+---
+title: IAP-movements
+---
 # About this chart
 
 The IAP Movements chart tracks the volume of **In-App Purchase (IAP)** transactions over time, broken down by app store. It helps you monitor purchase activity for your one-time products — consumables and non-consumables — across Apple App Store and Google Play Store.
