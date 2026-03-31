@@ -1,5 +1,5 @@
 ---
-title: Subscription base evolution
+title: Subscription Base Evolution
 ---
 # About this chart
 
