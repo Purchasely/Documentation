@@ -21,7 +21,7 @@ The chart is a **cohort retention table**. Each row represents a group (cohort) 
 
 The diagonal staircase pattern is normal: recent cohorts have fewer columns because not enough time has elapsed to measure later periods.
 
-## KPI displayed
+## Display modes
 
 Use the **Show** dropdown to switch between:
 
@@ -47,18 +47,43 @@ Use the **Daily / Weekly / Monthly** selector to control the time resolution of 
 * **Weekly** — One cohort per week, retention measured week by week. Good for spotting weekly patterns.
 * **Monthly** — One cohort per month, retention measured month by month. Best for long-term trends.
 
-### Why retention rates look higher at wider granularity
+### Why numbers differ when switching granularity
 
-You may notice that switching from daily to weekly or monthly shows **higher retention percentages**. This is expected behavior, not a data error.
+You may notice two things when switching from a finer granularity (e.g., weekly) to a wider one (e.g., monthly):
 
-**The reason:** when a subscription enters billing retry (e.g., payment fails on Jan 5) and recovers a few days later (e.g., payment succeeds on Jan 20), these two events may fall in different periods or the same period depending on granularity:
+1. **Cohort sizes don't add up** — the sum of weekly cohorts for March may be higher than the single monthly cohort for March.
+2. **Retention rates look higher** at wider granularity.
 
-* **Daily view:** the churn and recovery land on different days, so the subscription appears as lost on day 5 and recovered on day 20. Retention dips.
-* **Monthly view:** both events fall within January. The net effect is zero — the subscription never appears to have churned. Retention stays flat.
+Both effects come from the same root cause: **billing retry**. This is expected behavior, not a data error.
 
-The wider the time bucket, the more of these temporary churn-and-recovery cycles become invisible. This is standard behavior across analytics tools.
+#### What happens during billing retry
 
-**Recommendation:** use daily granularity when you need precision on short-term retention. Use weekly or monthly for trend analysis, but keep in mind that the numbers will be slightly optimistic due to this smoothing effect.
+When a subscription payment fails, it enters a **billing retry period** (also called grace period). The app store retries the charge over several days. If the payment eventually succeeds, the subscription is reactivated. If it doesn't, the subscription churns.
+
+This temporary churn-and-recovery cycle interacts with the granularity you've selected:
+
+#### Effect 1: cohort sizes don't add up
+
+A subscription that churns in week 10 and recovers in week 11 appears as a "started" subscription in the week 10 cohort and a "reactivated" subscription in the week 11 cohort — it is counted in **two separate cohorts**. But in monthly view, both events fall within the same month, so the subscription only appears **once**.
+
+> **Example from real data:** the six weekly cohorts covering March 2026 total 893 paid subscriptions (35 + 206 + 211 + 192 + 215 + 34). But the monthly March 2026 cohort shows only 835. The difference (58) represents subscriptions that were counted in two weekly cohorts due to billing retry spanning across weeks.
+
+#### Effect 2: retention rates look higher
+
+When a subscription churns and recovers within the same time bucket, the net effect is zero — it never appears to have churned.
+
+> **Example:** a subscription enters billing retry on Jan 5 and recovers on Jan 20.
+>
+> * **Weekly view:** churn and recovery land in different weeks — the subscription shows as lost, then recovered. Retention dips.
+> * **Monthly view:** both events land in January — net delta is 0. The subscription never appears to have churned. Retention stays flat.
+
+The wider the time bucket, the more of these temporary churn-and-recovery pairs collapse into non-events.
+
+#### Recommendation
+
+* Use **daily** granularity when you need precision on short-term retention and accurate cohort counts.
+* Use **weekly or monthly** for trend analysis, but keep in mind that cohort sizes and retention rates will be slightly optimistic due to this smoothing effect.
+* Don't try to reconcile weekly totals with monthly totals — the difference is an expected artifact of billing retry, not a data discrepancy.
 
 ## Filters
 
