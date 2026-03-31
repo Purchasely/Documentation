@@ -1,3 +1,6 @@
+---
+title: Subscription base evolution
+---
 # About this chart
 
 The Subscription Base Evolution chart shows the total count of active subscriptions over time as a bar chart. It helps you track the growth or decline of your subscriber base, spot trends across segments, and understand how your acquisition and retention efforts translate into active subscriptions on any given day, week, or month.
