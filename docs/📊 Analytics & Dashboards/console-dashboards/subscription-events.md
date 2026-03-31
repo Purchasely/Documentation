@@ -1,3 +1,6 @@
+---
+title: Subscription events
+---
 # About this chart
 
 The Subscription Events chart is a raw event explorer that plots the volume of server-side subscription lifecycle events over time. Each event type appears as a separate colored line on a time-series chart, letting you compare event volumes side by side. It is designed for deep operational analysis rather than high-level KPI tracking — use it when you need to understand exactly what is happening in your subscription lifecycle at the event level.
