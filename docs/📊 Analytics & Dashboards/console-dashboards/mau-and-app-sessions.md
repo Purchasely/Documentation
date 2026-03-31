@@ -1,3 +1,6 @@
+---
+title: MAU and app sessions
+---
 # About this chart
 
 The MAU & App Sessions page contains two charts that provide a high-level view of app engagement and Purchasely infrastructure performance. The first chart tracks Monthly Active Users and App starts over time. The second chart monitors Paywall Server Response Time, an operational metric for engineering teams.
