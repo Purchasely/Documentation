@@ -1,3 +1,6 @@
+---
+title: MRR
+---
 # About this chart
 
 The MRR chart tracks your Monthly Recurring Revenue over time. It normalizes all subscription revenue to a 30-day equivalent, regardless of actual billing period, so you can compare the recurring value of weekly, monthly, and yearly plans on a common scale. Use it to monitor revenue momentum, detect growth or contraction trends, and measure the impact of pricing or acquisition changes.
