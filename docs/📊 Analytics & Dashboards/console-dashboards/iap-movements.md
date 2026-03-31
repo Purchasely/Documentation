@@ -1,5 +1,5 @@
 ---
-title: IAP-movements
+title: IAP movements
 ---
 # About this chart
 
