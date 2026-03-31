@@ -1,3 +1,6 @@
+---
+title: IAP refunds
+---
 # About this chart
 
 The IAP Refunds chart tracks the percentage of one-time in-app purchases (consumables and non-consumables) that were eventually refunded, plotted over time by purchase date. It helps you monitor refund trends for non-subscription products, detect spikes that may signal product issues or store policy changes, and compare refund behavior across platforms, plans, and countries.
