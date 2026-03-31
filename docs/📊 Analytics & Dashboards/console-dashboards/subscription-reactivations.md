@@ -1,5 +1,5 @@
 ---
-title: Subscription reactivations
+title: Subscription Reactivations
 ---
 # About this chart
 
