@@ -1,3 +1,6 @@
+---
+title: Screens and conversions
+---
 # About this chart
 
 The Screens & Conversions chart is part of the Funnel Analytics section. It combines paywall view volume with conversion rates in a single visualization, letting you understand how many users see your paywalls and what proportion converts to a paid subscription. This is one of the most important charts for growth teams optimizing their monetization funnel.
