@@ -1,5 +1,5 @@
 ---
-title: Subscription status
+title: Subscription Status
 ---
 # About this chart
 
