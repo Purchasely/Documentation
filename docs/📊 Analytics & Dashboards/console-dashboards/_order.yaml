@@ -3,6 +3,7 @@
 - subscription-base-evolution
 - paid-subscription-movements
 - subscription-activations
+- subscription-retention
 - dashboard-live
 - dashboard-conversion
 - subscription-refunds
@@ -14,6 +15,5 @@
 - dashboard-trials
 - dashboard-promotional-offers
 - dashboard-events
-- subscription-retention
 - dash-subscription-status
 - subscription-events
