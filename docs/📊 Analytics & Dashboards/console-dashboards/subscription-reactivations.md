@@ -103,6 +103,16 @@ A reactivation is recorded when a user whose subscription was fully terminated (
 
 A billing retry recovery happens when a subscription payment fails, the app store retries the charge over several days, and the payment eventually succeeds. During this period the subscription was never fully terminated -- it was in a retry or grace period. A reactivation, on the other hand, only occurs after the subscription has been definitively terminated and the user actively re-subscribes.
 
+More specifically, on Google Play there are two recovery stages that are **not** reactivations:
+
+| Recovery type | What happened | Reactivation? |
+| :------------ | :------------ | :------------ |
+| **Grace period recovery** | Payment failed, retried successfully while user still had access | No — subscription never left active state |
+| **Account hold recovery** | Payment failed, user lost access, then payment succeeded during the hold window (up to 60 days) | No — the store restored the original subscription automatically |
+| **Re-subscribe after expiration** | Subscription fully expired, user actively purchases again | **Yes** — this is a reactivation |
+
+On the App Store, the equivalent distinction is between billing retry recovery (not a reactivation) and a new purchase after expiration (reactivation).
+
 ## Are high reactivation numbers always a good sign?
 
 Not necessarily. A healthy reactivation rate shows that your product has lasting appeal and your win-back efforts are effective. However, if reactivations are growing in parallel with churn, it may indicate a revolving-door pattern where the same users repeatedly churn and return. In that case, focus on understanding why users leave in the first place rather than celebrating their return.

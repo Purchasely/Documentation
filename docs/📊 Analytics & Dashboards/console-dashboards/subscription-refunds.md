@@ -83,6 +83,10 @@ Refund Rate = (Refunds / Subscriptions) x 100, where both values correspond to t
 
 Apple and Google handle refunds differently. Apple processes refund requests through Apple Support and historically has a more permissive refund policy. Google Play provides a 48-hour self-service refund window and processes later requests through Google Support. These policy differences naturally lead to different refund rate baselines for each platform. Filter by Platform to analyze each one separately.
 
+## Can a refund happen without revoking access?
+
+Yes. On Google Play, a refund does not automatically revoke the subscription entitlement. A developer (or Google Support) can issue a refund while letting the user keep access until the current period ends. On the App Store, refunds typically revoke access immediately. This means a refunded subscription on Android may still appear as "active" in other charts (Subscription Base, Subscription Status) until the current billing period expires. The refund rate in this chart counts the refund regardless of whether access was revoked.
+
 ## Can I see when the refund was actually issued?
 
 No. This chart plots refund data by subscription start date to help you evaluate the quality of your acquisition cohorts. It does not show refund timing. If you need to track when refunds are processed, use the server events (REFUND lifecycle event) which include timestamps for both the original transaction and the refund.

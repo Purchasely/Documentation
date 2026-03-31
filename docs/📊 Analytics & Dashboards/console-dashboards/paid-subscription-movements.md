@@ -110,6 +110,8 @@ Click **Filters** to narrow the data. You can combine multiple filters.
 
 When a subscriber switches from Plan A to Plan B, the system records the end of Plan A (counted as Churn) and the start of Plan B (counted as New). The net effect on the Balance is zero, but the individual bars show activity in both directions. This is expected behavior. If plan changes are frequent, they can inflate both the New and Churn bars while leaving the Balance relatively flat.
 
+For **deferred plan changes** (primarily Google Play), both the +1 churn and +1 new appear on the date the downgrade is *initiated*, even though the user continues using the old plan until the next renewal date. This can temporarily overstate both New and Churn volumes before the actual plan switch takes effect.
+
 ## What does a negative balance mean?
 
 A negative balance for a period means more subscriptions were lost than gained. A single negative period is not necessarily alarming -- it can happen after a promotional spike subsides or during a seasonal dip. However, a sustained negative balance across multiple periods indicates that churn is structurally outpacing acquisition and requires investigation.
@@ -129,3 +131,11 @@ Summing daily New and Churn values across a month may not exactly match the mont
 ## Can I export the data for further analysis?
 
 Yes. Click the **Export CSV** button below the data table to download all visible rows with their Date, New, Churn, and Balance columns. The export respects your current filters, grouping, and granularity settings.
+
+## How do Google Play paused subscriptions appear in this chart?
+
+Pause is a Google Play-only feature. When a subscription is paused, it appears as **Churn** (the user loses access). When it automatically resumes, it appears as **New** (access is restored). This inflates both New and Churn numbers without representing genuine acquisition or loss. Filter by Platform to isolate this effect on Android.
+
+## How do Google Play prepaid plans appear?
+
+Prepaid plans do not auto-renew. Each prepaid period expiration appears as **Churn**, and each top-up appears as **New** — even if the user intends to continue. This creates a recurring +1/-1 pattern for every prepaid subscriber at each renewal. If your app offers prepaid plans, expect higher New and Churn volumes on Android compared to auto-renewing equivalents.

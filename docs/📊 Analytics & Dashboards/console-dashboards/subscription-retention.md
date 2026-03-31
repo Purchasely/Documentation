@@ -94,6 +94,10 @@ When you add up the "Paid subscriptions" column across all weekly cohorts for a 
 
 This applies to any granularity comparison: daily totals won't match weekly totals, and weekly totals won't match monthly totals.
 
+> 📘 Grace period recovery vs. account hold recovery
+>
+> The billing retry effect described above specifically applies to subscriptions that go through **account hold** (Google Play: `ON_HOLD`) or equivalent — where access is revoked and then restored. Grace period recovery does **not** create a new cohort entry because the subscription never leaves the "active" state. Only account hold recovery (where the billing date resets) generates a recovery event that can cause double-counting across weekly cohorts.
+
 ## Why does retention look higher when I switch to a wider granularity?
 
 For the same reason. When a subscription churns and recovers within the same time bucket (e.g., within the same month), the net effect is zero — it never appears to have churned.
@@ -111,3 +115,11 @@ The wider the time bucket, the more of these temporary churn-and-recovery pairs 
 - **Monthly** for long-term trends and executive reporting — but keep in mind that cohort sizes and retention rates will be slightly optimistic due to the billing retry smoothing effect described above.
 
 As a rule of thumb: don't try to reconcile totals across granularities. The differences are an expected artifact of billing retry, not a data discrepancy.
+
+## How do plan changes affect retention cohorts?
+
+When a subscription changes plan (upgrade or downgrade), a new subscription is created in Purchasely. The old subscription will **churn** from its original cohort, and the new subscription will appear in the cohort corresponding to the plan change date. This can reduce retention rates for cohorts that experienced many plan changes, and inflate the size of cohorts during periods with frequent upgrades or downgrades. This is not data loss — the subscriber is still active, just tracked under a different subscription.
+
+## How do Google Play paused subscriptions affect retention?
+
+Paused subscriptions (Google Play only) temporarily leave the active state and re-enter it when the pause ends. In retention cohorts, a paused subscription will appear as churned during the pause period and recovered when it resumes — similar to account hold recovery. This creates the same cross-cohort counting effect described in the granularity section above.

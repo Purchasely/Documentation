@@ -95,6 +95,19 @@ No. A subscription in AUTO_RENEWING_CANCELLED status is still active. The subscr
 
 Grace period subscriptions represent a billing problem, not a user intent problem. The subscriber did not choose to cancel -- their payment simply failed. App stores (Apple and Google) retry the charge for a limited window (typically 6 to 16 days depending on the store). During this time the user retains access. If the retry succeeds, the subscription returns to AUTO_RENEWING. If it fails permanently, the subscription churns. Monitoring this segment helps you detect payment infrastructure issues early and decide whether to trigger in-app messaging to prompt users to update their payment method.
 
+## What is the difference between grace period and account hold?
+
+These are two distinct stages of a failed payment on app stores, and they affect the chart differently:
+
+| Stage | Access | Chart impact | Duration |
+| :---- | :----- | :----------- | :------- |
+| **Grace period** | User **retains** access | Counted in the **IN_GRACE_PERIOD** segment (yellow) | Configurable: 0–30 days (Google Play), 6–16 days (App Store) |
+| **Account hold** (Google Play) / **Billing retry without access** (App Store) | User **loses** access | **Not counted** in this chart (subscription is no longer active) | Up to 60 days total (grace period + account hold combined on Google Play) |
+
+On Google Play, this two-stage flow is explicit: `IN_GRACE_PERIOD` → `ON_HOLD` → `EXPIRED`. On the App Store, the equivalent is the billing retry period, which may or may not preserve access depending on grace period configuration.
+
+A subscription that recovers from **grace period** simply returns to AUTO_RENEWING — no reactivation event is generated. A subscription that recovers from **account hold** generates a recovery event and resets the billing date.
+
 ## Can a subscription move between statuses?
 
 Yes. A subscription can transition between statuses over its lifetime:

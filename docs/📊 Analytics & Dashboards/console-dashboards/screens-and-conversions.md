@@ -166,6 +166,10 @@ As a result, the most recent days or weeks will always show a lower CVR to regul
 
 Conversion rates are calculated against **unique viewers**, not total app users or total views. If many users see your paywall but few convert, the denominator (unique viewers) is large. Also remember that cohort attribution means recent periods will have incomplete conversion data. Check the KPI cards at the top: if "Number of unique Screens viewers" is very high relative to conversions, the issue is likely conversion efficiency rather than a data problem.
 
+## How do pending or deferred purchases affect conversions?
+
+On Google Play, a purchase can be **deferred** (e.g., the user chooses to pay later or uses a slow payment method). In this case, the user views the paywall and initiates a purchase, but the transaction is not immediately confirmed. The paywall view is counted in the cohort immediately, but the conversion is only recorded once the transaction is finalized. This can create a temporary gap where views increase but conversions lag behind — similar to the trial-to-paid delay, but caused by the payment processing timeline rather than an offer period.
+
 ## Can I see revenue data in this chart?
 
 No. The Screens & Conversions chart focuses exclusively on funnel metrics (views and conversion rates). For revenue analysis, use the Revenue or MRR charts, which track monetary values.

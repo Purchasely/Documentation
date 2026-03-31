@@ -118,3 +118,15 @@ No. MRR is computed from the actual `purchased_at` and `next_renewal_at` dates o
 ## Why did my MRR change even though I had no new subscribers?
 
 MRR can shift without new acquisitions. Common reasons include: subscriptions transitioning from an intro offer to full price (increasing MRR), subscriptions entering a billing retry period, refunds being processed, or renewals landing on a period with a different number of days. All of these change the per-subscription MRR contribution.
+
+## How do Google Play paused subscriptions affect MRR?
+
+During a pause (Google Play only), the subscription contributes **$0 to MRR** — the user has no access and no billing occurs. When the subscription automatically resumes, MRR is recalculated based on the new billing cycle. If you see periodic MRR dips concentrated on Android, paused subscriptions may be the cause.
+
+## How do price changes affect MRR?
+
+When a price change is pending (particularly opt-in increases on Google Play), MRR continues to reflect the **current price** until the new price actually takes effect at the next renewal. If the user rejects an opt-in price increase and the subscription is canceled, MRR will drop to $0 at expiration. The pending price change itself has no impact on MRR.
+
+## How do proration modes affect MRR on plan changes?
+
+For subscription upgrades and downgrades, MRR is calculated using the actual amount charged and the actual service period dates. Different proration modes on Google Play (e.g., CHARGE_PRORATED_PRICE, WITH_TIME_PRORATION) may result in a non-standard first period for the new plan, which affects the per-day MRR calculation. This is temporary and normalizes at the next full billing cycle.

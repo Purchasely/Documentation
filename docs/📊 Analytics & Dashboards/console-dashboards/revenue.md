@@ -100,3 +100,11 @@ The Revenue chart always breaks down by platform (Apple vs. Google). To analyze 
 ## Why does the chart show zero revenue for recent days?
 
 Transaction data from app stores can take **24 to 72 hours** to be fully processed and reported. If the most recent day or two show unusually low or zero revenue, wait for the data to be finalized before drawing conclusions.
+
+## How do chargebacks and voided purchases affect revenue?
+
+Chargebacks (payment disputes) can retroactively affect historical revenue figures. If a subscription payment is charged back months after the original transaction, the revenue adjustment may appear in the data for the original transaction date, not the chargeback date. This is most common on Google Play, where voided purchase notifications are sent for both refunds and chargebacks.
+
+## How do proration charges appear on plan changes?
+
+When a user upgrades or downgrades, the store may issue a prorated charge for the transition period. This charge does not correspond to a full billing cycle and may appear as a smaller-than-expected transaction. Different proration modes on Google Play (immediate charge, time-based proration, deferred) affect when and how much is charged, which can cause temporary spikes or dips in daily revenue.

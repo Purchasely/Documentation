@@ -37,7 +37,9 @@ Events are organized into color-coded categories. Click a category chip to selec
 | **Activation / Plan Change / Reactivation** | Blue | Activate, Deactivate, SubscriptionStarted, SubscriptionReactivated, SubscriptionUpgraded, SubscriptionDowngraded, SubscriptionCrossgraded, SubscriptionDeferred, SubscriptionReceived |
 | **Renewal / Recovery** | Green | SubscriptionRenewed, RenewedAutomatic, RenewalValidated, SubscriptionRecoveredFromBillingRetry, SubscriptionRecoveredFromGracePeriod |
 | **Billing Issue** | Yellow/Orange | EnteredBillingRetry, GracePeriodStarted, GracePeriodTerminated |
-| **Cancellation / Refund / Pause** | Red | SubscriptionTerminated, SubscriptionCancelledDuringGracePeriod, SubscriptionCancelledDuringPause, SubscriptionRefundBeforeExpiry, SubscriptionPaused, SubscriptionWithPause |
+| **Cancellation / Refund / Pause** | Red | SubscriptionTerminated, SubscriptionCancelledDuringGracePeriod, SubscriptionCancelledDuringPause, SubscriptionRefundBeforeExpiry, SubscriptionPaused, SubscriptionWithPause, SubscriptionUnpaused, SubscriptionWillNotPause |
+
+> **Note:** Pause-related events (SubscriptionPaused, SubscriptionUnpaused, SubscriptionWithPause, SubscriptionWillNotPause) are **Google Play only**. They will not appear for App Store subscriptions.
 | **Entitlement / Transfer** | Purple | SubscriptionTransferred |
 | **Trial / Intro / Promo offer** | Pink/Orange | TrialStarted, TrialConverted, TrialNotConverted, IntroOfferStarted, IntroOfferConverted, IntroOfferNotConverted, PromoCodeStarted, PromoCodeConverted, PromoCodeNotConverted, PromotionalOfferStarted, PromotionalOfferConverted, PromotionalOfferNotConverted |
 | **Transaction Revenue** | Blue | TransactionProcessed |
