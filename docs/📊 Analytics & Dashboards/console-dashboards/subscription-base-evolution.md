@@ -114,6 +114,24 @@ Total active subscriptions. This is a **stock metric** (how many subscriptions e
 
 This typically indicates a batch of subscriptions exiting their **grace period** and moving to a terminated or unpaid state. While a subscription is in its grace period it remains active, but once the grace period expires without a successful charge, the subscription loses its active status and the count drops. If the store successfully retries the charge before the full retry window expires, those subscriptions are restored and the count recovers. In daily granularity these fluctuations are visible; in weekly or monthly views they tend to smooth out.
 
+## How do Google Play paused subscriptions affect the count?
+
+Pause is a Google Play-only feature. When a subscription is paused:
+
+- It is **removed** from the active subscription count (the user loses access during the pause).
+- When it automatically resumes after the pause period, it **re-enters** the active count.
+
+This creates a temporary dip in your subscription base that resolves when the pause period ends. If you see periodic dips concentrated on Android, filter by Platform to check whether paused subscriptions are the cause.
+
+## How are Google Play prepaid plans counted?
+
+Prepaid plans (Google Play only) do not auto-renew. Each top-up creates a new subscription record. As a result:
+
+- A prepaid subscription **leaves** the active count when its prepaid period expires.
+- If the user tops up, a **new** subscription enters the active count.
+
+This can create a saw-tooth pattern for apps with a significant prepaid user base. The subscriber does not churn in the traditional sense (they intend to continue), but each top-up is technically a new subscription.
+
 ## Can the same subscription appear in multiple "Grouped by" segments?
 
 No. Each subscription is assigned to exactly one segment per dimension. For example, when grouping by Platform, a subscription is either iOS or Android — it cannot appear in both. The segments within a grouped view always sum to the total.
