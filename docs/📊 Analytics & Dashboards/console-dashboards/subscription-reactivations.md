@@ -1,3 +1,6 @@
+---
+title: Subscription reactivations
+---
 # About this chart
 
 The Subscription Reactivations chart tracks how many previously churned or terminated subscriptions have been re-started by the same user over time. It helps you measure the effectiveness of win-back campaigns, detect organic re-engagement patterns, and understand whether former subscribers are returning to your app.
