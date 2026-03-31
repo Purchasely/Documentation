@@ -1,5 +1,5 @@
 ---
-title: Subscription retention
+title: Subscription Retention
 ---
 # About this chart
 
