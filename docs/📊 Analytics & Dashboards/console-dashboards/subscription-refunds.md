@@ -1,3 +1,6 @@
+---
+title: Subscription refunds
+---
 # About this chart
 
 The Subscription Refunds chart tracks the percentage of subscriptions that were eventually refunded, plotted over time by subscription start date. It helps you monitor refund trends, detect spikes that may signal product or billing issues, and compare refund behavior across platforms, plans, and acquisition sources.
