@@ -1,5 +1,5 @@
 ---
-title: Subscription activations
+title: Subscription Activations
 ---
 # About this chart
 
