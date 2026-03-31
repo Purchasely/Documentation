@@ -1,5 +1,5 @@
 ---
-title: Paid subscriptions movements
+title: Paid Subscription Movements
 ---
 # About this chart
 
