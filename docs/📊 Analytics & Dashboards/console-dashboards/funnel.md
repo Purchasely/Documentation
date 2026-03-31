@@ -1,3 +1,6 @@
+---
+title: Funnel
+---
 # About this chart
 
 The Funnel chart visualizes the complete subscription journey as a **Sankey diagram** — a flow visualization where bands connect stages from left to right. It shows how subscriptions enter through a specific dimension (placement, paywall, plan, platform, or country), move through intermediate stages (offers, trials), and reach an outcome (conversion, full-price payment, renewal). Wider bands mean more subscriptions followed that path, giving you an immediate sense of where volume concentrates and where it drops off.
