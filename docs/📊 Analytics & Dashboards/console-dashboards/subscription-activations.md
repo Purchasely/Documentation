@@ -1,3 +1,6 @@
+---
+title: Subscription activations
+---
 # About this chart
 
 The Subscription Activations chart counts how many new subscriptions started during a given period. An "activation" is the moment a user begins a subscription for the first time -- whether through a free trial, a paid introductory offer, or a direct full-price purchase. It gives you a clear, day-by-day (or week-by-week, month-by-month) view of acquisition volume so you can spot trends, measure campaign impact, and compare acquisition channels.
