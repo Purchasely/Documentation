@@ -1,3 +1,6 @@
+---
+title: SDK versions
+---
 # About this chart
 
 The SDK Versions chart shows the distribution of Purchasely SDK versions across your user base over time, broken down by platform. It displays two stacked bar charts -- one for iOS and one for Android -- so you can see at a glance which SDK versions your users are running and how adoption shifts day by day.
