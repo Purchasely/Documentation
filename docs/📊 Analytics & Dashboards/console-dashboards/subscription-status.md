@@ -1,3 +1,6 @@
+---
+title: Subscription status
+---
 # About this chart
 
 The Subscription Status chart shows the composition of your active subscriptions by renewal status at each point in time. It breaks every active subscription into one of three states -- auto-renewing, canceled but still active, or in a grace period after a failed payment -- so you can monitor the health of your subscriber base at a glance.
