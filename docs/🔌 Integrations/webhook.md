@@ -14,7 +14,6 @@ next:
       slug: webhook-messages-authentication
       title: Webhook messages authentication
 ---
-
 Purchasely can send real-time **Server Events** to your backend via a webhook. These events cover every stage of the subscription lifecycle — from activation to renewal, plan changes, billing issues, and churn.
 
 This page explains how to configure and implement the webhook to receive **Lifecycle Events**, **Offer Events** and **Transactional Events**.
@@ -29,10 +28,10 @@ This page explains how to configure and implement the webhook to receive **Lifec
 
 Receiving server events on your backend unlocks several capabilities:
 
-- **Marketing automations** — Trigger campaigns based on lifecycle milestones (e.g. send a win-back email when `RENEWAL_DISABLED` fires, or a congratulations message on `TRIAL_CONVERTED`)
-- **Data pipeline** — Feed your data warehouse, BI tools or analytics platforms with granular subscription data for cohort analysis, churn prediction and LTV modeling
-- **Internal tooling** — Power customer support dashboards with real-time subscription status, billing issue alerts and transaction history
-- **Revenue tracking** — Use `TRANSACTION_PROCESSED` events to reconcile revenue across stores and currencies in your own systems
+* **Marketing automations** — Trigger campaigns based on lifecycle milestones (e.g. send a win-back email when `RENEWAL_DISABLED` fires, or a congratulations message on `TRIAL_CONVERTED`)
+* **Data pipeline** — Feed your data warehouse, BI tools or analytics platforms with granular subscription data for cohort analysis, churn prediction and LTV modeling
+* **Internal tooling** — Power customer support dashboards with real-time subscription status, billing issue alerts and transaction history
+* **Revenue tracking** — Use `TRANSACTION_PROCESSED` events to reconcile revenue across stores and currencies in your own systems
 
 <br />
 
@@ -46,7 +45,7 @@ Setting up the webhook requires two steps in the [Purchasely Console](https://co
 
 Enter your **Client webhook URL** — this is the HTTPS endpoint on your backend that will receive the events.
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/45bca19-image.png" />
+<Image align="center" border={true} src="https://files.readme.io/45bca19-image.png" className="border" />
 
 <br />
 
@@ -54,24 +53,25 @@ Enter your **Client webhook URL** — this is the HTTPS endpoint on your backend
 
 Scroll down to the **Subscription events** section. Here you can toggle individual events on or off depending on your needs.
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/433dcbd-image.png" />
+<Image align="center" border={true} src="https://files.readme.io/433dcbd-image.png" className="border" />
 
 Events are organized by category:
 
-| Category | Examples | Use case |
-| :------- | :------- | :------- |
-| **Activation / Plan Change / Reactivation** | `SUBSCRIPTION_STARTED`, `SUBSCRIPTION_UPGRADED`, `SUBSCRIPTION_REACTIVATED` | Track new subscribers, plan changes and win-backs |
-| **Cancellation / Refund / Pause** | `RENEWAL_DISABLED`, `SUBSCRIPTION_TERMINATED`, `SUBSCRIPTION_REFUNDED` | Detect voluntary and involuntary churn signals |
-| **Billing Issue** | `GRACE_PERIOD_STARTED`, `ENTERED_BILLING_RETRY` | Monitor and react to payment failures |
-| **Renewal / Recovery** | `SUBSCRIPTION_RENEWED`, `SUBSCRIPTION_RECOVERED_FROM_BILLING_RETRY` | Track successful renewals and billing recoveries |
-| **Entitlement / Transfer** | `SUBSCRIPTION_TRANSFERRED`, `SUBSCRIPTION_RECEIVED` | Handle multi-device subscription transfers |
-| **Trial / Intro / Promo Offer** | `TRIAL_STARTED`, `INTRO_OFFER_CONVERTED`, `PROMOTIONAL_OFFER_NOT_CONVERTED` | Measure offer performance and trigger conversion campaigns |
-| **Transaction Revenue** | `TRANSACTION_PROCESSED` | Track revenue per transaction with currency and amount details |
+| Category                                    | Examples                                                                    | Use case                                                       |
+| :------------------------------------------ | :-------------------------------------------------------------------------- | :------------------------------------------------------------- |
+| **Activation / Plan Change / Reactivation** | `SUBSCRIPTION_STARTED`, `SUBSCRIPTION_UPGRADED`, `SUBSCRIPTION_REACTIVATED` | Track new subscribers, plan changes and win-backs              |
+| **Cancellation / Refund / Pause**           | `RENEWAL_DISABLED`, `SUBSCRIPTION_TERMINATED`, `SUBSCRIPTION_REFUNDED`      | Detect voluntary and involuntary churn signals                 |
+| **Billing Issue**                           | `GRACE_PERIOD_STARTED`, `ENTERED_BILLING_RETRY`                             | Monitor and react to payment failures                          |
+| **Renewal / Recovery**                      | `SUBSCRIPTION_RENEWED`, `SUBSCRIPTION_RECOVERED_FROM_BILLING_RETRY`         | Track successful renewals and billing recoveries               |
+| **Entitlement / Transfer**                  | `SUBSCRIPTION_TRANSFERRED`, `SUBSCRIPTION_RECEIVED`                         | Handle multi-device subscription transfers                     |
+| **Trial / Intro / Promo Offer**             | `TRIAL_STARTED`, `INTRO_OFFER_CONVERTED`, `PROMOTIONAL_OFFER_NOT_CONVERTED` | Measure offer performance and trigger conversion campaigns     |
+| **Transaction Revenue**                     | `TRANSACTION_PROCESSED`                                                     | Track revenue per transaction with currency and amount details |
 
 For a complete list and description of each event, see:
-- [Lifecycle Events](lifecycle-events)
-- [Offer Events](offer-events)
-- [Transactional Event](transactional-event)
+
+* [Lifecycle Events](lifecycle-events)
+* [Offer Events](offer-events)
+* [Transactional Event](transactional-event)
 
 <br />
 
@@ -171,18 +171,18 @@ end
 
 All server events share a common JSON structure. Key fields include:
 
-| Field | Description |
-| :---- | :---------- |
-| `event_name` | Event identifier (e.g. `SUBSCRIPTION_RENEWED`) |
-| `event_id` | Unique event ID — use it for idempotency |
-| `user_id` | Logged-in user identifier |
-| `anonymous_user_id` | Identifier for users who haven't logged in yet |
-| `plan` | The Purchasely plan identifier |
-| `store` | The originating store (`APPLE_APP_STORE`, `GOOGLE_PLAY_STORE`, etc.) |
-| `subscription_status` | Current status of the subscription |
-| `purchased_at` | Original purchase date |
-| `next_renewal_at` | Next expected renewal date |
-| `event_created_at` | Timestamp of the event |
+| Field                 | Description                                                          |
+| :-------------------- | :------------------------------------------------------------------- |
+| `event_name`          | Event identifier (e.g. `SUBSCRIPTION_RENEWED`)                       |
+| `event_id`            | Unique event ID — use it for idempotency                             |
+| `user_id`             | Logged-in user identifier                                            |
+| `anonymous_user_id`   | Identifier for users who haven't logged in yet                       |
+| `plan`                | The Purchasely plan identifier                                       |
+| `store`               | The originating store (`APPLE_APP_STORE`, `GOOGLE_PLAY_STORE`, etc.) |
+| `subscription_status` | Current status of the subscription                                   |
+| `purchased_at`        | Original purchase date                                               |
+| `next_renewal_at`     | Next expected renewal date                                           |
+| `event_created_at`    | Timestamp of the event                                               |
 
 For `TRANSACTION_PROCESSED` events, additional revenue fields are provided (`store_price`, `customer_currency`, `plan_price_in_customer_currency`, etc.).
 
@@ -199,9 +199,3 @@ We strongly recommend verifying webhook signatures to protect your endpoint agai
 For more details, see [Webhook Messages Authentication](webhook-messages-authentication).
 
 <br />
-
-> 🚧 Important: do not use `next_renewal_at` to revoke access
->
-> Never use the `next_renewal_at` field to schedule entitlement revocation. Renewals can be delayed (billing retries, grace periods) or cancelled. Always rely on the `DEACTIVATE` event to revoke access.
->
-> `next_renewal_at` is useful for display purposes only (e.g. showing the user when their next charge is expected).
