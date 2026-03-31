@@ -5,6 +5,8 @@ hidden: false
 metadata:
   robots: index
 ---
+# About this chart
+
 The Subscription Retention chart tracks how many paid subscriptions remain active over time after their initial purchase. It helps you measure subscriber loyalty, identify when users tend to churn, and evaluate the long-term impact of your acquisition and retention strategies.
 
 # How to read the chart
