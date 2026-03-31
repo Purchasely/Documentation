@@ -1,5 +1,5 @@
 ---
-title: Subscription events
+title: Subscription Events
 ---
 # About this chart
 
