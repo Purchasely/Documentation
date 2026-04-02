@@ -5,7 +5,7 @@ title: SDK versions
 
 The SDK Versions chart shows the distribution of Purchasely SDK versions across your user base over time, broken down by platform. It displays two stacked bar charts -- one for iOS and one for Android -- so you can see at a glance which SDK versions your users are running and how adoption shifts day by day.
 
-This is critical for planning SDK deprecation, validating feature rollouts, and ensuring your users have access to the latest screen designs and capabilities. 
+This is critical for planning SDK deprecation, validating feature rollouts, and ensuring your users have access to the latest screen designs and capabilities.
 
 # How to read the chart
 
@@ -32,7 +32,7 @@ A version that shrinks over time indicates users are updating their app. A versi
 
 * **Plan SDK version deprecation** -- Monitor the percentage of users still on older SDK versions. When a legacy version drops below a meaningful threshold, you can safely deprecate it and simplify your codebase.
 * **Validate an app release rollout** -- After shipping a new app version with an updated SDK, watch the new SDK version appear and grow in the chart. If adoption stalls, investigate whether the rollout is paused or users are not updating.
-* **Ensure latest features compatibility** -- Use the chart to verify what share of your users have access to the latest features released in the SDK. 
+* **Ensure latest features compatibility** -- Use the chart to verify what share of your users have access to the latest features released in the SDK.
 * **Measure app update campaign effectiveness** -- If you run in-app prompts, push notifications, or other campaigns encouraging users to update, compare the version distribution before and after the campaign to quantify its impact.
 * **Detect platform-specific adoption gaps** -- Compare iOS and Android charts side by side. One platform may lag behind due to slower store review, staged rollouts, or different user behavior. This helps you decide whether to delay a feature that depends on a newer SDK version.
 
@@ -55,7 +55,3 @@ It depends on the SDK version. Screen Composer screens require SDK 5.0.0 or late
 ## Why does the total user count fluctuate between days?
 
 The chart reflects daily active users who triggered the SDK. Variations are normal and reflect natural fluctuations in app usage. Weekends, holidays, and seasonality all affect daily active user counts.
-
-## How often is this chart updated?
-
-The data is updated daily. Each bar represents the SDK version distribution observed for that calendar day.
