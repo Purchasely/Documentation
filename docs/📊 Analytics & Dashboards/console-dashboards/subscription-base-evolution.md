@@ -31,7 +31,7 @@ When a **Grouped by** dimension is applied, the bars are stacked or split by seg
 
 # Controls
 
-## Show
+### Show
 
 Filter the type of subscriptions included in the chart:
 
@@ -43,7 +43,7 @@ Filter the type of subscriptions included in the chart:
 | **Discounted subscriptions only** | Subscriptions currently on an introductory offer or promotional offer at a reduced price           |
 | **Free subscriptions only**       | Subscriptions on a free plan or in an active free trial period                                     |
 
-## Grouped by
+### Grouped by
 
 Break down the bars by a dimension to compare segments side by side:
 
@@ -59,7 +59,7 @@ Break down the bars by a dimension to compare segments side by side:
 | **Plan**             | Split by subscription plan                                                        |
 | **Plan periodicity** | Split by billing cycle (weekly, monthly, yearly, etc.)                            |
 
-## Granularity
+### Granularity
 
 Use the **Daily / Weekly / Monthly** selector to control the time resolution of the bars.
 
@@ -67,11 +67,11 @@ Use the **Daily / Weekly / Monthly** selector to control the time resolution of 
 * **Weekly** — One bar per week. Good for smoothing out day-of-week noise while keeping reasonable detail.
 * **Monthly** — One bar per month. Best for long-term trend analysis and executive reporting.
 
-## Date range
+### Date range
 
 Use the date picker to select the time window displayed on the chart. Both the chart and the data table update to reflect the selected range.
 
-## Filters
+### Filters
 
 Click **Filters** to narrow the data. You can combine multiple filters.
 
