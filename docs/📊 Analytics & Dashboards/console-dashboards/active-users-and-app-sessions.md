@@ -5,7 +5,7 @@ title: Active users and app sessions
 
 The MAU & App Sessions page contains two charts that provide a high-level view of app engagement and Purchasely infrastructure performance. The first chart tracks Monthly Active Users and App starts over time. The second chart monitors Screen Server Response Time, an operational metric for engineering teams.
 
-Both charts rely on data collected through the Purchasely SDK. MAU and App starts are counted based on SDK sessions, not store-level or third-party analytics data.
+MAU and App starts are counted based on SDK sessions, not store-level or third-party analytics data. More precisely, these metrics rely on the [UI / SDK event](ui-sdk-event) called `APP_STARTED`.
 
 # How to read the chart
 
