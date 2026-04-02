@@ -1,36 +1,36 @@
 ---
-title: MAU and app sessions
+title: Active users and app sessions
 ---
 # About this chart
 
-The MAU & App Sessions page contains two charts that provide a high-level view of app engagement and Purchasely infrastructure performance. The first chart tracks Monthly Active Users and App starts over time. The second chart monitors Paywall Server Response Time, an operational metric for engineering teams.
+The MAU & App Sessions page contains two charts that provide a high-level view of app engagement and Purchasely infrastructure performance. The first chart tracks Monthly Active Users and App starts over time. The second chart monitors Screen Server Response Time, an operational metric for engineering teams.
 
 Both charts rely on data collected through the Purchasely SDK. MAU and App starts are counted based on SDK sessions, not store-level or third-party analytics data.
 
 # How to read the chart
 
-## Chart 1: Monthly Active Users
+## Chart 1: Active Users
 
 This is a **combined bar and line chart** with two Y-axes.
 
-| Element | Description |
-|---------|-------------|
-| **Blue bars** (left Y-axis) | Monthly Active Users count. Each unique user who opened the app at least once during the selected month is counted once, regardless of how many times they opened it. |
+| Element                       | Description                                                                                                                                                                                    |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Blue bars** (left Y-axis)   | Monthly Active Users count. Each unique user who opened the app at least once during the selected month is counted once, regardless of how many times they opened it.                          |
 | **Black line** (right Y-axis) | App starts count. Each time the app is launched and the Purchasely SDK initializes, it counts as one app start. A single user opening the app 10 times generates 10 app starts but only 1 MAU. |
-| **Headline number** | The total MAU for the most recent complete period (e.g., 610,979). |
+| **Headline number**           | The total MAU for the current period (e.g., 610,979).                                                                                                                                          |
 
 The gap between the App starts line and the MAU bars indicates how frequently your average user opens the app. A large gap means high per-user session frequency.
 
-## Chart 2: Paywall Server Response Time
+## Chart 2: Screens Server Response Time
 
 This is a **multi-line chart** showing latency percentiles and request volume.
 
-| Element | Description |
-|---------|-------------|
-| **P50 (green line)** | Median response time in milliseconds. Half of all paywall requests completed faster than this value. This represents the typical user experience. |
-| **P95 (orange line)** | 95th percentile response time. 95% of requests completed within this time. Spikes here affect a meaningful portion of users. |
-| **P99 (red line)** | 99th percentile response time. Only 1% of requests were slower than this. Useful for catching tail latency issues that affect edge cases. |
-| **Requests (blue line)** (right Y-axis) | Total number of paywall server requests during the period. Helps correlate latency changes with traffic volume. |
+| Element                            | Description                                                                                                                                       |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **P50**                            | Median response time in milliseconds. Half of all paywall requests completed faster than this value. This represents the typical user experience. |
+| **P95**                            | 95th percentile response time. 95% of requests completed within this time. Spikes here affect a meaningful portion of users.                      |
+| **P99**                            | 99th percentile response time. Only 1% of requests were slower than this. Useful for catching tail latency issues that affect edge cases.         |
+| **Requests (bars)** (right Y-axis) | Total number of Screens server requests during the period. Helps correlate latency changes with traffic volume.                                   |
 
 A healthy chart shows stable, flat percentile lines with P50 well below P95 and P99. Sudden divergence between percentiles often indicates intermittent issues affecting a subset of requests.
 
@@ -50,11 +50,11 @@ Click the **Download CSV** button to export the currently displayed data. The ex
 
 # Common use cases
 
-- **Track user growth trends** -- Compare MAU month over month to assess whether your user base is growing, stable, or declining. Pair this with App starts to understand if growth comes from new users or increased engagement from existing ones.
-- **Measure engagement intensity** -- Divide App starts by MAU to compute the average number of sessions per user. An increasing ratio signals deeper engagement; a decreasing ratio may indicate retention issues even if MAU remains stable.
-- **Diagnose regional latency problems** -- Use the Country filter on the Paywall Server Response Time chart to isolate regions with elevated P95 or P99 values. This helps engineering teams decide whether to investigate CDN configuration, regional infrastructure, or third-party dependencies.
-- **Detect performance degradation after a release** -- Monitor the Paywall Server Response Time chart after deploying a new SDK version or backend change. A sudden increase in P95 or P99 that correlates with a release date signals a regression that needs investigation.
-- **Correlate traffic spikes with latency** -- Overlay the Requests line with percentile lines to determine if latency increases are caused by traffic surges. If P95 and P99 spike while Requests remain flat, the issue is likely infrastructure-related rather than load-related.
+* **Track user growth trends** -- Compare MAU month over month to assess whether your user base is growing, stable, or declining. Pair this with App starts to understand if growth comes from new users or increased engagement from existing ones.
+* **Measure engagement intensity** -- Divide App starts by MAU to compute the average number of sessions per user. An increasing ratio signals deeper engagement; a decreasing ratio may indicate retention issues even if MAU remains stable.
+* **Diagnose regional latency problems** -- Use the Country filter on the Paywall Server Response Time chart to isolate regions with elevated P95 or P99 values. This helps engineering teams decide whether to investigate CDN configuration, regional infrastructure, or third-party dependencies.
+* **Detect performance degradation after a release** -- Monitor the Paywall Server Response Time chart after deploying a new SDK version or backend change. A sudden increase in P95 or P99 that correlates with a release date signals a regression that needs investigation.
+* **Correlate traffic spikes with latency** -- Overlay the Requests line with percentile lines to determine if latency increases are caused by traffic surges. If P95 and P99 spike while Requests remain flat, the issue is likely infrastructure-related rather than load-related.
 
 # Frequently asked questions
 
