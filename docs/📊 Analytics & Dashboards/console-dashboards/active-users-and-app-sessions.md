@@ -20,12 +20,6 @@ The gap between the App starts line and the MAU bars indicates how frequently yo
 
 <br />
 
-# Controls
-
-## Granularity toggle
-
-Switch between time granularities to adjust the resolution of the data points displayed on the charts.
-
 # Common use cases
 
 * **Track user growth trends** -- Compare MAU month over month to assess whether your user base is growing, stable, or declining. Pair this with App starts to understand if growth comes from new users or increased engagement from existing ones.
@@ -35,12 +29,14 @@ Switch between time granularities to adjust the resolution of the data points di
 
 # Frequently asked questions
 
-## What counts as an Active User?
+### What counts as an Active User?
 
 An Active User is any unique user whose app triggered at least one Purchasely SDK session during a given period. The count is deduplicated: a user who opens the app 50 times in a month is counted as 1 MAU. Users are identified by the Purchasely anonymous ID or, if set, the custom user ID provided via `Purchasely.userLogin()`.
 
-## Why is MAU different from what I see in other analytics tools?
+### Why is MAU different from what I see in other analytics tools?
 
 Purchasely MAU is based on the SDK event APP_STARTED, not store downloads or third-party analytics sessions. Differences with other tools can arise from different session definitions, attribution windows, or user identification methods. Purchasely counts a user as active only when the SDK successfully initializes — which requires the app to fully launch and establish a connection. If the SDK is initialized late in the app startup routine, users who open the app but close it before the SDK starts will not be counted.
+
+<br />
 
 <br />
