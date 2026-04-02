@@ -15,7 +15,7 @@ This is a **combined bar and line chart** with two Y-axes.
 
 | Element                       | Description                                                                                                                                                                                    |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Blue bars** (left Y-axis)   | Monthly Active Users count. Each unique user who opened the app at least once during the selected month is counted once, regardless of how many times they opened it.                          |
+| **Blue bars** (left Y-axis)   | Active Users count. Each unique user who opened the app at least once during the selected period is counted once, regardless of how many times they opened it.                                 |
 | **Black line** (right Y-axis) | App starts count. Each time the app is launched and the Purchasely SDK initializes, it counts as one app start. A single user opening the app 10 times generates 10 app starts but only 1 MAU. |
 | **Headline number**           | The total MAU for the current period (e.g., 610,979).                                                                                                                                          |
 
