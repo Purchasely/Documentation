@@ -5,9 +5,13 @@ hidden: false
 metadata:
   robots: index
 ---
-<br />
+# About this chart
 
-## Chart 2: Screen Server Response Time
+The Platform health page provides a high-level view of Purchasely infrastructure performance. The chart monitors Screen Server Response Time, an operational metric for engineering teams.
+
+The chart relies on data collected through the the CloudFlare CDN. 
+
+# How to read the chart
 
 This is a **multi-line chart** showing latency percentiles and request volume.
 
