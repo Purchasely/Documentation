@@ -112,7 +112,7 @@ Total active subscriptions. This is a **stock metric** (how many subscriptions e
 
 ### Why do I see a drop followed by a recovery in the daily view?
 
-This typically indicates a batch of subscriptions exiting their **grace period** and moving to a terminated or unpaid state. While a subscription is in its grace period it remains active, but once the grace period expires without a successful charge, the subscription loses its active status and the count drops. If the store successfully retries the charge before the full retry window expires, those subscriptions are restored and the count recovers. In daily granularity these fluctuations are visible; in weekly or monthly views they tend to smooth out.
+This typically indicates a batch of subscriptions exiting their **grace period** and moving to a terminated or billing retry state. While a subscription is in its grace period it remains active, but once the grace period expires without a successful charge, the subscription loses its active status and the count drops. If the store successfully retries the charge before the full retry window expires, those subscriptions are restored and the count recovers. In daily granularity these fluctuations are visible; in weekly or monthly views they tend to smooth out.
 
 ### How do Google Play paused subscriptions affect the count?
 
