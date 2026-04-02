@@ -25,8 +25,6 @@ The gap between the App starts line and the MAU bars indicates how frequently yo
 * **Track user growth trends** -- Compare MAU month over month to assess whether your user base is growing, stable, or declining. Pair this with App starts to understand if growth comes from new users or increased engagement from existing ones.
 * **Measure engagement intensity** -- Divide App starts by MAU to compute the average number of sessions per user. An increasing ratio signals deeper engagement; a decreasing ratio may indicate retention issues even if MAU remains stable.
 
-<br />
-
 # Frequently asked questions
 
 ### What counts as an Active User?
