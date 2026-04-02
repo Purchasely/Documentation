@@ -29,7 +29,7 @@ The gap between the App starts line and the MAU bars indicates how frequently yo
 
 ### What counts as an Active User?
 
-An Active User is any unique user whose app triggered at least one Purchasely SDK session during a given period. The count is deduplicated: a user who opens the app 50 times in a month is counted as 1 MAU. Users are identified by the Purchasely anonymous ID or, if set, the custom user ID provided via `Purchasely.userLogin()`.
+An Active User is any unique user whose app triggered at least one Purchasely SDK session during a given period. The count is deduplicated: a user who opens the app 50 times in a month is counted as 1 MAU. Users are identified by the Purchasely anonymous ID or, if set, the custom user ID provided via `Purchasely.userLogin()`. An anonymous user who logs in is deduplicated and therefore counted only once.
 
 ### Why is MAU different from what I see in other analytics tools?
 
