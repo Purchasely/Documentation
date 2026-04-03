@@ -4,10 +4,10 @@
 - subscription-base-evolution
 - paid-subscription-movements
 - subscription-activations
+- subscription-status
 - subscription-retention
 - subscription-reactivations
 - subscription-refunds
-- subscription-status
 - subscription-events
 - funnel
 - iap-movements
