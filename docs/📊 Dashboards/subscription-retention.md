@@ -122,6 +122,12 @@ For the same reason. When a subscription churns and recovers within the same tim
 
 The wider the time bucket, the more of these temporary churn-and-recovery pairs become invisible. This is standard behavior across analytics tools.
 
+### Why does retention appear unusually high for some cohorts?
+
+This typically happens when the chart granularity does not match the billing cycle of the subscriptions being analyzed. For example, if you set the chart to monthly granularity but include yearly subscriptions, those subscriptions are prepaid for 12 months and will naturally remain active across many monthly periods — pulling retention rates up and making them less meaningful.
+
+For the most actionable insights, match the chart granularity with the plan periodicity filter. Use monthly granularity with monthly plans, weekly with weekly plans, and so on. If you need to analyze yearly subscriptions, prefer a monthly granularity so that each period represents a meaningful milestone in the subscription lifecycle.
+
 ### Which granularity should I use?
 
 * **Daily** when you need precision on short-term retention and accurate cohort counts.
@@ -129,6 +135,12 @@ The wider the time bucket, the more of these temporary churn-and-recovery pairs 
 * **Monthly** for long-term trends and executive reporting — but keep in mind that cohort sizes and retention rates will be slightly optimistic due to the billing retry smoothing effect described above.
 
 As a rule of thumb: don't try to reconcile totals across granularities. The differences are an expected artifact of billing retry, not a data discrepancy.
+
+### Why do prepaid subscriptions (yearly, quarterly) sometimes drop before their renewal date?
+
+Even though a yearly subscription is paid upfront, it can still leave the active state before its renewal date if a refund is granted by Apple or Google. Refunds are reflected in the chart at the moment the store processes them, not at the end of the billing cycle.
+
+This is why you may see a yearly cohort lose subscriptions during months 2, 3, or 6 — well before any renewal is expected. The same logic applies at other granularities: a monthly subscription viewed in weekly granularity can appear to churn mid-month if a refund is processed during that week.
 
 ### How do plan changes affect retention cohorts?
 
