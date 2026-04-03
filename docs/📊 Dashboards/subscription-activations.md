@@ -15,7 +15,9 @@ This chart is distinct from the "New" column in the Paid Subscriptions Movements
 > ⚠️ **Important: Accuracy depends on subscriber history import**
 >
 > Purchasely identifies an activation as a first-time subscription for a given user. To do so accurately, Purchasely needs the complete subscription history of your users — including lapsed subscribers — to be imported into the platform.
+>
 > If this full import has not been performed, Purchasely may not know that a user previously held a subscription and could count a reactivation as a new activation, leading to higher activation numbers than expected.
+>
 > This is the most common reason for discrepancies between Purchasely's activation metrics and the ones reported by the App Store or Google Play, which by definition have the complete transaction history for every user.
 > To ensure accurate activation tracking, please make sure you have completed the [historical subscriber import](subscribers-base-import) before relying on this metric.
 
