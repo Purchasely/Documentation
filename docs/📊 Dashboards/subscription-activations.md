@@ -5,12 +5,7 @@ title: Subscription Activations
 
 The Subscription Activations chart counts how many **new subscriptions** started during a given period. An "activation" is the moment a user begins a subscription for the first time -- whether through a free trial, a paid introductory offer, or a direct full-price purchase. It gives you a clear, day-by-day (or week-by-week, month-by-month) view of acquisition volume so you can spot trends, measure campaign impact, and compare acquisition channels.
 
-This chart is distinct from the "New" column in the Paid Subscriptions Movements chart. Paid Subscriptions Movements only tracks subscriptions that have generated a payment -- free trials are excluded until they convert. Subscription Activations counts every new first time subscription at the moment it starts, regardless of whether a payment has occurred yet. You can choose the segment you're interested in:
-
-* All activation - includes every new subscription whatever their offer)
-* Free trials only - focuses on new subscriptions starting with a Free Trial
-* Paid Intro offers only - focuses on new subscriptions starting with an paid introductory offer
-* Direct Full-price subscriptions only - focuses on new subscriptions starting directly with the full price
+This chart is distinct from the "New" column in the Paid Subscriptions Movements chart. Paid Subscriptions Movements only tracks subscriptions that have generated a payment -- free trials are excluded until they convert. Subscription Activations counts every new first time subscription at the moment it starts, regardless of whether a payment has occurred yet. 
 
 > ⚠️ **Important: Accuracy depends on subscriber history import**
 >
@@ -20,6 +15,13 @@ This chart is distinct from the "New" column in the Paid Subscriptions Movements
 >
 > This is the most common reason for discrepancies between Purchasely's activation metrics and the ones reported by the App Store or Google Play, which by definition have the complete transaction history for every user.
 > To ensure accurate activation tracking, please make sure you have completed the [historical subscriber import](subscribers-base-import) before relying on this metric.
+
+You can choose the segment you're interested in:
+
+* All activation - includes every new subscription whatever their offer)
+* Free trials only - focuses on new subscriptions starting with a Free Trial
+* Paid Intro offers only - focuses on new subscriptions starting with an paid introductory offer
+* Direct Full-price subscriptions only - focuses on new subscriptions starting directly with the full price
 
 # ⚠️ Change from dashboard v1: counting subscriptions, not subscribers
 
@@ -48,7 +50,7 @@ When the trend line sits above the average line, acquisition is accelerating. Wh
 
 # Controls
 
-## Show
+### Segments
 
 Filter by the type of subscription activation:
 
@@ -59,7 +61,7 @@ Filter by the type of subscription activation:
 | **Paid Intro Offers only**               | Only subscriptions that started with a discounted introductory offer (not free)                |
 | **Direct Full-price Subscriptions only** | Only subscriptions where the user paid full price from the start, with no trial or intro offer |
 
-## Grouped by
+### Grouped by
 
 Break down the activations by a dimension to compare segments side by side:
 
@@ -77,7 +79,7 @@ Break down the activations by a dimension to compare segments side by side:
 | **Event types**      | Split by the subscription event type                                                                                                                                                       |
 | **Payment types**    | Split by payment method. This dimension is unique to the Subscription Activations chart and lets you distinguish between standard in-app purchases, promo codes, and other payment methods |
 
-## Granularity
+### Granularity
 
 Use the **Daily / Weekly / Monthly** selector to control the time resolution.
 
@@ -85,7 +87,7 @@ Use the **Daily / Weekly / Monthly** selector to control the time resolution.
 * **Weekly** -- One bar per week. Good for smoothing out day-of-week noise while keeping reasonable detail.
 * **Monthly** -- One bar per month. Best for long-term trend analysis and executive reporting.
 
-## Filters
+### Filters
 
 Click **Filters** to narrow the data. You can combine multiple filters.
 
