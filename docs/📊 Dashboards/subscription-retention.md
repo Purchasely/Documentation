@@ -5,11 +5,6 @@ title: Subscription Retention
 
 The Subscription Retention chart tracks how many paid subscriptions remain active over time after their initial purchase. It helps you measure subscriber loyalty, identify when users tend to churn, and evaluate the long-term impact of your acquisition and retention strategies.
 
-Each cohort can be visualized with 2 different starting points:
-
-* when the subscription started - which actually includes the introductory offer
-* when the full-price subscription started - which excludes the introductory offer
-
 > 📘 **Cohort entry = any transition from non-active to active**
 >
 > Each cohort includes every subscription that transitions from a **non-active state** to an **active state** during the cohort period. There is no concept of "first-time activation" here: trial conversions, reactivations after churn, and billing retry recoveries are all counted as cohort entries. As a result, a single subscription can appear in multiple cohorts over its lifetime — for example, if it churns in March and recovers through billing retry in May, it will be counted in both cohorts.
@@ -24,6 +19,11 @@ Each cohort can be visualized with 2 different starting points:
 > * **Multiple subscriptions per user:** In v1, a user holding two active subscriptions simultaneously was counted once (one user). In v2, each subscription is counted individually, so the same user contributes two to the total.
 >
 > **Example:** Alice holds both a monthly Music plan and a yearly Premium plan. In v1, Alice counted as 1 subscriber. In v2, she counts as 2 active subscriptions. Conversely, if a single subscription was restored across 3 anonymous devices in v1, it appeared as 3 subscribers — in v2 it correctly counts as 1 subscription.
+
+Each cohort can be visualized with 2 different starting points:
+
+* when the subscription started - which actually includes the introductory offer
+* when the full-price subscription started - which excludes the introductory offer
 
 # How to read the chart
 
