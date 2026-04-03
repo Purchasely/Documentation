@@ -3,7 +3,7 @@ title: Active users and app sessions
 ---
 # About this chart
 
-The MAU & App Sessions page provides a high-level view of app engagement. The first chart tracks Monthly Active Users and App starts over time. The second chart monitors Screen Server Response Time, an operational metric for engineering teams.
+The Active Users & App Sessions page provides a high-level view of app engagement. The first chart tracks Monthly Active Users and App starts over time. The second chart monitors Screen Server Response Time, an operational metric for engineering teams.
 
 Active and App starts are counted based on SDK sessions, not store-level or third-party analytics data. More precisely, they rely on the [UI / SDK event](ui-sdk-event) called `APP_STARTED`.
 
