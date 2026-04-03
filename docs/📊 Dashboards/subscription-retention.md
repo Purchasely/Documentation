@@ -9,16 +9,16 @@ The Subscription Retention chart tracks how many paid subscriptions remain activ
 >
 > Each cohort includes every subscription that transitions from a **non-active state** to an **active state** during the cohort period. There is no concept of "first-time activation" here: trial conversions, reactivations after churn, and billing retry recoveries are all counted as cohort entries. As a result, a single subscription can appear in multiple cohorts over its lifetime — for example, if it churns in March and recovers through billing retry in May, it will be counted in both cohorts.
 
-> ⚠️ **Change from dashboard v1: counting subscriptions, not subscribers**
->
-> The previous version of this dashboard counted **unique subscribers** (users). Dashboard v2 now counts **unique subscriptions**, each identified by a unique subscription ID.
->
-> This changes the numbers in two ways:
->
-> * **Restored subscriptions across devices:** In v1, when a subscription was restored on a new device by a different anonymous user, it was counted multiple times — once for each anonymous user associated with it. In v2, the subscription is counted only once regardless of how many devices or anonymous users it passes through.
-> * **Multiple subscriptions per user:** In v1, a user holding two active subscriptions simultaneously was counted once (one user). In v2, each subscription is counted individually, so the same user contributes two to the total.
->
-> **Example:** Alice holds both a monthly Music plan and a yearly Premium plan. In v1, Alice counted as 1 subscriber. In v2, she counts as 2 active subscriptions. Conversely, if a single subscription was restored across 3 anonymous devices in v1, it appeared as 3 subscribers — in v2 it correctly counts as 1 subscription.
+# ⚠️ Change from dashboard v1: counting subscriptions, not subscribers
+
+The previous version of this dashboard counted **unique subscribers** (users). Dashboard v2 now counts **unique subscriptions**, each identified by a unique subscription ID.
+
+This changes the numbers in two ways:
+
+* **Restored subscriptions across devices:** In v1, when a subscription was restored on a new device by a different anonymous user, it was counted multiple times — once for each anonymous user associated with it. In v2, the subscription is counted only once regardless of how many devices or anonymous users it passes through.
+* **Multiple subscriptions per user:** In v1, a user holding two active subscriptions simultaneously was counted once (one user). In v2, each subscription is counted individually, so the same user contributes two to the total.
+
+**Example:** Alice holds both a monthly Music plan and a yearly Premium plan. In v1, Alice counted as 1 subscriber. In v2, she counts as 2 active subscriptions. Conversely, if a single subscription was restored across 3 anonymous devices in v1, it appeared as 3 subscribers — in v2 it correctly counts as 1 subscription.
 
 Each cohort can be visualized with 2 different starting points:
 
