@@ -42,7 +42,7 @@ A version that shrinks over time indicates users are updating their app. A versi
 
 The chart shows the exact SDK version string reported by the Purchasely SDK embedded in your app. If you see unexpected versions, check which Purchasely SDK version was bundled with each of your app releases. A mapping between your app version and the Purchasely SDK version is not maintained by Purchasely -- you need to track this in your own release notes or dependency files.
 
-[SDK changelog](https://docs.purchasely.com/docs/changelog)
+[SDK changelog](https://docs.purchasely.com/changelog)
 
 ## Why are some users still on very old SDK versions?
 
