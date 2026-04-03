@@ -3,7 +3,7 @@ title: Paid Subscription Movements
 ---
 # About this chart
 
-The Paid Subscriptions Movements chart tracks the flow of paid subscriptions entering and leaving your app over time. It combines new subscriptions (inflows) and churned subscriptions (outflows) into a single view, making it easy to see whether your subscriber base is growing, shrinking, or stable.
+The Paid Subscriptions Movements chart tracks the flow of **paid subscriptions** entering and leaving your app over time. It combines **new subscriptions** (inflows) and **churned subscriptions** (outflows) into a single view, making it easy to see whether your subscriber base is growing, shrinking, or stable.
 
 The chart uses a **bar + line layout**:
 
@@ -124,7 +124,7 @@ The Balance is the raw difference between New and Churn for the entire period. T
 
 A subscription in **grace period** is still active. It will therefore not appear as Churn. If the grace period recovers, the subscription will not appear as New. If it fails, the subscription will enter in **billing retry**.
 
-A subscription in **billing retry** is terminated -- it is therefore not considered as active anymore. It will appear as Churn. If the billing retry succeeds, the subscription will appear as a New. 
+A subscription in **billing retry** is terminated -- it is therefore not considered as active anymore. It will appear as Churn. If the billing retry succeeds, the subscription will appear as a New.
 
 ### Why do the numbers differ between daily and monthly granularity?
 
