@@ -4,8 +4,8 @@
 - subscription-base-evolution
 - paid-subscription-movements
 - subscription-activations
-- subscription-status
 - subscription-retention
+- subscription-status
 - subscription-reactivations
 - subscription-refunds
 - subscription-events
