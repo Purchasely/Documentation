@@ -134,6 +134,6 @@ As a rule of thumb: don't try to reconcile totals across granularities. The diff
 
 When a subscription changes plan (upgrade or downgrade), a new subscription is created in Purchasely. The old subscription will **churn** from its original cohort, and the new subscription will appear in the cohort corresponding to the plan change date. This can reduce retention rates for cohorts that experienced many plan changes, and inflate the size of cohorts during periods with frequent upgrades or downgrades. This is not data loss — the subscriber is still active, just tracked under a different subscription.
 
-## How do Google Play paused subscriptions affect retention?
+### How do Google Play paused subscriptions affect retention?
 
 Paused subscriptions (Google Play only) temporarily leave the active state and re-enter it when the pause ends. In retention cohorts, a paused subscription will appear as churned during the pause period and recovered when it resumes — similar to account hold recovery. This creates the same cross-cohort counting effect described in the granularity section above.
