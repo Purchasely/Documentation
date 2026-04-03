@@ -5,8 +5,8 @@
 - paid-subscription-movements
 - subscription-activations
 - subscription-retention
-- subscription-refunds
 - subscription-reactivations
+- subscription-refunds
 - subscription-status
 - subscription-events
 - funnel
