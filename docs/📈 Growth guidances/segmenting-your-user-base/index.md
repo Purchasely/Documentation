@@ -43,16 +43,12 @@ Purchasely allows to segment your user base into different segments by creating 
 
 [A/B tests](ab-tests) can also be configured specifically for a particular <Glossary>audience</Glossary>.
 
-# Limitations
+# Syncing external user lists
 
-The Purchasely Platform does offer a server API to inject user attributes directly from a 3rd-party tool platform, such as Amplitude or Braze.
+If you wish to reuse user lists or cohorts created in 3rd-party tools (such as Braze, Amplitude, or your own backend), you have two options:
 
-If you wish to reuse the different segments created in these 3rd-party tools, you need to pass them through the app to the Purchasely SDK:
-
-1. The app needs to fetch the user attributes from the 3rd party platform
-2. Each attribute must then be injected into the Purchasely SDK
-
-Alternatively, the app can fetch a `segment ID` from the 3rd party platform and inject it into the Purchasely SDK using a Custom User Attribute.
+1. **Custom Audiences API** (recommended): Use the [Custom Audiences API](custom-audiences-api) to sync static lists of user identifiers directly from your external tools to Purchasely. Custom Audiences can then be used in <Glossary>Placement</Glossary>s just like Audiences.
+2. **Custom User Attributes**: Alternatively, the app can fetch a cohort identifier from the 3rd-party platform and inject it into the Purchasely SDK using a [Custom User Attribute](custom-user-attributes), then create an Audience matching that attribute.
 
 <br />
 
