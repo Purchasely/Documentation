@@ -12,7 +12,7 @@ This chart is distinct from the "New" column in the Paid Subscriptions Movements
 * Paid Intro offers only - focuses on new subscriptions starting with an paid introductory offer
 * Direct Full-price subscriptions only - focuses on new subscriptions starting directly with the full price
 
-> ⚠️ Important: Accuracy depends on subscriber history import
+> ⚠️ **Important: Accuracy depends on subscriber history import**
 >
 > Purchasely identifies an activation as a first-time subscription for a given user. To do so accurately, Purchasely needs the complete subscription history of your users — including lapsed subscribers — to be imported into the platform.
 > If this full import has not been performed, Purchasely may not know that a user previously held a subscription and could count a reactivation as a new activation, leading to higher activation numbers than expected.
