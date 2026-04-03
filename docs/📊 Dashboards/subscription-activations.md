@@ -114,7 +114,7 @@ Click **Filters** to narrow the data. You can combine multiple filters.
 
 ### What counts as an "activation"?
 
-An activation is recorded the moment a user starts a new subscription. This includes three scenarios: (1) the user begins a free trial, (2) the user starts a subscription with a paid introductory offer, or (3) the user purchases a subscription at full price. The activation is counted on the start date, not when a payment is processed.
+An activation is recorded the moment a user starts a **new subscription** for the first time. This includes three scenarios: (1) the user begins a free trial, (2) the user starts a subscription with a paid introductory offer, or (3) the user purchases a subscription at full price. The activation is counted on the start date, not when a payment is processed.
 
 ### Why might activation numbers differ between Purchasely and the app stores?
 
@@ -129,12 +129,6 @@ This is a Google Play platform limitation, not a Purchasely one. In practice, ac
 ### How is this different from the "New" count in Paid Subscriptions Movements?
 
 Paid Subscriptions Movements tracks subscriptions that have entered a paid state. Free trials are not included in the "New" count of that chart until the trial converts to a paid subscription. Subscription Activations counts all new subscription starts immediately, including free trials. Use Activations to measure top-of-funnel acquisition volume, and Paid Subscriptions Movements to measure paying subscriber growth.
-
-### How do pending purchases and acknowledgement affect activations?
-
-On Google Play, a subscription must be **acknowledged** by the app within 3 days of purchase, otherwise it is automatically refunded. If your app has an acknowledgement delay (e.g., the user purchases but does not open the app immediately), the activation may be recorded slightly after the actual purchase date. In rare cases where acknowledgement fails entirely, the subscription is refunded and will not appear as an activation.
-
-Additionally, Google Play supports **deferred purchases** (e.g., the user selects a slow payment method). The activation is only recorded once the payment is confirmed, not when the user initiates the purchase flow.
 
 ### Why do weekly totals not match the sum of daily totals?
 
