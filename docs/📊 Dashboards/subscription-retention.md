@@ -41,7 +41,7 @@ The diagonal staircase pattern is normal: recent cohorts have fewer columns beca
 
 # Controls
 
-## Show
+### Show
 
 Switch between two display modes:
 
@@ -50,7 +50,7 @@ Switch between two display modes:
 | **Subscriptions retained (rates)**   | Percentage of the cohort still active at each period (e.g., 96.7% means 96.7% of the original cohort is still subscribed) |
 | **Subscriptions retained (numbers)** | Absolute count of subscriptions still active at each period                                                               |
 
-## Segment
+### Segment
 
 Focus on a subset of subscriptions:
 
@@ -59,7 +59,11 @@ Focus on a subset of subscriptions:
 | **All subscriptions**        | Includes all paid subscriptions: trials that converted, intro offers, promo offers, and direct full-price purchases |
 | **Full-price subscriptions** | Only subscriptions that started at full price (excludes trials, intro offers, and promo offers)                     |
 
-## Granularity
+<br />
+
+<br />
+
+### Granularity
 
 Use the **Daily / Weekly / Monthly** selector to control the time resolution of cohorts and retention periods.
 
@@ -67,7 +71,7 @@ Use the **Daily / Weekly / Monthly** selector to control the time resolution of 
 * **Weekly** — One cohort per week, retention measured week by week. Good for spotting weekly patterns.
 * **Monthly** — One cohort per month, retention measured month by month. Best for long-term trends.
 
-## Filters
+### Filters
 
 Click **Filters** to narrow the data. You can combine multiple filters.
 
@@ -103,11 +107,11 @@ When you add up the "Paid subscriptions" column across all weekly cohorts for a 
 
 This applies to any granularity comparison: daily totals won't match weekly totals, and weekly totals won't match monthly totals.
 
-> 📘 Grace period recovery vs. account hold recovery
+> 📘 **Grace period recovery vs. account hold recovery**
 >
-> The billing retry effect described above specifically applies to subscriptions that go through **account hold** (Google Play: `ON_HOLD`) or equivalent — where access is revoked and then restored. Grace period recovery does **not** create a new cohort entry because the subscription never leaves the "active" state. Only account hold recovery (where the billing date resets) generates a recovery event that can cause double-counting across weekly cohorts.
+> The **billing retry** effect described above specifically applies to subscriptions that go through **account hold** (Google Play: `ON_HOLD`) or equivalent — where access is revoked and then restored. Grace period recovery does **not** create a new cohort entry because the subscription never leaves the "active" state. Only account hold recovery (where the billing date resets) generates a recovery event that can cause double-counting across weekly cohorts.
 
-## Why does retention look higher when I switch to a wider granularity?
+### Why does retention look higher when I switch to a wider granularity?
 
 For the same reason. When a subscription churns and recovers within the same time bucket (e.g., within the same month), the net effect is zero — it never appears to have churned.
 
@@ -118,7 +122,7 @@ For the same reason. When a subscription churns and recovers within the same tim
 
 The wider the time bucket, the more of these temporary churn-and-recovery pairs become invisible. This is standard behavior across analytics tools.
 
-## Which granularity should I use?
+### Which granularity should I use?
 
 * **Daily** when you need precision on short-term retention and accurate cohort counts.
 * **Weekly** for week-over-week trend analysis with a good balance of precision and readability.
@@ -126,7 +130,7 @@ The wider the time bucket, the more of these temporary churn-and-recovery pairs 
 
 As a rule of thumb: don't try to reconcile totals across granularities. The differences are an expected artifact of billing retry, not a data discrepancy.
 
-## How do plan changes affect retention cohorts?
+### How do plan changes affect retention cohorts?
 
 When a subscription changes plan (upgrade or downgrade), a new subscription is created in Purchasely. The old subscription will **churn** from its original cohort, and the new subscription will appear in the cohort corresponding to the plan change date. This can reduce retention rates for cohorts that experienced many plan changes, and inflate the size of cohorts during periods with frequent upgrades or downgrades. This is not data loss — the subscriber is still active, just tracked under a different subscription.
 
