@@ -10,7 +10,9 @@ Each cohort can be visualized with 2 different starting points:
 * when the subscription started - which actually includes the introductory offer
 * when the full-price subscription started - which excludes the introductory offer
 
-<br />
+> 📘 **Cohort entry = any transition from non-active to active**
+>
+> Each cohort includes every subscription that transitions from a **non-active state** to an **active state** during the cohort period. There is no concept of "first-time activation" here: trial conversions, reactivations after churn, and billing retry recoveries are all counted as cohort entries. As a result, a single subscription can appear in multiple cohorts over its lifetime — for example, if it churns in March and recovers through billing retry in May, it will be counted in both cohorts.
 
 > ⚠️ **Change from dashboard v1: counting subscriptions, not subscribers**
 >
