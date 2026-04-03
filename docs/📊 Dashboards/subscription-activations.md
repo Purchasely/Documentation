@@ -12,6 +12,13 @@ This chart is distinct from the "New" column in the Paid Subscriptions Movements
 * Paid Intro offers only - focuses on new subscriptions starting with an paid introductory offer
 * Direct Full-price subscriptions only - focuses on new subscriptions starting directly with the full price
 
+> ⚠️ Important: Accuracy depends on subscriber history import
+>
+> Purchasely identifies an activation as a first-time subscription for a given user. To do so accurately, Purchasely needs the complete subscription history of your users — including lapsed subscribers — to be imported into the platform.
+> If this full import has not been performed, Purchasely may not know that a user previously held a subscription and could count a reactivation as a new activation, leading to higher activation numbers than expected.
+> This is the most common reason for discrepancies between Purchasely's activation metrics and the ones reported by the App Store or Google Play, which by definition have the complete transaction history for every user.
+> To ensure accurate activation tracking, please make sure you have completed the [historical subscriber import](subscribers-base-import) before relying on this metric.
+
 > ⚠️ **Change from dashboard v1: counting subscriptions, not subscribers**
 >
 > The previous version of this dashboard counted **unique subscribers** (users). Dashboard v2 now counts **unique subscriptions**, each identified by a unique subscription ID.
@@ -22,10 +29,6 @@ This chart is distinct from the "New" column in the Paid Subscriptions Movements
 > * **Multiple subscriptions per user:** In v1, a user holding two active subscriptions simultaneously was counted once (one user). In v2, each subscription is counted individually, so the same user contributes two to the total.
 >
 > **Example:** Alice holds both a monthly Music plan and a yearly Premium plan. In v1, Alice counted as 1 subscriber. In v2, she counts as 2 active subscriptions. Conversely, if a single subscription was restored across 3 anonymous devices in v1, it appeared as 3 subscribers — in v2 it correctly counts as 1 subscription.
-
-<Callout icon="⚠️">
-
-</Callout>
 
 # How to read the chart
 
@@ -107,32 +110,42 @@ Click **Filters** to narrow the data. You can combine multiple filters.
 
 # Frequently asked questions
 
-## What counts as an "activation"?
+### What counts as an "activation"?
 
 An activation is recorded the moment a user starts a new subscription. This includes three scenarios: (1) the user begins a free trial, (2) the user starts a subscription with a paid introductory offer, or (3) the user purchases a subscription at full price. The activation is counted on the start date, not when a payment is processed.
 
-## How is this different from the "New" count in Paid Subscriptions Movements?
+### Why might activation numbers differ between Purchasely and the app stores?
+
+Purchasely identifies an activation as a first-time subscription for a given user. To do so accurately, it needs the complete subscription history of your users — including lapsed subscribers — to be imported into the platform. If this full import has not been performed, Purchasely may not know that a user previously held a subscription and could count a reactivation as a new activation, leading to higher activation numbers than expected. The app stores (App Store Connect, Google Play Console), by definition, have the complete transaction history for every user and will therefore always reflect the accurate split between activations and reactivations.
+
+### Why are activation numbers on Android less accurate than on iOS?
+
+The App Store provides an API that allows fetching the full transaction history for any user, including lapsed subscriptions. This makes it possible to import your complete iOS subscriber base into Purchasely and accurately distinguish activations from reactivations.
+Google Play, however, does not expose lapsed subscription history through its APIs. If a user's previous subscription expired before they were known to Purchasely, there is no way to retrieve that past transaction. Purchasely will then count their next subscription as a new activation rather than a reactivation.
+This is a Google Play platform limitation, not a Purchasely one. In practice, activation metrics on Android may be slightly overstated compared to iOS, where full history import is possible.
+
+### How is this different from the "New" count in Paid Subscriptions Movements?
 
 Paid Subscriptions Movements tracks subscriptions that have entered a paid state. Free trials are not included in the "New" count of that chart until the trial converts to a paid subscription. Subscription Activations counts all new subscription starts immediately, including free trials. Use Activations to measure top-of-funnel acquisition volume, and Paid Subscriptions Movements to measure paying subscriber growth.
 
-## How do pending purchases and acknowledgement affect activations?
+### How do pending purchases and acknowledgement affect activations?
 
 On Google Play, a subscription must be **acknowledged** by the app within 3 days of purchase, otherwise it is automatically refunded. If your app has an acknowledgement delay (e.g., the user purchases but does not open the app immediately), the activation may be recorded slightly after the actual purchase date. In rare cases where acknowledgement fails entirely, the subscription is refunded and will not appear as an activation.
 
 Additionally, Google Play supports **deferred purchases** (e.g., the user selects a slow payment method). The activation is only recorded once the payment is confirmed, not when the user initiates the purchase flow.
 
-## Why do weekly totals not match the sum of daily totals?
+### Why do weekly totals not match the sum of daily totals?
 
 When using Daily granularity, each bar represents a single day. Weekly bars aggregate an entire week. Due to how time boundaries are aligned (weeks start on Monday), partial weeks at the beginning or end of the selected date range may cause slight differences when you manually sum daily values and compare them to weekly values. This is normal behavior.
 
-## What is the "Payment types" dimension and why is it only available here?
+### What is the "Payment types" dimension and why is it only available here?
 
 The Payment types grouping dimension lets you break down activations by how the subscription was paid for -- for example, standard in-app purchase, promo code redemption, or offer code. This dimension is specific to the Subscription Activations chart because it is most relevant at the point of acquisition, where understanding the payment method helps assess the quality and source of new subscribers.
 
-## Can I see activations for a specific A/B test variant?
+### Can I see activations for a specific A/B test variant?
 
 Yes. Click Filters, then select the A/B test you want to analyze. The chart will show only activations from users enrolled in that test. To compare variants, apply the filter for each variant separately and compare the resulting volumes and trends.
 
-## Why did activations spike but revenue did not increase?
+### Why did activations spike but revenue did not increase?
 
 This typically happens when the spike comes from free trial starts or deeply discounted intro offers. Use the Show dropdown to isolate "Free Trials only" -- if that segment accounts for the spike, the revenue impact will only appear later, when those trials convert to paid subscriptions.
