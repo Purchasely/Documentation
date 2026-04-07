@@ -38,7 +38,7 @@ Use the **Daily / Weekly / Monthly** selector to control the time resolution.
 * **Weekly** -- One data point per week. Good for smoothing day-to-day noise while still catching trends.
 * **Monthly** -- One data point per month. Best for long-term trend analysis and executive reporting.
 
-## Filters
+### Filters
 
 Click **Filters** to narrow the data. You can combine multiple filters.
 
@@ -49,7 +49,7 @@ Click **Filters** to narrow the data. You can combine multiple filters.
 | **Platforms**     | iOS, Android, or both                               |
 | **Product types** | Filter by product type (consumable, non-consumable) |
 
-## Download CSV
+### Download CSV
 
 Click **Download CSV** to export the data table for further analysis in a spreadsheet or BI tool. The export includes all columns (Dates, Refund Rate, Refunds, Purchases) for the currently selected granularity and filters.
 
@@ -67,18 +67,26 @@ Click **Download CSV** to export the data table for further analysis in a spread
 
 This is expected behavior. The date axis represents when the purchase was **made**, not when the refund was issued. Refunds typically occur days or weeks after the original purchase. Recent periods have not had enough time to accumulate refunds. Wait at least 14-30 days before drawing conclusions about a period's refund rate.
 
-## Why do past values keep changing?
+<br />
+
+> ❗️ **Pre-requisite: Server-to-server notifications**
+>
+> Refund data is only available if your app's Server-to-Server (S2S) notifications are properly configured and connected to Purchasely. Without this, Purchasely has no way of being notified when a refund is granted by the store, and this chart will remain empty.
+>
+> 📚 See [Apple App Store configuration](app-store-configuration#8-the-server-to-server-end-point---only-for-subscription-apps) and [Google Play Store configuration](play-store-configuration#server-to-server-notifications) for setup instructions.
+
+### Why do past values keep changing?
 
 Because refund data is anchored to the purchase date, a refund issued today for a purchase made two months ago will retroactively increase the refund rate for that earlier period. This is by design -- it gives you an accurate picture of the true refund rate for each purchase cohort. Values stabilize over time as the window for potential refunds closes.
 
-## How is the Refund Rate calculated?
+### How is the Refund Rate calculated?
 
 Refund Rate = (Refunds / Purchases) x 100, where both values correspond to the same period based on purchase date. For example, if 1,000 in-app purchases were made in January and 20 of them have been refunded to date, the refund rate for January is 2.0%. Each refunded purchase counts as one refund regardless of whether it was a full or partial refund.
 
-## Why do consumables and non-consumables have different refund rates?
+### Why do consumables and non-consumables have different refund rates?
 
 Consumable and non-consumable products have fundamentally different user expectations. Consumables are used immediately (e.g., in-game currency), so users may request refunds quickly if the purchased item does not meet expectations or if they made an accidental purchase. Non-consumables represent permanent unlocks, so refund requests may come later if the user feels the product does not deliver long-term value. Use the Product types filter to analyze each category separately and set appropriate benchmarks.
 
-## Why is my iOS refund rate different from Android?
+### Why is my iOS refund rate different from Android?
 
 Apple and Google handle in-app purchase refunds differently. Apple processes refund requests through Apple Support and has historically been more permissive with refund approvals. Google Play has its own refund policies and timelines. These policy differences naturally lead to different refund rate baselines for each platform. Filter by Platform to analyze each one separately and avoid comparing absolute rates across platforms.
