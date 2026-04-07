@@ -43,7 +43,7 @@ Six summary metrics appear at the top of the chart for the selected date range:
 
 The chart overlays two metrics on a shared time axis:
 
-<Table>
+<Table align={["left","left","left"]}>
   <thead>
     <tr>
       <th>
@@ -85,7 +85,7 @@ The chart overlays two metrics on a shared time axis:
       </td>
 
       <td>
-        Secondary metric: a conversion rate (Overall conversion rate, Conversion rate to intro or promo offer, or Conversion rate to full price).   
+        Secondary metric: a conversion rate (Overall conversion rate, Conversion rate to intro or promo offer, or Conversion rate to full price).  
         Conversions are not attributed to the date they occur, but to the date the user last viewed a paywall
       </td>
     </tr>
@@ -159,9 +159,9 @@ Select what the green line represents:
       </td>
 
       <td>
-        This aggregates the conversion to:  
+        This aggregates the conversion to:
 
-        * subscriptions starting with an introductory or promotional offer   
+        * subscriptions starting with an introductory or promotional offer
         * subscription starting directly in full-price
       </td>
     </tr>
@@ -243,9 +243,9 @@ As a result, the most recent days or weeks will always show a lower Conversion r
 
 ### Why don't full-price conversion numbers match the Paid Subscription Movements chart?
 
-The two charts use different attribution models. 
+The two charts use different attribution models.
 
-* In the **Paid Subscription Movements** chart, each transaction is attributed to the **date it was generated** — the actual day the payment or subscription event occurred. 
+* In the **Paid Subscription Movements** chart, each transaction is attributed to the **date it was generated** — the actual day the payment or subscription event occurred.
 * In the **Screens & Conversions** chart, conversions are attributed using a **cohort model**: each conversion is tied to the date the user last viewed a paywall, not when the conversion actually took place.
 
   For example, if a user views a paywall on April 1st and their trial converts to a full-price subscription on April 8th, the Paid Subscription Movements chart will show the conversion on April 8th, while the Screens & Conversions chart will attribute it to April 1st. This is why the same conversion can appear on different dates depending on which chart you are looking at, and why totals for a given day or week will not match between the two charts.
