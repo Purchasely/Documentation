@@ -34,6 +34,8 @@ Here are how the different display modes available
 
 You can set the display mode when creating a new screen. After clicking “**New screen**”, you’ll see options to choose both the screen **Layout** and the **Display mode**.
 
+You can also set a **different display mode per device type** (Smartphone, Tablet, TV) in the **Settings** tab of the Screen, under **Display modes**. This allows you to tailor the presentation to each device — for example, a Modal on smartphones and a Pop-in on tablets. See [Adapting Screens to devices](composer-adapting-screens-to-devices) for more details.
+
 <Image align="center" border={true} src="https://files.readme.io/9047cf70a2b5c6272209ee27995fb3fe1e1dca4abf7fc610a28d24ed52127dad-ScreenRecording2025-12-04at16.25.28-ezgif.com-video-to-gif-converter_1.gif" className="border" />
 
 We have added back button in the console to preview the back button for a **Push** display mode.
