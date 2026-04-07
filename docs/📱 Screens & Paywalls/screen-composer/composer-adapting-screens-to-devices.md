@@ -16,8 +16,6 @@ Your users are accessing content on a **variety of devices** with different **sc
 
 Purchasely Screen Composer allows you to preview and perfect your designs on any device type, ensuring optimal appearance and functionality. You can even [preview](preview) screens on your own device using the QR code.
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/32014e6339267cb30105de70bb826281f7ab08458fc6b047f6a74b624667ced8-ScreenRecording2025-03-07at08.41.48-ezgif.com-video-to-gif-converter.gif" />
-
 Purchasely offers several features to ensure your paywalls look great across all devices:
 
 * **Device-specific layouts** — choose a different layout structure per device (Smartphone, Tablet, TV)
@@ -35,10 +33,12 @@ By default, a Screen uses a single layout (e.g. "Sticky button") that applies to
 1. In the **Structure** tab, click the **"+"** button next to **LAYOUTS**
 2. In the dialog, select the target device: **Tablet** or **TV**
 3. Choose how to start:
-   - **Pick a layout** — start with an empty layout template (Fill height, Scroll, Sticky button, Tabs, Segmented control, or Bring your own screen)
-   - **Pick a layout with components** — choose a layout template and copy all components from the default surface
-   - **Copy from existing** — duplicate an existing layout (e.g. copy your Smartphone Portrait layout as-is)
+   * **Pick a layout** — start with an empty layout template (Fill height, Scroll, Sticky button, Tabs, Segmented control, or Bring your own screen)
+   * **Pick a layout with components** — choose a layout template and copy all components from the default surface
+   * **Copy from existing** — duplicate an existing layout (e.g. copy your Smartphone Portrait layout as-is)
 4. Click **Confirm**
+
+<Image align="center" border={true} src="https://files.readme.io/6aa93bbdb5714b6f1064e9f96f7c41073ea553576b1a324881af296ebfa06aae-change_layout.gif" className="border" />
 
 The new layout appears in the **LAYOUTS** panel. You can now select it to build and customize it independently from the other layouts.
 
@@ -50,9 +50,9 @@ The new layout appears in the **LAYOUTS** panel. You can now select it to build 
 
 Hover over a device layout in the LAYOUTS panel to reveal the action buttons:
 
-- **Edit** (pencil icon) — change the layout template for that device
-- **Delete** (trash icon) — remove the device-specific layout entirely
-- **"+"** — add a landscape orientation layout (see below)
+* **Edit** (pencil icon) — change the layout template for that device
+* **Delete** (trash icon) — remove the device-specific layout entirely
+* **"+"** — add a landscape orientation layout (see below)
 
 # Orientation-specific layouts
 
@@ -61,8 +61,10 @@ Within a device, you can also define a **separate layout for Landscape orientati
 ## Adding a Landscape layout
 
 1. In the **LAYOUTS** panel, hover over the device you want to customize (e.g. Smartphone)
-2. Click the **"+"** button on the right — the tooltip reads *"Add a specific layout for Landscape"*
+2. Click the **"+"** button on the right — the tooltip reads _"Add a specific layout for Landscape"_
 3. Select a layout template for the Landscape orientation
+
+<Image align="center" border={true} src="https://files.readme.io/8db2844024aa8637c07a6b23873f5c08852e9bd44ef23d046d982bc6c91c867d-change_orientation.gif" className="border" />
 
 Once added, the device entry expands to show both orientations:
 
@@ -97,7 +99,7 @@ A 12pt font size may look perfect on a smartphone but not on a tablet or TV, whe
 
 Simply select the device type. The preview will automatically switch to the selected device, allowing you to override the size / width / height / padding / margin of the component for that particular device.
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/f6878a3ced2f8aa01240c391b1505725cf94f781f8a08602d00058df5f1f9e4e-ScreenRecording2025-03-07at08.15.54-ezgif.com-video-to-gif-converter.gif" />
+<Image align="center" border={true} src="https://files.readme.io/f6878a3ced2f8aa01240c391b1505725cf94f781f8a08602d00058df5f1f9e4e-ScreenRecording2025-03-07at08.15.54-ezgif.com-video-to-gif-converter.gif" className="border" />
 
 # Device-specific media
 
@@ -105,7 +107,7 @@ Images and videos can also be customized per device. Purchasely allows you to se
 
 This is particularly useful when an image that looks great in portrait on a smartphone needs a wider crop or a completely different asset on a tablet or TV.
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/63ea31a39b58dcdd84d333efa77fa13c9a7138530fb2c44fc56c2c27489f2d69-ScreenRecording2025-03-07at08.12.54-ezgif.com-video-to-gif-converter.gif" />
+<Image align="center" border={true} src="https://files.readme.io/63ea31a39b58dcdd84d333efa77fa13c9a7138530fb2c44fc56c2c27489f2d69-ScreenRecording2025-03-07at08.12.54-ezgif.com-video-to-gif-converter.gif" className="border" />
 
 # Device-specific display mode
 
