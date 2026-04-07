@@ -125,4 +125,4 @@ When a price change is pending (particularly opt-in increases on Google Play), M
 
 ### How do proration modes affect MRR on plan changes?
 
-For subscription upgrades and downgrades, MRR is calculated using the actual amount charged and the actual service period dates. Different proration modes on Google Play (e.g., CHARGE_PRORATED_PRICE, WITH_TIME_PRORATION) may result in a non-standard first period for the new plan, which affects the per-day MRR calculation. This is temporary and normalizes at the next full billing cycle.
+For subscription upgrades and downgrades, MRR is calculated using the actual amount charged and the actual service period dates. Different proration modes on Google Play (e.g., `CHARGE_PRORATED_PRICE`, `WITH_TIME_PRORATION`) may result in a non-standard first period for the new plan, which affects the per-day MRR calculation. This is temporary and normalizes at the next full billing cycle.
