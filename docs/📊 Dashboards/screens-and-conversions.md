@@ -197,6 +197,19 @@ This is expected behavior due to the cohort attribution model. Users who recentl
 
 As a result, the most recent days or weeks will always show a lower Conversion rate to full price. The further back you look, the more complete the data becomes. Allow at least one full billing cycle (typically 7-30 days depending on your trial length) before drawing conclusions about regular-price conversion performance.
 
+### Why don't full-price conversion numbers match the Paid Subscription Movements chart?
+
+The two charts use different attribution models. 
+
+* In the **Paid Subscription Movements** chart, each transaction is attributed to the **date it was generated** — the actual day the payment or subscription event occurred. 
+* In the **Screens & Conversions** chart, conversions are attributed using a **cohort model**: each conversion is tied to the date the user last viewed a paywall, not when the conversion actually took place.
+
+  For example, if a user views a paywall on April 1st and their trial converts to a full-price subscription on April 8th, the Paid Subscription Movements chart will show the conversion on April 8th, while the Screens & Conversions chart will attribute it to April 1st. This is why the same conversion can appear on different dates depending on which chart you are looking at, and why totals for a given day or week will not match between the two charts.
+
+### Why is the Overall conversion rate not the sum of CVR to offer price and CVR to regular price?
+
+Because some subscriptions that start with a trial, intro offer, or promotional offer eventually convert to full price. These subscriptions are counted once in the "CVR to offer price" column (when the offer starts) and once in the "CVR to regular price" column (when the user converts to full price), but they are counted only once in the Overall conversion rate. The Overall CVR represents the percentage of unique viewers who generated at least one conversion event — regardless of how many stages that conversion went through. It is not an addition of the two sub-rates, but rather a deduplicated metric.
+
 ### What is the difference between "Grouped by" and "Split by"?
 
 "Grouped by" applies to the **primary metric** (bars) and breaks it into stacked or clustered segments within each time period. "Split by" applies to the **secondary metric** (line) and draws separate lines for each segment. They operate independently, so you can group bars by Placement while splitting the CVR line by Platform.
