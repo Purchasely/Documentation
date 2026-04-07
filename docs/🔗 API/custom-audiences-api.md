@@ -1,8 +1,8 @@
 ---
 title: Custom Audiences API
 excerpt: >-
-  Sync user custom audiences from your CRM, CDP, or any third-party tool to Purchasely
-  using the Client API
+  Sync user custom audiences from your CRM, CDP, or any third-party tool to
+  Purchasely using the Client API
 deprecated: false
 hidden: false
 metadata:
@@ -11,12 +11,10 @@ metadata:
   robots: index
 next:
   description: ''
-  pages: []
 ---
+The Custom Audiences API allows you to create and manage User Custom Audiences in Purchasely programmatically. Unlike <Glossary>Audience</Glossary>s — which are rule-based and evaluated dynamically from user attributes — **Custom Audiences** are static lists of user identifiers that you sync from external tools such as Braze, Amplitude, or your CDP.
 
-The Custom Audiences API allows you to create and manage user custom audiences in Purchasely programmatically. Unlike <Glossary>Audience</Glossary>s — which are rule-based and evaluated dynamically from user attributes — **Custom Audiences** are static lists of user identifiers that you sync from external tools such as Braze, Amplitude, or your own backend.
-
-Once synced, Custom Audiences can be used in <Glossary>Placement</Glossary>s just like Audiences, allowing you to display different screens to specific groups of users.
+Once synced, Custom Audiences can be used in <Glossary>Placement</Glossary>s, Campaigns,  Flows, A/B tests just like Audiences, allowing you to display different Screens to specific groups of users.
 
 > 📘 Custom Audiences vs Audiences
 >
@@ -28,9 +26,9 @@ Once synced, Custom Audiences can be used in <Glossary>Placement</Glossary>s jus
 
 ## Feature access
 
-The Custom Audiences feature requires the `custom-audiences` feature flag to be enabled on your Purchasely account. Without it, all Custom Audiences API endpoints will return `403 FEATURE_NOT_ENABLED`.
+The Custom Audiences feature requires the `custom-audiences` permission to be enabled on your Purchasely account. Without it, all Custom Audiences API endpoints will return `403 FEATURE_NOT_ENABLED`.
 
-Contact your Purchasely account manager or support to enable it.
+Contact your Purchasely account manager or support to get the pricing.
 
 ## API Key
 
@@ -38,7 +36,11 @@ All Client API requests require a **Bearer token** for authentication. You can c
 
 1. Navigate to **Settings > Client API Keys** in your app
 2. Click **Create API Key** and give it a name
-3. Copy the token — it will only be displayed once
+3. Copy the token — **it will only be displayed once**
+
+<Image align="center" border={true} src="https://files.readme.io/f2a31982c71d67ac04c645a94e90e057edb37b6a6df9884e7d974262f5d6fc64-image.png" className="border" />
+
+<br />
 
 Include the token in the `Authorization` header of every request:
 
@@ -56,7 +58,11 @@ Authorization: Bearer YOUR_API_KEY
 https://api.purchasely.io/client/mobile_applications/{app_id}
 ```
 
-Replace `{app_id}` with your application's Purchasely ID (e.g. `app_xxxx`).
+Replace `{app_id}` with your application's Purchasely ID (e.g. `app_xxxx`). You can fetch it directly from the browser URL when you open the Purchasely Console
+
+<Image align="center" border={true} src="https://files.readme.io/943adfe33f6fec09ccb8e1ea31ec6d465a9004c3473bf43514616f11a365f86b-image.png" className="border" />
+
+<br />
 
 # Rate limits
 
@@ -88,11 +94,11 @@ POST /client/mobile_applications/{app_id}/custom_audiences
 }
 ```
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| `vendor_id` | string | Yes | Your unique identifier for this custom audience |
-| `name` | string | Yes | A display name for the custom audience |
-| `identifier_type` | string | No | The type of user identifier. One of: `user_id`, `anonymous_id`. Defaults to `user_id` |
+| Parameter         | Type   | Required | Description                                                                                         |
+| ----------------- | ------ | -------- | --------------------------------------------------------------------------------------------------- |
+| `vendor_id`       | string | Yes      | Your unique identifier for this Custom Audience                                                     |
+| `name`            | string | Yes      | A human readable name for the Custom Audience. It will only be displayed in the Purchasely Console. |
+| `identifier_type` | string | No       | The type of user identifier. One of: `user_id`, `anonymous_id`. Defaults to `user_id`               |
 
 **Response** `201 Created`:
 
@@ -121,9 +127,9 @@ Returns all active custom audiences for your application.
 GET /client/mobile_applications/{app_id}/custom_audiences
 ```
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| `page` | integer | No | Page number for pagination (25 items per page) |
+| Parameter | Type    | Required | Description                                    |
+| --------- | ------- | -------- | ---------------------------------------------- |
+| `page`    | integer | No       | Page number for pagination (25 items per page) |
 
 **Response** `200 OK`:
 
@@ -152,7 +158,7 @@ GET /client/mobile_applications/{app_id}/custom_audiences
 
 ## Get a custom audience
 
-Returns a single custom audience by its `vendor_id`.
+Returns a single Custom Audience by its `vendor_id`.
 
 ```
 GET /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}
@@ -179,7 +185,7 @@ GET /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}
 
 ## Delete a custom audience
 
-Archives a custom audience. The custom audience will no longer appear in the list but its data is retained.
+Archives a custom audience. The Custom Audience will no longer appear in the list but its data is retained.
 
 ```
 DELETE /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}
@@ -206,11 +212,11 @@ DELETE /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}
 
 > 🚧 Cannot delete while processing
 >
-> If a mutation is currently processing for this custom audience, the deletion will be rejected with a `409 Conflict` error. Wait for the mutation to complete before retrying.
+> If a mutation is currently processing for this Custom Audience, the deletion will be rejected with a `409 Conflict` error. Wait for the mutation to complete before retrying.
 
 # Managing Custom Audience Users
 
-All user mutation operations are **asynchronous**. They return `202 Accepted` immediately and process in the background. The custom audience's `status` field transitions to `"processing"` while the mutation is running, then back to `"ready"` (or `"failed"`) when complete.
+All user mutation operations are **asynchronous**. They return `202 Accepted` immediately and process in the background. The Custom Audience's `status` field transitions to `"processing"` while the mutation is running, then back to `"ready"` (or `"failed"`) when complete.
 
 > ❗️ One mutation at a time
 >
@@ -233,12 +239,12 @@ POST /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}/users
 }
 ```
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| `add` | array of strings | No* | User identifiers to add to the custom audience |
-| `remove` | array of strings | No* | User identifiers to remove from the custom audience |
+| Parameter | Type             | Required | Description                                         |
+| --------- | ---------------- | -------- | --------------------------------------------------- |
+| `add`     | array of strings | No*      | User identifiers to add to the custom audience      |
+| `remove`  | array of strings | No*      | User identifiers to remove from the custom audience |
 
-\* At least one of `add` or `remove` must be provided.
+* At least one of `add` or `remove` must be provided.
 
 **Response** `202 Accepted`:
 
@@ -269,9 +275,9 @@ PUT /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}/users/repl
 }
 ```
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| `users` | array of strings | Yes | The complete list of user identifiers for the custom audience |
+| Parameter | Type             | Required | Description                                                   |
+| --------- | ---------------- | -------- | ------------------------------------------------------------- |
+| `users`   | array of strings | Yes      | The complete list of user identifiers for the custom audience |
 
 **Response** `202 Accepted`
 
@@ -297,10 +303,10 @@ Returns the list of user identifiers currently in the custom audience, with curs
 GET /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}/users
 ```
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| `cursor` | string | No | Pagination cursor returned by the previous response |
-| `limit` | integer | No | Number of results per page (1–10,000, default: 1,000) |
+| Parameter | Type    | Required | Description                                           |
+| --------- | ------- | -------- | ----------------------------------------------------- |
+| `cursor`  | string  | No       | Pagination cursor returned by the previous response   |
+| `limit`   | integer | No       | Number of results per page (1–10,000, default: 1,000) |
 
 **Response** `200 OK`:
 
@@ -321,11 +327,11 @@ GET /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}/users
 
 The `status` field on a custom audience indicates its current state:
 
-| Status | Description |
-| --- | --- |
-| `ready` | The custom audience is idle and ready for mutations |
-| `processing` | A mutation is currently being processed |
-| `failed` | The last mutation failed — check `last_job_result` for details |
+| Status       | Description                                                    |
+| ------------ | -------------------------------------------------------------- |
+| `ready`      | The custom audience is idle and ready for mutations            |
+| `processing` | A mutation is currently being processed                        |
+| `failed`     | The last mutation failed — check `last_job_result` for details |
 
 After a successful mutation, `last_synced_at` is updated and `last_job_result` contains a summary:
 
@@ -352,25 +358,25 @@ All errors follow this format:
 }
 ```
 
-| HTTP Status | Code | Description |
-| --- | --- | --- |
-| `401` | `UNAUTHORIZED` | Missing or invalid API key |
-| `403` | `FORBIDDEN` | API key does not have access to this application |
-| `403` | `FEATURE_NOT_ENABLED` | Custom audiences feature is not enabled for this account |
-| `404` | `CUSTOM_AUDIENCE_NOT_FOUND` | No custom audience found with this vendor_id |
-| `409` | `MUTATION_IN_PROGRESS` | A mutation is already running for this custom audience |
-| `409` | `CANNOT_ARCHIVE_WHILE_PROCESSING` | Cannot delete a custom audience while a mutation is processing |
-| `413` | `PAYLOAD_TOO_LARGE` | Request body exceeds 10 MB |
-| `422` | `VALIDATION_FAILED` | Missing or invalid required fields |
-| `422` | `EMPTY_PAYLOAD` | No users provided in the mutation request |
-| `422` | `INVALID_PAYLOAD` | `add`, `remove`, or `users` must be arrays of strings |
-| `429` | - | Rate limit exceeded (60 requests/minute, or 1/12h for replace) |
+| HTTP Status | Code                              | Description                                                    |
+| ----------- | --------------------------------- | -------------------------------------------------------------- |
+| `401`       | `UNAUTHORIZED`                    | Missing or invalid API key                                     |
+| `403`       | `FORBIDDEN`                       | API key does not have access to this application               |
+| `403`       | `FEATURE_NOT_ENABLED`             | Custom audiences feature is not enabled for this account       |
+| `404`       | `CUSTOM_AUDIENCE_NOT_FOUND`       | No custom audience found with this vendor_id                   |
+| `409`       | `MUTATION_IN_PROGRESS`            | A mutation is already running for this custom audience         |
+| `409`       | `CANNOT_ARCHIVE_WHILE_PROCESSING` | Cannot delete a custom audience while a mutation is processing |
+| `413`       | `PAYLOAD_TOO_LARGE`               | Request body exceeds 10 MB                                     |
+| `422`       | `VALIDATION_FAILED`               | Missing or invalid required fields                             |
+| `422`       | `EMPTY_PAYLOAD`                   | No users provided in the mutation request                      |
+| `422`       | `INVALID_PAYLOAD`                 | `add`, `remove`, or `users` must be arrays of strings          |
+| `429`       | -                                 | Rate limit exceeded (60 requests/minute, or 1/12h for replace) |
 
 # Example: full sync workflow
 
 Here is a typical workflow to sync a custom audience from an external tool:
 
-```bash
+```curl
 # 1. Create the custom audience
 curl -X POST https://api.purchasely.io/client/mobile_applications/app_xxxx/custom_audiences \
   -H "Authorization: Bearer YOUR_API_KEY" \
@@ -406,3 +412,9 @@ curl -X POST https://api.purchasely.io/client/mobile_applications/app_xxxx/custo
 ```
 
 Once your custom audience is synced, you can associate it with a <Glossary>Placement</Glossary> in the Purchasely Console to display a specific screen to users in that custom audience.
+
+# Cache
+
+Once a Custom Audience has been processed, it can take up to 15 min to update the cache for the app. For testing purposes, Purchasely Console Users using the debug mode have a 30s latency instead.
+
+<br />
