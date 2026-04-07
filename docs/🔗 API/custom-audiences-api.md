@@ -12,7 +12,15 @@ metadata:
 next:
   description: ''
 ---
-The Custom Audiences API allows you to create and manage User Custom Audiences in Purchasely programmatically. Unlike <Glossary>Audience</Glossary>s — which are rule-based and evaluated dynamically from user attributes — **Custom Audiences** are static lists of user identifiers that you sync from external tools such as Braze, Amplitude, or your CDP.
+# Benefits
+
+Custom Audiences let you inject user segments built in your CRM (e.g. Braze, Iterable) or CDP (e.g. Segment, Amplitude) directly into Purchasely. This means you can leverage the rich behavioral data and segmentation capabilities of your existing marketing stack to target users with personalized In-App Experiences — paywalls, upgrade prompts, retention offers, and more — without having to recreate those segments in Purchasely.
+
+For example, you could push a "high-intent trial users" segment from your CDP and immediately use it in Purchasely to show them a tailored conversion screen, or target a "churning subscribers" cohort from your CRM with a specific retention campaign.
+
+---
+# Custom Audiences API
+The Custom Audiences API allows you to create and manage User Custom Audiences in Purchasely programmatically. Unlike <Glossary>Audience</Glossary>s — which are rule-based and evaluated dynamically from User Attributes — **Custom Audiences** are static lists of user identifiers that you sync from external tools such as Braze, Amplitude, or your CDP.
 
 Once synced, Custom Audiences can be used in <Glossary>Placement</Glossary>s, Campaigns,  Flows, A/B tests just like Audiences, allowing you to display different Screens to specific groups of users.
 
@@ -24,13 +32,13 @@ Once synced, Custom Audiences can be used in <Glossary>Placement</Glossary>s, Ca
 
 # Prerequisites
 
-## Feature access
+### Feature access
 
 The Custom Audiences feature requires the `custom-audiences` permission to be enabled on your Purchasely account. Without it, all Custom Audiences API endpoints will return `403 FEATURE_NOT_ENABLED`.
 
 Contact your Purchasely account manager or support to get the pricing and access.
 
-## API Key
+### API Key
 
 All Client API requests require a **Bearer token** for authentication. You can create and manage API keys from the Purchasely Console:
 
@@ -52,7 +60,8 @@ Authorization: Bearer YOUR_API_KEY
 >
 > The API key grants full access to your app's Client API. Never expose it in client-side code or public repositories.
 
-# Base URL
+# Implementation
+### Base URL
 
 ```
 https://api.purchasely.io/client/mobile_applications/{app_id}
@@ -64,7 +73,7 @@ Replace `{app_id}` with your application's Purchasely ID (e.g. `app_xxxx`). You 
 
 <br />
 
-# Rate limits
+### Rate limits
 
 The Client API enforces a rate limit of **60 requests per minute** per API key. Requests exceeding this limit will receive a `429 Too Many Requests` response.
 
@@ -72,9 +81,9 @@ Additionally, the **Replace all users** endpoint (`PUT .../users/replace`) is li
 
 The maximum request body size is **10 MB**.
 
-# Managing Custom Audiences
+## Managing Custom Audiences
 
-## Create a custom audience
+### Create a custom audience
 
 Creates a new custom audience for your application.
 
@@ -119,7 +128,7 @@ POST /client/mobile_applications/{app_id}/custom_audiences
 }
 ```
 
-## List custom audiences
+### List custom audiences
 
 Returns all active custom audiences for your application.
 
@@ -156,7 +165,7 @@ GET /client/mobile_applications/{app_id}/custom_audiences
 }
 ```
 
-## Get a custom audience
+### Get a custom audience
 
 Returns a single Custom Audience by its `vendor_id`.
 
@@ -183,7 +192,7 @@ GET /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}
 }
 ```
 
-## Delete a custom audience
+### Delete a custom audience
 
 Archives a custom audience. The Custom Audience will no longer appear in the list but its data is retained.
 
@@ -214,7 +223,7 @@ DELETE /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}
 >
 > If a mutation is currently processing for this Custom Audience, the deletion will be rejected with a `409 Conflict` error. Wait for the mutation to complete before retrying.
 
-# Managing Custom Audience Users
+## Managing Custom Audience Users
 
 All user mutation operations are **asynchronous**. They return `202 Accepted` immediately and process in the background. The Custom Audience's `status` field transitions to `"processing"` while the mutation is running, then back to `"ready"` (or `"failed"`) when complete.
 
@@ -259,7 +268,7 @@ POST /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}/users
 }
 ```
 
-## Replace all users
+### Replace all users
 
 Replaces the entire custom audience membership with the provided list. All existing users are removed and the new list is set.
 
@@ -295,7 +304,7 @@ DELETE /client/mobile_applications/{app_id}/custom_audiences/{vendor_id}/users/c
 
 **Response** `202 Accepted`
 
-## List users
+### List users
 
 Returns the list of user identifiers currently in the custom audience, with cursor-based pagination.
 
@@ -372,7 +381,7 @@ All errors follow this format:
 | `422`       | `INVALID_PAYLOAD`                 | `add`, `remove`, or `users` must be arrays of strings          |
 | `429`       | -                                 | Rate limit exceeded (60 requests/minute, or 1/12h for replace) |
 
-# Example: full sync workflow
+## Example: full sync workflow
 
 Here is a typical workflow to sync a custom audience from an external tool:
 
@@ -413,7 +422,7 @@ curl -X POST https://api.purchasely.io/client/mobile_applications/app_xxxx/custo
 
 Once your custom audience is synced, you can associate it with a <Glossary>Placement</Glossary> in the Purchasely Console to display a specific screen to users in that custom audience.
 
-# Cache
+## Cache
 
 Once a Custom Audience has been processed, it can take up to 15 min to update the cache for the app. For testing purposes, Purchasely Console Users using the debug mode have a 30s latency instead.
 
