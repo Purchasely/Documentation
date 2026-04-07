@@ -214,7 +214,7 @@ Because some subscriptions that start with a trial, intro offer, or promotional 
 
 "Grouped by" applies to the **primary metric** (bars) and breaks it into stacked or clustered segments within each time period. "Split by" applies to the **secondary metric** (line) and draws separate lines for each segment. They operate independently, so you can group bars by Placement while splitting the CVR line by Platform.
 
-### Why is my Total CVR lower than I expected?
+### Why is my Overall conversion rate lower than I expected?
 
 Conversion rates are calculated against **unique viewers**, not total app users or total views. If many users see your paywall but few convert, the denominator (unique viewers) is large. Also remember that cohort attribution means recent periods will have incomplete conversion data. Check the KPI cards at the top: if "Number of unique Screens viewers" is very high relative to conversions, the issue is likely conversion efficiency rather than a data problem.
 
