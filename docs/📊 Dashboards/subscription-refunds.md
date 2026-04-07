@@ -66,6 +66,12 @@ Click **Filters** to narrow the data. You can combine multiple filters.
 
 This is expected behavior. The date axis represents when the subscription **started**, not when the refund was issued. Refunds typically occur days, weeks, or even months after the original purchase. Recent periods have not had enough time to accumulate refunds. Wait at least 30-90 days before drawing conclusions about a period's refund rate.
 
+> ❗️ **Pre-requisite: Server-to-server notifications**
+>
+> Refund data is only available if your app's Server-to-Server (S2S) notifications are properly configured and connected to Purchasely. Without this, Purchasely has no way of being notified when a refund is granted by the store, and this chart will remain empty.
+>
+> 📚 See [Apple App Store configuration](app-store-configuration#8-the-server-to-server-end-point---only-for-subscription-apps) and [Google Play Store configuration](play-store-configuration#server-to-server-notifications) for setup instructions.
+
 ### Why do past values keep changing?
 
 Because refund data is anchored to the subscription start date, a refund issued today for a subscription that started three months ago will retroactively increase the refund rate for that earlier period. This is by design — it gives you an accurate picture of the true refund rate for each acquisition cohort. Values stabilize over time as the window for potential refunds closes.
