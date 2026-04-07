@@ -43,11 +43,54 @@ Six summary metrics appear at the top of the chart for the selected date range:
 
 The chart overlays two metrics on a shared time axis:
 
-| Element                                      | Axis |  What it shows                                                                                   |
-| ------------------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------- |
-| **Blue bars** | Left Y-axis | Primary metric: Screens viewed count or Unique viewers count (depending on your selection) |
-| **Green line** | Right Y-axis | Secondary metric: a conversion rate (Overall conversion rate, Conversion rate to intro or promo offer, or Conversion rate to full price).  
-        Conversions are not attributed to the date they occur, but to the date the user last viewed a paywall |
+<Table>
+  <thead>
+    <tr>
+      <th>
+        Element
+      </th>
+
+      <th>
+        Axis
+      </th>
+
+      <th>
+        What it shows
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        **Blue bars**
+      </td>
+
+      <td>
+        Left Y-axis
+      </td>
+
+      <td>
+        Primary metric: Screens viewed count or Unique viewers count (depending on your selection)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        **Green line**
+      </td>
+
+      <td>
+        Right Y-axis
+      </td>
+
+      <td>
+        Secondary metric: a conversion rate (Overall conversion rate, Conversion rate to intro or promo offer, or Conversion rate to full price).  
+        Conversions are not attributed to the date they occur, but to the date the user last viewed a paywall
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 Reading both together is the key insight: bars show your traffic volume, the line shows your conversion efficiency. A day with tall bars but a dipping line means you drove more traffic without converting proportionally. A rising line with shrinking bars means your paywall is more effective but fewer users are reaching it.
 
