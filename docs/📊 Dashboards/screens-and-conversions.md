@@ -86,7 +86,7 @@ The chart overlays two metrics on a shared time axis:
 
       <td>
         Secondary metric: a conversion rate (Overall conversion rate, Conversion rate to intro or promo offer, or Conversion rate to full price).   
-        Conversions are not attributed to the date they occur, but to the date the user **last viewed a paywall** 
+        Conversions are not attributed to the date they occur, but to the date the user last viewed a paywall
       </td>
     </tr>
   </tbody>
