@@ -7,9 +7,24 @@ The Screens & Conversions chart is part of the Funnel Analytics section. It comb
 
 The chart displays six KPI cards at the top, a primary metric as blue bars (left Y-axis), and a secondary metric as a green line (right Y-axis). Together, they give you a complete picture of acquisition volume and efficiency over time.
 
+<br />
+
+# ⚠️ Cohort-based attribution
+
+**This is the most important concept to understand on this chart.** All conversions are attributed using a **cohort model**: each conversion is counted in the period where the user **last viewed a paywall**, not when the conversion actually occurred. This applies to both "CVR to offer price" and "CVR to regular price".
+
+> **Example:** a user views your paywall on March 1st. They tap the purchase button and start a 7-day free trial on March 1st. One week later, on March 8th, the trial ends and the user converts to a full-price subscription.
+>
+> * The **conversion to offer price** (trial start) is attributed to **March 1st** — the day the paywall was viewed.
+> * The **conversion to regular price** (trial-to-paid conversion) is also attributed to **March 1st** — the day the paywall was viewed, even though the actual payment happened on March 8th.
+>
+> Both conversion events are tied back to the cohort date when the user was last exposed to the paywall.
+
+This design lets you accurately measure the effectiveness of a paywall on the day it was shown, rather than scattering conversions across future dates when payments happen to process. It also means that **conversion rates for recent periods are always incomplete**: users who started a trial last week have not yet had the chance to convert to full price, so the "CVR to regular price" for that period will appear artificially low and will increase over time as those trials mature.
+
 # How to read the chart
 
-## KPI cards
+### KPI cards
 
 Six summary metrics appear at the top of the chart for the selected date range:
 
@@ -28,27 +43,56 @@ Six summary metrics appear at the top of the chart for the selected date range:
 
 The chart overlays two metrics on a shared time axis:
 
-| Element        | Axis         | What it shows                                                                                |
-| -------------- | ------------ | -------------------------------------------------------------------------------------------- |
-| **Blue bars**  | Left Y-axis  | Primary metric: Screens viewed count or Unique viewers count (depending on your selection)   |
-| **Green line** | Right Y-axis | Secondary metric: a conversion rate (CVR to regular price, CVR to offer price, or Total CVR) |
+<Table>
+  <thead>
+    <tr>
+      <th>
+        Element
+      </th>
+
+      <th>
+        Axis
+      </th>
+
+      <th>
+        What it shows
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        **Blue bars**
+      </td>
+
+      <td>
+        Left Y-axis
+      </td>
+
+      <td>
+        Primary metric: Screens viewed count or Unique viewers count (depending on your selection)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        **Green line**
+      </td>
+
+      <td>
+        Right Y-axis
+      </td>
+
+      <td>
+        Secondary metric: a conversion rate (Overall conversion rate, Conversion rate to intro or promo offer, or Conversion rate to full price).   
+        Conversions are not attributed to the date they occur, but to the date the user **last viewed a paywall** 
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 Reading both together is the key insight: bars show your traffic volume, the line shows your conversion efficiency. A day with tall bars but a dipping line means you drove more traffic without converting proportionally. A rising line with shrinking bars means your paywall is more effective but fewer users are reaching it.
-
-<br />
-
-### ⚠️ Cohort-based attribution
-
-**This is the most important concept to understand on this chart.** All conversions are attributed using a **cohort model**: each conversion is counted in the period where the user **last viewed a paywall**, not when the conversion actually occurred. This applies to both "CVR to offer price" and "CVR to regular price".
-
-> **Example:** a user views your paywall on March 1st. They tap the purchase button and start a 7-day free trial on March 1st. One week later, on March 8th, the trial ends and the user converts to a full-price subscription.
->
-> * The **conversion to offer price** (trial start) is attributed to **March 1st** — the day the paywall was viewed.
-> * The **conversion to regular price** (trial-to-paid conversion) is also attributed to **March 1st** — the day the paywall was viewed, even though the actual payment happened on March 8th.
->
-> Both conversion events are tied back to the cohort date when the user was last exposed to the paywall.
-
-This design lets you accurately measure the effectiveness of a paywall on the day it was shown, rather than scattering conversions across future dates when payments happen to process. It also means that **conversion rates for recent periods are always incomplete**: users who started a trial last week have not yet had the chance to convert to full price, so the "CVR to regular price" for that period will appear artificially low and will increase over time as those trials mature.
 
 <br />
 
@@ -75,7 +119,7 @@ Select what the blue bars represent:
 | **Screens viewed** | Total paywall views (every view counts, including repeat views by the same user) |
 | **Unique viewers** | Distinct users who viewed at least one paywall per time period                   |
 
-# 1# Grouped by (primary metric)
+### Grouped by (primary metric)
 
 Break down the bars into segments:
 
