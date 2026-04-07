@@ -28,7 +28,7 @@ Once synced, Custom Audiences can be used in <Glossary>Placement</Glossary>s, Ca
 
 The Custom Audiences feature requires the `custom-audiences` permission to be enabled on your Purchasely account. Without it, all Custom Audiences API endpoints will return `403 FEATURE_NOT_ENABLED`.
 
-Contact your Purchasely account manager or support to get the pricing.
+Contact your Purchasely account manager or support to get the pricing and access.
 
 ## API Key
 
