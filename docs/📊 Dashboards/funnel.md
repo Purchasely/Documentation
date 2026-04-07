@@ -64,7 +64,7 @@ Click **Filters** to narrow the data included in the funnel. You can combine mul
 | **Plans**      | Filter by specific subscription plan                         |
 | **Platforms**  | iOS, Android, or both                                        |
 
-## Download CSV
+### Download CSV
 
 Click **Download CSV** to export the data table as a CSV file for further analysis in a spreadsheet or BI tool.
 
@@ -78,26 +78,24 @@ Click **Download CSV** to export the data table as a CSV file for further analys
 
 # Frequently asked questions
 
-## What does "Unknown" mean in the entry nodes?
+### What does "Unknown" mean in the entry nodes?
 
 An "Unknown" entry node appears when subscriptions cannot be attributed to a specific value for the selected dimension. For example, if a subscription was not triggered from a tracked placement (e.g., it came from a direct store purchase or a legacy integration without placement tracking), it will appear under "Unknown" in the Placement dimension. This is expected and does not indicate a data error.
 
-## Can I see the funnel for a single placement or paywall?
+### Can I see the funnel for a single placement or paywall?
 
 Yes. Use the **Filters** button to select a specific placement, paywall, or any other filter. The Sankey diagram and data table will update to show only subscriptions matching your filter criteria.
 
-## Why do the numbers in the data table not add up across columns?
+### Why do the numbers in the data table not add up across columns?
 
 Each column represents a different stage in the funnel, and not all subscriptions progress through every stage. For example, subscriptions that start paying full price directly skip the "Free Trial Started" stage entirely. The columns are not meant to sum horizontally — they represent parallel paths through the funnel.
 
-## How does granularity affect the funnel data?
+### How does granularity affect the funnel data?
 
 Granularity controls the time window over which subscriptions are aggregated. A monthly view pools all subscriptions from the entire month into a single funnel, producing smoother and larger flows. A daily view shows a single day's subscriptions, which is useful for spotting short-term changes but produces thinner bands. The funnel shape may look different across granularities because subscription behavior varies by cohort size and time period.
 
-## What is the difference between "Converted" and "Paying Users"?
+### What is the difference between "Converted" and "Paying Users"?
 
 "Converted" counts subscriptions that transitioned from a free trial to a paid subscription. "Paying Users" includes all users who are actively paying, whether they converted from a trial, started paying directly at full price, or came through an introductory or promotional offer. A subscription can be counted as a Paying User without being counted as Converted if it never went through a trial.
 
-## Can I export the Sankey diagram as an image?
-
-The Sankey diagram itself cannot be exported as an image directly from the console. However, you can use the **Download CSV** button to export the underlying data table for use in external visualization tools or reports.
+<br />
