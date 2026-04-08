@@ -3,7 +3,7 @@ title: Subscription Activations
 ---
 # About this chart
 
-The Subscription Activations chart counts how many **new subscriptions** started during a given period. An "activation" is the moment a user begins a subscription for the first time -- whether through a free trial, a paid introductory offer, or a direct full-price purchase. It gives you a clear, day-by-day (or week-by-week, month-by-month) view of acquisition volume so you can spot trends, measure campaign impact, and compare acquisition channels.
+The Subscription Activations chart counts how many **new subscriptions** started during a given period. An "activation" is the moment a user begins a subscription for the first time -- whether through a free trial, a paid introductory offer, or a full-price purchase. It gives you a clear, day-by-day (or week-by-week, month-by-month) view of acquisition volume so you can spot trends, measure campaign impact, and compare acquisition channels.
 
 This chart is distinct from the "New" column in the Paid Subscriptions Movements chart. Paid Subscriptions Movements only tracks subscriptions that have generated a payment -- free trials are excluded until they convert. Subscription Activations counts every new first time subscription at the moment it starts, regardless of whether a payment has occurred yet. 
 
@@ -21,7 +21,7 @@ You can choose the segment you're interested in:
 * All activation - includes every new subscription whatever their offer)
 * Free trials only - focuses on new subscriptions starting with a Free Trial
 * Paid Intro offers only - focuses on new subscriptions starting with an paid introductory offer
-* Direct Full-price subscriptions only - focuses on new subscriptions starting directly with the full price
+* Full-price subscriptions only - focuses on the moment the user first pays full price (i.e. the first full-price payment, whether the subscription started directly at full price or after a free trial / intro offer has ended)
 
 # ⚠️ Change from dashboard v1: counting subscriptions, not subscribers
 
@@ -56,10 +56,10 @@ Filter by the type of subscription activation:
 
 | Option                                   | What it includes                                                                               |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| **All activations**                      | Every new subscription start: free trials, paid intro offers, and direct full-price purchases  |
+| **All activations**                      | Every new subscription start: free trials, paid intro offers, and full-price purchases  |
 | **Free Trials only**                     | Only subscriptions that started with a free trial period                                       |
 | **Paid Intro Offers only**               | Only subscriptions that started with a discounted introductory offer (not free)                |
-| **Direct Full-price Subscriptions only** | Only subscriptions where the user paid full price from the start, with no trial or intro offer |
+| **Full-price Subscriptions only** | The moment a user first pays full price. This includes subscriptions that started directly at full price, but also free trials and intro offers that have converted — the activation is counted when the first full-price payment occurs |
 
 ### Grouped by
 
@@ -106,7 +106,7 @@ Click **Filters** to narrow the data. You can combine multiple filters.
 # Common use cases
 
 * **Measure the impact of a new paywall** -- Launch a new paywall screen, then filter by Screen or use the Grouped by Screen dimension to compare activation volumes before and after the change.
-* **Compare acquisition channels** -- Use the Show dropdown to isolate Free Trials, Paid Intro Offers, or Direct Full-price Subscriptions. If most activations come from free trials, your acquisition funnel is trial-dependent; if direct purchases are growing, your value proposition is resonating without a discount.
+* **Compare acquisition channels** -- Use the Show dropdown to isolate Free Trials, Paid Intro Offers, or Full-price Subscriptions. The Full-price segment is especially useful for understanding when users actually start paying — it counts the first full-price payment, including trial and intro offer conversions. If most activations come from free trials, your acquisition funnel is trial-dependent; if full-price activations are growing, your value proposition is converting effectively.
 * **Evaluate a marketing campaign** -- Look for a spike in activations on the day a campaign launches. Filter by Campaign or Placement to attribute the lift to a specific initiative.
 * **Spot platform differences** -- Group by Platform to see whether iOS or Android drives more activations. Consistent gaps may indicate platform-specific paywall optimization opportunities.
 * **Understand payment method distribution** -- Group by Payment types to see the share of activations coming from standard purchases vs. promo codes or other methods. A high share of promo code activations may signal over-reliance on discounts.
@@ -116,7 +116,7 @@ Click **Filters** to narrow the data. You can combine multiple filters.
 
 ### What counts as an "activation"?
 
-An activation is recorded the moment a user starts a **new subscription** for the first time. This includes three scenarios: (1) the user begins a free trial, (2) the user starts a subscription with a paid introductory offer, or (3) the user purchases a subscription at full price. The activation is counted on the start date, not when a payment is processed.
+An activation is recorded the moment a user starts a **new subscription** for the first time. This includes three scenarios: (1) the user begins a free trial, (2) the user starts a subscription with a paid introductory offer, or (3) the user purchases a subscription at full price. The activation is counted on the start date, not when a payment is processed. When using the "Full-price Subscriptions only" segment, the activation is counted at the moment the user first pays full price — which may be after a trial or intro offer ends, not necessarily on the original subscription start date.
 
 ### Why might activation numbers differ between Purchasely and the app stores?
 
