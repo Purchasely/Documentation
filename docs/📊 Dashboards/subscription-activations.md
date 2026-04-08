@@ -54,11 +54,11 @@ When the trend line sits above the average line, acquisition is accelerating. Wh
 
 Filter by the type of subscription activation:
 
-| Option                                   | What it includes                                                                               |
-| ---------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| **All activations**                      | Every new subscription start: free trials, paid intro offers, and full-price purchases  |
-| **Free Trials only**                     | Only subscriptions that started with a free trial period                                       |
-| **Paid Intro Offers only**               | Only subscriptions that started with a discounted introductory offer (not free)                |
+| Option                            | What it includes                                                                                                                                                                                                                         |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **All activations**               | Every new subscription start: free trials, paid intro offers, and full-price purchases                                                                                                                                                   |
+| **Free Trials only**              | Only subscriptions that started with a free trial period                                                                                                                                                                                 |
+| **Paid Intro Offers only**        | Only subscriptions that started with a discounted introductory offer (not free)                                                                                                                                                          |
 | **Full-price Subscriptions only** | The moment a user first pays full price. This includes subscriptions that started directly at full price, but also free trials and intro offers that have converted — the activation is counted when the first full-price payment occurs |
 
 ### Grouped by
@@ -118,11 +118,11 @@ Click **Filters** to narrow the data. You can combine multiple filters.
 
 An activation is the **first time a user enters the selected segment**. The moment it is counted depends on which segment you are viewing:
 
-| Segment | Activation is counted when... |
-|---------|-------------------------------|
-| **All activations** | The user starts a subscription for the first time — whether through a free trial, a paid intro offer, or a full-price purchase |
-| **Free Trials only** | The user starts a free trial for the first time |
-| **Paid Intro Offers only** | The user starts a paid introductory offer for the first time |
+| Segment                           | Activation is counted when...                                                                                                                                          |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **All activations**               | The user starts a subscription for the first time — whether through a free trial, a paid intro offer, or a full-price purchase                                         |
+| **Free Trials only**              | The user starts a free trial for the first time                                                                                                                        |
+| **Paid Intro Offers only**        | The user starts a paid introductory offer for the first time                                                                                                           |
 | **Full-price Subscriptions only** | The user makes their first full-price payment — this may be the start of a direct full-price subscription, or the moment a trial or intro offer converts to full price |
 
 This means the same subscription can appear in different segments at different dates. For example, a user who starts a free trial in January and converts to full price in February will count as an activation in January under "All activations" and "Free Trials only", and as an activation in February under "Full-price Subscriptions only".
