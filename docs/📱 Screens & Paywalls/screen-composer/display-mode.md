@@ -177,6 +177,6 @@ TO BE COMPLETED
 
 > ❗️ The display mode is not taken into consideration with the actions Open Screen or Deeplink
 >
-> When using the action Open Screen, Open Placemennt or Deeplink in a button, the display mode of the destination screen is not taken into consideration by the SDK. The display mode used in this case is always the default one (`Modal`)
+> When using the action Open Screen, Open Placemennt or Deeplink in a button, the display mode of the destination screen is not taken into consideration by the SDK. The display mode used in this case will be the one configured in the Screen Composer directly (SDK v5.7 onwards).
 >
 > If you want to implement specific transitions between Purchasely Screens, you need to leverage the Flows feature. [Check our documentation for more information](flows)
