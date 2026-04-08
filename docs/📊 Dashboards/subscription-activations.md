@@ -3,9 +3,9 @@ title: Subscription Activations
 ---
 # About this chart
 
-The Subscription Activations chart counts how many **new subscriptions** started during a given period. An "activation" is the moment a user begins a subscription for the first time -- whether through a free trial, a paid introductory offer, or a full-price purchase. It gives you a clear, day-by-day (or week-by-week, month-by-month) view of acquisition volume so you can spot trends, measure campaign impact, and compare acquisition channels.
+The Subscription Activations chart counts how many users **enter a given subscription segment for the first time** during a given period. The definition of "activation" depends on the segment you select — it can be the start of a free trial, the start of a paid intro offer, or the first full-price payment. It gives you a clear, day-by-day (or week-by-week, month-by-month) view of acquisition volume so you can spot trends, measure campaign impact, and compare acquisition channels.
 
-This chart is distinct from the "New" column in the Paid Subscriptions Movements chart. Paid Subscriptions Movements only tracks subscriptions that have generated a payment -- free trials are excluded until they convert. Subscription Activations counts every new first time subscription at the moment it starts, regardless of whether a payment has occurred yet. 
+This chart is distinct from the "New" column in the Paid Subscriptions Movements chart. Paid Subscriptions Movements only tracks subscriptions that have generated a payment -- free trials are excluded until they convert. Subscription Activations counts first-time entries into the selected segment, which — depending on the segment — may occur before any payment is processed (e.g. a free trial start).
 
 > ⚠️ **Important: Accuracy depends on subscriber history import**
 >
@@ -16,12 +16,12 @@ This chart is distinct from the "New" column in the Paid Subscriptions Movements
 > This is the most common reason for discrepancies between Purchasely's activation metrics and the ones reported by the App Store or Google Play, which by definition have the complete transaction history for every user.
 > To ensure accurate activation tracking, please make sure you have completed the [historical subscriber import](subscribers-base-import) before relying on this metric.
 
-You can choose the segment you're interested in:
+You can choose the segment you're interested in. An activation is counted the first time a user enters the selected segment:
 
-* All activation - includes every new subscription whatever their offer)
-* Free trials only - focuses on new subscriptions starting with a Free Trial
-* Paid Intro offers only - focuses on new subscriptions starting with an paid introductory offer
-* Full-price subscriptions only - focuses on the moment the user first pays full price (i.e. the first full-price payment, whether the subscription started directly at full price or after a free trial / intro offer has ended)
+* All activations - the first time a user starts any subscription (free trial, paid intro offer, or full-price)
+* Free Trials only - the first time a user starts a free trial
+* Paid Intro Offers only - the first time a user starts a paid introductory offer
+* Full-price Subscriptions only - the first time a user pays full price (whether the subscription started directly at full price, or after a trial / intro offer converted)
 
 # ⚠️ Change from dashboard v1: counting subscriptions, not subscribers
 
@@ -116,7 +116,16 @@ Click **Filters** to narrow the data. You can combine multiple filters.
 
 ### What counts as an "activation"?
 
-An activation is recorded the moment a user starts a **new subscription** for the first time. This includes three scenarios: (1) the user begins a free trial, (2) the user starts a subscription with a paid introductory offer, or (3) the user purchases a subscription at full price. The activation is counted on the start date, not when a payment is processed. When using the "Full-price Subscriptions only" segment, the activation is counted at the moment the user first pays full price — which may be after a trial or intro offer ends, not necessarily on the original subscription start date.
+An activation is the **first time a user enters the selected segment**. The moment it is counted depends on which segment you are viewing:
+
+| Segment | Activation is counted when... |
+|---------|-------------------------------|
+| **All activations** | The user starts a subscription for the first time — whether through a free trial, a paid intro offer, or a full-price purchase |
+| **Free Trials only** | The user starts a free trial for the first time |
+| **Paid Intro Offers only** | The user starts a paid introductory offer for the first time |
+| **Full-price Subscriptions only** | The user makes their first full-price payment — this may be the start of a direct full-price subscription, or the moment a trial or intro offer converts to full price |
+
+This means the same subscription can appear in different segments at different dates. For example, a user who starts a free trial in January and converts to full price in February will count as an activation in January under "All activations" and "Free Trials only", and as an activation in February under "Full-price Subscriptions only".
 
 ### Why might activation numbers differ between Purchasely and the app stores?
 
@@ -130,7 +139,7 @@ This is a Google Play platform limitation, not a Purchasely one. In practice, ac
 
 ### How is this different from the "New" count in Paid Subscriptions Movements?
 
-Paid Subscriptions Movements tracks subscriptions that have entered a paid state. Free trials are not included in the "New" count of that chart until the trial converts to a paid subscription. Subscription Activations counts all new subscription starts immediately, including free trials. Use Activations to measure top-of-funnel acquisition volume, and Paid Subscriptions Movements to measure paying subscriber growth.
+Paid Subscriptions Movements tracks subscriptions that have entered a paid state. Free trials are not included in the "New" count of that chart until the trial converts to a paid subscription. Subscription Activations counts the first time a user enters the selected segment — which, for the "All activations" segment, includes free trials at their start date. Use Activations to measure acquisition volume across all entry points, and Paid Subscriptions Movements to measure paying subscriber growth.
 
 ### Why do weekly totals not match the sum of daily totals?
 
