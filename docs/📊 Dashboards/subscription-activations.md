@@ -23,6 +23,10 @@ You can choose the segment you're interested in. An activation is counted the fi
 * Paid Intro Offers only - the first time a user starts a paid introductory offer
 * Full-price Subscriptions only - the first time a user pays full price (whether the subscription started directly at full price, or after a trial / intro offer converted)
 
+> 📘 The same subscription can appear in different segments at different dates.
+>
+> For example, a user who starts a free trial in January and converts to full price in February will count as an activation in January under "All activations" and "Free Trials only", and as an activation in February under "Full-price Subscriptions only".
+
 # ⚠️ Change from dashboard v1: counting subscriptions, not subscribers
 
 The previous version of this dashboard counted **unique subscribers** (users). Dashboard v2 now counts **unique subscriptions**, each identified by a unique subscription ID.
