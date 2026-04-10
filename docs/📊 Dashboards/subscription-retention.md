@@ -39,6 +39,33 @@ The chart is a **cohort retention table**. Each row represents a group (cohort) 
 
 The diagonal staircase pattern is normal: recent cohorts have fewer columns because not enough time has elapsed to measure later periods.
 
+# Cohort Layer Cake
+
+Below the retention table, a **Cohort Layer Cake** chart provides a visual overview of your subscriber base composition over time.
+
+### What it shows
+
+The Layer Cake is a **stacked area chart** where each colored layer represents a cohort (a group of subscriptions that started during the same period). The X-axis is calendar time, and the Y-axis shows the absolute number of retained subscriptions. All cohorts are stacked on top of each other, so the total height at any point represents your entire active subscriber base at that moment.
+
+### How to read it
+
+| What to look for | What it means |
+| --- | --- |
+| **Overall shape trending upward** | Your subscriber base is growing — new cohorts are adding more subscribers than older ones are losing |
+| **Overall shape trending downward** | Churn is outpacing acquisition — you're losing subscribers faster than you're gaining new ones |
+| **Flat or plateau** | Acquisition and churn are roughly balanced |
+| **Older layers (bottom) thinning gradually** | Normal churn behavior — older cohorts naturally shrink over time |
+| **A layer thinning faster than others** | That cohort had worse retention — investigate what changed during that period (paywall, pricing, acquisition channel) |
+| **Recent layers (top) appearing large** | Strong recent acquisition — but watch whether they retain as well as older cohorts |
+
+### Practical insights
+
+The Layer Cake answers questions that the retention table cannot easily show:
+
+* **Is my subscriber base actually growing?** The table shows retention rates per cohort, but doesn't give you the big picture. The Layer Cake instantly shows whether your total active base is going up or down.
+* **Which cohorts still contribute meaningfully?** Old cohorts that have thinned to a sliver are no longer material. Thick, stable layers at the bottom indicate a healthy, loyal subscriber core.
+* **What's the balance between acquisition and retention?** If the chart keeps growing, new cohort layers are thick enough to compensate for natural churn in older ones. If it shrinks despite large new cohorts, retention is the problem.
+
 # Controls
 
 ### Show
@@ -149,3 +176,19 @@ When a subscription changes plan (upgrade or downgrade), a new subscription is c
 ### How do Google Play paused subscriptions affect retention?
 
 Paused subscriptions (Google Play only) temporarily leave the active state and re-enter it when the pause ends. In retention cohorts, a paused subscription will appear as churned during the pause period and recovered when it resumes — similar to account hold recovery. This creates the same cross-cohort counting effect described in the granularity section above.
+
+### What is the Cohort Layer Cake chart?
+
+The Cohort Layer Cake is a stacked area chart displayed below the retention table. Each layer represents a cohort, and all layers are stacked to show the total active subscriber base over time. It gives you an instant visual answer to the question: "Is my subscriber base growing, shrinking, or flat?"
+
+### How is the Layer Cake different from the retention table?
+
+The retention table shows **how well each cohort retains** (as a percentage or count), period by period. The Layer Cake shows **the combined result** of all cohorts together — the actual size and composition of your subscriber base at any point in time. The table is for diagnosing individual cohort performance; the Layer Cake is for understanding the big picture.
+
+### Why does the Layer Cake show a dip even though my latest cohort is large?
+
+A large new cohort adds a thick layer at the top, but if several older cohorts are shrinking simultaneously, the net effect can still be a decline. This signals that your retention across older cohorts is not strong enough to sustain growth from new acquisitions alone — a common early sign that you need to invest in retention strategies alongside acquisition.
+
+### Can the same subscription appear in multiple layers?
+
+Yes, for the same reasons described in the retention table FAQ. If a subscription churns and recovers through billing retry or account hold, it can appear in multiple cohorts — and therefore in multiple layers of the chart.
