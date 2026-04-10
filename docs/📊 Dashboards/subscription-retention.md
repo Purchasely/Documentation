@@ -1,9 +1,12 @@
 ---
 title: Subscription Retention
 ---
-# About this chart
+# About this page
 
-The Subscription Retention chart tracks how many paid subscriptions remain active over time after their initial purchase. It helps you measure subscriber loyalty, identify when users tend to churn, and evaluate the long-term impact of your acquisition and retention strategies.
+The Subscription Retention page helps you measure subscriber loyalty, identify when users tend to churn, and evaluate the long-term impact of your acquisition and retention strategies. It contains two complementary views:
+
+* The **Cohort Retention Table** — a detailed, per-cohort breakdown of how subscriptions retain over time
+* The **Cohort Layer Cake** — a stacked area chart showing the composition and evolution of your entire subscriber base
 
 > 📘 **Cohort entry = any transition from non-active to active**
 >
@@ -25,9 +28,11 @@ Each cohort can be visualized with 2 different starting points:
 * when the subscription started - which actually includes the introductory offer
 * when the full-price subscription started - which excludes the introductory offer
 
-# How to read the chart
+# Cohort Retention Table
 
-The chart is a **cohort retention table**. Each row represents a group (cohort) of subscriptions that started during the same time period.
+### What it shows
+
+The Cohort Retention Table is a **cohort retention matrix**. Each row represents a group (cohort) of subscriptions that started during the same time period.
 
 | Column                                           | Description                                                                                                                            |
 | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -37,15 +42,22 @@ The chart is a **cohort retention table**. Each row represents a group (cohort) 
 | **ARPPU**                                        | Average Revenue Per Paid Subscription for this cohort (Revenue / Paid subscriptions)                                                   |
 | **Day 0, Day 1, Day 2...**                       | How many subscriptions from this cohort are still active after N periods (or Week 0, Month 0, etc. depending on granularity)           |
 
+### How to read it
+
 The diagonal staircase pattern is normal: recent cohorts have fewer columns because not enough time has elapsed to measure later periods.
+
+Look for:
+
+* **Consistent retention rates across cohorts** — a sign that your product experience is stable
+* **A cohort with a sharper drop than its neighbors** — something changed for that group (pricing, paywall, acquisition channel)
+* **Improving retention in recent cohorts** — your retention efforts are paying off
+* **Sharp drops at specific periods** (Day 7, Day 30, Day 365) — these align with renewal dates and indicate cancellations or payment failures
 
 # Cohort Layer Cake
 
-Below the retention table, a **Cohort Layer Cake** chart provides a visual overview of your subscriber base composition over time.
-
 ### What it shows
 
-The Layer Cake is a **stacked area chart** where each colored layer represents a cohort (a group of subscriptions that started during the same period). The X-axis is calendar time, and the Y-axis shows the absolute number of retained subscriptions. All cohorts are stacked on top of each other, so the total height at any point represents your entire active subscriber base at that moment.
+The Cohort Layer Cake is a **stacked area chart** where each colored layer represents a cohort. The X-axis is calendar time, and the Y-axis shows the absolute number of retained subscriptions. All cohorts are stacked on top of each other, so the total height at any point represents your entire active subscriber base at that moment.
 
 ### How to read it
 
@@ -120,9 +132,15 @@ Click **Filters** to narrow the data. You can combine multiple filters.
 * **Compare trial vs. full-price retention** — Use the Segment dropdown to switch between "All subscriptions" and "Full-price subscriptions". If full-price retention is significantly higher, your trials may be attracting lower-intent users.
 * **Measure the impact of a paywall change** — Filter by Screen or A/B test and compare cohort retention before and after the change.
 * **Identify platform differences** — Filter by Platform to see if iOS and Android subscribers retain differently.
-* **Spot billing cycle issues** — Look for sharp drops at Day 7 (weekly plans), Day 30 (monthly plans), or Day 365 (yearly plans). These indicate renewal failures or intentional cancellations.
+* **Spot billing cycle issues** — Look for sharp drops at Day 7 (weekly plans), Day 30 (monthly plans), or Day 365 (yearly plans) in the retention table. These indicate renewal failures or intentional cancellations.
+* **Assess subscriber base health at a glance** — Check the Layer Cake to see if your total active base is growing, flat, or declining — without having to analyze individual cohorts.
+* **Identify problematic cohorts visually** — In the Layer Cake, a layer that thins faster than its neighbors signals a cohort with worse-than-average retention. Cross-reference with the retention table to pinpoint the exact drop-off period.
 
 # Frequently asked questions
+
+### What is the difference between the Cohort Retention Table and the Cohort Layer Cake?
+
+The retention table shows **how well each cohort retains** (as a percentage or count), period by period. The Layer Cake shows **the combined result** of all cohorts together — the actual size and composition of your subscriber base at any point in time. The table is for diagnosing individual cohort performance; the Layer Cake is for understanding the big picture.
 
 ### Why do weekly cohort totals not match the monthly total?
 
@@ -177,18 +195,10 @@ When a subscription changes plan (upgrade or downgrade), a new subscription is c
 
 Paused subscriptions (Google Play only) temporarily leave the active state and re-enter it when the pause ends. In retention cohorts, a paused subscription will appear as churned during the pause period and recovered when it resumes — similar to account hold recovery. This creates the same cross-cohort counting effect described in the granularity section above.
 
-### What is the Cohort Layer Cake chart?
-
-The Cohort Layer Cake is a stacked area chart displayed below the retention table. Each layer represents a cohort, and all layers are stacked to show the total active subscriber base over time. It gives you an instant visual answer to the question: "Is my subscriber base growing, shrinking, or flat?"
-
-### How is the Layer Cake different from the retention table?
-
-The retention table shows **how well each cohort retains** (as a percentage or count), period by period. The Layer Cake shows **the combined result** of all cohorts together — the actual size and composition of your subscriber base at any point in time. The table is for diagnosing individual cohort performance; the Layer Cake is for understanding the big picture.
-
 ### Why does the Layer Cake show a dip even though my latest cohort is large?
 
 A large new cohort adds a thick layer at the top, but if several older cohorts are shrinking simultaneously, the net effect can still be a decline. This signals that your retention across older cohorts is not strong enough to sustain growth from new acquisitions alone — a common early sign that you need to invest in retention strategies alongside acquisition.
 
-### Can the same subscription appear in multiple layers?
+### Can the same subscription appear in multiple layers of the Layer Cake?
 
-Yes, for the same reasons described in the retention table FAQ. If a subscription churns and recovers through billing retry or account hold, it can appear in multiple cohorts — and therefore in multiple layers of the chart.
+Yes, for the same reasons described above. If a subscription churns and recovers through billing retry or account hold, it can appear in multiple cohorts — and therefore in multiple layers of the chart.
