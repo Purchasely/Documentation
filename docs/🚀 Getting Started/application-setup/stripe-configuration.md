@@ -28,7 +28,7 @@ If you have more than one Stripe account (for each application) then connect the
 >
 > A Stripe application combines a Stripe account with only one Purchasely Application. If your Stripe account works with more than one Purchasely Application, please contact our support team via Intercom.
 >
-> Read below on how to handle both Stripe "test" and "production" environments.
+> Read below on how to handle Stripe "test", "sandbox", and "production" environments.
 
 Click on install app.  
 The list of authorizations required for the proper functioning of our application is then displayed.
@@ -66,7 +66,7 @@ Select the Purchasely app you wish to link your Stripe account to.
 
 Click on "NEXT".
 
-> 📘 Configuration for Sandbox and Production
+> 📘 Configuration for Test and Production
 >
 > Once the app is installed, it needs to be configured both in the "test" and "production" Stripe environments for purchases to be tracked in those environments accordingly.
 >
@@ -77,6 +77,24 @@ Click on "NEXT".
 >   * My Purchasely App (production) \<-> Stripe Account (production mode)
 > * 1 Purchasely application
 >   * My Purchasely App \<-> Stripe Account (test + production mode)
+
+> 📘 Sandbox support
+>
+> Since version 0.0.22 of the Purchasely Stripe App, you can also install Purchasely in a Stripe [sandbox](https://docs.stripe.com/sandboxes) environment.
+>
+> The installation flow is identical to test and production modes: install Purchasely from the marketplace while your Stripe dashboard is switched to your sandbox, then follow the setup wizard. Purchasely automatically detects that you are in a sandbox and links the account accordingly.
+>
+> > 🚧 Switching from test mode to sandbox on the same Purchasely application
+> >
+> > Sandbox and test mode are **separate Stripe environments** with distinct account identifiers. A Purchasely application can only be linked to one of them at a time.
+> >
+> > If your Purchasely application is already linked to a Stripe account in test mode and you want to switch to sandbox, you must first **unlink the test mode connection** before installing the app in your sandbox:
+> >
+> > 1. In your Stripe dashboard, open the Purchasely app settings in test mode and click "Disconnect" (or uninstall the app).
+> > 2. Switch to your sandbox in the Stripe dashboard.
+> > 3. Install the Purchasely app from the marketplace and follow the setup wizard.
+> >
+> > Your historical test mode data (subscriptions, receipts) remains attached to the previous test mode link but will no longer receive new events.
 
 <Image align="center" alt="App Selection" border={true} caption="App Selection" src="https://files.readme.io/cf3641f59a32afbcf0871690886c1fd908a2b3a4aa3dfeaacc0bf1df63540509-68747470733a2f2f66696c65732e676974626f6f6b2e636f6d2f76302f622f676974626f6f6b2d782d70726f642e61707073706f742e636f6d2f6f2f737061636573253246476755644f7a68716130377568376e4232695a4125324675706c6f6164732532464158773032777a486e5a5856713077344a4.webp" />
 
