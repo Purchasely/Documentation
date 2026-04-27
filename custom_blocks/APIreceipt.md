@@ -264,10 +264,7 @@ name: API /receipt
       </td>
 
       <td>
-        possible values:  
-
-        * `subscription`
-        * `checkout_session`
+        the type of Stripe object sent, currently we only accept `subscription`
       </td>
     </tr>
 
@@ -285,7 +282,7 @@ name: API /receipt
       </td>
 
       <td>
-        Stripe identifier of the [subscription](https://docs.stripe.com/api/subscriptions)/[checkout\_session](https://docs.stripe.com/api/checkout/sessions)
+        Stripe identifier of the [subscription](https://docs.stripe.com/api/subscriptions) associated to your purchase
       </td>
     </tr>
 
