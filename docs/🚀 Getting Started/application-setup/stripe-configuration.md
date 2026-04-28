@@ -170,6 +170,12 @@ curl \
   https://s2s.purchasely.io/receipts
 ```
 
+> 🚧 Cross-platform subscriptions are not deduplicated
+>
+> Sending a Stripe receipt for a `user_id` that already has an active App Store / Play Store subscription does **not** deactivate the existing subscription. Both will coexist as active in Purchasely (each emitting its own events), and the user will be billed by each store.
+>
+> If you want to prevent this, check the user's current subscription status (via [webhooks](server-events) or the SDK) before triggering a Stripe checkout, and ask the user to cancel their existing store subscription first.
+
 ## Passing integration attributes (optional)
 
 You can include `integration_*` fields in the JSON body so that Purchasely associates the subscriber with your analytics and engagement platforms (Amplitude, Mixpanel, Airship, Adjust, etc.). This lets those platforms receive subscription lifecycle events automatically.
