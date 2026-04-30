@@ -44,9 +44,25 @@ The following events can be sent from Purchasely to Adjust to track your subscri
 
 `SUBSCRIPTION_REFUNDED_REVOKED`: Sent when a subscription is refunded
 
+`TRANSACTION_PROCESSED`: Sent every time a paid transaction is processed by the store. This is the only event that carries `revenue` and `currency` in the S2S payload sent to Adjust.
+
 Subscription events need to be mapped with an Adjust Token. If an event does not have an associated \[adjust event token], it will not be sent.
 
 for more details see §2. *Creating your Adjust`event tokens` in the Adjust Console*.
+
+> 📘 Tracking revenue in Adjust
+>
+> The lifecycle events listed above (`SUBSCRIPTION_STARTED`, `TRIAL_CONVERTED`, `SUBSCRIPTION_RENEWED`, …) are useful for funnel tracking but **do not carry the `revenue` and `currency` fields** in the S2S payload sent to Adjust.
+>
+> To track revenue in Adjust, **map the `TRANSACTION_PROCESSED` event to a dedicated Adjust event token**. This event is generated every time a real payment occurs and carries:
+>
+> - `revenue` — the amount paid in the customer's currency
+> - `currency` — the payment currency
+> - `partner_params.source_event_name` — the originating lifecycle event (e.g. `SUBSCRIPTION_RENEWED`, `TRIAL_CONVERTED`), useful to segment new vs renewal vs trial conversion in Adjust
+>
+> Without this mapping, lifecycle events still reach Adjust but appear with revenue = 0 in your dashboards.
+>
+> See [Transactional Event](https://docs.purchasely.com/docs/transactional-event) for more details on `TRANSACTION_PROCESSED`.
 
 # Integration
 
