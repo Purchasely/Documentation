@@ -48,9 +48,9 @@ See below to add the store you want to use
 >
 > ```yaml pubspec.yaml
 > dependencies:
->   purchasely_flutter: ^<<current_flutter_version>>
->   purchasely_google: ^<<current_flutter_version>>
->   purchasely_android_player: ^<<current_flutter_version>>
+>   purchasely_flutter: ^{user.current_flutter_version}
+>   purchasely_google: ^{user.current_flutter_version}
+>   purchasely_android_player: ^{user.current_flutter_version}
 > ```
 
 ## Google Play Billing
