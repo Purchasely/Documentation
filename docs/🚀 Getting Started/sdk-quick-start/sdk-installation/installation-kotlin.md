@@ -49,7 +49,7 @@ apply plugin: 'com.huawei.agconnect'
 
 dependencies {
     //Add this line to integrate Huawei Mobile Services with Purchasely
-    implementation 'io.purchasely:huawei-services:<<current_major_version>>.+'
+    implementation 'io.purchasely:huawei-services:{user.current_major_version}.+'
 }
 ```
 
