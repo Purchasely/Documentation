@@ -23,9 +23,9 @@ Our Flutter SDK does not contains other stores to avoid unnecessary integrations
 ```typescript build.gradle
 dependencies {
     //Amazon App Store
-    implementation 'io.purchasely:amazon:<<current_android_version>>'
+    implementation 'io.purchasely:amazon:{user.current_android_version}'
     
     //Huawei Mobile Services
-    implementation 'io.purchasely:huawei-services:<<current_android_version>>'
+    implementation 'io.purchasely:huawei-services:{user.current_android_version}'
 }
 ```
