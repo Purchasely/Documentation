@@ -48,8 +48,8 @@ See below to add the store you want to use
 >
 > ```json package.json
 > "dependencies": {
->   "@purchasely/cordova-plugin-purchasely": "<<current_cordova_version>>",
->   "@purchasely/cordova-plugin-purchasely-google": "<<current_cordova_version>>"
+>   "@purchasely/cordova-plugin-purchasely": "{user.current_cordova_version}",
+>   "@purchasely/cordova-plugin-purchasely-google": "{user.current_cordova_version}"
 > },
 > ```
 
