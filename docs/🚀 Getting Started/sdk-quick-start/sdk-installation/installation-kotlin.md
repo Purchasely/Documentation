@@ -71,7 +71,7 @@ Purchasely.Builder(applicationContext)
 
 You only need to add one dependency
 
-`implementation 'io.purchasely:amazon:<<current_major_version>>.+'`
+`implementation 'io.purchasely:amazon:{user.current_major_version}.+'`
 
 This dependency contains the class `AmazonStore` that you must add to `Purchasely.Builder` to be used by the SDK
 
