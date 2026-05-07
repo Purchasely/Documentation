@@ -16,7 +16,7 @@ Don't forget to change the minimum OS versions to match Purchasely requirements 
 
 ...
 
-platform :ios, '<<sdk_ios_minimum_version>>.0'
+platform :ios, '{user.sdk_ios_minimum_version}.0'
 
 ...
 ```
