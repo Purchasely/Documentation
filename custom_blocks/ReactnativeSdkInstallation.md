@@ -42,15 +42,17 @@ allprojects {
 We do include a store by default in our SDK, with Android you can choose to use Google and/or Huawei and/or Amazon.  
 See below to add the store you want to use
 
+{user.current_rn_version}
+
 > 📘 Versioning
 >
 > All your dependencies **must** always be at the **same version** for example
 >
 > ```json package.json
 > "dependencies": {
->   "react-native-purchasely": "<<current_rn_version>>",
->   "@purchasely/react-native-purchasely-google": "<<current_rn_version>>",
->   "@purchasely/react-native-purchasely-android-player": "<<current_rn_version>>",
+>   "react-native-purchasely": "{user.current_rn_version}",
+>   "@purchasely/react-native-purchasely-google": "{user.current_rn_version}",
+>   "@purchasely/react-native-purchasely-android-player": "{user.current_rn_version}",
 > },
 > ```
 
