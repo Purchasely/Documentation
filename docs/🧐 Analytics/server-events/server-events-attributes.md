@@ -293,6 +293,44 @@ next:
 
     <tr>
       <td style={{ textAlign: "left" }}>
+        `full_plan_price_in_xxx`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **float**
+
+        ⚠️ Only available for Google Play Store subscriptions.
+
+        Contains the full regular plan price, ignoring any active intro offer, promotional offer, promo code or free trial (i.e. the price that will be charged once any offer phase ends), using the `Default integration currency` defined in the App Settings. This amount includes VAT.
+
+        `xxx` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code of the currency and will be replaced accordingly to the selected currency in the settings.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `full_plan_price_in_customer_currency`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **float**
+
+        ⚠️ Only available for Google Play Store subscriptions.
+
+        Contains the full regular plan price in the customer's own currency (`customer_currency`), ignoring any active intro offer, promotional offer, promo code or free trial (i.e. the price that will be charged once any offer phase ends). This amount includes VAT.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
         `amount_in_usd`
       </td>
 
