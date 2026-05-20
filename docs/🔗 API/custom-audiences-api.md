@@ -14,7 +14,7 @@ next:
 ---
 > 📘 Before you start — how to integrate the Custom Audiences API
 >
-> Since this is an API, it needs to be implemented somewhere. There are three possible paths:
+> Custom Audiences rely on a Purchasely API, that needs to be implemented somewhere. There are three possible paths:
 >
 > 1. **By your CDP / CRM vendor** — so the integration is available natively in the tool you already use. Some vendors can leverage their existing "Custom Integration" capability; others will require dedicated development on their side.
 > 2. **By you directly** — typically when you use an in-house CDP / CRM, or when you prefer to keep control of the sync logic.
@@ -28,8 +28,8 @@ next:
 >
 > **Existing integrations:**
 >
-> - ✅ [Dinmo](https://www.dinmo.com) — native integration available ([setup guide](https://docs.dinmo.io/integrations/destination-platforms/purchasely))
-> - 🛠️ Amplitude — planned for Q3 2026 (built on the Purchasely side)
+> * ✅ [Dinmo](https://www.dinmo.com) — native integration available ([setup guide](https://docs.dinmo.io/integrations/destination-platforms/purchasely))
+> * 🛠️ Amplitude — planned for Q3 2026 (built on the Purchasely side)
 
 # Benefits
 
@@ -37,8 +37,10 @@ Custom Audiences let you inject user segments built in your CRM (e.g. Braze, Ite
 
 For example, you could push a "high-intent trial users" segment from your CDP and immediately use it in Purchasely to show them a tailored conversion screen, or target a "churning subscribers" cohort from your CRM with a specific retention campaign.
 
----
+***
+
 # Custom Audiences API
+
 The Custom Audiences API allows you to create and manage User Custom Audiences in Purchasely programmatically. Unlike <Glossary>Audience</Glossary>s — which are rule-based and evaluated dynamically from User Attributes — **Custom Audiences** are static lists of user identifiers that you sync from external tools such as Braze, Amplitude, or your CDP.
 
 Once synced, Custom Audiences can be used in <Glossary>Placement</Glossary>s, Campaigns,  Flows, A/B tests just like Audiences, allowing you to display different Screens to specific groups of users.
@@ -80,6 +82,7 @@ Authorization: Bearer YOUR_API_KEY
 > The API key grants full access to your app's Client API. Never expose it in client-side code or public repositories.
 
 # Implementation
+
 ### Base URL
 
 ```
