@@ -12,6 +12,25 @@ metadata:
 next:
   description: ''
 ---
+> 📘 Before you start — how to integrate the Custom Audiences API
+>
+> Since this is an API, it needs to be implemented somewhere. There are three possible paths:
+>
+> 1. **By your CDP / CRM vendor** — so the integration is available natively in the tool you already use. Some vendors can leverage their existing "Custom Integration" capability; others will require dedicated development on their side.
+> 2. **By you directly** — typically when you use an in-house CDP / CRM, or when you prefer to keep control of the sync logic.
+> 3. **Via a middleware** (fallback) — a small service you build that pulls segments from your CDP / CRM and pushes them to the Purchasely API. More effort, but works when neither of the options above is possible.
+>
+> **Recommended steps if you want to enable Custom Audiences:**
+>
+> 1. **Contact us** so we can enable the feature on your account and sign a contract amendment. A temporary access for evaluation purposes (no production use) can be arranged.
+> 2. **Reach out to your CDP / CRM vendor** and ask them to add a Purchasely integration.
+> 3. **Introduce us to your vendor** — we'll provide implementation support directly.
+>
+> **Existing integrations:**
+>
+> - ✅ [Dinmo](https://www.dinmo.com) — native integration available ([setup guide](https://docs.dinmo.io/integrations/destination-platforms/purchasely))
+> - 🛠️ Amplitude — planned for Q3 2026 (built on the Purchasely side)
+
 # Benefits
 
 Custom Audiences let you inject user segments built in your CRM (e.g. Braze, Iterable) or CDP (e.g. Segment, Amplitude) directly into Purchasely. This means you can leverage the rich behavioral data and segmentation capabilities of your existing marketing stack to target users with personalized In-App Experiences — paywalls, upgrade prompts, retention offers, and more — without having to recreate those segments in Purchasely.
