@@ -1,6 +1,6 @@
 # Purchasely Android SDK Documentation
 
-This document provides comprehensive documentation for integrating and using the Purchasely Android SDK with Kotlin.
+This guide covers the Purchasely Android SDK v6 API for Kotlin and Java apps. Purchasely displays **Screens** and **Presentations** configured in the Console through placements, direct `screenId` lookups, campaigns, and Flows.
 
 ---
 
@@ -9,16 +9,18 @@ This document provides comprehensive documentation for integrating and using the
 1. [Requirements](#requirements)
 2. [Installation](#installation)
 3. [SDK Initialization](#sdk-initialization)
-4. [Displaying Paywalls](#displaying-paywalls)
-5. [Processing Transactions](#processing-transactions)
-6. [Paywall Action Interceptor](#paywall-action-interceptor)
-7. [User Identification](#user-identification)
-8. [Subscription Status & Entitlements](#subscription-status--entitlements)
-9. [Custom User Attributes](#custom-user-attributes)
-10. [Event Listeners](#event-listeners)
-11. [Pre-fetching Screens](#pre-fetching-screens)
-12. [Deeplinks Management](#deeplinks-management)
-13. [Alternative Stores](#alternative-stores)
+4. [Displaying Presentations](#displaying-presentations)
+5. [Action Interceptor](#action-interceptor)
+6. [Processing Transactions](#processing-transactions)
+7. [Embedded Presentations](#embedded-presentations)
+8. [Preloading](#preloading)
+9. [User Identification](#user-identification)
+10. [Subscription Status & Entitlements](#subscription-status--entitlements)
+11. [Custom User Attributes](#custom-user-attributes)
+12. [Event Listeners](#event-listeners)
+13. [Deeplinks & Campaigns](#deeplinks--campaigns)
+14. [Alternative Stores](#alternative-stores)
+15. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -27,403 +29,311 @@ This document provides comprehensive documentation for integrating and using the
 | Requirement | Version |
 |-------------|---------|
 | minSdkVersion | 23 |
-| compileSdkVersion | 34 |
-| Kotlin | 2.+ |
-| Gradle | 8.+ |
+| compileSdkVersion | 35 |
+| Kotlin | 2.2.x |
+| Gradle | 9.x |
 | JDK | 11 |
 
 ---
 
 ## Installation
 
-### Add Maven Repository
-
-Add the Purchasely Maven repository to your project-level `settings.gradle.kts`:
+Add Purchasely artifacts to your app module:
 
 ```kotlin
-// settings.gradle.kts
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-        maven {
-            url = uri("https://maven.purchasely.io")
-        }
-    }
-}
-```
-
-### Add Dependencies
-
-Add the required dependencies to your app-level `build.gradle.kts`:
-
-```kotlin
-// app/build.gradle.kts
 dependencies {
-    // Core SDK - Required
-    implementation("io.purchasely:core:5.+")
+    implementation("io.purchasely:core:6.0.0")
+    implementation("io.purchasely:google-play:6.0.0")
 
-    // Google Play Store - Required for Google Play
-    implementation("io.purchasely:google-play:5.+")
+    // Optional video support for Screens containing video components.
+    implementation("io.purchasely:player:6.0.0")
 
-    // Video Player - Optional, for video support in paywalls
-    implementation("io.purchasely:player:5.+")
+    // Optional Compose helper for embedded Presentations.
+    implementation("io.purchasely:presentation-compose:6.0.0")
 }
 ```
 
-> **Note**: The `player` dependency is optional but recommended if your paywalls contain video content.
+If you use Huawei or Amazon stores, add their Purchasely store artifact instead of or in addition to `google-play`.
 
 ---
 
 ## SDK Initialization
 
-Initialize the Purchasely SDK in your Application class. This should be the first method executed by your application.
+### Kotlin DSL
 
-### Full Mode (Recommended)
-
-In `full` mode, Purchasely handles the entire purchase flow including transactions and receipts.
+`Purchasely { ... }` configures and starts the SDK in one call. `context(...)` and `apiKey(...)` are mandatory.
 
 ```kotlin
-import android.app.Application
-import io.purchasely.ext.Purchasely
-import io.purchasely.ext.PLYRunningMode
-import io.purchasely.ext.LogLevel
-import io.purchasely.google.GoogleStore
-
-class YourApplication : Application() {
-
+class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Purchasely.Builder(applicationContext)
-            .apiKey("YOUR_API_KEY")
-            .userId(null) // Optional: set if you already know your user id
-            .stores(listOf(GoogleStore()))
-            .logLevel(LogLevel.DEBUG) // Set to ERROR for production
-            .runningMode(PLYRunningMode.Full)
-            .build()
-            .start { isConfigured, error ->
-                if (isConfigured) {
-                    // Purchasely SDK is ready
-                    Log.d("Purchasely", "SDK configured successfully")
+        Purchasely {
+            context(this@App)
+            apiKey("YOUR_API_KEY")
+            stores(listOf(GoogleStore()))
+            runningMode(PLYRunningMode.Full)
+            logLevel(LogLevel.DEBUG)
+            allowDeeplink(true)
+            allowCampaigns(true)
+            onInitialized { error ->
+                if (error == null) {
+                    // SDK ready
                 } else {
-                    // Handle configuration error
-                    Log.e("Purchasely", "SDK configuration failed: ${error?.message}")
+                    Log.e("Purchasely", "Initialization failed", error)
                 }
             }
+        }
     }
 }
 ```
 
-### PaywallObserver Mode
-
-Use `paywallObserver` mode if you have an existing in-app purchase infrastructure and want to use Purchasely only for paywall display and analytics.
+### Java / fluent Builder
 
 ```kotlin
-import android.app.Application
-import io.purchasely.ext.Purchasely
-import io.purchasely.ext.PLYRunningMode
-import io.purchasely.ext.LogLevel
-import io.purchasely.google.GoogleStore
-
-class YourApplication : Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-
-        Purchasely.Builder(applicationContext)
-            .apiKey("YOUR_API_KEY")
-            .userId(null)
-            .stores(listOf(GoogleStore()))
-            .logLevel(LogLevel.DEBUG)
-            .runningMode(PLYRunningMode.PaywallObserver)
-            .build()
-            .start { isConfigured, error ->
-                if (isConfigured) {
-                    // Purchasely SDK is ready
-                }
-            }
+Purchasely.Builder(applicationContext)
+    .apiKey("YOUR_API_KEY")
+    .stores(listOf(GoogleStore()))
+    .runningMode(PLYRunningMode.Full)
+    .allowDeeplink(true)
+    .allowCampaigns(true)
+    .build()
+    .start { error ->
+        if (error == null) {
+            // SDK ready
+        }
     }
-}
 ```
 
-### API Key
+### Running modes
 
-You can find your API Key in the Purchasely Console under **App settings > Backend & SDK configuration**.
+| Mode | Use when |
+|------|----------|
+| `PLYRunningMode.Full` | Purchasely handles store purchases and receipt validation. |
+| `PLYRunningMode.Observer` | Your app owns purchases; Purchasely observes transactions and displays Console-driven Screens. |
 
-### Initialization Callback
-
-The callback returns two values:
-- `isConfigured`: `true` if SDK was initialized successfully
-- `error`: Contains the specific error if `isConfigured` is `false`
-
-> **Important**: If you rely on subscription status or eligibility for offers, wait for the callback before proceeding.
+Default in v6 is `Observer`. Set `Full` explicitly when Purchasely must handle purchase execution.
 
 ---
 
-## Displaying Paywalls
+## Displaying Presentations
 
-Purchasely paywalls are displayed using **placements**. A placement is a specific location in your app where you want to display a paywall (e.g., onboarding, settings, premium feature).
-
-### Display a Placement
+Use the `PLYPresentation` builder. A prepared Presentation can be loaded with `preload()` and then displayed, or displayed atomically.
 
 ```kotlin
-val presentationView = Purchasely.presentationView(
-    context = context,
-    properties = PLYPresentationProperties(
-        placementId = "PLACEMENT_ID",
-        contentId = null, // Optional: associate content with the purchase
-        onClose = {
-            // Called when paywall should be closed
-            // Remove view from layout hierarchy here
-        }
-    )
-) { result, plan ->
-    when (result) {
-        PLYProductViewResult.PURCHASED -> {
-            Log.d("Purchasely", "User purchased ${plan?.name}")
-            // Update entitlements to unlock content
-        }
-        PLYProductViewResult.CANCELLED -> {
-            Log.d("Purchasely", "User cancelled")
-        }
-        PLYProductViewResult.RESTORED -> {
-            Log.d("Purchasely", "User restored ${plan?.name}")
-            // Update entitlements to unlock content
+import io.purchasely.ext.presentation.PLYPresentation
+import io.purchasely.ext.presentation.PLYPresentationType
+import io.purchasely.ext.presentation.PLYPurchaseResult
+import io.purchasely.ext.presentation.preload
+
+val presentation = PLYPresentation {
+    placementId("onboarding")
+    contentId("article_42")
+    onPresented { loaded, error ->
+        if (error != null) Log.e("Purchasely", "Presentation failed", error)
+    }
+    onCloseRequested {
+        Log.d("Purchasely", "User requested close")
+    }
+}.preload()
+
+when (presentation.type) {
+    PLYPresentationType.DEACTIVATED -> Unit
+    PLYPresentationType.CLIENT -> showYourOwnScreen(presentation)
+    else -> presentation.display(activity) { outcome ->
+        when (outcome.purchaseResult) {
+            PLYPurchaseResult.PURCHASED -> refreshEntitlements()
+            PLYPurchaseResult.RESTORED -> refreshEntitlements()
+            PLYPurchaseResult.CANCELLED, null -> Unit
         }
     }
 }
-
-// Add presentationView to your layout hierarchy
-yourContainer.addView(presentationView)
 ```
 
-### Display with Activity or Fragment
-
-You can also display presentations using `presentationViewForPlacement`:
+### Selectors
 
 ```kotlin
-val paywallView = Purchasely.presentationViewForPlacement(
-    context,
-    placementId = "onboarding",
-    onClose = {
-        // Remove view from layout hierarchy
-    }
-) { result, plan ->
-    when (result) {
-        PLYProductViewResult.PURCHASED -> Log.d("Purchasely", "User purchased ${plan?.name}")
-        PLYProductViewResult.CANCELLED -> Log.d("Purchasely", "User cancelled")
-        PLYProductViewResult.RESTORED -> Log.d("Purchasely", "User restored ${plan?.name}")
-    }
-}
-
-// Add paywallView to your layout
+PLYPresentation { placementId("onboarding") }
+PLYPresentation { screenId("screen_abc123") }
+PLYPresentation { flowId("flow_abc123") }
 ```
 
-### Close a Presentation
+`screenId` is the canonical Android name for a direct Console Screen identifier. Do not use `presentationId` in Android public APIs.
 
-Unlike other platforms, on Android you must manually handle the close callback:
+### UI and callback options
 
 ```kotlin
-val presentationView = Purchasely.presentationView(
-    context = context,
-    properties = PLYPresentationProperties(
-        placementId = "PLACEMENT_ID",
-        onClose = {
-            // Implement this callback to remove the view
-            yourContainer.removeView(presentationView)
-        }
-    )
-) { result, plan ->
-    // Handle result
+val prepared = PLYPresentation {
+    placementId("settings")
+    backgroundColor(0xFF101820.toInt())
+    progressColor(0xFFFFC857.toInt())
+    displayCloseButton(true)
+    displayBackButton(true)
+    onPresented { presentation, error -> }
+    onCloseRequested { }
+    onDismissed { outcome -> }
 }
+```
+
+### Prepared display helper
+
+```kotlin
+PLYPresentation { placementId("onboarding") }.display(
+    context = activity,
+    presentation = { loaded ->
+        // Display has been triggered for this loaded Screen.
+    },
+    callback = { outcome ->
+        // Final dismissal result.
+    }
+)
+```
+
+`display(context) { outcome }` fires on final dismissal. Do not use it as a “display triggered” callback.
+
+---
+
+## Action Interceptor
+
+The v6 interceptor is registered per action and returns `PLYInterceptResult`.
+
+```kotlin
+import io.purchasely.ext.PLYInterceptResult
+import io.purchasely.ext.interceptAction
+import io.purchasely.ext.presentation.PLYPresentationAction
+
+Purchasely.interceptAction<PLYPresentationAction.Login> { _, _ ->
+    showLoginScreen()
+    PLYInterceptResult.SUCCESS
+}
+
+Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, action ->
+    if (observerMode) {
+        launchBilling(
+            activity = info?.activity,
+            productId = action.plan.store_product_id,
+            offerToken = action.subscriptionOffer?.offerToken,
+        )
+        PLYInterceptResult.SUCCESS
+    } else {
+        PLYInterceptResult.NOT_HANDLED
+    }
+}
+```
+
+| Result | Meaning |
+|--------|---------|
+| `SUCCESS` | App handled the action; SDK skips default behavior. |
+| `FAILED` | App tried and failed; action chain stops. |
+| `NOT_HANDLED` | SDK should continue with default behavior. |
+
+Remove interceptors when tearing down a custom SDK wrapper:
+
+```kotlin
+Purchasely.removeAllActionInterceptors()
 ```
 
 ---
 
 ## Processing Transactions
 
-### Full Mode
+In `Full` mode, Purchasely performs purchases from Presentation buttons.
 
-In `full` mode, Purchasely automatically handles the purchase flow when users tap a purchase button.
+In `Observer` mode, intercept purchase and restore actions, run your billing flow, then call `Purchasely.synchronize()` after success so Purchasely receives the transaction state.
 
 ```kotlin
-val paywallView = Purchasely.presentationViewForPlacement(
-    context,
-    placementId = "onboarding",
-    onClose = {
-        // Remove view from layout hierarchy
-    }
-) { result, plan ->
-    when (result) {
-        PLYProductViewResult.PURCHASED -> {
-            Log.d("Purchasely", "User purchased ${plan?.name}")
-            // Transaction completed - update entitlements
-            unlockPremiumContent()
+private var pendingResult: ((PLYInterceptResult) -> Unit)? = null
+
+Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
+    suspendCancellableCoroutine { continuation ->
+        pendingResult = { result ->
+            if (continuation.isActive) continuation.resume(result)
         }
-        PLYProductViewResult.CANCELLED -> {
-            Log.d("Purchasely", "User cancelled purchase")
-        }
-        PLYProductViewResult.RESTORED -> {
-            Log.d("Purchasely", "User restored ${plan?.name}")
-            // Restore completed - update entitlements
-            unlockPremiumContent()
-        }
+        startBilling(info?.activity, purchase.plan.store_product_id, purchase.subscriptionOffer?.offerToken)
     }
 }
+
+fun onBillingSuccess() {
+    Purchasely.synchronize()
+    pendingResult?.invoke(PLYInterceptResult.SUCCESS)
+    pendingResult = null
+}
 ```
-
-### PaywallObserver Mode
-
-In `paywallObserver` mode, you handle transactions with your own infrastructure. Use the Paywall Action Interceptor to capture purchase intents.
 
 ---
 
-## Paywall Action Interceptor
+## Embedded Presentations
 
-The Paywall Action Interceptor allows you to intercept user actions on the paywall such as purchases, logins, restores, and custom links.
+Use `display()` for standard modal/Flow display. Use embedded APIs only when your app must own the container.
 
-### Basic Implementation
+### Android View
 
 ```kotlin
-Purchasely.setPaywallActionsInterceptor { info, action, parameters, processAction ->
-    when (action) {
-        PLYPresentationAction.PURCHASE -> {
-            // User tapped a purchase button
-            Log.d("Purchasely", "Purchase action for plan: ${parameters.plan?.name}")
-            processAction(true) // Continue with purchase
-        }
-        PLYPresentationAction.LOGIN -> {
-            // User tapped login button
-            // Display your login screen
-            showLoginScreen { success ->
-                if (success) {
-                    Purchasely.userLogin("user_id")
-                }
-                processAction(success)
-            }
-        }
-        PLYPresentationAction.RESTORE -> {
-            // User tapped restore button
-            Log.d("Purchasely", "Restore action")
-            processAction(true) // Continue with restore
-        }
-        PLYPresentationAction.OPEN_PRESENTATION -> {
-            // User tapped a button to open another presentation
-            processAction(true)
-        }
-        PLYPresentationAction.CLOSE -> {
-            // User tapped close button
-            processAction(true)
-        }
-        PLYPresentationAction.PROMO_CODE -> {
-            // User wants to enter a promo code
-            processAction(true)
-        }
-        else -> {
-            // For all other actions, continue normally
-            processAction(true)
-        }
-    }
+val view = presentation.buildView(context) { outcome ->
+    // Embedded result
+}
+container.addView(view)
+```
+
+### Fragment
+
+```kotlin
+val fragment = presentation.getFragment { outcome -> }
+supportFragmentManager.beginTransaction()
+    .replace(R.id.container, fragment)
+    .commit()
+```
+
+### Compose
+
+With the optional Compose artifact:
+
+```kotlin
+import io.purchasely.ext.presentation.compose.PLYPresentationView
+
+PLYPresentationView(
+    presentation = presentation,
+    modifier = Modifier.fillMaxWidth(),
+    callback = { outcome -> }
+)
+```
+
+Without the artifact:
+
+```kotlin
+AndroidView(
+    factory = { context -> presentation.buildView(context) ?: FrameLayout(context) }
+)
+```
+
+---
+
+## Preloading
+
+```kotlin
+var cached: PLYPresentation? = null
+
+lifecycleScope.launch {
+    cached = PLYPresentation { placementId("premium_feature") }.preload()
+}
+
+button.setOnClickListener {
+    cached?.display(activity) { outcome -> }
 }
 ```
 
-### Handle Custom Links
-
-You can add custom links in your paywall from the Purchasely Console. Intercept them with:
+Every builder/prepared/loaded presentation exposes `state: StateFlow<PLYPresentationState>`.
 
 ```kotlin
-Purchasely.setPaywallActionsInterceptor { info, action, parameters, processAction ->
-    if (action == PLYPresentationAction.OPEN_PRESENTATION) {
-        val url = parameters.url
-        if (url != null && url.contains("your-custom-scheme")) {
-            // Handle your custom link
-            handleCustomLink(url)
-            processAction(false) // We handled it ourselves
-            return@setPaywallActionsInterceptor
+lifecycleScope.launch {
+    prepared.state.collect { state ->
+        when (state) {
+            PLYPresentationState.Idle -> Unit
+            PLYPresentationState.Loading -> showLoading()
+            PLYPresentationState.Loaded -> hideLoading()
+            PLYPresentationState.Displayed -> Unit
+            is PLYPresentationState.Error -> showError(state.error)
         }
-    }
-    processAction(true)
-}
-```
-
-### PaywallObserver Mode with In-House Infrastructure
-
-When using `paywallObserver` mode with your own purchase system:
-
-```kotlin
-Purchasely.setPaywallActionsInterceptor { info, action, parameters, processAction ->
-    when (action) {
-        PLYPresentationAction.PURCHASE -> {
-            val plan = parameters.plan
-            val offerId = parameters.offer?.vendorId ?: plan?.basePlanId
-
-            // Use your own purchase system
-            yourPurchaseManager.purchase(
-                productId = plan?.productId,
-                offerId = offerId,
-                onSuccess = { purchase ->
-                    // Sync the purchase with Purchasely for analytics
-                    Purchasely.synchronize()
-                    processAction(true)
-                },
-                onError = { error ->
-                    processAction(false)
-                }
-            )
-        }
-        PLYPresentationAction.RESTORE -> {
-            // Use your own restore system
-            yourPurchaseManager.restore { success ->
-                if (success) {
-                    Purchasely.synchronize()
-                }
-                processAction(success)
-            }
-        }
-        else -> processAction(true)
-    }
-}
-```
-
-### PaywallObserver Mode with RevenueCat
-
-```kotlin
-Purchasely.setPaywallActionsInterceptor { info, action, parameters, processAction ->
-    when (action) {
-        PLYPresentationAction.PURCHASE -> {
-            val plan = parameters.plan
-            val subscriptionOption = parameters.subscriptionOffer?.subscriptionOption
-
-            if (subscriptionOption != null) {
-                // RevenueCat purchase with subscription option
-                Purchases.sharedInstance.purchase(
-                    PurchaseParams.Builder(info.activity, subscriptionOption).build(),
-                    object : PurchaseCallback {
-                        override fun onCompleted(storeTransaction: StoreTransaction, customerInfo: CustomerInfo) {
-                            Purchasely.synchronize()
-                            processAction(true)
-                        }
-                        override fun onError(error: PurchasesError, userCancelled: Boolean) {
-                            processAction(false)
-                        }
-                    }
-                )
-            }
-        }
-        PLYPresentationAction.RESTORE -> {
-            Purchases.sharedInstance.restorePurchases(object : ReceiveCustomerInfoCallback {
-                override fun onReceived(customerInfo: CustomerInfo) {
-                    Purchasely.synchronize()
-                    processAction(true)
-                }
-                override fun onError(error: PurchasesError) {
-                    processAction(false)
-                }
-            })
-        }
-        else -> processAction(true)
     }
 }
 ```
@@ -432,483 +342,93 @@ Purchasely.setPaywallActionsInterceptor { info, action, parameters, processActio
 
 ## User Identification
 
-### Login User
-
-When a user logs in, provide their user ID to Purchasely:
-
 ```kotlin
-Purchasely.userLogin("YOUR_USER_ID") { refresh ->
-    if (refresh) {
-        // User has subscriptions from a previous device/install
-        // Refresh your local entitlements
-        refreshEntitlements()
-    }
+Purchasely.userLogin("user_123") { shouldRefresh ->
+    shouldRefresh
 }
-```
 
-### Logout User
-
-When a user logs out:
-
-```kotlin
 Purchasely.userLogout()
 ```
 
-### Anonymous User ID
-
-Get the anonymous user ID assigned by Purchasely:
-
-```kotlin
-val anonymousId = Purchasely.anonymousUserId
-```
-
-### Set User ID at Initialization
-
-You can also set the user ID during SDK initialization:
-
-```kotlin
-Purchasely.Builder(applicationContext)
-    .apiKey("YOUR_API_KEY")
-    .userId("YOUR_USER_ID") // Set user ID here
-    .stores(listOf(GoogleStore()))
-    .build()
-    .start { isConfigured, error -> }
-```
+Call `userLogin` before loading Screens that depend on identified-user audiences.
 
 ---
 
 ## Subscription Status & Entitlements
 
-### Get User Subscriptions
-
-Retrieve the list of active subscriptions for the current user:
-
 ```kotlin
-Purchasely.userSubscriptions(
-    onSuccess = { subscriptions ->
-        subscriptions.forEach { subscription ->
-            Log.d("Purchasely", "Subscription: ${subscription.plan?.name}")
-            Log.d("Purchasely", "Product: ${subscription.product?.name}")
-            Log.d("Purchasely", "Expires: ${subscription.subscriptionSource?.nextRenewalDate}")
-        }
-    },
-    onError = { throwable ->
-        Log.e("Purchasely", "Error fetching subscriptions: ${throwable.message}")
+Purchasely.userSubscriptions(false, object : SubscriptionsListener {
+    override fun onSuccess(subscriptions: List<PLYSubscriptionData>) {
+        val active = subscriptions.any { it.subscriptionStatus?.isExpired() == false }
     }
-)
-```
 
-### Check Entitlements
-
-You can check if a user has access to specific entitlements:
-
-```kotlin
-Purchasely.userSubscriptions(
-    onSuccess = { subscriptions ->
-        val hasProAccess = subscriptions.any { subscription ->
-            subscription.plan?.hasEntitlement("pro_features") == true
-        }
-        if (hasProAccess) {
-            unlockProFeatures()
-        }
-    },
-    onError = { throwable ->
-        // Handle error
+    override fun onFailure(error: Throwable) {
+        Log.e("Purchasely", "Subscription fetch failed", error)
     }
-)
+})
 ```
 
 ---
 
 ## Custom User Attributes
 
-Custom User Attributes allow you to segment users and target specific audiences with different paywalls.
-
-### Set a Single Attribute
+User attribute mutations return `Deferred<Boolean>`; you may ignore the return value when fire-and-forget behavior is enough.
 
 ```kotlin
-// String
-Purchasely.setUserAttribute("email", "user@example.com")
-
-// Integer
-Purchasely.setUserAttribute("age", 25)
-
-// Float
-Purchasely.setUserAttribute("score", 4.5f)
-
-// Boolean
-Purchasely.setUserAttribute("premium_user", true)
-
-// Date
-Purchasely.setUserAttribute("registration_date", Date())
-```
-
-### Set Multiple Attributes
-
-```kotlin
-Purchasely.setUserAttributes(
-    mapOf(
-        Pair("age", 25),
-        Pair("gender", "male"),
-        Pair("subscription_tier", "basic")
-    )
-)
-```
-
-### Get Attribute Value
-
-```kotlin
-val age = Purchasely.userAttribute("age")
-```
-
-### Get All Attributes
-
-```kotlin
-val allAttributes = Purchasely.userAttributes()
-allAttributes.forEach { (key, value) ->
-    Log.d("Purchasely", "Attribute: $key = $value")
-}
-```
-
-### Clear Attribute
-
-```kotlin
-Purchasely.clearUserAttribute("email")
-```
-
-### Clear All Attributes
-
-```kotlin
-Purchasely.clearUserAttributes()
-```
-
-### Increment Attribute
-
-Useful for tracking counters:
-
-```kotlin
-// Increment by 1
-Purchasely.incrementUserAttribute("viewed_articles")
-
-// Increment by custom value
-Purchasely.incrementUserAttribute("points", 10)
-```
-
-### Decrement Attribute
-
-```kotlin
-// Decrement by 1
-Purchasely.decrementUserAttribute("remaining_credits")
-
-// Decrement by custom value
-Purchasely.decrementUserAttribute("lives", 3)
+Purchasely.setUserAttribute("favorite_spirit", "gin")
+val success = Purchasely.incrementUserAttribute("cocktails_viewed").await()
 ```
 
 ---
 
 ## Event Listeners
 
-### UI/SDK Events Listener
-
-Track user interactions with Purchasely screens:
-
 ```kotlin
-Purchasely.setEventListener(object : EventListener {
+Purchasely.eventListener = object : EventListener {
     override fun onEvent(event: PLYEvent) {
-        Log.d("Purchasely", "Event: ${event.name}")
-
-        // Forward to your analytics platform
-        yourAnalytics.track(event.name, event.properties)
-    }
-})
-```
-
-### Custom User Attributes Listener
-
-Listen for custom user attribute changes from surveys:
-
-```kotlin
-Purchasely.setUserAttributeListener(object : UserAttributeListener {
-    override fun onUserAttributeSet(
-        key: String,
-        value: Any,
-        source: PLYUserAttributeSource
-    ) {
-        if (source == PLYUserAttributeSource.PURCHASELY) {
-            // Attribute set by Purchasely (from survey)
-            Log.d("Purchasely", "Survey attribute: $key = $value")
-            // Send to your backend or analytics
-            yourBackend.updateUserAttribute(key, value)
-        }
-        // Ignore if source is CLIENT (set by your app)
-    }
-
-    override fun onUserAttributeRemoved(key: String, source: PLYUserAttributeSource) {
-        if (source == PLYUserAttributeSource.PURCHASELY) {
-            Log.d("Purchasely", "Attribute removed: $key")
-        }
-    }
-})
-```
-
----
-
-## Pre-fetching Screens
-
-Pre-fetch presentations to display them instantly without loading time.
-
-### Fetch Presentation
-
-```kotlin
-Purchasely.fetchPresentation(
-    placementId = "onboarding",
-    contentId = null
-) { presentation, error ->
-    if (error != null) {
-        Log.e("Purchasely", "Error fetching: ${error.message}")
-        return@fetchPresentation
-    }
-
-    when (presentation?.type) {
-        PLYPresentationType.NORMAL -> {
-            // Standard paywall - display it
-            presentation.display()
-        }
-        PLYPresentationType.FALLBACK -> {
-            // Fallback paywall (network error occurred)
-            presentation.display()
-        }
-        PLYPresentationType.DEACTIVATED -> {
-            // Placement is deactivated - don't show anything
-            Log.d("Purchasely", "Placement is deactivated")
-        }
-        PLYPresentationType.CLIENT -> {
-            // Custom paywall - display your own UI
-            val presentationId = presentation.id
-            displayYourCustomPaywall(presentationId)
-        }
-        else -> {
-            Log.d("Purchasely", "Unknown presentation type")
-        }
-    }
-}
-```
-
-### Display Pre-fetched Presentation
-
-```kotlin
-// Store the presentation
-var cachedPresentation: PLYPresentation? = null
-
-// Fetch it
-Purchasely.fetchPresentation(placementId = "premium_feature") { presentation, error ->
-    cachedPresentation = presentation
-}
-
-// Later, display it
-fun showPaywall() {
-    cachedPresentation?.let { presentation ->
-        when (presentation.type) {
-            PLYPresentationType.NORMAL, PLYPresentationType.FALLBACK -> {
-                val view = presentation.buildView(
-                    context = this,
-                    onClose = { /* handle close */ }
-                ) { result, plan ->
-                    // Handle result
-                }
-                yourContainer.addView(view)
-            }
-            PLYPresentationType.DEACTIVATED -> {
-                // Don't display
-            }
-            PLYPresentationType.CLIENT -> {
-                // Show custom paywall
-            }
-            else -> {}
-        }
+        Log.d("Purchasely", "${event.name}: ${event.properties}")
     }
 }
 ```
 
 ---
 
-## Deeplinks Management
-
-Purchasely can handle deeplinks to display specific presentations or trigger actions.
-
-### Check if Deeplink is Handled
+## Deeplinks & Campaigns
 
 ```kotlin
-override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
+Purchasely.allowDeeplink = true
+Purchasely.allowCampaigns = true
 
-    intent.data?.let { uri ->
-        val isHandled = Purchasely.isDeeplinkHandled(uri)
-        if (isHandled) {
-            Log.d("Purchasely", "Deeplink handled by Purchasely")
-        } else {
-            // Handle the deeplink yourself
-            handleOtherDeeplink(uri)
-        }
-    }
+fun handleIncoming(uri: Uri, activity: Activity) {
+    Purchasely.handleDeeplink(uri, activity)
 }
 ```
 
-### Enable Deeplink Display
-
-By default, deeplinks are processed but presentations won't display until you enable it:
-
-```kotlin
-// Enable after your UI is ready
-Purchasely.readyToOpenDeeplink = true
-```
-
-### Set Default Presentation Result Handler
-
-Handle results from deeplink-triggered presentations:
-
-```kotlin
-Purchasely.setDefaultPresentationResultHandler { result, plan ->
-    when (result) {
-        PLYProductViewResult.PURCHASED -> {
-            Log.d("Purchasely", "Purchased from deeplink: ${plan?.name}")
-        }
-        PLYProductViewResult.RESTORED -> {
-            Log.d("Purchasely", "Restored from deeplink: ${plan?.name}")
-        }
-        PLYProductViewResult.CANCELLED -> {
-            Log.d("Purchasely", "Cancelled from deeplink")
-        }
-    }
-}
-```
-
-### Supported Deeplink Schemes
-
-Purchasely handles deeplinks with the following schemes:
-- `purchasely://`
-- `https://` (with Purchasely domain)
-
-Configure your deeplinks in the Purchasely Console under **Deeplinks** settings.
+Use `allowCampaigns(false)` during startup/onboarding when automated campaign display must be deferred.
 
 ---
 
 ## Alternative Stores
 
-### Huawei Mobile Services
-
-Add Huawei repository and dependencies:
-
-```groovy
-// project/build.gradle
-buildscript {
-    repositories {
-        maven { url 'https://developer.huawei.com/repo/' }
-    }
-    dependencies {
-        classpath 'com.huawei.agconnect:agcp:1.6.0.300'
-    }
-}
-
-allprojects {
-    repositories {
-        maven { url 'https://developer.huawei.com/repo/' }
-    }
-}
-```
-
-```groovy
-// app/build.gradle
-apply plugin: 'com.huawei.agconnect'
-
-dependencies {
-    implementation 'io.purchasely:huawei-services:5.+'
-}
-```
-
-Initialize with HuaweiStore:
-
 ```kotlin
-Purchasely.Builder(applicationContext)
-    .apiKey("YOUR_API_KEY")
-    .stores(listOf(HuaweiStore()))
-    .build()
-    .start { isConfigured, error -> }
-```
-
-### Amazon App Store
-
-Add the Amazon dependency:
-
-```groovy
-dependencies {
-    implementation 'io.purchasely:amazon:5.+'
+Purchasely {
+    context(application)
+    apiKey("YOUR_API_KEY")
+    stores(listOf(GoogleStore(), HuaweiStore(), AmazonStore()))
+    runningMode(PLYRunningMode.Full)
 }
-```
-
-Initialize with AmazonStore:
-
-```kotlin
-Purchasely.Builder(applicationContext)
-    .apiKey("YOUR_API_KEY")
-    .stores(listOf(AmazonStore()))
-    .build()
-    .start { isConfigured, error -> }
-```
-
-### Multiple Stores
-
-You can configure multiple stores. The first available store will be used:
-
-```kotlin
-Purchasely.Builder(applicationContext)
-    .apiKey("YOUR_API_KEY")
-    .stores(listOf(GoogleStore(), AmazonStore(), HuaweiStore()))
-    .build()
-    .start { isConfigured, error -> }
-```
-
----
-
-## ProGuard Configuration
-
-If you use ProGuard, add the following rules:
-
-```proguard
--keep class io.purchasely.** { *; }
--keep class com.android.vending.billing.** { *; }
 ```
 
 ---
 
 ## Troubleshooting
 
-### Enable Debug Logging
+| Symptom | Check |
+|---------|-------|
+| Presentation does not display | Placement ID or `screenId`, SDK initialization callback, network logs. |
+| Close result is missing | Use `display(context) { outcome }` or `onDismissed { outcome }`. |
+| Observer purchase does not update access | Call `Purchasely.synchronize()` after your billing flow succeeds. |
+| Deeplink does nothing | Call `Purchasely.allowDeeplink = true` only after the UI can display a Screen. |
+| Wrong Screen appears | Verify placement mapping, audience targeting, user attributes, and campaigns. |
 
-```kotlin
-Purchasely.Builder(applicationContext)
-    .apiKey("YOUR_API_KEY")
-    .logLevel(LogLevel.DEBUG) // Enable verbose logging
-    .stores(listOf(GoogleStore()))
-    .build()
-    .start { isConfigured, error -> }
-```
-
-### Common Issues
-
-1. **SDK not configured**: Ensure `start()` is called before any other SDK method
-2. **Paywall not displaying**: Check that the placement ID matches your Console configuration
-3. **Purchase not completing**: Verify your Google Play Console setup and that products are active
-4. **User subscriptions empty**: Wait for the `start` callback before fetching subscriptions
-
----
-
-## Additional Resources
-
-- [Purchasely Console](https://console.purchasely.io)
-- [Full Documentation](https://docs.purchasely.com)
-- [API Reference](https://docs.purchasely.com/api-reference)
-
----
-
-*This documentation is for Purchasely Android SDK version 5.x*
+For v5 to v6 breaking changes, see `docs/SDK Migration/migrating-from-v5-to-v6-android.md`.
