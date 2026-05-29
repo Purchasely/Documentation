@@ -29,7 +29,8 @@ next:
 > **Existing integrations:**
 >
 > * ✅ [Dinmo](https://www.dinmo.com) — native integration available ([setup guide](https://docs.dinmo.io/integrations/destination-platforms/purchasely))
-> * 🛠️ Amplitude — planned for Q3 2026 (built on the Purchasely side)
+> * ✅ Amplitude
+> * ✅ Mixpanel
 
 # Benefits
 
