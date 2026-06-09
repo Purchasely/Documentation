@@ -16,54 +16,6 @@ next:
 
 Safe areas in the Purchasely Screen Composer layout are designed to ensure that screen content is rendered within the safe area boundaries of a device.
 
-<Columns layout="auto">
-  <Column>
-    Neque porro quisquam est qui dolorem ipsum quia
-  </Column>
-
-  <Column>
-    *Lorem ipsum dolor sit amet, consectetur adipiscing elit*
-  </Column>
-
-  <Column>
-    > Ut enim ad minim veniam, quis nostrud ullamco
-  </Column>
-</Columns>
-
-<Accordion title="My fkfkf Title" icon="fa-info-circle">
-  Lorem ipsum dolor sit amet, **consectetur adipiscing elit.** Ut enim
-  ad minim veniam, quis nostrud exercitation ullamco. Excepteur sint
-  occaecat cupidatat non proident!
-</Accordion>
-
-<Cards>
-  <Card title="Getting Started" href="#" icon="fa-rocket">
-    New to our platform? Follow this guide to get started.
-  </Card>
-
-  <Card title="API Reference" href="#" icon="fa-code">
-    Explore our interactive API reference.
-  </Card>
-
-  <Card title="Support & Community" href="#" icon="fa-comments" target="_blank">
-    Join our community or checkout our FAQ.
-  </Card>
-</Cards>
-
-<Tabs>
-  <Tab title="First Tab">
-    Welcome to the content that you can only see inside the first Tab.
-  </Tab>
-
-  <Tab title="Second Tab">
-    Here's content that's only inside the second Tab.
-  </Tab>
-
-  <Tab title="Third Tab">
-    Here's content that's only inside the third Tab.
-  </Tab>
-</Tabs>
-
 Although the Screen Composer includes a preview section, enabling safe areas within your screens helps you achieve the most accurate rendering on real devices.
 
 > ⚠️
