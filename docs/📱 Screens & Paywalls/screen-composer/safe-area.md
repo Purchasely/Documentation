@@ -18,9 +18,7 @@ Safe areas in the Purchasely Screen Composer layout are designed to ensure that 
 
 Although the Screen Composer includes a preview section, enabling safe areas within your screens helps you achieve the most accurate rendering on real devices.
 
-> ⚠️
->
-> **Important**
+> ⚠️ Important
 >
 > Safe Areas requires `Purchasely.display()` or `presentation.display()` to work correctly.<br />If your app uses a custom display method, safe area margins must be handled by the app itself.<br />Note that QR Code preview uses by default the standard method, so it will render correctly regardless of your integration.
 
