@@ -28,25 +28,21 @@ Currently, this functionality is available for native technologies (`Swift` and 
 
 Purchasely provides a [UIViewController](https://developer.apple.com/documentation/uikit/uiviewcontroller) instance, you can display it directly using the `present()` method. This UIViewController contains a [UIView](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621460-view) instance that you can use to integrate it in your own [UIView](https://developer.apple.com/documentation/uikit/uiview).
 
-The UIViewController returned also provides the property `PresentationView` to display Purchasely Screen with your SwiftUI View
+The preloaded presentation also provides the property `swiftUIView` to display Purchasely Screen with your SwiftUI View
 
 ```coffeescript Swift
 import Purchasely
 
 var controller: UIViewController?
 
-// Get the controller directly
-let purchaselyController = Purchasely.presentationController(for: "onboarding")
-// Or get it asynchronously with fetch method
-Purchasely.fetchPresentation(for: "onboarding", 
-                             fetchCompletion: { presentation, error in
+// Preload the presentation then read its controller
+PLYPresentationBuilder.forPlacementId("onboarding").build().preload { presentation, error in
    guard let presentation = presentation, error == nil else {
        print("Error while fetching presentation: \(error?.localizedDescription ?? "unknown")")
        return
    }
          
    let purchaselyController = presentation.controller
-})
 
 
 // Option 1 - Display the controller directly
@@ -71,13 +67,13 @@ struct ContentView: View {
             Text("This is SwiftUI View")
                 .padding()
             
-            purchaselyController?.PresentationView
+            presentation.swiftUIView
                 .frame(height: 400)
         }
     }
 }
 
-
+}
 ```
 
 # Kotlin
@@ -87,33 +83,32 @@ Purchasely provides a View instance that you can add to your layout hierarchy. I
 To use it with Jetpack Compose, you directly use the component [AndroidView](https://developer.android.com/develop/ui/compose/migrate/interoperability-apis/views-in-compose)
 
 ```c Kotlin
-// Option 1 - Add the view to your layout
-val purchaselyView: PLYPresentationView = Purchasely.presentationView(
-  context = context,
-  placement = "onboarding"
-)
-  
-findViewById<FrameLayout>(R.id.container).addView(purchaselyView)
+// Option 1 - Preload the presentation then add its view to your layout
+PLYPresentation {
+    placementId("onboarding")
+}.preload { loaded, error ->
+    if (error != null || loaded == null) return@preload
+    val purchaselyView = loaded.buildView(context) { outcome -> }
+    findViewById<FrameLayout>(R.id.container).addView(purchaselyView)
+}
 
-  
+
 // Option 2 - Get the view asynchronously
-Purchasely.fetchPresentation("onboarding") { presentation, error ->
+PLYPresentation {
+    placementId("onboarding")
+    onCloseRequested {
+        // TODO remove view from your layout
+    }
+}.preload { presentation, error ->
     if(error != null) {
         Log.d("Purchasely", "Error fetching paywall", error)
-        return@fetchPresentation
+        return@preload
     }
 
     when(presentation?.type) {
         PLYPresentationType.NORMAL,
         PLYPresentationType.FALLBACK -> {
-            val purchaselyView = presentation.buildView(
-                context = context,
-                properties = PLYPresentationProperties(
-                    onClose = {
-                        // TODO remove view from your layout
-                    }
-                )
-            )
+            val purchaselyView = presentation.buildView(context) { outcome -> }
             
           // Display Purchasely paywall by adding purchaselyView to your layout
           findViewById<FrameLayout>(R.id.container).addView(purchaselyView)
@@ -126,21 +121,16 @@ Purchasely.fetchPresentation("onboarding") { presentation, error ->
 
 
 // Option 3 - Add the view inside your Jetpack Compose Component
+// Preload the presentation first, then build the view inside AndroidView.
+// `loaded` is the preloaded PLYPresentation.
 AndroidView(
   modifier = Modifier
   	.fillMaxSize()
   	.padding(0.dp, 5.dp), // Occupy the max size in the Compose UI tree
   factory = { context ->
-    	val purchaselyView = Purchasely.presentationView(
-    		context = context,
-    		placementId = "onboarding",
-    		properties = PLYPresentationProperties(
-      		onClose = {
-        		// remove this component to close Purchasely Screen,
-      		}
-   		  )
-  	)
-   		purchaselyView
+    	loaded.buildView(context) { outcome ->
+      		// remove this component to close Purchasely Screen,
+   		}
   }
 )
 ```

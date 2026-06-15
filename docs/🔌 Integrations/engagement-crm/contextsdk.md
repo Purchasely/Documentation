@@ -76,19 +76,10 @@ class OnboardingViewController: UIViewController {
         Purchasely.setUserAttribute(withBoolValue: context.shouldUpsell, forKey: "context_should_upsell")
 
         // 3. Load and show the Purchasely paywall
-        let paywallController = Purchasely.presentationController(
-            for: "onboarding",
-            loaded: { [weak self] controller, success, error in
-                if let controller = controller, success {
-                    self?.present(controller, animated: true)
-                } else if let error = error {
-                    print("Failed to load paywall: \(error)")
-                    context.log(.skipped)
-                }
-            },
-            completion: { result, _ in
+        PLYPresentationBuilder.forPlacementId("onboarding")
+            .onDismissed { outcome in
                 // 4. Log the outcome to help train the ML model
-                switch result {
+                switch outcome.purchaseResult {
                 case .purchased:
                     context.log(.positive)
                 case .cancelled:
@@ -99,7 +90,15 @@ class OnboardingViewController: UIViewController {
                     context.log(.skipped)
                 }
             }
-        )
+            .build()
+            .preload { [weak self] presentation, error in
+                if let controller = presentation?.controller, error == nil {
+                    self?.present(controller, animated: true)
+                } else if let error = error {
+                    print("Failed to load paywall: \(error)")
+                    context.log(.skipped)
+                }
+            }
     }
 }
 ```
@@ -122,7 +121,7 @@ Let's break down what's happening:
 
 1. **`ContextManager.instantContext(flowName:duration:)`** - This captures the user's real-world context synchronously. The flow name (e.g., `"purchasely_onboarding"`) uniquely identifies this opportunity in your app. Use descriptive names like `"purchasely_settings"`, `"purchasely_post_action"`, etc.
 2. **`Purchasely.setUserAttribute()`** - This passes the `shouldUpsell` value to Purchasely as a user attribute. During the initial calibration phase, this value is always `true`. Once your custom ML model is trained and deployed, it makes real-time decisions based on the user's context.
-3. **`Purchasely.presentationController(for:)`** - This is your standard Purchasely integration. The placement ID (e.g., `"onboarding"`) should match what you've configured in your Purchasely dashboard.
+3. **`PLYPresentationBuilder.forPlacementId(...).build().preload { }`** - This is your standard Purchasely integration. The placement ID (e.g., `"onboarding"`) should match what you've configured in your Purchasely dashboard.
 4. **`context.log()`** - This logs the outcome, which is crucial for training the ML model:
    * `.positive` - User completed a purchase
    * `.negative` - User dismissed the paywall
@@ -138,21 +137,12 @@ let context = ContextManager.instantContext(flowName: "purchasely_onboarding", d
 // Set the context as a Purchasely user attribute
 Purchasely.setUserAttribute(withBoolValue: context.shouldUpsell, forKey: "context_should_upsell")
 
-let paywallController = Purchasely.presentationController(
-    for: "onboarding",
-    loaded: { [weak self] controller, success, error in
-        if let controller = controller, success {
-            self?.present(controller, animated: true)
-        } else if let error = error {
-            print("Failed to load paywall: \(error)")
-            context.log(.skipped)
-        }
-    },
-    completion: { result, plan in
-        switch result {
+PLYPresentationBuilder.forPlacementId("onboarding")
+    .onDismissed { outcome in
+        switch outcome.purchaseResult {
         case .purchased:
             // Log revenue with product details
-            if let plan = plan {
+            if let plan = outcome.plan {
                 context.logRevenueOutcome(
                     revenue: plan.amount,
                     currency: "USD",
@@ -170,7 +160,15 @@ let paywallController = Purchasely.presentationController(
             context.log(.skipped)
         }
     }
-)
+    .build()
+    .preload { [weak self] presentation, error in
+        if let controller = presentation?.controller, error == nil {
+            self?.present(controller, animated: true)
+        } else if let error = error {
+            print("Failed to load paywall: \(error)")
+            context.log(.skipped)
+        }
+    }
 ```
 
 <br />
@@ -243,17 +241,9 @@ private func presentPurchaselyPaywall(placement: String, context: Context) {
     // Set the context as a Purchasely user attribute
     Purchasely.setUserAttribute(withBoolValue: context.shouldUpsell, forKey: "context_should_upsell")
 
-    let paywallController = Purchasely.presentationController(
-        for: placement,
-        loaded: { [weak self] controller, success, error in
-            if let controller = controller, success {
-                self?.present(controller, animated: true)
-            } else {
-                context.log(.skipped)
-            }
-        },
-        completion: { result, _ in
-            switch result {
+    PLYPresentationBuilder.forPlacementId(placement)
+        .onDismissed { outcome in
+            switch outcome.purchaseResult {
             case .purchased:
                 context.log(.positive)
             case .cancelled:
@@ -264,7 +254,14 @@ private func presentPurchaselyPaywall(placement: String, context: Context) {
                 context.log(.skipped)
             }
         }
-    )
+        .build()
+        .preload { [weak self] presentation, error in
+            if let controller = presentation?.controller, error == nil {
+                self?.present(controller, animated: true)
+            } else {
+                context.log(.skipped)
+            }
+        }
 }
 ```
 

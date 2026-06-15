@@ -24,10 +24,10 @@ Your app might have a launch routine that needs to complete before another scree
 For that reason, the display of a trigger-based campaign is **deferred until you explicitly authorize it**. Once your app is ready, notify the Purchasely SDK with the following call:
 
 ```swift
-Purchasely.readyToOpenDeeplink(true)
+Purchasely.allowDeeplink(true)
 ```
 ```kotlin Kotlin
-Purchasely.readyToOpenDeeplink = true
+Purchasely.allowDeeplink = true
 ```
 ```javascript React Native
 Purchasely.readyToOpenDeeplink(true);
@@ -44,7 +44,7 @@ _purchasely.SetIsReadyToOpenDeeplink(true);
 
 > ❗️ Important notices
 >
-> * `readyToOpenDeeplink` must be called for a trigger-based campaign to be shown, as it works exactly like a [deep link](deeplinks-management) internally.
+> * `allowDeeplink` must be called for a trigger-based campaign to be shown, as it works exactly like a [deep link](deeplinks-management) internally.
 > * If you have implemented the [UI Handler](ui-handler-deeplinks) to manage the display of deep links yourself, you must keep the presentation object returned and **not** fetch it again — otherwise campaign context will be lost.
 
 # Placement-based campaigns
@@ -57,5 +57,5 @@ In other words, if your app already calls Placements, Placement-based campaigns 
 
 | Delivery method | SDK requirement |
 |---|---|
-| **Trigger-based** (e.g. `APP_STARTED`) | Call `readyToOpenDeeplink(true)` when your app is ready. |
+| **Trigger-based** (e.g. `APP_STARTED`) | Call `allowDeeplink(true)` when your app is ready. |
 | **Placement-based** | No additional code — uses existing Placement calls. |

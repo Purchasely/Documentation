@@ -54,23 +54,30 @@ In one line of code in your application, you can retrieve the UIViewController (
 ```swift Swift
 let placementId = "<<default_placement>>"
 // Get the UIViewController to present
-let purchaselyController = Purchasely.presentationController(for: placementId)
+PLYPresentationBuilder.forPlacementId(placementId).build().preload { presentation, error in
+    let purchaselyController = presentation?.controller
+}
 ```
 ```coffeescript Kotlin
 // Retrieve the view to display in your layout hierarchy
-val presentationView = Purchasely.presentationView(
-  context = context,
-  properties = PLYPresentationProperties(
-    placementId = "<<default_placement>>",
-    onClose = {
-      // remove view from layout hierarchy
-    })
-) { result, plan ->
-  when (result) {
-    PLYProductViewResult.PURCHASED -> Log.d("Purchasely", "User purchased ${plan?.name}")
-    PLYProductViewResult.CANCELLED -> Log.d("Purchasely", "User cancelled purchased")
-    PLYProductViewResult.RESTORED -> Log.d("Purchasely", "User restored ${plan?.name}")
+PLYPresentation {
+  placementId("<<default_placement>>")
+  onCloseRequested {
+    // remove view from layout hierarchy
   }
+}.preload { loaded, error ->
+  if (error != null || loaded == null) return@preload
+
+  val presentationView = loaded.buildView(context) { outcome ->
+    when (outcome.purchaseResult) {
+      PLYPurchaseResult.PURCHASED -> Log.d("Purchasely", "User purchased ${outcome.plan?.name}")
+      PLYPurchaseResult.CANCELLED -> Log.d("Purchasely", "User cancelled purchased")
+      PLYPurchaseResult.RESTORED -> Log.d("Purchasely", "User restored ${outcome.plan?.name}")
+      null -> {}
+    }
+  }
+
+  // Add presentationView to your layout hierarchy
 }
 ```
 ```typescript React Native

@@ -48,20 +48,16 @@ As always the implementation is easy as you just need to pass the (optional) par
 It can be with our own paywalls
 
 ```swift
-let paywallCtrl = Purchasely.presentationController(with: "my_presentation_id",
-													contentId: "my_content_id",
-													completion: { (result, plan) in
-													
-})
-present(paywallCtrl, animated: true)
-```
-```kotlin Kotlin
-UIViewController *paywallCtrl = [Purchasely presentationControllerWith:@"my_presentation_id"
-															 contentId:@"my_content_id"
-															completion:^(enum PLYProductViewControllerResult result, PLYPlan * _Nullable plan) {
+PLYPresentationBuilder.forScreenId("my_presentation_id")
+    .contentId("my_content_id")
+    .onDismissed { outcome in
 
-}];
-[self presentViewController:paywallCtrl animated:YES completion:nil];
+    }
+    .build()
+    .preload { presentation, error in
+        guard let paywallCtrl = presentation?.controller else { return }
+        present(paywallCtrl, animated: true)
+    }
 ```
 ```typescript React Native
 await Purchasely.presentPresentationWithIdentifier('my_presentation_id', 'my_content_id');

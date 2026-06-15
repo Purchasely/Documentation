@@ -28,19 +28,20 @@ next:
 You can close all opened Purchasely screens programmatically calling the method `close()` on the [presentation](pre-fetching) object currently displayed.
 
 ```swift Swift
-Purchasely.fetchPresentation(
-    for: "onboarding",
-     fetchCompletion: { presentation, error in
-                    
- // when displayed, call close
- presentation.close()
-
-)
+PLYPresentationBuilder
+    .forPlacementId("onboarding")
+    .build()
+    .preload { presentation, error in
+        // when displayed, call close
+        presentation?.close()
+    }
 ```
 ```kotlin Kotlin
-Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error ->
+PLYPresentation {
+  placementId("onboarding")
+}.preload { presentation, error ->
   // when displayed, call close
-  presentation.close()
+  presentation?.close()
 }
 
 // Alternatively you can call this method at anytime
@@ -99,7 +100,7 @@ _purchasely.ShowPresentation()
 
 ### Close a Screen
 
-Use **`Purchasely.closePresentation()`** to close the current screen permanently. If you want to display the screen again after closing it, you will have to fetch it again by calling fetchPresentation method.
+Use **`Purchasely.closePresentation()`** to close the current screen permanently. If you want to display the screen again after closing it, you will have to fetch it again by calling the `preload` method.
 
 ```coffeescript Flutter
 Purchasely.closePresentation()

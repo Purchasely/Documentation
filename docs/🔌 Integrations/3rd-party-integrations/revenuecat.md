@@ -73,12 +73,13 @@ The `start` method must be called **as soon as possible** to catch every purchas
 import Purchasely
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    Purchasely.start(withAPIKey: "API_KEY,
-                         appUserId: nil,
-			 runningMode: .paywallObserver,
-			 eventDelegate: nil,
-			 logLevel: .debug) { (success, error) in
-		print(success)
+    Purchasely
+        .apiKey("API_KEY")
+        .appUserId(nil)
+        .runningMode(.observer)
+        .logLevel(.debug)
+        .start { error in
+            print(error == nil)
         }
 	return true
 }
@@ -90,14 +91,14 @@ Purchasely.Builder(applicationContext)
     .apiKey("API_KEY")
     .logLevel(LogLevel.DEBUG) // set to warning or error for release
     .userId("USER_ID")
-    .runningMode(PLYRunningMode.PaywallObserver)
+    .runningMode(PLYRunningMode.Observer)
     .stores(listOf(GoogleStore(), HuaweiStore()))
     .build()
 
 // When you are ready for Purchasely to initialize,
 // you must call start() method that will grab configuration and products
 // from the selected stores.
-Purchasely.start { isConfigured ->
+Purchasely.start { error ->
 }
 ```
 ```typescript React Native
@@ -178,14 +179,25 @@ Once the placements are defined and called from the app, you can change the disp
 
 ```swift Swift
 let placementId = "ONBOARDING"
-paywallCtrl = Purchasely.presentationController(for: placementId, contentId: contentId, loaded: { _, _, _ in
-            }, completion: completion)
+PLYPresentationBuilder.forPlacementId(placementId)
+    .contentId(contentId)
+    .onDismissed(completion)
+    .build()
+    .preload { presentation, error in
+        let paywallCtrl = presentation?.controller
+    }
 ```
 ```kotlin Kotlin
 val placementId = "onboarding"
 val contentId = "my_content_id" //or null
-Purchasely.presentationFragmentForPlacement(placementId, contentId) { result, plan ->
-      Log.d("Purchasely", "Result is $result with plan $plan")
+PLYPresentation {
+    placementId(placementId)
+    contentId(contentId)
+}.preload { loaded, error ->
+    if (error != null || loaded == null) return@preload
+    val fragment = loaded.getFragment { outcome ->
+        Log.d("Purchasely", "Result is ${outcome.purchaseResult} with plan ${outcome.plan}")
+    }
 }
 ```
 ```typescript React Native
@@ -209,86 +221,76 @@ Finally, you must use the Paywall Actions Interceptor in your purchase system to
 Here is an example where RevenueCat is used to make the purchase, which requires you to [fetch products](https://www.revenuecat.com/docs/displaying-products) from their SDK and then [start the purchase](https://www.revenuecat.com/docs/making-purchases)
 
 ```swift Swift
-Purchasely.setPaywallActionsInterceptor { [weak self] (action, parameters, presentationInfos, proceed) in
-	switch action {
-		// Intercept the tap on purchase to display the terms and condition
-		case .purchase:		
-			// Grab the plan to purchase
-			guard let plan = parameters?.plan, let appleProductId = plan.appleProductId else {
-				return
-			}
+// Intercept the tap on purchase to make the purchase with RevenueCat
+Purchasely.interceptAction(.purchase) { [weak self] info, params, completion in
+	// Grab the plan to purchase
+	guard let plan = params?.plan, let appleProductId = plan.appleProductId else {
+		completion(.notHandled)
+		return
+	}
 
-			Purchases.shared.getOfferings { (offerings, error) in
-			    if let packages = offerings?.current?.availablePackages {
-			        if( let package = packages.first { $0.storeProduct.productIdentifier == appleProductId}) {
-					Purchases.shared.purchase(package: package) { (transaction, customerInfo, error, userCancelled) in
-					  //stop process on Purchasely side
-			                  proceed(false)
-					  if customerInfo.entitlements["your_entitlement_id"]?.isActive == true {
-					    // Unlock that great "pro" content              
-					  }
-					}
-				}
-			    }
+	Purchases.shared.getOfferings { (offerings, error) in
+	    if let packages = offerings?.current?.availablePackages {
+	        if( let package = packages.first { $0.storeProduct.productIdentifier == appleProductId}) {
+			Purchases.shared.purchase(package: package) { (transaction, customerInfo, error, userCancelled) in
+			  //stop process on Purchasely side
+	                  completion(.success)
+			  if customerInfo.entitlements["your_entitlement_id"]?.isActive == true {
+			    // Unlock that great "pro" content              
+			  }
 			}
-			
-		case .restore:
-			Purchases.shared.restorePurchases { customerInfo, error in
-			    //stop process on Purchasely side
-			    proceed(false)
-			}
-		default:
-			proceed(true)
+		}
+	    }
+	}
+}
+
+Purchasely.interceptAction(.restore) { info, params, completion in
+	Purchases.shared.restorePurchases { customerInfo, error in
+	    //stop process on Purchasely side
+	    completion(.success)
 	}
 }
 ```
 ```kotlin Kotlin
-Purchasely.setPaywallActionsInterceptor { info, action, parameters, processAction ->
-    when(action) {
-        PLYPresentationAction.PURCHASE -> {
-            val sku = parameters?.plan?.store_product_id
-            
-            //get RevenueCat package
-            Purchases.sharedInstance.getOfferingsWith({ error ->
-            // An error occurred
-            }) { offerings ->
-                offerings.current
-                    ?.availablePackages
-                    ?.takeUnless { it.isNullOrEmpty() }
-                    ?.let { list ->
-                     val rcPackage = list.firstOrNull { it.product.sku == sku }
-                     
-                     Purchases.sharedInstance.purchasePackage(
-                        this,
-                        rcPackage,
-                        onError = { error, userCancelled -> 
-                            /* No purchase */
-                            //stop process on Purchasely side
-			    processAction(false)
-                        },
-                        onSuccess = { product, customerInfo ->
-                            //stop process on Purchasely side
-			    processAction(false)
-                            if (customerInfo.entitlements["my_entitlement_identifier"]?.isActive == true) {
-                                // Unlock that content and synchronize with Purchasely
-                                Purchasely.synchronize()
-                            }
-                    })
-                }
-            }
+Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
+    val sku = purchase.plan?.store_product_id
+
+    //get RevenueCat package
+    Purchases.sharedInstance.getOfferingsWith({ error ->
+    // An error occurred
+    }) { offerings ->
+        offerings.current
+            ?.availablePackages
+            ?.takeUnless { it.isNullOrEmpty() }
+            ?.let { list ->
+             val rcPackage = list.firstOrNull { it.product.sku == sku }
+
+             Purchases.sharedInstance.purchasePackage(
+                this,
+                rcPackage,
+                onError = { error, userCancelled ->
+                    /* No purchase */
+                },
+                onSuccess = { product, customerInfo ->
+                    if (customerInfo.entitlements["my_entitlement_identifier"]?.isActive == true) {
+                        // Unlock that content and synchronize with Purchasely
+                        Purchasely.synchronize()
+                    }
+            })
         }
-        PLYPresentationAction.RESTORE -> {
-           // restore purchases with RevenueCat
-            Purchases.sharedInstance.restorePurchases(::showError) { customerInfo ->
-                //... check customerInfo to see if entitlement is now active
-                
-                //one this is done, stop Purchasely process and synchronize
-	        processAction(false)
-                Purchasely.synchronize()
-            }
-        }
-        else -> processAction(true)
     }
+    //stop process on Purchasely side
+    PLYInterceptResult.SUCCESS
+}
+
+Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
+    // restore purchases with RevenueCat
+    Purchases.sharedInstance.restorePurchases(::showError) { customerInfo ->
+        //... check customerInfo to see if entitlement is now active
+        Purchasely.synchronize()
+    }
+    //stop process on Purchasely side
+    PLYInterceptResult.SUCCESS
 }
 ```
 ```typescript React Native

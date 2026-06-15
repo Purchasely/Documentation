@@ -26,19 +26,23 @@ This first method to display a Placement was already presented at the stage **Di
 
 ```swift
 let placementId = "ONBOARDING"
-paywallCtrl = Purchasely.presentationController(for: placementId, contentId: contentId, loaded: { _, _, _ in
-            }, completion: completion)
+PLYPresentationBuilder.forPlacementId(placementId)
+    .contentId(contentId)
+    .onDismissed(completion)
+    .build()
+    .preload { presentation, error in
+    }
 ```
 
 ### 2\. USING THE ASYNCHRONOUS DISPLAY WITH PRE-FETCH
 
 Purchasely, by default, shows the paywall screen with a loading indicator while fetching the paywall from the network and preparing it for display.
 
-Using `Purchasely.fetchPresentation()` method, you can pre-fetch the paywall from the network before displaying it. 
+Using the `PLYPresentationBuilder` `preload` method, you can pre-fetch the paywall from the network before displaying it. 
 
 The benefits of this method are listed in the bloc on the right
 
-Call `Purchasely.fetchPresentation` for a placement or with a presentation id
+Call `PLYPresentationBuilder.forPlacementId(...).build().preload` for a placement or `PLYPresentationBuilder.forScreenId(...).build().preload` with a presentation id
 
 1. An error may be returned if the presentation could not be fetched from the network.
 2. If successful, you will have a `PLYPresentation` instance containing the following properties
@@ -74,9 +78,10 @@ To fetch a paywall and then display it, use the following code:
 
 ```swift
 // fetch presentation for placement
-Purchasely.fetchPresentation(
-    for: "ONBOARDING",
-    fetchCompletion: { presentation, error in
+PLYPresentationBuilder
+    .forPlacementId("ONBOARDING")
+    .build()
+    .preload { presentation, error in
          // closure to get presentation and display it
          guard let presentation = presentation, error == nil else {
              print("Error while fetching presentation: \(error?.localizedDescription ?? "unknown")")
@@ -99,22 +104,7 @@ Purchasely.fetchPresentation(
              // display your own paywall
              
          }
-    },
-    completion: { result, plan in
-        // closure when presentation controller is closed to get result
-        switch result {
-            case .purchased:
-                print("User purchased: \(plan?.name)")
-                break
-            case .restored:
-                print("User restored: \(plan?.name)")
-                break
-            case .cancelled:
-                break
-            @unknown default:
-                break
-        }
-    })
+    }
 ```
 
 ### 3\. USING THE DEEPLINK

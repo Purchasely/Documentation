@@ -25,26 +25,27 @@ If you want to quickly test your first in-app Purchase, we invite you to directl
 This first method to display a Placement was already presented at the stage **Display your first screen through a placement**
 
 ```kotlin
-val paywallView = Purchasely.presentationViewForPlacement(
-    context,
-    placementId = "ONBOARDING",
-    onClose = {
+PLYPresentation {
+    placementId("ONBOARDING")
+    onCloseRequested {
         //TODO remove view from layout hierarchy
-    },
-)
-        
-//TODO add paywallView to layout hierarchy
+    }
+}.preload { loaded, error ->
+    if (error != null || loaded == null) return@preload
+    val paywallView = loaded.buildView(context) { outcome -> }
+    //TODO add paywallView to layout hierarchy
+}
 ```
 
 ### 2\. USING THE ASYNCHRONOUS DISPLAY WITH PRE-FETCH
 
 Purchasely, by default, shows the paywall screen with a loading indicator while fetching the paywall from the network and preparing it for display.
 
-Using `Purchasely.fetchPresentation()` method, you can pre-fetch the paywall from the network before displaying it. 
+Using the `PLYPresentation` `preload` method, you can pre-fetch the paywall from the network before displaying it. 
 
 The benefits of this method are listed in the bloc on the right
 
-Call `Purchasely.fetchPresentation` for a placement or with a presentation id
+Call `PLYPresentation { placementId(...) }.preload` for a placement or `PLYPresentation { screenId(...) }.preload` with a presentation id
 
 1. An error may be returned if the presentation could not be fetched from the network.
 2. If successful, you will have a `PLYPresentation` instance containing the following properties
@@ -79,28 +80,29 @@ A presentation can be one of the following types:
 To fetch a paywall and then display it, use the following code:
 
 ```kotlin
-Purchasely.fetchPresentationForPlacement("ONBOARDING") { presentation, error ->
-    if(error != null) {
+PLYPresentation {
+    placementId("ONBOARDING")
+    onCloseRequested {
+        // TODO remove view from your layout
+    }
+}.preload { presentation, error ->
+    if (error != null) {
         Log.d("Purchasely", "Error fetching paywall", error)
-        return@fetchPresentationForPlacement
+        return@preload
     }
 
     when(presentation?.type) {
         PLYPresentationType.NORMAL,
         PLYPresentationType.FALLBACK -> {
             val paywallView = presentation.buildView(
-                context = this@MainActivity,
-                viewProperties = PLYPresentationViewProperties(
-                    onClose = {
-                        // TODO remove view from your layout
-                    }
-                )
-            ) { result, plan ->
+                context = this@MainActivity
+            ) { outcome ->
                 // Paywall is closed, check result to know if a purchase happened
-                when(result) {
-                    PLYProductViewResult.PURCHASED -> Log.d("Purchasely", "User purchased ${plan?.name}")
-                    PLYProductViewResult.CANCELLED -> Log.d("Purchasely", "User cancelled purchased")
-                    PLYProductViewResult.RESTORED -> Log.d("Purchasely", "User restored ${plan?.name}")
+                when(outcome.purchaseResult) {
+                    PLYPurchaseResult.PURCHASED -> Log.d("Purchasely", "User purchased ${outcome.plan?.name}")
+                    PLYPurchaseResult.CANCELLED -> Log.d("Purchasely", "User cancelled purchased")
+                    PLYPurchaseResult.RESTORED -> Log.d("Purchasely", "User restored ${outcome.plan?.name}")
+                    null -> {}
                 }
             }
             
@@ -110,7 +112,7 @@ Purchasely.fetchPresentationForPlacement("ONBOARDING") { presentation, error ->
             // Nothing to display
         }
         PLYPresentationType.CLIENT -> {
-            val paywallId = presentation.id
+            val paywallId = presentation.screenId
             val planIds = presentation.plans
             // Display your own paywall
         }

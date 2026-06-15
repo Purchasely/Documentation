@@ -31,7 +31,7 @@ import Purchasely
 
 func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
 	// You can chain calls to multiple handler using a OR
-	return Purchasely.isDeeplinkHandled(deeplink: url) 
+	return Purchasely.handleDeeplink(url) 
 }
 ```
 ```Text With SceneDelegate
@@ -48,13 +48,13 @@ func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options conn
 	// …
 
 	if let url = connectionOptions.urlContexts.first?.url {
-		_ = Purchasely.isDeeplinkHandled(deeplink: url)
+		_ = Purchasely.handleDeeplink(url)
 	}
 }
 
 func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
 	if let url = URLContexts.first?.url {
-		_ = Purchasely.isDeeplinkHandled(deeplink: url)
+		_ = Purchasely.handleDeeplink(url)
 	}
 }
 ```
@@ -68,7 +68,7 @@ For that reason, the display of Purchasely deeplinks is **deferred until you aut
 Once your app is ready, notify the Purchasely SDK by using the following code:
 
 ```swift
-Purchasely.readyToOpenDeeplink(true)
+Purchasely.allowDeeplink(true)
 ```
 
 ### SETTING THE DEFAULT PRESENTATION HANDLER

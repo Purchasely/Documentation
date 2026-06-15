@@ -62,11 +62,6 @@ The only change you need to make is if you are in observer mode, if you are in f
 > ```swift Swift
 > try await Purchasely.syncPurchase(for: "apple product id")
 > ```
-> ```objectivec
-> [Purchasely syncPurchaseFor:@"apple-product-id" completionHandler:^(NSError * _Nullable error) {
->     // Handle Error.    
-> }];
-> ```
 
 # Requirements
 

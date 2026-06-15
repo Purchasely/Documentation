@@ -24,7 +24,7 @@ import Purchasely
 
 func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
 	// You can chain calls to multiple handler using a OR
-	return Purchasely.isDeeplinkHandled(deeplink: url) 
+	return Purchasely.handleDeeplink(url) 
 }
 
 // ---------------------------------------------------
@@ -40,13 +40,13 @@ func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options conn
 	// …
 
 	if let url = connectionOptions.urlContexts.first?.url {
-		_ = Purchasely.isDeeplinkHandled(deeplink: url)
+		_ = Purchasely.handleDeeplink(url)
 	}
 }
 
 func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
 	if let url = URLContexts.first?.url {
-		_ = Purchasely.isDeeplinkHandled(deeplink: url)
+		_ = Purchasely.handleDeeplink(url)
 	}
 }
 ```
@@ -60,7 +60,7 @@ class MyActivity : FragmentActivity() {
         val data = intent.data
         if(data != null) {
             //Purchasely sdk will return true if it handles the deeplink
-            val isHandledByPurchasely = Purchasely.isDeeplinkHandled(data)
+            val isHandledByPurchasely = Purchasely.handleDeeplink(data)
         }
     }    
 
@@ -95,10 +95,10 @@ For that reason, the display of Purchasely deeplinks is **deferred until you aut
 Once your app is ready, notify the Purchasely SDK by using the following code:
 
 ```swift
-Purchasely.readyToOpenDeeplink(true)
+Purchasely.allowDeeplink(true)
 ```
 ```kotlin Kotlin
-Purchasely.readyToOpenDeeplink = true
+Purchasely.allowDeeplink = true
 ```
 ```javascript React Native
 Purchasely.readyToOpenDeeplink(true);

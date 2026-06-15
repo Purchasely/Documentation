@@ -23,9 +23,9 @@ For *SwiftUI* applications, **Purchasely** provides a wrapper that allows render
 Simply access the *SwiftUI* wrapper provided by **Purchasely** and integrate it into your *SwiftUI* view hierarchy. The component ensures that the underlying UIKit view controller is properly managed within the *SwiftUI* environment.
 
 ```Text Swift
-Purchasely.presentationController(with: <paywallIdentifier>, contentId: <contentId>, loaded: { controller,_,_ in
-      self.paywallView = controller?.PresentationView // Example
-}, completion: nil)
+PLYPresentationBuilder.forScreenId(<paywallIdentifier>).contentId(<contentId>).build().preload { presentation, error in
+      self.paywallView = presentation?.swiftUIView // Example
+}
 ```
 
 > 🚧 Limitations

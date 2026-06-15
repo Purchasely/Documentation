@@ -14,6 +14,10 @@ next:
 
 ```swift
 let placementId = "ONBOARDING"
-paywallCtrl = Purchasely.presentationController(for: placementId, contentId: contentId, loaded: { _, _, _ in
-            }, completion: completion)
+PLYPresentationBuilder.forPlacementId(placementId)
+    .contentId(contentId)
+    .onDismissed(completion)
+    .build()
+    .preload { presentation, error in
+    }
 ```

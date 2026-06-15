@@ -30,7 +30,7 @@ class MyActivity : FragmentActivity() {
         val data = intent.data
         if(data != null) {
             //Purchasely sdk will return true if it handles the deeplink
-            val isHandledByPurchasely = Purchasely.isDeeplinkHandled(data)
+            val isHandledByPurchasely = Purchasely.handleDeeplink(data)
         }
     }    
 
@@ -46,7 +46,7 @@ For that reason, the display of Purchasely deeplinks is **deferred until you aut
 Once your app is ready, notify the Purchasely SDK by using the following code:
 
 ```kotlin
-Purchasely.readyToOpenDeeplink = true
+Purchasely.allowDeeplink = true
 ```
 
 ### SETTING THE DEFAULT PRESENTATION HANDLER
@@ -56,12 +56,13 @@ Usually when a paywall / screen is instantiated by the app, a closure is called 
 You can retrieve the result of the user action in a paywall opened with a deeplink by setting a `DefaultPresentationResultHandler`.
 
 ```kotlin
-Purchasely.setDefaultPresentationResultHandler { result, plan ->
+Purchasely.setDefaultPresentationResultHandler { outcome ->
     /* You can set a callback to know when your user purchased a product */
-    when(result) {
-        PLYProductViewResult.PURCHASED -> Log.d("Purchasely", "Purchased $plan")
-        PLYProductViewResult.CANCELLED ->  Log.d("Purchasely", "Cancelled purchase of $plan")
-        PLYProductViewResult.RESTORED -> Log.d("Purchasely", "Restored $plan")
+    when(outcome.purchaseResult) {
+        PLYPurchaseResult.PURCHASED -> Log.d("Purchasely", "Purchased ${outcome.plan}")
+        PLYPurchaseResult.CANCELLED ->  Log.d("Purchasely", "Cancelled purchase of ${outcome.plan}")
+        PLYPurchaseResult.RESTORED -> Log.d("Purchasely", "Restored ${outcome.plan}")
+        null -> {}
     }
 }
 ```

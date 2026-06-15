@@ -72,12 +72,13 @@ Purchasely.setDefaultPresentationResultHandler { [weak self](result, plan) in
 }
 ```
 ```kotlin Kotlin
-Purchasely.setDefaultPresentationResultHandler { result, plan ->
+Purchasely.setDefaultPresentationResultHandler { outcome ->
     /* You can set a callback to know when your user purchased a product */
-    when(result) {
-        PLYProductViewResult.PURCHASED -> Log.d("Purchasely", "Purchased $plan")
-        PLYProductViewResult.CANCELLED ->  Log.d("Purchasely", "Cancelled purchase of $plan")
-        PLYProductViewResult.RESTORED -> Log.d("Purchasely", "Restored $plan")
+    when(outcome.purchaseResult) {
+        PLYPurchaseResult.PURCHASED -> Log.d("Purchasely", "Purchased ${outcome.plan}")
+        PLYPurchaseResult.CANCELLED ->  Log.d("Purchasely", "Cancelled purchase of ${outcome.plan}")
+        PLYPurchaseResult.RESTORED -> Log.d("Purchasely", "Restored ${outcome.plan}")
+        null -> {}
     }
 }
 ```

@@ -52,24 +52,12 @@ Your language code must be [ISO 639-1](https://fr.wikipedia.org/wiki/Liste_des_c
 let locale = Locale(identifier: "es")
 Purchasely.setLanguage(from: locale)
 ```
-```objectivec Objective-C
-// Force language to Spanish
-NSLocale *locale = [NSLocale localeWithLocaleIdentifier: @"es"];
-[Purchasely setLanguageFrom: locale];
-```
 ```kotlin
 // Force language to spanish
 Purchasely.language = Locale("es")
 
 // Force language to italian
 Purchasely.language = Locale.ITALY
-```
-```java Java
-// Force language to spanish
-Purchasely.setLanguage(new Locale("es"));
-
-// Force language to italian
-Purchasely.setLanguage(Locale.ITALY);
 ```
 ```typescript ReactNative
 // Force language to spanish

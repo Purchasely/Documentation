@@ -65,7 +65,7 @@ As a general rule, you should always use a <Glossary>Placement</Glossary> to dis
 
 # Pre-fetching
 
-You can pre-fetch a Screen with the method `Purchasely.fetchPresentation()` so that all processing is done before showing it to your user. You also get access to more information like the audience id or ab test variant id of your user for the placement you have requested.
+You can pre-fetch a Screen with the `PLYPresentationBuilder` / `PLYPresentation { }.preload` API (iOS: `PLYPresentationBuilder.forPlacementId(...).build().preload { }`, Android: `PLYPresentation { placementId(...) }.preload { }`) so that all processing is done before showing it to your user. You also get access to more information like the audience id or ab test variant id of your user for the placement you have requested.
 
 However, we do not advise to pre-fetch all screens at once as an <Glossary>Audience</Glossary> is attributed on request based on user attributes or subscription status that may change during the session of the user. Thus, we suggest to pre-fetch at start only your home placement and then fetch the <Glossary>Placement</Glossary> of the current touchpoint/Screen of your application when the user navigates.
 

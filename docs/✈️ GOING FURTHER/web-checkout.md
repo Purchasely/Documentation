@@ -152,23 +152,15 @@ Within the app, the user journey looks like this:
 
 * When the user taps on the checkout button, a new `"webCheckout"` action is sent to the Paywall Actions Interceptor if one is provided during the SDK set up. It contains the action name, and the url, query parameter key, web checkout provider and client reference id parameters. We recommend storing the client reference id to simplify reconciliation on your end (see [Stripe documentation](https://docs.stripe.com/payment-links/url-parameters#streamline-reconciliation-with-a-url-parameter))\ <br />
 * ```swift
-  Purchasely.start(
-      withAPIKey: // your Purchasely API key,
-      paywallActionsInterceptor: { action, parameters, presentationInfo, proceed in
-          switch action {
-          // ... other actions
-          case .webCheckout:
-              parameters?.clientReferenceId    // The unique reference passed as a query parameter using the provided query parameter key
-              parameters?.queryParameterKey    // The query parameter key for the client referenne id. In the case of stripe, the key is `client_reference_id`
-              parameters?.url                  // The payment page URL
-              parameters?.webCheckoutProvider  // The web checkout provider. "stripe" for Stripe, "other" otherwise
+  Purchasely.interceptAction(.webCheckout) { info, params, completion in
+      params?.clientReferenceId    // The unique reference passed as a query parameter using the provided query parameter key
+      params?.queryParameterKey    // The query parameter key for the client referenne id. In the case of stripe, the key is `client_reference_id`
+      params?.url                  // The payment page URL
+      params?.webCheckoutProvider  // The web checkout provider. "stripe" for Stripe, "other" otherwise
 
-              // store the client reference id to simplify reconciliation
-              proceed(true)                    // If you want the Purchasely SDK to handle the action and display the payment page. Else, call `proceed(false)` and have your app should handle displaying the web page.
-          }
-      },
-      storekitSettings: // your StoreKit setting
-  )
+      // store the client reference id to simplify reconciliation
+      completion(.notHandled)      // Return .notHandled if you want the Purchasely SDK to handle the action and display the payment page. Else, return .success and have your app handle displaying the web page.
+  }
   ```
   ```javascript Flutter
   ```

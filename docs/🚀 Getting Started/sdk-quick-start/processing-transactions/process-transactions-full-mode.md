@@ -33,42 +33,47 @@ After [displaying a placement](screens-display), you get the `result` of the use
 You also have as a second argument the `plan` bought by the user, it is set to `nil` if no purchase was made.
 
 ```swift
-let paywallCtrl = Purchasely.presentationController(
-   for: "my_placement_id",
-   contentId: "my_content_id",
-   completion: { (result, plan) in
-	switch result {
-                case .purchased:
-                    print("User purchased: \(plan?.name)")
-                    // update entitlements to unlock the access to the contents
-                    break
-                case .restored:
-                    print("User restored his purchases")
-                    // update entitlements to unlock the access to the contents
-                    break
-                case .cancelled:
-                    break
-                @unknown default:
-                    break
-	}												
-})
+PLYPresentationBuilder.forPlacementId("my_placement_id")
+    .contentId("my_content_id")
+    .onDismissed { outcome in
+        switch outcome.purchaseResult {
+        case .purchased:
+            print("User purchased: \(outcome.plan?.name)")
+            // update entitlements to unlock the access to the contents
+        case .restored:
+            print("User restored his purchases")
+            // update entitlements to unlock the access to the contents
+        case .cancelled:
+            break
+        @unknown default:
+            break
+        }
+    }
+    .build()
+    .preload { presentation, error in
+        let paywallCtrl = presentation?.controller
+    }
 ```
 ```kotlin
-val paywallView = Purchasely.presentationViewForPlacement(
-    context,
-    placementId = "onboarding",
-    onClose = {
+PLYPresentation {
+    placementId("onboarding")
+    onCloseRequested {
         //TODO remove view from layout hierarchy
-    },
-) { result, plan ->
-    when(result) {
-        PLYProductViewResult.PURCHASED -> Log.d("Purchasely", "User purchased ${plan?.name}")
-        PLYProductViewResult.CANCELLED -> Log.d("Purchasely", "User cancelled purchased")
-        PLYProductViewResult.RESTORED -> Log.d("Purchasely", "User restored ${plan?.name}")
     }
-}
+}.preload { presentation, error ->
+    if (error != null || presentation == null) return@preload
 
-//TODO add paywallView to layout hierarchy
+    val paywallView = presentation.buildView(context) { outcome ->
+        when(outcome.purchaseResult) {
+            PLYPurchaseResult.PURCHASED -> Log.d("Purchasely", "User purchased ${outcome.plan?.name}")
+            PLYPurchaseResult.CANCELLED -> Log.d("Purchasely", "User cancelled purchased")
+            PLYPurchaseResult.RESTORED -> Log.d("Purchasely", "User restored ${outcome.plan?.name}")
+            null -> {}
+        }
+    }
+
+    //TODO add paywallView to layout hierarchy
+}
 ```
 ```javascript React Native
 try {

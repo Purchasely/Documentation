@@ -171,41 +171,24 @@ To intercept this event, you can setup a global handler that passes you the sour
 * IF the user cancels sign-in, dismiss your login controller and notify the SDK by calling the `isLoggedIn` closure with `false`
 
 ```swift Swift
-Purchasely.setPaywallActionsInterceptor { [weak self] (action, parameters, presentationInfo, proceed) in
-
-	switch action {
-
-	// Intercept the tap on login
-	case .login:
-		// When the user has completed the process
-		// Pass true to reload the paywall or dismiss the paywall if the user already has an active subscription
-		self?.presentLogin(above: presentationInfo?.controller) { (loggedIn) in
-			proceed(loggedIn)
-		}
-	default:
-		proceed(true)
-		break
+Purchasely.interceptAction(.login) { [weak self] info, params, completion in
+	// When the user has completed the process
+	// Pass .success to reload the paywall or dismiss the paywall if the user already has an active subscription
+	self?.presentLogin(above: info?.controller) { (loggedIn) in
+		completion(loggedIn ? .success : .notHandled)
 	}
 }
 ```
 ```kotlin Kotlin
-Purchasely.setPaywallActionsInterceptor { info, action, parameters, processAction ->
-    if (info?.activity == null) return@setPaywallActionsInterceptor
+Purchasely.interceptAction<PLYPresentationAction.Login> { info, _ ->
+    val activity = info?.activity ?: return@interceptAction PLYInterceptResult.NOT_HANDLED
 
-    when(action) {
-        PLYPresentationAction.LOGIN -> {
-            // Call your method to display your view 
-            // and return boolean result to userLoggedIn
-            presentLogin(info.activity) { userLoggedIn ->
-    		// Don't forget to notify the SDK by calling `processAction`
-    		processAction(userLoggedIn)
-            }
-        }
-        else -> {
-            Log.d("PLYActionInterceptor", action.value + " " + parameters)
-            processAction(true)
-        }
+    // Call your method to display your view
+    // and return boolean result to userLoggedIn
+    presentLogin(activity) { userLoggedIn ->
+        // The login flow is handled by your app
     }
+    PLYInterceptResult.SUCCESS
 }
 ```
 ```typescript React Native

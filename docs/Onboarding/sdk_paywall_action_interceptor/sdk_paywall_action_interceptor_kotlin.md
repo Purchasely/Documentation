@@ -13,82 +13,72 @@ next:
 Here is a code sample using the Paywall Action Interceptor to perform the purchase and restore actions triggered from Purchasely's paywall with your own purchase system
 
 ```kotlin In-House
-Purchasely.setPaywallActionsInterceptor { info, action, parameters, processAction ->
-    when(action) {
-        PLYPresentationAction.PURCHASE -> {
-            val subscriptionId = parameters.subscriptionOffer?.subscriptionId
-            val basePlanId = parameters.subscriptionOffer?.basePlanId
-            val offerId = parameters.subscriptionOffer?.offerId
-            val offerToken = parameters.subscriptionOffer?.offerToken
-            
-            // you just need to pass the offerToken to BillingClient
-            val success = MyPurchaseSystem.purchase(offerToken)
-          
-            if(success) {
-              Purchasely.synchronize() // synchronize new purchase
-            }
-            
-            processAction(false) // notify Purchasely paywall to stop processing action
-        }
-        PLYPresentationAction.RESTORE -> {
-            MyPurchaseSystem.restoreAllPurchases()
-            Purchasely.synchronize() // synchronize all purchases with Purchasely
-            processAction(false) // notify Purchasely paywall to stop processing action
-        }
-        else -> processAction(true) // notify Purchasely paywall to continue other actions
+Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
+    val subscriptionId = purchase.subscriptionOffer?.subscriptionId
+    val basePlanId = purchase.subscriptionOffer?.basePlanId
+    val offerId = purchase.subscriptionOffer?.offerId
+    val offerToken = purchase.subscriptionOffer?.offerToken
+
+    // you just need to pass the offerToken to BillingClient
+    val success = MyPurchaseSystem.purchase(offerToken)
+
+    if (success) {
+        Purchasely.synchronize() // synchronize new purchase
+        PLYInterceptResult.SUCCESS
+    } else {
+        PLYInterceptResult.FAILED
     }
+}
+
+Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
+    MyPurchaseSystem.restoreAllPurchases()
+    Purchasely.synchronize() // synchronize all purchases with Purchasely
+    PLYInterceptResult.SUCCESS
 }
 ```
 ```kotlin RevenueCat
-Purchasely.setPaywallActionsInterceptor { info, action, parameters, processAction ->
-    when(action) {
-        PLYPresentationAction.PURCHASE -> {
-            val subscriptionId = parameters.subscriptionOffer?.subscriptionId
-            val basePlanId = parameters.subscriptionOffer?.basePlanId
-            val offerId = parameters.subscriptionOffer?.offerId
-            val offerToken = parameters.subscriptionOffer?.offerToken
-            
-            //get RevenueCat package
-            Purchases.sharedInstance.getOfferingsWith({ error ->
-            // An error occurred
-            }) { offerings ->
-                offerings.current
-                    ?.availablePackages
-                    ?.takeUnless { it.isNullOrEmpty() }
-                    ?.let { list ->
-                     val rcPackage = list.firstOrNull { it.product.sku == subscriptionId }
-                     
-                     Purchases.sharedInstance.purchasePackage(
-                        this,
-                        rcPackage,
-                        onError = { error, userCancelled -> 
-                            /* No purchase */
-                            //stop process on Purchasely side
-			    processAction(false)
-                        },
-                        onSuccess = { product, customerInfo ->
-                            //stop process on Purchasely side
-			    processAction(false)
-                            if (customerInfo.entitlements["my_entitlement_identifier"]?.isActive == true) {
-                                // Unlock that content and synchronize with Purchasely
-                                Purchasely.synchronize()
-                                processAction(false)
-                            }
-                    })
-                }
-            }
+Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
+    val subscriptionId = purchase.subscriptionOffer?.subscriptionId
+    val basePlanId = purchase.subscriptionOffer?.basePlanId
+    val offerId = purchase.subscriptionOffer?.offerId
+    val offerToken = purchase.subscriptionOffer?.offerToken
+
+    //get RevenueCat package
+    Purchases.sharedInstance.getOfferingsWith({ error ->
+    // An error occurred
+    }) { offerings ->
+        offerings.current
+            ?.availablePackages
+            ?.takeUnless { it.isNullOrEmpty() }
+            ?.let { list ->
+             val rcPackage = list.firstOrNull { it.product.sku == subscriptionId }
+
+             Purchases.sharedInstance.purchasePackage(
+                this,
+                rcPackage,
+                onError = { error, userCancelled ->
+                    /* No purchase */
+                },
+                onSuccess = { product, customerInfo ->
+                    if (customerInfo.entitlements["my_entitlement_identifier"]?.isActive == true) {
+                        // Unlock that content and synchronize with Purchasely
+                        Purchasely.synchronize()
+                    }
+            })
         }
-        PLYPresentationAction.RESTORE -> {
-           // restore purchases with RevenueCat
-            Purchases.sharedInstance.restorePurchases(::showError) { customerInfo ->
-                //... check customerInfo to see if entitlement is now active
-                
-                //one this is done, stop Purchasely process and synchronize
-	        			processAction(false)
-                Purchasely.synchronize() // synchronize all purchases with Purchasely
-            }
-        }
-        else -> processAction(true) // notify Purchasely paywall to continue other actions
     }
+
+    PLYInterceptResult.SUCCESS // notify Purchasely the action was handled
+}
+
+Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
+    // restore purchases with RevenueCat
+    Purchases.sharedInstance.restorePurchases(::showError) { customerInfo ->
+        //... check customerInfo to see if entitlement is now active
+
+        Purchasely.synchronize() // synchronize all purchases with Purchasely
+    }
+
+    PLYInterceptResult.SUCCESS // notify Purchasely the action was handled
 }
 ```

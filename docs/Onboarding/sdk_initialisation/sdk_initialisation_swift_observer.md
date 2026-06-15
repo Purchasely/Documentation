@@ -16,15 +16,15 @@ next:
 import Purchasely
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    Purchasely.start(
-       withAPIKey: "<<X-API-KEY>>",
-       appUserId: nil, // optional if you already know your user id
-			 runningMode: .paywallObserver,
-			 storekitSettings: .storeKit1, // Set your StoreKit version
-			 logLevel: .debug
-    ) {(success, error) in
-      print(success)
-    }
+    Purchasely
+        .apiKey("<<X-API-KEY>>")
+        .appUserId(nil) // optional if you already know your user id
+        .runningMode(.observer)
+        .storekitSettings(.storeKit1) // Set your StoreKit version
+        .logLevel(.debug)
+        .start { error in
+            print(error == nil)
+        }
 	return true
 }
 ```

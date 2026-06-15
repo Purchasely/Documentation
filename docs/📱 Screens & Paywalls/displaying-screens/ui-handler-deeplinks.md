@@ -24,10 +24,10 @@ To effortlessly display deeplink-triggered Screens, your app must notify the Pur
 
 ```coffeescript Swift
 // Call it in your viewDidAppear
-Purchasely.readyToOpenDeeplink(true)
+Purchasely.allowDeeplink(true)
 ```
 ```coffeescript Kotlin
-Purchasely.readyToOpenDeeplink = true
+Purchasely.allowDeeplink = true
 ```
 
 ## Optional: Override display
@@ -97,8 +97,8 @@ class CustomUIHandler: NSObject, PLYUIHandler {
             
             // get the UIViewController
             let purchaselyController = presentation.controller
-            // get the UIViewControllerRepresentable wrapper for Swift UI
-            let purchaselyView = purchaselyController?.PresentationView
+            // get the SwiftUI wrapper for Swift UI
+            let purchaselyView = presentation.swiftUIView
         }
         
         // or if you don't want to handle the display, always call
@@ -120,11 +120,10 @@ Purchasely.uiHandler = object : PLYUIHandler {
         PLYPresentationType.NORMAL,
         PLYPresentationType.FALLBACK -> {
           Log.d("Purchasely", "Display Purchasely View")
-          val purchaselyView = presentation.buildView(context, PLYPresentationViewProperties(
-            onClose = {
-              // TODO remove purchaselyView
-            }
-          ))
+          val purchaselyView = presentation.buildView(context) { outcome ->
+            // Paywall is closed, check outcome.purchaseResult and outcome.plan
+            // TODO remove purchaselyView
+          }
           myContainer.addView(purchaselyView)
         
         // Alternatively call display() to display it in a new Activity

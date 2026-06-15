@@ -25,19 +25,21 @@ next:
 import Purchasely
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    Purchasely.start(
-       withAPIKey: "<<X-API-KEY>>",
-       appUserId: nil, // optional if you already know your user id
-       logLevel: .debug
-    ) {(success, error) in
-      print(success)
-    }
+    Purchasely
+        .apiKey("<<X-API-KEY>>")
+        .appUserId(nil) // optional if you already know your user id
+        .runningMode(.full)
+        .logLevel(.debug)
+        .start { error in
+            print(error == nil)
+        }
 	return true
 }
 ```
 ```kotlin
 import android.app.Application
 import io.purchasely.ext.Purchasely
+import io.purchasely.ext.PLYRunningMode
 import io.purchasely.google.GoogleStore
 
 class YourApplication: Application() {
@@ -48,9 +50,10 @@ class YourApplication: Application() {
         Purchasely.Builder(applicationContext)
             .apiKey("<<X-API-KEY>>")
             .userId(null) // optional if you already know your user id
+            .runningMode(PLYRunningMode.Full)
             .build()
-            .start { isConfigured, error ->
-                if(isConfigured) {
+            .start { error ->
+                if (error == null) {
                     // Purchasely setup is complete 
                 )
             }
@@ -134,9 +137,8 @@ You can provide a callback method when you start the SDK. It will be automatical
 
 You can display a screen without waiting the SDK to be fully initialized.
 
-The callback returns two values:
+The callback returns a single value:
 
-* `success`: **true | false** to indicate whether the SDK was initialized successfully and whether the configuration is correct. If it returns false, you can still use Purchasely SDK.
-* `error`: Indicates the specific error that may have occurred when the `success` value is false.
+* `error`: `nil` when the SDK was initialized successfully and the configuration is correct. If it is not `nil`, you can still use Purchasely SDK, and it indicates the specific error that occurred.
 
 <br />

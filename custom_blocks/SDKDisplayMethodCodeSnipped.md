@@ -2,15 +2,14 @@
 name: SDK - Display method code snipped
 ---
 ```swift Swift
-Purchasely.fetchPresentation(for: "onboarding", fetchCompletion: { presentation, error in
+PLYPresentationBuilder.forPlacementId("onboarding").build().preload { presentation, error in
       guard error == nil,
             let presentation = presentation else { return }
-                                                                  
+
      // Calling display() to launch the flow
 		 // Source UIViewController is optional 
      presentation.display(from: myUIViewController) 
-
-})
+}
 
 // If for some specific configuration you need to check if the presentation is a flow, that's possible but it should only be done if required by your implementation
 if presentation.isFlow {
@@ -20,10 +19,12 @@ if presentation.isFlow {
 
 ```
 ```kotlin Kotlin
-Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error ->
+PLYPresentation {
+  placementId("onboarding")
+}.preload { presentation, error ->
   if(error != null) {
     Log.d("Purchasely", "Error fetching Screen", error)
-    return@fetchPresentation
+    return@preload
   }
   
   // Calling display() to launch the flow 

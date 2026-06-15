@@ -14,7 +14,7 @@ next:
 ---
 Purchasely, by default, [shows the Screen](displaying-your-first-screen) with a loading indicator while fetching the Screen from the network and preparing it for display.
 
-Using `Purchasely.fetchPresentation()` method, you can pre-fetch the Screen from the network before displaying it. This provides the following benefits:
+Using the `PLYPresentation` builder with its `preload` method (iOS: `PLYPresentationBuilder`), you can pre-fetch the Screen from the network before displaying it. This provides the following benefits:
 
 * Display the Screen only after it has been loaded from the network
 * Handle network errors gracefully
@@ -25,7 +25,7 @@ Using `Purchasely.fetchPresentation()` method, you can pre-fetch the Screen from
 
 ## Implementation
 
-Call `Purchasely.fetchPresentation` **for** a placement or **with** a presentation id
+Build a `PLYPresentation` (Android) / `PLYPresentationBuilder` (iOS) **for** a placement or **with** a presentation id, then call `preload`
 
 1. An error may be returned if the presentation could not be fetched from the network.
 2. If successful, you will have a `PLYPresentation` instance containing the following properties:
@@ -41,9 +41,10 @@ A presentation can be one of the following types:
 
 ```swift Swift
 // fetch presentation for placement
-Purchasely.fetchPresentation(
-    for: "onboarding",
-    fetchCompletion: { presentation, error in
+PLYPresentationBuilder
+    .forPlacementId("onboarding")
+    .build()
+    .preload { presentation, error in
          // closure to get presentation and display it
          guard let presentation = presentation, error == nil else {
              print("Error while fetching presentation: \(error?.localizedDescription ?? "unknown")")
@@ -70,32 +71,18 @@ Purchasely.fetchPresentation(
              // display your own Screen
              
          }
-    },
-    completion: { result, plan in
-        // closure when presentation controller is closed to get result
-        switch result {
-            case .purchased:
-                print("User purchased: \(plan?.name)")
-                break
-            case .restored:
-                print("User restored: \(plan?.name)")
-                break
-            case .cancelled:
-                break
-            @unknown default:
-                break
-        }
-    },
-    loadedCompletion: {
-       // closure when presentation is loaded and displayed         
     }
-)
 ```
 ```kotlin Kotlin
-Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error ->
+PLYPresentation {
+  placementId("onboarding")
+  onCloseRequested {
+    // TODO remove view from your layout
+  }
+}.preload { presentation, error ->
   if(error != null) {
     Log.d("Purchasely", "Error fetching Screen", error)
-    return@fetchPresentation
+    return@preload
   }
 
   when(presentation?.type) {
@@ -107,19 +94,13 @@ Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error -
       
       // Intermediate: build the view to display it yourself in your layout for specific use cases
 			// Note: this won't work with Flows
-      val screenView = presentation.buildView(
-        context = this@MainActivity,
-        properties = PLYPresentationProperties(
-          onClose = {
-            // TODO remove view from your layout
-          }
-        )
-      ) { result, plan ->
+      val screenView = presentation.buildView(this@MainActivity) { outcome ->
         // Screen is closed, check result to know if a purchase happened
-        when(result) {
-          PLYProductViewResult.PURCHASED -> Log.d("Purchasely", "User purchased ${plan?.name}")
-          PLYProductViewResult.CANCELLED -> Log.d("Purchasely", "User cancelled purchased")
-          PLYProductViewResult.RESTORED -> Log.d("Purchasely", "User restored ${plan?.name}")
+        when(outcome.purchaseResult) {
+          PLYPurchaseResult.PURCHASED -> Log.d("Purchasely", "User purchased ${outcome.plan?.name}")
+          PLYPurchaseResult.CANCELLED -> Log.d("Purchasely", "User cancelled purchased")
+          PLYPurchaseResult.RESTORED -> Log.d("Purchasely", "User restored ${outcome.plan?.name}")
+          null -> {}
         }
       }
 
@@ -129,7 +110,7 @@ Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error -
       // Nothing to display
     }
     PLYPresentationType.CLIENT -> {
-      val paywallId = presentation.id
+      val paywallId = presentation.screenId
       val planIds = presentation.plans
       // Display your own Screen
     }

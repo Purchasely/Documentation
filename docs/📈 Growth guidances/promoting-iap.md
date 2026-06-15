@@ -74,10 +74,7 @@ The **only thing you have to do** is tell Purchasely whenever it is ok to launch
 Keep in mind the more you add steps before the less likely the user will finish the transaction.
 
 ```swift Swift
-Purchasely.readyToOpenDeeplink(true)
-```
-```objectivec Objective-C
-[Purchasely isReadyToPurchase: YES];
+Purchasely.allowDeeplink(true)
 ```
 
 <br />

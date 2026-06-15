@@ -67,18 +67,20 @@ The `display()` method automatically:
 If you want to integrate the Flow manually into your app / parent view, you should check the attribute `displayMode` carried by the `PLYPresentation` returned by the pre-fetching
 
 ```kotlin Kotlin
-Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error ->
+PLYPresentation {
+  placementId("onboarding")
+}.preload { presentation, error ->
   error?.let {
     Toast.makeText(context, "Error fetching presentation", Toast.LENGTH_SHORT).show()
-    return@fetchPresentation
+    return@preload
   }
 
   presentation?.let {
     val fragment = it.getFragment(){ result, plan ->
       when(result) {
-        PLYProductViewResult.PURCHASED -> Log.d("Purchasely", "User purchased ${plan?.name}")
-        PLYProductViewResult.CANCELLED -> Log.d("Purchasely", "User cancelled purchased")
-        PLYProductViewResult.RESTORED -> Log.d("Purchasely", "User restored ${plan?.name}")
+        PLYPurchaseResult.PURCHASED -> Log.d("Purchasely", "User purchased ${plan?.name}")
+        PLYPurchaseResult.CANCELLED -> Log.d("Purchasely", "User cancelled purchased")
+        PLYPurchaseResult.RESTORED -> Log.d("Purchasely", "User restored ${plan?.name}")
       }
     }
 
@@ -111,7 +113,7 @@ Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error -
     }
   } ?: run {
     Toast.makeText(context, "Presentation is null", Toast.LENGTH_SHORT).show()
-    return@fetchPresentation
+    return@preload
   }
 }
 ```

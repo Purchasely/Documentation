@@ -31,55 +31,41 @@ Here is a sample code to show how to intercept a login or to make the user accep
 Note: This mechanism can also be used in `full` mode.
 
 ```swift
-Purchasely.setPaywallActionsInterceptor { [weak self] (action, parameters, info, proceed) in
-
-	switch action {
-	
-	// Intercept the tap on login
-	case .login:
-		// When the user has completed the process
-		// Pass true to reload the paywall if user is logged in
-		self?.presentLogin(above: info?.controller) { (loggedIn) in
-			Purchasely.userLogin(with: "MY_USER_ID")
-			proceed(loggedIn)
-		}
-	
-	// Intercept the tap on purchase to display the terms and condition
-	case .purchase:
-		self?.presentTermsAndConditions(above: info?.controller) { (userAcceptedTerms) in
-			proceed(userAcceptedTerms)
-		}
-	default:
-		proceed(true)
-		break
+// Intercept the tap on login
+Purchasely.interceptAction(.login) { [weak self] info, params, completion in
+	// When the user has completed the process
+	// Return .notHandled to reload the paywall if user is logged in
+	self?.presentLogin(above: info?.controller) { (loggedIn) in
+		Purchasely.userLogin(with: "MY_USER_ID")
+		completion(loggedIn ? .notHandled : .success)
 	}
 }
 
+// Intercept the tap on purchase to display the terms and condition
+Purchasely.interceptAction(.purchase) { [weak self] info, params, completion in
+	self?.presentTermsAndConditions(above: info?.controller) { (userAcceptedTerms) in
+		completion(userAcceptedTerms ? .notHandled : .success)
+	}
+}
 ```
 ```kotlin
-Purchasely.setPaywallActionsInterceptor { info, action, parameters, processAction ->
-    if (info?.activity == null) return@setPaywallActionsInterceptor
+Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
+    if (info?.activity == null) return@interceptAction PLYInterceptResult.NOT_HANDLED
 
-    when(action) {
-        PLYPresentationAction.PURCHASE -> {
-            presentTermsAndConditions(info.activity) { userAcceptedTerms ->
-    		// Don't forget to notify the SDK by calling `processAction`
-    		processAction(userAcceptedTerms)
-        }
-        PLYPresentationAction.LOGIN -> {
-            // Call your method to display your view 
-            // and return boolean result to userLoggedIn
-            presentLogin(info.activity) { userLoggedIn ->
-                Purchasely.userLogin("MY_USER_ID")
-            // Pass true to reload the paywall if user is logged in
-            processAction(userLoggedIn)
-            }
-        }
-        else -> {
-            Log.d("PLYActionInterceptor", action.value + " " + parameters)
-            processAction(true)
-        }
+    presentTermsAndConditions(info.activity) { userAcceptedTerms ->
+        // Display your terms & conditions, then proceed
     }
+    PLYInterceptResult.NOT_HANDLED
+}
+
+Purchasely.interceptAction<PLYPresentationAction.Login> { info, _ ->
+    if (info?.activity == null) return@interceptAction PLYInterceptResult.NOT_HANDLED
+
+    // Call your method to display your view
+    presentLogin(info.activity) { userLoggedIn ->
+        Purchasely.userLogin("MY_USER_ID")
+    }
+    PLYInterceptResult.NOT_HANDLED
 }
 ```
 ```javascript React Native

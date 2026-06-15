@@ -27,15 +27,15 @@ next:
 import Purchasely
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    Purchasely.start(
-       withAPIKey: "<<X-API-KEY>>",
-       appUserId: nil, // optional if you already know your user id
-       runningMode: .full, // select between full and paywallObserver
-       storekitSettings: .storeKit2, // Set your StoreKit version
-       logLevel: .debug
-    ) {(success, error) in
-      print(success)
-    }
+    Purchasely
+        .apiKey("<<X-API-KEY>>")
+        .appUserId(nil) // optional if you already know your user id
+        .runningMode(.full) // ⚠️ default is now .observer — set .full for Purchasely to handle purchases
+        .storekitSettings(.storeKit2) // Set your StoreKit version
+        .logLevel(.debug)
+        .start { error in
+            print(error == nil)
+        }
 	return true
 }
 ```
@@ -53,11 +53,12 @@ class YourApplication: Application() {
             .apiKey("<<X-API-KEY>>")
             .userId(null) // optional if you already know your user id
             .stores(listOf(GoogleStore())) // Set the list of stores you want to have
+            .runningMode(PLYRunningMode.Full) // ⚠️ default is now Observer — set Full for Purchasely to handle purchases
             .build()
-            .start { isConfigured, error ->
-                if(isConfigured) {
-                    // Purchasely setup is complete 
-                )
+            .start { error ->
+                if (error == null) {
+                    // Purchasely setup is complete
+                }
             }
     }
 }
@@ -125,47 +126,19 @@ Purchasely.startWithAPIKey(
     Purchasely.RunningMode.full
 );
 ```
-```objectivec Objective-C
-#import <Purchasely/Purchasely-Swift.h>
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	// Override point for customization after application launch.
+The parameter `runningMode` allows you to choose between the `full` mode and the `observer` mode.
 
-	[Purchasely startWithAPIKey:@"<<X-API-KEY>>"
-			  appUserId:@"USER_ID"
-			runningMode: PLYRunningModeFull
-	           storekitSettings: [StorekitSettings .storekit2]
-	  paywallActionsInterceptor:nil
-		           logLevel: LogLevelInfo
-			initialized: nil];
-	return YES;
-}
-```
-```java Java
-import android.app.Application
-import io.purchasely.ext.Purchasely
-import io.purchasely.google.GoogleStore
-
-public class YourApplication extends  Application {
-
-		 @Override
-     public void onCreate() {
-        super.onCreate()
-
-        Purchasely.Builder(applicationContext)
-            .apiKey("<<X-API-KEY>>")
-            .stores(listOf(GoogleStore())) // Set the list of stores you want to have
-            .build()
-            .start { isConfigured, error ->
-                if(isConfigured) {
-                    // Purchasely setup is complete 
-                )
-            }
-    }
-}
-```
-
-The parameter `runningMode` allows you to choose between the `full` mode and the `paywallObserver` mode.
+> 🚧 Major change in v6 — default running mode is now `observer`
+>
+> In SDK v5 the default running mode was **Full** (Purchasely handles and validates purchases).
+> In **SDK v6 the default is `observer`** (Purchasely only observes transactions, without processing them).
+>
+> This change is **silent** — your code keeps compiling. If you want Purchasely to handle the
+> purchase flow and validate receipts, you **must** now set the mode explicitly:
+> `.runningMode(.full)` on iOS, `.runningMode(PLYRunningMode.Full)` on Android.
+>
+> See the [v6 migration guide](migrating-from-sdk-5-to-6) for details.
 
 [More details on the SDK running modes.](running-modes)
 
@@ -193,26 +166,27 @@ You can find your API Key in the section [App settings / Backend & SDK configura
 
 <br />
 
-## `paywallObserver` mode
+## `observer` mode
 
-If you want to use Purchasely in [paywallObserver](paywallobserver-mode) mode, you need to set the running mode of `Purchasely.start()` method to `paywallObserver`
+This is now the **default** running mode in SDK v6. If you want to use Purchasely in [observer](paywallobserver-mode) mode explicitly, set the running mode to `observer` (`.observer` on iOS, `PLYRunningMode.Observer` on Android):
 
 ```swift Swift
 import Purchasely
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    Purchasely.start(
-       withAPIKey: "<<X-API-KEY>>",
-			 runningMode: .paywallObserver,
-    ) {(success, error) in
-      print(success)
-    }
+    Purchasely
+        .apiKey("<<X-API-KEY>>")
+        .runningMode(.observer)
+        .start { error in
+            print(error == nil)
+        }
 	return true
 }
 ```
 ```kotlin
 import android.app.Application
 import io.purchasely.ext.Purchasely
+import io.purchasely.ext.PLYRunningMode
 import io.purchasely.google.GoogleStore
 
 class YourApplication: Application() {
@@ -222,13 +196,13 @@ class YourApplication: Application() {
 
         Purchasely.Builder(applicationContext)
             .apiKey("<<X-API-KEY>>")
-            .runningMode(PLYRunningMode.PaywallObserver)
+            .runningMode(PLYRunningMode.Observer)
             .stores(listOf(GoogleStore())) // Set the list of stores you want to have
             .build()
-            .start { isConfigured, error ->
-               if(isConfigured) {
-               			// Purchasely setup is complete 
-               )
+            .start { error ->
+               if (error == null) {
+               			// Purchasely setup is complete
+               }
             }
     }
 }
@@ -296,48 +270,6 @@ Purchasely.startWithAPIKey(
     Purchasely.RunningMode.paywallObserver
 );
 ```
-```objectivec Objective-C
-#import <Purchasely/Purchasely-Swift.h>
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	// Override point for customization after application launch.
-
-	[Purchasely startWithAPIKey:@"<<X-API-KEY>>"
-			  appUserId:@"USER_ID"
-			runningMode: PLYRunningModePaywallObserver
-	              eventDelegate:nil
-			 uiDelegate:nil
-			storekitSettings: [StorekitSettings .storekit1]
-	  paywallActionsInterceptor:nil
-		           logLevel: LogLevelInfo
-			initialized: nil];
-	return YES;
-}
-```
-```java Java
-import android.app.Application
-import io.purchasely.ext.Purchasely
-import io.purchasely.google.GoogleStore
-
-public class YourApplication extends  Application {
-
-		 @Override
-     public void onCreate() {
-        super.onCreate()
-
-        Purchasely.Builder(applicationContext)
-            .apiKey("<<X-API-KEY>>")
-            .runningMode(PLYRunningMode.Full.PaywallObserver)
-            .stores(listOf(GoogleStore())) // Set the list of stores you want to have
-            .build()
-            .start { isConfigured, error ->
-               if(isConfigured) {
-               			// Purchasely setup is complete 
-               )
-            }
-    }
-}
-```
 
 ## StoreKit version
 
@@ -368,7 +300,6 @@ This **also applies when you want to display a placement** with an [Audience](se
 
 Otherwise, you can [display a screen](displaying-screens) without waiting, as the SDK will automatically update the screen displayed when all necessary information about pricing and offers for your plans have been fetched.
 
-The callback returns two values:
+Since SDK v6, the callback returns a single value:
 
-* `success`: **true | false** to indicate whether the SDK was initialized successfully and whether the configuration is correct. If it returns false, you can still use Purchasely SDK.
-* `error`: Indicates the specific error that may have occurred when the `success` value is false.
+* `error`: `nil` (Swift) / `null` (Kotlin) when the SDK was initialized successfully and the configuration is correct. When it is non-null, it indicates the specific error that occurred — you can still use the Purchasely SDK.

@@ -15,6 +15,7 @@ next:
 ```kotlin Kotlin
 import android.app.Application
 import io.purchasely.ext.Purchasely
+import io.purchasely.ext.PLYRunningMode
 import io.purchasely.google.GoogleStore
 
 class YourApplication: Application() {
@@ -28,10 +29,10 @@ class YourApplication: Application() {
             .userId(null) // optional if you already know your user id
             .stores(listOf(GoogleStore())) // Set the list of stores you want to have
             .build()
-            .start { isConfigured, error ->
-               if(isConfigured) {
-               			// Purchasely setup is complete 
-               )
+            .start { error ->
+               if (error == null) {
+               			// Purchasely setup is complete
+               }
             }
     }
 }

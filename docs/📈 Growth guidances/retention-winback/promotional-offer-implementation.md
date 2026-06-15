@@ -111,38 +111,33 @@ Here is a code sample to sign the offer on iOS:
 > Please look at sample code below for more details
 
 ```swift Swift
-Purchasely.setPaywallActionsInterceptor { [weak self] (action, parameters, presentationInfos, proceed) in
-	switch action {
-		// Intercept the tap on purchase to display the terms and condition
-		case .purchase:		
-			// Grab the plan to purchase
-			guard let plan = parameters?.plan, let appleProductId = plan.appleProductId else {
-				proceed(false)
-				return
-			}
-			
-			let offer = parameters?.promoOffer
-	
-			// sign the offer
-        		Purchasely.signPromotionalOffer(storeProductId: appleProductId,
-        						storeOfferId: offer?.storeOfferId) { signature in
-            		// Success completion
-       		 	} failure: { error in
-            		// Failure completion
-        		}
-				
-			// Purchase with signature
-			
-			// Using StoreKit1
-			purchaseUsingStoreKit1(plan) 
-			// Using StoreKit2
-			purchaseUsingStoreKit2(plan)
-			
-			// Finally close the process with Purchasely
-			proceed(false)
-		default:
-			proceed(true)
+// Intercept the tap on purchase to display the terms and condition
+Purchasely.interceptAction(.purchase) { [weak self] info, params, completion in
+	// Grab the plan to purchase
+	guard let plan = params?.plan, let appleProductId = plan.appleProductId else {
+		completion(.success)
+		return
 	}
+
+	let offer = params?.promoOffer
+
+	// sign the offer
+	Purchasely.signPromotionalOffer(storeProductId: appleProductId,
+					storeOfferId: offer?.storeOfferId) { signature in
+		// Success completion
+	} failure: { error in
+		// Failure completion
+	}
+
+	// Purchase with signature
+
+	// Using StoreKit1
+	self?.purchaseUsingStoreKit1(plan)
+	// Using StoreKit2
+	self?.purchaseUsingStoreKit2(plan)
+
+	// Finally close the process with Purchasely
+	completion(.success)
 }
 
 func purchaseUsingStoreKit1(_ plan: PLYPlan) {
@@ -213,21 +208,16 @@ func purchaseUsingStoreKit2(_ plan: PLYPlan) {
 }
 ```
 ```kotlin Kotlin
-Purchasely.setPaywallActionsInterceptor { info, action, parameters, processAction ->
-    when(action) {
-        PLYPresentationAction.PURCHASE -> {
-            val sku = parameters.subscriptionOffer?.subscriptionId
-            val basePlanId = parameters.subscriptionOffer?.basePlanId
-            val offerId = parameters.subscriptionOffer?.offerId
-            val offerToken = parameters.subscriptionOffer?.offerToken
+Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
+    val sku = purchase.subscriptionOffer?.subscriptionId
+    val basePlanId = purchase.subscriptionOffer?.basePlanId
+    val offerId = purchase.subscriptionOffer?.offerId
+    val offerToken = purchase.subscriptionOffer?.offerToken
 
-            // TODO purchase with SKU and offer id
-            
-            // Finally close the process with Purchasely
-            processAction(false)
-        }
-        else -> processAction(true)
-    }
+    // TODO purchase with SKU and offer id
+
+    // Finally close the process with Purchasely
+    PLYInterceptResult.SUCCESS
 }
 ```
 ```typescript React Native

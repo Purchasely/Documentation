@@ -22,74 +22,69 @@ next:
 
 # Implementing the Paywall Action Interceptor
 
-The interceptor passes 4 parameters:
+You register one interceptor per action with `Purchasely.interceptAction`. Each interceptor receives:
 
-* `action`: the `PLYPresentationAction` enum that gives the type of action
-* `parameters`: a dictionary that contains the objects needed to perform the action (like a `PLYPlan` for a purchase)
 * `info`: the `PLYPresentationInfo` object containing the controller of the paywall to dismiss it or display content / error messages above it, and the presentation id and content id associated to this paywall
-* `proceed`: a completion handler parameter with a boolean telling Purchasely if it should continue the action itself. In other words, returning `true` on a purchase action will lead the Purchasely SDK to trigger the native in-app purchase flow
+* the typed action object (like a `Purchase` carrying the `plan` and, on Android, the `subscriptionOffer`) that contains the objects needed to perform the action
+* `completion` (iOS) / a returned `PLYInterceptResult` (Android): tells Purchasely how the action was handled. Returning the "not handled" result on a purchase action will lead the Purchasely SDK to trigger the native in-app purchase flow itself
 
-> ⚠️ When should you call `proceed(true)`  after handling the action?
+> ⚠️ Which result should you return after handling the action?
 >
-> On a `login` action, call `proceed(true)` to refresh the paywall if the user has logged in
+> On a `login` action, return `completion(.notHandled)` (iOS) / `PLYInterceptResult.NOT_HANDLED` (Android) to refresh the paywall if the user has logged in
 >
-> On a `purchase` action, if you've successfully handled the transaction, you should not call `proceed(true)` to avoid a second trigger of the native in-app purchase flow by the SDK
+> On a `purchase` action, if you've successfully handled the transaction, return `completion(.success)` (iOS) / `PLYInterceptResult.SUCCESS` (Android) to avoid a second trigger of the native in-app purchase flow by the SDK
 >
-> If you don't handle every action, you **HAVE TO** call `proceed(true)` otherwise the bouton will keep spinning and nothing will happen.
+> Actions you do not register an interceptor for are handled automatically by the SDK, so the button will not keep spinning.
 
 ## Processing transactions with your in-house system
 
 Here is a code sample using the Paywall Action Interceptor to process transactions **with your own in-house purchase system** , for the actions `purchase` and `restore`:
 
 ```swift
-Purchasely.setPaywallActionsInterceptor { [weak self] (action, parameters, presentationInfos, proceed) in
-    switch action {
-    // Intercept the tap on purchase to display the terms and condition
-    case .purchase:        
-        // Grab the plan to purchase
-        guard let plan = parameters?.plan, let appleProductId = plan.appleProductId else {
-            return
-        }
-
-        let success = MyPurchaseSystem.purchase(appleProductId)
-        if success {
-            Purchasely.synchronize() // synchronize new purchase with Purchasely
-        }
-        proceed(false) // notify Purchasely paywall to stop processing action
-    case .restore:
-        MyPurchaseSystem.restorePurchases()
-        Purchasely.synchronize() // synchronize all purchases with Purchasely
-        proceed(false) // notify Purchasely paywall to stop processing action
-    default:
-        proceed(true) // notify Purchasely paywall to continue other actions
+Purchasely.interceptAction(.purchase) { info, params, completion in
+    // Grab the plan to purchase
+    guard let plan = params?.plan, let appleProductId = plan.appleProductId else {
+        completion(.notHandled)
+        return
     }
+
+    let success = MyPurchaseSystem.purchase(appleProductId)
+    if success {
+        Purchasely.synchronize() // synchronize new purchase with Purchasely
+        completion(.success) // notify Purchasely paywall to stop processing action
+    } else {
+        completion(.failed)
+    }
+}
+
+Purchasely.interceptAction(.restore) { info, params, completion in
+    MyPurchaseSystem.restorePurchases()
+    Purchasely.synchronize() // synchronize all purchases with Purchasely
+    completion(.success) // notify Purchasely paywall to stop processing action
 }
 ```
 ```kotlin
-Purchasely.setPaywallActionsInterceptor { info, action, parameters, processAction ->
-    when(action) {
-        PLYPresentationAction.PURCHASE -> {
-            val subscriptionId = parameters.subscriptionOffer?.subscriptionId
-            val basePlanId = parameters.subscriptionOffer?.basePlanId
-            val offerId = parameters.subscriptionOffer?.offerId
-            val offerToken = parameters.subscriptionOffer?.offerToken
-            
-            // you just need to pass the offerToken to BillingClient
-            val success = MyPurchaseSystem.purchase(offerToken)
-          
-            if(success) {
-              Purchasely.synchronize() // synchronize new purchase
-            }
-            
-            processAction(false) // notify Purchasely paywall to stop processing action
-        }
-        PLYPresentationAction.RESTORE -> {
-            MyPurchaseSystem.restoreAllPurchases()
-            Purchasely.synchronize() // synchronize all purchases with Purchasely
-            processAction(false) // notify Purchasely paywall to stop processing action
-        }
-        else -> processAction(true) // notify Purchasely paywall to continue other actions
+Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
+    val subscriptionId = purchase.subscriptionOffer?.subscriptionId
+    val basePlanId = purchase.subscriptionOffer?.basePlanId
+    val offerId = purchase.subscriptionOffer?.offerId
+    val offerToken = purchase.subscriptionOffer?.offerToken
+
+    // you just need to pass the offerToken to BillingClient
+    val success = MyPurchaseSystem.purchase(offerToken)
+
+    if (success) {
+        Purchasely.synchronize() // synchronize new purchase
+        PLYInterceptResult.SUCCESS // notify Purchasely paywall to stop processing action
+    } else {
+        PLYInterceptResult.FAILED
     }
+}
+
+Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
+    MyPurchaseSystem.restoreAllPurchases()
+    Purchasely.synchronize() // synchronize all purchases with Purchasely
+    PLYInterceptResult.SUCCESS // notify Purchasely paywall to stop processing action
 }
 ```
 ```javascript React Native
@@ -269,96 +264,87 @@ private void OnPaywallActionIntercepted(PaywallAction action)
 Here is a code sample using the Paywall Action Interceptor to process transactions **with RevenueCat** , for the actions `purchase` and `restore`:
 
 ```swift
-Purchasely.setPaywallActionsInterceptor { [weak self] (action, parameters, presentationInfos, proceed) in
-    switch action {
-    // Intercept the tap on purchase to display the terms and condition
-    case .purchase:
-        // Grab the plan to purchase
-        guard let plan = parameters?.plan, let appleProductId = plan.appleProductId else {
-            return
-        }
+Purchasely.interceptAction(.purchase) { info, params, completion in
+    // Grab the plan to purchase
+    guard let plan = params?.plan, let appleProductId = plan.appleProductId else {
+        completion(.notHandled)
+        return
+    }
 
-        Purchases.shared.getOfferings { (offerings, error) in
-            if let packages = offerings?.current?.availablePackages {
-                if let package = packages.first(where: { $0.storeProduct.productIdentifier == appleProductId }) {
-                    Purchases.shared.purchase(package: package) { (transaction, customerInfo, error, userCancelled) in
-                        /** IMPORTANT for Purchasely **/
-                        // synchronize new purchase with Purchasely
-                        Purchasely.synchronize()
-                        // notify Purchasely paywall to stop processing action
-                        proceed(false)
+    Purchases.shared.getOfferings { (offerings, error) in
+        if let packages = offerings?.current?.availablePackages {
+            if let package = packages.first(where: { $0.storeProduct.productIdentifier == appleProductId }) {
+                Purchases.shared.purchase(package: package) { (transaction, customerInfo, error, userCancelled) in
+                    /** IMPORTANT for Purchasely **/
+                    // synchronize new purchase with Purchasely
+                    Purchasely.synchronize()
+                    // notify Purchasely paywall to stop processing action
+                    completion(.success)
 
-                        if customerInfo.entitlements["your_entitlement_id"]?.isActive == true {
-                            // Unlock that great "pro" content              
-                        }
+                    if customerInfo.entitlements["your_entitlement_id"]?.isActive == true {
+                        // Unlock that great "pro" content              
                     }
                 }
             }
         }
-    case .restore:
-        Purchases.shared.restorePurchases { customerInfo, error in
-            /** IMPORTANT for Purchasely **/
-            // synchronize new purchase with Purchasely
-            Purchasely.synchronize()
-            // notify Purchasely paywall to stop processing action
-            proceed(false)
-        }
-    default:
-        proceed(true) // notify Purchasely paywall to continue other actions
+    }
+}
+
+Purchasely.interceptAction(.restore) { info, params, completion in
+    Purchases.shared.restorePurchases { customerInfo, error in
+        /** IMPORTANT for Purchasely **/
+        // synchronize new purchase with Purchasely
+        Purchasely.synchronize()
+        // notify Purchasely paywall to stop processing action
+        completion(.success)
     }
 }
 ```
 ```kotlin
-Purchasely.setPaywallActionsInterceptor { info, action, parameters, processAction ->
-    when(action) {
-        PLYPresentationAction.PURCHASE -> {
-            val subscriptionId = parameters.subscriptionOffer?.subscriptionId
-            val basePlanId = parameters.subscriptionOffer?.basePlanId
-            val offerId = parameters.subscriptionOffer?.offerId
-            val offerToken = parameters.subscriptionOffer?.offerToken
-            
-            //get RevenueCat package
-            Purchases.sharedInstance.getOfferingsWith({ error ->
-            // An error occurred
-            }) { offerings ->
-                offerings.current
-                    ?.availablePackages
-                    ?.takeUnless { it.isNullOrEmpty() }
-                    ?.let { list ->
-                     val rcPackage = list.firstOrNull { it.product.sku == subscriptionId }
-                     
-                     Purchases.sharedInstance.purchasePackage(
-                        this,
-                        rcPackage,
-                        onError = { error, userCancelled -> 
-                            /* No purchase */
-                            //stop process on Purchasely side
-			    processAction(false)
-                        },
-                        onSuccess = { product, customerInfo ->
-                            //stop process on Purchasely side
-			    processAction(false)
-                            if (customerInfo.entitlements["my_entitlement_identifier"]?.isActive == true) {
-                                // Unlock that content and synchronize with Purchasely
-                                Purchasely.synchronize()
-                                processAction(false)
-                            }
-                    })
-                }
-            }
+Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
+    val subscriptionId = purchase.subscriptionOffer?.subscriptionId
+    val basePlanId = purchase.subscriptionOffer?.basePlanId
+    val offerId = purchase.subscriptionOffer?.offerId
+    val offerToken = purchase.subscriptionOffer?.offerToken
+
+    //get RevenueCat package
+    Purchases.sharedInstance.getOfferingsWith({ error ->
+    // An error occurred
+    }) { offerings ->
+        offerings.current
+            ?.availablePackages
+            ?.takeUnless { it.isNullOrEmpty() }
+            ?.let { list ->
+             val rcPackage = list.firstOrNull { it.product.sku == subscriptionId }
+
+             Purchases.sharedInstance.purchasePackage(
+                this,
+                rcPackage,
+                onError = { error, userCancelled -> 
+                    /* No purchase */
+                },
+                onSuccess = { product, customerInfo ->
+                    if (customerInfo.entitlements["my_entitlement_identifier"]?.isActive == true) {
+                        // Unlock that content and synchronize with Purchasely
+                        Purchasely.synchronize()
+                    }
+            })
         }
-        PLYPresentationAction.RESTORE -> {
-           // restore purchases with RevenueCat
-            Purchases.sharedInstance.restorePurchases(::showError) { customerInfo ->
-                //... check customerInfo to see if entitlement is now active
-                
-                //one this is done, stop Purchasely process and synchronize
-	        			processAction(false)
-                Purchasely.synchronize() // synchronize all purchases with Purchasely
-            }
-        }
-        else -> processAction(true) // notify Purchasely paywall to continue other actions
     }
+
+    PLYInterceptResult.SUCCESS // notify Purchasely paywall to stop processing action
+}
+
+Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
+   // restore purchases with RevenueCat
+    Purchases.sharedInstance.restorePurchases(::showError) { customerInfo ->
+        //... check customerInfo to see if entitlement is now active
+
+        //one this is done, synchronize with Purchasely
+        Purchasely.synchronize() // synchronize all purchases with Purchasely
+    }
+
+    PLYInterceptResult.SUCCESS // notify Purchasely paywall to stop processing action
 }
 ```
 ```javascript React Native

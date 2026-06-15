@@ -30,13 +30,14 @@ There most straightforward way to display In-App Experiences is to use a <Glossa
 
 The most universal method consists in:
 
-* pre-fetching the Placement by calling the SDK method `fetchPresentation()`
+* pre-fetching the Placement by calling the SDK method `preload()`
 * and then calling the `display()` method of the `PLYPresentation` object fetched
 
 ```swift Swift
-Purchasely.fetchPresentation(
-    for: "onboarding",
-    fetchCompletion: { presentation, error in
+PLYPresentationBuilder
+    .forPlacementId("onboarding")
+    .build()
+    .preload { presentation, error in
          guard let presentation = presentation, error == nil else {
              print("Error while fetching presentation: \(error?.localizedDescription ?? "unknown")")
              return
@@ -45,17 +46,18 @@ Purchasely.fetchPresentation(
          // call the display method and provide the currently displayed UIViewController
          presentation.display(from: myUIViewController)
     }
-)
 ```
 ```kotlin Kotlin
-Purchasely.fetchPresentation(placementId = "onboarding") { presentation, error ->
-  if(error != null) {
+PLYPresentation {
+    placementId("onboarding")
+}.preload { presentation, error ->
+  if (error != null) {
     Log.d("Purchasely", "Error fetching Screen", error)
-    return@fetchPresentation
+    return@preload
   }
 
   // call the display method and provide your Activity
-  presentation.display(activity)
+  presentation?.display(activity)
 }
 ```
 ```typescript React Native

@@ -59,9 +59,10 @@ This dependency contains the class `GoogleStore` that you must add to `Purchasel
 Purchasely.Builder(applicationContext)
   .apiKey("<<X-API-KEY>>")
   .stores(listOf(HuaweiStore()))
+  .runningMode(PLYRunningMode.Full)
   .build()
-  .start { isConfigured, error ->
-    if(isConfigured) {
+  .start { error ->
+    if (error == null) {
       // Purchasely setup is complete 
       )
     }
@@ -79,9 +80,10 @@ This dependency contains the class `AmazonStore` that you must add to `Purchasel
 Purchasely.Builder(applicationContext)
   .apiKey("<<X-API-KEY>>")
   .stores(listOf(AmazonStore()))
+  .runningMode(PLYRunningMode.Full)
   .build()
-  .start { isConfigured, error ->
-    if(isConfigured) {
+  .start { error ->
+    if (error == null) {
       // Purchasely setup is complete 
       )
     }

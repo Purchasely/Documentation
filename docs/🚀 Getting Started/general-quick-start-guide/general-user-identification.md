@@ -64,19 +64,21 @@ To login a user, just provides your user id. Purchasely will save this user id f
 import Purchasely
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    Purchasely.start(
-       withAPIKey: "<<X-API-KEY>>",
-       appUserId: "XYZ-123-ABC-456" // user ID
-       logLevel: .debug
-    ) {(success, error) in
-      print(success)
-    }
+    Purchasely
+        .apiKey("<<X-API-KEY>>")
+        .appUserId("XYZ-123-ABC-456") // user ID
+        .runningMode(.full)
+        .logLevel(.debug)
+        .start { error in
+            print(error == nil)
+        }
 	return true
 }
 ```
 ```kotlin
 import android.app.Application
 import io.purchasely.ext.Purchasely
+import io.purchasely.ext.PLYRunningMode
 import io.purchasely.google.GoogleStore
 
 class YourApplication: Application() {
@@ -87,9 +89,10 @@ class YourApplication: Application() {
         Purchasely.Builder(applicationContext)
             .apiKey("<<X-API-KEY>>")
             .userId("XYZ-123-ABC-456") // user ID
+            .runningMode(PLYRunningMode.Full)
             .build()
-            .start { isConfigured, error ->
-                if(isConfigured) {
+            .start { error ->
+                if (error == null) {
                     // Purchasely setup is complete 
                 )
             }
