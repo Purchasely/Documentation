@@ -71,16 +71,19 @@ Purchasely.Builder(this)
     .build()
     .start()
 
-// After (v6) — set Full explicitly if you need it
-Purchasely.Builder(this)
-    .apiKey("API_KEY")
-    .stores(listOf(GoogleStore()))
-    .runningMode(PLYRunningMode.Full) // ← required for purchase handling & validation
-    .build()
-    .start { error -> }
+// After (v6) — Kotlin DSL (recommended); set Full explicitly if you need it
+Purchasely {
+    context(applicationContext)
+    apiKey("API_KEY")
+    stores(listOf(GoogleStore()))
+    runningMode(PLYRunningMode.Full) // ← required for purchase handling & validation
+    onInitialized { error -> }
+}
 ```
 
-If you don't add `.runningMode(PLYRunningMode.Full)`, the SDK logs a DEBUG message at `build()` time reminding you of the change.
+> 📘 The fluent `Purchasely.Builder` still works and is the form Java callers use — see [Kotlin DSL vs fluent Builder](#kotlin-dsl-recommended) below.
+
+If you don't set `runningMode(PLYRunningMode.Full)`, the SDK logs a DEBUG message at `build()` time reminding you of the change.
 
 > 🚧 Behavioral consequence — automatic screen close
 >
@@ -93,9 +96,9 @@ If you don't add `.runningMode(PLYRunningMode.Full)`, the SDK logs a DEBUG messa
 .runningMode(PLYRunningMode.Observer)        // v6
 ```
 
-### New Kotlin DSL entrypoint
+### Kotlin DSL (recommended)
 
-`Purchasely { … }` configures **and** starts the SDK in one call (Kotlin only — Java keeps the fluent builder):
+`Purchasely { … }` configures **and** starts the SDK in one call. It is the **recommended** Kotlin entry point in v6:
 
 ```kotlin
 Purchasely {
@@ -114,6 +117,20 @@ Purchasely {
 ```
 
 `context` and `apiKey` are mandatory; every setting is a method‑style setter. Custom Lint checks (`PurchaselyMissingContext`, `PurchaselyMissingApiKey`, `PurchaselyFullModeWithoutStores`) flag common mistakes at editor time.
+
+The fluent `Purchasely.Builder` chain remains **fully supported** (and is the only form available to Java callers). Both paths share one internal initialization, so they behave identically — pick whichever you prefer:
+
+```kotlin
+Purchasely.Builder(applicationContext)
+    .apiKey("API_KEY")
+    .userId("user-123")
+    .stores(listOf(GoogleStore()))
+    .runningMode(PLYRunningMode.Full)
+    .build()
+    .start { error ->
+        if (error == null) { /* SDK ready */ }
+    }
+```
 
 ### Callback signature simplified
 
