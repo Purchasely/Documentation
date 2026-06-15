@@ -1285,6 +1285,115 @@ next:
         Contains the store bundle ID of the app in which the purchase was made.
       </td>
     </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `commitment_billing_type`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**
+
+        Billing mode of the subscription. Only present for **App Store monthly subscriptions with a 12-month commitment**, where it is set to `monthly`. Absent for standard subscriptions.
+
+        When present, the other `commitment_*` attributes below are also filled.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `billing_period_number`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **int**
+
+        Position of the current installment within the 12-month commitment (e.g. `5` for the 5th monthly charge).
+
+        Only present for 12-month commitment subscriptions.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `total_billing_periods`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **int**
+
+        Total number of installments in the commitment term (`12`).
+
+        Only present for 12-month commitment subscriptions.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `commitment_expires_at`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **string**  
+        _in ISO 8601_  
+        Date at which the current 12-month commitment term ends.
+
+        Only present for 12-month commitment subscriptions.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `commitment_expires_at_ms`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **int**
+
+        _in milliseconds since the Epoch_  
+        Same as `commitment_expires_at`, expressed in milliseconds.
+
+        Only present for 12-month commitment subscriptions.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        `commitment_will_auto_renew`
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        No
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        **boolean**
+
+        Whether the commitment will renew for a new 12-month term when the current one ends. This is distinct from the monthly billing of installments within the term.
+
+        Only present for 12-month commitment subscriptions.
+      </td>
+    </tr>
   </tbody>
 </Table>
 
@@ -1482,6 +1591,50 @@ next:
   "purchasely_subscription_id": "subs_D7GnVQbUxvY6YxoeK6nhyPDkmyCVcfe",
   "effective_next_renewal_at_ms": 1702390991777,
   "store_original_transaction_id": "GPA.3355-5688-7970-28037",
+  "plan_price_in_customer_currency": 9.99
+}
+```
+```json INSTALLMENT_PAID
+{
+  "plan": "yearly",
+  "store": "APPLE_APP_STORE",
+  "product": "PURCHASELY_PLUS",
+  "user_id": "toto",
+  "event_id": "f0b9c1d2-3e4f-4a5b-9c6d-7e8f9a0b1c2d",
+  "event_name": "INSTALLMENT_PAID",
+  "offer_type": "NONE",
+  "api_version": 3,
+  "device_type": "PHONE",
+  "environment": "SANDBOX",
+  "purchased_at": "2026-06-15T10:00:00.000Z",
+  "purchase_type": "RENEWING_SUBSCRIPTION",
+  "store_country": "FR",
+  "next_renewal_at": "2026-07-15T10:00:00.000Z",
+  "purchased_at_ms": 1781517600000,
+  "event_created_at": "2026-06-15T10:00:04.120Z",
+  "is_family_shared": false,
+  "store_product_id": "com.purchasely.plus.yearly",
+  "customer_currency": "EUR",
+  "plan_price_in_eur": 9.99,
+  "next_renewal_at_ms": 1784109600000,
+  "event_created_at_ms": 1781517604120,
+  "previous_offer_type": "NONE",
+  "store_app_bundle_id": "com.purchasely.demo",
+  "subscription_status": "AUTO_RENEWING",
+  "commitment_billing_type": "monthly",
+  "billing_period_number": 5,
+  "total_billing_periods": 12,
+  "commitment_expires_at": "2027-02-15T10:00:00.000Z",
+  "commitment_expires_at_ms": 1802685600000,
+  "commitment_will_auto_renew": true,
+  "store_transaction_id": "2000000123456789",
+  "original_purchased_at": "2026-02-15T10:00:00.000Z",
+  "original_purchased_at_ms": 1771149600000,
+  "cumulated_revenues_in_eur": 49.95,
+  "effective_next_renewal_at": "2026-07-15T10:00:00.000Z",
+  "purchasely_subscription_id": "subs_D7GnVQbUxvY6YxoeK6nhyPDkmyCVcfe",
+  "effective_next_renewal_at_ms": 1784109600000,
+  "store_original_transaction_id": "2000000111111111",
   "plan_price_in_customer_currency": 9.99
 }
 ```

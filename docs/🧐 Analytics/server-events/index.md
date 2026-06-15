@@ -50,10 +50,11 @@ They are used  to [manage entitlements with your developer's backend](entitlemen
 
 ## 2. Lifecycle Events
 
-This subset is composed of 27 different events which map every use case in a typical subscription lifecycle.
+This subset is composed of 29 different events which map every use case in a typical subscription lifecycle.
 
 * when a subscription starts, is renewed, terminated, upgraded, downgraded, transferred or enters in grace period or in billing retry
 * when the auto-renewing of a subscription is disabled or enabled again
+* when a monthly installment of an App Store 12-month commitment subscription is paid or refunded
 
 <Image align="center" className="border" border={true} src="https://files.readme.io/814f7ea504469dc0ae40c50fe3dbcdc5e313b940dfd7c2d7c3387365c8c53fef-Capture_decran_2024-11-14_a_10.49.30.png" />
 

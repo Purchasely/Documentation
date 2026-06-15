@@ -481,3 +481,77 @@ The Google Play Store has a PAUSE mechanism allowing subscribers to suspend thei
     </tr>
   </tbody>
 </Table>
+
+<br />
+
+# MONTHLY SUBSCRIPTION WITH 12-MONTH COMMITMENT
+
+**App Store only**\
+A *monthly subscription with a 12-month commitment* is a yearly subscription that is **billed in 12 monthly installments** instead of a single upfront payment: the subscriber commits to a full year but is charged once a month. This billing mode is available on the App Store starting with iOS 26.4.
+
+Each monthly charge generates an `INSTALLMENT_PAID` event, so a single committed subscription produces **12 `INSTALLMENT_PAID` events per year**. To avoid amplifying automations driven by your existing lifecycle events, those events keep their standard meaning and still fire only at the relevant moments:
+
+* **Initial purchase** (1st installment) → `SUBSCRIPTION_STARTED` **and** `INSTALLMENT_PAID`
+* **Monthly charges** (installments 2 to 12) → `INSTALLMENT_PAID` only — `SUBSCRIPTION_RENEWED` is **not** sent for these mid-commitment charges
+* **Commitment renewal** (start of a new 12-month term) → `SUBSCRIPTION_RENEWED` **and** `INSTALLMENT_PAID`
+* **Billing recovery** (a failed installment is eventually paid) → `SUBSCRIPTION_RECOVERED_FROM_BILLING_RETRY` **and** `INSTALLMENT_PAID`
+
+When the subscriber turns off auto-renewal mid-commitment, a `RENEWAL_DISABLED` event is sent, but billing continues for the remaining installments (each still generating an `INSTALLMENT_PAID`) until the commitment term ends.
+
+Events about a committed subscription carry additional `commitment_*` attributes (current installment number, total installments, commitment expiration date, commitment auto-renewal). See [Server Events Attributes](server-events-attributes).
+
+<Table align={["left","left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Event
+      </th>
+
+      <th>
+        Description
+      </th>
+
+      <th>
+        Useful to
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        `INSTALLMENT_PAID`
+      </td>
+
+      <td>
+        A monthly installment of a 12-month commitment subscription has been billed.  
+
+        Sent on **every** monthly charge (12 per year), on top of the lifecycle event that may accompany it at the start of a term or on billing recovery (see above).
+      </td>
+
+      <td>
+        1. Track per-installment revenue without inflating renewal-based automations
+        2. Reconcile the monthly billing schedule of committed subscribers
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        `INSTALLMENT_REFUNDED`
+      </td>
+
+      <td>
+        A **past** monthly installment of a 12-month commitment has been refunded.  
+
+        The commitment and the subscription remain active and the subscriber keeps access to the premium benefits — only that single installment is refunded.  
+
+        A refund of the **current** installment ends the commitment instead, and is reported through `SUBSCRIPTION_REFUNDED_REVOKED`.
+      </td>
+
+      <td>
+        1. Reconcile a partial refund on a single billing period
+        2. Adjust revenue for the refunded installment without treating the subscriber as churned
+      </td>
+    </tr>
+  </tbody>
+</Table>
