@@ -10,6 +10,29 @@ The goal is to compile all scattered documentation into a single, comprehensive 
 
 ---
 
+## Target version & sources of truth (v6)
+
+The compiled docs target **SDK 6.0.0**. When compiling or re-compiling, verify every API name, signature, enum case and default against the authoritative sources — **do not guess or rely on the scattered docs alone**:
+
+| Platform | Migration guide (authoritative) | SDK source to grep |
+|----------|---------------------------------|--------------------|
+| iOS | `../iOS/MIGRATION-6.0.0.md` | `../iOS/Purchasely/Classes/` (confirm a method is `public`, not `internal`/removed) |
+| Android | `../Android/MIGRATION_V6.md` | `../Android/core/src/main/java/io/purchasely/` |
+
+Also see the client-facing migration guides under `docs/➡️ MIGRATING TO PURCHASELY/migrating-from-sdk-5-to-6/`.
+
+> **Major v6 change — default running mode is now Observer.** Every compiled doc's Initialization section MUST state this and show how to set Full explicitly (iOS `.runningMode(.full)`, Android `.runningMode(PLYRunningMode.Full)`) for Purchasely to handle and validate purchases.
+
+> **Objective-C & Java are no longer documented.** The iOS doc contains **Swift only**; the Android doc contains **Kotlin only**. The languages are still supported by the SDK — we just no longer publish their snippets.
+
+To re-compile after a version bump, pass `--force` to the script (otherwise an existing `platform/<platform>.md` is left untouched):
+```bash
+./compilation/compile_sdk_docs.sh ios --force
+./compilation/compile_sdk_docs.sh all --force
+```
+
+---
+
 ## Step-by-Step Process
 
 ### Step 1: Identify All Relevant Documentation Files
@@ -136,16 +159,20 @@ Use this standard structure for all platform documentation:
 ## Platform-Specific Notes
 
 ### Android/Kotlin
+- **Kotlin only** — do NOT include Java snippets (no longer documented)
+- Default running mode is **Observer**; show `.runningMode(PLYRunningMode.Full)` for purchase handling
 - Include alternative stores section (Huawei, Amazon)
-- Note the `onClose` callback requirement (must implement manually)
+- Presentation API: `PLYPresentation { }.preload`, `display(context) { outcome -> }`, `buildView`/`getFragment`, `onCloseRequested` (renamed from `onClose`); presentation types live in `io.purchasely.ext.presentation.*`
 - Include ProGuard rules
-- Dependencies: `io.purchasely:core`, `io.purchasely:google-play`, `io.purchasely:player`
+- Dependencies: `io.purchasely:core`, `io.purchasely:google-play`, `io.purchasely:player` (version **6.0.0**); Gradle 9.3.0+, Kotlin 2.2.x, JDK 11, minSdk 23, compileSdk 35
 
 ### iOS/Swift
+- **Swift only** — do NOT include Objective-C snippets (no longer documented)
+- Default running mode is **`.observer`**; show `.runningMode(.full)` for purchase handling
+- Initialization uses the fluent builder `Purchasely.apiKey(…)…start { error in }` (the positional `start(withAPIKey:)` is removed); also show the async/await variant
+- Presentation API: `PLYPresentationBuilder.forPlacementId/forScreenId(…).build().preload { }`; per-action `interceptAction(.x)` returning `PLYInterceptResult`; SwiftUI via `presentation.swiftUIView`, UIKit via `presentation.controller`
 - Include StoreKit version selection (StoreKit 1 vs StoreKit 2)
-- Note Objective-C compatibility if needed
 - Include CocoaPods and SPM installation options
-- Mention UIKit vs SwiftUI considerations
 
 ### React Native
 - Include both npm/yarn installation
@@ -216,12 +243,12 @@ Include a note like this in each platform:
 >
 > All Purchasely packages must be the **exact same version**. Mismatched versions will cause runtime errors.
 >
-> Example for React Native:
+> Example for React Native (use the matching released version for your platform):
 > ```json
 > "dependencies": {
->   "react-native-purchasely": "5.0.0",
->   "@purchasely/react-native-purchasely-google": "5.0.0",
->   "@purchasely/react-native-purchasely-android-player": "5.0.0"
+>   "react-native-purchasely": "6.0.0",
+>   "@purchasely/react-native-purchasely-google": "6.0.0",
+>   "@purchasely/react-native-purchasely-android-player": "6.0.0"
 > }
 > ```
 
@@ -231,13 +258,15 @@ Include a note like this in each platform:
 
 When reading documentation files, look for these language identifiers to extract the correct code:
 
-| Platform | Identifiers to Look For |
-|----------|------------------------|
-| Android | `kotlin`, `Kotlin`, `java`, `Java`, `groovy` |
-| iOS | `swift`, `Swift`, `objectivec`, `Objective-C` |
-| React Native | `typescript React Native`, `javascript React Native`, `ReactNative` |
-| Flutter | `typescript Flutter`, `dart`, `Flutter` |
-| Cordova | `javascript Cordova`, `Cordova` |
+| Platform | Identifiers to INCLUDE in the compiled doc | Notes |
+|----------|--------------------------------------------|-------|
+| Android | `kotlin`, `Kotlin` (+ `groovy` for Gradle) | `java` / `Java` blocks are **no longer documented** — skip them |
+| iOS | `swift`, `Swift` | `objectivec` / `Objective-C` blocks are **no longer documented** — skip them |
+| React Native | `typescript React Native`, `javascript React Native`, `ReactNative` | |
+| Flutter | `typescript Flutter`, `dart`, `Flutter` | |
+| Cordova | `javascript Cordova`, `Cordova` | |
+
+> ⚠️ Trust the **label** after the fence (e.g. `swift Swift`), not the highlighter token: some Cordova/Flutter snippets are mislabeled `swift`/`kotlin`. The label identifies the real platform.
 
 ---
 
@@ -367,14 +396,20 @@ When updating for a new SDK version:
 Before finalizing the documentation:
 
 - [ ] All code examples compile/are syntactically correct
+- [ ] **Every API name, signature, enum case and default verified against the source of truth** (MIGRATION guide + SDK source) — not invented
+- [ ] **No removed v5 identifiers remain in code** — grep the file:
+  - iOS: `start(withAPIKey`, `setPaywallActionsInterceptor`, `fetchPresentation`, `presentationController`, `closeDisplayedPresentation`, `.PresentationView`, `PLYPresentationInfo`
+  - Android: `setPaywallActionsInterceptor`, `fetchPresentation`, `presentationView`, `PLYPresentationProperties`, `PLYProductViewResult`, `PaywallObserver`, `readyToOpenDeeplink`, `isDeeplinkHandled`
+- [ ] **No Objective-C (iOS) / Java (Android) code fences** in the output
+- [ ] Initialization section states the **default running mode is now Observer** and how to set Full
 - [ ] No placeholder values left (except intentional ones like `YOUR_API_KEY`)
 - [ ] Consistent formatting throughout
 - [ ] All sections have content
 - [ ] Links to Purchasely Console are correct
-- [ ] Version number is specified
+- [ ] Version number is **6.0.0**
 - [ ] Table of contents matches actual sections
 
 ---
 
-*Last updated: January 2026*
-*Created for Purchasely SDK Documentation v5.x*
+*Last updated: June 2026*
+*Updated for Purchasely SDK Documentation v6.x (iOS = Swift only, Android = Kotlin only; default running mode is Observer)*

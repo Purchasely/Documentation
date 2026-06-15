@@ -2,8 +2,14 @@
 
 # compile_sdk_docs.sh
 # Script to compile SDK documentation for all platforms
-# Usage: ./compile_sdk_docs.sh [platform]
+# Usage: ./compile_sdk_docs.sh [platform] [--force]
 # Platforms: android, ios, react-native, flutter, cordova, all
+#
+# By default an existing platform/<platform>.md is left untouched. To RE-compile
+# (e.g. after an SDK major version bump such as v5 -> v6), pass --force so the
+# prompt is regenerated and the existing file is meant to be overwritten:
+#   ./compile_sdk_docs.sh ios --force
+#   ./compile_sdk_docs.sh all --force
 
 set -e
 
@@ -45,62 +51,50 @@ generate_prompt() {
     local output_file="platform/${platform}.md"
 
     cat > "compile_${platform}_prompt.txt" << EOF
-Create a comprehensive ${platform_upper} SDK documentation file following the SDK_COMPILATION_PROCESS.md guidelines.
+Compile / RE-compile the comprehensive ${platform_upper} SDK documentation file, targeting SDK v6.0.0, following compilation/SDK_COMPILATION_PROCESS.md.
 
-TASK: Create ${output_file}
+TASK: (Over)write ${output_file}
 
-PLATFORM: ${platform_upper}
+PLATFORM: ${platform_upper}   (target SDK version: 6.0.0)
 
 PROCESS TO FOLLOW:
-1. Read compilation/SDK_COMPILATION_PROCESS.md to understand the complete compilation process
-2. Follow the step-by-step process documented there
-3. Extract all ${platform}-specific code from the documentation files
-4. Compile into a single ${output_file} file using the standard structure
+1. Read compilation/SDK_COMPILATION_PROCESS.md for the complete process and the standard 15-section structure.
+2. If ${output_file} already exists, use it as the STRUCTURAL and prose-quality TEMPLATE, then refresh ALL code to v6 and overwrite it.
+3. Extract only ${platform_upper}-specific code from the source docs (they are already on v6) and the custom blocks.
+4. Cross-check every API name, signature, enum case and default against the SOURCES OF TRUTH below — do not invent or guess.
 
-STANDARD STRUCTURE (from SDK_COMPILATION_PROCESS.md):
-1. Requirements
-2. Installation
-3. SDK Initialization
-4. Displaying Paywalls
-5. Processing Transactions
-6. Paywall Action Interceptor
-7. User Identification
-8. Subscription Status & Entitlements
-9. Custom User Attributes
-10. Event Listeners
-11. Pre-fetching Screens
-12. Deeplinks Management
-13. Platform-Specific Features (if applicable)
-14. Troubleshooting
-15. Additional Resources
+SOURCES OF TRUTH for v6 (verify against these, in priority order):
+- iOS:     ../iOS/MIGRATION-6.0.0.md   and the SDK source under ../iOS/Purchasely/Classes/  (grep to confirm a method is public, not internal/removed)
+- Android: ../Android/MIGRATION_V6.md  and the SDK source under ../Android/core/src/main/java/io/purchasely/
+- The migration guides under docs/➡️ MIGRATING TO PURCHASELY/migrating-from-sdk-5-to-6/
 
-KEY REQUIREMENTS:
-- Include ONLY ${platform}-specific code examples
-- Extract code blocks marked with the appropriate language identifier
-- Follow the checklist in SDK_COMPILATION_PROCESS.md
-- Ensure all code is syntactically correct
-- Use the same quality standards as platform/android.md
+V6 RULES (critical):
+- iOS doc: include ONLY Swift. DO NOT include Objective-C (no longer documented).
+- Android doc: include ONLY Kotlin. DO NOT include Java (no longer documented).
+- DEFAULT RUNNING MODE IS NOW OBSERVER. The SDK Initialization section MUST prominently state this and show how to set Full explicitly (iOS: .runningMode(.full); Android: .runningMode(PLYRunningMode.Full)) for Purchasely to handle/validate purchases.
+- Use the v6 APIs only. The following v5 names are REMOVED/renamed and must NOT appear as usable code:
+  iOS:     start(withAPIKey:), setPaywallActionsInterceptor, fetchPresentation, presentationController/productController/planController, closeDisplayedPresentation, controller.PresentationView, PLYPresentationInfo
+  Android: setPaywallActionsInterceptor, fetchPresentation, presentationView(...), PLYPresentationProperties, PLYProductViewResult, PaywallObserver, readyToOpenDeeplink, isDeeplinkHandled, subscriptionsFragment, purchaseHistory, intro*/INTRO_*/TRIAL_*
+- Use version 6.0.0 wherever a version appears. Android build reqs: Gradle 9.3.0+, Kotlin 2.2.x, JDK 11, minSdk 23, compileSdk 35.
 
-SOURCE DIRECTORIES (from SDK_COMPILATION_PROCESS.md):
-- docs/🚀 Getting Started/sdk-quick-start/sdk-installation/
-- docs/Onboarding/sdk_initialisation/
-- docs/Onboarding/sdk_paywall_action_interceptor/
-- docs/Onboarding/sdk_deeplinks/
+CODE-BLOCK SELECTION:
+- Trust the LABEL after the language fence (e.g. swift Swift, kotlin Kotlin), not the highlighter token — some Cordova/Flutter blocks are mislabeled swift/kotlin.
+
+SOURCE DIRECTORIES:
+- docs/🚀 Getting Started/sdk-quick-start/ (sdk-installation/, sdk-initialization.md, processing-transactions/, listener-delegate.md, entitlements-management/)
+- docs/Onboarding/sdk_initialisation/, sdk_paywall_action_interceptor/, sdk_deeplinks/, sdk_placement/, sdk_asynchronous_display/
 - docs/📱 Screens & Paywalls/displaying-screens/
 - docs/✈️ GOING FURTHER/
 - docs/👤 Users/
 - docs/📈 Growth guidances/segmenting-your-user-base/
 - custom_blocks/
 
-REFERENCE:
-- Check platform/android.md as a reference for structure and quality
-- Follow the platform-specific notes in SDK_COMPILATION_PROCESS.md
-- Use the code block identifiers documented in the process file
+VERIFICATION (do this before finishing):
+- Re-read your generated ${output_file} and confirm every code example matches a real v6 public API in the source of truth.
+- Grep the file to confirm NONE of the removed v5 identifiers above remain in code, and that no Objective-C (iOS) / Java (Android) code fences are present.
+- Confirm the Table of Contents matches the actual sections.
 
-OUTPUT:
-Create ${platform}.md in the platform/ folder
-
-Please proceed with the compilation process.
+OUTPUT: (over)write ${output_file}. Then report which sections you produced and the verification result.
 EOF
 
     print_success "Generated prompt file: compile_${platform}_prompt.txt"
@@ -114,8 +108,11 @@ compile_platform() {
 
     # Check if already exists in platform/ directory
     if [ -f "$PLATFORM_DIR/${platform}.md" ]; then
-        print_warning "platform/${platform}.md already exists. Skipping..."
-        return
+        if [ "${FORCE:-0}" != "1" ]; then
+            print_warning "platform/${platform}.md already exists. Skipping (re-run with --force to regenerate: './compile_sdk_docs.sh ${platform} --force')."
+            return
+        fi
+        print_warning "platform/${platform}.md exists — --force set: regenerating (the existing file is meant to be overwritten by the compilation)."
     fi
 
     # Generate prompt file
@@ -129,6 +126,13 @@ compile_platform() {
 # Main script
 main() {
     local platform=${1:-}
+
+    # Detect a --force / force flag anywhere in the args (allows regenerating an
+    # existing compiled file, e.g. on a major SDK version bump).
+    FORCE=0
+    for arg in "$@"; do
+        if [ "$arg" = "--force" ] || [ "$arg" = "force" ]; then FORCE=1; fi
+    done
 
     echo ""
     print_info "Purchasely SDK Documentation Compiler"
@@ -164,6 +168,7 @@ main() {
             ;;
         all)
             print_info "Compiling all platforms..."
+            compile_platform "android"
             compile_platform "ios"
             compile_platform "react-native"
             compile_platform "flutter"
@@ -181,55 +186,57 @@ main() {
 
             # Create a master instruction file
             cat > "COMPILE_ALL_PLATFORMS.md" << 'EOF'
-# Compile All Platform SDKs
+# Compile All Platform SDKs (target SDK v6.0.0)
 
-Please compile SDK documentation for all remaining platforms following the process in `SDK_COMPILATION_PROCESS.md`.
+Please (re)compile SDK documentation for all platforms following the process in `SDK_COMPILATION_PROCESS.md`. Target SDK version is **6.0.0**. If a `platform/<platform>.md` already exists, use it as the structural/quality template and overwrite it with refreshed v6 content.
+
+## Sources of truth for v6 (verify against these — do not guess)
+
+- iOS: `../iOS/MIGRATION-6.0.0.md` + SDK source `../iOS/Purchasely/Classes/`
+- Android: `../Android/MIGRATION_V6.md` + SDK source `../Android/core/src/main/java/io/purchasely/`
+- `docs/➡️ MIGRATING TO PURCHASELY/migrating-from-sdk-5-to-6/`
 
 ## Platforms to Compile
 
-### 1. iOS (ios.md)
-- Language: Swift
-- Code identifiers: swift, Swift, objectivec, Objective-C
-- Special considerations: StoreKit 1 vs 2, CocoaPods/SPM installation
-- Reference: android.md for structure
+### 1. Android (android.md)
+- Language: **Kotlin only** (Java is no longer documented — do NOT include `java Java` blocks)
+- Code identifiers: `kotlin`, `Kotlin`
+- v6 specifics: default running mode is **Observer** (set `PLYRunningMode.Full` for purchase handling); `PLYPresentation { }.preload`, `interceptAction<…>`, `PLYPresentationOutcome`, presentation types in `io.purchasely.ext.presentation.*`; deps `io.purchasely:core/google-play/player:6.0.0`, Gradle 9.3.0+, Kotlin 2.2.x
 
-### 2. React Native (react-native.md)
-- Language: JavaScript/TypeScript
-- Code identifiers: typescript React Native, javascript React Native, ReactNative
-- Special considerations: iOS pod install, Android gradle, storeKit1 parameter, androidStores parameter
-- Reference: android.md for structure
+### 2. iOS (ios.md)
+- Language: **Swift only** (Objective-C is no longer documented — do NOT include `objectivec` blocks)
+- Code identifiers: `swift`, `Swift`
+- v6 specifics: default running mode is **`.observer`** (set `.runningMode(.full)` for purchase handling); fluent `Purchasely.apiKey(…)…start { error }`, `PLYPresentationBuilder`, `interceptAction(.x)`, `presentation.swiftUIView`; StoreKit 1 vs 2, CocoaPods/SPM
 
-### 3. Flutter (flutter.md)
-- Language: Dart
-- Code identifiers: typescript Flutter, dart, Flutter
-- Special considerations: pub.dev installation, iOS pod install, Android gradle
-- Reference: android.md for structure
+### 3. React Native (react-native.md)
+- Language: JavaScript/TypeScript — code identifiers: `typescript React Native`, `javascript React Native`, `ReactNative`
+- Note: the RN/Flutter/Cordova wrappers may still be on the v5 API until their own v6 release — keep their code as found in the sources
 
-### 4. Cordova (cordova.md)
-- Language: JavaScript
-- Code identifiers: javascript Cordova, Cordova
-- Special considerations: Plugin installation, platform-specific setup, config.xml
-- Reference: android.md for structure
+### 4. Flutter (flutter.md)
+- Language: Dart — code identifiers: `typescript Flutter`, `dart`, `Flutter`
+
+### 5. Cordova (cordova.md)
+- Language: JavaScript — code identifiers: `javascript Cordova`, `Cordova`
 
 ## Process for Each Platform
 
-1. Read compilation/SDK_COMPILATION_PROCESS.md for the complete process
-2. Follow the step-by-step instructions
-3. Use the standard 15-section structure
-4. Extract platform-specific code from source files
+1. Read `compilation/SDK_COMPILATION_PROCESS.md` for the complete process
+2. Use the standard 15-section structure
+3. Extract platform-specific code from source files (trust the LABEL after the fence, not the highlighter token)
+4. Cross-check every API/signature/default against the sources of truth above
 5. Follow the quality checklist
-6. Create the platform/{platform}.md file
+6. (Over)write the `platform/{platform}.md` file
 
 ## Quality Standards
 
-- Match the quality and completeness of platform/android.md
-- All code must be syntactically correct
+- Match the quality and completeness of the existing compiled docs
+- All code must be syntactically correct and use real v6 public APIs only
 - No placeholder values except intentional ones
 - Consistent formatting throughout
-- Complete table of contents
-- Links verified
+- Complete table of contents matching actual sections
+- Verify: no removed v5 identifiers remain in code; no Objective-C (iOS) / Java (Android) fences
 
-Please proceed to compile all four platforms.
+Please proceed to compile all platforms.
 EOF
 
             print_success "Created COMPILE_ALL_PLATFORMS.md"
@@ -259,7 +266,7 @@ EOF
             print_success "Cleanup complete"
             ;;
         *)
-            echo "Usage: $0 {android|ios|react-native|flutter|cordova|all|interactive|check|clean}"
+            echo "Usage: $0 {android|ios|react-native|flutter|cordova|all|interactive|check|clean} [--force]"
             echo ""
             echo "Commands:"
             echo "  android        Generate prompt for Android documentation"
@@ -267,14 +274,19 @@ EOF
             echo "  react-native   Generate prompt for React Native documentation"
             echo "  flutter        Generate prompt for Flutter documentation"
             echo "  cordova        Generate prompt for Cordova documentation"
-            echo "  all            Generate prompts for all platforms"
+            echo "  all            Generate prompts for all platforms (android, ios, react-native, flutter, cordova)"
             echo "  interactive    Create master instruction file for all platforms"
             echo "  check          Check compilation status"
             echo "  clean          Remove generated prompt files"
             echo ""
+            echo "Options:"
+            echo "  --force        Regenerate even if platform/<platform>.md already exists"
+            echo "                 (use this to re-compile after an SDK major version bump)"
+            echo ""
             echo "Example:"
             echo "  $0 ios"
-            echo "  $0 all"
+            echo "  $0 ios --force"
+            echo "  $0 all --force"
             echo "  $0 interactive"
             exit 1
             ;;
