@@ -20,7 +20,10 @@ pod install Purchasely
 # Setup
 
 ```Text Swift
-Purchasely.start("<<X-API-KEY>>")
+Purchasely
+    .apiKey("<<X-API-KEY>>")
+    .runningMode(.full) // ⚠️ default is now .observer — set .full for Purchasely to handle purchases
+    .start { error in }
 ```
 
 API KEY is: {user["X-API-KEY"]}
@@ -40,7 +43,7 @@ API KEY is: {user["X-API-KEY"]}
 Display a paywall
 
 ```Text Swift
-Purchasely.presentationController("onboarding")
+Purchasely.display(for: "onboarding")
 ```
 
 # Action Interceptor

@@ -24,7 +24,7 @@ next:
 
 You register one interceptor per action with `Purchasely.interceptAction`. Each interceptor receives:
 
-* `info`: the `PLYPresentationInfo` object containing the controller of the paywall to dismiss it or display content / error messages above it, and the presentation id and content id associated to this paywall
+* `info`: the `PLYInterceptorInfo` object containing the controller of the paywall to dismiss it or display content / error messages above it, and the presentation id and content id associated to this paywall
 * the typed action object (like a `Purchase` carrying the `plan` and, on Android, the `subscriptionOffer`) that contains the objects needed to perform the action
 * `completion` (iOS) / a returned `PLYInterceptResult` (Android): tells Purchasely how the action was handled. Returning the "not handled" result on a purchase action will lead the Purchasely SDK to trigger the native in-app purchase flow itself
 
