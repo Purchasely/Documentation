@@ -50,7 +50,7 @@ class YourApplication: Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // Kotlin DSL — configures AND starts the SDK in a single call
+        // ── Recommended — Kotlin DSL: configures AND starts the SDK in one call ──
         Purchasely {
             context(applicationContext)
             apiKey("<<X-API-KEY>>")
@@ -63,6 +63,19 @@ class YourApplication: Application() {
                 }
             }
         }
+
+        // ── Alternative — fluent Builder (same behavior; the only form for Java) ──
+        Purchasely.Builder(applicationContext)
+            .apiKey("<<X-API-KEY>>")
+            .userId(null)
+            .stores(listOf(GoogleStore()))
+            .runningMode(PLYRunningMode.Full)
+            .build()
+            .start { error ->
+                if (error == null) {
+                    // Purchasely setup is complete
+                }
+            }
     }
 }
 
@@ -128,24 +141,6 @@ Purchasely.startWithAPIKey(
     Purchasely.LogLevel.DEBUG, 
     Purchasely.RunningMode.full
 );
-```
-
-### Kotlin — fluent Builder (alternative to the DSL)
-
-The Kotlin DSL above is the recommended entry point. You can also use the fluent `Purchasely.Builder`, which behaves identically and configures then starts the SDK in two steps:
-
-```kotlin Kotlin
-Purchasely.Builder(applicationContext)
-    .apiKey("<<X-API-KEY>>")
-    .userId(null) // optional if you already know your user id
-    .stores(listOf(GoogleStore())) // Set the list of stores you want to have
-    .runningMode(PLYRunningMode.Full) // ⚠️ default is now Observer — set Full for Purchasely to handle purchases
-    .build()
-    .start { error ->
-        if (error == null) {
-            // Purchasely setup is complete
-        }
-    }
 ```
 
 The parameter `runningMode` allows you to choose between the `full` mode and the `observer` mode.
