@@ -187,7 +187,7 @@ All server events share a common JSON structure. Key fields include:
 | `next_renewal_at`     | Next expected renewal date                                           |
 | `event_created_at`    | Timestamp of the event                                               |
 
-For `TRANSACTION_PROCESSED` events, additional revenue fields are provided (`store_price`, `customer_currency`, `plan_price_in_customer_currency`, etc.).
+For `TRANSACTION_PROCESSED` events, additional revenue fields are provided (`amount_in_customer_currency`, `customer_currency`, `plan_price_in_customer_currency`, etc.).
 
 For the full payload reference, see [Server Events Attributes](server-events-attributes).
 
