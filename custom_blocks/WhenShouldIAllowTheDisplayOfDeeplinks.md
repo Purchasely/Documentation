@@ -1,8 +1,8 @@
 ---
-name: When should I allow the display of deeplinks?
+name: Can I control when deeplinks are displayed?
 ---
-# When should I allow the display of deeplinks?
+# Can I control when deeplinks are displayed?
 
-Your app might have a launch routine that requires to be fulfilled before another screen can be displayed. It can be splash screen, on boarding, login …
+By **default**, Purchasely deeplinks are displayed **immediately** when they are received — you don't have to do anything.
 
-The display of Purchasely deeplinks is deferred until you authorize it. Once your app is ready, notify the Purchasely SDK by calling the appropriate method referred on the left.
+If your app has a launch routine that must complete before a screen can be shown (splash screen, onboarding, login…), you can **temporarily prevent** the display with `Purchasely.allowDeeplink(false)` and re-enable it with `Purchasely.allowDeeplink(true)` once your app is ready. Any deeplink received meanwhile is then displayed. See the method referred on the left.

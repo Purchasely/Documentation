@@ -167,8 +167,9 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 | `logLevel(_:)` | `.error` |
 | `environment(_:)` | `.prod` |
 | `themeMode(_:)` | `.system` |
-| `allowDeeplink(_:)` | unset — deeplinks stay queued until `Purchasely.allowDeeplink(true)` |
-| `allowCampaigns(_:)` | unset — the backend `allow_campaigns` config seeds the gate during `start()` |
+| `allowDeeplink(_:)` | `true` — deeplinks display immediately; pass `false` to defer until `Purchasely.allowDeeplink(true)` |
+| `allowCampaigns(_:)` | `true` — campaigns display immediately; pass `false` to defer until `Purchasely.allowCampaigns(true)` |
+| `handleDeeplink(_:)` | unset — pass a cold‑start deeplink to display once the SDK has started |
 
 ### API Key
 
@@ -958,7 +959,7 @@ struct ContentView: View {
 
 ## Deeplinks Management
 
-Purchasely can handle deeplinks to display specific presentations or trigger actions. There are three steps: pass the deeplink to the SDK, allow the display, and set a default presentation result handler.
+Purchasely can handle deeplinks to display specific presentations or trigger actions. Pass the deeplink to the SDK, optionally control when it is displayed, and set a default presentation result handler. You can also hand a cold‑start deeplink to the SDK at initialization with `Purchasely.apiKey("YOUR_API_KEY").handleDeeplink(url).start { error in }`.
 
 ### 1. Pass the Deeplink to Purchasely SDK
 
@@ -1000,13 +1001,19 @@ func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
 }
 ```
 
-### 2. Allow the Display
+### 2. Forbidding the Display
 
-The display of Purchasely deeplinks is **deferred until you authorize it** (for example, after your splash screen, onboarding or login). Once your app is ready:
+By **default**, Purchasely deeplinks are displayed **immediately** when they are received. If your app has a launch routine that must complete first (splash screen, onboarding, login…), you can **temporarily prevent** the display, then re-enable it once you are ready:
 
 ```swift
+// Prevent the display (e.g. while your onboarding is on screen)
+Purchasely.allowDeeplink(false)
+
+// Re-enable it once ready — any queued deeplink displays immediately
 Purchasely.allowDeeplink(true)
 ```
+
+Campaigns follow the same principle through their own flag, `allowCampaigns` (also `true` by default): call `Purchasely.allowCampaigns(false)` to defer and `Purchasely.allowCampaigns(true)` to re-enable. The two flags are independent.
 
 ### 3. Set the Default Presentation Result Handler
 
@@ -1113,7 +1120,7 @@ Purchasely
 1. **Purchases not validated / subscriptions not processed**: In v6 the default running mode is `.observer`. Add `.runningMode(.full)` if you want Purchasely to handle and validate purchases.
 2. **SDK not configured**: Ensure the `Purchasely.apiKey(...)…start` chain is called in `didFinishLaunchingWithOptions` before any other SDK method.
 3. **Paywall not displaying**: Check that the placement id matches your Console configuration.
-4. **Deeplink paywall not appearing**: Make sure you called `Purchasely.allowDeeplink(true)` once your UI is ready.
+4. **Deeplink paywall not appearing**: Make sure you passed the deeplink with `Purchasely.handleDeeplink(_:)` and that you did not set `Purchasely.allowDeeplink(false)` (deeplinks display immediately by default).
 5. **Purchase not completing**: Verify your App Store Connect setup and that products are active.
 6. **User subscriptions empty**: Wait for the `start` callback before fetching subscriptions.
 7. **StoreKit errors**: Ensure you've selected the correct StoreKit version for your app.

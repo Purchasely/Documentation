@@ -101,8 +101,9 @@ Purchasely
 | `logLevel(_:)` | `.error` |
 | `environment(_:)` | `.prod` |
 | `themeMode(_:)` | `.system` |
-| `allowDeeplink(_:)` | unset — deeplinks stay queued until `Purchasely.allowDeeplink(true)` |
-| `allowCampaigns(_:)` | unset — seeded by backend config; an explicit `allowCampaigns(false)` is sticky |
+| `allowDeeplink(_:)` | `true` — deeplinks display immediately; pass `false` to defer until `Purchasely.allowDeeplink(true)` |
+| `allowCampaigns(_:)` | `true` — campaigns display immediately; pass `false` to defer until `Purchasely.allowCampaigns(true)` |
+| `handleDeeplink(_:)` | unset — pass a cold‑start deeplink to display once the SDK has started |
 
 > 📘 The pre‑`start` class funcs `setEnvironment(_:)`, `setShowPromotedInAppPurchasePaywall(_:)`, `setAppTechnology(_:)`, `setSdkBridgeVersion(_:)`, `setThemeMode(_:)` are **deprecated** (removal in v7). Use the chain modifiers instead.
 
@@ -323,9 +324,12 @@ The old methods still compile but are deprecated (removal in v7):
 | `Purchasely.isDeeplinkHandled(deeplink:)` | `Purchasely.handleDeeplink(_:)` |
 
 ```swift
-Purchasely.allowDeeplink(true)
 let handled = Purchasely.handleDeeplink(url)
 ```
+
+> 📘 In v6, deeplinks display **immediately** by default. Call `Purchasely.allowDeeplink(false)` to defer them (e.g. during onboarding) and `allowDeeplink(true)` when ready. You can also hand a cold‑start deeplink to the SDK at initialization: `Purchasely.apiKey("…").handleDeeplink(url).start { error in }`.
+>
+> Unlike Android, iOS does **not** intercept deeplinks automatically — you still pass them via `Purchasely.handleDeeplink(_:)` from your `AppDelegate` / `SceneDelegate`.
 
 ***
 

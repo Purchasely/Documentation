@@ -10,10 +10,10 @@ metadata:
 next:
   description: ''
 ---
-To manage deeplinks you need to do 2 things:
+To manage deeplinks you need to do up to 3 things:
 
 * Pass the deeplink to the Purchasely SDK when it is received by the application
-* Allow the Purchasely SDK to display content over your interface
+* Optionally control when Purchasely is allowed to display content over your interface
 * Set a default presentation handler to get the result of what was done by the user on the paywall / screen
 
 ### PASSING THE DEEPLINK TO THE PURCHASELY SDK
@@ -23,13 +23,11 @@ To enable the Purchasely SDK to analyze the deeplink, the app needs to pass it u
 ```csharp Unity
 ```
 
-### ALLOWING THE DISPLAY
+### FORBIDDING THE DISPLAY
 
-Your app might have a launch routine that requires to be fulfilled before another screen can be displayed. It can be splash screen, on boarding, login, displaying an ad etc...
+By **default**, Purchasely deeplinks are displayed **immediately** when they are received.
 
-For that reason, the display of Purchasely deeplinks is **deferred until you authorize it**. 
-
-Once your app is ready, notify the Purchasely SDK by using the following code:
+If your app has a launch routine that must complete before a screen can be shown (splash screen, onboarding, login, displaying an ad…), you can **temporarily prevent** the display, then re-enable it once you are ready:
 
 ```csharp Unity
 ```

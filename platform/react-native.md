@@ -645,13 +645,17 @@ Purchasely.isDeeplinkHandled('app://ply/presentations/')
     .then((value) => console.log('Deeplink handled by Purchasely? ' + value));
 ```
 
-### Allowing the Display
+### Forbidding the Display
 
-Once your app is ready (after splash screen, onboarding, login, etc.):
+By **default**, deeplinks are displayed **immediately**. To defer them (e.g. during a splash screen, onboarding or login), prevent the display and re-enable it once you are ready:
 
 ```typescript
-Purchasely.readyToOpenDeeplink(true);
+Purchasely.allowDeeplink(false);
+// later, once your app is ready
+Purchasely.allowDeeplink(true);
 ```
+
+Campaigns follow the same principle through `allowCampaigns` (also `true` by default): `Purchasely.allowCampaigns(false)` / `Purchasely.allowCampaigns(true)`.
 
 ### Setting the Default Presentation Handler
 

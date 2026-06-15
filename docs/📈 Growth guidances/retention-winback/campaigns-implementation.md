@@ -1,7 +1,7 @@
 ---
 title: Campaign SDK implementation
 excerpt: >-
-  Learn how to authorize the Purchasely SDK to display campaigns in your
+  Learn how to control when the Purchasely SDK displays campaigns in your
   application.
 deprecated: false
 hidden: false
@@ -13,39 +13,55 @@ next:
   description: ''
 ---
 
-This page explains the SDK-side setup required to allow [Campaigns](campaigns) to display in your application.
+This page explains how to control when [Campaigns](campaigns) display in your application. By default, no SDK code is required — campaigns display automatically.
 
 **⚠️ The minimum SDK version required to use this feature is 5.1.0**
 
-# Authorizing campaign display
+# Controlling campaign display
 
-Your app might have a launch routine that needs to complete before another screen can be shown — a splash screen, onboarding, login, ad interstitial, etc.
+By **default**, campaigns are displayed **immediately** — `allowCampaigns` is `true`, so a trigger-based campaign shows on its own with no extra code.
 
-For that reason, the display of a trigger-based campaign is **deferred until you explicitly authorize it**. Once your app is ready, notify the Purchasely SDK with the following call:
+If your app has a launch routine that must complete before a screen can be shown (splash screen, onboarding, login, ad interstitial…), you can **temporarily prevent** campaigns from displaying, then re-enable them once you are ready. Any campaign triggered meanwhile is then displayed:
 
-```swift
-Purchasely.allowDeeplink(true)
+```swift Swift
+// Prevent campaigns from displaying (e.g. during onboarding)
+Purchasely.allowCampaigns(false)
+
+// Re-enable once ready — any queued campaign displays immediately
+Purchasely.allowCampaigns(true)
 ```
 ```kotlin Kotlin
-Purchasely.allowDeeplink = true
+// Prevent campaigns from displaying (e.g. during onboarding)
+Purchasely.allowCampaigns = false
+
+// Re-enable once ready — any queued campaign displays immediately
+Purchasely.allowCampaigns = true
 ```
 ```javascript React Native
-Purchasely.readyToOpenDeeplink(true);
+Purchasely.allowCampaigns(false);
+// later, once your app is ready
+Purchasely.allowCampaigns(true);
 ```
 ```java Flutter
-Purchasely.readyToOpenDeeplink(true);
+Purchasely.allowCampaigns(false);
+// later, once your app is ready
+Purchasely.allowCampaigns(true);
 ```
 ```swift Cordova
-Purchasely.readyToOpenDeeplink(true);
+Purchasely.allowCampaigns(false);
+// later, once your app is ready
+Purchasely.allowCampaigns(true);
 ```
 ```csharp Unity
-_purchasely.SetIsReadyToOpenDeeplink(true);
+_purchasely.SetAllowCampaigns(false);
+// later, once your app is ready
+_purchasely.SetAllowCampaigns(true);
 ```
 
-> ❗️ Important notices
+> 📘 Important notices
 >
-> * `allowDeeplink` must be called for a trigger-based campaign to be shown, as it works exactly like a [deep link](deeplinks-management) internally.
-> * If you have implemented the [UI Handler](ui-handler-deeplinks) to manage the display of deep links yourself, you must keep the presentation object returned and **not** fetch it again — otherwise campaign context will be lost.
+> * `allowCampaigns` controls campaigns **independently** from deeplinks (`allowDeeplink`) — gating one does not affect the other.
+> * If you have implemented the [UI Handler](ui-handler-deeplinks) to manage the display yourself, you must keep the presentation object returned and **not** fetch it again — otherwise campaign context will be lost.
 
 # Placement-based campaigns
 
@@ -57,5 +73,5 @@ In other words, if your app already calls Placements, Placement-based campaigns 
 
 | Delivery method | SDK requirement |
 |---|---|
-| **Trigger-based** (e.g. `APP_STARTED`) | Call `allowDeeplink(true)` when your app is ready. |
+| **Trigger-based** (e.g. `APP_STARTED`) | Displayed automatically (`allowCampaigns` is `true` by default). Set it to `false` to defer, back to `true` when ready. |
 | **Placement-based** | No additional code — uses existing Placement calls. |

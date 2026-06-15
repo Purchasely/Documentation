@@ -33,8 +33,6 @@ Here are the actions Purchasely supports:
 * Display a paywall
 * Display a placement
 * Update credit card (Deeplink to App Store)
-* Display the user subscriptions
-* Display the cancellation survey
 
 Deeplinks are also used to preview paywalls and screen on your device (directly inside your app) by scanning a QR code displayed in the upper right corner of the Paywall builder inside the Console.
 
@@ -46,17 +44,17 @@ Deeplinks which do not match the pattern are just ignored
 
 # How to enable deeplinks management with the SDK?
 
-To integrate these automations you need 2 things:
+To integrate these automations:
 
-1. Pass the deeplink to Purchasley when it is received by the application
-2. Allow Purchasely to display content over your interface
+1. Pass the deeplink to Purchasely when it is received by the application — **not required on Android**, where the SDK intercepts Purchasely deeplinks automatically
+2. Optionally control when Purchasely is allowed to display content over your interface
 
 <WhenShouldIAllowTheDisplayOfDeeplinks />
 
 <br />
 
-# When should I allow the display of deeplinks?
+# Can I control when deeplinks are displayed?
 
-Your app might have a launch routine that requires to be fulfilled before another screen can be displayed. It can be splash screen, on boarding, login …
+By **default**, Purchasely deeplinks are displayed **immediately** when they are received — you don't have to do anything.
 
-The display of Purchasely deeplinks is deferred until you authorize it. Once your app is ready, notify the Purchasely SDK by calling the appropriate method referred on the left.
+If your app has a launch routine that must complete before a screen can be shown (splash screen, onboarding, login…), you can **temporarily prevent** the display with `Purchasely.allowDeeplink(false)` and re-enable it with `Purchasely.allowDeeplink(true)` once your app is ready.

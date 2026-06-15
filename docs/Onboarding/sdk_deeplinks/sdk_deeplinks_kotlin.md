@@ -10,44 +10,51 @@ metadata:
 next:
   description: ''
 ---
-To manage deeplinks you need to do 2 things:
+To manage deeplinks you need to do up to 2 things:
 
-* Pass the deeplink to the Purchasely SDK when it is received by the application
-* Allow the Purchasely SDK to display content over your interface
+* Optionally control when Purchasely is allowed to display content over your interface
 * Set a default presentation handler to get the result of what was done by the user on the paywall / screen
 
-### PASSING THE DEEPLINK TO THE PURCHASELY SDK
+> 📘 No code needed to pass the deeplink on Android
+>
+> Since v6, the Android SDK **intercepts Purchasely deeplinks automatically** (it reads the foreground activity's intent on create and resume). **You don't need to call `handleDeeplink` yourself.**
 
-To enable the Purchasely SDK to analyze the deeplink, the app needs to pass it using the following code:
+### PASSING THE DEEPLINK TO THE PURCHASELY SDK (optional)
+
+The SDK already handles deeplinks on its own. You only need the manual call below as a fallback for activities using `singleTask` / `singleTop` launch modes that receive the deeplink in `onNewIntent` **without** calling `setIntent(intent)`. You can also pass a cold-start deeplink at initialization with `Purchasely.Builder(context).handleDeeplink(intent.data).build().start { error -> }`.
 
 ```kotlin
 class MyActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
-        //retrieve intent data to get deeplink that opened your activity
+
+        // Optional — the SDK already intercepts deeplinks automatically.
         val data = intent.data
-        if(data != null) {
-            //Purchasely sdk will return true if it handles the deeplink
+        if (data != null) {
+            // Purchasely SDK returns true if it handles the deeplink
             val isHandledByPurchasely = Purchasely.handleDeeplink(data)
         }
-    }    
+    }
 
 }
 ```
 
-### ALLOWING THE DISPLAY
+### FORBIDDING THE DISPLAY
 
-Your app might have a launch routine that requires to be fulfilled before another screen can be displayed. It can be splash screen, on boarding, login, displaying an ad etc...
+By **default**, Purchasely deeplinks are displayed **immediately** when they are received.
 
-For that reason, the display of Purchasely deeplinks is **deferred until you authorize it**. 
-
-Once your app is ready, notify the Purchasely SDK by using the following code:
+If your app has a launch routine that must complete before a screen can be shown (splash screen, onboarding, login, displaying an ad…), you can **temporarily prevent** the display, then re-enable it once you are ready:
 
 ```kotlin
+// Prevent the display (e.g. while your onboarding is on screen)
+Purchasely.allowDeeplink = false
+
+// Re-enable it once ready — any queued deeplink displays immediately
 Purchasely.allowDeeplink = true
 ```
+
+> 📘 You only need this if you want to **defer** deeplinks. Do nothing and they display as soon as they are received.
 
 ### SETTING THE DEFAULT PRESENTATION HANDLER
 
