@@ -1,5 +1,5 @@
 ---
-name: Paywall Action Interceptor - actions intercepted
+name: Action Interceptor - actions intercepted
 ---
 # What Paywall Actions can be intercepted?
 

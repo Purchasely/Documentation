@@ -137,7 +137,7 @@ Add text to display in the button:
 
 ## Login
 
-**Login** Action lets the user login to your application. You can intercept this login action with the [paywall action interceptor](https://start.purchasely.com/docs/process-transactions-with-paywall-action-interceptor). 
+**Login** Action lets the user login to your application. You can intercept this login action with the [action interceptor](https://start.purchasely.com/docs/process-transactions-with-paywall-action-interceptor). 
 
 1. **Action**: Login
 

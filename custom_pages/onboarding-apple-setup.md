@@ -43,4 +43,4 @@ Display a paywall
 Purchasely.presentationController("onboarding")
 ```
 
-# Paywall Action Interceptor
+# Action Interceptor

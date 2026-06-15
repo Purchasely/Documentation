@@ -23,8 +23,8 @@ The existing subscription infrastructure continues to process transactions and t
 A typical purchase flow will be as follows:
 
 1. the Paywall is displayed by the Purchasely SDK
-2. when the user clicks on a purchase button, the Purchasely SDK hands over to the app using the <Glossary>Paywall Action Interceptor</Glossary>, providing the app with the references of the plan that was tapped\
-   [More details on processing transactions with the <Glossary>Paywall Action Interceptor</Glossary>](process-transactions-with-paywall-action-interceptor)\
+2. when the user clicks on a purchase button, the Purchasely SDK hands over to the app using the <Glossary>Action Interceptor</Glossary>, providing the app with the references of the plan that was tapped\
+   [More details on processing transactions with the <Glossary>Action Interceptor</Glossary>](process-transactions-with-paywall-action-interceptor)\
    [More details on using Purchasely with RevenueCat](revenuecat)
 3. the app processes the transaction on its own
    * either through a 3rd party SDK (like RevenueCat)
@@ -36,9 +36,9 @@ A typical purchase flow will be as follows:
 
 <PaywallActionInterceptorWhatIsIt />
 
-# What is the Paywall Action Interceptor?
+# What is the Action Interceptor?
 
-The Paywall Action Interceptor allows to intercept and override every interaction the users have with a Purchasely Screen.
+The Action Interceptor allows to intercept and override every interaction the users have with a Purchasely Screen.
 
 This can be used to:
 

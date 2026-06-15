@@ -187,7 +187,7 @@ The URL called aggregate the Link value with the Query parameter and its value.
 
 E.g.: [https://payment.mywebsite.com?client\_ref\_id=XXXX](https://payment.mywebsite.com?client_ref_id=XXXX)
 
-If you need to add extra parameters to the URL or the web query, you can intercept the action using the paywall action interceptor.
+If you need to add extra parameters to the URL or the web query, you can intercept the action using the action interceptor.
 
 <br />
 

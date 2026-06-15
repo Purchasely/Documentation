@@ -10,7 +10,7 @@ metadata:
 next:
   description: ''
 ---
-Here is a code sample using the Paywall Action Interceptor to perform the purchase and restore actions triggered from Purchasely's paywall with your own purchase system
+Here is a code sample using the Action Interceptor to perform the purchase and restore actions triggered from Purchasely's paywall with your own purchase system
 
 ```kotlin In-House
 Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->

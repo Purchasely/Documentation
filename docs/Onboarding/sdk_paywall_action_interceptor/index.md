@@ -1,5 +1,5 @@
 ---
-title: SDK Paywall Action Interceptor
+title: SDK Action Interceptor
 excerpt: ''
 deprecated: false
 hidden: true

@@ -97,7 +97,7 @@ try {
 
 When you are using Purchasely in [`paywallObserver`](paywallobserver-mode) mode, you can:
 
-1. retrieve the Plan and associated offer purchased by the user by using the [paywall action interceptor](process-transactions-with-paywall-action-interceptor)
+1. retrieve the Plan and associated offer purchased by the user by using the [action interceptor](process-transactions-with-paywall-action-interceptor)
 2. sign it (iOS only) 
 3. and do the purchase with your own transaction processor
 

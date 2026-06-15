@@ -1,9 +1,9 @@
 ---
-name: Paywall Action Interceptor - What is it?
+name: Action Interceptor - What is it?
 ---
-# What is the Paywall Action Interceptor?
+# What is the Action Interceptor?
 
-The Paywall Action Interceptor allows to intercept and override every interaction the users have with a Purchasely Screen.
+The Action Interceptor allows to intercept and override every interaction the users have with a Purchasely Screen.
 
 This can be used to:
 
@@ -22,6 +22,6 @@ With the action interceptor, you get everything you need to:
 
 <br />
 
-<Image alt="Example of use of the Paywall Action Interceptor: when a user clicks on the Purchase button, the SDK hands over to the app that displays a modal to make the user accept the T&C. The same principle is used to make the app process the transaction with an already-in-place transaction infrastructure" align="center" border={true} src="https://files.readme.io/92ecc79-image.png">
-  Example of use of the Paywall Action Interceptor: when a user clicks on the Purchase button, the SDK hands over to the app that displays a modal to make the user accept the T\&C. The same principle is used to make the app process the transaction with an already-in-place transaction infrastructure
+<Image alt="Example of use of the Action Interceptor: when a user clicks on the Purchase button, the SDK hands over to the app that displays a modal to make the user accept the T&C. The same principle is used to make the app process the transaction with an already-in-place transaction infrastructure" align="center" border={true} src="https://files.readme.io/92ecc79-image.png">
+  Example of use of the Action Interceptor: when a user clicks on the Purchase button, the SDK hands over to the app that displays a modal to make the user accept the T\&C. The same principle is used to make the app process the transaction with an already-in-place transaction infrastructure
 </Image>

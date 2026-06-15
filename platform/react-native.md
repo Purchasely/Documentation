@@ -11,7 +11,7 @@ This document provides comprehensive documentation for integrating and using the
 3. [SDK Initialization](#sdk-initialization)
 4. [Displaying Paywalls](#displaying-paywalls)
 5. [Processing Transactions](#processing-transactions)
-6. [Paywall Action Interceptor](#paywall-action-interceptor)
+6. [Action Interceptor](#action-interceptor)
 7. [User Identification](#user-identification)
 8. [Subscription Status & Entitlements](#subscription-status--entitlements)
 9. [Custom User Attributes](#custom-user-attributes)
@@ -283,7 +283,7 @@ try {
 }
 ```
 
-### PaywallObserver Mode with Paywall Action Interceptor
+### PaywallObserver Mode with Action Interceptor
 
 In `paywallObserver` mode, you handle purchases with your own infrastructure while using Purchasely for paywall display.
 
@@ -326,9 +326,9 @@ Purchasely.setPaywallActionInterceptorCallback((result) => {
 
 ---
 
-## Paywall Action Interceptor
+## Action Interceptor
 
-The Paywall Action Interceptor allows you to intercept and handle user actions on the paywall.
+The Action Interceptor allows you to intercept and handle user actions on the paywall.
 
 ### Available Actions
 

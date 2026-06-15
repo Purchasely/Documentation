@@ -26,7 +26,7 @@ next:
       slug: migrating-from-v5-to-v6-cordova
       title: Migrating to v6 — Cordova
 ---
-Version 6.0 is a **major release** of the Purchasely SDK. It modernizes the public API around a single, consistent presentation model, replaces the global paywall action interceptor with a granular per‑action API, and clarifies a number of method names.
+Version 6.0 is a **major release** of the Purchasely SDK. It modernizes the public API around a single, consistent presentation model, replaces the global action interceptor with a granular per‑action API, and clarifies a number of method names.
 
 This page gives you the overview. Detailed, copy‑paste migration steps are available per platform at the bottom of this page.
 
@@ -60,7 +60,7 @@ In v5, the SDK defaulted to **Full** mode (Purchasely handles and validates purc
 |------|----|----|
 | Default running mode | Full | **Observer** ⚠️ |
 | Initialization | Positional `start(...)` | Fluent builder (`apiKey(...)…start()`) / Kotlin DSL |
-| Paywall action interceptor | One global `setPaywallActionsInterceptor` | One interceptor per action via `interceptAction(...)` returning `PLYInterceptResult` |
+| Action interceptor | One global `setPaywallActionsInterceptor` | One interceptor per action via `interceptAction(...)` returning `PLYInterceptResult` |
 | Interceptor result | Ambiguous boolean (`processAction(Bool)`) | Explicit `.success` / `.failed` / `.notHandled` |
 | Deeplink readiness | `readyToOpenDeeplink` | `allowDeeplink` |
 | Deeplink handling | `isDeeplinkHandled(...)` | `handleDeeplink(...)` |

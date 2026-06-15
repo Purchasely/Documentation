@@ -11,7 +11,7 @@ This document provides comprehensive documentation for integrating and using the
 3. [SDK Initialization](#sdk-initialization)
 4. [Displaying Paywalls](#displaying-paywalls)
 5. [Processing Transactions](#processing-transactions)
-6. [Paywall Action Interceptor](#paywall-action-interceptor)
+6. [Action Interceptor](#action-interceptor)
 7. [User Identification](#user-identification)
 8. [Subscription Status & Entitlements](#subscription-status--entitlements)
 9. [Custom User Attributes](#custom-user-attributes)
@@ -361,13 +361,13 @@ PLYPresentationBuilder
 
 ### Observer Mode
 
-In `.observer` mode, you handle transactions with your own infrastructure. Use the Paywall Action Interceptor to capture purchase intents (see below), and call `Purchasely.synchronize(success:failure:)` after a successful purchase so Purchasely can track revenue and analytics.
+In `.observer` mode, you handle transactions with your own infrastructure. Use the Action Interceptor to capture purchase intents (see below), and call `Purchasely.synchronize(success:failure:)` after a successful purchase so Purchasely can track revenue and analytics.
 
 ---
 
-## Paywall Action Interceptor
+## Action Interceptor
 
-The Paywall Action Interceptor allows you to intercept user actions on the paywall such as purchases, logins, restores, and custom links.
+The Action Interceptor allows you to intercept user actions on the paywall such as purchases, logins, restores, and custom links.
 
 In v6 the global `setPaywallActionsInterceptor` is **replaced** by a granular, **per-action** API: register one interceptor per action with `Purchasely.interceptAction(.x)`. Each interceptor reports back through a `PLYInterceptResult`.
 

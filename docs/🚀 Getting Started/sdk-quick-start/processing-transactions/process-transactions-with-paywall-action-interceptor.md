@@ -1,5 +1,5 @@
 ---
-title: paywallObserver - using the Paywall Action Interceptor
+title: paywallObserver - using the Action Interceptor
 excerpt: >-
   This sections provides a detailed overview of how to use the Paywall Action
   Interceptor to process transactions in paywallObserver Mode
@@ -20,7 +20,7 @@ next:
 
 <PaywallActionInterceptorActionsIntercepted />
 
-# Implementing the Paywall Action Interceptor
+# Implementing the Action Interceptor
 
 You register one interceptor per action with `Purchasely.interceptAction`. Each interceptor receives:
 
@@ -38,7 +38,7 @@ You register one interceptor per action with `Purchasely.interceptAction`. Each 
 
 ## Processing transactions with your in-house system
 
-Here is a code sample using the Paywall Action Interceptor to process transactions **with your own in-house purchase system** , for the actions `purchase` and `restore`:
+Here is a code sample using the Action Interceptor to process transactions **with your own in-house purchase system** , for the actions `purchase` and `restore`:
 
 ```swift
 Purchasely.interceptAction(.purchase) { info, params, completion in
@@ -261,7 +261,7 @@ private void OnPaywallActionIntercepted(PaywallAction action)
 
 ## Processing transaction with RevenueCat
 
-Here is a code sample using the Paywall Action Interceptor to process transactions **with RevenueCat** , for the actions `purchase` and `restore`:
+Here is a code sample using the Action Interceptor to process transactions **with RevenueCat** , for the actions `purchase` and `restore`:
 
 ```swift
 Purchasely.interceptAction(.purchase) { info, params, completion in
@@ -577,4 +577,4 @@ private void OnPaywallActionIntercepted(PaywallAction action)
 
 <br />
 
-[More details on the Paywall Action Interceptor and how to intercept of types of actions](paywall-action-interceptor)
+[More details on the Action Interceptor and how to intercept of types of actions](paywall-action-interceptor)

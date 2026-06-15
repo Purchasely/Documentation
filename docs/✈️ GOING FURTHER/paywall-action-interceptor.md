@@ -1,7 +1,7 @@
 ---
-title: Intercept Screens Actions with the Paywall Action Interceptor
+title: Intercept Screens Actions with the Action Interceptor
 excerpt: >-
-  This section provides a details overview of the Paywall Action Interceptor and
+  This section provides a details overview of the Action Interceptor and
   how to intercept actions
 deprecated: false
 hidden: false
@@ -11,12 +11,12 @@ metadata:
   robots: index
 next:
   description: >-
-    If you need to use the Paywall Action Interceptor to process transactions
+    If you need to use the Action Interceptor to process transactions
     with your own subscription infrastructure
   pages:
     - type: basic
       slug: process-transactions-with-paywall-action-interceptor
-      title: paywallObserver - using the Paywall Action Interceptor
+      title: paywallObserver - using the Action Interceptor
 ---
 <PaywallActionInterceptorWhatIsIt />
 
@@ -236,4 +236,4 @@ private void OnPaywallActionIntercepted(PaywallAction action)
 
 # Intercepting the purchase action
 
-[Using the Paywall Action Interceptor to process transactions in paywallObserverMode](process-transactions-with-paywall-action-interceptor)
+[Using the Action Interceptor to process transactions in paywallObserverMode](process-transactions-with-paywall-action-interceptor)

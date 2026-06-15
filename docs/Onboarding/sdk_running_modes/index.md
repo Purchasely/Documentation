@@ -18,7 +18,7 @@ The Purchasely SDK can be used in 2 different modes:
    * When a call-to-action is clicked from a Purchasely paywall, the Purchasely SDK automatically triggers the in-app purchase native flow and manages the transaction from end to end. 
    * This includes the transaction finishing (App Store) and transaction acknowledgement (Google Play Store).
 2. `paywallObserver`: the transactions remain managed with the existing subscription infrastructure (either in-house or 3rd party such as RevenueCat).
-   * When a call-to-action is clicked from a Purchasely paywall, the Purchasely SDK hands-over to the app (using the Paywall Action Interceptor), which can manage the transaction on its own, using the existing subscription infrastructure.
+   * When a call-to-action is clicked from a Purchasely paywall, the Purchasely SDK hands-over to the app (using the Action Interceptor), which can manage the transaction on its own, using the existing subscription infrastructure.
    * In this case, the responsibility to finish the transaction (App Store) or acknowledge it (Google Play Store) lies with the developer.
    * Once the transaction has been processed, the Purchasely SDK gathers the receipt and sends it to the Purchasely Platform to feed the dashboard.
 

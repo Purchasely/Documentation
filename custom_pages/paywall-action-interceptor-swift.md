@@ -1,5 +1,5 @@
 ---
-title: Paywall Action Interceptor
+title: Action Interceptor
 fullscreen: false
 hidden: true
 metadata:
