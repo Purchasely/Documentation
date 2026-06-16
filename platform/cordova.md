@@ -51,7 +51,7 @@ Update your Podfile to set the minimum iOS version:
 
 ...
 
-platform :ios, '11.0'
+platform :ios, '13.4'
 
 ...
 ```
@@ -64,7 +64,7 @@ Update your `android/build.gradle` file:
 // Edit file android/build.gradle
 buildscript {
     ext {
-        minSdkVersion = 21 //min version must not be below 21
+        minSdkVersion = 23 //min version must not be below 23
         compileSdkVersion = 33
         targetSdkVersion = 33
     }

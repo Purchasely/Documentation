@@ -41,8 +41,8 @@ next:
 
 The Purchasely SDK is developed natively on the following platforms:
 
-* iOS - Swift (minimum version {user.sdk_ios_minimum_version})
-* Android - Kotlin (minimum version {user.sdk_android_minimum_version})
+* iOS - Swift (minimum version 13.4)
+* Android - Kotlin (minimum version 23)
 
 For hybrid apps, our <Glossary>bridge sdk</Glossary>s are available for:
 
@@ -54,11 +54,11 @@ For hybrid apps, our <Glossary>bridge sdk</Glossary>s are available for:
 
 | Platform         | SDK Version                    |
 | :--------------- | :----------------------------- |
-| **iOS**          | {user.current_ios_version}     |
-| **Android**      | {user.current_android_version} |
-| **Flutter**      | {user.current_flutter_version} |
-| **React Native** | {user.current_rn_version}      |
-| **Cordova**      | {user.current_cordova_version} |
+| **iOS**          | 6.0.0-rc.1     |
+| **Android**      | 6.0.0-rc.1 |
+| **Flutter**      | 6.0.0-rc.1 |
+| **React Native** | 6.0.0-rc.1      |
+| **Cordova**      | 6.0.0-rc.1 |
 
 # Implementation process
 

@@ -9,14 +9,14 @@ We rely on [NPM](https://www.npmjs.com/package/@purchasely/cordova-plugin-purcha
 cordova plugin add @purchasely/cordova-plugin-purchasely
 ```
 
-Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 11 / Android 21)
+Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android 23)
 
 ```yaml iOS
 // Podfile
 
 ...
 
-platform :ios, '11.0'
+platform :ios, '13.4'
 
 ...
 ```
@@ -24,7 +24,7 @@ platform :ios, '11.0'
 // Edit file android/build.gradle
 buildscript {
     ext {
-        minSdkVersion = 21 //min version must not be below 21
+        minSdkVersion = 23 //min version must not be below 23
         compileSdkVersion = 33
         targetSdkVersion = 33
     }
@@ -48,8 +48,8 @@ See below to add the store you want to use
 >
 > ```json package.json
 > "dependencies": {
->   "@purchasely/cordova-plugin-purchasely": "{user.current_cordova_version}",
->   "@purchasely/cordova-plugin-purchasely-google": "{user.current_cordova_version}"
+>   "@purchasely/cordova-plugin-purchasely": "6.0.0-rc.1",
+>   "@purchasely/cordova-plugin-purchasely-google": "6.0.0-rc.1"
 > },
 > ```
 

@@ -1,7 +1,7 @@
 ---
 name: ios sdk installation
 ---
-{user.sdk_ios_minimum_version} or superior is required to install Purchasely iOS SDK
+13.4 or superior is required to install Purchasely iOS SDK
 
 **CocaPods**
 

@@ -18,14 +18,14 @@ We rely on [Pub.dev](https://pub.dev/packages/purchasely_flutter/install) to dis
 flutter pub add purchasely_flutter
 ```
 
-Don't forget to change the minimum OS versions to match Purchasely requirements ({user.sdk_ios_minimum_version} / Android {user.sdk_android_minimum_version})
+Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android 23)
 
 ```yaml iOS
 // Podfile
 
 ...
 
-platform :ios, '<<sdk_ios_minimum_version>>.0'
+platform :ios, '13.4'
 
 ...
 ```
@@ -33,7 +33,7 @@ platform :ios, '<<sdk_ios_minimum_version>>.0'
 // Edit file android/build.gradle
 buildscript {
     ext {
-        minSdkVersion = 21 //min version must not be below 21
+        minSdkVersion = 23 //min version must not be below 23
         compileSdkVersion = 33
         targetSdkVersion = 33
     }
@@ -57,9 +57,9 @@ See below to add the store you want to use
 >
 > ```yaml pubspec.yaml
 > dependencies:
->   purchasely_flutter: ^<<current_flutter_version>>
->   purchasely_google: ^<<current_flutter_version>>
->   purchasely_android_player: ^<<current_flutter_version>>
+>   purchasely_flutter: ^6.0.0-rc.1
+>   purchasely_google: ^6.0.0-rc.1
+>   purchasely_android_player: ^6.0.0-rc.1
 > ```
 
 <br />

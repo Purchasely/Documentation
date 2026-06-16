@@ -47,7 +47,7 @@ The Purchasely SDK follows the version naming convention `x.y.z`:
 * **Minor (y)**: Incremented for new features, compatible with the current major version.
 * **Patch (z)**: Incremented for backward-compatible bug fixes.
 
-We recommend always using the latest version within the current major version (currently {user.current_major_version}). Here are the examples of the version nomenclature for different platforms:
+We recommend always using the latest version within the current major version (currently 6). Here are the examples of the version nomenclature for different platforms:
 
 * **iOS (Swift, CocoaPods)**
   ```ruby Podfile

@@ -12,7 +12,7 @@ next:
 ---
 ## Requirements
 
-* minSdkVersion: 21
+* minSdkVersion: 23
 * compileSdkVersion: 33
 * Kotlin: 1.8.+
 * Gradle 7.+

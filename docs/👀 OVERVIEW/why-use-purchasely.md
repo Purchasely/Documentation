@@ -48,12 +48,12 @@ Purchasely’s SDK is designed to be:
 
 Our SDK is:
 
-* **Super lightweight**: Less than {user.sdk_ios_size} on iOS and less than {user.sdk_android_size} on Android
+* **Super lightweight**: Less than 2 MB on iOS and less than 1 MB on Android
 * **Native**: developed in **Swift** and **Kotlin**, relies on core OS technologies to provide the best possible experience (dark mode, haptic feedback, localization, support for all devices and orientations…).
 * **Always up to date**: We implement the latest StoreKit and Play Store features so that you don't have to bother with that. This opens up your marketing team to a lot of new possibilities.
 * **Backward compatible** and built to avoid forcing upgrades:
   * We can add new screens and templates without requiring you to update the SDK.
-  * We support OS down to {user.sdk_ios_minimum_version} on iOS and {user.sdk_android_minimum_version} on Android.
+  * We support OS down to 13.4 on iOS and 23 on Android.
 * **Performant**: We cache data on device, we use local ressources and CDN network to initialise our payment stack and display paywalls almost as fast as your local home made paywalls. Proof is we have never failed an A/A test against one of those.
 * **Resources efficient**: We cache some data in memory and some other on device based on their nature. We react on both memory and disk usage limits to free the most that we can. We group some network calls and trigger some of them later if they are not critical.
 * **Privaccy-conscious **: Every possible computation is made on device to keep the data private. The SDK has an anonymous mode, can be used with a based userId and is compliant with kids privacy regulations. As this was made in Europe we are respecting the most restricting regulations from day-1 (GDPR).

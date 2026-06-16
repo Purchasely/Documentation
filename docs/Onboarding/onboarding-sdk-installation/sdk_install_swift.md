@@ -10,7 +10,7 @@ metadata:
 next:
   description: ''
 ---
-> 📘 iOS 11 or superior is required to install Purchasely iOS SDK
+> 📘 iOS 13.4 or superior is required to install Purchasely iOS SDK
 
 **CocaPods**
 

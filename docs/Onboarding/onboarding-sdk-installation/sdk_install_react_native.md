@@ -18,14 +18,14 @@ We rely on [NPM](https://www.npmjs.com/package/react-native-purchasely) to distr
 npm install react-native-purchasely --save
 ```
 
-Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 11 / Android 21)
+Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android 23)
 
 ```yaml iOS
 // Podfile
 
 ...
 
-platform :ios, '11.0'
+platform :ios, '13.4'
 
 ...
 ```
@@ -33,7 +33,7 @@ platform :ios, '11.0'
 // Edit file android/build.gradle
 buildscript {
     ext {
-        minSdkVersion = 21 //min version must not be below 21
+        minSdkVersion = 23 //min version must not be below 23
         compileSdkVersion = 33
         targetSdkVersion = 33
     }
