@@ -33,7 +33,7 @@ This guide covers the Purchasely Android SDK **v6** API for Kotlin apps. Purchas
 | Requirement | Version |
 |-------------|---------|
 | minSdkVersion | 23 |
-| compileSdkVersion | 35 |
+| compileSdkVersion | 36 |
 | Kotlin | 2.2.x (K2 compiler) |
 | Gradle | 9.3.0+ |
 | Android Gradle Plugin | 9.x |

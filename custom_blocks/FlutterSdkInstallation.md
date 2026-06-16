@@ -25,8 +25,8 @@ platform :ios, '13.4'
 buildscript {
     ext {
         minSdkVersion = 23 //min version must not be below 23
-        compileSdkVersion = 33
-        targetSdkVersion = 33
+        compileSdkVersion = 36
+        targetSdkVersion = 35
     }
 }
 

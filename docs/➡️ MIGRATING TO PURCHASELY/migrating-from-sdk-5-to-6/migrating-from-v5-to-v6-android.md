@@ -51,7 +51,7 @@ dependencies {
 }
 ```
 
-Build requirements: **Gradle 9.3.0+**, **Kotlin 2.2.x** (K2 compiler), JDK 11, `minSdk 23`, `compileSdk 35`.
+Build requirements: **Gradle 9.3.0+**, **Kotlin 2.2.x** (K2 compiler), JDK 11, `minSdk 23`, `compileSdk 36`.
 
 > 📘 The reified Kotlin entry points (`interceptAction<T> { … }`, `removeActionInterceptor<T>()`) are `inline` functions targeting JVM 11. Compile your Kotlin module with `jvmTarget = 11`, or use the non‑inline `Class`‑based overload.
 

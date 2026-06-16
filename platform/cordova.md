@@ -27,8 +27,8 @@ This document provides comprehensive documentation for integrating and using the
 | Requirement | iOS | Android |
 |-------------|-----|---------|
 | Minimum OS Version | 11.0 | 21 |
-| compileSdkVersion | - | 33 |
-| targetSdkVersion | - | 33 |
+| compileSdkVersion | - | 36 |
+| targetSdkVersion | - | 35 |
 
 ---
 
@@ -65,8 +65,8 @@ Update your `android/build.gradle` file:
 buildscript {
     ext {
         minSdkVersion = 23 //min version must not be below 23
-        compileSdkVersion = 33
-        targetSdkVersion = 33
+        compileSdkVersion = 36
+        targetSdkVersion = 35
     }
 }
 

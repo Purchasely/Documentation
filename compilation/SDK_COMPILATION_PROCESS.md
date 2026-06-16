@@ -164,7 +164,7 @@ Use this standard structure for all platform documentation:
 - Include alternative stores section (Huawei, Amazon)
 - Presentation API: `PLYPresentation { }.preload`, `display(context) { outcome -> }`, `buildView`/`getFragment`, `onCloseRequested` (renamed from `onClose`); presentation types live in `io.purchasely.ext.presentation.*`
 - Include ProGuard rules
-- Dependencies: `io.purchasely:core`, `io.purchasely:google-play`, `io.purchasely:player` (version **6.0.0-rc.1**); Gradle 9.3.0+, Kotlin 2.2.x, JDK 11, minSdk 23, compileSdk 35
+- Dependencies: `io.purchasely:core`, `io.purchasely:google-play`, `io.purchasely:player` (version **6.0.0-rc.1**); Gradle 9.3.0+, Kotlin 2.2.x, JDK 11, minSdk 23, compileSdk 36
 
 ### iOS/Swift
 - **Swift only** — do NOT include Objective-C snippets (no longer documented)

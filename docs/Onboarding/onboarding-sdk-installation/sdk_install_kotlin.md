@@ -13,7 +13,7 @@ next:
 ## Requirements
 
 * minSdkVersion: 23
-* compileSdkVersion: 33
+* compileSdkVersion: 36
 * Kotlin: 1.8.+
 * Gradle 7.+
 * Android Gradle Plugin: 4.+
