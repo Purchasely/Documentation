@@ -25,7 +25,7 @@ PLYPresentation { placementId("<<default_placement>>") }
     .preload { loaded, error -> loaded?.display(context) }
 
 // 4) Handle the result via a default handler
-Purchasely.setDefaultPresentationResultHandler { outcome ->
+Purchasely.setDefaultPresentationDismissHandler { outcome ->
     when (outcome.purchaseResult) {
         PLYPurchaseResult.PURCHASED,
         PLYPurchaseResult.RESTORED -> { /* unlock content */ }
@@ -47,8 +47,8 @@ Purchasely
 Purchasely.display(for: "<<default_placement>>")
 
 // 4) Handle the result via a default handler
-Purchasely.setDefaultPresentationResultHandler { (result, plan) in
-    switch result {
+Purchasely.setDefaultPresentationDismissHandler { outcome in
+    switch outcome.purchaseResult {
     case .purchased, .restored: break // unlock content
     default: break
     }

@@ -63,7 +63,7 @@ Usually when a paywall / screen is instantiated by the app, a closure is called 
 You can retrieve the result of the user action in a paywall opened with a deeplink by setting a `DefaultPresentationResultHandler`.
 
 ```kotlin
-Purchasely.setDefaultPresentationResultHandler { outcome ->
+Purchasely.setDefaultPresentationDismissHandler { outcome ->
     /* You can set a callback to know when your user purchased a product */
     when(outcome.purchaseResult) {
         PLYPurchaseResult.PURCHASED -> Log.d("Purchasely", "Purchased ${outcome.plan}")

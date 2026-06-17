@@ -359,7 +359,7 @@ Purchasely.closeAllScreens()
 When a Screen is opened from a deeplink or a campaign, your app does not instantiate it, so no per-display callback fires. Register a default handler to receive the result:
 
 ```kotlin
-Purchasely.setDefaultPresentationResultHandler { outcome ->
+Purchasely.setDefaultPresentationDismissHandler { outcome ->
     when (outcome.purchaseResult) {
         PLYPurchaseResult.PURCHASED -> Log.d("Purchasely", "Purchased ${outcome.plan}")
         PLYPurchaseResult.CANCELLED -> Log.d("Purchasely", "Cancelled purchase of ${outcome.plan}")
@@ -808,7 +808,7 @@ app_scheme://ply/flows/FLOW_ID                    // a Flow
 app_scheme://ply/update_billing                   // open Play Store billing settings
 ```
 
-Use `setDefaultPresentationResultHandler` (see [Displaying Presentations](#displaying-presentations)) to receive the result of a Screen opened from a deeplink.
+Use `setDefaultPresentationDismissHandler` (see [Displaying Presentations](#displaying-presentations)) to receive the result of a Screen opened from a deeplink.
 
 ---
 

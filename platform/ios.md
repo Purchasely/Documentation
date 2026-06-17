@@ -1020,17 +1020,20 @@ Campaigns follow the same principle through their own flag, `allowCampaigns` (al
 Usually a closure is called back when you instantiate a paywall yourself. With a deeplink you don't instantiate it, so set a default handler to receive the result:
 
 ```swift
-Purchasely.setDefaultPresentationResultHandler { [weak self] (result, plan) in
-    switch result {
+Purchasely.setDefaultPresentationDismissHandler { outcome in
+    switch outcome.purchaseResult {
     case .purchased:
-        print("Purchased from deeplink: \(plan?.name ?? "unknown")")
+        print("Purchased from deeplink: \(outcome.plan?.name ?? "unknown")")
     case .restored:
-        print("Restored from deeplink: \(plan?.name ?? "unknown")")
+        print("Restored from deeplink")
     case .cancelled:
-        print("Cancelled from deeplink")
+        print("Cancelled from deeplink (\(outcome.closeReason))")
+    case .none:
+        break
     @unknown default:
         break
     }
+    // outcome.presentation identifies which presentation (campaign / deeplink / Promoted IAP) closed
 }
 ```
 

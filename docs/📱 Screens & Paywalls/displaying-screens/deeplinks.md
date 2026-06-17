@@ -58,13 +58,15 @@ Usually when a paywall / screen is instantiated by the app, a closure is called 
 You can retrieve the result of the user action in a paywall opened with a deeplink by setting a `DefaultPresentationResultHandler`. This only works in [full mode](full-mode), in [paywallObserver mode](paywallobserver-mode) do not forget to call Purchasely.synchronize() when a purchase happened.
 
 ```swift Swift
-Purchasely.setDefaultPresentationResultHandler { [weak self](result, plan) in
-    switch result {
+Purchasely.setDefaultPresentationDismissHandler { outcome in
+    switch outcome.purchaseResult {
         case .purchased:
             break
         case .restored:
             break
         case .cancelled:
+            break
+        case .none:
             break
         @unknown default:
 				    break
@@ -72,7 +74,7 @@ Purchasely.setDefaultPresentationResultHandler { [weak self](result, plan) in
 }
 ```
 ```kotlin Kotlin
-Purchasely.setDefaultPresentationResultHandler { outcome ->
+Purchasely.setDefaultPresentationDismissHandler { outcome ->
     /* You can set a callback to know when your user purchased a product */
     when(outcome.purchaseResult) {
         PLYPurchaseResult.PURCHASED -> Log.d("Purchasely", "Purchased ${outcome.plan}")

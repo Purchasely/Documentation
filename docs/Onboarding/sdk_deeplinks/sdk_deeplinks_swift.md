@@ -82,13 +82,15 @@ Usually when a paywall / screen is instantiated by the app, a closure is called 
 You can retrieve the result of the user action in a paywall opened with a deeplink by setting a `DefaultPresentationResultHandler`.
 
 ```swift Swift
-Purchasely.setDefaultPresentationResultHandler { [weak self](result, plan) in
-    switch result {
+Purchasely.setDefaultPresentationDismissHandler { outcome in
+    switch outcome.purchaseResult {
         case .purchased:
             break
         case .restored:
             break
         case .cancelled:
+            break
+        case .none:
             break
         @unknown default:
 				    break
