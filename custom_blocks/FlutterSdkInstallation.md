@@ -6,7 +6,7 @@ We rely on [Pub.dev](https://pub.dev/packages/purchasely_flutter/install) to dis
 # Main dependency
 
 ```shell
-flutter pub add purchasely_flutter
+flutter pub add purchasely_flutter:6.0.0-rc.1
 ```
 
 Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android 23)
@@ -44,31 +44,32 @@ See below to add the store you want to use
 
 > 📘 Versioning
 >
-> All your dependencies **must** always be at the **same version** for example
+> All your dependencies **must** always be at the **exact same version**. Pin each package to `6.0.0-rc.1` — do not use a floating range (`^6.0.0`, `5.+`, …).
 >
 > ```yaml pubspec.yaml
 > dependencies:
->   purchasely_flutter: ^6.0.0-rc.1
->   purchasely_google: ^6.0.0-rc.1
->   purchasely_android_player: ^6.0.0-rc.1
+>   purchasely_flutter: 6.0.0-rc.1
+>   purchasely_google: 6.0.0-rc.1
+>   purchasely_android_player: 6.0.0-rc.1
 > ```
 
 ## Google Play Billing
 
-To add Google as a store, you can use our NPM dependency
+To add Google as a store, you can use our pub.dev dependency
 
 ```shell
-flutter pub add purchasely_google
+flutter pub add purchasely_google:6.0.0-rc.1
 ```
 
-Then you must add Google in the list of stores
+Then you must add Google in the list of stores when starting the SDK with the builder
 
-```typescript Flutter
-await Purchasely.start(
-        apiKey: '<<X-API-KEY>>',
-        androidStores: ['Google'], // default is Google, don't forget to add the dependency to the same version
-        storeKit1: false, // set to false to use StoreKit2, true to use StoreKit1
-);
+```dart Flutter
+await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
+        .runningMode(RunningMode.full)
+        .logLevel(LogLevel.error)
+        .stores([PLYStore.google]) // don't forget to add the matching dependency at the same version
+        .storekitVersion(StorekitVersion.storeKit2) // iOS only: storeKit2 (default) | storeKit1
+        .start();
 ```
 
 <br />
@@ -85,5 +86,5 @@ A video player is not provided by default on Android to avoid conflict with anot
 We provide one in an external dependency that is detected and handled automatically
 
 ```shell
-flutter pub add purchasely_android_player
+flutter pub add purchasely_android_player:6.0.0-rc.1
 ```

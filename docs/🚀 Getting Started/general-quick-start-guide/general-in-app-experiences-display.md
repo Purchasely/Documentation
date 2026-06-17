@@ -76,10 +76,13 @@ try {
 ```
 ```typescript Flutter
 try {
-  var presentation = await Purchasely.fetchPresentation("ONBOARDING");
+  final request = PresentationBuilder.placement("ONBOARDING").build();
+
+  // Preload the Screen, then display it
+  await request.preload();
 
   //Display Purchasely Screen
-  var presentResult = await Purchasely.presentPresentation(presentation);
+  final outcome = await request.display();
 } catch (e) {
   print(e);
 }

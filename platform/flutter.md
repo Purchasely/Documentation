@@ -1,6 +1,12 @@
 # Purchasely Flutter SDK Documentation
 
-This document provides comprehensive documentation for integrating and using the Purchasely Flutter SDK with Dart.
+This guide covers the Purchasely Flutter SDK **v6** (`6.0.0-rc.1`) for Dart apps. The plugin bridges to the Purchasely 6.0 native SDKs (iOS `Purchasely 6.0.0-rc.1`, Android `io.purchasely:core 6.0.0-rc.1`) and displays **Presentations** (Screens / paywalls) configured in the Console through placements, direct `screen` lookups, campaigns, deeplinks and Flows.
+
+> 📘 SDK v6 — what changed
+>
+> v6 is a major release with breaking changes on the **paywall surface only**: **starting the SDK**, **displaying / preloading / closing a presentation**, and the **action interceptor**. Everything else on the `Purchasely` class — purchases, restore, identity, catalog, subscriptions, user attributes, events, dynamic offerings, consent and config — remains source-compatible. Deeplinks gain the v6 names (`allowDeeplink`, `handleDeeplink`) while the old v5 names remain as deprecated aliases.
+>
+> The most impactful change for new integrations is that the **default running mode is now `RunningMode.observer`** (it was Full in v5). If you want Purchasely to handle and validate purchases, set `.runningMode(RunningMode.full)` explicitly. See [SDK Initialization](#sdk-initialization).
 
 ---
 
@@ -19,6 +25,8 @@ This document provides comprehensive documentation for integrating and using the
 11. [Pre-fetching Screens](#pre-fetching-screens)
 12. [Deeplinks Management](#deeplinks-management)
 13. [Platform-Specific Features](#platform-specific-features)
+14. [Troubleshooting](#troubleshooting)
+15. [Additional Resources](#additional-resources)
 
 ---
 
@@ -26,7 +34,7 @@ This document provides comprehensive documentation for integrating and using the
 
 | Requirement | iOS | Android |
 |-------------|-----|---------|
-| Minimum OS Version | 11.0 | 21 |
+| Minimum OS Version | 13.4 | 23 (minSdkVersion) |
 | compileSdkVersion | - | 36 |
 | targetSdkVersion | - | 35 |
 
@@ -34,20 +42,24 @@ This document provides comprehensive documentation for integrating and using the
 
 ## Installation
 
+We rely on [pub.dev](https://pub.dev/packages/purchasely_flutter) to distribute the Flutter SDK.
+
 ### Main Dependency
 
-Install the Purchasely Flutter SDK via pub.dev:
+Pin the Purchasely Flutter SDK to the exact version:
 
 ```shell
-flutter pub add purchasely_flutter
+flutter pub add purchasely_flutter:6.0.0-rc.1
 ```
+
+Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android minSdk 23).
 
 ### iOS Setup
 
 Update your Podfile to set the minimum iOS version:
 
-```yaml
-// Podfile
+```ruby
+# Podfile
 
 ...
 
@@ -61,6 +73,8 @@ Then run:
 ```shell
 cd ios && pod install
 ```
+
+The iOS native dependency (`Purchasely 6.0.0-rc.1`) is published on the CocoaPods trunk, so it resolves from the public repositories with no extra configuration.
 
 ### Android Setup
 
@@ -83,9 +97,11 @@ allprojects {
 }
 ```
 
+The Android native dependencies (`io.purchasely:core` / `google-play` / `player` `6.0.0-rc.1`) are published on **Maven Central**, so they resolve from the public repositories with no `mavenLocal()`.
+
 ### Android Dependencies
 
-> ⚠️ **Important**: The main Purchasely SDK (`purchasely_flutter`) does **NOT** include store implementations by default. This modular architecture allows you to include only the stores you need and avoid dependency conflicts.
+> ⚠️ **Important**: The main Purchasely SDK (`purchasely_flutter`) does **NOT** include store implementations by default. This modular architecture lets you include only the stores you need and avoids dependency conflicts.
 
 With Android, you can choose to use Google Play Store and/or Huawei AppGallery and/or Amazon Appstore. **You must install the corresponding dependency for each store you want to support.**
 
@@ -94,38 +110,40 @@ With Android, you can choose to use Google Play Store and/or Huawei AppGallery a
 If your app is distributed on the **Google Play Store**, you **must** install the Google Play Billing dependency:
 
 ```shell
-flutter pub add purchasely_google
+flutter pub add purchasely_google:6.0.0-rc.1
 ```
 
 **Why is this required?**
 - The Purchasely core SDK does not include the Google Play Billing library
-- When you specify `androidStores: ['Google']` in initialization, the SDK looks for this dependency at runtime
+- When you pass `.stores([PLYStore.google])` at initialization, the SDK looks for this dependency at runtime
 - Without this dependency, purchases will not work on Android devices using Google Play Store
 - The app may crash or fail to initialize properly on Android
+
+> ⚠️ **Google Play Billing v8** — the `purchasely_google` artifact pulls in Google Play Billing Client v8. If you also depend on Google Play Billing directly, do not force an older billing dependency into your project.
 
 #### Video Player (Required for Video Paywalls)
 
 If your paywalls contain videos, you **must** install the Android video player dependency:
 
 ```shell
-flutter pub add purchasely_android_player
+flutter pub add purchasely_android_player:6.0.0-rc.1
 ```
 
 **Why is this required?**
 - The core SDK does not include a video player to avoid conflicts with other media libraries you may have (e.g., Media3/ExoPlayer)
 - Without this dependency, videos in paywalls will not play on Android
-- If you already have your own video player that supports HLS, you can provide your own player view instead
+- The external player is detected and handled automatically by the SDK
 
 #### Version Matching (Critical)
 
-> ⚠️ **All Purchasely packages must be at the exact same version.** Mismatched versions will cause runtime errors or unexpected behavior.
+> ⚠️ **All Purchasely packages must be pinned to the exact same version.** Mismatched versions cause runtime errors. Pin each package to `6.0.0-rc.1` — do **not** use a floating range (`^6.0.0`, `5.+`, …).
 
 ```yaml
 # pubspec.yaml
 dependencies:
-  purchasely_flutter: ^5.0.0
-  purchasely_google: ^5.0.0
-  purchasely_android_player: ^5.0.0
+  purchasely_flutter: 6.0.0-rc.1
+  purchasely_google: 6.0.0-rc.1
+  purchasely_android_player: 6.0.0-rc.1
 ```
 
 #### Complete Android Installation Example
@@ -133,76 +151,89 @@ dependencies:
 For a typical app distributed on Google Play Store with video paywalls:
 
 ```shell
-# Install all required dependencies
-flutter pub add purchasely_flutter
-flutter pub add purchasely_google
-flutter pub add purchasely_android_player
+# Install all required dependencies (same exact version)
+flutter pub add purchasely_flutter:6.0.0-rc.1
+flutter pub add purchasely_google:6.0.0-rc.1
+flutter pub add purchasely_android_player:6.0.0-rc.1
 ```
 
 Then initialize with the Google store:
 
 ```dart
-bool configured = await Purchasely.start(
-    apiKey: 'YOUR_API_KEY',
-    androidStores: ['Google'], // Requires purchasely_google package
-    storeKit1: false,
-    logLevel: PLYLogLevel.error,
-    runningMode: PLYRunningMode.full,
-    userId: null,
-);
+final bool configured = await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
+    .runningMode(RunningMode.full)
+    .logLevel(LogLevel.error)
+    .stores([PLYStore.google]) // requires the purchasely_google package at the same version
+    .storekitVersion(StorekitVersion.storeKit2) // iOS only: storeKit2 (default) | storeKit1
+    .start();
 ```
 
 ---
 
 ## SDK Initialization
 
+In v6 the SDK is started with the fluent **`PurchaselyBuilder`**. The old `Purchasely.start(...)` method and the `PLYRunningMode` / `PLYLogLevel` enums (and the `storeKit1: true/false` boolean) have been **removed**.
+
 Initialize the Purchasely SDK as early as possible in your application lifecycle.
 
-### Full Mode (Recommended)
+> 🚧 Major v6 change — the default running mode is now `Observer`
+>
+> In v5 the implicit default was Full. In **v6 the default is `RunningMode.observer`** — Purchasely observes transactions but your app keeps control of the purchase flow. **If you want Purchasely to handle the purchase flow and validate receipts, set `.runningMode(RunningMode.full)` explicitly.** A behavioral consequence: in observer mode, presentations no longer auto-close after a purchase or restore — dismiss them yourself.
 
-In `full` mode, Purchasely handles the entire purchase flow including transactions and receipts.
+### Full Mode (Purchasely handles purchases)
+
+In `RunningMode.full`, Purchasely handles the entire purchase flow including transactions and receipts.
 
 ```dart
 import 'package:purchasely_flutter/purchasely_flutter.dart';
 
-// Everything is optional except apiKey and storeKit1
+// Everything is optional except the apiKey
 // Example with default values
-bool configured = await Purchasely.start(
-    apiKey: 'YOUR_API_KEY',
-    androidStores: ['Google'], // default is Google, don't forget to add the dependency
-    storeKit1: false, // set to false to use StoreKit2, true to use StoreKit1
-    logLevel: PLYLogLevel.error, // set to debug in development mode to see logs
-    runningMode: PLYRunningMode.full, // select between full and paywallObserver
-    userId: null, // set a user id if you have one
-);
+final bool configured = await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
+    .appUserId(null)                             // optional if you already know your user id
+    .runningMode(RunningMode.full)               // RunningMode.observer (default) | full
+    .logLevel(LogLevel.error)                    // set to LogLevel.debug in development to see logs
+    .stores([PLYStore.google])                   // Android only: google | huawei | amazon
+    .storekitVersion(StorekitVersion.storeKit2)  // iOS only: storeKit2 (default) | storeKit1
+    .allowDeeplink(true)                         // allow the SDK to open deeplinks (default true)
+    .allowCampaigns(true)                        // optional campaign display gate (default true)
+    .start();
 
 if (!configured) {
-    print('Purchasely SDK not configured');
-    return;
+  print('Purchasely SDK not configured');
+  return;
 }
 
 print('Purchasely SDK configured successfully');
 ```
 
-### PaywallObserver Mode
+### Observer Mode (your app owns purchases)
 
-Use `paywallObserver` mode if you have an existing in-app purchase infrastructure and want to use Purchasely only for paywall display and analytics.
+Use `RunningMode.observer` if you have an existing in-app purchase infrastructure and want to use Purchasely only for paywall display and analytics. This is the **default** mode in v6, so passing it makes the intent explicit.
 
 ```dart
-bool configured = await Purchasely.start(
-    apiKey: 'YOUR_API_KEY',
-    androidStores: ['Google'],
-    storeKit1: false,
-    logLevel: PLYLogLevel.error,
-    runningMode: PLYRunningMode.paywallObserver,
-    userId: null,
-);
+final bool configured = await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
+    .appUserId(null)
+    .runningMode(RunningMode.observer)           // RunningMode.observer (default) | full
+    .logLevel(LogLevel.error)
+    .stores([PLYStore.google])
+    .storekitVersion(StorekitVersion.storeKit2)
+    .start();
 
 if (!configured) {
-    print('Purchasely SDK not configured');
-    return;
+  print('Purchasely SDK not configured');
+  return;
 }
 ```
+
+### Enums
+
+| Enum | Values |
+|------|--------|
+| `RunningMode` | `observer` (default), `full` |
+| `LogLevel` | `debug`, `info`, `warn`, `error` |
+| `StorekitVersion` | `storeKit2` (default, iOS), `storeKit1` (iOS) |
+| `PLYStore` | `google`, `huawei`, `amazon` (Android) |
 
 ### API Key
 
@@ -212,42 +243,89 @@ You can find your API Key in the Purchasely Console under **App settings > Backe
 
 ## Displaying Paywalls
 
-Purchasely paywalls are displayed using **placements**. A placement is a specific location in your app where you want to display a paywall (e.g., onboarding, settings, premium feature).
+Purchasely paywalls are **Presentations** displayed using **placements** (a specific location in your app, e.g. onboarding, settings, premium feature) or by direct `screen` id.
+
+`PresentationBuilder.placement(id).build()` returns a **`PresentationRequest`**. Calling `display([Transition])` shows the presentation and resolves at **dismiss** with a `PresentationOutcome`.
 
 ### Display a Placement
 
 ```dart
-try {
-    var result = await Purchasely.presentPresentationForPlacement(
-        'ONBOARDING',
-        isFullscreen: true,
-    );
+final outcome = await PresentationBuilder.placement('ONBOARDING')
+    .contentId('my_content_id') // optional
+    .build()
+    .display(const Transition.fullScreen());
 
-    switch (result.result) {
-        case PLYPurchaseResult.purchased:
-            print('User purchased: ${result.plan?.name}');
-            // Update entitlements to unlock content
-            break;
-        case PLYPurchaseResult.restored:
-            print('User restored purchases');
-            // Update entitlements to unlock content
-            break;
-        case PLYPurchaseResult.cancelled:
-            print('User cancelled purchased');
-            break;
-    }
-} catch (e) {
-    print(e);
+// outcome: presentation, purchaseResult, plan, closeReason, error
+if (outcome.error != null) {
+  print('Display error: ${outcome.error!.message}');
+} else if (outcome.purchaseResult == PurchaseResult.purchased ||
+    outcome.purchaseResult == PurchaseResult.restored) {
+  print('Purchased ${outcome.plan}');
+} else {
+  print('Dismissed: ${outcome.closeReason}'); // button | backSystem | programmatic
 }
 ```
 
+### Targeting a specific screen / product
+
+```dart
+// A specific presentation by screen id
+await PresentationBuilder.screen('SCREEN_ID').build().display(const Transition.modal());
+
+// A specific content inside a screen
+await PresentationBuilder.screen('SCREEN_ID').contentId('CONTENT_ID').build().display();
+```
+
+### Selectors
+
+```dart
+PresentationBuilder.placement('onboarding'); // by placement id
+PresentationBuilder.screen('screen_abc123'); // direct Console Screen lookup
+PresentationBuilder.defaultSource();         // default handler for deeplinks / campaigns
+```
+
+To display a Flow, use its deeplink `app_scheme://ply/flows/FLOW_ID`.
+
+### Transitions
+
+`display([Transition])` accepts an optional `Transition`:
+
+```dart
+const Transition.fullScreen();          // full-screen
+const Transition.modal();               // modal sheet
+const Transition.modal(dismissible: false);
+const Transition.push();                // pushed onto the navigation stack
+```
+
+`TransitionType` also exposes `drawer`, `popin` and `inlinePaywall` for advanced layouts (with `heightPercentage` and `backgroundColors`).
+
 ### Display Results
 
-After displaying a placement, you receive a result indicating the user's action:
+`display([Transition])` resolves with a `PresentationOutcome`:
 
-- `PLYPurchaseResult.purchased`: User purchased a plan
-- `PLYPurchaseResult.restored`: User restored a previous purchase
-- `PLYPurchaseResult.cancelled`: User did not complete a purchase
+| Field | Type | Description |
+|-------|------|-------------|
+| `presentation` | `Presentation?` | The displayed presentation (or `null` if it never reached display) |
+| `purchaseResult` | `PurchaseResult?` | `purchased` \| `restored` \| `cancelled` \| `null` |
+| `plan` | `Map<String, dynamic>?` | The purchased plan (when `purchaseResult` is `purchased` / `restored`) |
+| `closeReason` | `CloseReason?` | `button` \| `backSystem` \| `programmatic` (when no purchase) |
+| `error` | `PresentationError?` | Display error; mutually exclusive with `closeReason` |
+
+`purchaseResult` is `null` when the user dismissed the screen without a purchase action.
+
+### Presentation lifecycle (display / close / back)
+
+A **loaded** `Presentation` (returned by `preload()`, or from `outcome.presentation`) exposes imperative controls:
+
+```dart
+final presentation = await PresentationBuilder.placement('ONBOARDING').build().preload();
+
+presentation.display();  // show (returns a future that resolves at dismiss)
+presentation.close();    // dismiss programmatically
+presentation.back();     // navigate back inside a multi-step (Flow) presentation
+```
+
+> 📘 The v5 imperative methods `closePresentation()`, `closeAllScreens()`, `hidePresentation()`, `showPresentation()` have been **removed**. Use the loaded `Presentation` handle instead.
 
 ---
 
@@ -255,136 +333,152 @@ After displaying a placement, you receive a result indicating the user's action:
 
 ### Full Mode
 
-In `full` mode, the Purchasely SDK automatically launches the native in-app purchase flow when a user clicks on a purchase button and handles the transaction. You only need to update entitlements once you have confirmation that the purchase was processed.
+In `RunningMode.full`, the Purchasely SDK automatically launches the native in-app purchase flow when a user taps a purchase button and handles the transaction. You only need to update entitlements once you have confirmation the purchase was processed.
 
 ```dart
 try {
-    var result = await Purchasely.presentPresentationForPlacement(
-        'onboarding',
-        isFullscreen: true,
-    );
+  final outcome = await PresentationBuilder.placement('onboarding')
+      .build()
+      .display(const Transition.fullScreen());
 
-    switch (result.result) {
-        case PLYPurchaseResult.purchased:
-            print('User purchased: ${result.plan?.name}');
-            // Update entitlements to unlock the access to the contents
-            break;
-        case PLYPurchaseResult.restored:
-            print('User restored his purchases');
-            // Update entitlements to unlock the access to the contents
-            break;
-        case PLYPurchaseResult.cancelled:
-            print('User cancelled purchased');
-            break;
-    }
+  if (outcome.purchaseResult == PurchaseResult.purchased ||
+      outcome.purchaseResult == PurchaseResult.restored) {
+    print('User purchased ${outcome.plan}');
+    // Update entitlements to unlock the access to the contents
+  }
 } catch (e) {
-    print(e);
+  print(e);
 }
 ```
 
-### PaywallObserver Mode with Action Interceptor
-
-In `paywallObserver` mode, you handle purchases with your own infrastructure while using Purchasely for paywall display.
+You can also trigger a purchase programmatically (unchanged):
 
 ```dart
-Purchasely.setPaywallActionInterceptorCallback(
-    (PaywallActionInterceptorResult result) {
-    if (result.action == PLYPaywallAction.purchase) {
-        try {
-            // The store product id (sku) the user clicked on in the paywall
-            var productId = result.parameters.plan.productId;
-
-            if (Platform.isAndroid) {
-                // Only for Android you can get other interesting parameters
-                String basePlanId = result.parameters.subscriptionOffer?.basePlanId;
-                String offerId = result.parameters.subscriptionOffer?.offerId;
-                String offerToken = result.parameters.subscriptionOffer?.offerToken;
-            }
-
-            bool success = await MyPurchaseSystem.purchase(productId);
-            if (success) {
-                // Synchronize all purchases with Purchasely
-                Purchasely.synchronize();
-                // Notify Purchasely paywall to stop processing action
-                Purchasely.onProcessAction(false);
-            }
-        } catch (e) {
-            Purchasely.onProcessAction(false);
-            print(e);
-        }
-    } else if (result.action == PLYPaywallAction.restore) {
-        Purchasely.onProcessAction(false);
-
-        try {
-            await MyPurchaseSystem.restoreAllPurchases();
-            // Synchronize all purchases with Purchasely
-            Purchasely.synchronize();
-            Purchasely.onProcessAction(false);
-        } on PlatformException catch (e) {
-            Purchasely.onProcessAction(false);
-            // Error restoring purchases
-        }
-    } else {
-        // Notify Purchasely paywall to continue other actions
-        Purchasely.onProcessAction(true);
-    }
-});
+final plan = await Purchasely.purchaseWithPlanVendorId(
+  vendorId: 'PURCHASELY_PLUS_MONTHLY',
+);
 ```
+
+### Observer Mode with Action Interceptor
+
+In `RunningMode.observer`, you handle purchases with your own infrastructure while using Purchasely for paywall display. Register an interceptor for the `purchase` action; the handler returns an `InterceptResult` (there is no more `onProcessAction`). In observer mode the presentation does **not** auto-close, so dismiss it yourself with `info.presentation?.close()`.
+
+```dart
+import 'package:flutter/foundation.dart';
+import 'package:purchasely_flutter/purchasely_flutter.dart';
+
+await Purchasely.interceptAction(
+  PresentationActionKind.purchase,
+  (info, payload) async {
+    if (payload is! PurchasePayload) {
+      return InterceptResult.notHandled;
+    }
+    try {
+      // The store product id (sku) the user tapped on in the presentation
+      final storeProductId = payload.plan['productId'];
+
+      if (defaultTargetPlatform == TargetPlatform.android) {
+        // Only for Android you can retrieve the subscription offer details
+        final basePlanId = payload.subscriptionOffer?['basePlanId'];
+        final offerId = payload.subscriptionOffer?['offerId'];
+        final offerToken = payload.subscriptionOffer?['offerToken'];
+      }
+
+      final success = await MyPurchaseSystem.purchase(storeProductId);
+      if (success) {
+        await Purchasely.synchronize(); // synchronize the new purchase with Purchasely
+        await info.presentation?.close(); // observer mode: dismiss it yourself
+        return InterceptResult.success;
+      }
+      return InterceptResult.failed;
+    } catch (e) {
+      print(e);
+      return InterceptResult.failed;
+    }
+  },
+);
+
+await Purchasely.interceptAction(
+  PresentationActionKind.restore,
+  (info, payload) async {
+    try {
+      await MyPurchaseSystem.restoreAllPurchases();
+      await Purchasely.synchronize(); // synchronize all purchases with Purchasely
+      await info.presentation?.close();
+      return InterceptResult.success;
+    } catch (e) {
+      // Error restoring purchases
+      return InterceptResult.failed;
+    }
+  },
+);
+```
+
+> 📘 `synchronize()` now reports completion. The 6.0 native SDKs expose success/error callbacks on `synchronize()`. The Dart `Purchasely.synchronize()` keeps its `Future<void>` signature but now **resolves when the synchronization actually completes** and **throws a `PlatformException` on failure**. `await` it (and optionally `try/catch`) before chaining a follow-up presentation that targets subscribers.
 
 ---
 
 ## Action Interceptor
 
-The Action Interceptor allows you to intercept and handle user actions on the paywall.
+The v6 interceptor is registered **per action kind** with `Purchasely.interceptAction(kind, handler)`. The handler receives a typed payload and returns an `InterceptResult` — there is no more `Purchasely.setPaywallActionInterceptorCallback(...)` or `Purchasely.onProcessAction(bool)`.
 
-### Available Actions
+### Result values
 
-| Action | Description |
-|--------|-------------|
-| `PLYPaywallAction.purchase` | User tapped a purchase button |
-| `PLYPaywallAction.restore` | User tapped the restore button |
-| `PLYPaywallAction.login` | User tapped the login button |
-| `PLYPaywallAction.close` | User tapped the close button |
-| `PLYPaywallAction.navigate` | User wants to navigate to an external URL |
-| `PLYPaywallAction.open_presentation` | User wants to open another presentation |
+| Result | Meaning |
+|--------|---------|
+| `InterceptResult.success` | App handled the action; SDK skips its default behavior. |
+| `InterceptResult.failed` | App tried but failed; the action chain stops. |
+| `InterceptResult.notHandled` | SDK should continue with its default behavior. |
+
+### Action kinds & payloads
+
+`PresentationActionKind`: `close`, `closeAll`, `login`, `navigate`, `purchase`, `restore`, `openPresentation`, `openPlacement`, `promoCode`, `webCheckout`.
+
+| Action kind | Typed payload |
+|-------------|---------------|
+| `purchase` | `PurchasePayload` (`plan`, `subscriptionOffer`, …) |
+| `restore` | — |
+| `login` | — |
+| `close` | `ClosePayload` |
+| `closeAll` | `CloseAllPayload` |
+| `navigate` | `NavigatePayload` (`url`, `title`) |
+| `openPresentation` | `OpenPresentationPayload` |
+| `openPlacement` | `OpenPlacementPayload` |
+| `promoCode` | — |
+| `webCheckout` | `WebCheckoutPayload` |
 
 ### Implementation
 
 ```dart
-Purchasely.setPaywallActionInterceptorCallback(
-    (PaywallActionInterceptorResult result) {
-    if (result.action == PLYPaywallAction.navigate) {
-        print('User wants to navigate');
-        Purchasely.onProcessAction(true);
-    } else if (result.action == PLYPaywallAction.close) {
-        print('User wants to close paywall');
-        Purchasely.onProcessAction(false);
-    } else if (result.action == PLYPaywallAction.login) {
-        print('User wants to login');
-        // Present your own screen for user to log in
-        Purchasely.closePresentation();
-        Purchasely.userLogin('MY_USER_ID');
-        // Call this method to update Purchasely Paywall
-        Purchasely.onProcessAction(true);
-    } else if (result.action == PLYPaywallAction.open_presentation) {
-        print('User wants to open a new paywall');
-        Purchasely.onProcessAction(true);
-    } else if (result.action == PLYPaywallAction.purchase) {
-        print('User wants to purchase');
-        // If you want to intercept it, close presentation and display your screen
-        Purchasely.closePresentation();
-        Purchasely.onProcessAction(false);
-    } else if (result.action == PLYPaywallAction.restore) {
-        print('User wants to restore his purchases');
-        Purchasely.onProcessAction(true);
-    } else {
-        print('Action unknown ' + result.action.toString());
-        Purchasely.onProcessAction(true);
+import 'package:purchasely_flutter/purchasely_flutter.dart';
+
+await Purchasely.interceptAction(
+  PresentationActionKind.navigate,
+  (info, payload) async {
+    if (payload is NavigatePayload) {
+      // open payload.url with your router / url_launcher
+      return InterceptResult.success;
     }
-});
+    return InterceptResult.notHandled;
+  },
+);
+
+await Purchasely.interceptAction(
+  PresentationActionKind.login,
+  (info, payload) async {
+    // Present your own screen for the user to log in
+    Purchasely.userLogin('MY_USER_ID');
+    return InterceptResult.success;
+  },
+);
 ```
 
-> **Important**: Always call `Purchasely.onProcessAction(true/false)` to notify the SDK whether to continue processing the action.
+### Removing interceptors
+
+```dart
+await Purchasely.removeInterceptor(PresentationActionKind.purchase);
+await Purchasely.removeAllInterceptors();
+```
 
 ---
 
@@ -395,8 +489,7 @@ Purchasely.setPaywallActionInterceptorCallback(
 The Purchasely SDK automatically generates and assigns an `anonymous_user_id` to each user, maintaining consistency as long as the app remains installed on the device.
 
 ```dart
-// Get the anonymous user ID
-String anonymousId = Purchasely.anonymousUserId;
+final anonymousId = await Purchasely.anonymousUserId;
 print('Anonymous User ID: $anonymousId');
 ```
 
@@ -405,42 +498,35 @@ print('Anonymous User ID: $anonymousId');
 To authenticate users and associate purchases with their account:
 
 ```dart
-// Login with user ID
-Purchasely.userLogin('123456789').then((refresh) {
-    if (refresh) {
-        // Call your backend to refresh user information
-        print('User logged in, refresh entitlements');
-    }
-});
+final refresh = await Purchasely.userLogin('123456789');
+if (refresh) {
+  // You should call your backend to refresh user entitlements
+  print('User logged in, refresh entitlements');
+}
 ```
+
+You can also provide the user id at initialization with `PurchaselyBuilder.apiKey('…').appUserId('123456789').start()`.
 
 ### User Logout
 
-To sign out a user:
-
 ```dart
-// Logout user (clears user ID and custom attributes)
+// Logout user (clears user id and custom attributes)
 Purchasely.userLogout();
 ```
 
 ### Login from Paywall
 
-To handle the login button on the paywall:
+To handle the login button on a presentation, intercept the `login` action:
 
 ```dart
-Purchasely.setPaywallActionInterceptorCallback(
-    (PaywallActionInterceptorResult result) {
-    if (result.action == PLYPaywallAction.login) {
-        print('User wants to login');
-        // Present your own screen for user to log in
-        Purchasely.closePresentation();
-        Purchasely.userLogin('MY_USER_ID');
-        // Call this method to update Purchasely Paywall
-        Purchasely.onProcessAction(true);
-    } else {
-        Purchasely.onProcessAction(true);
-    }
-});
+await Purchasely.interceptAction(
+  PresentationActionKind.login,
+  (info, payload) async {
+    // Present your own screen for the user to log in
+    Purchasely.userLogin('MY_USER_ID'); // call before returning to update the screen
+    return InterceptResult.success;
+  },
+);
 ```
 
 ---
@@ -453,20 +539,31 @@ Purchasely offers a way to retrieve active subscriptions directly from your mobi
 
 ```dart
 try {
-    List<PLYSubscription> subscriptions = await Purchasely.userSubscriptions();
-    print('==> Subscriptions');
-    if (subscriptions.isNotEmpty) {
-        print(subscriptions.first.plan);
-        print(subscriptions.first.subscriptionSource);
-        print(subscriptions.first.nextRenewalDate);
-        print(subscriptions.first.cancelledDate);
-    }
+  final List<PLYSubscription> subscriptions = await Purchasely.userSubscriptions();
+  if (subscriptions.isNotEmpty) {
+    print(subscriptions.first.plan);
+    print(subscriptions.first.subscriptionSource);
+    print(subscriptions.first.nextRenewalDate);
+    print(subscriptions.first.cancelledDate);
+  }
 } catch (e) {
-    print(e);
+  print(e);
 }
 ```
 
-> **Note**: There is a **few seconds delay** for `Purchasely.userSubscriptions()` to be updated after a purchase or restoration. If you rely on this method to get the current subscription status right after a purchase, you should **wait for 3 seconds** before calling this method.
+Expired subscriptions (the user's history) are available via `Purchasely.userSubscriptionsHistory()` — useful for analytics and engagement strategies.
+
+```dart
+final history = await Purchasely.userSubscriptionsHistory();
+```
+
+> **Note**: There is a **few seconds delay** for `Purchasely.userSubscriptions()` to be updated after a purchase or restoration. If you rely on this method right after a purchase, **wait for 3 seconds** before calling it.
+
+> 🚧 Removed in v6 — `presentSubscriptions()` (BREAKING)
+>
+> The native subscriptions screen was removed from the 6.0 SDKs on both platforms, so `Purchasely.presentSubscriptions()` has been **removed entirely** from the Flutter API — the method no longer exists. There is no drop-in replacement: build your own subscriptions screen with `userSubscriptions()` / `userSubscriptionsHistory()`.
+>
+> The cancellation survey UI was likewise removed, so `Purchasely.displaySubscriptionCancellationInstruction()` is kept for source compatibility but is a **no-op** on both Android and iOS.
 
 ---
 
@@ -476,54 +573,39 @@ Custom User Attributes allow you to segment users and personalize their journey.
 
 ### Supported Types
 
-- `String`
-- `Int`
-- `Double` (Float)
-- `Bool`
-- `Date` (DateTime)
-- `Array of Strings`
+`String`, `int`, `double`, `bool`, `DateTime`, and arrays of those types.
 
 ### Setting Attributes
 
 ```dart
-// Set individual attributes
-Purchasely.setUserAttributeWithString('stringKey', 'StringValue');
-Purchasely.setUserAttributeWithInt('intKey', 3);
-Purchasely.setUserAttributeWithDouble('doubleKey', 1.2);
-Purchasely.setUserAttributeWithBoolean('booleanKey', true);
-Purchasely.setUserAttributeWithDate('dateKey', DateTime.now());
+Purchasely.setUserAttributeWithString('gender', 'man');
+Purchasely.setUserAttributeWithInt('age', 21);
+Purchasely.setUserAttributeWithDouble('weight', 78.2);
+Purchasely.setUserAttributeWithBoolean('premium', true);
+Purchasely.setUserAttributeWithDate('subscription_date', DateTime.now());
+Purchasely.setUserAttributeWithStringArray('tags', ['sport', 'news']);
 ```
 
 ### Retrieving Attributes
 
 ```dart
-// Set an attribute first
-Purchasely.setUserAttributeWithInt('age', 21);
-
-// Retrieve a specific attribute
-dynamic ageAttribute = await Purchasely.userAttribute('age');
-print('Age: $ageAttribute');
-
 // Get all attributes
-Map<dynamic, dynamic> attributes = await Purchasely.userAttributes();
-attributes.forEach((key, value) {
-    print('Attribute $key is $value');
-});
+final attributes = await Purchasely.userAttributes();
+print(attributes); // Map of key -> value
+
+// Retrieve a specific attribute (DateTime values are parsed automatically when possible)
+final dateAttribute = await Purchasely.userAttribute('subscription_date');
 ```
 
 ### Incrementing / Decrementing Counters
 
 ```dart
-// Increment a user attribute
-// Increment by 1, it will be created if not set
+// Increment a user attribute (created if not set)
 Purchasely.incrementUserAttribute('viewed_articles');
-// You can also set a specific number to increment
 Purchasely.incrementUserAttribute('viewed_articles', value: 3);
 
 // Decrement a user attribute
-// Decrement by 1, it will be created if not set
 Purchasely.decrementUserAttribute('viewed_articles');
-// You can also set a specific number to decrement
 Purchasely.decrementUserAttribute('viewed_articles', value: 7);
 ```
 
@@ -531,13 +613,13 @@ Purchasely.decrementUserAttribute('viewed_articles', value: 7);
 
 ```dart
 // Remove one attribute
-Purchasely.clearUserAttribute('dateKey');
+Purchasely.clearUserAttribute('size');
 
 // Remove all attributes
 Purchasely.clearUserAttributes();
 ```
 
-> **Note**: `Purchasely.userLogout()` will automatically clear all custom user attributes unless you call `Purchasely.userLogout(false)`.
+> **Note**: `Purchasely.userLogout()` clears all custom user attributes.
 
 ---
 
@@ -545,39 +627,52 @@ Purchasely.clearUserAttributes();
 
 ### UI / SDK Events Listener
 
-When users interact with Purchasely Screens, the SDK triggers events. Implement an event listener to forward these events to analytics platforms.
+When users interact with Purchasely Screens, the SDK triggers events. Implement an event listener to forward these events to your analytics platforms.
 
 ```dart
-Purchasely.listenToEvents().listen((event) {
-    print('Event received: ${event.name}');
-    print('Event properties: ${event.properties}');
-
-    // Forward to your analytics platform
-    // Analytics.track(event.name, event.properties);
+Purchasely.listenToEvents((event) {
+  print('Event received: ${event.name}');
+  print('Event properties: ${event.properties}');
+  // Forward to your analytics platform
 });
+
+// Stop listening when no longer needed:
+Purchasely.stopListeningToEvents();
 ```
+
+UI/SDK events are computed by the Purchasely Platform for conversion KPIs but cannot be routed to third-party integrations from the Console — forward them yourself from the app if you need them in your analytics.
 
 ### Custom User Attributes Listener
 
-The `PLYUserAttributeSource` enum indicates where the user attribute update originated:
+When a user submits answers to a survey configured in the Screen Composer, custom user attributes can be set automatically by the SDK. The `source` parameter tells you whether the change came from Purchasely or from your own app.
 
 ```dart
-enum PLYUserAttributeSource {
-    purchasely,
-    client,
+class MyUserAttributeListener implements UserAttributeListener {
+  @override
+  void onUserAttributeSet(String key, PLYUserAttributeType type, dynamic value,
+      PLYUserAttributeSource source) {
+    if (source == PLYUserAttributeSource.purchasely) {
+      // Process attribute set by Purchasely (e.g., from surveys)
+    }
+  }
+
+  @override
+  void onUserAttributeRemoved(String key, PLYUserAttributeSource source) {}
 }
+
+Purchasely.setUserAttributeListener(MyUserAttributeListener());
 ```
 
-- **purchasely**: The change was initiated internally by the Purchasely SDK (e.g., from surveys)
-- **client**: The change was triggered directly by your app
+The `PLYUserAttributeSource` enum indicates where the update originated:
 
-> **Note**: When your app sets a Custom User Attribute, the listener will be called with `source` set to `client`. You can ignore these events to avoid processing data you already have.
+- **purchasely**: The change was initiated internally by the Purchasely SDK (e.g., from surveys)
+- **client**: The change was triggered directly by your app — you can usually ignore these since your app already has the data
 
 ---
 
 ## Pre-fetching Screens
 
-Pre-fetch paywalls from the network before displaying them for a better user experience.
+Purchasely, by default, shows the paywall screen with a loading indicator while fetching it from the network. Using `PresentationRequest.preload()`, you can pre-fetch the paywall from the network **before** displaying it for a better user experience.
 
 ### Benefits
 
@@ -588,99 +683,119 @@ Pre-fetch paywalls from the network before displaying them for a better user exp
 
 ### Implementation
 
+Build a `PresentationRequest`, `preload()` it to fetch the screen from the network, then `display()` the **same** request when you are ready.
+
 ```dart
+import 'package:purchasely_flutter/purchasely_flutter.dart';
+
 try {
-    var presentation = await Purchasely.fetchPresentation('ONBOARDING');
+  final request = PresentationBuilder.placement('ONBOARDING').build();
 
-    if (presentation == null) {
-        print('No presentation found');
-        return;
-    }
+  // Preload resolves once the screen is loaded
+  final presentation = await request.preload();
 
-    if (presentation.type == PLYPresentationType.deactivated) {
-        // No Screen to display
-        return;
-    }
+  if (presentation.type == PresentationType.deactivated) {
+    // No paywall to display for this placement
+    return;
+  }
+  if (presentation.type == PresentationType.client) {
+    // Display your own paywall (BYOS) — plan summaries are in presentation.plans
+    return;
+  }
 
-    if (presentation.type == PLYPresentationType.client) {
-        // Display my own Screen
-        var planIds = presentation.plans;
-        return;
-    }
+  // Display the preloaded presentation; resolves at dismiss
+  final outcome = await request.display(const Transition.fullScreen());
 
-    // Display Purchasely Screen
-    var presentResult = await Purchasely.presentPresentation(
-        presentation,
-        isFullscreen: false,
-    );
-
-    switch (presentResult.result) {
-        case PLYPurchaseResult.cancelled:
-            print('User cancelled purchased');
-            break;
-        case PLYPurchaseResult.purchased:
-            print('User purchased ${presentResult.plan?.name}');
-            break;
-        case PLYPurchaseResult.restored:
-            print('User restored ${presentResult.plan?.name}');
-            break;
-    }
+  switch (outcome.purchaseResult) {
+    case PurchaseResult.cancelled:
+      print('User cancelled purchased');
+      break;
+    case PurchaseResult.purchased:
+      print('User purchased ${outcome.plan}');
+      break;
+    case PurchaseResult.restored:
+      print('User restored ${outcome.plan}');
+      break;
+    case null:
+      print('User dismissed: ${outcome.closeReason}');
+      break;
+  }
 } catch (e) {
-    print(e);
+  print(e);
 }
 ```
 
 ### Presentation Types
 
-| Type | Description |
-|------|-------------|
-| `PLYPresentationType.normal` | Default Purchasely paywall |
-| `PLYPresentationType.fallback` | Fallback paywall (requested one not found) |
-| `PLYPresentationType.deactivated` | No paywall for this placement |
-| `PLYPresentationType.client` | Your own paywall (BYOS) |
+| Type (`PresentationType`) | Description |
+|---------------------------|-------------|
+| `normal` | Default Purchasely paywall |
+| `fallback` | Fallback paywall (requested one not found) |
+| `deactivated` | No paywall for this placement |
+| `client` | Your own paywall (BYOS) |
 
 ---
 
 ## Deeplinks Management
 
-To enable Purchasely to display screens via deeplinks, you need to:
+To manage deeplinks you can do up to 3 things:
 
-1. Pass the deeplink to the Purchasely SDK
-2. Allow the display when your app is ready
-3. Set a default presentation handler
+1. Allow the SDK to open deeplinks (and optionally pass a received deeplink to the SDK)
+2. Optionally control when Purchasely is allowed to display content over your interface
+3. Set a default presentation handler to receive the result of the user's action
 
-### Passing the Deeplink
+### Allowing the Display
+
+Deeplink display is allowed via the start builder (it also defaults to `true`):
 
 ```dart
-Purchasely.handle('app://ply/presentations/')
-    .then((value) => print('Deeplink handled by Purchasely? $value'));
+await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
+    .allowDeeplink(true)
+    .start();
 ```
+
+### Passing the Deeplink to the SDK
+
+To let the Purchasely SDK analyze a deeplink received by the app, pass it with `handleDeeplink`:
+
+```dart
+final handled = await Purchasely.handleDeeplink('app://ply/presentations/');
+print('Deeplink handled by Purchasely? $handled');
+```
+
+> 📘 `handleDeeplink` replaces the v5 `isDeeplinkHandled` name, which remains only as a deprecated alias.
 
 ### Forbidding the Display
 
-By **default**, deeplinks are displayed **immediately**. To defer them (e.g. during a splash screen, onboarding or login), prevent the display and re-enable it once you are ready:
+By **default**, Purchasely deeplinks are displayed **immediately** when they are received. To defer them (e.g. during a splash screen, onboarding or login), prevent the display and re-enable it once you are ready:
 
 ```dart
+// Prevent the display (e.g. while your onboarding is on screen)
 Purchasely.allowDeeplink(false);
-// later, once your app is ready
+
+// Re-enable it once ready — any queued deeplink displays immediately
 Purchasely.allowDeeplink(true);
 ```
 
-Campaigns follow the same principle through `allowCampaigns` (also `true` by default): `Purchasely.allowCampaigns(false)` / `Purchasely.allowCampaigns(true)`.
+Campaigns follow the same principle through `allowCampaigns` (also `true` by default):
+`Purchasely.allowCampaigns(false)` / `Purchasely.allowCampaigns(true)`.
+
+> 📘 `allowDeeplink` replaces the v5 `readyToOpenDeeplink` name, which remains only as a deprecated alias.
 
 ### Setting the Default Presentation Handler
 
-Retrieve the result of user actions on paywalls opened via deeplinks:
+When a paywall / screen is opened from a deeplink (or campaign), you don't instantiate it yourself, so no per-display callback fires. Attach `onDismissed` to a **default-source** request to receive the result:
 
 ```dart
-Purchasely.setDefaultPresentationResultCallback((result) {
-    print('Presentation View Result: ${result.result}');
-
-    if (result.plan != null) {
-        print('Plan Vendor ID: ${result.plan.vendorId}');
-        print('Plan Name: ${result.plan.name}');
-    }
-});
+PresentationBuilder.defaultSource()
+    .onDismissed((outcome) {
+      print('Presentation dismissed: ${outcome.purchaseResult} / ${outcome.closeReason}');
+      if (outcome.plan != null) {
+        print('Plan: ${outcome.plan}');
+      }
+    })
+    .build()
+    .display();
 ```
 
 ---
@@ -689,48 +804,66 @@ Purchasely.setDefaultPresentationResultCallback((result) {
 
 ### StoreKit Selection (iOS)
 
-Choose between StoreKit 1 and StoreKit 2 for iOS:
+Choose between StoreKit 1 and StoreKit 2 for iOS with the `StorekitVersion` enum (this replaces the old `storeKit1: true/false` boolean):
 
 ```dart
-await Purchasely.start(
-    apiKey: 'YOUR_API_KEY',
-    storeKit1: false, // false = StoreKit 2, true = StoreKit 1
-    // ...
-);
+await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
+    .storekitVersion(StorekitVersion.storeKit2) // storeKit2 (default) | storeKit1
+    .start();
 ```
 
-> **Recommendation**: Use StoreKit 2 (`storeKit1: false`) for new integrations.
+> **Recommendation**: Use StoreKit 2 (`StorekitVersion.storeKit2`, the default) for new integrations.
 
 ### Android Stores
 
-Purchasely supports multiple Android stores:
+Purchasely supports multiple Android stores via the `PLYStore` enum passed to `.stores([...])`:
 
 ```dart
-await Purchasely.start(
-    apiKey: 'YOUR_API_KEY',
-    androidStores: ['Google'], // Options: 'Google', 'Huawei', 'Amazon'
-    // ...
-);
+await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
+    .stores([PLYStore.google]) // PLYStore.google | PLYStore.huawei | PLYStore.amazon
+    .start();
 ```
 
-To use multiple stores:
+To use multiple stores (the first one available on the device is used):
 
 ```dart
-androidStores: ['Google', 'Huawei']
+.stores([PLYStore.google, PLYStore.huawei])
 ```
 
-> **Note**: Install the corresponding dependencies for each store you want to support.
+> **Note**: Install the corresponding dependency for each store you want to support, all at the same version.
 
 ### Android-Specific Purchase Parameters
 
-When intercepting purchases on Android, you can access additional parameters:
+When intercepting purchases on Android, you can access additional subscription offer parameters from the `PurchasePayload`:
 
 ```dart
-if (Platform.isAndroid) {
-    String basePlanId = result.parameters.subscriptionOffer?.basePlanId;
-    String offerId = result.parameters.subscriptionOffer?.offerId;
-    String offerToken = result.parameters.subscriptionOffer?.offerToken;
+if (defaultTargetPlatform == TargetPlatform.android) {
+  final basePlanId = payload.subscriptionOffer?['basePlanId'];
+  final offerId = payload.subscriptionOffer?['offerId'];
+  final offerToken = payload.subscriptionOffer?['offerToken'];
 }
+```
+
+### Inline (Embedded) Presentations
+
+To render a presentation inline inside your widget tree — as opposed to full-screen / modal — use the `PLYPresentationView` widget with a `PresentationRequest`. The widget preloads the request and hands the resulting presentation to the native inline view.
+
+```dart
+import 'package:purchasely_flutter/native_view_widget.dart';
+import 'package:purchasely_flutter/purchasely_flutter.dart';
+
+final request = PresentationBuilder.placement('onboarding')
+    .onDismissed((outcome) => print('inline dismissed: ${outcome.purchaseResult}'))
+    .build();
+
+// In your build():
+Expanded(
+  child: PLYPresentationView(
+    request: request,
+    loadingBuilder: const Center(child: CircularProgressIndicator()),
+    errorBuilder: (context, error) => Text('Error: ${error.message}'),
+  ),
+);
 ```
 
 ---
@@ -739,28 +872,34 @@ if (Platform.isAndroid) {
 
 ### Common Issues
 
-1. **SDK not configured**: Ensure you call `Purchasely.start()` before any other SDK methods.
+1. **SDK not configured**: Ensure you call `PurchaselyBuilder.apiKey('…').start()` and that it resolves to `true` before any other SDK methods.
 
-2. **Purchases not working**: Verify that you've added the correct store dependencies and they're all at the same version.
+2. **Purchases not validating / paywall does not auto-close after purchase**: You are likely in the new default `Observer` mode. Set `.runningMode(RunningMode.full)` for Purchasely to own the purchase flow. In observer mode, presentations do not auto-close — dismiss them with `info.presentation?.close()`.
 
-3. **Paywall not displaying**: Check that:
-   - The placement exists in your Purchasely Console
-   - The SDK is properly initialized
+3. **Purchases not working on Android**: Verify that you've added `purchasely_google` and that all Purchasely packages are pinned to the exact same version (`6.0.0-rc.1`).
+
+4. **Paywall not displaying**: Check that:
+   - The placement / screen exists in your Purchasely Console
+   - The SDK is properly initialized (the `start()` future returned `true`)
    - You have an active internet connection
 
-4. **iOS pod install issues**: Ensure your iOS deployment target is set to at least 11.0 in your Podfile.
+5. **Observer purchase does not update access**: Call `await Purchasely.synchronize()` after your billing flow succeeds.
+
+6. **iOS pod install issues**: Ensure your iOS deployment target is set to at least **13.4** in your Podfile.
+
+7. **Deeplink does nothing**: Ensure `allowDeeplink` is `true` and, if you defer deeplinks, that you re-enable with `Purchasely.allowDeeplink(true)`.
 
 ### Debug Mode
 
 Enable debug logging during development:
 
 ```dart
-await Purchasely.start(
-    apiKey: 'YOUR_API_KEY',
-    logLevel: PLYLogLevel.debug, // Use error in production
-    // ...
-);
+await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
+    .logLevel(LogLevel.debug) // use LogLevel.error in production
+    .start();
 ```
+
+For the full list of v5→v6 breaking changes, see the [Migrating to v6 — Flutter](https://docs.purchasely.com/migrating-from-v5-to-v6-flutter) guide.
 
 ---
 
@@ -769,3 +908,5 @@ await Purchasely.start(
 - [Purchasely Console](https://console.purchasely.io)
 - [Pub.dev Package](https://pub.dev/packages/purchasely_flutter)
 - [Purchasely Documentation](https://docs.purchasely.com)
+</content>
+</invoke>

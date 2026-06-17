@@ -99,17 +99,16 @@ try {
 }
 ```
 ```typescript Flutter
-// Everything is optional except apiKey and storeKit1
+// Everything is optional except apiKey
 // Example with default values
-bool configured = await Purchasely.start(
-        apiKey: '<<X-API-KEY>>',
-        androidStores: ['Google'], // default is Google, don't forget to add the dependency to the same version
-        storeKit1: false, // set to false to use StoreKit2, true to use StoreKit1
-        logLevel: PLYLogLevel.error, // set to debug in development mode to see logs
-        runningMode: PLYRunningMode.full, // select between full and paywallObserver
-        userId: null, // set a user id if you have one
-      );
-    
+final bool configured = await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
+    .stores([PLYStore.google]) // default is Google, don't forget to add the dependency to the same version
+    .storekitVersion(StorekitVersion.storeKit2) // storeKit2 (default) | storeKit1
+    .logLevel(LogLevel.error) // set to debug in development mode to see logs
+    .runningMode(RunningMode.full) // ⚠️ default is now observer — set full for Purchasely to handle purchases
+    .appUserId(null) // set a user id if you have one
+    .start();
+
 if (!configured) {
         print('Purchasely SDK not configured');
         return;
@@ -243,17 +242,16 @@ try {
 }
 ```
 ```typescript Flutter
-// Everything is optional except apiKey and storeKit1
+// Everything is optional except apiKey
 // Example with default values
-bool configured = await Purchasely.start(
-        apiKey: '<<X-API-KEY>>',
-        androidStores: ['Google'], // default is Google, don't forget to add the dependency to the same version
-        storeKit1: false, // set to false to use StoreKit2, true to use StoreKit1
-        logLevel: PLYLogLevel.error, // set to debug in development mode to see logs
-        runningMode: PLYRunningMode.paywallObserver, // select between full and paywallObserver
-        userId: null, // set a user id if you have one
-      );
-    
+final bool configured = await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
+    .stores([PLYStore.google]) // default is Google, don't forget to add the dependency to the same version
+    .storekitVersion(StorekitVersion.storeKit2) // storeKit2 (default) | storeKit1
+    .logLevel(LogLevel.error) // set to debug in development mode to see logs
+    .runningMode(RunningMode.observer) // select between full and observer
+    .appUserId(null) // set a user id if you have one
+    .start();
+
 if (!configured) {
         print('Purchasely SDK not configured');
         return;

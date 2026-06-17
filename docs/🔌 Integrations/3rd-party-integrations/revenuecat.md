@@ -120,21 +120,12 @@ Purchasely.startWithAPIKey(
 );
 ```
 ```typescript Flutter
-/**
-* @params String apiKey
-* @params StringArray stores : may be Google, Amazon and Huawei
-* @params String userId
-* @params PLYLogLevel logLevel
-* @params PLYRunningMode runningMode
-**/
-bool configured = await Purchasely.startWithApiKey(
-        'API_KEY',
-        ['Google'],
-        null,
-        PLYLogLevel.debug,
-        PLYRunningMode.paywallObserver
-    );
-    
+bool configured = await PurchaselyBuilder.apiKey('API_KEY')
+        .stores([PLYStore.google])              // google | huawei | amazon
+        .runningMode(RunningMode.observer)      // observer (default) | full
+        .logLevel(LogLevel.debug)               // debug | info | warn | error
+        .start();
+
 if (!configured) {
         print('Purchasely SDK not configured');
         return;
@@ -208,7 +199,7 @@ await Purchasely.presentPresentationForPlacement({
 });
 ```
 ```Text Flutter
-await Purchasely.presentPresentationForPlacement('onboarding');
+await PresentationBuilder.placement('onboarding').build().display();
 ```
 ```typescript Cordova
 Purchasely.presentPresentationForPlacement('onboarding');
@@ -343,46 +334,51 @@ Purchasely.setPaywallActionInterceptorCallback((result) => {
   });
 ```
 ```typescript Flutter
-Purchasely.setPaywallActionInterceptorCallback(
-          (PaywallActionInterceptorResult result) {
-    if (result.action == PLYPaywallAction.purchase) {
-      try {
-        //the store product id (sku) the user clicked on in the paywall
-        var productId = result.parameters.plan.productId
-        
-        Offerings offerings = await Purchases.getOfferings();
-        if (offerings.current != null && offerings.current.monthly != null) {
-          //get your product from revenuecat
-          Product product = offerings.current.monthly.product;
-          
-          //start purchase
-          PurchaserInfo purchaserInfo = await Purchases.purchasePackage(product);
-          Purchasely.onProcessAction(false);
-          if (purchaserInfo.entitlements.all["my_entitlement_identifier"].isActive) {
-            // Unlock that great "pro" content
-            Purchasely.synchronize();
-          }
-        }
-      } catch (e) {
-        Purchasely.onProcessAction(false);
-        print(e);
-      }
-    } if (result.action == PLYPaywallAction.restore) {
-      Purchasely.onProcessAction(false);
-      
-      try {
-        PurchaserInfo restoredInfo = await Purchases.restoreTransactions();
-        // ... check restored purchaserInfo to see if entitlement is now active
-        Purchasely.onProcessAction(false);
-        Purchasely.synchronize();
-      } on PlatformException catch (e) {
-        Purchasely.onProcessAction(false);
-        // Error restoring purchases
-      }
-    } else {
-      Purchasely.onProcessAction(true);
+await Purchasely.interceptAction(
+  PresentationActionKind.purchase,
+  (info, payload) async {
+    if (payload is! PurchasePayload) {
+      return InterceptResult.notHandled;
     }
- });
+    try {
+      //the store product id (sku) the user clicked on in the paywall
+      var productId = payload.plan['productId'];
+
+      Offerings offerings = await Purchases.getOfferings();
+      if (offerings.current != null && offerings.current.monthly != null) {
+        //get your product from revenuecat
+        Product product = offerings.current.monthly.product;
+
+        //start purchase
+        PurchaserInfo purchaserInfo = await Purchases.purchasePackage(product);
+        if (purchaserInfo.entitlements.all["my_entitlement_identifier"].isActive) {
+          // Unlock that great "pro" content
+          Purchasely.synchronize();
+        }
+        return InterceptResult.success;
+      }
+      return InterceptResult.failed;
+    } catch (e) {
+      print(e);
+      return InterceptResult.failed;
+    }
+  },
+);
+
+await Purchasely.interceptAction(
+  PresentationActionKind.restore,
+  (info, payload) async {
+    try {
+      PurchaserInfo restoredInfo = await Purchases.restoreTransactions();
+      // ... check restored purchaserInfo to see if entitlement is now active
+      Purchasely.synchronize();
+      return InterceptResult.success;
+    } on PlatformException catch (e) {
+      // Error restoring purchases
+      return InterceptResult.failed;
+    }
+  },
+);
 ```
 ```typescript Cordova
 Purchasely.setPaywallActionInterceptorCallback((result) => {

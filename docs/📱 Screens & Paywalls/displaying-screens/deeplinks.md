@@ -93,14 +93,16 @@ Purchasely.setDefaultPresentationResultCallback((result) => {
 });
 ```
 ```java Flutter
-Purchasely.setDefaultPresentationResultCallback((result) => {
-  console.log('Presentation View Result : ' + result.result);
+PresentationBuilder.defaultSource()
+    .onDismissed((outcome) {
+      print('Presentation View Result : ${outcome.purchaseResult}');
 
-  if (result.plan != null) {
-    console.log('Plan Vendor ID : ' + result.plan.vendorId);
-    console.log('Plan Name : ' + result.plan.name);
-  }
-});
+      if (outcome.plan != null) {
+        print('Plan : ${outcome.plan}');
+      }
+    })
+    .build()
+    .display();
 ```
 ```swift Cordova
 Purchasely.setDefaultPresentationResultHandler((result) => {

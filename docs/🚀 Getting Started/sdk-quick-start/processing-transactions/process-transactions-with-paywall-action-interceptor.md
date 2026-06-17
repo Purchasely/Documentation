@@ -131,51 +131,52 @@ Purchasely.setPaywallActionInterceptorCallback((result) => {
   });
 ```
 ```javascript Flutter
-Purchasely.setPaywallActionInterceptorCallback(
-          (PaywallActionInterceptorResult result) {
-    if (result.action == PLYPaywallAction.purchase) {
-      try {
-        //the store product id (sku) the user clicked on in the paywall
-        var productId = result.parameters.plan.productId
-     
-        if (Platform.isAndroid) {
-           // Only for Android you can get other interesting parameters
-          String subscriptionId = result.parameters.subscriptionOffer?.subscriptionId
-          String basePlanId = result.parameters.subscriptionOffer?.basePlanId;
-          String offerId = result.parameters.subscriptionOffer?.offerId;
-          String offerToken = result.parameters.subscriptionOffer?.offerToken;
-        }
-        
-        bool success = await MyPurchaseSystem.purchase(productId);
-        if (success) {
-          // synchronize all purchases with Purchasely
-          Purchasely.synchronize();
-          // notify Purchasely paywall to stop processing action
-          Purchasely.onProcessAction(false);
-        }
-      } catch (e) {
-        Purchasely.onProcessAction(false);
-        print(e);
+// Register one handler per action kind; each returns an InterceptResult.
+await Purchasely.interceptAction(
+  PresentationActionKind.purchase,
+  (info, payload) async {
+    if (payload is! PurchasePayload) {
+      return InterceptResult.notHandled;
+    }
+    try {
+      //the store product id (sku) the user clicked on in the paywall
+      final productId = payload.plan['productId'];
+
+      if (Platform.isAndroid) {
+        // Only for Android you can get other interesting parameters
+        final basePlanId = payload.subscriptionOffer?['basePlanId'];
+        final offerId = payload.subscriptionOffer?['offerId'];
+        final offerToken = payload.subscriptionOffer?['offerToken'];
       }
-    } if (result.action == PLYPaywallAction.restore) {
-      Purchasely.onProcessAction(false);
-      
-      try {
-        await MyPurchaseSystem.restoreAllPurchases();
-       
+
+      final success = await MyPurchaseSystem.purchase(productId);
+      if (success) {
         // synchronize all purchases with Purchasely
         Purchasely.synchronize();
-        // notify Purchasely paywall to stop processing action
-        Purchasely.onProcessAction(false);
-      } on PlatformException catch (e) {
-        Purchasely.onProcessAction(false);
-        // Error restoring purchases
+        return InterceptResult.success;
       }
-    } else {
-      // notify Purchasely paywall to continue other actions
-      Purchasely.onProcessAction(true);
+      return InterceptResult.failed;
+    } catch (e) {
+      print(e);
+      return InterceptResult.failed;
     }
- });
+  },
+);
+
+await Purchasely.interceptAction(
+  PresentationActionKind.restore,
+  (info, payload) async {
+    try {
+      await MyPurchaseSystem.restoreAllPurchases();
+      // synchronize all purchases with Purchasely
+      Purchasely.synchronize();
+      return InterceptResult.success;
+    } on PlatformException {
+      // Error restoring purchases
+      return InterceptResult.failed;
+    }
+  },
+);
 ```
 ```swift Cordova
 Purchasely.setPaywallActionInterceptorCallback((result) => {
@@ -406,58 +407,61 @@ Purchasely.setPaywallActionInterceptorCallback((result) => {
   });
 ```
 ```javascript Flutter
-Purchasely.setPaywallActionInterceptorCallback(
-          (PaywallActionInterceptorResult result) {
-    if (result.action == PLYPaywallAction.purchase) {
-      try {
-        //the store product id (sku) the user clicked on in the paywall
-        var productId = result.parameters.plan.productId
-        
-        if(Platform.isAndroid) {
-          // Only for Android you can get other interesting parameters
-          String basePlanId = result.parameters.subscriptionOffer?.basePlanId;
-          String offerId = result.parameters.subscriptionOffer?.offerId;
-          String offerToken = result.parameters.subscriptionOffer?.offerToken;
-        }
-        
-        Offerings offerings = await Purchases.getOfferings();
-        if (offerings.current != null && offerings.current.monthly != null) {
-          //get your product from revenuecat
-          Product product = offerings.current.monthly.product;
-          
-          //start purchase
-          PurchaserInfo purchaserInfo = await Purchases.purchasePackage(product);
-          if (purchaserInfo.entitlements.all["my_entitlement_identifier"].isActive) {
-            // synchronize all purchases with Purchasely
-            Purchasely.synchronize();
-          }
-          // notify Purchasely paywall to stop processing action
-          Purchasely.onProcessAction(false);
-        }
-      } catch (e) {
-        Purchasely.onProcessAction(false);
-        print(e);
-      }
-    } if (result.action == PLYPaywallAction.restore) {
-      Purchasely.onProcessAction(false);
-      
-      try {
-        PurchaserInfo restoredInfo = await Purchases.restoreTransactions();
-        // ... check restored purchaserInfo to see if entitlement is now active
-        
-        // synchronize all purchases with Purchasely
-        Purchasely.synchronize();
-        // notify Purchasely paywall to stop processing action
-        Purchasely.onProcessAction(false);
-      } on PlatformException catch (e) {
-        Purchasely.onProcessAction(false);
-        // Error restoring purchases
-      }
-    } else {
-      // notify Purchasely paywall to continue other actions
-      Purchasely.onProcessAction(true);
+// Register one handler per action kind; each returns an InterceptResult.
+await Purchasely.interceptAction(
+  PresentationActionKind.purchase,
+  (info, payload) async {
+    if (payload is! PurchasePayload) {
+      return InterceptResult.notHandled;
     }
- });
+    try {
+      //the store product id (sku) the user clicked on in the paywall
+      final productId = payload.plan['productId'];
+
+      if (Platform.isAndroid) {
+        // Only for Android you can get other interesting parameters
+        final basePlanId = payload.subscriptionOffer?['basePlanId'];
+        final offerId = payload.subscriptionOffer?['offerId'];
+        final offerToken = payload.subscriptionOffer?['offerToken'];
+      }
+
+      Offerings offerings = await Purchases.getOfferings();
+      if (offerings.current != null && offerings.current.monthly != null) {
+        //get your product from revenuecat
+        Product product = offerings.current.monthly.product;
+
+        //start purchase
+        PurchaserInfo purchaserInfo = await Purchases.purchasePackage(product);
+        if (purchaserInfo.entitlements.all["my_entitlement_identifier"].isActive) {
+          // synchronize all purchases with Purchasely
+          Purchasely.synchronize();
+        }
+        return InterceptResult.success;
+      }
+      return InterceptResult.failed;
+    } catch (e) {
+      print(e);
+      return InterceptResult.failed;
+    }
+  },
+);
+
+await Purchasely.interceptAction(
+  PresentationActionKind.restore,
+  (info, payload) async {
+    try {
+      PurchaserInfo restoredInfo = await Purchases.restoreTransactions();
+      // ... check restored purchaserInfo to see if entitlement is now active
+
+      // synchronize all purchases with Purchasely
+      Purchasely.synchronize();
+      return InterceptResult.success;
+    } on PlatformException {
+      // Error restoring purchases
+      return InterceptResult.failed;
+    }
+  },
+);
 ```
 ```swift Cordova
 Purchasely.setPaywallActionInterceptorCallback((result) => {

@@ -277,62 +277,59 @@ Purchasely.setPaywallActionInterceptorCallback((result) => {
   });
 ```
 ```typescript Flutter
-Purchasely.setPaywallActionInterceptorCallback(
-          (PaywallActionInterceptorResult result) {
-  if (result.action == PLYPaywallAction.purchase) {
+await Purchasely.interceptAction(
+  PresentationActionKind.purchase,
+  (info, payload) async {
+    if (payload is! PurchasePayload) {
+      return InterceptResult.notHandled;
+    }
+
     // Retrieve the store product id and offer id
-      String? storeProductId = result.parameters.plan?.productId;
-      String? storeOfferId = result.parameters.offer?.storeOfferId;
+    String? storeProductId = payload.plan['productId'];
+    String? storeOfferId = payload.offer?['storeOfferId'];
 
-      // -- GOOGLE ONLY --
-      // Alternatively, just for Google with v5 and v6 you can retrieve everything if it simpler for you,
-      // specially if you want the offer token
-      String? productId = result.parameters.subscriptionOffer?.subscriptionId;
-      String? basePlanId = result.parameters.subscriptionOffer?.basePlanId;
-      String? offerId = result.parameters.subscriptionOffer?.offerId;
-      String? offerToken = result.parameters.subscriptionOffer?.offerToken;
-      // -- END GOOGLE --
+    // -- GOOGLE ONLY --
+    // Alternatively, just for Google you can retrieve everything if it is simpler for you,
+    // specially if you want the offer token
+    String? productId = payload.subscriptionOffer?['subscriptionId'];
+    String? basePlanId = payload.subscriptionOffer?['basePlanId'];
+    String? offerId = payload.subscriptionOffer?['offerId'];
+    String? offerToken = payload.subscriptionOffer?['offerToken'];
+    // -- END GOOGLE --
 
-      // -- APPLE ONLY --
-      if(storeProductId != null && storeOfferId != null) {
-        try {
-          Map signature = await Purchasely.signPromotionalOffer(storeProductId, storeOfferId);
-          String? anonymousUserId = await Purchasely.anonymousUserId;
-          String? appTokenUserId = anonymousUserId.toLowerCase();
+    // -- APPLE ONLY --
+    if (storeProductId != null && storeOfferId != null) {
+      try {
+        Map signature = await Purchasely.signPromotionalOffer(storeProductId, storeOfferId);
+        String? anonymousUserId = await Purchasely.anonymousUserId;
+        String? appTokenUserId = anonymousUserId?.toLowerCase();
 
-            // You need the signature and appTokenUserId to validate the offer
-            // Signature contains those fields
-            /*
-              signature['identifier'] as String
-              signature['signature'] as String
-              signature['keyIdentifier'] as String
-              signature['timestamp'] as int
-            */
-        } catch (e) {
-          print("Error while signing promotional offer");
-          print(e);
-        }
+        // You need the signature and appTokenUserId to validate the offer
+        // Signature contains those fields
+        /*
+          signature['identifier'] as String
+          signature['signature'] as String
+          signature['keyIdentifier'] as String
+          signature['timestamp'] as int
+        */
+      } catch (e) {
+        print("Error while signing promotional offer");
+        print(e);
       }
-      // -- END APPLE --
+    }
+    // -- END APPLE --
 
+    // Now that you have the ids you need, you can launch your purchase flow
 
-      // Now that you have the ids you need, you can launch your purchase flow
-
-      // Hide Purchasely paywall if you want
-      Purchasely.hidePresentation();
-
+    try {
       // TODO launch purchase flow
 
-      // When purchase is done, call this method to stop loader on Purchasely paywall
-      Purchasely.onProcessAction(false);
-
-      // if successful, close the paywall
-      Purchasely.closePresentation();
-
-      // if not successful, display the paywall again
-      Purchasely.showPresentation();
-  } else {
-    Purchasely.onProcessAction(true);
-  }
-});
+      // if successful, return success to dismiss the paywall
+      return InterceptResult.success;
+    } catch (e) {
+      // if not successful, return failed to keep the paywall displayed
+      return InterceptResult.failed;
+    }
+  },
+);
 ```

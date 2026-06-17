@@ -93,14 +93,13 @@ try {
 }
 ```
 ```typescript Flutter
-// Everything is optional except apiKey and storeKit1
+// Everything is optional except apiKey
 // Example with default values
-bool configured = await Purchasely.start(
-        apiKey: '<<X-API-KEY>>',
-        logLevel: PLYLogLevel.error, // set to debug in development mode to see logs
-        userId: null, // set a user id if you have one
-      );
-    
+final bool configured = await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
+    .logLevel(LogLevel.error) // set to debug in development mode to see logs
+    .appUserId(null) // set a user id if you have one
+    .start();
+
 if (!configured) {
         print('Purchasely SDK not configured');
         return;

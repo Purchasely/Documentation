@@ -99,21 +99,24 @@ try {
 ```
 ```javascript Flutter
 try {
-  var result = await Purchasely.presentPresentationForPlacement(
-      "onboarding",
-      isFullscreen: true);
+  final outcome = await PresentationBuilder.placement('onboarding')
+      .build()
+      .display(const Transition.fullScreen());
 
-  switch (result.result) {
-    case PLYPurchaseResult.purchased:
-      print('User purchased: ${result.plan?.name}');
+  switch (outcome.purchaseResult) {
+    case PurchaseResult.purchased:
+      print('User purchased: ${outcome.plan}');
       // update entitlements to unlock the access to the contents
       break;
-    case PLYPurchaseResult.restored:
+    case PurchaseResult.restored:
       print('User restored his purchases');
       // update entitlements to unlock the access to the contents
       break;
-    case PLYPurchaseResult.cancelled:
+    case PurchaseResult.cancelled:
       print("User cancelled purchased");
+      break;
+    case null:
+      print("User dismissed: ${outcome.closeReason}");
       break;
   }
 } catch (e) {

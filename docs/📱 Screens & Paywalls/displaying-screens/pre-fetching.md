@@ -161,42 +161,43 @@ try {
 ```
 ```javascript Flutter
 try {
-  var presentation = await Purchasely.fetchPresentation("ONBOARDING");
+  final request = PresentationBuilder.placement("ONBOARDING").build();
 
-  if (presentation == null) {
-    print("No presentation found");
-    return;
-  }
+  final presentation = await request.preload();
 
-  if (presentation.type == PLYPresentationType.deactivated) {
+  if (presentation.type == PresentationType.deactivated) {
     // No Screen to display
     return;
   }
 
-  if (presentation.type == PLYPresentationType.client) {
+  if (presentation.type == PresentationType.client) {
     // Display my own Screen
     return;
   }
 
   //Display Purchasely Screen
 
-  var presentResult = await Purchasely.presentPresentation(presentation,
-      isFullscreen: false);
+  final outcome = await request.display();
 
-  switch (presentResult.result) {
-    case PLYPurchaseResult.cancelled:
+  switch (outcome.purchaseResult) {
+    case PurchaseResult.cancelled:
       {
         print("User cancelled purchased");
       }
       break;
-    case PLYPurchaseResult.purchased:
+    case PurchaseResult.purchased:
       {
-        print("User purchased ${presentResult.plan?.name}");
+        print("User purchased ${outcome.plan}");
       }
       break;
-    case PLYPurchaseResult.restored:
+    case PurchaseResult.restored:
       {
-        print("User restored ${presentResult.plan?.name}");
+        print("User restored ${outcome.plan}");
+      }
+      break;
+    case null:
+      {
+        print("User dismissed: ${outcome.closeReason}");
       }
       break;
   }

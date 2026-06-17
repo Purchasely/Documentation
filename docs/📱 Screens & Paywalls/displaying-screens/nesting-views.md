@@ -137,7 +137,7 @@ AndroidView(
 
 # Flutter
 
-Flutter developers can nest Purchasely Screen using the `StatelessWidget` returned by `Purchasely.getPresentationView()`\
+Flutter developers can nest Purchasely Screen using the `PLYPresentationView` widget built from a `PresentationRequest`.\
 Full example below:
 
 ```c Flutter
@@ -148,10 +148,7 @@ import 'package:purchasely_flutter/native_view_widget.dart';
 import 'package:purchasely_flutter/purchasely_flutter.dart';
 
 class PresentationScreen extends StatelessWidget {
-  final Map<String, dynamic> properties;
-  final Function(PresentPresentationResult)? callback;
-
-  PresentationScreen({required this.properties, this.callback});
+  PresentationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -171,18 +168,14 @@ class PresentationScreen extends StatelessWidget {
   }
 
   Widget _buildPresentationView() {
-    PLYPresentationView? presentationView = Purchasely.getPresentationView(
-        // you can also set the presentation instance from fetchPresentation
-        //presentation: properties['presentation'],
-        //presentationId: "my_paywall_1" you can also set presentation id directly
-        placementId: "onboarding"
-        contentId: null,
-        callback: (PresentPresentationResult result) {
-          print(
-            'Presentation result:${result.result} - plan:${result.plan?.vendorId}');
-        });
+    final request = PresentationBuilder.placement('onboarding')
+        // you can also target a specific screen with PresentationBuilder.screen('my_paywall_1')
+        .onDismissed((outcome) {
+          print('Presentation result:${outcome.purchaseResult} - plan:${outcome.plan}');
+        })
+        .build();
 
-    return presentationView ?? Container();
+    return PLYPresentationView(request: request);
   }
 }
 ```

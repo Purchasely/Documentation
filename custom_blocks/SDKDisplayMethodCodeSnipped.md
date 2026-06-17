@@ -62,29 +62,25 @@ try {
   console.error(e);
 }
 ```
-```javascript Flutter
+```dart Flutter
 try {
-  var presentation = await Purchasely.fetchPresentation("onboarding");
+  final request = PresentationBuilder.placement("onboarding").build();
 
-  if (presentation == null) {
-    print("No presentation found");
-    return;
-  }
+  // Preload resolves once the Screen is loaded
+  final presentation = await request.preload();
 
-  if (presentation.type == PLYPresentationType.deactivated) {
+  if (presentation.type == PresentationType.deactivated) {
     // No Screen to display
     return;
   }
 
-  if (presentation.type == PLYPresentationType.client) {
+  if (presentation.type == PresentationType.client) {
     // Display my own Screen
     return;
   }
 
-  //Display Purchasely Screen
-
-  await Purchasely.presentPresentation(presentation,
-      isFullscreen: false);
+  // Display Purchasely Screen; resolves at dismiss
+  await request.display(const Transition.modal());
 
 } catch (e) {
   print(e);

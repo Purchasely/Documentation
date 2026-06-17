@@ -107,37 +107,56 @@ Purchasely.setPaywallActionInterceptorCallback((result) => {
   });
 ```
 ```javascript Flutter
-Purchasely.setPaywallActionInterceptorCallback(
-          (PaywallActionInterceptorResult result) {
-  if (result.action == PLYPaywallAction.navigate) {
+await Purchasely.interceptAction(
+  PresentationActionKind.navigate,
+  (info, payload) async {
     print('User wants to navigate');
-    Purchasely.onProcessAction(true);
-  } else if (result.action == PLYPaywallAction.close) {
+    return InterceptResult.notHandled;
+  },
+);
+
+await Purchasely.interceptAction(
+  PresentationActionKind.close,
+  (info, payload) async {
     print('User wants to close paywall');
-    Purchasely.onProcessAction(false);
-  } else if (result.action == PLYPaywallAction.login) {
+    return InterceptResult.success;
+  },
+);
+
+await Purchasely.interceptAction(
+  PresentationActionKind.login,
+  (info, payload) async {
     print('User wants to login');
     //Present your own screen for user to log in
-    Purchasely.closePresentation();
     Purchasely.userLogin('MY_USER_ID');
-    //Call this method to update Purchasely Paywall
-    Purchasely.onProcessAction(true);
-  } else if (result.action == PLYPaywallAction.open_presentation) {
+    return InterceptResult.success;
+  },
+);
+
+await Purchasely.interceptAction(
+  PresentationActionKind.openPresentation,
+  (info, payload) async {
     print('User wants to open a new paywall');
-    Purchasely.onProcessAction(true);
-  } else if (result.action == PLYPaywallAction.purchase) {
+    return InterceptResult.notHandled;
+  },
+);
+
+await Purchasely.interceptAction(
+  PresentationActionKind.purchase,
+  (info, payload) async {
     print('User wants to purchase');
-    //If you want to intercept it, close presentation and display your screen
-    Purchasely.closePresentation();
-    Purchasely.onProcessAction(false);
-  } else if (result.action == PLYPaywallAction.restore) {
+    //If you want to intercept it, handle the purchase and display your screen
+    return InterceptResult.success;
+  },
+);
+
+await Purchasely.interceptAction(
+  PresentationActionKind.restore,
+  (info, payload) async {
     print('User wants to restore his purchases');
-    Purchasely.onProcessAction(true);
-  } else {
-    print('Action unknown ' + result.action.toString());
-    Purchasely.onProcessAction(true);
-  }
-});
+    return InterceptResult.notHandled;
+  },
+);
 ```
 ```swift Cordova
 Purchasely.setPaywallActionInterceptor((result) => {

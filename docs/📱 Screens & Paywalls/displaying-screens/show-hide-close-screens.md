@@ -65,7 +65,8 @@ To learn more about fetching and displaying screens using the Purchasely SDK, re
 Use **`Purchasely.hidePresentation() `**&#x74;o hide a screen without closing it. This method is useful when you want to temporarily hide the screen and bring it back later.
 
 ```coffeescript Flutter
-Purchasely.hidePresentation()
+// On the loaded Presentation handle (from preload() or outcome.presentation)
+presentation.close()
 ```
 ```coffeescript React Native
 Purchasely.hidePresentation()
@@ -84,7 +85,8 @@ _purchasely.HidePresentation()
 Use **`Purchasely.showPresentation()`** to display a screen that was previously hidden using **`hidePresentation()`**.
 
 ```coffeescript Flutter
-Purchasely.showPresentation()
+// On the loaded Presentation handle (from preload() or outcome.presentation)
+presentation.display()
 ```
 ```coffeescript React Native
 Purchasely.showPresentation()
@@ -103,7 +105,8 @@ _purchasely.ShowPresentation()
 Use **`Purchasely.closePresentation()`** to close the current screen permanently. If you want to display the screen again after closing it, you will have to fetch it again by calling the `preload` method.
 
 ```coffeescript Flutter
-Purchasely.closePresentation()
+// On the loaded Presentation handle (from preload() or outcome.presentation)
+presentation.close()
 ```
 ```coffeescript React Native
 Purchasely.closePresentation()

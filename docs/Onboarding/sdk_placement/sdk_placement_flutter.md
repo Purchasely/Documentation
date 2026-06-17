@@ -12,8 +12,11 @@ next:
 ---
 ### CALLING A PLACEMENT FROM THE APP CODE
 
-```swift Flutter
-await Purchasely.presentPresentationForPlacement('SAMPLE_PLACEMENT');
+```dart Flutter
+await PresentationBuilder.placement('SAMPLE_PLACEMENT')
+    .contentId(contentId)
+    .build()
+    .display(const Transition.fullScreen());
 ```
 
 <br />

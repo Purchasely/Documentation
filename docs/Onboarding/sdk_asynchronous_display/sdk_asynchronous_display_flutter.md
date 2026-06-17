@@ -24,33 +24,38 @@ If you want to quickly test your first in-app Purchase, we invite you to directl
 
 This first method to display a Placement was already presented at the stage **Display your first screen through a placement**
 
-```javascript Flutter
-await Purchasely.presentPresentationForPlacement('ONBOARDING');
+`PresentationBuilder.placement(id).build()` returns a `PresentationRequest`. Calling `display([Transition])` shows the paywall and resolves at **dismiss** with a `PresentationOutcome`.
+
+```dart Flutter
+await PresentationBuilder.placement('ONBOARDING')
+    .contentId(contentId)
+    .build()
+    .display(const Transition.fullScreen());
 ```
 
 ### 2\. USING THE ASYNCHRONOUS DISPLAY WITH PRE-FETCH
 
 Purchasely, by default, shows the paywall screen with a loading indicator while fetching the paywall from the network and preparing it for display.
 
-Using `Purchasely.fetchPresentation()` method, you can pre-fetch the paywall from the network before displaying it. 
+Using the `PresentationRequest` `preload` method, you can pre-fetch the paywall from the network before displaying it. 
 
 The benefits of this method are listed in the bloc on the right
 
-Call `Purchasely.fetchPresentation` for a placement or with a presentation id
+Call `PresentationBuilder.placement(...).build().preload()` for a placement or `PresentationBuilder.screen(...).build().preload()` with a presentation id
 
 1. An error may be returned if the presentation could not be fetched from the network.
-2. If successful, you will have a `PLYPresentation` instance containing the following properties
+2. If successful, you will have a `Presentation` instance containing the following properties
 
-```swift PLYPresentation properties
-class PLYPresentation(
+```swift Presentation properties
+class Presentation(
     id: String?
     placementId: String?
     audienceId: String?
     abTestId: String?
     abTestVariantId: String?
     language: String?
-    type: PLYPresentationType
-    plans: [String] // get PLYPlan instance with Purchasely.plan("planId")
+    type: PresentationType
+    plans: [String] // get PLYPlan instance with Purchasely.planWithIdentifier("planId")
 
     // Android SDK only (Kotlin or Java)
     view: PLYTemplateView?
@@ -70,44 +75,45 @@ A presentation can be one of the following types:
 
 To fetch a paywall and then display it, use the following code:
 
-```javascript Flutter
+```dart Flutter
 try {
-  var presentation = await Purchasely.fetchPresentation("ONBOARDING");
+  // Build a request and preload it to fetch the screen from the network
+  final request = PresentationBuilder.placement('ONBOARDING').build();
 
-  if (presentation == null) {
-    print("No presentation found");
-    return;
-  }
+  final presentation = await request.preload();
 
-  if (presentation.type == PLYPresentationType.deactivated) {
+  if (presentation.type == PresentationType.deactivated) {
     // No paywall to display
     return;
   }
 
-  if (presentation.type == PLYPresentationType.client) {
-    // Display my own paywall
+  if (presentation.type == PresentationType.client) {
+    // Display my own paywall — plan summaries are in presentation.plans
     return;
   }
 
-  //Display Purchasely paywall
+  // Display Purchasely paywall; resolves at dismiss with a PresentationOutcome
+  final outcome = await request.display(const Transition.fullScreen());
 
-  var presentResult = await Purchasely.presentPresentation(presentation,
-      isFullscreen: false);
-
-  switch (presentResult.result) {
-    case PLYPurchaseResult.cancelled:
+  switch (outcome.purchaseResult) {
+    case PurchaseResult.cancelled:
       {
         print("User cancelled purchased");
       }
       break;
-    case PLYPurchaseResult.purchased:
+    case PurchaseResult.purchased:
       {
-        print("User purchased ${presentResult.plan?.name}");
+        print("User purchased ${outcome.plan}");
       }
       break;
-    case PLYPurchaseResult.restored:
+    case PurchaseResult.restored:
       {
-        print("User restored ${presentResult.plan?.name}");
+        print("User restored ${outcome.plan}");
+      }
+      break;
+    case null:
+      {
+        print("User dismissed: ${outcome.closeReason}");
       }
       break;
   }

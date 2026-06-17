@@ -206,19 +206,16 @@ Purchasely.setPaywallActionInterceptorCallback((result) => {
 });
 ```
 ```typescript Flutter
-Purchasely.setPaywallActionInterceptorCallback(
-          (PaywallActionInterceptorResult result) {
-    if (result.action == PLYPaywallAction.login) {
-      print('User wants to login');
-      //Present your own screen for user to log in
-      Purchasely.closePaywall();
-      Purchasely.userLogin('MY_USER_ID');
-      //Call this method to update Purchasely Paywall
-      Purchasely.onProcessAction(true);
-    } else {
-      Purchasely.onProcessAction(true);
-    }
- });
+await Purchasely.interceptAction(
+  PresentationActionKind.login,
+  (info, payload) async {
+    print('User wants to login');
+    //Present your own screen for user to log in
+    Purchasely.userLogin('MY_USER_ID');
+    //Return success to update Purchasely Paywall
+    return InterceptResult.success;
+  },
+);
 ```
 ```javascript Cordova
 Purchasely.setPaywallActionInterceptorCallback((result) => {
