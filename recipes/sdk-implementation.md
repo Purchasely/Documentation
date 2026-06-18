@@ -78,7 +78,7 @@ Display the paywall configured for a [placement](displaying-screens-placements).
 
 # Handle the result
 
-A paywall opened from a deeplink or placement reports its outcome through the default presentation result handler.
+A paywall opened from a deeplink or placement reports its outcome through the default presentation dismiss handler.
 
 <!-- kotlin@18-25 -->
 <!-- swift@13-19 -->

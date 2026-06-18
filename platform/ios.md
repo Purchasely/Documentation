@@ -959,7 +959,7 @@ struct ContentView: View {
 
 ## Deeplinks Management
 
-Purchasely can handle deeplinks to display specific presentations or trigger actions. Pass the deeplink to the SDK, optionally control when it is displayed, and set a default presentation result handler. You can also hand a cold‑start deeplink to the SDK at initialization with `Purchasely.apiKey("YOUR_API_KEY").handleDeeplink(url).start { error in }`.
+Purchasely can handle deeplinks to display specific presentations or trigger actions. Pass the deeplink to the SDK, optionally control when it is displayed, and set a default presentation dismiss handler. You can also hand a cold‑start deeplink to the SDK at initialization with `Purchasely.apiKey("YOUR_API_KEY").handleDeeplink(url).start { error in }`.
 
 ### 1. Pass the Deeplink to Purchasely SDK
 
@@ -1015,7 +1015,7 @@ Purchasely.allowDeeplink(true)
 
 Campaigns follow the same principle through their own flag, `allowCampaigns` (also `true` by default): call `Purchasely.allowCampaigns(false)` to defer and `Purchasely.allowCampaigns(true)` to re-enable. The two flags are independent.
 
-### 3. Set the Default Presentation Result Handler
+### 3. Set the Default Presentation Dismiss Handler
 
 Usually a closure is called back when you instantiate a paywall yourself. With a deeplink you don't instantiate it, so set a default handler to receive the result:
 

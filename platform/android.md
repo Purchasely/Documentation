@@ -352,9 +352,9 @@ Purchasely.closeAllScreens()
 
 ### `onCloseRequested`
 
-`onCloseRequested` fires when the user **requests** a close (e.g. taps the X). The actual dismissal, with the purchase outcome, is delivered by `onDismissed` or the `display()` result handler.
+`onCloseRequested` fires when the user **requests** a close (e.g. taps the X). The actual dismissal, with the purchase outcome, is delivered by `onDismissed` or the `display()` dismiss callback.
 
-### Default presentation result handler
+### Default presentation dismiss handler
 
 When a Screen is opened from a deeplink or a campaign, your app does not instantiate it, so no per-display callback fires. Register a default handler to receive the result:
 

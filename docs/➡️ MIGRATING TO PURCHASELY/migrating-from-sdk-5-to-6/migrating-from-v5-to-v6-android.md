@@ -392,7 +392,7 @@ lifecycleScope.launch {
 
 ### `onClose` → `onCloseRequested`
 
-The callback was renamed: it fires when the user **requests** a close (e.g. taps the X). The actual dismissal, with the purchase outcome, is delivered by `onDismissed` / the `display()` result handler.
+The callback was renamed: it fires when the user **requests** a close (e.g. taps the X). The actual dismissal, with the purchase outcome, is delivered by `onDismissed` / the `display()` dismiss callback.
 
 ***
 
