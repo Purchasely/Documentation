@@ -1046,8 +1046,6 @@ Purchasely SDK supports the format `app_scheme://ply/...` where `app_scheme` is 
 - Open a screen directly: `app_scheme://ply/presentations/PRESENTATION_ID`
 - Open your default screen: `app_scheme://ply/presentations`
 - Open a placement: `app_scheme://ply/placements/PLACEMENT_ID`
-- Open a presentation for a product: `app_scheme://ply/products/PRODUCT_ID/PRESENTATION_ID`
-- Open a presentation for a plan: `app_scheme://ply/plans/PLAN_ID/PRESENTATION_ID`
 - Open store billing settings: `app_scheme://ply/update_billing`
 
 Configure your deeplinks in the Purchasely Console under **Deeplinks** settings.

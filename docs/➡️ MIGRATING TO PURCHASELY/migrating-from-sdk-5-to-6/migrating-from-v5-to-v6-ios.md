@@ -287,11 +287,12 @@ Where you may need a change:
 
 ## 5. SwiftUI — `swiftUIView`
 
-The PascalCase `controller.PresentationView` bridge is removed. Read `swiftUIView` off the preloaded presentation:
+The PascalCase `controller.PresentationView` bridge is removed. The eight `PLYPresentationView?`‑returning factory methods — `Purchasely.productView(…)`, `planView(…)`, `presentationView(…)` and their `contentId:` variants — are **removed** too (they were the SwiftUI counterpart to the UIViewController‑returning methods in §3, and still carried the legacy `(PLYProductViewControllerResult, PLYPlan?)` completion block). Read `swiftUIView` off the preloaded presentation instead, and take the dismissal result from `onDismissed`:
 
 ```swift
 PLYPresentationBuilder
     .forScreenId(id)
+    .onDismissed { outcome in /* outcome carries purchaseResult + plan */ }
     .build()
     .preload { presentation, error in
         if let view = presentation?.swiftUIView {
@@ -331,6 +332,17 @@ let handled = Purchasely.handleDeeplink(url)
 >
 > Unlike Android, iOS does **not** intercept deeplinks automatically — you still pass them via `Purchasely.handleDeeplink(_:)` from your `AppDelegate` / `SceneDelegate`.
 
+### Product / plan deeplinks removed (breaking)
+
+The `ply/products/*` and `ply/plans/*` deeplink formats are **removed** in v6. Deep‑link to a placement or a presentation instead — configure the target screen in the Console:
+
+| v5 (removed) | v6 |
+|--------------|----|
+| `app_scheme://ply/products/PRODUCT_ID/PRESENTATION_ID` | `app_scheme://ply/presentations/PRESENTATION_ID` |
+| `app_scheme://ply/plans/PLAN_ID/PRESENTATION_ID` | `app_scheme://ply/presentations/PRESENTATION_ID` |
+| `app_scheme://ply/products/PRODUCT_ID` | `app_scheme://ply/placements/PLACEMENT_ID` |
+| `app_scheme://ply/plans/PLAN_ID` | `app_scheme://ply/placements/PLACEMENT_ID` |
+
 ***
 
 ## 8. Display mode sizing (new)
@@ -359,6 +371,8 @@ When `dismissible` is `false`, ambient dismiss (background tap, swipe‑down, iP
 * [ ] Remove the `paywallActionsInterceptor:` parameter from `start()` and any `PLYPaywallActionsInterceptor` typealias
 * [ ] Replace `Purchasely.fetchPresentation(...)` with `PLYPresentationBuilder.…build().preload { … }`
 * [ ] Replace `controller.PresentationView` with `presentation.swiftUIView`
+* [ ] Replace `Purchasely.productView(…)` / `planView(…)` / `presentationView(…)` with `PLYPresentationBuilder.…build().preload { presentation, _ in presentation?.swiftUIView }`
+* [ ] Repoint any `ply/products/*` or `ply/plans/*` deeplinks to `ply/presentations/<id>` or `ply/placements/<id>`
 * [ ] Replace `Purchasely.closeDisplayedPresentation()` with `Purchasely.closeAllScreens()`
 * [ ] Update `Purchasely.display(...)` to `Purchasely.display(for: placementId, transition: …)`
 * [ ] In Objective‑C, change `PLYPresentation *` to `id<PLYPresentation>`
