@@ -375,13 +375,13 @@ await Purchasely.interceptAction(
     }
     try {
       // The store product id (sku) the user tapped on in the presentation
-      final storeProductId = payload.plan['productId'];
+      final storeProductId = payload.plan.productId;
 
       if (defaultTargetPlatform == TargetPlatform.android) {
         // Only for Android you can retrieve the subscription offer details
-        final basePlanId = payload.subscriptionOffer?['basePlanId'];
-        final offerId = payload.subscriptionOffer?['offerId'];
-        final offerToken = payload.subscriptionOffer?['offerToken'];
+        final basePlanId = payload.subscriptionOffer?.basePlanId;
+        final offerId = payload.subscriptionOffer?.offerId;
+        final offerToken = payload.subscriptionOffer?.offerToken;
       }
 
       final success = await MyPurchaseSystem.purchase(storeProductId);
@@ -436,7 +436,7 @@ The v6 interceptor is registered **per action kind** with `Purchasely.interceptA
 
 | Action kind | Typed payload |
 |-------------|---------------|
-| `purchase` | `PurchasePayload` (`plan`, `subscriptionOffer`, …) |
+| `purchase` | `PurchasePayload` (`plan: PLYPlan`, `subscriptionOffer: PLYSubscriptionOffer?`, `offer: PLYPromoOffer?`) |
 | `restore` | — |
 | `login` | — |
 | `close` | `ClosePayload` |
@@ -834,13 +834,13 @@ To use multiple stores (the first one available on the device is used):
 
 ### Android-Specific Purchase Parameters
 
-When intercepting purchases on Android, you can access additional subscription offer parameters from the `PurchasePayload`:
+When intercepting purchases on Android, you can access additional subscription offer parameters from the typed `PLYSubscriptionOffer?` on `PurchasePayload`:
 
 ```dart
 if (defaultTargetPlatform == TargetPlatform.android) {
-  final basePlanId = payload.subscriptionOffer?['basePlanId'];
-  final offerId = payload.subscriptionOffer?['offerId'];
-  final offerToken = payload.subscriptionOffer?['offerToken'];
+  final basePlanId = payload.subscriptionOffer?.basePlanId;
+  final offerId = payload.subscriptionOffer?.offerId;
+  final offerToken = payload.subscriptionOffer?.offerToken;
 }
 ```
 

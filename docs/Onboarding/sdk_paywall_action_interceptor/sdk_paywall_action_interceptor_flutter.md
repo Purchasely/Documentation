@@ -28,13 +28,13 @@ await Purchasely.interceptAction(
     }
     try {
       // The store product id (sku) the user tapped on in the presentation
-      final storeProductId = payload.plan['productId'];
+      final storeProductId = payload.plan.productId;
 
       if (defaultTargetPlatform == TargetPlatform.android) {
         // Only for Android you can retrieve the subscription offer details
-        final basePlanId = payload.subscriptionOffer?['basePlanId'];
-        final offerId = payload.subscriptionOffer?['offerId'];
-        final offerToken = payload.subscriptionOffer?['offerToken'];
+        final basePlanId = payload.subscriptionOffer?.basePlanId;
+        final offerId = payload.subscriptionOffer?.offerId;
+        final offerToken = payload.subscriptionOffer?.offerToken;
       }
 
       final success = await MyPurchaseSystem.purchase(storeProductId);
@@ -80,13 +80,13 @@ await Purchasely.interceptAction(
     }
     try {
       // The store product id (sku) the user tapped on in the presentation
-      final storeProductId = payload.plan['productId'];
+      final storeProductId = payload.plan.productId;
 
       if (defaultTargetPlatform == TargetPlatform.android) {
         // Only for Android you can retrieve the subscription offer details
-        final basePlanId = payload.subscriptionOffer?['basePlanId'];
-        final offerId = payload.subscriptionOffer?['offerId'];
-        final offerToken = payload.subscriptionOffer?['offerToken'];
+        final basePlanId = payload.subscriptionOffer?.basePlanId;
+        final offerId = payload.subscriptionOffer?.offerId;
+        final offerToken = payload.subscriptionOffer?.offerToken;
       }
 
       final offerings = await Purchases.getOfferings();

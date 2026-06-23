@@ -285,16 +285,16 @@ await Purchasely.interceptAction(
     }
 
     // Retrieve the store product id and offer id
-    String? storeProductId = payload.plan['productId'];
-    String? storeOfferId = payload.offer?['storeOfferId'];
+    String? storeProductId = payload.plan.productId;
+    String? storeOfferId = payload.offer?.storeOfferId;
 
     // -- GOOGLE ONLY --
     // Alternatively, just for Google you can retrieve everything if it is simpler for you,
     // specially if you want the offer token
-    String? productId = payload.subscriptionOffer?['subscriptionId'];
-    String? basePlanId = payload.subscriptionOffer?['basePlanId'];
-    String? offerId = payload.subscriptionOffer?['offerId'];
-    String? offerToken = payload.subscriptionOffer?['offerToken'];
+    String? productId = payload.subscriptionOffer?.subscriptionId;
+    String? basePlanId = payload.subscriptionOffer?.basePlanId;
+    String? offerId = payload.subscriptionOffer?.offerId;
+    String? offerToken = payload.subscriptionOffer?.offerToken;
     // -- END GOOGLE --
 
     // -- APPLE ONLY --

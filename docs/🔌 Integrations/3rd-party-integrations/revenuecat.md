@@ -342,7 +342,7 @@ await Purchasely.interceptAction(
     }
     try {
       //the store product id (sku) the user clicked on in the paywall
-      var productId = payload.plan['productId'];
+      var productId = payload.plan.productId;
 
       Offerings offerings = await Purchases.getOfferings();
       if (offerings.current != null && offerings.current.monthly != null) {

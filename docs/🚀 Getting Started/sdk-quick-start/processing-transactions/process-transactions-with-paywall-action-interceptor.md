@@ -25,7 +25,7 @@ next:
 You register one interceptor per action with `Purchasely.interceptAction`. Each interceptor receives:
 
 * `info`: the `PLYInterceptorInfo` object containing the controller of the paywall to dismiss it or display content / error messages above it, and the presentation id and content id associated to this paywall
-* the typed action object (like a `Purchase` carrying the `plan` and, on Android, the `subscriptionOffer`) that contains the objects needed to perform the action
+* the typed action object (like a native `Purchase`, or Flutter's `PurchasePayload`, carrying a real `plan` object and, on Android, a real nullable `subscriptionOffer` object) that contains the objects needed to perform the action
 * `completion` (iOS) / a returned `PLYInterceptResult` (Android): tells Purchasely how the action was handled. Returning the "not handled" result on a purchase action will lead the Purchasely SDK to trigger the native in-app purchase flow itself
 
 > ⚠️ Which result should you return after handling the action?
@@ -140,13 +140,13 @@ await Purchasely.interceptAction(
     }
     try {
       //the store product id (sku) the user clicked on in the paywall
-      final productId = payload.plan['productId'];
+      final productId = payload.plan.productId;
 
       if (Platform.isAndroid) {
         // Only for Android you can get other interesting parameters
-        final basePlanId = payload.subscriptionOffer?['basePlanId'];
-        final offerId = payload.subscriptionOffer?['offerId'];
-        final offerToken = payload.subscriptionOffer?['offerToken'];
+        final basePlanId = payload.subscriptionOffer?.basePlanId;
+        final offerId = payload.subscriptionOffer?.offerId;
+        final offerToken = payload.subscriptionOffer?.offerToken;
       }
 
       final success = await MyPurchaseSystem.purchase(productId);
@@ -416,13 +416,13 @@ await Purchasely.interceptAction(
     }
     try {
       //the store product id (sku) the user clicked on in the paywall
-      final productId = payload.plan['productId'];
+      final productId = payload.plan.productId;
 
       if (Platform.isAndroid) {
         // Only for Android you can get other interesting parameters
-        final basePlanId = payload.subscriptionOffer?['basePlanId'];
-        final offerId = payload.subscriptionOffer?['offerId'];
-        final offerToken = payload.subscriptionOffer?['offerToken'];
+        final basePlanId = payload.subscriptionOffer?.basePlanId;
+        final offerId = payload.subscriptionOffer?.offerId;
+        final offerToken = payload.subscriptionOffer?.offerToken;
       }
 
       Offerings offerings = await Purchases.getOfferings();

@@ -302,7 +302,7 @@ await Purchasely.interceptAction(
   PresentationActionKind.purchase,
   (info, payload) async {
     if (payload is PurchasePayload) {
-      final ok = await MyPurchaseSystem.purchase(payload.plan['productId']);
+      final ok = await MyPurchaseSystem.purchase(payload.plan.productId);
       return ok ? InterceptResult.success : InterceptResult.failed;
     }
     return InterceptResult.notHandled;
@@ -337,11 +337,11 @@ await Purchasely.removeAllInterceptors();
 
 ### Action kinds & payloads
 
-Action kinds (`PresentationActionKind`): `close`, `closeAll`, `login`, `navigate`, `purchase`, `restore`, `openPresentation`, `openPlacement`, `promoCode`, `webCheckout`. Each kind has a typed payload (`PurchasePayload`, `NavigatePayload`, `ClosePayload`, `CloseAllPayload`, `OpenPresentationPayload`, `OpenPlacementPayload`, `WebCheckoutPayload`); payload‑less kinds (`login`, `restore`, `promoCode`) carry no extra fields.
+Action kinds (`PresentationActionKind`): `close`, `closeAll`, `login`, `navigate`, `purchase`, `restore`, `openPresentation`, `openPlacement`, `promoCode`, `webCheckout`. Each kind has a typed payload (`PurchasePayload`, `NavigatePayload`, `ClosePayload`, `CloseAllPayload`, `OpenPresentationPayload`, `OpenPlacementPayload`, `WebCheckoutPayload`); payload‑less kinds (`login`, `restore`, `promoCode`) carry no extra fields. `PurchasePayload` exposes real objects: `plan` is a `PLYPlan`, `subscriptionOffer` is a nullable `PLYSubscriptionOffer`, and `offer` is a nullable `PLYPromoOffer`.
 
 > 📘 Observer‑mode bridge
 >
-> In `observer` mode, intercept `purchase` / `restore`, run your own billing flow, then call `Purchasely.synchronize()` and return `InterceptResult.success`. On Android, the `PurchasePayload` also carries `subscriptionOffer` (`basePlanId`, `offerId`, `offerToken`).
+> In `observer` mode, intercept `purchase` / `restore`, run your own billing flow, then call `Purchasely.synchronize()` and return `InterceptResult.success`. On Android, `PurchasePayload.subscriptionOffer` is a nullable `PLYSubscriptionOffer` carrying `subscriptionId`, `basePlanId`, `offerId`, and `offerToken`.
 
 ***
 
