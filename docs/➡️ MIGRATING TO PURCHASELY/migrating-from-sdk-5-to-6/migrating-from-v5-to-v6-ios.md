@@ -1,6 +1,8 @@
 ---
 title: Migrating to v6 — iOS
-excerpt: Breaking changes and migration steps to upgrade the Purchasely iOS SDK from v5.x to v6.0.0-rc.1
+excerpt: >-
+  Breaking changes and migration steps to upgrade the Purchasely iOS SDK from
+  v5.x to v6.0.0-rc.1
 deprecated: false
 hidden: false
 metadata:
@@ -18,19 +20,19 @@ Version 6.0.0-rc.1 introduces a fluent initialization builder, a granular per‑
 
 ## Summary of breaking changes
 
-| v5 | v6 |
-|----|----|
-| Default running mode `.full` | Default running mode **`.observer`** ⚠️ |
-| `Purchasely.start(withAPIKey:…)` | `Purchasely.apiKey(…)…start()` (fluent builder) |
-| `setPaywallActionsInterceptor { … }` | `Purchasely.interceptAction(.x) { … }` returning `PLYInterceptResult` |
-| `PLYPresentationInfo` | `PLYInterceptorInfo` |
-| `Purchasely.fetchPresentation(...)` | `PLYPresentationBuilder.…build().preload { … }` |
-| `Purchasely.display(for:displayMode:)` | `Purchasely.display(for:transition:)` |
-| `Purchasely.closeDisplayedPresentation()` | `Purchasely.closeAllScreens()` |
-| `controller.PresentationView` | `presentation.swiftUIView` |
-| `readyToOpenDeeplink(_:)` | `allowDeeplink(_:)` |
-| `isDeeplinkHandled(deeplink:)` | `handleDeeplink(_:)` |
-| `PLYProductViewControllerResult` | `PLYPresentationOutcome` |
+| v5                                        | v6                                                                    |
+| ----------------------------------------- | --------------------------------------------------------------------- |
+| Default running mode `.full`              | Default running mode `.observer` ⚠️                                   |
+| `Purchasely.start(withAPIKey:…)`          | `Purchasely.apiKey(…)…start()` (fluent builder)                       |
+| `setPaywallActionsInterceptor { … }`      | `Purchasely.interceptAction(.x) { … }` returning `PLYInterceptResult` |
+| `PLYPresentationInfo`                     | `PLYInterceptorInfo`                                                  |
+| `Purchasely.fetchPresentation(...)`       | `PLYPresentationBuilder.…build().preload { … }`                       |
+| `Purchasely.display(for:displayMode:)`    | `Purchasely.display(for:transition:)`                                 |
+| `Purchasely.closeDisplayedPresentation()` | `Purchasely.closeAllScreens()`                                        |
+| `controller.PresentationView`             | `presentation.swiftUIView`                                            |
+| `readyToOpenDeeplink(_:)`                 | `allowDeeplink(_:)`                                                   |
+| `isDeeplinkHandled(deeplink:)`            | `handleDeeplink(_:)`                                                  |
+| `PLYProductViewControllerResult`          | `PLYPresentationOutcome`                                              |
 
 ***
 
@@ -40,9 +42,11 @@ Version 6.0.0-rc.1 introduces a fluent initialization builder, a granular per‑
 
 ### Default running mode is now `.observer` ⚠️
 
-The default `runningMode` changed from `.full` to `.observer`. **If you want Purchasely to handle and validate purchases, set `.full` explicitly.**
+The default `runningMode` changed from `.full` to `.observer`. **If you want Purchasely to handle and validate purchases, set&#x20;**`.full`**&#x20;explicitly.**
 
-> 🚧 This change is silent — your code compiles without errors. If you relied on the implicit `.full` default, your app will **stop validating transactions** until you add `.runningMode(.full)`.
+> 🚧 This change is silent&#x20;
+>
+> Your code compiles without errors. If you relied on the implicit `.full` default, your app will **stop validating transactions** until you add `.runningMode(.full)`.
 
 ### Before (v5)
 
@@ -93,19 +97,17 @@ Purchasely
 
 ### Chain modifiers and defaults
 
-| Modifier | Default |
-|----------|---------|
-| `appUserId(_:)` | `nil` (anonymous) |
-| `runningMode(_:)` | `.observer` ⚠️ (was `.full` in v5) |
-| `storekitSettings(_:)` | `.storeKit2` |
-| `logLevel(_:)` | `.error` |
-| `environment(_:)` | `.prod` |
-| `themeMode(_:)` | `.system` |
-| `allowDeeplink(_:)` | `true` — deeplinks display immediately; pass `false` to defer until `Purchasely.allowDeeplink(true)` |
-| `allowCampaigns(_:)` | `true` — campaigns display immediately; pass `false` to defer until `Purchasely.allowCampaigns(true)` |
-| `handleDeeplink(_:)` | unset — pass a cold‑start deeplink to display once the SDK has started |
-
-> 📘 The pre‑`start` class funcs `setEnvironment(_:)`, `setShowPromotedInAppPurchasePaywall(_:)`, `setAppTechnology(_:)`, `setSdkBridgeVersion(_:)`, `setThemeMode(_:)` are **deprecated** (removal in v7). Use the chain modifiers instead.
+| Modifier               | Default                                                                                               |
+| ---------------------- | ----------------------------------------------------------------------------------------------------- |
+| `appUserId(_:)`        | `nil` (anonymous)                                                                                     |
+| `runningMode(_:)`      | `.observer` ⚠️ (was `.full` in v5)                                                                    |
+| `storekitSettings(_:)` | `.storeKit2`                                                                                          |
+| `logLevel(_:)`         | `.error`                                                                                              |
+| `environment(_:)`      | `.prod`                                                                                               |
+| `themeMode(_:)`        | `.system`                                                                                             |
+| `allowDeeplink(_:)`    | `true` — deeplinks display immediately; pass `false` to defer until `Purchasely.allowDeeplink(true)`  |
+| `allowCampaigns(_:)`   | `true` — campaigns display immediately; pass `false` to defer until `Purchasely.allowCampaigns(true)` |
+| `handleDeeplink(_:)`   | unset — pass a cold‑start deeplink to display once the SDK has started                                |
 
 ***
 
@@ -156,28 +158,30 @@ Purchasely.interceptAction(.login) { info, params, completion in
 
 ### Result semantics
 
-| `PLYInterceptResult` | Meaning | SDK behavior |
-|----------------------|---------|--------------|
-| `.success` | App handled the action successfully | Chain advances to next action |
-| `.failed` | App tried but failed | Remaining actions from this interaction are skipped |
-| `.notHandled` | App doesn't want to handle this | SDK executes the action itself |
+| `PLYInterceptResult` | Meaning                             | SDK behavior                                        |
+| -------------------- | ----------------------------------- | --------------------------------------------------- |
+| `.success`           | App handled the action successfully | Chain advances to next action                       |
+| `.failed`            | App tried but failed                | Remaining actions from this interaction are skipped |
+| `.notHandled`        | App doesn't want to handle this     | SDK executes the action itself                      |
 
-> 📘 `.notHandled` for `.purchase` / `.restore` in observer mode logs a warning and skips — the SDK cannot execute purchases in observer mode.
+> 📘 Observer mode
+>
+> `.notHandled` for `.purchase` / `.restore` in observer mode logs a warning and skips — the SDK cannot execute purchases in observer mode.
 
-`processAction(false)` → `.success`, `processAction(true)` → `.notHandled`. Remove interceptors with `Purchasely.removeActionInterceptor(.login)` / `Purchasely.removeAllActionInterceptors()`.
+`processAction(false)` → `.success`, <br />`processAction(true)` → `.notHandled`. <br />Remove interceptors with `Purchasely.removeActionInterceptor(.login)` / `Purchasely.removeAllActionInterceptors()`.
 
 ### `PLYPresentationInfo` → `PLYInterceptorInfo`
 
 `PLYPresentationInfo` is removed; the new `PLYInterceptorInfo` is passed automatically:
 
-| `PLYPresentationInfo` (removed) | `PLYInterceptorInfo` (new) |
-|---------------------------------|----------------------------|
-| `info.presentationId` | `info.presentation?.id` |
-| `info.placementId` | `info.presentation?.placementId` |
-| `info.audienceId` | `info.presentation?.audienceId` |
+| `PLYPresentationInfo` (removed)          | `PLYInterceptorInfo` (new)                         |
+| ---------------------------------------- | -------------------------------------------------- |
+| `info.presentationId`                    | `info.presentation?.id`                            |
+| `info.placementId`                       | `info.presentation?.placementId`                   |
+| `info.audienceId`                        | `info.presentation?.audienceId`                    |
 | `info.abTestId` / `info.abTestVariantId` | `info.presentation?.abTestId` / `…abTestVariantId` |
-| `info.campaignId` | `info.presentation?.campaignId` |
-| `info.contentId` / `info.controller` | `info.contentId` / `info.controller` |
+| `info.campaignId`                        | `info.presentation?.campaignId`                    |
+| `info.contentId` / `info.controller`     | `info.contentId` / `info.controller`               |
 
 The `paywallActionsInterceptor:` parameter is also removed from `start()` — register interceptors separately, and the `PLYPaywallActionsInterceptor` typealias no longer exists.
 
@@ -211,11 +215,11 @@ do {
 
 Mapping the legacy callbacks to builder hooks:
 
-| Legacy callback | Fires when | Builder hook |
-|-----------------|------------|--------------|
-| `fetchCompletion:` | The presentation was fetched | `.preload { presentation, error in … }` |
-| `loadedCompletion:` | The paywall is on screen | `.onPresented { presentation, error in … }` |
-| `completion:` | The product view controller was dismissed | `.onDismissed { outcome in … }` |
+| Legacy callback     | Fires when                                | Builder hook                                |
+| ------------------- | ----------------------------------------- | ------------------------------------------- |
+| `fetchCompletion:`  | The presentation was fetched              | `.preload { presentation, error in … }`     |
+| `loadedCompletion:` | The paywall is on screen                  | `.onPresented { presentation, error in … }` |
+| `completion:`       | The product view controller was dismissed | `.onDismissed { outcome in … }`             |
 
 `PLYPresentationBuilder` supports content id, color overrides, header‑button overrides and lifecycle callbacks:
 
@@ -230,7 +234,9 @@ PLYPresentationBuilder.from(placementId: "onboarding")
 
 From Objective‑C, use the factories `forPlacementId:` / `forScreenId:`.
 
-> 📘 `displayCloseButton(_:)` / `displayBackButton(_:)` are **suppression‑only** on iOS: passing `false` hides a button the backend would show; passing `true` does **not** force a backend‑hidden button to appear. They are build‑time only — set them before `build()`.
+> 📘 Override close button
+>
+> `displayCloseButton(_:)` / `displayBackButton(_:)` are **suppression‑only** on iOS: passing `false` hides a button the backend would show; passing `true` does **not** force a backend‑hidden button to appear. They are build‑time only — set them before `build()`.
 
 ### `Purchasely.display(...)` simplified
 
@@ -251,13 +257,13 @@ For a direct Screen, a completion, or richer configuration, use `PLYPresentation
 
 `onDismissed` delivers a `PLYPresentationOutcome` carrying five fields:
 
-| Field | Type | Meaning |
-|-------|------|---------|
+| Field            | Type                | Meaning                                             |
+| ---------------- | ------------------- | --------------------------------------------------- |
 | `purchaseResult` | `PLYPurchaseResult` | `.purchased` / `.cancelled` / `.restored` / `.none` |
-| `plan` | `PLYPlan?` | The purchased plan, when applicable |
-| `presentation` | `PLYPresentation?` | The presentation that produced this outcome |
-| `closeReason` | `PLYCloseReason` | **New** — why the paywall closed |
-| `error` | `Error?` | Reserved (always `nil` in 6.0) |
+| `plan`           | `PLYPlan?`          | The purchased plan, when applicable                 |
+| `presentation`   | `PLYPresentation?`  | The presentation that produced this outcome         |
+| `closeReason`    | `PLYCloseReason`    | **New** — why the paywall closed                    |
+| `error`          | `Error?`            | Reserved (always `nil` in 6.0)                      |
 
 ```swift
 .onDismissed { outcome in
@@ -279,9 +285,9 @@ For a direct Screen, a completion, or richer configuration, use `PLYPresentation
 
 Where you may need a change:
 
-* **Objective‑C** signatures `(PLYPresentation *)` → `(id<PLYPresentation>)`. Method bodies typically need no other edits.
-* **Swift** delegate signatures may write `any PLYPresentation` (both `PLYPresentation` and `any PLYPresentation` compile).
-* The public delegate protocols `PLYUIHandler`, `PLYCustomScreenViewControllerDelegate`, `PLYCustomScreenViewDelegate` now declare `any PLYPresentation`.
+- **Objective‑C** signatures `(PLYPresentation *)` → `(id<PLYPresentation>)`. Method bodies typically need no other edits.
+- **Swift** delegate signatures may write `any PLYPresentation` (both `PLYPresentation` and `any PLYPresentation` compile).
+- The public delegate protocols `PLYUIHandler`, `PLYCustomScreenViewControllerDelegate`, `PLYCustomScreenViewDelegate` now declare `any PLYPresentation`.
 
 ***
 
@@ -319,29 +325,29 @@ Purchasely.closeAllScreens()   // was Purchasely.closeDisplayedPresentation()
 
 The old methods still compile but are deprecated (removal in v7):
 
-| v5 (deprecated) | v6 |
-|-----------------|----|
-| `Purchasely.readyToOpenDeeplink(_:)` | `Purchasely.allowDeeplink(_:)` |
+| v5 (deprecated)                           | v6                              |
+| ----------------------------------------- | ------------------------------- |
+| `Purchasely.readyToOpenDeeplink(_:)`      | `Purchasely.allowDeeplink(_:)`  |
 | `Purchasely.isDeeplinkHandled(deeplink:)` | `Purchasely.handleDeeplink(_:)` |
 
 ```swift
 let handled = Purchasely.handleDeeplink(url)
 ```
 
-> 📘 In v6, deeplinks display **immediately** by default. Call `Purchasely.allowDeeplink(false)` to defer them (e.g. during onboarding) and `allowDeeplink(true)` when ready. You can also hand a cold‑start deeplink to the SDK at initialization: `Purchasely.apiKey("…").handleDeeplink(url).start { error in }`.
+> 📘 Deeplinks are allowed by default
 >
-> Unlike Android, iOS does **not** intercept deeplinks automatically — you still pass them via `Purchasely.handleDeeplink(_:)` from your `AppDelegate` / `SceneDelegate`.
+> In v6, deeplinks display **immediately** by default. Call `Purchasely.allowDeeplink(false)` to defer them (e.g. during onboarding) and `allowDeeplink(true)` when ready. You can also hand a cold‑start deeplink to the SDK at initialization: `Purchasely.apiKey("…").handleDeeplink(url).start { error in }`.<br />Unlike Android, iOS does **not** intercept deeplinks automatically — you still pass them via `Purchasely.handleDeeplink(_:)` from your `AppDelegate` / `SceneDelegate`.
 
 ### Product / plan deeplinks removed (breaking)
 
 The `ply/products/*` and `ply/plans/*` deeplink formats are **removed** in v6. Deep‑link to a placement or a presentation instead — configure the target screen in the Console:
 
-| v5 (removed) | v6 |
-|--------------|----|
+| v5 (removed)                                           | v6                                               |
+| ------------------------------------------------------ | ------------------------------------------------ |
 | `app_scheme://ply/products/PRODUCT_ID/PRESENTATION_ID` | `app_scheme://ply/presentations/PRESENTATION_ID` |
-| `app_scheme://ply/plans/PLAN_ID/PRESENTATION_ID` | `app_scheme://ply/presentations/PRESENTATION_ID` |
-| `app_scheme://ply/products/PRODUCT_ID` | `app_scheme://ply/placements/PLACEMENT_ID` |
-| `app_scheme://ply/plans/PLAN_ID` | `app_scheme://ply/placements/PLACEMENT_ID` |
+| `app_scheme://ply/plans/PLAN_ID/PRESENTATION_ID`       | `app_scheme://ply/presentations/PRESENTATION_ID` |
+| `app_scheme://ply/products/PRODUCT_ID`                 | `app_scheme://ply/placements/PLACEMENT_ID`       |
+| `app_scheme://ply/plans/PLAN_ID`                       | `app_scheme://ply/placements/PLACEMENT_ID`       |
 
 ***
 
@@ -363,22 +369,24 @@ When `dismissible` is `false`, ambient dismiss (background tap, swipe‑down, iP
 
 ### Breaking (must fix to compile)
 
-* [ ] Replace `Purchasely.start(withAPIKey:…)` with the fluent chain `Purchasely.apiKey("…")…start()`
-* [ ] If using Full mode, add explicit `.runningMode(.full)` (default changed to `.observer`)
-* [ ] Replace `setPaywallActionsInterceptor { … }` with per‑action `Purchasely.interceptAction(.x) { … }`
-* [ ] Map `processAction(false)` → `.success`, `processAction(true)` → `.notHandled`
-* [ ] Replace `PLYPresentationInfo` with `PLYInterceptorInfo`
-* [ ] Remove the `paywallActionsInterceptor:` parameter from `start()` and any `PLYPaywallActionsInterceptor` typealias
-* [ ] Replace `Purchasely.fetchPresentation(...)` with `PLYPresentationBuilder.…build().preload { … }`
-* [ ] Replace `controller.PresentationView` with `presentation.swiftUIView`
-* [ ] Replace `Purchasely.productView(…)` / `planView(…)` / `presentationView(…)` with `PLYPresentationBuilder.…build().preload { presentation, _ in presentation?.swiftUIView }`
-* [ ] Repoint any `ply/products/*` or `ply/plans/*` deeplinks to `ply/presentations/<id>` or `ply/placements/<id>`
-* [ ] Replace `Purchasely.closeDisplayedPresentation()` with `Purchasely.closeAllScreens()`
-* [ ] Update `Purchasely.display(...)` to `Purchasely.display(for: placementId, transition: …)`
-* [ ] In Objective‑C, change `PLYPresentation *` to `id<PLYPresentation>`
+- [ ] Replace `Purchasely.start(withAPIKey:…)` with the fluent chain `Purchasely.apiKey("…")…start()`
+- [ ] If using Full mode, add explicit `.runningMode(.full)` (default changed to `.observer`)
+- [ ] Replace `setPaywallActionsInterceptor { … }` with per‑action `Purchasely.interceptAction(.x) { … }`
+- [ ] Map `processAction(false)` → `.success`, `processAction(true)` → `.notHandled`
+- [ ] Replace `PLYPresentationInfo` with `PLYInterceptorInfo`
+- [ ] Remove the `paywallActionsInterceptor:` parameter from `start()` and any `PLYPaywallActionsInterceptor` typealias
+- [ ] Replace `Purchasely.fetchPresentation(...)` with `PLYPresentationBuilder.…build().preload { … }`
+- [ ] Replace `controller.PresentationView` with `presentation.swiftUIView`
+- [ ] Replace `Purchasely.productView(…)` / `planView(…)` / `presentationView(…)` with `PLYPresentationBuilder.…build().preload { presentation, _ in presentation?.swiftUIView }`
+- [ ] Repoint any `ply/products/*` or `ply/plans/*` deeplinks to `ply/presentations/<id>` or `ply/placements/<id>`
+- [ ] Replace `Purchasely.closeDisplayedPresentation()` with `Purchasely.closeAllScreens()`
+- [ ] Update `Purchasely.display(...)` to `Purchasely.display(for: placementId, transition: …)`
+- [ ] In Objective‑C, change `PLYPresentation *` to `id<PLYPresentation>`
 
 ### Deprecated (fix before v7)
 
-* [ ] Migrate the pre‑`start` `set*` class funcs to chain modifiers
-* [ ] Replace `readyToOpenDeeplink(_:)` with `allowDeeplink(_:)` and `isDeeplinkHandled(deeplink:)` with `handleDeeplink(_:)`
-* [ ] Build and verify no deprecation warnings remain
+- [ ] Migrate the pre‑`start` `set*` class funcs to chain modifiers
+- [ ] Replace `readyToOpenDeeplink(_:)` with `allowDeeplink(_:)` and `isDeeplinkHandled(deeplink:)` with `handleDeeplink(_:)`
+- [ ] Build and verify no deprecation warnings remain
+
+<br />
