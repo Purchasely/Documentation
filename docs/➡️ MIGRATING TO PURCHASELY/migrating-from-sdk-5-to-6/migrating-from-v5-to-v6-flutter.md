@@ -36,7 +36,7 @@ Version 6.0.0-rc.1 adapts the Flutter plugin to the Purchasely 6.0 native SDKs (
 | `Purchasely.getPresentationView(...)` | `PLYPresentationView(request: …)` widget |
 | `PLYPurchaseResult` (display result) | `PresentationOutcome` (5 fields) |
 | `setPaywallActionInterceptorCallback` + `onProcessAction(bool)` | `Purchasely.interceptAction(kind, handler)` returning `InterceptResult` |
-| `setDefaultPresentationResultHandler(cb)` | `PresentationBuilder.defaultSource().onDismissed(...)` |
+| `setDefaultPresentationResultHandler(cb)` | `Purchasely.setDefaultPresentationDismissHandler(cb)` |
 | `readyToOpenDeeplink(_)` | `allowDeeplink(_)` (old name kept as deprecated alias) |
 | `isDeeplinkHandled(_)` | `handleDeeplink(_)` (old name kept as deprecated alias) |
 | `presentSubscriptions()` | **removed** — build your own from `userSubscriptions()` |
@@ -345,7 +345,7 @@ Action kinds (`PresentationActionKind`): `close`, `closeAll`, `login`, `navigate
 
 ***
 
-## 7. Deeplinks & default result handler
+## 7. Deeplinks, campaigns & default dismiss handler
 
 The old methods still compile but are **deprecated** aliases:
 
@@ -362,17 +362,15 @@ await PurchaselyBuilder.apiKey('<YOUR_API_KEY>').allowDeeplink(true).start();
 final handled = await Purchasely.handleDeeplink('app://ply/presentations/');
 ```
 
-### Default result handler
+### Default dismiss handler
 
-`Purchasely.setDefaultPresentationResultHandler(cb)` is **removed**. Attach `onDismissed` to a default‑source request to receive the result of presentations opened via deeplinks or campaigns:
+`Purchasely.setDefaultPresentationResultHandler(cb)` is replaced by `Purchasely.setDefaultPresentationDismissHandler(cb)`. Use it for presentations opened by the SDK itself: campaigns, deeplinks, and promoted in-app purchases.
 
 ```dart
-PresentationBuilder.defaultSource()
-    .onDismissed((outcome) {
-      print('Deeplink presentation dismissed: ${outcome.purchaseResult} / ${outcome.closeReason}');
-    })
-    .build()
-    .display();
+await Purchasely.setDefaultPresentationDismissHandler((outcome) {
+  print('SDK presentation dismissed: ${outcome.presentation?.screenId} / '
+      '${outcome.purchaseResult} / ${outcome.closeReason}');
+});
 ```
 
 ***
@@ -436,7 +434,7 @@ final history = await Purchasely.userSubscriptionsHistory(); // expired subscrip
 
 ## What stays the same
 
-Only the **paywall surface** (start, display / preload / close / back, the action interceptor, default result handler) has breaking API changes. Every other `Purchasely.*` method remains source‑compatible; deeplinks add v6 names with deprecated aliases:
+Only the **paywall surface** (start, display / preload / close / back, the action interceptor, default dismiss handler) has breaking API changes. Every other `Purchasely.*` method remains source‑compatible; deeplinks add v6 names with deprecated aliases:
 
 * **Purchases**: `purchaseWithPlanVendorId`, `signPromotionalOffer`.
 * **Restore**: `restoreAllProducts`, `silentRestoreAllProducts`, `userDidConsumeSubscriptionContent`.
@@ -464,7 +462,7 @@ Only the **paywall surface** (start, display / preload / close / back, the actio
 * [ ] Replace `closePresentation()` / `hidePresentation()` / `showPresentation()` with `presentation.close()` / `.display()`
 * [ ] Replace `getPresentationView(...)` with the `PLYPresentationView(request: …)` widget
 * [ ] Replace `setPaywallActionInterceptorCallback` + `onProcessAction` with `Purchasely.interceptAction(kind, handler)` returning `InterceptResult`
-* [ ] Replace `setDefaultPresentationResultHandler(cb)` with `PresentationBuilder.defaultSource().onDismissed(...)`
+* [ ] Replace `setDefaultPresentationResultHandler(cb)` with `Purchasely.setDefaultPresentationDismissHandler(cb)`
 * [ ] Remove `presentSubscriptions()` — build your own UI from `userSubscriptions()` / `userSubscriptionsHistory()`
 
 ### Deprecated (fix before v7)

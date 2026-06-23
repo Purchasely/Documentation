@@ -742,7 +742,7 @@ To manage deeplinks you can do up to 3 things:
 
 1. Allow the SDK to open deeplinks (and optionally pass a received deeplink to the SDK)
 2. Optionally control when Purchasely is allowed to display content over your interface
-3. Set a default presentation handler to receive the result of the user's action
+3. Set a default presentation dismiss handler to receive the result of the user's action
 
 ### Allowing the Display
 
@@ -782,20 +782,18 @@ Campaigns follow the same principle through `allowCampaigns` (also `true` by def
 
 > 📘 `allowDeeplink` replaces the v5 `readyToOpenDeeplink` name, which remains only as a deprecated alias.
 
-### Setting the Default Presentation Handler
+### Setting the Default Presentation Dismiss Handler
 
-When a paywall / screen is opened from a deeplink (or campaign), you don't instantiate it yourself, so no per-display callback fires. Attach `onDismissed` to a **default-source** request to receive the result:
+When a paywall / screen is opened by the SDK itself (deeplink, campaign, promoted in-app purchase), you don't instantiate it yourself, so no per-display callback fires. Register a default dismiss handler to receive the resulting `PresentationOutcome`:
 
 ```dart
-PresentationBuilder.defaultSource()
-    .onDismissed((outcome) {
-      print('Presentation dismissed: ${outcome.purchaseResult} / ${outcome.closeReason}');
-      if (outcome.plan != null) {
-        print('Plan: ${outcome.plan}');
-      }
-    })
-    .build()
-    .display();
+await Purchasely.setDefaultPresentationDismissHandler((outcome) {
+  print('SDK presentation dismissed: ${outcome.presentation?.screenId} / '
+      '${outcome.purchaseResult} / ${outcome.closeReason}');
+  if (outcome.plan != null) {
+    print('Plan: ${outcome.plan}');
+  }
+});
 ```
 
 ---
