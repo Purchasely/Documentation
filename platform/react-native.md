@@ -659,17 +659,25 @@ Campaigns follow the same principle through `allowCampaigns` (also `true` by def
 
 ### Setting the Default Presentation Handler
 
-Retrieve the result of user actions on paywalls opened via deeplinks:
+Retrieve the result of user actions on paywalls the SDK opens itself (deeplinks,
+campaigns, Promoted In-App Purchases). `setDefaultPresentationDismissHandler` is
+the v6 replacement for the v5 `setDefaultPresentationResultCallback` /
+`setDefaultPresentationResultHandler`, and delivers the rich `PresentationOutcome`:
 
 ```typescript
-Purchasely.setDefaultPresentationResultCallback((result) => {
-    console.log('Presentation View Result: ' + result.result);
+const subscription = Purchasely.setDefaultPresentationDismissHandler((outcome) => {
+    // outcome: { presentation, purchaseResult, plan, closeReason, error }
+    console.log('Presentation dismissed:', outcome.purchaseResult); // 'purchased' | 'restored' | 'cancelled' | null
 
-    if (result.plan != null) {
-        console.log('Plan Vendor ID: ' + result.plan.vendorId);
-        console.log('Plan Name: ' + result.plan.name);
+    if (outcome.plan != null) {
+        console.log('Plan Vendor ID:', outcome.plan.vendorId);
+        console.log('Plan Name:', outcome.plan.name);
     }
 });
+
+// Only one handler is active at a time (re-registering replaces it).
+// Remove it with subscription.remove() or
+// Purchasely.removeDefaultPresentationDismissHandler().
 ```
 
 ---
