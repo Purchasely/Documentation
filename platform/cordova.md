@@ -586,12 +586,14 @@ Campaigns follow the same principle through `allowCampaigns` (also `true` by def
 Retrieve the result of user actions on paywalls opened via deeplinks:
 
 ```javascript
-Purchasely.setDefaultPresentationResultHandler((result) => {
-    console.log('Presentation View Result: ' + result.result);
+Purchasely.setDefaultPresentationDismissHandler((outcome) => {
+    // `presentation` identifies which campaign/deeplink closed.
+    console.log('Dismissed presentation: ' + (outcome.presentation && outcome.presentation.screenId));
+    console.log('Purchase result: ' + outcome.purchaseResult + ' / close reason: ' + outcome.closeReason);
 
-    if (result.plan != null) {
-        console.log('Plan Vendor ID: ' + result.plan.vendorId);
-        console.log('Plan Name: ' + result.plan.name);
+    if (outcome.plan != null) {
+        console.log('Plan Vendor ID: ' + outcome.plan.vendorId);
+        console.log('Plan Name: ' + outcome.plan.name);
     }
 });
 ```

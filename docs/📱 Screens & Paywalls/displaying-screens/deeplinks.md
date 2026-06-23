@@ -107,7 +107,7 @@ PresentationBuilder.defaultSource()
     .display();
 ```
 ```swift Cordova
-Purchasely.setDefaultPresentationResultHandler((result) => {
+Purchasely.setDefaultPresentationDismissHandler((result) => {
 	console.log("Presentation View Result: " + result.result);
 
 	if (result.plan != null) {

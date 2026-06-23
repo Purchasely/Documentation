@@ -46,7 +46,7 @@ Usually when a paywall / screen is instantiated by the app, a closure is called 
 You can retrieve the result of the user action in a paywall opened with a deeplink by setting a `DefaultPresentationResultHandler`.
 
 ```swift Cordova
-Purchasely.setDefaultPresentationResultHandler((result) => {
+Purchasely.setDefaultPresentationDismissHandler((result) => {
 	console.log("Presentation View Result: " + result.result);
 
 	if (result.plan != null) {
