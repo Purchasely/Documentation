@@ -15,7 +15,7 @@ We rely on [NPM](https://www.npmjs.com/package/@purchasely/cordova-plugin-purcha
 # Main dependency
 
 ```shell
-cordova plugin add @purchasely/cordova-plugin-purchasely
+cordova plugin add @purchasely/cordova-plugin-purchasely@6.0.0-rc.1
 ```
 
 Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android 23)

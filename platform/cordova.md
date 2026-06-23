@@ -1,6 +1,10 @@
 # Purchasely Cordova SDK Documentation
 
-This document provides comprehensive documentation for integrating and using the Purchasely Cordova SDK with JavaScript.
+This guide covers the Purchasely **Cordova** SDK **v6** for JavaScript apps. Purchasely displays **Screens** and **Presentations** configured in the Console through placements, direct `presentationId` lookups, campaigns, and deeplinks. The Cordova plugin bridges to the native iOS and Android Purchasely SDKs through `cordova.exec`.
+
+> 📘 SDK v6 — what changed
+>
+> v6 is a major release with breaking changes. Unlike the native iOS/Android and the React Native / Flutter SDKs, the **Cordova JavaScript surface stays method-based and almost unchanged** — the native bridges were rewired to the v6 SDKs behind the existing `cordova.exec` actions. The breaking changes a host app must apply are: the **default running mode is now `Observer`** (set `RunningMode.full` to let Purchasely handle purchases), the deeplink methods were renamed (`allowDeeplink` / `handleDeeplink`), `setDefaultPresentationResultHandler` became `setDefaultPresentationDismissHandler`, `synchronize` now reports completion, and `presentSubscriptions` is a no-op. See the [v5→v6 migration guide](https://docs.purchasely.com/migrating-from-v5-to-v6-cordova).
 
 ---
 
@@ -10,15 +14,18 @@ This document provides comprehensive documentation for integrating and using the
 2. [Installation](#installation)
 3. [SDK Initialization](#sdk-initialization)
 4. [Displaying Paywalls](#displaying-paywalls)
-5. [Processing Transactions](#processing-transactions)
-6. [Action Interceptor](#action-interceptor)
-7. [User Identification](#user-identification)
-8. [Subscription Status & Entitlements](#subscription-status--entitlements)
-9. [Custom User Attributes](#custom-user-attributes)
-10. [Event Listeners](#event-listeners)
-11. [Pre-fetching Screens](#pre-fetching-screens)
-12. [Deeplinks Management](#deeplinks-management)
-13. [Platform-Specific Features](#platform-specific-features)
+5. [Action Interceptor](#action-interceptor)
+6. [Processing Transactions](#processing-transactions)
+7. [Pre-fetching Screens](#pre-fetching-screens)
+8. [Default Presentation Dismiss Handler](#default-presentation-dismiss-handler)
+9. [User Identification](#user-identification)
+10. [Subscription Status & Entitlements](#subscription-status--entitlements)
+11. [Custom User Attributes](#custom-user-attributes)
+12. [Event Listeners](#event-listeners)
+13. [Deeplinks Management](#deeplinks-management)
+14. [Platform-Specific Features](#platform-specific-features)
+15. [Troubleshooting](#troubleshooting)
+16. [Additional Resources](#additional-resources)
 
 ---
 
@@ -26,45 +33,56 @@ This document provides comprehensive documentation for integrating and using the
 
 | Requirement | iOS | Android |
 |-------------|-----|---------|
-| Minimum OS Version | 11.0 | 21 |
-| compileSdkVersion | - | 36 |
-| targetSdkVersion | - | 35 |
+| Minimum OS version | 13.4 | API 23 |
+| compileSdkVersion | — | 36 |
+| targetSdkVersion | — | 35 |
+| Cordova | `cordova` ≥ 11 | `cordova-android` ≥ 12 |
+
+The v6 native Android SDK is built with Kotlin 2.2.x and `compileSdk 36`; make sure your Cordova Android toolchain provides them (see [Android Setup](#android-setup)).
 
 ---
 
 ## Installation
 
-### Main Dependency
-
-Install the Purchasely Cordova SDK via NPM:
+The Purchasely Cordova SDK is split into two plugins. **Both must be pinned to the exact same version.**
 
 ```shell
-cordova plugin add @purchasely/cordova-plugin-purchasely
+cordova plugin add @purchasely/cordova-plugin-purchasely@6.0.0-rc.1
+cordova plugin add @purchasely/cordova-plugin-purchasely-google@6.0.0-rc.1
 ```
+
+| Plugin | Purpose |
+|--------|---------|
+| `@purchasely/cordova-plugin-purchasely` | Main plugin (iOS + Android). Required. |
+| `@purchasely/cordova-plugin-purchasely-google` | Google Play Billing support on Android. Required for purchases on the Google Play Store. |
+
+These plugins pull the native SDKs:
+
+| Platform | Native artifact |
+|----------|-----------------|
+| iOS | `pod 'Purchasely', '6.0.0-rc.1'` (CocoaPods) |
+| Android | `io.purchasely:core:6.0.0-rc.1` + `io.purchasely:google-play:6.0.0-rc.1` (Maven Central) |
+
+> There is **no video player plugin on Cordova** — the `io.purchasely:player` artifact is not bridged.
 
 ### iOS Setup
 
-Update your Podfile to set the minimum iOS version:
+Set the minimum iOS version in your `Podfile`:
 
-```yaml
-// Podfile
-
-...
-
+```ruby
+# platforms/ios/Podfile
 platform :ios, '13.4'
-
-...
 ```
 
 ### Android Setup
 
-Update your `android/build.gradle` file:
+Make sure your project resolves dependencies from Maven Central and targets the SDK levels required by v6:
 
 ```groovy
-// Edit file android/build.gradle
+// android build.gradle
 buildscript {
     ext {
-        minSdkVersion = 23 //min version must not be below 23
+        minSdkVersion = 23      // must not be below 23
         compileSdkVersion = 36
         targetSdkVersion = 35
     }
@@ -72,336 +90,351 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
         mavenCentral()
     }
 }
 ```
 
+> 📘 Google Play Billing
+>
+> `@purchasely/cordova-plugin-purchasely-google` pulls Google Play Billing Client v8 (`com.android.billingclient:billing:8.x`) transitively. Do not force an older billing dependency into your project.
+
 ### Android Dependencies
 
-> ⚠️ **Important**: The main Purchasely SDK (`@purchasely/cordova-plugin-purchasely`) does **NOT** include store implementations by default. This modular architecture allows you to include only the stores you need and avoid dependency conflicts.
+> ⚠️ The main plugin (`@purchasely/cordova-plugin-purchasely`) does **NOT** include store implementations by default. This modular architecture lets you include only the stores you need and avoids dependency conflicts. When you pass `['Google']` as the stores parameter, the SDK looks for the Google Play Billing dependency at runtime — without it, purchases fail on Android.
 
-With Android, you can choose to use Google Play Store and/or Huawei AppGallery and/or Amazon Appstore. **You must install the corresponding dependency for each store you want to support.**
+#### Version matching (critical)
 
-#### Google Play Billing (Required for Google Play Store)
-
-If your app is distributed on the **Google Play Store**, you **must** install the Google Play Billing dependency:
-
-```shell
-cordova plugin add @purchasely/cordova-plugin-purchasely-google
-```
-
-**Why is this required?**
-- The Purchasely core SDK does not include the Google Play Billing library
-- When you specify `['Google']` as the stores parameter in initialization, the SDK looks for this dependency at runtime
-- Without this dependency, purchases will not work on Android devices using Google Play Store
-- The app may crash or fail to initialize properly on Android
-
-#### Version Matching (Critical)
-
-> ⚠️ **All Purchasely packages must be at the exact same version.** Mismatched versions will cause runtime errors or unexpected behavior.
+> ⚠️ **Every `io.purchasely:*` dependency must resolve to the same version.** A stray `6.0.0` (release) ranks *above* `6.0.0-rc.1` in Gradle and silently upgrades `core`, producing a `NoSuchMethodError` at runtime. Keep both plugins on the same pre-release string.
 
 ```json
 // package.json
 "dependencies": {
-  "@purchasely/cordova-plugin-purchasely": "5.0.0",
-  "@purchasely/cordova-plugin-purchasely-google": "5.0.0"
+  "@purchasely/cordova-plugin-purchasely": "6.0.0-rc.1",
+  "@purchasely/cordova-plugin-purchasely-google": "6.0.0-rc.1"
 }
 ```
 
-#### Complete Android Installation Example
+### API Key
 
-For a typical app distributed on Google Play Store:
-
-```shell
-# Install all required dependencies
-cordova plugin add @purchasely/cordova-plugin-purchasely
-cordova plugin add @purchasely/cordova-plugin-purchasely-google
-```
-
-Then initialize with the Google store:
-
-```javascript
-Purchasely.startWithAPIKey(
-    'YOUR_API_KEY',
-    ['Google'], // Requires @purchasely/cordova-plugin-purchasely-google
-    false, // false for StoreKit 2, true for StoreKit 1
-    null,
-    Purchasely.LogLevel.DEBUG,
-    Purchasely.RunningMode.full
-);
-```
+Find your API key in the Console under [App settings / Backend & SDK configuration](https://console.purchasely.io/settings?step=backend-sdk).
 
 ---
 
 ## SDK Initialization
 
-Initialize the Purchasely SDK as early as possible in your application lifecycle.
-
-### Full Mode (Recommended)
-
-In `full` mode, Purchasely handles the entire purchase flow including transactions and receipts.
+Initialize Purchasely as early as possible in your app lifecycle (e.g. on `deviceready`). `start()` does not block, so you can call other SDK methods right after.
 
 ```javascript
 /**
- * @params String apiKey
- * @params StringArray stores : may be Google, Amazon and Huawei
- * @params Boolean storeKit1 : true for StoreKit 1, false for StoreKit 2
- * @params String userId
- * @params Purchasely.LogLevel logLevel
- * @params Purchasely.RunningMode runningMode
- **/
-Purchasely.startWithAPIKey(
+ * @param {string}  apiKey
+ * @param {string[]} stores      may contain 'Google', 'Amazon', 'Huawei'
+ * @param {boolean} storeKit1    iOS only — true = StoreKit 1, false = StoreKit 2
+ * @param {string}  userId       your user id, or null for anonymous
+ * @param {number}  logLevel     Purchasely.LogLevel.*
+ * @param {number}  runningMode  Purchasely.RunningMode.full | .observer
+ */
+Purchasely.start(
     'YOUR_API_KEY',
     ['Google'],
-    false, // false for StoreKit 2, true for StoreKit 1
-    null, // user id if user is connected
-    Purchasely.LogLevel.DEBUG, // set to ERROR in production
-    Purchasely.RunningMode.full
+    false,                        // false = StoreKit 2 (recommended), true = StoreKit 1
+    null,                         // user id if the user is already known
+    Purchasely.LogLevel.DEBUG,    // set to ERROR in production
+    Purchasely.RunningMode.full,  // ⚠️ default is now Observer — set .full to handle purchases
+    (isConfigured) => {
+        // Purchasely is started
+    },
+    (error) => {
+        console.error('Purchasely start failed: ' + error);
+    }
 );
 ```
 
-### PaywallObserver Mode
+### Running modes
 
-Use `paywallObserver` mode if you have an existing in-app purchase infrastructure and want to use Purchasely only for paywall display and analytics.
+> 🚧 Major v6 change — the default running mode is now `Observer`
+>
+> In v5 the implicit default was `Full`. In **v6 the native default is `Observer`** (Purchasely observes transactions but does not process them). **If you want Purchasely to handle the purchase flow and validate receipts, you must pass `Purchasely.RunningMode.full` explicitly.** In `Observer` mode, presentations **no longer auto-close** after a purchase or restore — close them yourself (see [Processing Transactions](#processing-transactions)).
 
-```javascript
-Purchasely.startWithAPIKey(
-    'YOUR_API_KEY',
-    ['Google'],
-    false, // false for StoreKit 2, true for StoreKit 1
-    null, // user id of user
-    Purchasely.LogLevel.DEBUG,
-    Purchasely.RunningMode.paywallObserver
-);
-```
+| Mode | Value | Use when |
+|------|-------|----------|
+| `Purchasely.RunningMode.full` | `3` | Purchasely handles store purchases and receipt validation. Pass this explicitly. |
+| `Purchasely.RunningMode.observer` | `2` | Your app owns purchases; Purchasely observes transactions and displays Console-driven Screens. |
 
-### API Key
+> ⚠️ `Purchasely.RunningMode.paywallObserver` was **removed** in v6 — use `Purchasely.RunningMode.observer` (same value `2`).
 
-You can find your API Key in the Purchasely Console under **App settings > Backend & SDK configuration**.
+### Log levels
+
+`Purchasely.LogLevel.DEBUG` `INFO` `WARN` `ERROR`. Use `DEBUG` during integration and `ERROR` in production.
 
 ---
 
 ## Displaying Paywalls
 
-Purchasely paywalls are displayed using **placements**. A placement is a specific location in your app where you want to display a paywall (e.g., onboarding, settings, premium feature).
+Purchasely paywalls are displayed through **placements**. A placement is a logical location in your app (onboarding, settings, a premium feature…) that the Console maps to a Screen, an A/B test, or a campaign.
 
-### Display a Placement
+### Display a placement
 
 ```javascript
 Purchasely.presentPresentationForPlacement(
     'ONBOARDING', // placementId
-    null, // contentId (optional)
-    true, // fullscreen
-    (callback) => {
-        if (callback.result == Purchasely.PurchaseResult.PURCHASED) {
-            console.log('User purchased ' + callback.plan.name);
+    null,         // contentId (optional)
+    true,         // fullscreen
+    (outcome) => {
+        if (outcome.result == Purchasely.PurchaseResult.PURCHASED) {
+            console.log('User purchased ' + (outcome.plan && outcome.plan.name));
             // Update entitlements to unlock content
-        } else if (callback.result == Purchasely.PurchaseResult.RESTORED) {
-            console.log('User restored his purchases');
+        } else if (outcome.result == Purchasely.PurchaseResult.RESTORED) {
+            console.log('User restored their purchases');
             // Update entitlements to unlock content
-        } else if (callback.result == Purchasely.PurchaseResult.CANCELLED) {
-            console.log('User cancelled purchased');
+        } else if (outcome.result == Purchasely.PurchaseResult.CANCELLED) {
+            console.log('User cancelled');
         }
     },
     (error) => {
-        console.log('Error with purchase: ' + error);
+        console.log('Error displaying paywall: ' + error);
     }
 );
 ```
 
-### Display Results
-
-After displaying a placement, you receive a result indicating the user's action:
-
-- `Purchasely.PurchaseResult.PURCHASED`: User purchased a plan
-- `Purchasely.PurchaseResult.RESTORED`: User restored a previous purchase
-- `Purchasely.PurchaseResult.CANCELLED`: User did not complete a purchase
-
----
-
-## Processing Transactions
-
-### Full Mode
-
-In `full` mode, the Purchasely SDK automatically launches the native in-app purchase flow when a user clicks on a purchase button and handles the transaction. You only need to update entitlements once you have confirmation that the purchase was processed.
+### Display a specific Screen
 
 ```javascript
-Purchasely.presentPresentationForPlacement(
-    'onboarding', // placementId
-    null, // contentId
-    true, // fullscreen
-    (callback) => {
-        if (callback.result == Purchasely.PurchaseResult.PURCHASED) {
-            console.log('User purchased ' + callback.plan.name);
-            // Update entitlements to unlock the access to the contents
-        } else if (callback.result == Purchasely.PurchaseResult.RESTORED) {
-            console.log('User restored his purchases');
-            // Update entitlements to unlock the access to the contents
-        } else if (callback.result == Purchasely.PurchaseResult.CANCELLED) {
-            console.log('User cancelled purchased');
-        }
-    },
-    (error) => {
-        console.log('Error with purchase: ' + error);
-    }
+Purchasely.presentPresentationWithIdentifier(
+    'screen_abc123', // presentationId (Console Screen id)
+    null,            // contentId
+    true,            // fullscreen
+    (outcome) => { /* … */ },
+    (error) => { /* … */ }
 );
 ```
 
-### PaywallObserver Mode with Action Interceptor
+### The display outcome
 
-In `paywallObserver` mode, you handle purchases with your own infrastructure while using Purchasely for paywall display.
+The success callback receives an outcome object:
 
-```javascript
-Purchasely.setPaywallActionInterceptorCallback((result) => {
-    if (result.action === Purchasely.PaywallAction.purchase) {
-        // The store product id (sku) the user clicked on in the paywall
-        const storeProductId = result.parameters.plan.productId;
-
-        MyPurchaseSystem.purchase(storeProductId, ({ success, error }) => {
-            if (success) {
-                // Synchronize all purchases with Purchasely
-                Purchasely.synchronize();
-            }
-            // Notify Purchasely paywall to stop processing action
-            Purchasely.onProcessAction(false);
-        }, ({ error, userCancelled }) => {
-            // Error making purchase
-            Purchasely.onProcessAction(false);
-        });
-    } else if (result.action === Purchasely.PaywallAction.restore) {
-        MyPurchaseSystem.restoreTransactions(
-            info => {
-                // Synchronize all purchases with Purchasely
-                Purchasely.synchronize();
-                // Notify Purchasely paywall to stop processing action
-                Purchasely.onProcessAction(false);
-            },
-            error => {
-                // Error restoring purchases
-                // Notify Purchasely paywall to stop processing action
-                Purchasely.onProcessAction(false);
-            }
-        );
-    } else {
-        // Notify Purchasely paywall to continue other actions
-        Purchasely.onProcessAction(true);
-    }
-});
-```
+| Field | Description |
+|-------|-------------|
+| `result` | `Purchasely.PurchaseResult.PURCHASED` (`0`), `CANCELLED` (`1`), or `RESTORED` (`2`). |
+| `plan` | The purchased/restored plan (`vendorId`, `name`, …) when applicable. |
+| `purchaseResult` | String form: `'purchased'` \| `'cancelled'` \| `'restored'` \| `null`. |
+| `closeReason` | Why the Screen closed: `'button'`, `'back_system'` (Android), `'interactiveDismiss'` (iOS), `'programmatic'`, or `null`. |
+| `presentation` | The presentation that produced the outcome (`screenId`, `placementId`, `campaignId`, …). |
 
 ---
 
 ## Action Interceptor
 
-The Action Interceptor allows you to intercept and handle user actions on the paywall.
+Intercept user actions on a paywall to run your own logic (custom login, custom purchase flow, analytics…). Register one interceptor; respond to **every** intercepted action with `Purchasely.onProcessAction(true|false)`:
 
-### Available Actions
-
-| Action | Description |
-|--------|-------------|
-| `Purchasely.PaywallAction.purchase` | User tapped a purchase button |
-| `Purchasely.PaywallAction.restore` | User tapped the restore button |
-| `Purchasely.PaywallAction.login` | User tapped the login button |
-| `Purchasely.PaywallAction.close` | User tapped the close button |
-| `Purchasely.PaywallAction.navigate` | User wants to navigate to an external URL |
-| `Purchasely.PaywallAction.open_presentation` | User wants to open another presentation |
-
-### Implementation
+* `onProcessAction(true)` — let Purchasely proceed with its default behavior.
+* `onProcessAction(false)` — you handled the action; Purchasely stops processing it.
 
 ```javascript
 Purchasely.setPaywallActionInterceptor((result) => {
-    console.log('Received action from paywall' + result.info.presentationId);
+    console.log('Action from paywall ' + result.info.presentationId);
 
-    if (result.action === Purchasely.PaywallAction.navigate) {
-        console.log(
-            'User wants to navigate to website ' +
-            result.parameters.title + ' ' + result.parameters.url
+    switch (result.action) {
+        case Purchasely.PaywallAction.navigate:
+            console.log('Navigate to ' + result.parameters.title + ' ' + result.parameters.url);
+            Purchasely.onProcessAction(true);
+            break;
+
+        case Purchasely.PaywallAction.login:
+            // Present your own login screen, then update Purchasely
+            Purchasely.closePresentation();
+            Purchasely.userLogin('MY_USER_ID', () => {});
+            Purchasely.onProcessAction(true);
+            break;
+
+        case Purchasely.PaywallAction.purchase:
+            // To intercept the purchase, close the paywall and show your own flow
+            Purchasely.closePresentation();
+            break;
+
+        default:
+            Purchasely.onProcessAction(true);
+            break;
+    }
+});
+```
+
+### Available actions
+
+| Action | Description |
+|--------|-------------|
+| `Purchasely.PaywallAction.purchase` | User tapped a purchase button. |
+| `Purchasely.PaywallAction.restore` | User tapped restore. |
+| `Purchasely.PaywallAction.login` | User tapped the *Already subscribed? Sign-in* button. |
+| `Purchasely.PaywallAction.close` | User tapped close. |
+| `Purchasely.PaywallAction.close_all` | Close all Purchasely Screens. |
+| `Purchasely.PaywallAction.navigate` | Navigate to an external URL (`parameters.url`, `parameters.title`). |
+| `Purchasely.PaywallAction.open_presentation` | Open another presentation. |
+| `Purchasely.PaywallAction.open_placement` | Open another placement. |
+| `Purchasely.PaywallAction.promo_code` | Redeem a promo code. |
+| `Purchasely.PaywallAction.web_checkout` | Open a web checkout. |
+
+> **Important**: always call `Purchasely.onProcessAction(true|false)` after handling an action, or the paywall stays blocked.
+
+---
+
+## Processing Transactions
+
+### Full mode
+
+In `Full` mode the SDK launches the native purchase flow automatically when the user taps a purchase button, validates the receipt, and manages the transaction. You only need to react to the display outcome and refresh your entitlements.
+
+### Observer mode
+
+In `Observer` mode you run purchases with your own billing system and use Purchasely for the paywall UI. Intercept `purchase` / `restore`, run your flow, then call `Purchasely.synchronize()` so Purchasely receives the transaction, and close the paywall yourself (Observer mode does not auto-close):
+
+```javascript
+Purchasely.setPaywallActionInterceptor((result) => {
+    if (result.action === Purchasely.PaywallAction.purchase) {
+        const storeProductId = result.parameters.plan.productId;
+
+        MyPurchaseSystem.purchase(storeProductId,
+            () => {
+                Purchasely.synchronize();        // upload the receipt to Purchasely
+                Purchasely.onProcessAction(false); // you handled the purchase
+                Purchasely.closePresentation();    // Observer mode does not auto-close
+            },
+            () => {
+                Purchasely.onProcessAction(false);
+            }
         );
-        Purchasely.onProcessAction(true);
-    } else if (result.action === Purchasely.PaywallAction.close) {
-        console.log('User wants to close paywall');
-        Purchasely.onProcessAction(true);
-    } else if (result.action === Purchasely.PaywallAction.login) {
-        console.log('User wants to login');
-        // Present your own screen for user to log in
-        Purchasely.closePresentation();
-        Purchasely.userLogin('MY_USER_ID');
-        // Call this method to update Purchasely Paywall
-        Purchasely.onProcessAction(true);
-    } else if (result.action === Purchasely.PaywallAction.open_presentation) {
-        console.log('User wants to open a new paywall');
-        Purchasely.onProcessAction(true);
-    } else if (result.action === Purchasely.PaywallAction.purchase) {
-        console.log('User wants to purchase');
-        // If you want to intercept it, close presentation and display your screen
-        Purchasely.closePresentation();
     } else if (result.action === Purchasely.PaywallAction.restore) {
-        console.log('User wants to restore his purchases');
-        Purchasely.onProcessAction(true);
+        MyPurchaseSystem.restore(
+            () => {
+                Purchasely.synchronize();
+                Purchasely.onProcessAction(false);
+                Purchasely.closePresentation();
+            },
+            () => Purchasely.onProcessAction(false)
+        );
     } else {
-        console.log('Action unknown ' + result.action);
         Purchasely.onProcessAction(true);
     }
 });
 ```
 
-> **Important**: Always call `Purchasely.onProcessAction(true/false)` to notify the SDK whether to continue processing the action.
+### `synchronize` reports completion
+
+In v6, `synchronize` accepts optional success / error callbacks and resolves when the native synchronization completes (the v5 fire-and-forget behavior is gone). Calling `Purchasely.synchronize()` with no arguments still works.
+
+```javascript
+Purchasely.synchronize(
+    () => console.log('Purchasely synchronized'),
+    (error) => console.error('Sync failed: ' + error)
+);
+```
+
+### Programmatic purchase & restore
+
+```javascript
+// Purchase a plan directly by its Console vendor id
+Purchasely.purchaseWithPlanVendorId(
+    'PURCHASELY_PLUS_YEARLY', // plan vendor id
+    null,                     // offer id (optional)
+    null,                     // content id (optional)
+    (plan) => console.log('Purchased ' + plan.vendorId),
+    (error) => console.error(error)
+);
+
+// Restore previous purchases
+Purchasely.restoreAllProducts(
+    () => console.log('Purchases restored'),
+    (error) => console.error(error)
+);
+```
+
+---
+
+## Pre-fetching Screens
+
+Fetch a Screen from the network before displaying it — useful to display only once loaded, handle network errors gracefully, or pre-load during onboarding.
+
+```javascript
+Purchasely.fetchPresentationForPlacement(
+    'ONBOARDING', // placementId
+    null,         // contentId
+    (presentation) => {
+        Purchasely.presentPresentation(
+            presentation,
+            true,  // fullscreen
+            null,  // background color (optional)
+            (outcome) => {
+                if (outcome.result == Purchasely.PurchaseResult.CANCELLED) {
+                    console.log('User cancelled');
+                } else {
+                    console.log('User purchased ' + (outcome.plan && outcome.plan.name));
+                }
+            },
+            (error) => console.log('Error displaying presentation: ' + error)
+        );
+    },
+    (error) => console.log('Error fetching presentation: ' + error)
+);
+```
+
+You can also fetch by Screen id with `Purchasely.fetchPresentation(presentationId, contentId, success, error)`.
+
+### Presentation types
+
+| Type | Description |
+|------|-------------|
+| `NORMAL` | The default Purchasely Screen. |
+| `FALLBACK` | A Screen, but not the requested one (it could not be found). |
+| `DEACTIVATED` | No Screen for this placement (e.g. an A/B test or audience). |
+| `CLIENT` | Your own Screen (BYOS) — use the list of plans to build your UI. |
+
+---
+
+## Default Presentation Dismiss Handler
+
+When a Screen is opened by the SDK itself — a **campaign**, a **deeplink**, or a **Promoted In-App Purchase** — your app does not instantiate it, so no per-display callback fires. Register a default dismiss handler to receive the outcome:
+
+```javascript
+Purchasely.setDefaultPresentationDismissHandler((outcome) => {
+    // `presentation` identifies which campaign/deeplink closed.
+    console.log('Dismissed: ' + (outcome.presentation && outcome.presentation.screenId));
+    console.log('Purchase: ' + outcome.purchaseResult + ' / close: ' + outcome.closeReason);
+
+    if (outcome.result == Purchasely.PurchaseResult.PURCHASED && outcome.plan != null) {
+        console.log('Purchased ' + outcome.plan.vendorId);
+        // Update entitlements
+    }
+});
+```
+
+> 📘 Renamed in v6
+>
+> `setDefaultPresentationDismissHandler` replaces v5's `setDefaultPresentationResultHandler` (breaking change, no alias). The callback now receives a single rich outcome object (`result`, `plan`, `purchaseResult`, `closeReason`, `presentation`) instead of the legacy `(result, plan)` shape.
 
 ---
 
 ## User Identification
 
-### Anonymous Users
-
-The Purchasely SDK automatically generates and assigns an `anonymous_user_id` to each user, maintaining consistency as long as the app remains installed on the device.
+Provide your own user id so purchases and subscriptions follow the user across devices instead of being tied to an anonymous, device-bound id.
 
 ```javascript
-// Get the anonymous user ID
-Purchasely.getAnonymousUserId((anonymousId) => {
-    console.log('Purchasely anonymous Id: ' + anonymousId);
-});
-```
-
-### User Login
-
-To authenticate users and associate purchases with their account:
-
-```javascript
-// Login with user ID
+// Authenticate a user
 Purchasely.userLogin('123456789', (shouldRefresh) => {
     if (shouldRefresh) {
-        // You should call your backend to refresh user entitlements
-        console.log('User logged in, refresh entitlements');
+        // Call your backend to refresh user entitlements
     }
 });
-```
 
-### User Logout
-
-To sign out a user:
-
-```javascript
-// Logout user (clears user ID and custom attributes)
+// Sign out — clears the user id and custom attributes
 Purchasely.userLogout();
 ```
 
-### Login from Paywall
-
-To handle the login button on the paywall:
+Retrieve the auto-generated anonymous id when needed:
 
 ```javascript
-Purchasely.setPaywallActionInterceptorCallback((result) => {
-    if (result.action === Purchasely.PaywallAction.login) {
-        console.log('User wants to login');
-        // Present your own screen for user to log in
-        Purchasely.closePresentation();
-        Purchasely.userLogin('MY_USER_ID');
-        // Call this method to update Purchasely Paywall
-        Purchasely.onProcessAction(true);
-    } else {
-        Purchasely.onProcessAction(true);
-    }
+Purchasely.getAnonymousUserId((anonymousId) => {
+    console.log('Anonymous id: ' + anonymousId);
 });
 ```
 
@@ -409,169 +442,130 @@ Purchasely.setPaywallActionInterceptorCallback((result) => {
 
 ## Subscription Status & Entitlements
 
-### Retrieve User Subscriptions
-
-Purchasely offers a way to retrieve active subscriptions directly from your mobile app:
+Fetch the user's active subscriptions to manage entitlements at the app level:
 
 ```javascript
-Purchasely.userSubscriptions(subscriptions => {
-    console.log('Subscriptions ' + subscriptions);
-}, (error) => {
-    console.log(error);
-});
+Purchasely.userSubscriptions(
+    (subscriptions) => {
+        subscriptions.forEach((sub) => {
+            console.log('Plan: ' + sub.plan.vendorId);
+            console.log('Source: ' + sub.subscriptionSource);
+        });
+    },
+    (error) => console.log(error)
+);
 ```
 
-> **Note**: There is a **few seconds delay** for `Purchasely.userSubscriptions()` to be updated after a purchase or restoration. If you rely on this method to get the current subscription status right after a purchase, you should **wait for 3 seconds** before calling this method.
+> **Note**: there is a few-seconds delay before `userSubscriptions()` reflects a purchase or restoration. If you call it right after a purchase, wait ~3 seconds.
+
+Retrieve past (expired) subscriptions for analytics and re-engagement:
+
+```javascript
+Purchasely.userSubscriptionsHistory(
+    (history) => console.log('Past subscriptions: ' + history.length),
+    (error) => console.log(error)
+);
+```
+
+> 📘 Removed UI in v6
+>
+> The native subscriptions-list / cancellation UI was removed from both SDKs. `Purchasely.presentSubscriptions()` is now a **no-op** (it logs a warning and does nothing). Build your own management screen from `userSubscriptions()` / `userSubscriptionsHistory()`.
 
 ---
 
 ## Custom User Attributes
 
-Custom User Attributes allow you to segment users and personalize their journey.
-
-### Supported Types
-
-- `String`
-- `Int`
-- `Double` (Float)
-- `Bool`
-
-> **Note**: Date and Array types have limited support in Cordova.
-
-### Setting Attributes
+Set, retrieve and clear custom attributes to segment users and build audiences. Each setter takes an optional `DataProcessingLegalBasis` (`essential` / `optional`).
 
 ```javascript
-// Set individual attributes
-Purchasely.setUserAttributeWithString('key_string', 'value_string');
-Purchasely.setUserAttributeWithBoolean('key_boolean', true);
-Purchasely.setUserAttributeWithInt('key_int', 7);
-Purchasely.setUserAttributeWithDouble('key_double', 4.5);
-```
+// Set attributes
+Purchasely.setUserAttributeWithString('favorite_spirit', 'gin', Purchasely.DataProcessingLegalBasis.essential);
+Purchasely.setUserAttributeWithBoolean('newsletter', true);
+Purchasely.setUserAttributeWithInt('viewed_articles', 7);
+Purchasely.setUserAttributeWithDouble('avg_session', 4.5);
+Purchasely.setUserAttributeWithDate('signup_date', new Date().toISOString());
 
-### Retrieving Attributes
-
-```javascript
-// Retrieve a specific attribute
-Purchasely.userAttribute('key_string', value => {
-    console.log('User attribute string: ' + value);
+// Retrieve an attribute
+Purchasely.userAttribute('favorite_spirit', (value) => {
+    console.log('favorite_spirit = ' + value);
 });
-```
 
-### Incrementing / Decrementing Counters
-
-The increment/decrement methods are not directly available in Cordova, but you can achieve the same result:
-
-```javascript
-// Increment a user attribute manually
-Purchasely.userAttribute('viewed_articles', value => {
-    Purchasely.setUserAttributeWithInt('viewed_articles', value + 1);
+// Increment a counter manually (no native increment method on Cordova)
+Purchasely.userAttribute('viewed_articles', (value) => {
+    Purchasely.setUserAttributeWithInt('viewed_articles', (value || 0) + 1);
 });
-```
 
-### Clearing Attributes
-
-```javascript
-// Remove one attribute
-Purchasely.clearUserAttribute('key_string');
-
-// Remove all attributes
+// Clear
+Purchasely.clearUserAttribute('favorite_spirit');
 Purchasely.clearUserAttributes();
 ```
 
-> **Note**: `Purchasely.userLogout()` will automatically clear all custom user attributes unless you call `Purchasely.userLogout(false)`.
+Array variants are available too: `setUserAttributeWithStringArray`, `setUserAttributeWithIntArray`, `setUserAttributeWithDoubleArray`, `setUserAttributeWithBooleanArray`.
+
+> **Note**: `Purchasely.userLogout()` clears all custom user attributes.
+
+### Third-party attributes
+
+Forward an analytics SDK id to Purchasely with `setAttribute`:
+
+```javascript
+Purchasely.setAttribute(Purchasely.Attribute.AMPLITUDE_USER_ID, 'amplitude_user_id');
+```
 
 ---
 
 ## Event Listeners
 
-### UI / SDK Events Listener
-
-When users interact with Purchasely Screens, the SDK triggers events. Implement an event listener to forward these events to analytics platforms.
+Forward Purchasely UI/SDK events to your own analytics. Set the listener after starting the SDK.
 
 ```javascript
-Purchasely.addEventListener((event) => {
-    console.log('Event received: ' + event.name);
-    console.log('Event properties: ' + JSON.stringify(event.properties));
-
-    // Forward to your analytics platform
+Purchasely.addEventsListener((event) => {
+    console.log('Event: ' + event.name);
+    console.log('Properties: ' + JSON.stringify(event.properties));
     // Analytics.track(event.name, event.properties);
 });
+
+// Remove it when no longer needed
+Purchasely.removeEventsListener();
 ```
 
----
+UI/SDK events are computed by the Purchasely Platform for conversion KPIs but cannot be routed to third-party integrations from the Console — forward them yourself if you need them in your analytics.
 
-## Pre-fetching Screens
-
-Pre-fetch paywalls from the network before displaying them for a better user experience.
-
-### Benefits
-
-- Display the Screen only after it has been loaded
-- Handle network errors gracefully
-- Show a custom loading screen
-- Pre-load during app navigation
-
-### Implementation
+You can also listen for custom user attribute changes (e.g. from in-Screen surveys):
 
 ```javascript
-Purchasely.fetchPresentationForPlacement(
-    'ONBOARDING', // placementId
-    null, // contentId
-    (presentation) => {
-        // Use the "presentation" object from the callback
-        Purchasely.presentPresentation(
-            presentation,
-            false, // isFullscreen
-            null, // loadedCallback
-            (callback) => {
-                if (callback.result == Purchasely.PurchaseResult.CANCELLED) {
-                    console.log('User cancelled purchased');
-                } else {
-                    console.log('User purchased ' + callback.plan.name);
-                }
-            },
-            (error) => {
-                console.log('Error with present: ' + error);
-            }
-        );
-    },
-    (error) => {
-        console.log('Error with purchase: ' + error);
-    }
-);
+Purchasely.addUserAttributeListener((change) => {
+    console.log(change.action + ' ' + change.key); // Purchasely.UserAttributeAction.ADD | REMOVE
+});
 ```
-
-### Presentation Types
-
-| Type | Description |
-|------|-------------|
-| `NORMAL` | Default Purchasely paywall |
-| `FALLBACK` | Fallback paywall (requested one not found) |
-| `DEACTIVATED` | No paywall for this placement |
-| `CLIENT` | Your own paywall (BYOS) |
 
 ---
 
 ## Deeplinks Management
 
-To enable Purchasely to display screens via deeplinks, you need to:
+To let Purchasely display Screens via deeplinks:
 
-1. Pass the deeplink to the Purchasely SDK
-2. Allow the display when your app is ready
-3. Set a default presentation handler
-
-### Passing the Deeplink
+### Pass the deeplink to the SDK
 
 ```javascript
-// If you grab the deeplink inside your Cordova code you can call
-Purchasely.handle('app://ply/presentations/', (handled) => {
-    console.log('Was deeplink handled by Purchasely? ' + handled);
+Purchasely.handleDeeplink('app_scheme://ply/presentations/', (handled) => {
+    console.log('Handled by Purchasely? ' + handled);
 });
 ```
 
-### Forbidding the Display
+Supported formats (`app_scheme` is your declared URL scheme):
 
-By **default**, deeplinks are displayed **immediately**. To defer them (e.g. during a splash screen, onboarding or login), prevent the display and re-enable it once you are ready:
+```
+app_scheme://ply/presentations/PRESENTATION_ID   // a specific Screen
+app_scheme://ply/presentations                   // your default Screen
+app_scheme://ply/placements/PLACEMENT_ID          // a placement
+app_scheme://ply/placements                       // your default placement
+app_scheme://ply/flows/FLOW_ID                    // a Flow
+```
+
+### Defer the display
+
+By **default**, deeplink presentations display immediately. To defer them (e.g. during a splash screen, onboarding, or login), turn the flag off and back on when ready:
 
 ```javascript
 Purchasely.allowDeeplink(false);
@@ -579,94 +573,67 @@ Purchasely.allowDeeplink(false);
 Purchasely.allowDeeplink(true);
 ```
 
-Campaigns follow the same principle through `allowCampaigns` (also `true` by default): `Purchasely.allowCampaigns(false)` / `Purchasely.allowCampaigns(true)`.
+### Receive the result
 
-### Setting the Default Presentation Handler
+Use [`setDefaultPresentationDismissHandler`](#default-presentation-dismiss-handler) to get the outcome of a Screen opened from a deeplink or campaign.
 
-Retrieve the result of user actions on paywalls opened via deeplinks:
-
-```javascript
-Purchasely.setDefaultPresentationDismissHandler((outcome) => {
-    // `presentation` identifies which campaign/deeplink closed.
-    console.log('Dismissed presentation: ' + (outcome.presentation && outcome.presentation.screenId));
-    console.log('Purchase result: ' + outcome.purchaseResult + ' / close reason: ' + outcome.closeReason);
-
-    if (outcome.plan != null) {
-        console.log('Plan Vendor ID: ' + outcome.plan.vendorId);
-        console.log('Plan Name: ' + outcome.plan.name);
-    }
-});
-```
+> 📘 Renamed in v6
+>
+> v5's `readyToOpenDeeplink(bool)` and `isDeeplinkHandled(url, …)` were **removed** — use `allowDeeplink(bool)` and `handleDeeplink(url, success, error)`.
 
 ---
 
 ## Platform-Specific Features
 
-### StoreKit Selection (iOS)
+### StoreKit selection (iOS)
 
-Choose between StoreKit 1 and StoreKit 2 for iOS:
+The 3rd `start` argument selects the StoreKit version on iOS — `false` for StoreKit 2 (recommended), `true` for StoreKit 1:
 
 ```javascript
-Purchasely.startWithAPIKey(
-    'YOUR_API_KEY',
-    ['Google'],
-    false, // false = StoreKit 2, true = StoreKit 1
-    // ...
+Purchasely.start('YOUR_API_KEY', ['Google'], false /* StoreKit 2 */, null,
+    Purchasely.LogLevel.DEBUG, Purchasely.RunningMode.full, () => {}, () => {});
+```
+
+### Android stores
+
+Pass the store(s) you support in the `stores` array — install the matching dependency for each:
+
+```javascript
+['Google']            // Google Play
+['Google', 'Huawei']  // multiple stores; the first available on the device is used
+```
+
+> **Note**: only `@purchasely/cordova-plugin-purchasely-google` is published for Cordova. For Huawei/Amazon, contact Purchasely support.
+
+### Promotional offers (iOS)
+
+```javascript
+Purchasely.signPromotionalOffer('store_product_id', 'store_offer_id',
+    (signature) => console.log(signature),
+    (error) => console.error(error)
 );
 ```
 
-> **Recommendation**: Use StoreKit 2 (`false`) for new integrations.
-
-### Android Stores
-
-Purchasely supports multiple Android stores:
-
-```javascript
-Purchasely.startWithAPIKey(
-    'YOUR_API_KEY',
-    ['Google'], // Options: 'Google', 'Huawei', 'Amazon'
-    // ...
-);
-```
-
-To use multiple stores:
-
-```javascript
-['Google', 'Huawei']
-```
-
-> **Note**: Install the corresponding dependencies for each store you want to support.
+On Android this returns "No signing required on Android" — promotional offer signing is an Apple-only feature.
 
 ---
 
 ## Troubleshooting
 
-### Common Issues
+| Symptom | Check |
+|---------|-------|
+| `SDK not configured` | Call `Purchasely.start(...)` before any other SDK method. |
+| Purchases do not validate / paywall does not auto-close after purchase | You are likely in the new default `Observer` mode. Pass `Purchasely.RunningMode.full`. |
+| Observer purchase does not update access | Call `Purchasely.synchronize()` after your billing flow succeeds. |
+| Purchases not working on Android | Install `@purchasely/cordova-plugin-purchasely-google` and keep every `io.purchasely:*` dependency on the same version. |
+| Paywall not displaying | Verify the placement exists in the Console, the SDK is initialized, and the device has network access. |
+| Deeplink does nothing | Ensure `Purchasely.allowDeeplink(true)` and that you forward the URL with `handleDeeplink(...)`. |
+| `NoSuchMethodError` at runtime (Android) | A stray `io.purchasely:*:6.0.0` outranks `6.0.0-rc.1`; pin every artifact to the same string. |
 
-1. **SDK not configured**: Ensure you call `Purchasely.startWithAPIKey()` before any other SDK methods.
-
-2. **Purchases not working**: Verify that you've added the correct store dependencies and they're all at the same version.
-
-3. **Paywall not displaying**: Check that:
-   - The placement exists in your Purchasely Console
-   - The SDK is properly initialized
-   - You have an active internet connection
-
-4. **iOS issues**: Ensure your iOS deployment target is set to at least 11.0.
-
-### Debug Mode
-
-Enable debug logging during development:
+### Debug logging
 
 ```javascript
-Purchasely.startWithAPIKey(
-    'YOUR_API_KEY',
-    ['Google'],
-    false,
-    null,
-    Purchasely.LogLevel.DEBUG, // Use ERROR in production
-    Purchasely.RunningMode.full
-);
+Purchasely.setLogLevel(Purchasely.LogLevel.DEBUG); // or pass it to start(); use ERROR in production
 ```
 
 ---
@@ -674,5 +641,6 @@ Purchasely.startWithAPIKey(
 ## Additional Resources
 
 - [Purchasely Console](https://console.purchasely.io)
-- [NPM Package](https://www.npmjs.com/package/@purchasely/cordova-plugin-purchasely)
+- [Migrating from v5 to v6 — Cordova](https://docs.purchasely.com/migrating-from-v5-to-v6-cordova)
+- [NPM — main plugin](https://www.npmjs.com/package/@purchasely/cordova-plugin-purchasely)
 - [Purchasely Documentation](https://docs.purchasely.com)

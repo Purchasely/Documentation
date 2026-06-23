@@ -22,7 +22,7 @@ To enable the Purchasely SDK to analyze the deeplink, the app needs to pass it u
 
 ```swift Cordova
 // If you grab the deeplink inside your Cordova code you can call
-Purchasely.handle("app://ply/presentations/", (handled) => {
+Purchasely.handleDeeplink("app_scheme://ply/presentations/", (handled) => {
 	console.log("Was deeplink handled by Purchasely? " + handled);
 });
 ```

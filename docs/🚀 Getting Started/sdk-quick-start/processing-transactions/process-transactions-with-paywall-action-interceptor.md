@@ -179,7 +179,7 @@ await Purchasely.interceptAction(
 );
 ```
 ```swift Cordova
-Purchasely.setPaywallActionInterceptorCallback((result) => {
+Purchasely.setPaywallActionInterceptor((result) => {
     if (result.action === Purchasely.PaywallAction.purchase) {
         // the store product id (sku) the user clicked on in the paywall
         const storeProductId = result.parameters.plan.productId;
@@ -464,7 +464,7 @@ await Purchasely.interceptAction(
 );
 ```
 ```swift Cordova
-Purchasely.setPaywallActionInterceptorCallback((result) => {
+Purchasely.setPaywallActionInterceptor((result) => {
     if (result.action === Purchasely.PaywallAction.purchase) {
       //the store product id (sku) the user clicked on in the paywall
       const storeProductId = result.parameters.plan.productId

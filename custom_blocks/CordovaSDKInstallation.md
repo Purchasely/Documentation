@@ -6,7 +6,7 @@ We rely on [NPM](https://www.npmjs.com/package/@purchasely/cordova-plugin-purcha
 # Main dependency
 
 ```shell
-cordova plugin add @purchasely/cordova-plugin-purchasely
+cordova plugin add @purchasely/cordova-plugin-purchasely@6.0.0-rc.1
 ```
 
 Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android 23)
@@ -32,6 +32,7 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
         mavenCentral()
     }
 }
@@ -39,7 +40,7 @@ allprojects {
 
 # Android setup
 
-We do include a store by default in our SDK, with Android you can choose to use Google and/or Huawei and/or Amazon.  
+We do not include a store by default in our SDK; with Android you can choose to use Google and/or Huawei and/or Amazon.  
 See below to add the store you want to use
 
 > 📘 Versioning
@@ -58,19 +59,21 @@ See below to add the store you want to use
 To add Google as a store, you can use our NPM dependency
 
 ```shell
-cordova plugin add @purchasely/cordova-plugin-purchasely-google
+cordova plugin add @purchasely/cordova-plugin-purchasely-google@6.0.0-rc.1
 ```
 
 Then you must add Google in the list of stores
 
-```typescript Cordova
-Purchasely.startWithAPIKey(
-    '<<X-API-KEY>>', 
+```javascript Cordova
+Purchasely.start(
+    '<<X-API-KEY>>',
     ['Google'],
-    true, // true for StoreKit 1, false for StoreKit 2
-    null, // user id if user is conencted
+    false, // false for StoreKit 2 (recommended), true for StoreKit 1
+    null, // user id if user is connected
     Purchasely.LogLevel.DEBUG, // set to ERROR in production
-    Purchasely.RunningMode.full
+    Purchasely.RunningMode.full, // ⚠️ v6 default is Observer — set .full to handle purchases
+    (isConfigured) => {},
+    (error) => { console.error(error); }
 );
 ```
 

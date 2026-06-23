@@ -131,6 +131,7 @@ if (!configured) {
         return;
 }
 ```
+* @params Boolean storeKit1 : true for StoreKit 1, false for StoreKit 2 (iOS)
 ```javascript Cordova
 /**
 * @params String apiKey
@@ -139,12 +140,15 @@ if (!configured) {
 * @params Purchasley.LogLevel logLevel
 * @params Purchasely.RunningMode runningMode
 **/
-Purchasely.startWithAPIKey(
-    'API_KEY', 
-    ['Google'], 
-    null, 
-    Purchasely.LogLevel.DEBUG, 
-    Purchasely.RunningMode.paywallObserver
+Purchasely.start(
+    'API_KEY',
+    ['Google'],
+    false, // false for StoreKit 2 (recommended), true for StoreKit 1
+    null, // user id (optional)
+    Purchasely.LogLevel.DEBUG,
+    Purchasely.RunningMode.observer,
+    (isConfigured) => {},
+    (error) => console.error(error)
 );
 ```
 
@@ -381,7 +385,7 @@ await Purchasely.interceptAction(
 );
 ```
 ```typescript Cordova
-Purchasely.setPaywallActionInterceptorCallback((result) => {
+Purchasely.setPaywallActionInterceptor((result) => {
     if (result.action === Purchasely.PaywallAction.purchase) {
       //the store product id (sku) the user clicked on in the paywall
       const storeProductId = result.parameters.plan.productId

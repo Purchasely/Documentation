@@ -218,11 +218,11 @@ await Purchasely.interceptAction(
 );
 ```
 ```javascript Cordova
-Purchasely.setPaywallActionInterceptorCallback((result) => {
-   if (result.action === PLYPaywallAction.LOGIN) {
+Purchasely.setPaywallActionInterceptor((result) => {
+   if (result.action === Purchasely.PaywallAction.login) {
       console.log('User wants to login');
       //Present your own screen for user to log in
-      Purchasely.closePaywall();
+      Purchasely.closePresentation();
       Purchasely.userLogin('MY_USER_ID');
       //Call this method to update Purchasely Paywall
       Purchasely.onProcessAction(true);

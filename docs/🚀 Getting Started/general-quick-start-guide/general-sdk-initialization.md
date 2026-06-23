@@ -116,8 +116,12 @@ if (!configured) {
 Purchasely.startWithAPIKey(
     '<<X-API-KEY>>', 
     ['Google'],
+    false, // false for StoreKit 2 (recommended), true for StoreKit 1
     null, // user id of user
-    Purchasely.LogLevel.DEBUG 
+    Purchasely.LogLevel.DEBUG,
+    Purchasely.RunningMode.full, // ⚠️ v6 default is Observer — set .full to handle purchases
+    (isConfigured) => {},
+    (error) => console.error(error)
 );
 ```
 

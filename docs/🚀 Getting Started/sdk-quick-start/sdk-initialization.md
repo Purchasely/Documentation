@@ -135,10 +135,12 @@ _purchasely = new PurchaselyRuntime.Purchasely("USER_ID",
 Purchasely.startWithAPIKey(
     '<<X-API-KEY>>', 
     ['Google'],
-    false, // true for StoreKit 1, false for StoreKit 2
+    false, // false for StoreKit 2 (recommended), true for StoreKit 1
     null, // user id of user
-    Purchasely.LogLevel.DEBUG, 
-    Purchasely.RunningMode.full
+    Purchasely.LogLevel.DEBUG,
+    Purchasely.RunningMode.full,
+    (isConfigured) => {},
+    (error) => console.error(error)
 );
 ```
 
@@ -278,10 +280,12 @@ _purchasely = new PurchaselyRuntime.Purchasely("USER_ID",
 Purchasely.startWithAPIKey(
     '<<X-API-KEY>>', 
     ['Google'],
-    true, // true for StoreKit 1, false for StoreKit 2
+    false, // false for StoreKit 2 (recommended), true for StoreKit 1
     null, // user id of user
-    Purchasely.LogLevel.DEBUG, 
-    Purchasely.RunningMode.paywallObserver
+    Purchasely.LogLevel.DEBUG,
+    Purchasely.RunningMode.observer,
+    (isConfigured) => {},
+    (error) => console.error(error)
 );
 ```
 

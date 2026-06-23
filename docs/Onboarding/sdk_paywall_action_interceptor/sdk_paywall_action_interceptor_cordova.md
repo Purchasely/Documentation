@@ -13,7 +13,7 @@ next:
 Here is a code sample using the Action Interceptor to perform the purchase and restore actions triggered from Purchasely's paywall with your own purchase system
 
 ```kotlin In-House
-Purchasely.setPaywallActionInterceptorCallback((result) => {
+Purchasely.setPaywallActionInterceptor((result) => {
     if (result.action === Purchasely.PaywallAction.purchase) {
         // the store product id (sku) the user clicked on in the paywall
         const storeProductId = result.parameters.plan.productId;
@@ -50,7 +50,7 @@ Purchasely.setPaywallActionInterceptorCallback((result) => {
 });
 ```
 ```kotlin RevenueCat
-Purchasely.setPaywallActionInterceptorCallback((result) => {
+Purchasely.setPaywallActionInterceptor((result) => {
     if (result.action === Purchasely.PaywallAction.purchase) {
       //the store product id (sku) the user clicked on in the paywall
       const storeProductId = result.parameters.plan.productId
