@@ -122,36 +122,37 @@ PLYPresentation {
 ```
 ```javascript React Native
 try {
-  // Fetch presentation to display
-  const presentation = await Purchasely.fetchPresentation({
-      placementId: 'onboarding'
-  })
+  // Build a request for the placement, then preload its Screen
+  const request = Purchasely.presentation.placement('onboarding').build()
 
-  if(presentation.type == PLYPresentationType.DEACTIVATED) {
+  const presentation = await request.preload()
+
+  if (presentation.type === PLYPresentationType.DEACTIVATED) {
     // No Screen to display
     return
   }
 
-  if(presentation.type == PLYPresentationType.CLIENT) {
+  if (presentation.type === PLYPresentationType.CLIENT) {
     // Display my own Screen
     return
   }
 
-  //Display Purchasely Screen
-  const result = await Purchasely.presentPresentation({
-    presentation: presentation
-  })
-  
-  switch (result.result) {
-    case ProductResult.PRODUCT_RESULT_PURCHASED:
-    case ProductResult.PRODUCT_RESULT_RESTORED:
-      if (result.plan != null) {
-        console.log('User purchased ' + result.plan.name);
+  // Display Purchasely Screen, resolves when it is dismissed
+  const outcome = await request.display()
+
+  switch (outcome.purchaseResult) {
+    case 'purchased':
+    case 'restored':
+      if (outcome.plan != null) {
+        console.log('User purchased ' + outcome.plan.name);
       }
 
       break;
-    case ProductResult.PRODUCT_RESULT_CANCELLED:
+    case 'cancelled':
       console.log('User cancelled');
+      break;
+    case null:
+      console.log('User dismissed: ' + outcome.closeReason);
       break;
   }
 

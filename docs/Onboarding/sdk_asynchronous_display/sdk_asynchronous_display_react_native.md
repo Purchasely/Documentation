@@ -25,22 +25,22 @@ If you want to quickly test your first in-app Purchase, we invite you to directl
 This first method to display a Placement was already presented at the stage **Display your first screen through a placement**
 
 ```javascript React Native
-await Purchasely.presentPresentationForPlacement({
-    placementVendorId: 'ONBOARDING',
-    contentId: 'my_content_id',
-    isFullscreen: true,
-});
+const outcome = await Purchasely.presentation
+    .placement('ONBOARDING')
+    .contentId('my_content_id')
+    .build()
+    .display();
 ```
 
 ### 2\. USING THE ASYNCHRONOUS DISPLAY WITH PRE-FETCH
 
 Purchasely, by default, shows the paywall screen with a loading indicator while fetching the paywall from the network and preparing it for display.
 
-Using `Purchasely.fetchPresentation()` method, you can pre-fetch the paywall from the network before displaying it. 
+Using the `preload()` method on a presentation request, you can pre-fetch the paywall from the network before displaying it. 
 
 The benefits of this method are listed in the bloc on the right
 
-Call `Purchasely.fetchPresentation` for a placement or with a presentation id
+Call `Purchasely.presentation.placement(...).build().preload()` for a placement or `Purchasely.presentation.screen(...).build().preload()` with a presentation id
 
 1. An error may be returned if the presentation could not be fetched from the network.
 2. If successful, you will have a `PLYPresentation` instance containing the following properties
@@ -76,35 +76,41 @@ To fetch a paywall and then display it, use the following code:
 
 ```javascript React Native
 try {
-  // Fetch presentation to display
-  const presentation = await Purchasely.fetchPresentation({
-      placementId: 'ONBOARDING'
-  })
+  // Build a request for the placement
+  const request = Purchasely.presentation.placement('ONBOARDING').build()
 
-  if(presentation.type == PLYPresentationType.DEACTIVATED) {
+  // Pre-fetch presentation to display
+  const presentation = await request.preload()
+
+  if (presentation == null) {
+    // No presentation, it means an error was triggered
+    return
+  }
+
+  if (presentation.type === PLYPresentationType.DEACTIVATED) {
     // No paywall to display
     return
   }
 
-  if(presentation.type == PLYPresentationType.CLIENT) {
-    // Display my own paywall
+  if (presentation.type === PLYPresentationType.CLIENT) {
+    const paywallId = presentation.screenId
+    const planIds = presentation.plans
+    // Display your own paywall
     return
   }
 
-  //Display Purchasely paywall
-  const result = await Purchasely.presentPresentation({
-    presentation: presentation
-  })
-  
-  switch (result.result) {
-    case ProductResult.PRODUCT_RESULT_PURCHASED:
-    case ProductResult.PRODUCT_RESULT_RESTORED:
-      if (result.plan != null) {
-        console.log('User purchased ' + result.plan.name);
+  // Display Purchasely paywall, resolves when it is dismissed
+  const outcome = await request.display()
+
+  switch (outcome.purchaseResult) {
+    case 'purchased':
+    case 'restored':
+      if (outcome.plan != null) {
+        console.log('User purchased ' + outcome.plan.name);
       }
 
       break;
-    case ProductResult.PRODUCT_RESULT_CANCELLED:
+    case 'cancelled':
       console.log('User cancelled');
       break;
   }

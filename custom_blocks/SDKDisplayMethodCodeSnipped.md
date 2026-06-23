@@ -38,25 +38,23 @@ if (presentation.flowId != null) {
 ```
 ```javascript React Native
 try {
-  // Fetch presentation to display
-  const presentation = await Purchasely.fetchPresentation({
-      placementId: 'onboarding'
-  })
+  const request = Purchasely.presentation.placement('onboarding').build();
 
-  if(presentation.type == PLYPresentationType.DEACTIVATED) {
+  // Preload resolves once the Screen is loaded
+  const presentation = await request.preload();
+
+  if (presentation.type === PLYPresentationType.DEACTIVATED) {
     // No Screen to display
-    return
+    return;
   }
 
-  if(presentation.type == PLYPresentationType.CLIENT) {
+  if (presentation.type === PLYPresentationType.CLIENT) {
     // Display my own Screen
-    return
+    return;
   }
 
-  //Display Purchasely Screen
-  await Purchasely.presentPresentation({
-    presentation: presentation
-  })
+  // Display Purchasely Screen; resolves at dismiss
+  await request.display();
 
 } catch (e) {
   console.error(e);

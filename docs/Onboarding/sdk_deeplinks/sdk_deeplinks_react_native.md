@@ -18,12 +18,16 @@ To manage deeplinks you need to do up to 3 things:
 
 ### PASSING THE DEEPLINK TO THE PURCHASELY SDK
 
-To enable the Purchasely SDK to analyze the deeplink, the app needs to pass it using the following code:
+To enable the Purchasely SDK to analyze the deeplink, the app needs to pass it using the following code. You can also allow deeplinks at initialization with `Purchasely.builder('YOUR_API_KEY').allowDeeplink(true).start()`.
 
 ```javascript React Native
-Purchasely.isDeeplinkHandled('app://ply/presentations/')
-          .then((value) => console.log('Deeplink handled by Purchasely ? ' + value));
+const handled = await Purchasely.isDeeplinkHandled('app://ply/presentations/');
+console.log('Deeplink handled by Purchasely? ' + handled);
 ```
+
+> 📘 React Native keeps `isDeeplinkHandled`
+>
+> In v6 the runtime method is still `Purchasely.isDeeplinkHandled(uri)`. Allowing deeplinks at startup now uses `allowDeeplink(true)` on the builder (the v5 startup permission method has been removed).
 
 ### FORBIDDING THE DISPLAY
 
@@ -31,17 +35,21 @@ By **default**, Purchasely deeplinks are displayed **immediately** when they are
 
 If your app has a launch routine that must complete before a screen can be shown (splash screen, onboarding, login, displaying an ad…), you can **temporarily prevent** the display, then re-enable it once you are ready:
 
-```kotlin React Native
+```javascript React Native
+// Prevent the display (e.g. while your onboarding is on screen)
 Purchasely.allowDeeplink(false);
-// later, once your app is ready
+
+// Re-enable it once ready — any queued deeplink displays immediately
 Purchasely.allowDeeplink(true);
 ```
+
+> 📘 You only need this if you want to **defer** deeplinks. Do nothing and they display as soon as they are received. `allowDeeplink` replaces the v5 deeplink-permission method.
 
 ### SETTING THE DEFAULT PRESENTATION HANDLER
 
 Usually when a paywall / screen is instantiated by the app, a closure is called back to inform the app of what has happened with the paywall / screen. However, when a deeplink is called, as you don't instantiate the paywall / screen yourself, no closure will be called.
 
-You can retrieve the result of the user action in a paywall opened with a deeplink by setting the global default dismiss handler with `setDefaultPresentationDismissHandler`. It is the v6 replacement for the v5 `setDefaultPresentationResultCallback` / `setDefaultPresentationResultHandler`.
+You can retrieve the result of the user action in a paywall opened with a deeplink by setting the global default dismiss handler with `setDefaultPresentationDismissHandler`. It is the v6 replacement for the v5 default presentation result callbacks.
 
 ```javascript React Native
 const subscription = Purchasely.setDefaultPresentationDismissHandler((outcome) => {

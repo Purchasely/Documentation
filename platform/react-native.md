@@ -1,6 +1,12 @@
 # Purchasely React Native SDK Documentation
 
-This document provides comprehensive documentation for integrating and using the Purchasely React Native SDK with JavaScript/TypeScript.
+This guide covers the Purchasely React Native SDK **v6** (`6.0.0-rc.1`) for JavaScript / TypeScript apps. The bridge wraps the Purchasely 6.0 native SDKs (iOS `Purchasely 6.0.0-rc.1`, Android `io.purchasely:core 6.0.0-rc.1`) and displays **Presentations** (Screens / paywalls) configured in the Console through placements, direct `screen` lookups, campaigns, deeplinks and Flows.
+
+> 📘 SDK v6 — what changed
+>
+> v6 is a major release with breaking changes on the **paywall surface only**: **starting the SDK** (`Purchasely.builder(...)`), **displaying / preloading / closing a presentation**, and the **action interceptor**. Everything else on the `Purchasely` object — purchases, restore, identity, catalog, subscriptions, user attributes, events, dynamic offerings, consent and config — keeps its v5 signatures. React Native keeps `Purchasely.isDeeplinkHandled(uri)` for passing a deeplink to the SDK.
+>
+> The most impactful change for new integrations is that the **default running mode is now `'observer'`** (it was Full in v5). If you want Purchasely to handle and validate purchases, set `.runningMode('full')` explicitly. See [SDK Initialization](#sdk-initialization).
 
 ---
 
@@ -18,7 +24,12 @@ This document provides comprehensive documentation for integrating and using the
 10. [Event Listeners](#event-listeners)
 11. [Pre-fetching Screens](#pre-fetching-screens)
 12. [Deeplinks Management](#deeplinks-management)
-13. [Platform-Specific Features](#platform-specific-features)
+13. [Embedded Presentations](#embedded-presentations)
+14. [Platform-Specific Features](#platform-specific-features)
+15. [Theme & Appearance](#theme--appearance)
+16. [Privacy & Consent](#privacy--consent)
+17. [Troubleshooting](#troubleshooting)
+18. [Additional Resources](#additional-resources)
 
 ---
 
@@ -26,28 +37,32 @@ This document provides comprehensive documentation for integrating and using the
 
 | Requirement | iOS | Android |
 |-------------|-----|---------|
-| Minimum OS Version | 11.0 | 21 |
+| Minimum OS Version | 13.4 | 21 (minSdkVersion) |
 | compileSdkVersion | - | 36 |
 | targetSdkVersion | - | 35 |
+
+The SDK packages are pinned to `6.0.0-rc.1`. Pin every Purchasely package to that **exact** version — this is a pre-release, so do **not** use a floating range (`^6.0.0`, `6.x`, …).
 
 ---
 
 ## Installation
 
-### Main Dependency
+We rely on [NPM](https://www.npmjs.com/package/react-native-purchasely) to distribute the React Native SDK.
 
-Install the Purchasely React Native SDK via NPM:
+### Main Dependency
 
 ```shell
 npm install react-native-purchasely --save
 ```
 
+Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android minSdk 21).
+
 ### iOS Setup
 
 Update your Podfile to set the minimum iOS version:
 
-```yaml
-// Podfile
+```ruby
+# Podfile
 
 ...
 
@@ -62,6 +77,8 @@ Then run:
 cd ios && pod install
 ```
 
+The iOS native dependency (`Purchasely 6.0.0-rc.1`) is published on the CocoaPods trunk, so it resolves from the public repositories with no extra configuration.
+
 ### Android Setup
 
 Update your `android/build.gradle` file:
@@ -70,7 +87,7 @@ Update your `android/build.gradle` file:
 // Edit file android/build.gradle
 buildscript {
     ext {
-        minSdkVersion = 23 //min version must not be below 23
+        minSdkVersion = 21 //min version must not be below 21
         compileSdkVersion = 36
         targetSdkVersion = 35
     }
@@ -83,9 +100,11 @@ allprojects {
 }
 ```
 
+The Android native dependencies (`io.purchasely:core` / `google-play` / `player` `6.0.0-rc.1`) are published on **Maven Central**, so they resolve from the public repositories with no extra configuration.
+
 ### Android Dependencies
 
-> ⚠️ **Important**: The main Purchasely SDK (`react-native-purchasely`) does **NOT** include store implementations by default. This modular architecture allows you to include only the stores you need and avoid dependency conflicts.
+> ⚠️ **Important**: The main Purchasely SDK (`react-native-purchasely`) does **NOT** include store implementations by default. This modular architecture lets you include only the stores you need and avoids dependency conflicts.
 
 With Android, you can choose to use Google Play Store and/or Huawei AppGallery and/or Amazon Appstore. **You must install the corresponding dependency for each store you want to support.**
 
@@ -99,9 +118,11 @@ npm install @purchasely/react-native-purchasely-google --save
 
 **Why is this required?**
 - The Purchasely core SDK does not include the Google Play Billing library
-- When you specify `androidStores: ['Google']` in initialization, the SDK looks for this dependency at runtime
+- When you pass `.stores(['google'])` at initialization, the SDK looks for this dependency at runtime
 - Without this dependency, purchases will not work on Android devices using Google Play Store
 - The app may crash or fail to initialize properly on Android
+
+> ⚠️ **Google Play Billing v8** — the `@purchasely/react-native-purchasely-google` artifact pulls in Google Play Billing Client v8. If you also depend on Google Play Billing directly, do not force an older billing dependency into your project.
 
 #### Video Player (Required for Video Paywalls)
 
@@ -114,19 +135,26 @@ npm install @purchasely/react-native-purchasely-android-player --save
 **Why is this required?**
 - The core SDK does not include a video player to avoid conflicts with other media libraries you may have (e.g., Media3/ExoPlayer)
 - Without this dependency, videos in paywalls will not play on Android
-- If you already have your own video player that supports HLS, you can provide your own player view instead
+- The external player is detected and handled automatically by the SDK
 
 #### Version Matching (Critical)
 
-> ⚠️ **All Purchasely packages must be at the exact same version.** Mismatched versions will cause runtime errors or unexpected behavior.
+> ⚠️ **All Purchasely packages must be pinned to the exact same version.** Mismatched versions cause runtime errors. Pin each package to `6.0.0-rc.1` — do **not** use a floating range.
 
 ```json
 // package.json
 "dependencies": {
-  "react-native-purchasely": "5.0.0",
-  "@purchasely/react-native-purchasely-google": "5.0.0",
-  "@purchasely/react-native-purchasely-android-player": "5.0.0"
+  "react-native-purchasely": "6.0.0-rc.1",
+  "@purchasely/react-native-purchasely-google": "6.0.0-rc.1",
+  "@purchasely/react-native-purchasely-android-player": "6.0.0-rc.1"
 }
+```
+
+The two remaining alternative stores follow the same pattern:
+
+```shell
+npm install @purchasely/react-native-purchasely-amazon --save
+npm install @purchasely/react-native-purchasely-huawei --save
 ```
 
 #### Complete Android Installation Example
@@ -134,7 +162,7 @@ npm install @purchasely/react-native-purchasely-android-player --save
 For a typical app distributed on Google Play Store with video paywalls:
 
 ```shell
-# Install all required dependencies
+# Install all required dependencies (same exact version)
 npm install react-native-purchasely --save
 npm install @purchasely/react-native-purchasely-google --save
 npm install @purchasely/react-native-purchasely-android-player --save
@@ -143,38 +171,45 @@ npm install @purchasely/react-native-purchasely-android-player --save
 Then initialize with the Google store:
 
 ```typescript
-await Purchasely.start({
-    apiKey: 'YOUR_API_KEY',
-    androidStores: ['Google'], // Requires @purchasely/react-native-purchasely-google
-    storeKit1: false,
-    // ...
-});
+await Purchasely.builder('YOUR_API_KEY')
+    .runningMode('full')
+    .logLevel('error')
+    .stores(['google']) // requires @purchasely/react-native-purchasely-google at the same version
+    .storekitVersion('storeKit2') // iOS only: 'storeKit2' (default) | 'storeKit1'
+    .start();
 ```
 
 ---
 
 ## SDK Initialization
 
+In v6 the SDK is started with the fluent **`Purchasely.builder(...)`**. The v5 object-based start method and its `runningMode` / `logLevel` enum values and the StoreKit boolean have been **removed**. All builder options now use plain **strings** (e.g. `'full'`, `'error'`, `'google'`, `'storeKit2'`).
+
 Initialize the Purchasely SDK as early as possible in your application lifecycle.
 
-### Full Mode (Recommended)
+> 🚧 Major v6 change — the default running mode is now Observer
+>
+> In v5 the implicit default was Full. In **v6 the default is `'observer'`** — Purchasely observes transactions but your app keeps control of the purchase flow. **If you want Purchasely to handle the purchase flow and validate receipts, pass `.runningMode('full')` explicitly.** A behavioral consequence: in observer mode, presentations no longer auto-close after a purchase or restore — dismiss them yourself.
 
-In `full` mode, Purchasely handles the entire purchase flow including transactions and receipts.
+### Full Mode (Purchasely handles purchases)
+
+In `'full'` mode, Purchasely handles the entire purchase flow including transactions and receipts.
 
 ```typescript
-import Purchasely, { LogLevels, RunningMode } from 'react-native-purchasely';
+import Purchasely from 'react-native-purchasely';
 
-// Everything is optional except apiKey and storeKit1
+// Everything is optional except the apiKey
 // Example with default values
 try {
-    const configured = await Purchasely.start({
-        apiKey: 'YOUR_API_KEY',
-        storeKit1: false, // set to false to use StoreKit2, true to use StoreKit1
-        logLevel: LogLevels.ERROR, // set to DEBUG in development mode to see logs
-        userId: null, // if you know your user id, set it here
-        runningMode: RunningMode.Full, // select between Full and PaywallObserver
-        androidStores: ['Google'] // default is Google, don't forget to add the dependency
-    });
+    const configured = await Purchasely.builder('YOUR_API_KEY')
+        .appUserId(null)              // optional if you already know your user id
+        .runningMode('full')          // 'observer' (default) | 'full'
+        .logLevel('error')            // set to 'debug' in development mode to see logs
+        .allowDeeplink(true)          // allow Purchasely to open deeplinks (default false)
+        .allowCampaigns(true)         // allow Purchasely campaigns (default true)
+        .stores(['google'])           // Android only: 'google' | 'huawei' | 'amazon'
+        .storekitVersion('storeKit2') // iOS only: 'storeKit2' (default) | 'storeKit1'
+        .start();                     // resolves to a boolean
 
     if (configured) {
         console.log('Purchasely SDK configured successfully');
@@ -184,26 +219,40 @@ try {
 }
 ```
 
-### PaywallObserver Mode
+### Observer Mode (your app owns purchases)
 
-Use `paywallObserver` mode if you have an existing in-app purchase infrastructure and want to use Purchasely only for paywall display and analytics.
+Use `'observer'` mode if you have an existing in-app purchase infrastructure and want to use Purchasely only for paywall display and analytics. This is the **default** mode in v6, so passing it makes the intent explicit.
 
 ```typescript
-import Purchasely, { LogLevels, RunningMode } from 'react-native-purchasely';
+import Purchasely from 'react-native-purchasely';
 
 try {
-    const configured = await Purchasely.start({
-        apiKey: 'YOUR_API_KEY',
-        storeKit1: false,
-        logLevel: LogLevels.ERROR,
-        userId: null,
-        runningMode: RunningMode.PaywallObserver,
-        androidStores: ['Google']
-    });
+    const configured = await Purchasely.builder('YOUR_API_KEY')
+        .appUserId(null)              // optional if you already know your user id
+        .runningMode('observer')      // 'observer' (default) | 'full'
+        .logLevel('error')            // set to 'debug' in development mode to see logs
+        .allowDeeplink(true)          // allow Purchasely to open deeplinks
+        .allowCampaigns(true)         // allow Purchasely campaigns
+        .stores(['google'])           // Android only: 'google' | 'huawei' | 'amazon'
+        .storekitVersion('storeKit2') // iOS only: 'storeKit2' (default) | 'storeKit1'
+        .start();
 } catch (e) {
     console.log('Purchasely SDK not configured properly');
 }
 ```
+
+### Builder options
+
+| Method | Values | Notes |
+|--------|--------|-------|
+| `.appUserId(id)` | `string \| null` | Associate purchases with a user; anonymous by default |
+| `.runningMode(mode)` | `'observer'` (default), `'full'` | `'full'` lets Purchasely own the purchase flow |
+| `.logLevel(level)` | `'debug'`, `'info'`, `'warn'`, `'error'` (default) | Use `'debug'` in development |
+| `.allowDeeplink(bool)` | `true` / `false` (default `false`) | Replaces the v5 startup deeplink-permission method |
+| `.allowCampaigns(bool)` | `true` (default) / `false` | Gate Purchasely campaign display |
+| `.stores(list)` | `['google' \| 'huawei' \| 'amazon']` | Android only |
+| `.storekitVersion(v)` | `'storeKit2'` (default), `'storeKit1'` | iOS only; replaces the `storeKit1` boolean |
+| `.start()` | — | `Promise<boolean>`; resolves once the SDK is configured |
 
 ### API Key
 
@@ -213,44 +262,126 @@ You can find your API Key in the Purchasely Console under **App settings > Backe
 
 ## Displaying Paywalls
 
-Purchasely paywalls are displayed using **placements**. A placement is a specific location in your app where you want to display a paywall (e.g., onboarding, settings, premium feature).
+Purchasely paywalls are **Presentations** displayed using **placements** (a specific location in your app, e.g. onboarding, settings, premium feature) or by direct `screen` id.
+
+`Purchasely.presentation` is the entry point (a `PresentationBuilder`). `Purchasely.presentation.placement(id).build()` returns a **`PresentationRequest`**. Calling `.display([transition])` shows the presentation and resolves at **dismiss** with a `PresentationOutcome` (`{ presentation, purchaseResult, plan, closeReason, error }`).
 
 ### Display a Placement
 
 ```typescript
-import Purchasely, { ProductResult } from 'react-native-purchasely';
+import Purchasely from 'react-native-purchasely';
 
 try {
-    const result = await Purchasely.presentPresentationForPlacement({
-        placementVendorId: 'ONBOARDING',
-        contentId: 'my_content_id', // optional: associate content with the purchase
-        isFullscreen: true,
-    });
+    const outcome = await Purchasely.presentation
+        .placement('ONBOARDING')
+        .contentId('my_content_id') // optional: associate content with the purchase
+        .build()
+        .display();
 
-    switch (result.result) {
-        case ProductResult.PRODUCT_RESULT_PURCHASED:
-        case ProductResult.PRODUCT_RESULT_RESTORED:
-            if (result.plan != null) {
-                console.log('User purchased ' + result.plan.name);
-                // Update entitlements to unlock content
-            }
-            break;
-        case ProductResult.PRODUCT_RESULT_CANCELLED:
-            console.log('User cancelled');
-            break;
+    // outcome: { presentation, purchaseResult, plan, closeReason, error }
+    if (outcome.error != null) {
+        console.log('Display error:', outcome.error.message);
+    } else if (
+        outcome.purchaseResult === 'purchased' ||
+        outcome.purchaseResult === 'restored'
+    ) {
+        console.log('User purchased ' + outcome.plan?.name);
+        // Update entitlements to unlock content
+    } else {
+        console.log('Dismissed:', outcome.closeReason); // 'button' | 'backSystem' | ...
     }
 } catch (e) {
     console.error(e);
 }
 ```
 
+### Targeting a specific screen / product
+
+```typescript
+// A specific presentation by screen id
+await Purchasely.presentation.screen('SCREEN_ID').build().display();
+
+// A specific content inside a screen
+await Purchasely.presentation.screen('SCREEN_ID').contentId('CONTENT_ID').build().display();
+```
+
+### Selectors
+
+```typescript
+Purchasely.presentation.placement('onboarding'); // by placement id
+Purchasely.presentation.screen('screen_abc123'); // direct Console Screen lookup
+Purchasely.presentation.default();               // default handler for deeplinks / campaigns
+```
+
+To display a Flow, use its deeplink `app_scheme://ply/flows/FLOW_ID`.
+
+### Builder chaining
+
+The `PresentationBuilder` exposes the following chainable options before `.build()`:
+
+```typescript
+Purchasely.presentation
+    .placement('ONBOARDING')
+    .contentId('my_content_id')
+    .backgroundColor('#000000')      // hex color
+    .progressColor('#FFFFFF')        // hex color
+    .displayCloseButton(true)        // Android only (no-op on iOS)
+    .displayBackButton(true)         // Android only (no-op on iOS)
+    .onLoaded((presentation, error) => { /* screen loaded */ })
+    .onPresented((presentation, error) => { /* screen presented */ })
+    .onCloseRequested(() => { /* user requested close */ })
+    .onDismissed((outcome) => { /* screen dismissed */ })
+    .build();
+```
+
+### Transitions
+
+`.display([transition])` accepts an optional `Transition` **object**:
+
+```typescript
+await Purchasely.presentation.placement('ONBOARDING').build().display({ type: 'fullScreen' });
+await Purchasely.presentation.placement('ONBOARDING').build().display({ type: 'modal', dismissible: false });
+await Purchasely.presentation.placement('ONBOARDING').build().display({ type: 'push' });
+```
+
+The `Transition` object accepts:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | `'fullScreen' \| 'push' \| 'modal' \| 'drawer' \| 'popin' \| 'inlinePaywall'` | Transition mode |
+| `heightPercentage` | `number?` | Height ratio for `drawer` / `popin` |
+| `dismissible` | `boolean?` | Whether the user can dismiss interactively |
+| `backgroundColors` | `{ light?, dark? }?` | Backdrop colors per theme |
+
 ### Display Results
 
-After displaying a placement, you receive a result indicating the user's action:
+`.display([transition])` resolves with a `PresentationOutcome`:
 
-- `PRODUCT_RESULT_PURCHASED`: User purchased a plan
-- `PRODUCT_RESULT_RESTORED`: User restored a previous purchase
-- `PRODUCT_RESULT_CANCELLED`: User did not complete a purchase
+| Field | Type | Description |
+|-------|------|-------------|
+| `presentation` | `Presentation \| null` | The displayed presentation (or `null` if it never reached display) |
+| `purchaseResult` | `string \| null` | `'purchased'` \| `'restored'` \| `'cancelled'` \| `null` |
+| `plan` | `PurchaselyPlan \| null` | The purchased plan (when `purchaseResult` is `'purchased'` / `'restored'`) |
+| `closeReason` | `string \| null` | `'button'` \| `'backSystem'` \| `'interactiveDismiss'` \| `'programmatic'` (when no purchase) |
+| `error` | `PresentationError \| null` | Display error; mutually exclusive with `closeReason` |
+
+`purchaseResult` is `null` when the user dismissed the screen without a purchase action. Platform note: Android never reports `'interactiveDismiss'`; iOS never reports `'backSystem'`.
+
+### Presentation lifecycle (display / close / back)
+
+A `PresentationRequest` exposes imperative controls:
+
+```typescript
+const request = Purchasely.presentation.placement('ONBOARDING').build();
+
+request.display();  // show (returns a Promise that resolves at dismiss)
+request.close();    // dismiss programmatically
+request.back();     // navigate back inside a multi-step (Flow) presentation
+```
+
+> 📘 The v5 imperative close / hide / show presentation methods have been **removed**. Use the `PresentationRequest` handle (`request.close()` / `request.back()`) instead.
+>
+> ⚠️ The native SDK does not yet expose a per-request close, so `request.close()` currently dismisses **all** displayed presentations, not only this request. If your app stacks presentations (e.g. a product page inside an onboarding flow), calling `close()` on one will also dismiss the others.
 
 ---
 
@@ -258,128 +389,144 @@ After displaying a placement, you receive a result indicating the user's action:
 
 ### Full Mode
 
-In `full` mode, the Purchasely SDK automatically launches the native in-app purchase flow when a user clicks on a purchase button and handles the transaction. You only need to update entitlements once you have confirmation that the purchase was processed.
+In `'full'` mode, the Purchasely SDK automatically launches the native in-app purchase flow when a user taps a purchase button and handles the transaction. You only need to update entitlements once you have confirmation the purchase was processed.
 
 ```typescript
 try {
-    const result = await Purchasely.presentPresentationForPlacement({
-        placementVendorId: 'onboarding',
-        isFullscreen: true,
-    });
+    const outcome = await Purchasely.presentation
+        .placement('onboarding')
+        .build()
+        .display();
 
-    switch (result.result) {
-        case ProductResult.PRODUCT_RESULT_PURCHASED:
-        case ProductResult.PRODUCT_RESULT_RESTORED:
-            if (result.plan != null) {
-                console.log('User purchased ' + result.plan.name);
-                // Update entitlements to unlock the access to the contents
-            }
-            break;
-        case ProductResult.PRODUCT_RESULT_CANCELLED:
-            break;
+    if (
+        outcome.purchaseResult === 'purchased' ||
+        outcome.purchaseResult === 'restored'
+    ) {
+        console.log('User purchased ' + outcome.plan?.name);
+        // Update entitlements to unlock the access to the contents
     }
 } catch (e) {
     console.error(e);
 }
 ```
 
-### PaywallObserver Mode with Action Interceptor
-
-In `paywallObserver` mode, you handle purchases with your own infrastructure while using Purchasely for paywall display.
+You can also trigger a purchase programmatically (unchanged in v6):
 
 ```typescript
-Purchasely.setPaywallActionInterceptorCallback((result) => {
-    if (result.action === PLYPaywallAction.PURCHASE) {
-        try {
-            // The store product id (sku) the user clicked on in the paywall
-            const storeProductId = result.parameters.plan.productId;
+const plan = await Purchasely.purchaseWithPlanVendorId({
+    planVendorId: 'PURCHASELY_PLUS_MONTHLY',
+    offerId: null,   // optional
+    contentId: null, // optional
+});
+```
 
-            if (Platform.OS === 'android') {
-                // Only for Android you can retrieve other information
-                const basePlanId = result.parameters.subscriptionOffer?.basePlanId;
-                const offerId = result.parameters.subscriptionOffer?.offerId;
-                const offerToken = result.parameters.subscriptionOffer?.offerToken;
-            }
+### Observer Mode with Action Interceptor
 
-            const success = await MyPurchaseSystem.purchase(storeProductId);
-            if (success) {
-                Purchasely.synchronize(); // Synchronize all purchases with Purchasely
-                Purchasely.onProcessAction(false); // Stop processing action
-            }
-        } catch (e) {
-            console.log(e);
-            Purchasely.onProcessAction(false);
+In `'observer'` mode, you handle purchases with your own infrastructure while using Purchasely for paywall display. Register an interceptor for the `'purchase'` action; the handler returns an intercept result string (the v5 process-action acknowledgement callback no longer exists). In observer mode the presentation does **not** auto-close, so dismiss it yourself.
+
+```typescript
+import { Platform } from 'react-native';
+import Purchasely from 'react-native-purchasely';
+
+Purchasely.interceptAction('purchase', async (info, payload) => {
+    if (payload?.kind !== 'purchase') {
+        return 'notHandled';
+    }
+    try {
+        // The store product id (sku) the user tapped on in the paywall
+        const storeProductId = payload.plan.productId;
+
+        if (Platform.OS === 'android') {
+            // Only for Android you can retrieve the subscription offer details
+            const basePlanId = payload.subscriptionOffer?.basePlanId;
+            const offerId = payload.subscriptionOffer?.offerId;
+            const offerToken = payload.subscriptionOffer?.offerToken;
         }
-    } else if (result.action === PLYPaywallAction.RESTORE) {
-        try {
-            await MyPurchaseSystem.restorePurchases();
-            Purchasely.synchronize();
-            Purchasely.onProcessAction(false);
-        } catch (e) {
-            Purchasely.onProcessAction(false);
+
+        const success = await MyPurchaseSystem.purchase(storeProductId);
+        if (success) {
+            await Purchasely.synchronize(); // synchronize the new purchase with Purchasely
+            return 'success'; // notify Purchasely the action was handled
         }
-    } else {
-        Purchasely.onProcessAction(true); // Continue other actions
+        return 'failed';
+    } catch (e) {
+        console.log(e);
+        return 'failed';
+    }
+});
+
+Purchasely.interceptAction('restore', async (info, payload) => {
+    try {
+        await MyPurchaseSystem.restorePurchases();
+        await Purchasely.synchronize(); // synchronize all purchases with Purchasely
+        return 'success'; // notify Purchasely the action was handled
+    } catch (e) {
+        // Error restoring purchases
+        return 'failed';
     }
 });
 ```
+
+> 📘 `synchronize()` now reports completion. In v6 `Purchasely.synchronize()` returns a `Promise<boolean>` that **resolves when the synchronization actually completes** and **rejects on failure**. `await` it (and optionally `try/catch`) before chaining a follow-up presentation that targets subscribers. Fire-and-forget callers stay source-compatible with the previous behavior.
 
 ---
 
 ## Action Interceptor
 
-The Action Interceptor allows you to intercept and handle user actions on the paywall.
+The v6 interceptor is registered **per action kind** with `Purchasely.interceptAction(kind, handler)`. The handler receives a typed payload and returns an intercept result string — the v5 single global interceptor callback and its boolean process-action acknowledgement no longer exist.
 
-### Available Actions
+### Result values
 
-| Action | Description |
-|--------|-------------|
-| `PURCHASE` | User tapped a purchase button |
-| `RESTORE` | User tapped the restore button |
-| `LOGIN` | User tapped the login button |
-| `CLOSE` | User tapped the close button |
-| `NAVIGATE` | User wants to navigate to an external URL |
-| `OPEN_PRESENTATION` | User wants to open another presentation |
+| Result | Meaning |
+|--------|---------|
+| `'success'` | App handled the action; SDK skips its default behavior. |
+| `'failed'` | App tried but failed; the action chain stops. |
+| `'notHandled'` | SDK should continue with its default behavior. |
+
+### Action kinds & payloads
+
+Action kinds: `'close'`, `'closeAll'`, `'login'`, `'navigate'`, `'purchase'`, `'restore'`, `'openPresentation'`, `'openPlacement'`, `'promoCode'`, `'webCheckout'`.
+
+The handler's second argument is a typed payload (or `null`); narrow it with `payload?.kind`:
+
+| Action kind | Payload `kind` | Notable fields |
+|-------------|----------------|----------------|
+| `purchase` | `'purchase'` | `plan` (`PurchaselyPlan`), `subscriptionOffer?`, `offer?` |
+| `restore` | — | — |
+| `login` | — | — |
+| `close` / `closeAll` | `'close'` / `'closeAll'` | `closeReason` |
+| `navigate` | `'navigate'` | `url`, `title?` |
+| `openPresentation` | `'openPresentation'` | `presentationId` |
+| `openPlacement` | `'openPlacement'` | `placementId` |
+| `webCheckout` | `'webCheckout'` | `url`, `clientReferenceId`, `queryParameterKey`, `webCheckoutProvider` |
 
 ### Implementation
 
 ```typescript
-import Purchasely, { PLYPaywallAction } from 'react-native-purchasely';
+import { Linking } from 'react-native';
+import Purchasely from 'react-native-purchasely';
 
-Purchasely.setPaywallActionInterceptorCallback((result) => {
-    console.log('Received action from paywall ' + result.info.presentationId);
-
-    if (result.action === PLYPaywallAction.NAVIGATE) {
-        console.log('User wants to navigate to ' + result.parameters.url);
-        Purchasely.onProcessAction(true);
-    } else if (result.action === PLYPaywallAction.CLOSE) {
-        console.log('User wants to close paywall');
-        Purchasely.onProcessAction(true);
-    } else if (result.action === PLYPaywallAction.LOGIN) {
-        console.log('User wants to login');
-        // Present your own screen for user to log in
-        Purchasely.closePresentation();
-        Purchasely.userLogin('MY_USER_ID');
-        // Call this method to update Purchasely Paywall
-        Purchasely.onProcessAction(true);
-    } else if (result.action === PLYPaywallAction.OPEN_PRESENTATION) {
-        console.log('User wants to open a new paywall');
-        Purchasely.onProcessAction(true);
-    } else if (result.action === PLYPaywallAction.PURCHASE) {
-        console.log('User wants to purchase');
-        // If you want to intercept it, close presentation and handle yourself
-        Purchasely.closePresentation();
-    } else if (result.action === PLYPaywallAction.RESTORE) {
-        console.log('User wants to restore purchases');
-        Purchasely.onProcessAction(true);
-    } else {
-        console.log('Action unknown ' + result.action);
-        Purchasely.onProcessAction(true);
+Purchasely.interceptAction('navigate', async (info, payload) => {
+    if (payload?.kind === 'navigate') {
+        Linking.openURL(payload.url);
+        return 'success';
     }
+    return 'notHandled';
+});
+
+Purchasely.interceptAction('login', async (info, payload) => {
+    // Present your own screen for the user to log in
+    Purchasely.userLogin('MY_USER_ID');
+    return 'success';
 });
 ```
 
-> **Important**: Always call `Purchasely.onProcessAction(true/false)` to notify the SDK whether to continue processing the action.
+### Removing interceptors
+
+```typescript
+Purchasely.removeActionInterceptor('purchase');
+Purchasely.removeAllActionInterceptors();
+```
 
 ---
 
@@ -390,9 +537,11 @@ Purchasely.setPaywallActionInterceptorCallback((result) => {
 The Purchasely SDK automatically generates and assigns an `anonymous_user_id` to each user, maintaining consistency as long as the app remains installed on the device.
 
 ```typescript
-// Get the anonymous user ID
 const anonymousId = await Purchasely.getAnonymousUserId();
 console.log('Anonymous User ID: ' + anonymousId);
+
+const anonymous = await Purchasely.isAnonymous();
+console.log('Is anonymous? ' + anonymous);
 ```
 
 ### User Login
@@ -400,7 +549,6 @@ console.log('Anonymous User ID: ' + anonymousId);
 To authenticate users and associate purchases with their account:
 
 ```typescript
-// Login with user ID
 Purchasely.userLogin('123456789').then((refresh) => {
     if (refresh) {
         // You should call your backend to refresh user entitlements
@@ -409,31 +557,24 @@ Purchasely.userLogin('123456789').then((refresh) => {
 });
 ```
 
+You can also provide the user id at initialization with `Purchasely.builder('YOUR_API_KEY').appUserId('123456789').start()`.
+
 ### User Logout
 
-To sign out a user:
-
 ```typescript
-// Logout user (clears user ID and custom attributes)
+// Logout user (clears user id and custom attributes)
 Purchasely.userLogout();
 ```
 
 ### Login from Paywall
 
-To handle the login button on the paywall:
+To handle the login button on a presentation, intercept the `'login'` action:
 
 ```typescript
-Purchasely.setPaywallActionInterceptorCallback((result) => {
-    if (result.action === PLYPaywallAction.LOGIN) {
-        console.log('User wants to login');
-        // Present your own screen for user to log in
-        Purchasely.closePresentation();
-        Purchasely.userLogin('MY_USER_ID');
-        // Call this method to update Purchasely Paywall
-        Purchasely.onProcessAction(true);
-    } else {
-        Purchasely.onProcessAction(true);
-    }
+Purchasely.interceptAction('login', async (info, payload) => {
+    // Present your own screen for the user to log in
+    Purchasely.userLogin('MY_USER_ID'); // call before returning to update the screen
+    return 'success';
 });
 ```
 
@@ -448,7 +589,6 @@ Purchasely offers a way to retrieve active subscriptions directly from your mobi
 ```typescript
 try {
     const subscriptions = await Purchasely.userSubscriptions();
-    console.log('==> Subscriptions');
     if (subscriptions[0] !== undefined) {
         console.log(subscriptions[0].plan);
         console.log(subscriptions[0].subscriptionSource);
@@ -460,7 +600,38 @@ try {
 }
 ```
 
-> **Note**: There is a **few seconds delay** for `Purchasely.userSubscriptions()` to be updated after a purchase or restoration. If you rely on this method to get the current subscription status right after a purchase, you should **wait for 3 seconds** before calling this method.
+Expired subscriptions (the user's history) are available via `Purchasely.userSubscriptionsHistory()` — useful for analytics and engagement strategies.
+
+```typescript
+const history = await Purchasely.userSubscriptionsHistory();
+```
+
+> **Note**: There is a **few seconds delay** for `Purchasely.userSubscriptions()` to be updated after a purchase or restoration. If you rely on this method right after a purchase, **wait for 3 seconds** before calling it.
+
+### Restoring Purchases
+
+```typescript
+// Visible restore — triggers store UI when needed, returns true if a purchase was restored
+const restored = await Purchasely.restoreAllProducts();
+
+// Silent restore — no store prompt
+const silentRestored = await Purchasely.silentRestoreAllProducts();
+```
+
+### Catalog data
+
+```typescript
+const products = await Purchasely.allProducts();
+const product = await Purchasely.productWithIdentifier('product_vendor_id');
+const plan = await Purchasely.planWithIdentifier('plan_vendor_id');
+
+// iOS introductory offer eligibility
+const eligible = await Purchasely.isEligibleForIntroOffer('plan_vendor_id');
+```
+
+> 🚧 Removed in v6 — the native subscriptions screen (BREAKING)
+>
+> The native subscriptions screen was removed from the 6.0 SDKs on both platforms, so the v5 method that opened it has been **removed entirely** from the React Native API — the method no longer exists. There is no drop-in replacement: build your own subscriptions screen with `userSubscriptions()` / `userSubscriptionsHistory()`.
 
 ---
 
@@ -470,22 +641,23 @@ Custom User Attributes allow you to segment users and personalize their journey.
 
 ### Supported Types
 
-- `String`
-- `Int` (Number)
-- `Float` (Number)
-- `Bool` (Boolean)
-- `Date`
-- `Array of Strings`
+`String`, `Number` (Int / Float), `Boolean`, `Date`, and arrays of `String` / `Number` / `Boolean`.
 
 ### Setting Attributes
 
+Every setter accepts an optional GDPR legal basis (`PLYDataProcessingLegalBasis.ESSENTIAL` / `.OPTIONAL`) as the last argument.
+
 ```typescript
-// Set individual attributes
+import Purchasely, { PLYDataProcessingLegalBasis } from 'react-native-purchasely';
+
 Purchasely.setUserAttributeWithString('gender', 'man');
 Purchasely.setUserAttributeWithNumber('age', 21);
 Purchasely.setUserAttributeWithNumber('weight', 78.2);
-Purchasely.setUserAttributeWithBoolean('premium', true);
+Purchasely.setUserAttributeWithBoolean('premium', true, PLYDataProcessingLegalBasis.ESSENTIAL);
 Purchasely.setUserAttributeWithDate('subscription_date', new Date());
+Purchasely.setUserAttributeWithStringArray('tags', ['sport', 'news']);
+Purchasely.setUserAttributeWithNumberArray('scores', [10, 20]);
+Purchasely.setUserAttributeWithBooleanArray('flags', [true, false]);
 ```
 
 ### Retrieving Attributes
@@ -493,7 +665,7 @@ Purchasely.setUserAttributeWithDate('subscription_date', new Date());
 ```typescript
 // Get all attributes
 const attributes = await Purchasely.userAttributes();
-console.log(attributes); // Returns a PurchaselyUserAttribute object with key and value
+console.log(attributes);
 
 // Retrieve a specific attribute
 const dateAttribute = await Purchasely.userAttribute('subscription_date');
@@ -504,14 +676,12 @@ console.log(new Date(dateAttribute).getFullYear());
 ### Incrementing / Decrementing Counters
 
 ```typescript
-// Increment a user attribute
+// Increment a user attribute (created if not set)
 Purchasely.incrementUserAttribute({ key: 'viewed_articles' });
-// Increment by a specific number
 Purchasely.incrementUserAttribute({ key: 'viewed_articles', value: 3 });
 
 // Decrement a user attribute
 Purchasely.decrementUserAttribute({ key: 'viewed_articles' });
-// Decrement by a specific number
 Purchasely.decrementUserAttribute({ key: 'viewed_articles', value: 7 });
 ```
 
@@ -523,9 +693,12 @@ Purchasely.clearUserAttribute('size');
 
 // Remove all attributes
 Purchasely.clearUserAttributes();
+
+// Clear Purchasely built-in attributes
+Purchasely.clearBuiltInAttributes();
 ```
 
-> **Note**: `Purchasely.userLogout()` will automatically clear all custom user attributes unless you call `Purchasely.userLogout(false)`.
+> **Note**: `Purchasely.userLogout()` clears all custom user attributes.
 
 ---
 
@@ -533,41 +706,70 @@ Purchasely.clearUserAttributes();
 
 ### UI / SDK Events Listener
 
-When users interact with Purchasely Screens, the SDK triggers events. Implement an event listener to forward these events to analytics platforms.
+When users interact with Purchasely Screens, the SDK triggers events. Implement an event listener to forward these events to your analytics platforms.
 
 ```typescript
-Purchasely.addEventListener((event) => {
+const listener = Purchasely.addEventListener((event) => {
     console.log('Event received: ' + event.name);
     console.log('Event properties: ' + JSON.stringify(event.properties));
-
     // Forward to your analytics platform
-    // Analytics.track(event.name, event.properties);
 });
+
+// Stop listening when no longer needed:
+listener.remove();
+// or Purchasely.removeEventListener();
+```
+
+UI/SDK events are computed by the Purchasely Platform for conversion KPIs but cannot be routed to third-party integrations from the Console — forward them yourself from the app if you need them in your analytics.
+
+### Purchase Listener
+
+```typescript
+const purchaseListener = Purchasely.addPurchasedListener(() => {
+    console.log('A purchase was made');
+    // Refresh entitlements
+});
+
+purchaseListener.remove();
 ```
 
 ### Custom User Attributes Listener
 
-When a user submits answers to a survey, custom user attributes can be set automatically by the SDK:
+When a user submits answers to a survey configured in the Screen Composer, custom user attributes can be set automatically by the SDK. The `source` property tells you whether the change came from Purchasely or from your own app.
 
 ```typescript
-Purchasely.setUserAttributeListener((attribute) => {
+import Purchasely, { PLYUserAttributeSource } from 'react-native-purchasely';
+
+const setListener = Purchasely.addUserAttributeSetListener((attribute) => {
     console.log('Attribute key: ' + attribute.key);
     console.log('Attribute value: ' + attribute.value);
     console.log('Attribute type: ' + attribute.type);
     console.log('Attribute source: ' + attribute.source);
 
-    // Ignore if source is CLIENT (set by your app)
     if (attribute.source === PLYUserAttributeSource.PURCHASELY) {
         // Process attribute set by Purchasely (e.g., from surveys)
     }
 });
+
+const removedListener = Purchasely.addUserAttributeRemovedListener((attribute) => {
+    console.log('Attribute removed: ' + attribute.key);
+});
+
+// Clean up
+setListener.remove();
+removedListener.remove();
 ```
+
+The source values:
+
+- **`PLYUserAttributeSource.PURCHASELY`**: The change was initiated internally by the Purchasely SDK (e.g., from surveys)
+- **`PLYUserAttributeSource.CLIENT`**: The change was triggered directly by your app — you can usually ignore these since your app already has the data
 
 ---
 
 ## Pre-fetching Screens
 
-Pre-fetch paywalls from the network before displaying them for a better user experience.
+Purchasely, by default, shows the paywall screen with a loading indicator while fetching it from the network. Using `request.preload()`, you can pre-fetch the paywall from the network **before** displaying it for a better user experience.
 
 ### Benefits
 
@@ -578,40 +780,50 @@ Pre-fetch paywalls from the network before displaying them for a better user exp
 
 ### Implementation
 
+Build a `PresentationRequest`, `preload()` it to fetch the screen from the network, then `display()` the **same** request when you are ready.
+
 ```typescript
-import Purchasely, { PLYPresentationType, ProductResult } from 'react-native-purchasely';
+import Purchasely, { PLYPresentationType } from 'react-native-purchasely';
 
 try {
-    // Fetch presentation to display
-    const presentation = await Purchasely.fetchPresentation({
-        placementId: 'ONBOARDING'
-    });
+    // Build a request for the placement
+    const request = Purchasely.presentation.placement('ONBOARDING').build();
 
-    if (presentation.type == PLYPresentationType.DEACTIVATED) {
-        // No paywall to display
+    // Pre-fetch the presentation to display; resolves once the screen is loaded
+    const presentation = await request.preload();
+
+    if (presentation == null) {
+        // No presentation, it means an error was triggered
         return;
     }
 
-    if (presentation.type == PLYPresentationType.CLIENT) {
-        // Display your own paywall
+    if (presentation.type === PLYPresentationType.DEACTIVATED) {
+        // No paywall to display for this placement
+        return;
+    }
+
+    if (presentation.type === PLYPresentationType.CLIENT) {
+        // Display your own paywall (BYOS)
+        const paywallId = presentation.screenId;
         const planIds = presentation.plans;
         return;
     }
 
-    // Display Purchasely paywall
-    const result = await Purchasely.presentPresentation({
-        presentation: presentation
-    });
+    // Display the preloaded presentation; resolves at dismiss
+    const outcome = await request.display();
 
-    switch (result.result) {
-        case ProductResult.PRODUCT_RESULT_PURCHASED:
-        case ProductResult.PRODUCT_RESULT_RESTORED:
-            if (result.plan != null) {
-                console.log('User purchased ' + result.plan.name);
+    switch (outcome.purchaseResult) {
+        case 'purchased':
+        case 'restored':
+            if (outcome.plan != null) {
+                console.log('User purchased ' + outcome.plan.name);
             }
             break;
-        case ProductResult.PRODUCT_RESULT_CANCELLED:
+        case 'cancelled':
             console.log('User cancelled');
+            break;
+        default:
+            console.log('User dismissed:', outcome.closeReason);
             break;
     }
 } catch (e) {
@@ -621,8 +833,8 @@ try {
 
 ### Presentation Types
 
-| Type | Description |
-|------|-------------|
+| Type (`PLYPresentationType`) | Description |
+|------------------------------|-------------|
 | `NORMAL` | Default Purchasely paywall |
 | `FALLBACK` | Fallback paywall (requested one not found) |
 | `DEACTIVATED` | No paywall for this placement |
@@ -632,42 +844,59 @@ try {
 
 ## Deeplinks Management
 
-To enable Purchasely to display screens via deeplinks, you need to:
+To manage deeplinks you can do up to 3 things:
 
-1. Pass the deeplink to the Purchasely SDK
-2. Allow the display when your app is ready
-3. Set a default presentation handler
+1. Pass a received deeplink to the SDK (and allow the SDK to open deeplinks)
+2. Optionally control when Purchasely is allowed to display content over your interface
+3. Set a default presentation dismiss handler to receive the result of the user's action
 
-### Passing the Deeplink
+### Allowing the Display
+
+Deeplink display is allowed via the start builder (it defaults to `false`):
 
 ```typescript
-Purchasely.isDeeplinkHandled('app://ply/presentations/')
-    .then((value) => console.log('Deeplink handled by Purchasely? ' + value));
+await Purchasely.builder('YOUR_API_KEY')
+    .allowDeeplink(true)
+    .start();
 ```
+
+### Passing the Deeplink to the SDK
+
+To let the Purchasely SDK analyze a deeplink received by the app, pass it with `isDeeplinkHandled`:
+
+```typescript
+const handled = await Purchasely.isDeeplinkHandled('app://ply/presentations/');
+console.log('Deeplink handled by Purchasely? ' + handled);
+```
+
+> 📘 React Native keeps `isDeeplinkHandled`
+>
+> In v6 the runtime method for passing a deeplink is still `Purchasely.isDeeplinkHandled(uri)`. Only the startup permission changed: it now uses `.allowDeeplink(true)` on the builder (the v5 startup permission method has been removed).
 
 ### Forbidding the Display
 
-By **default**, deeplinks are displayed **immediately**. To defer them (e.g. during a splash screen, onboarding or login), prevent the display and re-enable it once you are ready:
+By **default**, Purchasely deeplinks are displayed **immediately** when they are received. To defer them (e.g. during a splash screen, onboarding or login), prevent the display and re-enable it once you are ready:
 
 ```typescript
+// Prevent the display (e.g. while your onboarding is on screen)
 Purchasely.allowDeeplink(false);
-// later, once your app is ready
+
+// Re-enable it once ready — any queued deeplink displays immediately
 Purchasely.allowDeeplink(true);
 ```
 
-Campaigns follow the same principle through `allowCampaigns` (also `true` by default): `Purchasely.allowCampaigns(false)` / `Purchasely.allowCampaigns(true)`.
+Campaigns follow the same principle through `allowCampaigns` (also `true` by default):
+`Purchasely.allowCampaigns(false)` / `Purchasely.allowCampaigns(true)`.
 
-### Setting the Default Presentation Handler
+### Setting the Default Presentation Dismiss Handler
 
-Retrieve the result of user actions on paywalls the SDK opens itself (deeplinks,
-campaigns, Promoted In-App Purchases). `setDefaultPresentationDismissHandler` is
-the v6 replacement for the v5 `setDefaultPresentationResultCallback` /
-`setDefaultPresentationResultHandler`, and delivers the rich `PresentationOutcome`:
+When a paywall / screen is opened by the SDK itself (deeplink, campaign, Promoted In-App Purchase), you don't instantiate it yourself, so no per-display callback fires. Register a default dismiss handler to receive the resulting `PresentationOutcome`. `setDefaultPresentationDismissHandler` is the v6 replacement for the v5 default presentation result callbacks.
 
 ```typescript
 const subscription = Purchasely.setDefaultPresentationDismissHandler((outcome) => {
     // outcome: { presentation, purchaseResult, plan, closeReason, error }
-    console.log('Presentation dismissed:', outcome.purchaseResult); // 'purchased' | 'restored' | 'cancelled' | null
+    // `presentation` is always populated — use it to identify which screen closed.
+    console.log(outcome.presentation?.screenId, outcome.purchaseResult, outcome.closeReason);
 
     if (outcome.plan != null) {
         console.log('Plan Vendor ID:', outcome.plan.vendorId);
@@ -676,8 +905,48 @@ const subscription = Purchasely.setDefaultPresentationDismissHandler((outcome) =
 });
 
 // Only one handler is active at a time (re-registering replaces it).
-// Remove it with subscription.remove() or
-// Purchasely.removeDefaultPresentationDismissHandler().
+// Remove it when you no longer need it:
+//   subscription.remove();
+//   // or Purchasely.removeDefaultPresentationDismissHandler();
+```
+
+---
+
+## Embedded Presentations
+
+To render a presentation inline inside your component tree — as opposed to full-screen / modal — use the `PLYPresentationView` component. Pass a `placementId` (or a preloaded `presentation`) and a close callback.
+
+```tsx
+import { PLYPresentationView } from 'react-native-purchasely';
+
+<PLYPresentationView
+    placementId="ONBOARDING"
+    flex={1}
+    onPresentationClosed={(result) => {
+        console.log('Closed with result:', result);
+        // Remove the component from your tree to close the Purchasely Screen
+    }}
+/>
+```
+
+You can also feed it a presentation you preloaded yourself:
+
+```tsx
+const presentation = await Purchasely.presentation.placement('ONBOARDING').build().preload();
+
+<PLYPresentationView
+    presentation={presentation}
+    flex={1}
+    onPresentationClosed={(result) => console.log('Closed:', result)}
+/>
+```
+
+If your app renders its own paywall (BYOS), report display and close to Purchasely for analytics:
+
+```typescript
+Purchasely.clientPresentationDisplayed(presentation);
+// ... when your screen closes
+Purchasely.clientPresentationClosed(presentation);
 ```
 
 ---
@@ -686,49 +955,138 @@ const subscription = Purchasely.setDefaultPresentationDismissHandler((outcome) =
 
 ### StoreKit Selection (iOS)
 
-Choose between StoreKit 1 and StoreKit 2 for iOS:
+Choose between StoreKit 1 and StoreKit 2 for iOS with the `.storekitVersion(...)` builder option (this replaces the old StoreKit boolean flag):
 
 ```typescript
-await Purchasely.start({
-    apiKey: 'YOUR_API_KEY',
-    storeKit1: false, // false = StoreKit 2, true = StoreKit 1
-    // ...
-});
+await Purchasely.builder('YOUR_API_KEY')
+    .storekitVersion('storeKit2') // 'storeKit2' (default) | 'storeKit1'
+    .start();
 ```
 
-> **Recommendation**: Use StoreKit 2 (`storeKit1: false`) for new integrations.
+> **Recommendation**: Use StoreKit 2 (`'storeKit2'`, the default) for new integrations.
 
 ### Android Stores
 
-Purchasely supports multiple Android stores:
+Purchasely supports multiple Android stores via the `.stores([...])` builder option:
 
 ```typescript
-await Purchasely.start({
-    apiKey: 'YOUR_API_KEY',
-    androidStores: ['Google'], // Options: 'Google', 'Huawei', 'Amazon'
-    // ...
-});
+await Purchasely.builder('YOUR_API_KEY')
+    .stores(['google']) // 'google' | 'huawei' | 'amazon'
+    .start();
 ```
 
-To use multiple stores:
+To use multiple stores (the first one available on the device is used):
 
 ```typescript
-androidStores: ['Google', 'Huawei']
+.stores(['google', 'huawei'])
 ```
 
-> **Note**: Install the corresponding dependencies for each store you want to support.
+> **Note**: Install the corresponding dependency for each store you want to support, all at the same version.
 
 ### Android-Specific Purchase Parameters
 
-When intercepting purchases on Android, you can access additional parameters:
+When intercepting purchases on Android, you can access additional subscription offer parameters from the typed payload's `subscriptionOffer`:
 
 ```typescript
-if (Platform.OS === 'android') {
-    const basePlanId = result.parameters.subscriptionOffer?.basePlanId;
-    const offerId = result.parameters.subscriptionOffer?.offerId;
-    const offerToken = result.parameters.subscriptionOffer?.offerToken;
-}
+import { Platform } from 'react-native';
+
+Purchasely.interceptAction('purchase', async (info, payload) => {
+    if (payload?.kind === 'purchase' && Platform.OS === 'android') {
+        const basePlanId = payload.subscriptionOffer?.basePlanId;
+        const offerId = payload.subscriptionOffer?.offerId;
+        const offerToken = payload.subscriptionOffer?.offerToken;
+    }
+    return 'notHandled';
+});
 ```
+
+### Promotional Offers (iOS)
+
+```typescript
+const signature = await Purchasely.signPromotionalOffer({
+    storeProductId: 'my_store_product_id',
+    storeOfferId: 'my_store_offer_id',
+});
+```
+
+### Dynamic Offerings
+
+```typescript
+await Purchasely.setDynamicOffering({
+    reference: 'my_offering',
+    planVendorId: 'PURCHASELY_PLUS_MONTHLY',
+    offerVendorId: 'my_offer', // optional
+});
+
+const offerings = await Purchasely.getDynamicOfferings();
+Purchasely.removeDynamicOffering('my_offering');
+Purchasely.clearDynamicOfferings();
+```
+
+### Language
+
+Force the Purchasely Screens language (otherwise the device locale is used):
+
+```typescript
+Purchasely.setLanguage('fr');
+```
+
+### Consumable subscription content
+
+When a user has consumed the content unlocked by a non-renewing subscription, notify the SDK:
+
+```typescript
+Purchasely.userDidConsumeSubscriptionContent();
+```
+
+---
+
+## Theme & Appearance
+
+Control whether Purchasely Screens render in light, dark or system appearance with `setThemeMode`:
+
+```typescript
+import Purchasely, { PLYThemeMode } from 'react-native-purchasely';
+
+Purchasely.setThemeMode(PLYThemeMode.LIGHT);  // LIGHT | DARK | SYSTEM
+```
+
+| Value | Behavior |
+|-------|----------|
+| `PLYThemeMode.LIGHT` | Always render in light appearance |
+| `PLYThemeMode.DARK` | Always render in dark appearance |
+| `PLYThemeMode.SYSTEM` | Follow the device system appearance |
+
+---
+
+## Privacy & Consent
+
+### GDPR legal basis on attributes
+
+Every `setUserAttributeWith*` (and `incrementUserAttribute` / `decrementUserAttribute`) accepts an optional `PLYDataProcessingLegalBasis` to record the legal basis for storing the value:
+
+```typescript
+import Purchasely, { PLYDataProcessingLegalBasis } from 'react-native-purchasely';
+
+Purchasely.setUserAttributeWithString('gender', 'man', PLYDataProcessingLegalBasis.ESSENTIAL);
+```
+
+`PLYDataProcessingLegalBasis` values: `ESSENTIAL`, `OPTIONAL`.
+
+### Revoking data-processing consent
+
+To honor a user opting out, revoke consent for one or more processing purposes:
+
+```typescript
+import Purchasely, { PLYDataProcessingPurpose } from 'react-native-purchasely';
+
+Purchasely.revokeDataProcessingConsent([
+    PLYDataProcessingPurpose.ANALYTICS,
+    PLYDataProcessingPurpose.CAMPAIGNS,
+]);
+```
+
+`PLYDataProcessingPurpose` values: `ANALYTICS`, `IDENTIFIED_ANALYTICS`, `CAMPAIGNS`, `PERSONALIZATION`, `THIRD_PARTY_INTEGRATION`, `ALL_NON_ESSENTIALS`.
 
 ---
 
@@ -736,27 +1094,39 @@ if (Platform.OS === 'android') {
 
 ### Common Issues
 
-1. **SDK not configured**: Ensure you call `Purchasely.start()` before any other SDK methods.
+1. **SDK not configured**: Ensure you call `Purchasely.builder('YOUR_API_KEY').start()` and that it resolves to `true` before any other SDK methods.
 
-2. **Purchases not working**: Verify that you've added the correct store dependencies and they're all at the same version.
+2. **Purchases not validating / paywall does not auto-close after purchase**: You are likely in the new default `'observer'` mode. Pass `.runningMode('full')` for Purchasely to own the purchase flow. In observer mode, presentations do not auto-close — dismiss them yourself with `request.close()`.
 
-3. **Paywall not displaying**: Check that:
-   - The placement exists in your Purchasely Console
-   - The SDK is properly initialized
+3. **Purchases not working on Android**: Verify that you've added `@purchasely/react-native-purchasely-google` and that all Purchasely packages are pinned to the exact same version (`6.0.0-rc.1`).
+
+4. **Paywall not displaying**: Check that:
+   - The placement / screen exists in your Purchasely Console
+   - The SDK is properly initialized (the `start()` promise resolved `true`)
    - You have an active internet connection
 
-4. **StoreKit issues on iOS**: Ensure your iOS deployment target is set to at least 11.0.
+5. **Observer purchase does not update access**: Call `await Purchasely.synchronize()` after your billing flow succeeds.
+
+6. **iOS pod install issues**: Ensure your iOS deployment target is set to at least **13.4** in your Podfile, then run `cd ios && pod install --repo-update`.
+
+7. **Deeplink does nothing**: Ensure `allowDeeplink` is `true` and, if you defer deeplinks, that you re-enable with `Purchasely.allowDeeplink(true)`.
 
 ### Debug Mode
 
 Enable debug logging during development:
 
 ```typescript
-await Purchasely.start({
-    apiKey: 'YOUR_API_KEY',
-    logLevel: LogLevels.DEBUG, // Use ERROR in production
-    // ...
-});
+await Purchasely.builder('YOUR_API_KEY')
+    .logLevel('debug') // use 'error' in production
+    .start();
+```
+
+You can also adjust the log level at runtime:
+
+```typescript
+import Purchasely, { LogLevels } from 'react-native-purchasely';
+
+Purchasely.setLogLevel(LogLevels.DEBUG);
 ```
 
 ---

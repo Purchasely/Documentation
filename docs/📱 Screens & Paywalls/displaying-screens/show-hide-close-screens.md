@@ -69,7 +69,8 @@ Use **`Purchasely.hidePresentation() `**&#x74;o hide a screen without closing it
 presentation.close()
 ```
 ```coffeescript React Native
-Purchasely.hidePresentation()
+// On the request returned by .build()
+request.close()
 ```
 ```coffeescript Cordova
 Purchasely.hidePresentation()
@@ -89,7 +90,8 @@ Use **`Purchasely.showPresentation()`** to display a screen that was previously 
 presentation.display()
 ```
 ```coffeescript React Native
-Purchasely.showPresentation()
+// On the request returned by .build()
+request.display()
 ```
 ```coffeescript Cordova
 Purchasely.showPresentation()
@@ -109,7 +111,8 @@ Use **`Purchasely.closePresentation()`** to close the current screen permanently
 presentation.close()
 ```
 ```coffeescript React Native
-Purchasely.closePresentation()
+// On the request returned by .build()
+request.close()
 ```
 ```coffeescript Cordova
 Purchasely.closePresentation()

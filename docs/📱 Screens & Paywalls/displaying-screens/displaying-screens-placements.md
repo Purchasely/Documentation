@@ -81,10 +81,10 @@ PLYPresentation {
 }
 ```
 ```typescript React Native
-await Purchasely.presentPresentationForPlacement({
-    placementVendorId: '<<default_placement>>',
-    isFullscreen: true,
-});
+await Purchasely.presentation
+    .placement('<<default_placement>>')
+    .build()
+    .display();
 ```
 ```typescript Flutter
 await PresentationBuilder.placement('<<default_placement>>').build().display();

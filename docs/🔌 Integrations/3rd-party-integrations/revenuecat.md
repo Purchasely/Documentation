@@ -104,20 +104,16 @@ Purchasely.start { error ->
 ```typescript React Native
 import Purchasely from 'react-native-purchasely';
 
-/**
-* @params String apiKey
-* @params StringArray stores : may be Google, Amazon and Huawei
-* @params String userId
-* @params Purchasley.LogLevel logLevel
-* @params RunningMode runningMode
-**/
-Purchasely.startWithAPIKey(
-  'API_KEY',
-  ['Google'],
-  'USER_ID',
-  Purchasely.logLevelDebug,
-  RunningMode.PaywallObserver
-);
+const configured = await Purchasely.builder('API_KEY')
+  .appUserId('USER_ID')          // optional
+  .stores(['google'])            // Android: 'google' | 'huawei' | 'amazon'
+  .runningMode('observer')       // 'observer' (default) | 'full'
+  .logLevel('debug')             // 'debug' | 'info' | 'warn' | 'error'
+  .start();
+
+if (!configured) {
+  console.log('Purchasely SDK not configured');
+}
 ```
 ```typescript Flutter
 bool configured = await PurchaselyBuilder.apiKey('API_KEY')
@@ -131,13 +127,13 @@ if (!configured) {
         return;
 }
 ```
-* @params Boolean storeKit1 : true for StoreKit 1, false for StoreKit 2 (iOS)
 ```javascript Cordova
 /**
 * @params String apiKey
 * @params StringArray stores : may be Google, Amazon and Huawei
+* @params Boolean storeKit1 : true for StoreKit 1, false for StoreKit 2 (iOS)
 * @params String userId
-* @params Purchasley.LogLevel logLevel
+* @params Purchasely.LogLevel logLevel
 * @params Purchasely.RunningMode runningMode
 **/
 Purchasely.start(
@@ -196,11 +192,11 @@ PLYPresentation {
 }
 ```
 ```typescript React Native
-await Purchasely.presentPresentationForPlacement({
-    placementVendorId: 'onboarding',
-    contentId: 'my_content_id',
-    isFullscreen: true,
-});
+await Purchasely.presentation
+  .placement('onboarding')
+  .contentId('my_content_id')
+  .build()
+  .display();
 ```
 ```Text Flutter
 await PresentationBuilder.placement('onboarding').build().display();
@@ -289,53 +285,49 @@ Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
 }
 ```
 ```typescript React Native
-Purchasely.setPaywallActionInterceptorCallback((result) => {
-    if (result.action === PLYPaywallAction.PURCHASE) {
-      try {
-        //the store product id (sku) the user clicked on in the paywall
-        String storeProductId = result.parameters.plan.productId
-        
-        try {
-          const offerings = await Purchases.getOfferings();
-          if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {
-            //get your package
-            const package = offerings.current.monthly;
-            
-            //and purchase with RevenueCat
-            try {
-              const {customerInfo, productIdentifier} = await Purchases.purchasePackage(package);
-              Purchasely.onProcessAction(false);
-              if (typeof customerInfo.entitlements.active.my_entitlement_identifier !== "undefined") {
-                Purchasely.synchronize();
-              }
-            } catch (e) {
-              Purchasely.onProcessAction(false);
-              if (!e.userCancelled) {
-                showError(e);
-              }
-            }
-          }
-        } catch (e) {
-           Purchasely.onProcessAction(false);
-        }
-      } catch (e) {
-        console.log(e);
-        Purchasely.onProcessAction(false);
-      }
-    } else if (result.action === PLYPaywallAction.RESTORE) {
-      try {
-        const restore = await Purchases.restorePurchases();
-        // ... check restored purchaserInfo to see if entitlement is now active
-        
-        Purchasely.onProcessAction(false);
+// One handler per action kind. Return 'success' | 'failed' | 'notHandled'.
+
+Purchasely.interceptAction('purchase', async (info, payload) => {
+  if (payload?.kind !== 'purchase') {
+    return 'notHandled';
+  }
+
+  // the store product id (sku) the user clicked on in the paywall
+  const storeProductId = payload.plan.productId;
+
+  try {
+    const offerings = await Purchases.getOfferings();
+    if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {
+      // get your package
+      const pkg = offerings.current.monthly;
+
+      // and purchase with RevenueCat
+      const { customerInfo } = await Purchases.purchasePackage(pkg);
+      if (typeof customerInfo.entitlements.active.my_entitlement_identifier !== 'undefined') {
+        // Unlock that content and synchronize with Purchasely
         Purchasely.synchronize();
-      } catch (e) {
-        Purchasely.onProcessAction(false);
       }
-    } else {
-      Purchasely.onProcessAction(true);
+      return 'success';
     }
-  });
+    return 'failed';
+  } catch (e) {
+    if (!e.userCancelled) {
+      showError(e);
+    }
+    return 'failed';
+  }
+});
+
+Purchasely.interceptAction('restore', async (info, payload) => {
+  try {
+    await Purchases.restorePurchases();
+    // ... check restored customerInfo to see if entitlement is now active
+    Purchasely.synchronize();
+    return 'success';
+  } catch (e) {
+    return 'failed';
+  }
+});
 ```
 ```typescript Flutter
 await Purchasely.interceptAction(

@@ -192,17 +192,12 @@ Purchasely.interceptAction<PLYPresentationAction.Login> { info, _ ->
 }
 ```
 ```typescript React Native
-Purchasely.setPaywallActionInterceptorCallback((result) => {
-    if (result.action === PLYPaywallAction.LOGIN) {
-      console.log('User wants to login');
-      //Present your own screen for user to log in
-      Purchasely.closePaywall();
-      Purchasely.userLogin('MY_USER_ID');
-      //Call this method to update Purchasely Paywall
-      Purchasely.onProcessAction(true);
-    } else {
-      Purchasely.onProcessAction(true);
-    }
+Purchasely.interceptAction('login', async (info, payload) => {
+  console.log('User wants to login');
+  // Present your own screen for user to log in
+  Purchasely.userLogin('MY_USER_ID');
+  // Return success to update Purchasely Paywall
+  return 'success';
 });
 ```
 ```typescript Flutter

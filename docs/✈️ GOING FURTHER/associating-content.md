@@ -60,7 +60,11 @@ PLYPresentationBuilder.forScreenId("my_presentation_id")
     }
 ```
 ```typescript React Native
-await Purchasely.presentPresentationWithIdentifier('my_presentation_id', 'my_content_id');
+await Purchasely.presentation
+  .screen('my_presentation_id')
+  .contentId('my_content_id')
+  .build()
+  .display();
 ```
 ```typescript Flutter
 await Purchasely.presentPresentationWithIdentifier('my_presentation_id', 'my_content_id');

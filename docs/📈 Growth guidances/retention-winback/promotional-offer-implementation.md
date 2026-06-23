@@ -221,60 +221,51 @@ Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
 }
 ```
 ```typescript React Native
-Purchasely.setPaywallActionInterceptorCallback((result) => {
-    switch (result.action) {
-      case PLYPaywallAction.PURCHASE:
-        // Retrieve the store product id and offer id
-        const storeProductId = result.parameters.plan?.productId;
-        const storeOfferId = result.parameters.offer?.storeOfferId;
+Purchasely.interceptAction('purchase', async (info, payload) => {
+  if (payload?.kind !== 'purchase') {
+    return 'notHandled';
+  }
 
-        // -- GOOGLE ONLY --
-        // Alternatively, just for Google with v5 and v6 you can retrieve everything if it simpler for you,
-        // specially if you want the offer token
-        const productId = result.parameters.subscriptionOffer?.subscriptionId;
-        const basePlanId = result.parameters.subscriptionOffer?.basePlanId;
-        const offerId = result.parameters.subscriptionOffer?.offerId;
-        const offerToken = result.parameters.subscriptionOffer?.offerToken;
-        // -- END GOOGLE --
+  // Retrieve the store product id and offer id
+  const storeProductId = payload.plan?.productId;
+  const storeOfferId = payload.offer?.storeOfferId;
 
-        // -- APPLE ONLY --
-        if(storeOfferId != null) {
-          try {
-            async() => {
-              const signature = await Purchasely.signPromotionalOffer(storeProductId, storeOfferId);
-              const anonymousUserId = await Purchasely.getAnonymousUserId();
-              const appTokenUserId = anonymousUserId.toLowerCase();
+  // -- GOOGLE ONLY --
+  // Alternatively, just for Google you can retrieve everything if it is simpler for you,
+  // specially if you want the offer token
+  const productId = payload.subscriptionOffer?.subscriptionId;
+  const basePlanId = payload.subscriptionOffer?.basePlanId;
+  const offerId = payload.subscriptionOffer?.offerId;
+  const offerToken = payload.subscriptionOffer?.offerToken;
+  // -- END GOOGLE --
 
-              // You need the signature and appTokenUserId to validate the offer
-            }
-          } catch (e) {
-            console.log("Error while signing promotional offer");
-            console.error(e);
-          }
-        }
-        // -- END APPLE --
+  // -- APPLE ONLY --
+  if (storeOfferId != null) {
+    try {
+      const signature = await Purchasely.signPromotionalOffer(storeProductId, storeOfferId);
+      const anonymousUserId = await Purchasely.getAnonymousUserId();
+      const appTokenUserId = anonymousUserId.toLowerCase();
 
-
-        // Now that you have the ids you need, you can launch your purchase flow
-
-        // Hide Purchasely paywall if you want
-        Purchasely.hidePresentation();
-
-        // TODO launch purchase flow
-
-        // When purchase is done, call this method to stop loader on Purchasely paywall
-        Purchasely.onProcessAction(false);
-
-        // if successful, close the paywall
-        Purchasely.closePresentation();
-
-        // if not successful, display the paywall again
-        Purchasely.showPresentation()
-        break;
-      default:
-        Purchasely.onProcessAction(true);
+      // You need the signature and appTokenUserId to validate the offer
+    } catch (e) {
+      console.log('Error while signing promotional offer');
+      console.error(e);
     }
-  });
+  }
+  // -- END APPLE --
+
+  // Now that you have the ids you need, you can launch your purchase flow
+
+  try {
+    // TODO launch purchase flow
+
+    // if successful, return 'success' to dismiss the paywall
+    return 'success';
+  } catch (e) {
+    // if not successful, return 'failed' to keep the paywall displayed
+    return 'failed';
+  }
+});
 ```
 ```typescript Flutter
 await Purchasely.interceptAction(

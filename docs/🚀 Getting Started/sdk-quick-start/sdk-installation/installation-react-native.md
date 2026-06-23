@@ -24,14 +24,15 @@ To add Huawei as a store, you can use our NPM dependency
 npm install @purchasely/react-native-purchasely-huawei --save
 ```
 
-Then you must add Huawei in the list of stores
+Then you must add Huawei in the list of stores when starting the SDK with the builder
 
 ```typescript React Native
-await Purchasely.start({
-  apiKey: '<<X-API-KEY>>',
-  storeKit1: false, // set to false to use StoreKit2, true to use StoreKit1,
-  androidStores: ['Google','Huawei'] // you can use multiple stores
-});
+await Purchasely.builder('<<X-API-KEY>>')
+  .runningMode('full')
+  .logLevel('error')
+  .stores(['google', 'huawei']) // you can use multiple stores
+  .storekitVersion('storeKit2') // iOS only: 'storeKit2' (default) | 'storeKit1'
+  .start();
 ```
 
 ## Amazon In-App Purchases
@@ -42,12 +43,13 @@ To add Amazon as a store, you can use our NPM dependency
 npm install @purchasely/react-native-purchasely-amazon --save
 ```
 
-Then you must add Amazon in the list of stores
+Then you must add Amazon in the list of stores when starting the SDK with the builder
 
 ```typescript React Native
-await Purchasely.start({
-  apiKey: '<<X-API-KEY>>',
-  storeKit1: false, // set to false to use StoreKit2, true to use StoreKit1,
-  androidStores: ['Google','Amazon'] // you can use multiple stores
-});
+await Purchasely.builder('<<X-API-KEY>>')
+  .runningMode('full')
+  .logLevel('error')
+  .stores(['google', 'amazon']) // you can use multiple stores
+  .storekitVersion('storeKit2') // iOS only: 'storeKit2' (default) | 'storeKit1'
+  .start();
 ```

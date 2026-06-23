@@ -103,15 +103,14 @@ class YourApplication: Application() {
 ```typescript ReactNative
 import Purchasely from 'react-native-purchasely';
 
-// Everything is optional except apiKey and storeKit1
+// Everything is optional except apiKey
 // Example with default values
 try {
-    const configured = await Purchasely.start({
-        apiKey: '<<X-API-KEY>>',
-        logLevel: LogLevels.ERROR, // set to debug in development mode to see logs
-      userId: "XYZ-123-ABC-456" // user ID
-    });
- 
+    const configured = await Purchasely.builder('<<X-API-KEY>>')
+        .appUserId('XYZ-123-ABC-456') // user ID
+        .runningMode('full')          // ⚠️ default is now 'observer' — set 'full' for Purchasely to handle purchases
+        .logLevel('error')            // set to 'debug' in development mode to see logs
+        .start();
 } catch (e) {
      console.log("Purchasely SDK not configured properly");
 }
@@ -138,8 +137,8 @@ if (!configured) {
 * @params Purchasley.LogLevel logLevel
 * @params Purchasely.RunningMode runningMode
 **/
-Purchasely.startWithAPIKey(
-    '<<X-API-KEY>>', 
+Purchasely.start(
+    '<<X-API-KEY>>',
     ['Google'],
     false, // false for StoreKit 2 (recommended), true for StoreKit 1
     "XYZ-123-ABC-456", // user ID

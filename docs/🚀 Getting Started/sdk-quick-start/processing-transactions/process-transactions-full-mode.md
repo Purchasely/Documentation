@@ -77,20 +77,23 @@ PLYPresentation {
 ```
 ```javascript React Native
 try {
-  const result = await Purchasely.presentPresentationForPlacement({
-    placementVendorId: 'onboarding',
-    isFullscreen: true,
-  });
+  const outcome = await Purchasely.presentation
+    .placement('onboarding')
+    .build()
+    .display();
 
-  switch (result.result) {
-    case ProductResult.PRODUCT_RESULT_PURCHASED:
-    case ProductResult.PRODUCT_RESULT_RESTORED:
-      if (result.plan != null) {
-        console.log('User purchased ' + result.plan.name);
+  switch (outcome.purchaseResult) {
+    case 'purchased':
+    case 'restored':
+      if (outcome.plan != null) {
+        console.log('User purchased ' + outcome.plan.name);
         // update entitlements to unlock the access to the contents
       }
       break;
-    case ProductResult.PRODUCT_RESULT_CANCELLED:
+    case 'cancelled':
+      break;
+    default:
+      console.log('User dismissed: ' + outcome.closeReason);
       break;
   }
 } catch (e) {

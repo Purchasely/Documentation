@@ -76,10 +76,10 @@ In v5, the SDK defaulted to **Full** mode (Purchasely handles and validates purc
 | iOS / Swift / Objective‑C | ✅ Available |
 | Android / Kotlin / Java | ✅ Available |
 | Flutter | 🚧 Coming soon |
-| React Native | 🚧 Coming soon |
+| React Native | ✅ Available |
 | Cordova | 🚧 Coming soon |
 
-The native iOS and Android SDKs are migrated first. The cross‑platform wrappers (Flutter, React Native, Cordova) bridge to the native SDKs and will receive their own v6 migration guides in upcoming releases.
+The native iOS and Android SDKs are migrated first, followed by React Native. The remaining cross‑platform wrappers (Flutter, Cordova) bridge to the native SDKs and will receive their own v6 migration guides in upcoming releases.
 
 ***
 

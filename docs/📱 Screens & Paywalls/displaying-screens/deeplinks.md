@@ -85,12 +85,12 @@ Purchasely.setDefaultPresentationDismissHandler { outcome ->
 }
 ```
 ```javascript React Native
-Purchasely.setDefaultPresentationResultCallback((result) => {
-  console.log('Presentation View Result : ' + result.result);
+Purchasely.setDefaultPresentationDismissHandler((outcome) => {
+  console.log('Presentation View Result : ' + outcome.purchaseResult);
 
-  if (result.plan != null) {
-    console.log('Plan Vendor ID : ' + result.plan.vendorId);
-    console.log('Plan Name : ' + result.plan.name);
+  if (outcome.plan != null) {
+    console.log('Plan Vendor ID : ' + outcome.plan.vendorId);
+    console.log('Plan Name : ' + outcome.plan.name);
   }
 });
 ```

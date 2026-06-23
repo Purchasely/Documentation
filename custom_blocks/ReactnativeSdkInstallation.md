@@ -9,7 +9,7 @@ We rely on [NPM](https://www.npmjs.com/package/react-native-purchasely) to distr
 npm install react-native-purchasely --save
 ```
 
-Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android 23)
+Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android 21)
 
 ```yaml iOS
 // Podfile
@@ -24,7 +24,7 @@ platform :ios, '13.4'
 // Edit file android/build.gradle
 buildscript {
     ext {
-        minSdkVersion = 23 //min version must not be below 23
+        minSdkVersion = 21 //min version must not be below 21
         compileSdkVersion = 36
         targetSdkVersion = 35
     }
@@ -41,8 +41,6 @@ allprojects {
 
 We do include a store by default in our SDK, with Android you can choose to use Google and/or Huawei and/or Amazon.  
 See below to add the store you want to use
-
-6.0.0-rc.1
 
 > 📘 Versioning
 >
@@ -64,14 +62,15 @@ To add Google as a store, you can use our NPM dependency
 npm install @purchasely/react-native-purchasely-google --save
 ```
 
-Then you must add Google in the list of stores
+Then you must add Google in the list of stores when starting the SDK with the builder
 
 ```typescript React Native
-await Purchasely.start({
-  apiKey: '<<X-API-KEY>>',
-  storeKit1: false, // set to false to use StoreKit2, true to use StoreKit1,
-  androidStores: ['Google']
-});
+await Purchasely.builder('<<X-API-KEY>>')
+  .runningMode('full')
+  .logLevel('error')
+  .stores(['google']) // don't forget to add the matching dependency at the same version
+  .storekitVersion('storeKit2') // iOS only: 'storeKit2' (default) | 'storeKit1'
+  .start();
 ```
 
 <br />

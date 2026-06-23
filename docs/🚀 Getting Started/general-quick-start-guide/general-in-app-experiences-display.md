@@ -62,14 +62,13 @@ PLYPresentation {
 ```
 ```typescript React Native
 try {
-  const presentation = await Purchasely.fetchPresentation({
-      placementId: 'onboarding'
-  })
+  const request = Purchasely.presentation.placement('onboarding').build()
+
+  // Preload the Screen, then display it
+  await request.preload()
 
   //Display Purchasely Screen
-  const result = await Purchasely.presentPresentation({
-    presentation: presentation
-  })
+  const outcome = await request.display()
 } catch (e) {
   console.error(e);
 }

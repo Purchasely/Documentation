@@ -10,102 +10,112 @@ metadata:
 next:
   description: ''
 ---
-Here is a code sample using the Action Interceptor to perform the purchase and restore actions triggered from Purchasely's paywall with your own purchase system
+Here is a code sample using the Action Interceptor to perform the purchase and restore actions triggered from Purchasely's paywall with your own purchase system.
 
-```kotlin In-House
-Purchasely.setPaywallActionInterceptorCallback((result) => {
-    if (result.action === PLYPaywallAction.PURCHASE) {
-      try {
-        //the store product id (sku) the user clicked on in the paywall
-        String storeProductId = result.parameters.plan.productId
-        
-        if (Platform.OS === 'android') {
-          // Only for Android you can retrieve other information about the purchase
-          const basePlanId = result.parameters.subscriptionOffer?.basePlanId;
-          const offerId = result.parameters.subscriptionOffer?.offerId;
-          const offerToken = result.parameters.subscriptionOffer?.offerToken;
-        }
-        
-        try {
-          const success = await MyPurchaseSystem.purchase(storeProductId)
-          if (success) {
-            Purchasely.synchronize(); // synchronize all purchases with Purchasely
-            Purchasely.onProcessAction(false); // notify Purchasely paywall to stop processing action
-          }
-        } catch (e) {
-           Purchasely.onProcessAction(false); // notify Purchasely paywall to stop processing action
-        }
-      } catch (e) {
-        console.log(e);
-        Purchasely.onProcessAction(false); // notify Purchasely paywall to stop processing action
-      }
-    } else if (result.action === PLYPaywallAction.RESTORE) {
-      try {
-        const restore = await MyPurchaseSystem.restorePurchases();
-        
-        Purchasely.onProcessAction(false); // notify Purchasely paywall to stop processing action
-        Purchasely.synchronize(); // synchronize all purchases with Purchasely
-      } catch (e) {
-        Purchasely.onProcessAction(false); // notify Purchasely paywall to stop processing action
-      }
-    } else {
-      Purchasely.onProcessAction(true); // notify Purchasely paywall to continue other actions
+Register **one handler per action kind** with `Purchasely.interceptAction(kind, handler)`. The handler simply returns an intercept result string (`'success'` / `'failed'` / `'notHandled'`) to tell Purchasely whether the action was handled — there is no callback to notify the paywall anymore.
+
+> **Observer mode:** after handling a purchase, do your own billing, call `await Purchasely.synchronize()` and return `'success'`.
+
+```typescript In-House
+import { Platform } from 'react-native'
+import Purchasely from 'react-native-purchasely'
+
+Purchasely.interceptAction('purchase', async (info, payload) => {
+  if (payload?.kind !== 'purchase') {
+    return 'notHandled'
+  }
+  try {
+    // The store product id (sku) the user tapped on in the paywall
+    const storeProductId = payload.plan.productId
+
+    if (Platform.OS === 'android') {
+      // Only for Android you can retrieve the subscription offer details
+      const basePlanId = payload.subscriptionOffer?.basePlanId
+      const offerId = payload.subscriptionOffer?.offerId
+      const offerToken = payload.subscriptionOffer?.offerToken
     }
-  });
-```
-```kotlin RevenueCat
-Purchasely.setPaywallActionInterceptorCallback((result) => {
-    if (result.action === PLYPaywallAction.PURCHASE) {
-      try {
-        //the store product id (sku) the user clicked on in the paywall
-        String storeProductId = result.parameters.plan.productId
-        
-        if (Platform.OS === 'android') {
-          // Only for Android you can retrieve other information about the purchase
-          const basePlanId = result.parameters.subscriptionOffer?.basePlanId;
-          const offerId = result.parameters.subscriptionOffer?.offerId;
-          const offerToken = result.parameters.subscriptionOffer?.offerToken;
-        }
-        
-        try {
-          const offerings = await Purchases.getOfferings();
-          if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {
-            //get your package
-            const package = offerings.current.monthly;
-            
-            //and purchase with RevenueCat
-            try {
-              const {customerInfo, productIdentifier} = await Purchases.purchasePackage(package);
-              if (typeof customerInfo.entitlements.active.my_entitlement_identifier !== "undefined") {
-                Purchasely.synchronize(); // synchronize all purchases with Purchasely
-              }
-              Purchasely.onProcessAction(false); // notify Purchasely paywall to stop processing action
-            } catch (e) {
-              Purchasely.onProcessAction(false); // notify Purchasely paywall to stop processing action
-              if (!e.userCancelled) {
-                showError(e);
-              }
-            }
-          }
-        } catch (e) {
-           Purchasely.onProcessAction(false); // notify Purchasely paywall to stop processing action
-        }
-      } catch (e) {
-        console.log(e);
-        Purchasely.onProcessAction(false); // notify Purchasely paywall to stop processing action
-      }
-    } else if (result.action === PLYPaywallAction.RESTORE) {
-      try {
-        const restore = await Purchases.restorePurchases();
-        // ... check restored purchaserInfo to see if entitlement is now active
-        
-        Purchasely.onProcessAction(false); // notify Purchasely paywall to stop processing action
-        Purchasely.synchronize(); // synchronize all purchases with Purchasely
-      } catch (e) {
-        Purchasely.onProcessAction(false); // notify Purchasely paywall to stop processing action
-      }
-    } else {
-      Purchasely.onProcessAction(true); // notify Purchasely paywall to continue other actions
+
+    const success = await MyPurchaseSystem.purchase(storeProductId)
+    if (success) {
+      await Purchasely.synchronize() // synchronize new purchase with Purchasely
+      return 'success' // notify Purchasely the action was handled
     }
-  });
+    return 'failed'
+  } catch (e) {
+    console.log(e)
+    return 'failed'
+  }
+})
+
+Purchasely.interceptAction('restore', async (info, payload) => {
+  try {
+    await MyPurchaseSystem.restorePurchases()
+    await Purchasely.synchronize() // synchronize all purchases with Purchasely
+    return 'success' // notify Purchasely the action was handled
+  } catch (e) {
+    // Error restoring purchases
+    return 'failed'
+  }
+})
 ```
+```typescript RevenueCat
+import { Platform } from 'react-native'
+import Purchasely from 'react-native-purchasely'
+import Purchases from 'react-native-purchases'
+
+Purchasely.interceptAction('purchase', async (info, payload) => {
+  if (payload?.kind !== 'purchase') {
+    return 'notHandled'
+  }
+  try {
+    // The store product id (sku) the user tapped on in the paywall
+    const storeProductId = payload.plan.productId
+
+    if (Platform.OS === 'android') {
+      // Only for Android you can retrieve the subscription offer details
+      const basePlanId = payload.subscriptionOffer?.basePlanId
+      const offerId = payload.subscriptionOffer?.offerId
+      const offerToken = payload.subscriptionOffer?.offerToken
+    }
+
+    const offerings = await Purchases.getOfferings()
+    if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {
+      // get your package
+      const pkg = offerings.current.monthly
+
+      // and purchase with RevenueCat
+      try {
+        const { customerInfo } = await Purchases.purchasePackage(pkg)
+        if (typeof customerInfo.entitlements.active.my_entitlement_identifier !== 'undefined') {
+          await Purchasely.synchronize() // synchronize all purchases with Purchasely
+          return 'success' // notify Purchasely the action was handled
+        }
+      } catch (e) {
+        if (!e.userCancelled) {
+          showError(e)
+        }
+        return 'failed'
+      }
+    }
+    return 'failed'
+  } catch (e) {
+    console.log(e)
+    return 'failed'
+  }
+})
+
+Purchasely.interceptAction('restore', async (info, payload) => {
+  try {
+    await Purchases.restorePurchases()
+    // ... check restored customerInfo to see if entitlement is now active
+
+    await Purchasely.synchronize() // synchronize all purchases with Purchasely
+    return 'success' // notify Purchasely the action was handled
+  } catch (e) {
+    // Error restoring purchases
+    return 'failed'
+  }
+})
+```
+
+You can register handlers for other action kinds the same way (e.g. `'login'`, or `'navigate'` with its typed payload — `payload.url`). To clean up, use `Purchasely.removeActionInterceptor(kind)` or `Purchasely.removeAllActionInterceptors()`.

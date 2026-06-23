@@ -68,43 +68,49 @@ Purchasely.interceptAction<PLYPresentationAction.Login> { info, _ ->
     PLYInterceptResult.NOT_HANDLED
 }
 ```
-```javascript React Native
-Purchasely.setPaywallActionInterceptorCallback((result) => {
-    console.log('Received action from paywall ' + result.info.presentationId);
+```typescript React Native
+import { Linking } from 'react-native';
 
-    if (result.action === PLYPaywallAction.NAVIGATE) {
-      console.log(
-        'User wants to navigate to website ' +
-          result.parameters.title +
-          ' ' +
-          result.parameters.url
-      );
-      Purchasely.onProcessAction(true);
-    } else if (result.action === PLYPaywallAction.CLOSE) {
-      console.log('User wants to close paywall');
-      Purchasely.onProcessAction(true);
-    } else if (result.action === PLYPaywallAction.LOGIN) {
-      console.log('User wants to login');
-      //Present your own screen for user to log in
-      Purchasely.closePresentation();
-      Purchasely.userLogin('MY_USER_ID');
-      //Call this method to update Purchasely Paywall
-      Purchasely.onProcessAction(true);
-    } else if (result.action === PLYPaywallAction.OPEN_PRESENTATION) {
-      console.log('User wants to open a new paywall');
-      Purchasely.onProcessAction(true);
-    } else if (result.action === PLYPaywallAction.PURCHASE) {
-      console.log('User wants to purchase');
-      //If you want to intercept it, close presentation and display your screen
-      Purchasely.closePresentation();
-    } else if (result.action === PLYPaywallAction.RESTORE) {
-      console.log('User wants to restore his purchases');
-      Purchasely.onProcessAction(true);
-    } else {
-      console.log('Action unknown ' + result.action);
-      Purchasely.onProcessAction(true);
-    }
-  });
+// Register one handler per action kind.
+// Return 'success' | 'failed' | 'notHandled'.
+
+Purchasely.interceptAction('navigate', async (info, payload) => {
+  console.log('User wants to navigate');
+  if (payload?.kind === 'navigate') {
+    Linking.openURL(payload.url);
+    return 'success';
+  }
+  return 'notHandled';
+});
+
+Purchasely.interceptAction('close', async (info, payload) => {
+  console.log('User wants to close paywall');
+  return 'notHandled';
+});
+
+Purchasely.interceptAction('login', async (info, payload) => {
+  console.log('User wants to login');
+  // Present your own screen for user to log in
+  Purchasely.userLogin('MY_USER_ID');
+  // Return success to update Purchasely Paywall
+  return 'success';
+});
+
+Purchasely.interceptAction('openPresentation', async (info, payload) => {
+  console.log('User wants to open a new paywall');
+  return 'notHandled';
+});
+
+Purchasely.interceptAction('purchase', async (info, payload) => {
+  console.log('User wants to purchase');
+  // If you want to intercept it, handle the purchase and display your screen
+  return 'success';
+});
+
+Purchasely.interceptAction('restore', async (info, payload) => {
+  console.log('User wants to restore his purchases');
+  return 'notHandled';
+});
 ```
 ```javascript Flutter
 await Purchasely.interceptAction(

@@ -331,11 +331,9 @@ var PaywallScreen = ({
 
 const fetchPresentation = async () => {
   try {
-    presentationForComponent = await Purchasely.fetchPresentation({
-      placementId: 'Settings',
-      contentId: null,
-    });
-    console.log('presentation fetched is %s', presentationForComponent?.id);
+    const request = Purchasely.presentation.placement('Settings').build();
+    presentationForComponent = await request.preload();
+    console.log('presentation fetched is %s', presentationForComponent?.screenId);
   } catch (e) {
     console.error(e);
   }
