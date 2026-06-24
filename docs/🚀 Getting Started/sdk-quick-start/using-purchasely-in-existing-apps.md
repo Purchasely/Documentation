@@ -33,7 +33,7 @@ Purchasely is composed of 3 modules that can be used independently :
 
 <br />
 
-You might have an existing subscription management system and changing it might seem complex to your organisation.<br />With our modular approach you can leverage the entire power of our No-Code Experimentation Lab on your existing infrastructure in minutes **only involving mobile developers**. This is what `observer` mode is made for.
+You might have an existing subscription management system and changing it might seem complex to your organisation.<br />With our modular approach you can leverage the entire power of our No-Code Experimentation Lab on your existing infrastructure in minutes **only involving mobile developers**. This is what `paywallObserver` mode is made for.
 
 This mode allows you to take advantage of the Purchasely SDK of the following features without migrating your existing Subscription Infrastructure:
 
