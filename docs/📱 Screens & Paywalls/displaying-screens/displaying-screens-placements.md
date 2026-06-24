@@ -87,7 +87,7 @@ await Purchasely.presentation
     .display();
 ```
 ```typescript Flutter
-await PresentationBuilder.placement('<<default_placement>>').build().display();
+await PLYPresentationBuilder.placement('<<default_placement>>').build().display();
 ```
 ```csharp Unity
 private PurchaselyRuntime.Purchasely _purchasely;

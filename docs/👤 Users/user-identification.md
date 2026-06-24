@@ -202,13 +202,13 @@ Purchasely.interceptAction('login', async (info, payload) => {
 ```
 ```typescript Flutter
 await Purchasely.interceptAction(
-  PresentationActionKind.login,
+  PLYPresentationActionKind.login,
   (info, payload) async {
     print('User wants to login');
     //Present your own screen for user to log in
     Purchasely.userLogin('MY_USER_ID');
     //Return success to update Purchasely Paywall
-    return InterceptResult.success;
+    return PLYInterceptResult.success;
   },
 );
 ```

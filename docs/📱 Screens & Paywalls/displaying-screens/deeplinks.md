@@ -95,7 +95,7 @@ Purchasely.setDefaultPresentationDismissHandler((outcome) => {
 });
 ```
 ```java Flutter
-PresentationBuilder.defaultSource()
+PLYPresentationBuilder.defaultSource()
     .onDismissed((outcome) {
       print('Presentation View Result : ${outcome.purchaseResult}');
 

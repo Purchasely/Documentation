@@ -6,7 +6,7 @@ This guide covers the Purchasely Flutter SDK **v6** (`6.0.0-rc.1`) for Dart apps
 >
 > v6 is a major release with breaking changes on the **paywall surface only**: **starting the SDK**, **displaying / preloading / closing a presentation**, and the **action interceptor**. Everything else on the `Purchasely` class — purchases, restore, identity, catalog, subscriptions, user attributes, events, dynamic offerings, consent and config — remains source-compatible. Deeplinks gain the v6 names (`allowDeeplink`, `handleDeeplink`) while the old v5 names remain as deprecated aliases.
 >
-> The most impactful change for new integrations is that the **default running mode is now `RunningMode.observer`** (it was Full in v5). If you want Purchasely to handle and validate purchases, set `.runningMode(RunningMode.full)` explicitly. See [SDK Initialization](#sdk-initialization).
+> The most impactful change for new integrations is that the **default running mode is now `PLYRunningMode.observer`** (it was Full in v5). If you want Purchasely to handle and validate purchases, set `.runningMode(PLYRunningMode.full)` explicitly. See [SDK Initialization](#sdk-initialization).
 
 ---
 
@@ -160,11 +160,11 @@ flutter pub add purchasely_android_player:6.0.0-rc.1
 Then initialize with the Google store:
 
 ```dart
-final bool configured = await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
-    .runningMode(RunningMode.full)
-    .logLevel(LogLevel.error)
+final bool configured = await Purchasely.apiKey('<<X-API-KEY>>')
+    .runningMode(PLYRunningMode.full)
+    .logLevel(PLYLogLevel.error)
     .stores([PLYStore.google]) // requires the purchasely_google package at the same version
-    .storekitVersion(StorekitVersion.storeKit2) // iOS only: storeKit2 (default) | storeKit1
+    .storekitVersion(PLYStorekitVersion.storeKit2) // iOS only: storeKit2 (default) | storeKit1
     .start();
 ```
 
@@ -178,25 +178,25 @@ Initialize the Purchasely SDK as early as possible in your application lifecycle
 
 > 🚧 Major v6 change — the default running mode is now `Observer`
 >
-> In v5 the implicit default was Full. In **v6 the default is `RunningMode.observer`** — Purchasely observes transactions but your app keeps control of the purchase flow. **If you want Purchasely to handle the purchase flow and validate receipts, set `.runningMode(RunningMode.full)` explicitly.** A behavioral consequence: in observer mode, presentations no longer auto-close after a purchase or restore — dismiss them yourself.
+> In v5 the implicit default was Full. In **v6 the default is `PLYRunningMode.observer`** — Purchasely observes transactions but your app keeps control of the purchase flow. **If you want Purchasely to handle the purchase flow and validate receipts, set `.runningMode(PLYRunningMode.full)` explicitly.** A behavioral consequence: in observer mode, presentations no longer auto-close after a purchase or restore — dismiss them yourself.
 
 ### Full Mode (Purchasely handles purchases)
 
-In `RunningMode.full`, Purchasely handles the entire purchase flow including transactions and receipts.
+In `PLYRunningMode.full`, Purchasely handles the entire purchase flow including transactions and receipts.
 
 ```dart
 import 'package:purchasely_flutter/purchasely_flutter.dart';
 
 // Everything is optional except the apiKey
 // Example with default values
-final bool configured = await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
-    .appUserId(null)                             // optional if you already know your user id
-    .runningMode(RunningMode.full)               // RunningMode.observer (default) | full
-    .logLevel(LogLevel.error)                    // set to LogLevel.debug in development to see logs
-    .stores([PLYStore.google])                   // Android only: google | huawei | amazon
-    .storekitVersion(StorekitVersion.storeKit2)  // iOS only: storeKit2 (default) | storeKit1
-    .allowDeeplink(true)                         // allow the SDK to open deeplinks (default true)
-    .allowCampaigns(true)                        // optional campaign display gate (default true)
+final bool configured = await Purchasely.apiKey('<<X-API-KEY>>')
+    .appUserId(null)                              // optional if you already know your user id
+    .runningMode(PLYRunningMode.full)             // PLYRunningMode.observer (default) | full
+    .logLevel(PLYLogLevel.error)                  // set to PLYLogLevel.debug in development to see logs
+    .stores([PLYStore.google])                    // Android only: google | huawei | amazon
+    .storekitVersion(PLYStorekitVersion.storeKit2) // iOS only: storeKit2 (default) | storeKit1
+    .allowDeeplink(true)                          // allow the SDK to open deeplinks (default true)
+    .allowCampaigns(true)                         // optional campaign display gate (default true)
     .start();
 
 if (!configured) {
@@ -209,15 +209,15 @@ print('Purchasely SDK configured successfully');
 
 ### Observer Mode (your app owns purchases)
 
-Use `RunningMode.observer` if you have an existing in-app purchase infrastructure and want to use Purchasely only for paywall display and analytics. This is the **default** mode in v6, so passing it makes the intent explicit.
+Use `PLYRunningMode.observer` if you have an existing in-app purchase infrastructure and want to use Purchasely only for paywall display and analytics. This is the **default** mode in v6, so passing it makes the intent explicit.
 
 ```dart
-final bool configured = await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
+final bool configured = await Purchasely.apiKey('<<X-API-KEY>>')
     .appUserId(null)
-    .runningMode(RunningMode.observer)           // RunningMode.observer (default) | full
-    .logLevel(LogLevel.error)
+    .runningMode(PLYRunningMode.observer)          // PLYRunningMode.observer (default) | full
+    .logLevel(PLYLogLevel.error)
     .stores([PLYStore.google])
-    .storekitVersion(StorekitVersion.storeKit2)
+    .storekitVersion(PLYStorekitVersion.storeKit2)
     .start();
 
 if (!configured) {
@@ -230,9 +230,9 @@ if (!configured) {
 
 | Enum | Values |
 |------|--------|
-| `RunningMode` | `observer` (default), `full` |
-| `LogLevel` | `debug`, `info`, `warn`, `error` |
-| `StorekitVersion` | `storeKit2` (default, iOS), `storeKit1` (iOS) |
+| `PLYRunningMode` | `observer` (default), `full` |
+| `PLYLogLevel` | `debug`, `info`, `warn`, `error` |
+| `PLYStorekitVersion` | `storeKit2` (default, iOS), `storeKit1` (iOS) |
 | `PLYStore` | `google`, `huawei`, `amazon` (Android) |
 
 ### API Key
@@ -245,22 +245,22 @@ You can find your API Key in the Purchasely Console under **App settings > Backe
 
 Purchasely paywalls are **Presentations** displayed using **placements** (a specific location in your app, e.g. onboarding, settings, premium feature) or by direct `screen` id.
 
-`PresentationBuilder.placement(id).build()` returns a **`PresentationRequest`**. Calling `display([Transition])` shows the presentation and resolves at **dismiss** with a `PresentationOutcome`.
+`PLYPresentationBuilder.placement(id).build()` returns a **`PLYPresentationRequest`**. Calling `display([PLYTransition])` shows the presentation and resolves at **dismiss** with a `PLYPresentationOutcome`.
 
 ### Display a Placement
 
 ```dart
-final outcome = await PresentationBuilder.placement('ONBOARDING')
+final outcome = await PLYPresentationBuilder.placement('ONBOARDING')
     .contentId('my_content_id') // optional
     .build()
-    .display(const Transition.fullScreen());
+    .display(const PLYTransition.fullScreen());
 
 // outcome: presentation, purchaseResult, plan, closeReason, error
 if (outcome.error != null) {
   print('Display error: ${outcome.error!.message}');
-} else if (outcome.purchaseResult == PurchaseResult.purchased ||
-    outcome.purchaseResult == PurchaseResult.restored) {
-  print('Purchased ${outcome.plan}');
+} else if (outcome.purchaseResult == PLYPurchaseResult.purchased ||
+    outcome.purchaseResult == PLYPurchaseResult.restored) {
+  print('Purchased ${outcome.plan?.name}');
 } else {
   print('Dismissed: ${outcome.closeReason}'); // button | backSystem | programmatic
 }
@@ -270,62 +270,67 @@ if (outcome.error != null) {
 
 ```dart
 // A specific presentation by screen id
-await PresentationBuilder.screen('SCREEN_ID').build().display(const Transition.modal());
+await PLYPresentationBuilder.screen('SCREEN_ID').build().display(const PLYTransition.modal());
 
 // A specific content inside a screen
-await PresentationBuilder.screen('SCREEN_ID').contentId('CONTENT_ID').build().display();
+await PLYPresentationBuilder.screen('SCREEN_ID').contentId('CONTENT_ID').build().display();
 ```
 
 ### Selectors
 
 ```dart
-PresentationBuilder.placement('onboarding'); // by placement id
-PresentationBuilder.screen('screen_abc123'); // direct Console Screen lookup
-PresentationBuilder.defaultSource();         // default handler for deeplinks / campaigns
+PLYPresentationBuilder.placement('onboarding'); // by placement id
+PLYPresentationBuilder.screen('screen_abc123'); // direct Console Screen lookup
+PLYPresentationBuilder.defaultSource();         // default handler for deeplinks / campaigns
 ```
 
 To display a Flow, use its deeplink `app_scheme://ply/flows/FLOW_ID`.
 
 ### Transitions
 
-`display([Transition])` accepts an optional `Transition`:
+`display([PLYTransition])` accepts an optional `PLYTransition`:
 
 ```dart
-const Transition.fullScreen();          // full-screen
-const Transition.modal();               // modal sheet
-const Transition.modal(dismissible: false);
-const Transition.push();                // pushed onto the navigation stack
+const PLYTransition.fullScreen();         // full-screen
+const PLYTransition.modal();              // modal sheet
+const PLYTransition.modal(dismissible: false);
+const PLYTransition.push();               // pushed onto the navigation stack
+const PLYTransition.drawer(height: PLYTransitionDimension.percentage(0.5));
+const PLYTransition.popin(
+  width: PLYTransitionDimension.pixel(320),
+  height: PLYTransitionDimension.percentage(0.6),
+);
 ```
 
-`TransitionType` also exposes `drawer`, `popin` and `inlinePaywall` for advanced layouts (with `heightPercentage` and `backgroundColors`).
+`PLYTransitionDimension` accepts `.percentage(value)` (0.0–1.0) or `.pixel(value)`. Leave a dimension `null` to size to content ("hug").
 
 ### Display Results
 
-`display([Transition])` resolves with a `PresentationOutcome`:
+`display([PLYTransition])` resolves with a `PLYPresentationOutcome`:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `presentation` | `Presentation?` | The displayed presentation (or `null` if it never reached display) |
-| `purchaseResult` | `PurchaseResult?` | `purchased` \| `restored` \| `cancelled` \| `null` |
-| `plan` | `Map<String, dynamic>?` | The purchased plan (when `purchaseResult` is `purchased` / `restored`) |
-| `closeReason` | `CloseReason?` | `button` \| `backSystem` \| `programmatic` (when no purchase) |
-| `error` | `PresentationError?` | Display error; mutually exclusive with `closeReason` |
+| `presentation` | `PLYPresentation?` | The displayed presentation (or `null` if it never reached display) |
+| `purchaseResult` | `PLYPurchaseResult?` | `purchased` \| `restored` \| `cancelled` \| `null` |
+| `plan` | `PLYPlan?` | The purchased plan (when `purchaseResult` is `purchased` / `restored`) |
+| `closeReason` | `PLYCloseReason?` | `button` \| `backSystem` \| `programmatic` (when no purchase) |
+| `error` | `PLYPresentationError?` | Display error; mutually exclusive with `closeReason` |
 
 `purchaseResult` is `null` when the user dismissed the screen without a purchase action.
 
 ### Presentation lifecycle (display / close / back)
 
-A **loaded** `Presentation` (returned by `preload()`, or from `outcome.presentation`) exposes imperative controls:
+A **loaded** `PLYPresentation` (returned by `preload()`, or from `outcome.presentation`) exposes imperative controls:
 
 ```dart
-final presentation = await PresentationBuilder.placement('ONBOARDING').build().preload();
+final presentation = await PLYPresentationBuilder.placement('ONBOARDING').build().preload();
 
 presentation.display();  // show (returns a future that resolves at dismiss)
 presentation.close();    // dismiss programmatically
 presentation.back();     // navigate back inside a multi-step (Flow) presentation
 ```
 
-> 📘 The v5 imperative methods `closePresentation()`, `closeAllScreens()`, `hidePresentation()`, `showPresentation()` have been **removed**. Use the loaded `Presentation` handle instead.
+> 📘 The v5 imperative methods `closePresentation()`, `closeAllScreens()`, `hidePresentation()`, `showPresentation()` have been **removed**. Use the loaded `PLYPresentation` handle instead.
 
 ---
 
@@ -333,17 +338,17 @@ presentation.back();     // navigate back inside a multi-step (Flow) presentatio
 
 ### Full Mode
 
-In `RunningMode.full`, the Purchasely SDK automatically launches the native in-app purchase flow when a user taps a purchase button and handles the transaction. You only need to update entitlements once you have confirmation the purchase was processed.
+In `PLYRunningMode.full`, the Purchasely SDK automatically launches the native in-app purchase flow when a user taps a purchase button and handles the transaction. You only need to update entitlements once you have confirmation the purchase was processed.
 
 ```dart
 try {
-  final outcome = await PresentationBuilder.placement('onboarding')
+  final outcome = await PLYPresentationBuilder.placement('onboarding')
       .build()
-      .display(const Transition.fullScreen());
+      .display(const PLYTransition.fullScreen());
 
-  if (outcome.purchaseResult == PurchaseResult.purchased ||
-      outcome.purchaseResult == PurchaseResult.restored) {
-    print('User purchased ${outcome.plan}');
+  if (outcome.purchaseResult == PLYPurchaseResult.purchased ||
+      outcome.purchaseResult == PLYPurchaseResult.restored) {
+    print('User purchased ${outcome.plan?.name}');
     // Update entitlements to unlock the access to the contents
   }
 } catch (e) {
@@ -361,17 +366,17 @@ final plan = await Purchasely.purchaseWithPlanVendorId(
 
 ### Observer Mode with Action Interceptor
 
-In `RunningMode.observer`, you handle purchases with your own infrastructure while using Purchasely for paywall display. Register an interceptor for the `purchase` action; the handler returns an `InterceptResult` (there is no more `onProcessAction`). In observer mode the presentation does **not** auto-close, so dismiss it yourself with `info.presentation?.close()`.
+In `PLYRunningMode.observer`, you handle purchases with your own infrastructure while using Purchasely for paywall display. Register an interceptor for the `purchase` action; the handler returns a `PLYInterceptResult` (there is no more `onProcessAction`). In observer mode the presentation does **not** auto-close, so dismiss it yourself with `info.presentation?.close()`.
 
 ```dart
 import 'package:flutter/foundation.dart';
 import 'package:purchasely_flutter/purchasely_flutter.dart';
 
 await Purchasely.interceptAction(
-  PresentationActionKind.purchase,
+  PLYPresentationActionKind.purchase,
   (info, payload) async {
-    if (payload is! PurchasePayload) {
-      return InterceptResult.notHandled;
+    if (payload is! PLYPurchasePayload) {
+      return PLYInterceptResult.notHandled;
     }
     try {
       // The store product id (sku) the user tapped on in the presentation
@@ -388,27 +393,27 @@ await Purchasely.interceptAction(
       if (success) {
         await Purchasely.synchronize(); // synchronize the new purchase with Purchasely
         await info.presentation?.close(); // observer mode: dismiss it yourself
-        return InterceptResult.success;
+        return PLYInterceptResult.success;
       }
-      return InterceptResult.failed;
+      return PLYInterceptResult.failed;
     } catch (e) {
       print(e);
-      return InterceptResult.failed;
+      return PLYInterceptResult.failed;
     }
   },
 );
 
 await Purchasely.interceptAction(
-  PresentationActionKind.restore,
+  PLYPresentationActionKind.restore,
   (info, payload) async {
     try {
       await MyPurchaseSystem.restoreAllPurchases();
       await Purchasely.synchronize(); // synchronize all purchases with Purchasely
       await info.presentation?.close();
-      return InterceptResult.success;
+      return PLYInterceptResult.success;
     } catch (e) {
       // Error restoring purchases
-      return InterceptResult.failed;
+      return PLYInterceptResult.failed;
     }
   },
 );
@@ -420,32 +425,32 @@ await Purchasely.interceptAction(
 
 ## Action Interceptor
 
-The v6 interceptor is registered **per action kind** with `Purchasely.interceptAction(kind, handler)`. The handler receives a typed payload and returns an `InterceptResult` — there is no more `Purchasely.setPaywallActionInterceptorCallback(...)` or `Purchasely.onProcessAction(bool)`.
+The v6 interceptor is registered **per action kind** with `Purchasely.interceptAction(kind, handler)`. The handler receives a typed payload and returns a `PLYInterceptResult` — there is no more `Purchasely.setPaywallActionInterceptorCallback(...)` or `Purchasely.onProcessAction(bool)`.
 
 ### Result values
 
 | Result | Meaning |
 |--------|---------|
-| `InterceptResult.success` | App handled the action; SDK skips its default behavior. |
-| `InterceptResult.failed` | App tried but failed; the action chain stops. |
-| `InterceptResult.notHandled` | SDK should continue with its default behavior. |
+| `PLYInterceptResult.success` | App handled the action; SDK skips its default behavior. |
+| `PLYInterceptResult.failed` | App tried but failed; the action chain stops. |
+| `PLYInterceptResult.notHandled` | SDK should continue with its default behavior. |
 
 ### Action kinds & payloads
 
-`PresentationActionKind`: `close`, `closeAll`, `login`, `navigate`, `purchase`, `restore`, `openPresentation`, `openPlacement`, `promoCode`, `webCheckout`.
+`PLYPresentationActionKind`: `close`, `closeAll`, `login`, `navigate`, `purchase`, `restore`, `openPresentation`, `openPlacement`, `promoCode`, `webCheckout`.
 
 | Action kind | Typed payload |
 |-------------|---------------|
-| `purchase` | `PurchasePayload` (`plan: PLYPlan`, `subscriptionOffer: PLYSubscriptionOffer?`, `offer: PLYPromoOffer?`) |
+| `purchase` | `PLYPurchasePayload` (`plan: PLYPlan`, `subscriptionOffer: PLYSubscriptionOffer?`, `offer: PLYPromoOffer?`) |
 | `restore` | — |
 | `login` | — |
-| `close` | `ClosePayload` |
-| `closeAll` | `CloseAllPayload` |
-| `navigate` | `NavigatePayload` (`url`, `title`) |
-| `openPresentation` | `OpenPresentationPayload` |
-| `openPlacement` | `OpenPlacementPayload` |
+| `close` | `PLYClosePayload` |
+| `closeAll` | `PLYCloseAllPayload` |
+| `navigate` | `PLYNavigatePayload` (`url`, `title`) |
+| `openPresentation` | `PLYOpenPresentationPayload` |
+| `openPlacement` | `PLYOpenPlacementPayload` |
 | `promoCode` | — |
-| `webCheckout` | `WebCheckoutPayload` |
+| `webCheckout` | `PLYWebCheckoutPayload` |
 
 ### Implementation
 
@@ -453,22 +458,22 @@ The v6 interceptor is registered **per action kind** with `Purchasely.interceptA
 import 'package:purchasely_flutter/purchasely_flutter.dart';
 
 await Purchasely.interceptAction(
-  PresentationActionKind.navigate,
+  PLYPresentationActionKind.navigate,
   (info, payload) async {
-    if (payload is NavigatePayload) {
+    if (payload is PLYNavigatePayload) {
       // open payload.url with your router / url_launcher
-      return InterceptResult.success;
+      return PLYInterceptResult.success;
     }
-    return InterceptResult.notHandled;
+    return PLYInterceptResult.notHandled;
   },
 );
 
 await Purchasely.interceptAction(
-  PresentationActionKind.login,
+  PLYPresentationActionKind.login,
   (info, payload) async {
     // Present your own screen for the user to log in
     Purchasely.userLogin('MY_USER_ID');
-    return InterceptResult.success;
+    return PLYInterceptResult.success;
   },
 );
 ```
@@ -476,8 +481,8 @@ await Purchasely.interceptAction(
 ### Removing interceptors
 
 ```dart
-await Purchasely.removeInterceptor(PresentationActionKind.purchase);
-await Purchasely.removeAllInterceptors();
+await Purchasely.removeActionInterceptor(PLYPresentationActionKind.purchase);
+await Purchasely.removeAllActionInterceptors();
 ```
 
 ---
@@ -505,7 +510,7 @@ if (refresh) {
 }
 ```
 
-You can also provide the user id at initialization with `PurchaselyBuilder.apiKey('…').appUserId('123456789').start()`.
+You can also provide the user id at initialization with `Purchasely.apiKey('…').appUserId('123456789').start()`.
 
 ### User Logout
 
@@ -520,11 +525,11 @@ To handle the login button on a presentation, intercept the `login` action:
 
 ```dart
 await Purchasely.interceptAction(
-  PresentationActionKind.login,
+  PLYPresentationActionKind.login,
   (info, payload) async {
     // Present your own screen for the user to log in
     Purchasely.userLogin('MY_USER_ID'); // call before returning to update the screen
-    return InterceptResult.success;
+    return PLYInterceptResult.success;
   },
 );
 ```
@@ -672,7 +677,7 @@ The `PLYUserAttributeSource` enum indicates where the update originated:
 
 ## Pre-fetching Screens
 
-Purchasely, by default, shows the paywall screen with a loading indicator while fetching it from the network. Using `PresentationRequest.preload()`, you can pre-fetch the paywall from the network **before** displaying it for a better user experience.
+Purchasely, by default, shows the paywall screen with a loading indicator while fetching it from the network. Using `PLYPresentationRequest.preload()`, you can pre-fetch the paywall from the network **before** displaying it for a better user experience.
 
 ### Benefits
 
@@ -683,38 +688,38 @@ Purchasely, by default, shows the paywall screen with a loading indicator while 
 
 ### Implementation
 
-Build a `PresentationRequest`, `preload()` it to fetch the screen from the network, then `display()` the **same** request when you are ready.
+Build a `PLYPresentationRequest`, `preload()` it to fetch the screen from the network, then `display()` the **same** request when you are ready.
 
 ```dart
 import 'package:purchasely_flutter/purchasely_flutter.dart';
 
 try {
-  final request = PresentationBuilder.placement('ONBOARDING').build();
+  final request = PLYPresentationBuilder.placement('ONBOARDING').build();
 
   // Preload resolves once the screen is loaded
   final presentation = await request.preload();
 
-  if (presentation.type == PresentationType.deactivated) {
+  if (presentation.type == PLYPresentationType.deactivated) {
     // No paywall to display for this placement
     return;
   }
-  if (presentation.type == PresentationType.client) {
+  if (presentation.type == PLYPresentationType.client) {
     // Display your own paywall (BYOS) — plan summaries are in presentation.plans
     return;
   }
 
   // Display the preloaded presentation; resolves at dismiss
-  final outcome = await request.display(const Transition.fullScreen());
+  final outcome = await request.display(const PLYTransition.fullScreen());
 
   switch (outcome.purchaseResult) {
-    case PurchaseResult.cancelled:
+    case PLYPurchaseResult.cancelled:
       print('User cancelled purchased');
       break;
-    case PurchaseResult.purchased:
-      print('User purchased ${outcome.plan}');
+    case PLYPurchaseResult.purchased:
+      print('User purchased ${outcome.plan?.name}');
       break;
-    case PurchaseResult.restored:
-      print('User restored ${outcome.plan}');
+    case PLYPurchaseResult.restored:
+      print('User restored ${outcome.plan?.name}');
       break;
     case null:
       print('User dismissed: ${outcome.closeReason}');
@@ -725,10 +730,19 @@ try {
 }
 ```
 
+You can also chain preload and display in a single expression:
+
+```dart
+final outcome = await PLYPresentationBuilder.placement('ONBOARDING')
+    .build()
+    .preload()
+    .display(const PLYTransition.drawer(height: PLYTransitionDimension.percentage(0.5)));
+```
+
 ### Presentation Types
 
-| Type (`PresentationType`) | Description |
-|---------------------------|-------------|
+| Type (`PLYPresentationType`) | Description |
+|------------------------------|-------------|
 | `normal` | Default Purchasely paywall |
 | `fallback` | Fallback paywall (requested one not found) |
 | `deactivated` | No paywall for this placement |
@@ -749,7 +763,7 @@ To manage deeplinks you can do up to 3 things:
 Deeplink display is allowed via the start builder (it also defaults to `true`):
 
 ```dart
-await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
+await Purchasely.apiKey('<<X-API-KEY>>')
     .allowDeeplink(true)
     .start();
 ```
@@ -784,14 +798,14 @@ Campaigns follow the same principle through `allowCampaigns` (also `true` by def
 
 ### Setting the Default Presentation Dismiss Handler
 
-When a paywall / screen is opened by the SDK itself (deeplink, campaign, promoted in-app purchase), you don't instantiate it yourself, so no per-display callback fires. Register a default dismiss handler to receive the resulting `PresentationOutcome`:
+When a paywall / screen is opened by the SDK itself (deeplink, campaign, promoted in-app purchase), you don't instantiate it yourself, so no per-display callback fires. Register a default dismiss handler to receive the resulting `PLYPresentationOutcome`:
 
 ```dart
 await Purchasely.setDefaultPresentationDismissHandler((outcome) {
   print('SDK presentation dismissed: ${outcome.presentation?.screenId} / '
       '${outcome.purchaseResult} / ${outcome.closeReason}');
   if (outcome.plan != null) {
-    print('Plan: ${outcome.plan}');
+    print('Plan: ${outcome.plan?.name}');
   }
 });
 ```
@@ -802,22 +816,22 @@ await Purchasely.setDefaultPresentationDismissHandler((outcome) {
 
 ### StoreKit Selection (iOS)
 
-Choose between StoreKit 1 and StoreKit 2 for iOS with the `StorekitVersion` enum (this replaces the old `storeKit1: true/false` boolean):
+Choose between StoreKit 1 and StoreKit 2 for iOS with the `PLYStorekitVersion` enum (this replaces the old `storeKit1: true/false` boolean):
 
 ```dart
-await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
-    .storekitVersion(StorekitVersion.storeKit2) // storeKit2 (default) | storeKit1
+await Purchasely.apiKey('<<X-API-KEY>>')
+    .storekitVersion(PLYStorekitVersion.storeKit2) // storeKit2 (default) | storeKit1
     .start();
 ```
 
-> **Recommendation**: Use StoreKit 2 (`StorekitVersion.storeKit2`, the default) for new integrations.
+> **Recommendation**: Use StoreKit 2 (`PLYStorekitVersion.storeKit2`, the default) for new integrations.
 
 ### Android Stores
 
 Purchasely supports multiple Android stores via the `PLYStore` enum passed to `.stores([...])`:
 
 ```dart
-await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
+await Purchasely.apiKey('<<X-API-KEY>>')
     .stores([PLYStore.google]) // PLYStore.google | PLYStore.huawei | PLYStore.amazon
     .start();
 ```
@@ -832,7 +846,7 @@ To use multiple stores (the first one available on the device is used):
 
 ### Android-Specific Purchase Parameters
 
-When intercepting purchases on Android, you can access additional subscription offer parameters from the typed `PLYSubscriptionOffer?` on `PurchasePayload`:
+When intercepting purchases on Android, you can access additional subscription offer parameters from the typed `PLYSubscriptionOffer?` on `PLYPurchasePayload`:
 
 ```dart
 if (defaultTargetPlatform == TargetPlatform.android) {
@@ -844,13 +858,13 @@ if (defaultTargetPlatform == TargetPlatform.android) {
 
 ### Inline (Embedded) Presentations
 
-To render a presentation inline inside your widget tree — as opposed to full-screen / modal — use the `PLYPresentationView` widget with a `PresentationRequest`. The widget preloads the request and hands the resulting presentation to the native inline view.
+To render a presentation inline inside your widget tree — as opposed to full-screen / modal — use the `PLYPresentationView` widget with a `PLYPresentationRequest`. The widget preloads the request and hands the resulting presentation to the native inline view.
 
 ```dart
 import 'package:purchasely_flutter/native_view_widget.dart';
 import 'package:purchasely_flutter/purchasely_flutter.dart';
 
-final request = PresentationBuilder.placement('onboarding')
+final request = PLYPresentationBuilder.placement('onboarding')
     .onDismissed((outcome) => print('inline dismissed: ${outcome.purchaseResult}'))
     .build();
 
@@ -870,9 +884,9 @@ Expanded(
 
 ### Common Issues
 
-1. **SDK not configured**: Ensure you call `PurchaselyBuilder.apiKey('…').start()` and that it resolves to `true` before any other SDK methods.
+1. **SDK not configured**: Ensure you call `Purchasely.apiKey('…').start()` and that it resolves to `true` before any other SDK methods.
 
-2. **Purchases not validating / paywall does not auto-close after purchase**: You are likely in the new default `Observer` mode. Set `.runningMode(RunningMode.full)` for Purchasely to own the purchase flow. In observer mode, presentations do not auto-close — dismiss them with `info.presentation?.close()`.
+2. **Purchases not validating / paywall does not auto-close after purchase**: You are likely in the new default `Observer` mode. Set `.runningMode(PLYRunningMode.full)` for Purchasely to own the purchase flow. In observer mode, presentations do not auto-close — dismiss them with `info.presentation?.close()`.
 
 3. **Purchases not working on Android**: Verify that you've added `purchasely_google` and that all Purchasely packages are pinned to the exact same version (`6.0.0-rc.1`).
 
@@ -892,8 +906,8 @@ Expanded(
 Enable debug logging during development:
 
 ```dart
-await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
-    .logLevel(LogLevel.debug) // use LogLevel.error in production
+await Purchasely.apiKey('<<X-API-KEY>>')
+    .logLevel(PLYLogLevel.debug) // use PLYLogLevel.error in production
     .start();
 ```
 
@@ -906,5 +920,3 @@ For the full list of v5→v6 breaking changes, see the [Migrating to v6 — Flut
 - [Purchasely Console](https://console.purchasely.io)
 - [Pub.dev Package](https://pub.dev/packages/purchasely_flutter)
 - [Purchasely Documentation](https://docs.purchasely.com)
-</content>
-</invoke>

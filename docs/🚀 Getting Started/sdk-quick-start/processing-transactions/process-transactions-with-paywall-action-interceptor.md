@@ -25,7 +25,7 @@ next:
 You register one interceptor per action with `Purchasely.interceptAction`. Each interceptor receives:
 
 * `info`: the `PLYInterceptorInfo` object containing the controller of the paywall to dismiss it or display content / error messages above it, and the presentation id and content id associated to this paywall
-* the typed action object (like a native `Purchase`, or Flutter's `PurchasePayload`, carrying a real `plan` object and, on Android, a real nullable `subscriptionOffer` object) that contains the objects needed to perform the action
+* the typed action object (like a native `Purchase`, or Flutter's `PLYPurchasePayload`, carrying a real `plan` object and, on Android, a real nullable `subscriptionOffer` object) that contains the objects needed to perform the action
 * `completion` (iOS) / a returned `PLYInterceptResult` (Android): tells Purchasely how the action was handled. Returning the "not handled" result on a purchase action will lead the Purchasely SDK to trigger the native in-app purchase flow itself
 
 > ⚠️ Which result should you return after handling the action?
@@ -127,12 +127,12 @@ Purchasely.interceptAction('restore', async (info, payload) => {
 });
 ```
 ```javascript Flutter
-// Register one handler per action kind; each returns an InterceptResult.
+// Register one handler per action kind; each returns a PLYInterceptResult.
 await Purchasely.interceptAction(
-  PresentationActionKind.purchase,
+  PLYPresentationActionKind.purchase,
   (info, payload) async {
-    if (payload is! PurchasePayload) {
-      return InterceptResult.notHandled;
+    if (payload is! PLYPurchasePayload) {
+      return PLYInterceptResult.notHandled;
     }
     try {
       //the store product id (sku) the user clicked on in the paywall
@@ -149,27 +149,27 @@ await Purchasely.interceptAction(
       if (success) {
         // synchronize all purchases with Purchasely
         Purchasely.synchronize();
-        return InterceptResult.success;
+        return PLYInterceptResult.success;
       }
-      return InterceptResult.failed;
+      return PLYInterceptResult.failed;
     } catch (e) {
       print(e);
-      return InterceptResult.failed;
+      return PLYInterceptResult.failed;
     }
   },
 );
 
 await Purchasely.interceptAction(
-  PresentationActionKind.restore,
+  PLYPresentationActionKind.restore,
   (info, payload) async {
     try {
       await MyPurchaseSystem.restoreAllPurchases();
       // synchronize all purchases with Purchasely
       Purchasely.synchronize();
-      return InterceptResult.success;
+      return PLYInterceptResult.success;
     } on PlatformException {
       // Error restoring purchases
-      return InterceptResult.failed;
+      return PLYInterceptResult.failed;
     }
   },
 );
@@ -393,12 +393,12 @@ Purchasely.interceptAction('restore', async (info, payload) => {
 });
 ```
 ```javascript Flutter
-// Register one handler per action kind; each returns an InterceptResult.
+// Register one handler per action kind; each returns a PLYInterceptResult.
 await Purchasely.interceptAction(
-  PresentationActionKind.purchase,
+  PLYPresentationActionKind.purchase,
   (info, payload) async {
-    if (payload is! PurchasePayload) {
-      return InterceptResult.notHandled;
+    if (payload is! PLYPurchasePayload) {
+      return PLYInterceptResult.notHandled;
     }
     try {
       //the store product id (sku) the user clicked on in the paywall
@@ -422,18 +422,18 @@ await Purchasely.interceptAction(
           // synchronize all purchases with Purchasely
           Purchasely.synchronize();
         }
-        return InterceptResult.success;
+        return PLYInterceptResult.success;
       }
-      return InterceptResult.failed;
+      return PLYInterceptResult.failed;
     } catch (e) {
       print(e);
-      return InterceptResult.failed;
+      return PLYInterceptResult.failed;
     }
   },
 );
 
 await Purchasely.interceptAction(
-  PresentationActionKind.restore,
+  PLYPresentationActionKind.restore,
   (info, payload) async {
     try {
       PurchaserInfo restoredInfo = await Purchases.restoreTransactions();
@@ -441,10 +441,10 @@ await Purchasely.interceptAction(
 
       // synchronize all purchases with Purchasely
       Purchasely.synchronize();
-      return InterceptResult.success;
+      return PLYInterceptResult.success;
     } on PlatformException {
       // Error restoring purchases
-      return InterceptResult.failed;
+      return PLYInterceptResult.failed;
     }
   },
 );

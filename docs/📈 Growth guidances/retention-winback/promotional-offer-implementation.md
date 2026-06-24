@@ -269,10 +269,10 @@ Purchasely.interceptAction('purchase', async (info, payload) => {
 ```
 ```typescript Flutter
 await Purchasely.interceptAction(
-  PresentationActionKind.purchase,
+  PLYPresentationActionKind.purchase,
   (info, payload) async {
-    if (payload is! PurchasePayload) {
-      return InterceptResult.notHandled;
+    if (payload is! PLYPurchasePayload) {
+      return PLYInterceptResult.notHandled;
     }
 
     // Retrieve the store product id and offer id
@@ -316,10 +316,10 @@ await Purchasely.interceptAction(
       // TODO launch purchase flow
 
       // if successful, return success to dismiss the paywall
-      return InterceptResult.success;
+      return PLYInterceptResult.success;
     } catch (e) {
       // if not successful, return failed to keep the paywall displayed
-      return InterceptResult.failed;
+      return PLYInterceptResult.failed;
     }
   },
 );

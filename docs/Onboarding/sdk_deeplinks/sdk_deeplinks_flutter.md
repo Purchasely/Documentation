@@ -52,11 +52,11 @@ Usually when a paywall / screen is instantiated by the app, a closure is called 
 You can retrieve the result of the user action in a paywall opened with a deeplink by attaching `onDismissed` to a default-source request.
 
 ```dart Flutter
-PresentationBuilder.defaultSource()
+PLYPresentationBuilder.defaultSource()
     .onDismissed((outcome) {
       print('Presentation dismissed: ${outcome.purchaseResult}');
       if (outcome.plan != null) {
-        print('Plan: ${outcome.plan}');
+        print('Plan: ${outcome.plan?.name}');
       }
     })
     .build()

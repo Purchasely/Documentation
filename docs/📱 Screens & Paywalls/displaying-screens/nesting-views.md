@@ -168,8 +168,8 @@ class PresentationScreen extends StatelessWidget {
   }
 
   Widget _buildPresentationView() {
-    final request = PresentationBuilder.placement('onboarding')
-        // you can also target a specific screen with PresentationBuilder.screen('my_paywall_1')
+    final request = PLYPresentationBuilder.placement('onboarding')
+        // you can also target a specific screen with PLYPresentationBuilder.screen('my_paywall_1')
         .onDismissed((outcome) {
           print('Presentation result:${outcome.purchaseResult} - plan:${outcome.plan}');
         })

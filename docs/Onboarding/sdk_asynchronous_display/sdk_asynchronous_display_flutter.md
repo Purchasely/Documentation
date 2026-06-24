@@ -24,37 +24,37 @@ If you want to quickly test your first in-app Purchase, we invite you to directl
 
 This first method to display a Placement was already presented at the stage **Display your first screen through a placement**
 
-`PresentationBuilder.placement(id).build()` returns a `PresentationRequest`. Calling `display([Transition])` shows the paywall and resolves at **dismiss** with a `PresentationOutcome`.
+`PLYPresentationBuilder.placement(id).build()` returns a `PLYPresentationRequest`. Calling `display([PLYTransition])` shows the paywall and resolves at **dismiss** with a `PLYPresentationOutcome`.
 
 ```dart Flutter
-await PresentationBuilder.placement('ONBOARDING')
+await PLYPresentationBuilder.placement('ONBOARDING')
     .contentId(contentId)
     .build()
-    .display(const Transition.fullScreen());
+    .display(const PLYTransition.fullScreen());
 ```
 
 ### 2\. USING THE ASYNCHRONOUS DISPLAY WITH PRE-FETCH
 
 Purchasely, by default, shows the paywall screen with a loading indicator while fetching the paywall from the network and preparing it for display.
 
-Using the `PresentationRequest` `preload` method, you can pre-fetch the paywall from the network before displaying it. 
+Using the `PLYPresentationRequest` `preload` method, you can pre-fetch the paywall from the network before displaying it. 
 
 The benefits of this method are listed in the bloc on the right
 
-Call `PresentationBuilder.placement(...).build().preload()` for a placement or `PresentationBuilder.screen(...).build().preload()` with a presentation id
+Call `PLYPresentationBuilder.placement(...).build().preload()` for a placement or `PLYPresentationBuilder.screen(...).build().preload()` with a presentation id
 
 1. An error may be returned if the presentation could not be fetched from the network.
-2. If successful, you will have a `Presentation` instance containing the following properties
+2. If successful, you will have a `PLYPresentation` instance containing the following properties
 
 ```swift Presentation properties
-class Presentation(
+class PLYPresentation(
     id: String?
     placementId: String?
     audienceId: String?
     abTestId: String?
     abTestVariantId: String?
     language: String?
-    type: PresentationType
+    type: PLYPresentationType
     plans: [String] // get PLYPlan instance with Purchasely.planWithIdentifier("planId")
 
     // Android SDK only (Kotlin or Java)
@@ -78,37 +78,37 @@ To fetch a paywall and then display it, use the following code:
 ```dart Flutter
 try {
   // Build a request and preload it to fetch the screen from the network
-  final request = PresentationBuilder.placement('ONBOARDING').build();
+  final request = PLYPresentationBuilder.placement('ONBOARDING').build();
 
   final presentation = await request.preload();
 
-  if (presentation.type == PresentationType.deactivated) {
+  if (presentation.type == PLYPresentationType.deactivated) {
     // No paywall to display
     return;
   }
 
-  if (presentation.type == PresentationType.client) {
+  if (presentation.type == PLYPresentationType.client) {
     // Display my own paywall — plan summaries are in presentation.plans
     return;
   }
 
-  // Display Purchasely paywall; resolves at dismiss with a PresentationOutcome
-  final outcome = await request.display(const Transition.fullScreen());
+  // Display Purchasely paywall; resolves at dismiss with a PLYPresentationOutcome
+  final outcome = await request.display(const PLYTransition.fullScreen());
 
   switch (outcome.purchaseResult) {
-    case PurchaseResult.cancelled:
+    case PLYPurchaseResult.cancelled:
       {
         print("User cancelled purchased");
       }
       break;
-    case PurchaseResult.purchased:
+    case PLYPurchaseResult.purchased:
       {
-        print("User purchased ${outcome.plan}");
+        print("User purchased ${outcome.plan?.name}");
       }
       break;
-    case PurchaseResult.restored:
+    case PLYPurchaseResult.restored:
       {
-        print("User restored ${outcome.plan}");
+        print("User restored ${outcome.plan?.name}");
       }
       break;
     case null:

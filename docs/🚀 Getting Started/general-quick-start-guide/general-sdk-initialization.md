@@ -95,8 +95,8 @@ try {
 ```typescript Flutter
 // Everything is optional except apiKey
 // Example with default values
-final bool configured = await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
-    .logLevel(LogLevel.error) // set to debug in development mode to see logs
+final bool configured = await Purchasely.apiKey('<<X-API-KEY>>')
+    .logLevel(PLYLogLevel.error) // set to debug in development mode to see logs
     .appUserId(null) // set a user id if you have one
     .start();
 

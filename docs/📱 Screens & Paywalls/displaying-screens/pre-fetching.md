@@ -162,16 +162,16 @@ try {
 ```
 ```javascript Flutter
 try {
-  final request = PresentationBuilder.placement("ONBOARDING").build();
+  final request = PLYPresentationBuilder.placement("ONBOARDING").build();
 
   final presentation = await request.preload();
 
-  if (presentation.type == PresentationType.deactivated) {
+  if (presentation.type == PLYPresentationType.deactivated) {
     // No Screen to display
     return;
   }
 
-  if (presentation.type == PresentationType.client) {
+  if (presentation.type == PLYPresentationType.client) {
     // Display my own Screen
     return;
   }
@@ -181,19 +181,19 @@ try {
   final outcome = await request.display();
 
   switch (outcome.purchaseResult) {
-    case PurchaseResult.cancelled:
+    case PLYPurchaseResult.cancelled:
       {
         print("User cancelled purchased");
       }
       break;
-    case PurchaseResult.purchased:
+    case PLYPurchaseResult.purchased:
       {
-        print("User purchased ${outcome.plan}");
+        print("User purchased ${outcome.plan?.name}");
       }
       break;
-    case PurchaseResult.restored:
+    case PLYPurchaseResult.restored:
       {
-        print("User restored ${outcome.plan}");
+        print("User restored ${outcome.plan?.name}");
       }
       break;
     case null:

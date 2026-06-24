@@ -67,7 +67,7 @@ await Purchasely.presentation
   .display();
 ```
 ```typescript Flutter
-await Purchasely.presentPresentationWithIdentifier('my_presentation_id', 'my_content_id');
+await PLYPresentationBuilder.screen('my_presentation_id').contentId('my_content_id').build().display();
 ```
 ```javascript Cordova
 Purchasely.presentPresentationWithIdentifier(

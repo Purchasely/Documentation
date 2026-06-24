@@ -114,53 +114,53 @@ Purchasely.interceptAction('restore', async (info, payload) => {
 ```
 ```javascript Flutter
 await Purchasely.interceptAction(
-  PresentationActionKind.navigate,
+  PLYPresentationActionKind.navigate,
   (info, payload) async {
     print('User wants to navigate');
-    return InterceptResult.notHandled;
+    return PLYInterceptResult.notHandled;
   },
 );
 
 await Purchasely.interceptAction(
-  PresentationActionKind.close,
+  PLYPresentationActionKind.close,
   (info, payload) async {
     print('User wants to close paywall');
-    return InterceptResult.success;
+    return PLYInterceptResult.success;
   },
 );
 
 await Purchasely.interceptAction(
-  PresentationActionKind.login,
+  PLYPresentationActionKind.login,
   (info, payload) async {
     print('User wants to login');
     //Present your own screen for user to log in
     Purchasely.userLogin('MY_USER_ID');
-    return InterceptResult.success;
+    return PLYInterceptResult.success;
   },
 );
 
 await Purchasely.interceptAction(
-  PresentationActionKind.openPresentation,
+  PLYPresentationActionKind.openPresentation,
   (info, payload) async {
     print('User wants to open a new paywall');
-    return InterceptResult.notHandled;
+    return PLYInterceptResult.notHandled;
   },
 );
 
 await Purchasely.interceptAction(
-  PresentationActionKind.purchase,
+  PLYPresentationActionKind.purchase,
   (info, payload) async {
     print('User wants to purchase');
     //If you want to intercept it, handle the purchase and display your screen
-    return InterceptResult.success;
+    return PLYInterceptResult.success;
   },
 );
 
 await Purchasely.interceptAction(
-  PresentationActionKind.restore,
+  PLYPresentationActionKind.restore,
   (info, payload) async {
     print('User wants to restore his purchases');
-    return InterceptResult.notHandled;
+    return PLYInterceptResult.notHandled;
   },
 );
 ```

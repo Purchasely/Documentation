@@ -116,10 +116,10 @@ if (!configured) {
 }
 ```
 ```typescript Flutter
-bool configured = await PurchaselyBuilder.apiKey('API_KEY')
+bool configured = await Purchasely.apiKey('API_KEY')
         .stores([PLYStore.google])              // google | huawei | amazon
-        .runningMode(RunningMode.observer)      // observer (default) | full
-        .logLevel(LogLevel.debug)               // debug | info | warn | error
+        .runningMode(PLYRunningMode.observer)   // observer (default) | full
+        .logLevel(PLYLogLevel.debug)            // debug | info | warn | error
         .start();
 
 if (!configured) {
@@ -199,7 +199,7 @@ await Purchasely.presentation
   .display();
 ```
 ```Text Flutter
-await PresentationBuilder.placement('onboarding').build().display();
+await PLYPresentationBuilder.placement('onboarding').build().display();
 ```
 ```typescript Cordova
 Purchasely.presentPresentationForPlacement('onboarding');
@@ -331,10 +331,10 @@ Purchasely.interceptAction('restore', async (info, payload) => {
 ```
 ```typescript Flutter
 await Purchasely.interceptAction(
-  PresentationActionKind.purchase,
+  PLYPresentationActionKind.purchase,
   (info, payload) async {
-    if (payload is! PurchasePayload) {
-      return InterceptResult.notHandled;
+    if (payload is! PLYPurchasePayload) {
+      return PLYInterceptResult.notHandled;
     }
     try {
       //the store product id (sku) the user clicked on in the paywall
@@ -351,27 +351,27 @@ await Purchasely.interceptAction(
           // Unlock that great "pro" content
           Purchasely.synchronize();
         }
-        return InterceptResult.success;
+        return PLYInterceptResult.success;
       }
-      return InterceptResult.failed;
+      return PLYInterceptResult.failed;
     } catch (e) {
       print(e);
-      return InterceptResult.failed;
+      return PLYInterceptResult.failed;
     }
   },
 );
 
 await Purchasely.interceptAction(
-  PresentationActionKind.restore,
+  PLYPresentationActionKind.restore,
   (info, payload) async {
     try {
       PurchaserInfo restoredInfo = await Purchases.restoreTransactions();
       // ... check restored purchaserInfo to see if entitlement is now active
       Purchasely.synchronize();
-      return InterceptResult.success;
+      return PLYInterceptResult.success;
     } on PlatformException catch (e) {
       // Error restoring purchases
-      return InterceptResult.failed;
+      return PLYInterceptResult.failed;
     }
   },
 );

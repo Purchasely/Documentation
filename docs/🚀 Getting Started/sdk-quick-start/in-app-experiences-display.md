@@ -75,7 +75,7 @@ try {
 ```
 ```typescript Flutter
 try {
-  final request = PresentationBuilder.placement("ONBOARDING").build();
+  final request = PLYPresentationBuilder.placement("ONBOARDING").build();
 
   // Preload the Screen, then display it
   await request.preload();

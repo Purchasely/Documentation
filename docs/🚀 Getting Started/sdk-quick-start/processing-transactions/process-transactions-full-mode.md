@@ -102,20 +102,20 @@ try {
 ```
 ```javascript Flutter
 try {
-  final outcome = await PresentationBuilder.placement('onboarding')
+  final outcome = await PLYPresentationBuilder.placement('onboarding')
       .build()
-      .display(const Transition.fullScreen());
+      .display(const PLYTransition.fullScreen());
 
   switch (outcome.purchaseResult) {
-    case PurchaseResult.purchased:
-      print('User purchased: ${outcome.plan}');
+    case PLYPurchaseResult.purchased:
+      print('User purchased: ${outcome.plan?.name}');
       // update entitlements to unlock the access to the contents
       break;
-    case PurchaseResult.restored:
+    case PLYPurchaseResult.restored:
       print('User restored his purchases');
       // update entitlements to unlock the access to the contents
       break;
-    case PurchaseResult.cancelled:
+    case PLYPurchaseResult.cancelled:
       print("User cancelled purchased");
       break;
     case null:

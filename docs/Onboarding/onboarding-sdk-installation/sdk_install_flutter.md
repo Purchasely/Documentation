@@ -73,11 +73,11 @@ flutter pub add purchasely_google:6.0.0-rc.1
 Then you must add Google in the list of stores when starting the SDK with the builder
 
 ```dart Flutter
-await PurchaselyBuilder.apiKey('<<X-API-KEY>>')
-        .runningMode(RunningMode.full)
-        .logLevel(LogLevel.error)
+await Purchasely.apiKey('<<X-API-KEY>>')
+        .runningMode(PLYRunningMode.full)
+        .logLevel(PLYLogLevel.error)
         .stores([PLYStore.google]) // don't forget to add the matching dependency at the same version
-        .storekitVersion(StorekitVersion.storeKit2) // iOS only: storeKit2 (default) | storeKit1
+        .storekitVersion(PLYStorekitVersion.storeKit2) // iOS only: storeKit2 (default) | storeKit1
         .start();
 ```
 

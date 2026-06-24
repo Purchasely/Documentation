@@ -13,10 +13,10 @@ next:
 ### CALLING A PLACEMENT FROM THE APP CODE
 
 ```dart Flutter
-await PresentationBuilder.placement('SAMPLE_PLACEMENT')
+await PLYPresentationBuilder.placement('SAMPLE_PLACEMENT')
     .contentId(contentId)
     .build()
-    .display(const Transition.fullScreen());
+    .display(const PLYTransition.fullScreen());
 ```
 
 <br />
