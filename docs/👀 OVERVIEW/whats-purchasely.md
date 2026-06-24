@@ -20,8 +20,6 @@ Purchasely helps mobile teams:
 
 # What you can do with Purchasely
 
-<br />
-
 ### Build in-app experiences (for all apps)
 
 Use Purchasely to create and orchestrate native experiences such as Screens, Surveys, Quizzes, and Flows. In the SDK, these are called Presentations, rendered natively and configured remotely from the Console.
