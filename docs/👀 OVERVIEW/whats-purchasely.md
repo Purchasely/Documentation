@@ -18,10 +18,6 @@ Purchasely helps mobile teams:
 - Personalize journeys based on user insights and attributes (e.g., answers, intent, behaviors).
 - Measure and optimize key KPIs (activation, engagement, retention—and monetization metrics for subscription apps).
 
-<br />
-
-<br />
-
 # What you can do with Purchasely
 
 <br />
