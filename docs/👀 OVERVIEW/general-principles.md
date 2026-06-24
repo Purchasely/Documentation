@@ -57,7 +57,7 @@ For subscription apps, Purchasely can be used in two running modes, depending on
    Use this mode if you:
    * start a subscription app from scratch, or
    * want to migrate your existing subscription infrastructure.
-2. **`paywallObserver` mode**
+2. **`observer` mode**
 
    In this mode, Purchasely works on top of your existing subscription infrastructure (in-house or a third-party solution such as RevenueCat). Purchasely does not process transactions; transactions are observed by the SDK to feed dashboards.
 

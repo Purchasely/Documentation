@@ -26,8 +26,8 @@ next:
 
 <br />
 
-The other mode available with the Purchasely SDK is the `paywallObserver` mode.\
-[More details about the paywallObserver mode](paywallObserver-mode)
+The other mode available with the Purchasely SDK is the `observer` mode.\
+[More details about the observer mode](observer-mode)
 
 <br />
 

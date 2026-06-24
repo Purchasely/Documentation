@@ -18,7 +18,7 @@ private PurchaselyRuntime.Purchasely _purchasely;
 _purchasely = new PurchaselyRuntime.Purchasely("USER_ID",
 			false, // true for StoreKit 1, false for StoreKit 2
 			LogLevel.Debug,
-			RunningMode.PaywallObserver,
+			RunningMode.Observer,
 			OnPurchaselyStart,
 			OnPurchaselyEvent);
 ```

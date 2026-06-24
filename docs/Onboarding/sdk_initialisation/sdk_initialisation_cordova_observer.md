@@ -35,7 +35,7 @@ Purchasely.start(
 
 > 📘 Observer mode
 >
-> `Purchasely.RunningMode.observer` (value `2`) replaces v5's `paywallObserver`. In Observer mode your app owns the purchase flow; intercept the purchase/restore actions, run your billing, then call `Purchasely.synchronize()`.
+> `Purchasely.RunningMode.observer` (value `2`) replaces v5's `observer`. In Observer mode your app owns the purchase flow; intercept the purchase/restore actions, run your billing, then call `Purchasely.synchronize()`.
 
 ### USER IDENTIFICATION
 

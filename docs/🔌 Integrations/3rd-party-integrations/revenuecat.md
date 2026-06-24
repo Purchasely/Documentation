@@ -150,7 +150,7 @@ Purchasely.start(
 
 The `userID` parameter is optional and allows you to associate the purchase to a user instead of a device. You can also [set it up](user-identification) later if you wish to.
 
-The most important argument to set, besides `apiKey` , of course, is the `runningMode` in **paywallObserver**
+The most important argument to set, besides `apiKey` , of course, is the `runningMode` in **observer**
 
 > 📘 Transactions
 >
@@ -430,7 +430,7 @@ Purchasely.setPaywallActionInterceptor((result) => {
 
 > 🚧 Synchroniztation
 >
-> When **a purchase or a restoration** is made with your current flow, call the `Purchasely.synchronize()` method so that new transactions are [caught](https://docs.purchasely.com/quick-start-1/sdk-configuration/paywall-observer-mode#4-sync-your-purchases-android-only) by our SDK (but not processed)
+> When **a purchase or a restoration** is made with your current flow, call the `Purchasely.synchronize()` method so that new transactions are [caught](https://docs.purchasely.com/quick-start-1/sdk-configuration/observer-mode#4-sync-your-purchases-android-only) by our SDK (but not processed)
 
 # Data processing
 

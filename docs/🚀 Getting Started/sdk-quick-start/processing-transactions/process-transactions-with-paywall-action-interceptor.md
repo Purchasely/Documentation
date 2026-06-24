@@ -1,8 +1,8 @@
 ---
-title: paywallObserver - using the Action Interceptor
+title: observer - using the Action Interceptor
 excerpt: >-
   This sections provides a detailed overview of how to use the Paywall Action
-  Interceptor to process transactions in paywallObserver Mode
+  Interceptor to process transactions in observer Mode
 deprecated: false
 hidden: false
 metadata:

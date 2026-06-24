@@ -13,8 +13,8 @@ next:
   description: Need more details on running modes? See below
   pages:
     - type: basic
-      slug: paywallobserver-mode
-      title: How the paywallObserver mode works?
+      slug: observer-mode
+      title: How the observer mode works?
     - type: basic
       slug: full-mode
       title: How the full mode works?
@@ -31,6 +31,6 @@ next:
 
 <br />
 
-## paywallObserver Mode
+## observer Mode
 
 <Image align="center" className="border" border={true} src="https://files.readme.io/81acf4589eca92ebccd60b8499b6c8d955af45ffbd1161502e8b11369217af03-observer_mode.png" />

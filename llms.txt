@@ -40,7 +40,7 @@ Use `platform/{platform}.md` when the user:
 
 Each platform documentation file includes:
 1. Requirements and Installation
-2. SDK Initialization (Full Mode & PaywallObserver Mode)
+2. SDK Initialization (Full Mode & Observer Mode)
 3. Displaying Paywalls with Placements
 4. Processing Transactions
 5. Paywall Action Interceptor (purchase, restore, login, close, navigate)
@@ -60,7 +60,7 @@ Each platform documentation file includes:
 ### Running Modes
 
 - **Full Mode**: Purchasely handles entire purchase flow (recommended for new apps)
-- **PaywallObserver Mode**: Use with existing IAP infrastructure (RevenueCat, etc.)
+- **Observer Mode**: Use with existing IAP infrastructure (RevenueCat, etc.)
 
 ### Placements
 

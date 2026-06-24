@@ -1,6 +1,6 @@
 ---
-title: How the paywallObserver mode works?
-excerpt: This section provides details on how the paywallObserver mode works
+title: How the observer mode works?
+excerpt: This section provides details on how the observer mode works
 deprecated: false
 hidden: false
 metadata:
@@ -9,7 +9,7 @@ metadata:
   robots: index
 next:
   description: >-
-    Start the implementation of the SDK by initializing it in paywallObserver
+    Start the implementation of the SDK by initializing it in observer
     Mode
   pages:
     - type: basic
@@ -31,6 +31,6 @@ The other mode available with the Purchasely SDK is the `full` mode.\
 
 <br />
 
-# Architecture diagram paywallObserver mode
+# Architecture diagram observer mode
 
 <Image align="center" className="border" border={true} src="https://files.readme.io/45c44e0d9c111ecf892e178ce4311bce79e1961909f977e0728b51264d22a169-observer_mode_2.png" />

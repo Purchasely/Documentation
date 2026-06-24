@@ -952,7 +952,7 @@ _OS Version requirement: iOS 15 and above_
 
 These attributes allow you to target users that have expired subscriptions at the given moment.
 
-For this set of attributes to work, it is mandatory that the transaction has been processed (`full` mode) OR observed (`paywallObserver` mode) by the Purchasely Platform, so that we can keep a record of the subscription in our database.
+For this set of attributes to work, it is mandatory that the transaction has been processed (`full` mode) OR observed (`observer` mode) by the Purchasely Platform, so that we can keep a record of the subscription in our database.
 
 A new record in the database is made every time:
 

@@ -55,7 +55,7 @@ This deeplink will open the App Store / Play Store setttings for the user to upd
 
 Usually when a paywall / screen is instantiated by the app, a closure is called back to inform the app of what has happened with the paywall . However, when a deeplink is called, as you don't instantiate the paywall yourself, no closure will be called.
 
-You can retrieve the result of the user action in a paywall opened with a deeplink by setting a `DefaultPresentationResultHandler`. This only works in [full mode](full-mode), in [paywallObserver mode](paywallobserver-mode) do not forget to call Purchasely.synchronize() when a purchase happened.
+You can retrieve the result of the user action in a paywall opened with a deeplink by setting a `DefaultPresentationResultHandler`. This only works in [full mode](full-mode), in [observer mode](observer-mode) do not forget to call Purchasely.synchronize() when a purchase happened.
 
 ```swift Swift
 Purchasely.setDefaultPresentationDismissHandler { outcome in

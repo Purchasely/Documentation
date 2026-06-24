@@ -162,7 +162,7 @@ Purchasely.start(
 | `Purchasely.RunningMode.full` | `3` | Purchasely handles store purchases and receipt validation. Pass this explicitly. |
 | `Purchasely.RunningMode.observer` | `2` | Your app owns purchases; Purchasely observes transactions and displays Console-driven Screens. |
 
-> ⚠️ `Purchasely.RunningMode.paywallObserver` was **removed** in v6 — use `Purchasely.RunningMode.observer` (same value `2`).
+> ⚠️ `Purchasely.RunningMode.observer` was **removed** in v6 — use `Purchasely.RunningMode.observer` (same value `2`).
 
 ### Log levels
 

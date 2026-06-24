@@ -1,5 +1,5 @@
 ---
-name: paywallObserver mode - general principle
+name: observer mode - general principle
 ---
 A typical purchase flow will be as follows:
 

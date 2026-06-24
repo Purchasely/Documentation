@@ -16,7 +16,7 @@ next:
   pages:
     - type: basic
       slug: process-transactions-with-paywall-action-interceptor
-      title: paywallObserver - using the Action Interceptor
+      title: observer - using the Action Interceptor
 ---
 <PaywallActionInterceptorWhatIsIt />
 
@@ -261,4 +261,4 @@ private void OnPaywallActionIntercepted(PaywallAction action)
 
 # Intercepting the purchase action
 
-[Using the Action Interceptor to process transactions in paywallObserverMode](process-transactions-with-paywall-action-interceptor)
+[Using the Action Interceptor to process transactions in observerMode](process-transactions-with-paywall-action-interceptor)

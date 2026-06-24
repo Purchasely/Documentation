@@ -53,9 +53,9 @@ Configuring StoreKit 2 with App Store Connect to allow Purchasely to verify tran
 
 The only change you need to make is if you are in observer mode, if you are in full mode you're all set!
 
-> ❗️ Handling purchases and restorations (Paywall Observer mode)
+> ❗️ Handling purchases and restorations (Observer mode)
 >
-> If you are using the Purchasely SDK in [Paywall Observer mode](paywallobserver-mode), it is essential to call `Purchasely.syncPurchase()` once a purchase or restoration has been processed. This allows the SDK to be aware of new transactions and ensures accurate data reporting for A/B tests and paywall conversion.
+> If you are using the Purchasely SDK in [Observer mode](observer-mode), it is essential to call `Purchasely.syncPurchase()` once a purchase or restoration has been processed. This allows the SDK to be aware of new transactions and ensures accurate data reporting for A/B tests and paywall conversion.
 >
 > After processing a purchase or restoration, call
 >

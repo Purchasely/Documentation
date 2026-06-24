@@ -10,7 +10,7 @@ metadata:
   description: >-
     Purchasely offers 3 modules that can be used independently, including
     transaction infrastructure, subscription data hub, and a no-code
-    experimentation lab. The "paywallObserver" mode allows you to leverage the
+    experimentation lab. The "observer" mode allows you to leverage the
     features of Purchasely without migrating your existing subscription
     infrastructure.
   robots: index
@@ -18,8 +18,8 @@ next:
   description: ''
   pages:
     - type: basic
-      slug: paywallobserver-mode
-      title: How the paywallObserver mode works?
+      slug: observer-mode
+      title: How the observer mode works?
 ---
 
 <Image src="https://files.readme.io/593e12b-Optimisation_entonnoir_Purchasely_2024_1.png" align="center" border={true} />
@@ -33,7 +33,7 @@ Purchasely is composed of 3 modules that can be used independently :
 
 <br />
 
-You might have an existing subscription management system and changing it might seem complex to your organisation.<br />With our modular approach you can leverage the entire power of our No-Code Experimentation Lab on your existing infrastructure in minutes **only involving mobile developers**. This is what `paywallObserver` mode is made for.
+You might have an existing subscription management system and changing it might seem complex to your organisation.<br />With our modular approach you can leverage the entire power of our No-Code Experimentation Lab on your existing infrastructure in minutes **only involving mobile developers**. This is what `observer` mode is made for.
 
 This mode allows you to take advantage of the Purchasely SDK of the following features without migrating your existing Subscription Infrastructure:
 
@@ -49,7 +49,7 @@ Purchasely will handle everything and handover to you when a transaction needs t
 
 > 📘 Learn how to use Purchasely on top of your existing infrastructure
 >
-> [Documentation](paywallobserver-mode)
+> [Documentation](observer-mode)
 
 <br />
 

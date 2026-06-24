@@ -184,7 +184,7 @@ You can find your API Key in the section [App settings / Backend & SDK configura
 
 ## `observer` mode
 
-This is now the **default** running mode in SDK v6. If you want to use Purchasely in [observer](paywallobserver-mode) mode explicitly, set the running mode to `observer` (`.observer` on iOS, `PLYRunningMode.Observer` on Android):
+This is now the **default** running mode in SDK v6. If you want to use Purchasely in [observer](observer-mode) mode explicitly, set the running mode to `observer` (`.observer` on iOS, `PLYRunningMode.Observer` on Android):
 
 ```swift Swift
 import Purchasely
@@ -263,7 +263,7 @@ private PurchaselyRuntime.Purchasely _purchasely;
 _purchasely = new PurchaselyRuntime.Purchasely("USER_ID",
 			false, // true for StoreKit 1, false for StoreKit 2
 			LogLevel.Debug,
-			RunningMode.PaywallObserver,
+			RunningMode.Observer,
 			OnPurchaselyStart,
 			OnPurchaselyEvent);
 ```

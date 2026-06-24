@@ -93,9 +93,9 @@ try {
 }
 ```
 
-# `paywallObserver` mode - Retrieve the offer to purchase
+# `observer` mode - Retrieve the offer to purchase
 
-When you are using Purchasely in [`paywallObserver`](paywallobserver-mode) mode, you can:
+When you are using Purchasely in [`observer`](observer-mode) mode, you can:
 
 1. retrieve the Plan and associated offer purchased by the user by using the [action interceptor](process-transactions-with-paywall-action-interceptor)
 2. sign it (iOS only) 

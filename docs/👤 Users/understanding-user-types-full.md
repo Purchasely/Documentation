@@ -74,7 +74,7 @@ However, when the information comes from a store notification, Purchasely’s se
 
 ## Known Users
 
-The purchase is made ([full mode](full-mode)) / declared ([observer mode](paywallobserver-mode)) to the Purchasely SDK. It can also [be imported manually](subscribers-base-import).
+The purchase is made ([full mode](full-mode)) / declared ([observer mode](observer-mode)) to the Purchasely SDK. It can also [be imported manually](subscribers-base-import).
 
 As previously discussed for “Application users”, these users can be **anonymous** or **connected**.
 
@@ -113,7 +113,7 @@ For this type of user:
 * The purchase is made on a version of your app not using the Purchasely SDK.
 * The subscription was obtained through family sharing.
 * An error occurred during the purchase (app closed during the purchase, network issue).
-* You are in [observer mode](paywallobserver-mode) and do not call [Purchasely.synchronize()](process-transactions-with-paywall-action-interceptor#processing-transactions-with-your-in-house-system).
+* You are in [observer mode](observer-mode) and do not call [Purchasely.synchronize()](process-transactions-with-paywall-action-interceptor#processing-transactions-with-your-in-house-system).
 
 <br />
 

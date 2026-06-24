@@ -1,6 +1,6 @@
 ---
 name: >-
-  Understanding running modes | full mode & paywallObserver mode quick overview
+  Understanding running modes | full mode & observer mode quick overview
   and benefits
 ---
 # Understanding running modes
@@ -8,25 +8,25 @@ name: >-
 Purchasely offers two distinct running modes to accommodate different app development needs:
 
 * `full` mode (default): Purchasely managed the in-app transactions
-* `paywallObserver` mode: the in-app transaction are managed by your existing system (either in-house or using a 3rd party solution such as RevenueCat)
+* `observer` mode: the in-app transaction are managed by your existing system (either in-house or using a 3rd party solution such as RevenueCat)
 
 In both modes, the same [no-code growth features are available](main-features).
 
 By choosing the appropriate running mode, you can tailor Purchasely SDK to fit your application's specific needs.
 
-You can switch between these modes at any time by updating the parameter `runningMode` passed to [`Purchasely.start()`](sdk-setup) during the SDK initialization process with the values `full` or `paywallObserver`
+You can switch between these modes at any time by updating the parameter `runningMode` passed to [`Purchasely.start()`](sdk-setup) during the SDK initialization process with the values `full` or `observer`
 
 <br />
 
-# `paywallObserver` Mode
+# `observer` Mode
 
-The `paywallObserver` mode is designed for applications that already have a subscription infrastructure in place and prefer not to alter it. By implementing the Purchasely SDK in `paywallObserver` mode, you can use the same set of no-code growth features without needing to migrate your existing subscription management system.
+The `observer` mode is designed for applications that already have a subscription infrastructure in place and prefer not to alter it. By implementing the Purchasely SDK in `observer` mode, you can use the same set of no-code growth features without needing to migrate your existing subscription management system.
 
 This mode is recommended for:
 
 * Applications that have an established in-app purchase system and wish to swiftly grow their revenue by leveraging purchasely's no-code growth features without undergoing a full migration.
 
-## When to use the `paywallObserver` mode?
+## When to use the `observer` mode?
 
 This mode is perfect to use Purchasely data and Purchasely paywalls without changing your existing subscription infrastructure.
 
@@ -52,7 +52,7 @@ This can be achieved that by leveraging the no-code features of the Purchasely P
 * Campaign Automations: Automate marketing campaigns to engage users at the right time with the right offers and convert them to loyal subscribers, retain churning subscribers and win-back lapsed subscribers.
 * 3rd Party Integrations: Enhance your app with a variety of third-party tools and services for analytics, marketing, and more.
 
-[For more details on how the paywallObserver mode works click here](paywallobserver-mode)
+[For more details on how the observer mode works click here](observer-mode)
 
 <br />
 

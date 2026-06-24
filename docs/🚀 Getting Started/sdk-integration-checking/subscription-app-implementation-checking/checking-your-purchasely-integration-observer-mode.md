@@ -1,5 +1,5 @@
 ---
-title: paywallObserver mode - Checking your Purchasely Integration
+title: observer mode - Checking your Purchasely Integration
 excerpt: >-
   This page gives you an outlook of everything you can check once you've
   finished the implementation of the Purchasely SDK
@@ -28,7 +28,7 @@ Here is a checklist for your Purchasely Integration
 📚 Documentation: [SDK Initialization](sdk-initialization)
 
 * [ ] The SDK is started ASAP in the start routine of your app
-* [ ] The `running mode` parameter is set to `paywallObserver` mode (📚 [documentation](paywallObserver-mode))
+* [ ] The `running mode` parameter is set to `observer` mode (📚 [documentation](observer-mode))
 * [ ] On iOS, the StoreKit version configured for the SDK matches the desired one (we strongly recommend using StoreKit 2 though)
 * [ ] In the [Console App settings,](https://console.purchasely.io/settings?step=stores) you have configured the StoreKit 2 settings (issuer ID, private key).  
   It will be useful to the Purchasely platform to fetch more accurate data even if your app is currently working with StoreKit 1.

@@ -14,16 +14,16 @@ next:
   pages:
     - type: basic
       slug: process-transactions-with-paywall-action-interceptor
-      title: paywallObserver - using the Action Interceptor
+      title: observer - using the Action Interceptor
     - type: basic
       slug: process-transactions-full-mode
       title: full mode
 ---
 Transaction processing differs depending on the SDK running mode.
 
-# `paywallObserver` mode
+# `observer` mode
 
-In `paywallObserver` mode, you manually process the transaction after intercepting the click on the purchase button thanks to the <Glossary>Action Interceptor</Glossary>.\
+In `observer` mode, you manually process the transaction after intercepting the click on the purchase button thanks to the <Glossary>Action Interceptor</Glossary>.\
 \=> [Implementation guide for processing transactions using the Action Interceptor](process-transactions-with-paywall-action-interceptor)
 
 # `full` mode

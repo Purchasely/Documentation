@@ -1,5 +1,5 @@
 ---
-title: SDK Paywall Observer Mode
+title: SDK Observer Mode
 excerpt: ''
 deprecated: false
 hidden: true
@@ -10,11 +10,11 @@ metadata:
 next:
   description: ''
 ---
-# What is the `paywallObserver` mode?
+# What is the `observer` mode?
 
 <PaywallObserverModeIntro />
 
-The `paywallObserver` mode allows the use Purchasely on top of an existing subscription infrastructure, such as RevenueCat or an existing in-house subscription platform.
+The `observer` mode allows the use Purchasely on top of an existing subscription infrastructure, such as RevenueCat or an existing in-house subscription platform.
 
 The existing subscription infrastructure continues to process transactions and the Purchasely platform is used on top of it. The Purchasely SDK observes these transactions to fill the Purchasely Dashboards with the data, but it does not acknowledge them with the App stores.
 
@@ -76,4 +76,4 @@ You can intercept the following buttons being tapped:
 
 Once the app has processed the transaction, the Purchasely SDK fetches the receipt created and sends it to the Purchasely Platform, to feed the platform with all the analytics associated to the receipt (subscription events, revenue, mapping with the user etc).
 
-The transaction will however not be finished (App Store) nor acknowledged (Google Play Store). In the Paywall Observer Mode, this is the responsibility of the developer to do it.
+The transaction will however not be finished (App Store) nor acknowledged (Google Play Store). In the Observer Mode, this is the responsibility of the developer to do it.
