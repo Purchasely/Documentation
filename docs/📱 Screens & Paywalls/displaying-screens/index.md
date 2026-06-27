@@ -24,6 +24,9 @@ next:
     - type: basic
       slug: show-hide-close-screens
       title: Control Screen visibility
+    - type: basic
+      slug: handling-presentation-result
+      title: Handling the paywall result (presentation outcome)
 ---
 > 🚧 Native UI
 >
