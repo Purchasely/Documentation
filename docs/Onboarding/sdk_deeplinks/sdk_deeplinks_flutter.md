@@ -29,6 +29,30 @@ print('Deeplink handled by Purchasely? $handled');
 >
 > In v6 the runtime method is `Purchasely.handleDeeplink(uri)`. The old `isDeeplinkHandled` name remains only as a deprecated alias.
 
+#### Cold start (deeplink that launched the app)
+
+If your app is **launched from** a deeplink, pass the captured URL to the start
+builder. The SDK resolves it automatically once configured — **no separate
+`Purchasely.handleDeeplink(...)` call is needed**:
+
+```dart Flutter
+await PurchaselyBuilder.apiKey('YOUR_API_KEY')
+    .allowDeeplink(true)
+    .handleDeeplink(launchDeeplink) // null when not launched from a deeplink
+    .start();
+```
+
+`handleDeeplink(null)` (or omitting the modifier) is a no-op. This mirrors the
+native `PurchaselyBuilder.handleDeeplink(_:)` (iOS) and
+`Purchasely.Builder.handleDeeplink(uri)` (Android).
+
+> 📘 Which events fire on a deeplink open
+>
+> Opening a presentation via a deeplink emits `DEEPLINK_OPENED`,
+> `PRESENTATION_LOADED` and `PRESENTATION_VIEWED` (`PRESENTATION_OPENED` is **not**
+> emitted for a deeplink — it only fires when an in-paywall action opens another
+> presentation).
+
 ### FORBIDDING THE DISPLAY
 
 By **default**, Purchasely deeplinks are displayed **immediately** when they are received.
