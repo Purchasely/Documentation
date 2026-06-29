@@ -12,7 +12,7 @@ next:
 ---
 This guide covers the **Flutter SDK** (Dart). For the native layers this plugin bridges to, see the [iOS guide](migrating-from-v5-to-v6-ios) or the [Android guide](migrating-from-v5-to-v6-android), or the platform pages listed on the [migration overview](migrating-from-sdk-5-to-6).
 
-Version 6.0.0-rc.1 adapts the Flutter plugin to the Purchasely 6.0 native SDKs (iOS `Purchasely 6.0.0-rc.1`, Android `io.purchasely:core 6.0.0-rc.1`). The paywall surface — starting the SDK, displaying / preloading / closing a presentation, and the action interceptor — moves to a fluent builder API. Everything else on the `Purchasely` class (purchases, restore, identity, catalog, subscriptions, user attributes, events, dynamic offerings, consent and config) remains source‑compatible.
+Version 6.0.0-rc.1 (the first Flutter release candidate) adapts the Flutter plugin to the Purchasely 6.0 native SDKs (iOS `Purchasely 6.0.0-rc.2`, Android `io.purchasely:core 6.0.0-rc.2`). The paywall surface — starting the SDK, displaying / preloading / closing a presentation, and the action interceptor — moves to a fluent builder API. Everything else on the `Purchasely` class (purchases, restore, identity, catalog, subscriptions, user attributes, events, dynamic offerings, consent and config) remains source‑compatible.
 
 > 📘 Breaking type renames (v5 → v6)
 >
