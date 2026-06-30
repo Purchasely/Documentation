@@ -53,7 +53,7 @@ dependencies {
 }
 ```
 
-Build requirements: **Gradle 9.3.0+**, **Kotlin 2.2.x** (K2 compiler), JDK 11, `minSdk 23`, `compileSdk 36`.
+Build requirements: **Gradle 9.6.1+**, **Kotlin 2.3.x** (K2 compiler), JDK 11, `minSdk 23`, `compileSdk 36`.
 
 > 📘 Target JVM 11
 >
