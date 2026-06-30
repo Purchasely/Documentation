@@ -14,7 +14,7 @@ Here is a code sample using the Action Interceptor to perform the purchase and r
 
 Register **one handler per action kind** with `Purchasely.interceptAction(kind, handler)`. The handler simply returns an intercept result string (`'success'` / `'failed'` / `'notHandled'`) to tell Purchasely whether the action was handled — there is no callback to notify the paywall anymore.
 
-> **Observer mode:** after handling a purchase, do your own billing, call `await Purchasely.synchronize()` and return `'success'`.
+> **Observer mode:** after handling a purchase, do your own billing and return `'success'` — the SDK calls `synchronize()` automatically to report the transaction.
 
 ```typescript In-House
 import { Platform } from 'react-native'
@@ -37,7 +37,7 @@ Purchasely.interceptAction('purchase', async (info, payload) => {
 
     const success = await MyPurchaseSystem.purchase(storeProductId)
     if (success) {
-      await Purchasely.synchronize() // synchronize new purchase with Purchasely
+      // SDK auto-synchronizes on success in observer mode
       return 'success' // notify Purchasely the action was handled
     }
     return 'failed'
@@ -50,7 +50,7 @@ Purchasely.interceptAction('purchase', async (info, payload) => {
 Purchasely.interceptAction('restore', async (info, payload) => {
   try {
     await MyPurchaseSystem.restorePurchases()
-    await Purchasely.synchronize() // synchronize all purchases with Purchasely
+    // SDK auto-synchronizes on success in observer mode
     return 'success' // notify Purchasely the action was handled
   } catch (e) {
     // Error restoring purchases
@@ -87,7 +87,7 @@ Purchasely.interceptAction('purchase', async (info, payload) => {
       try {
         const { customerInfo } = await Purchases.purchasePackage(pkg)
         if (typeof customerInfo.entitlements.active.my_entitlement_identifier !== 'undefined') {
-          await Purchasely.synchronize() // synchronize all purchases with Purchasely
+          // SDK auto-synchronizes on success in observer mode
           return 'success' // notify Purchasely the action was handled
         }
       } catch (e) {
@@ -109,7 +109,7 @@ Purchasely.interceptAction('restore', async (info, payload) => {
     await Purchases.restorePurchases()
     // ... check restored customerInfo to see if entitlement is now active
 
-    await Purchasely.synchronize() // synchronize all purchases with Purchasely
+    // SDK auto-synchronizes on success in observer mode
     return 'success' // notify Purchasely the action was handled
   } catch (e) {
     // Error restoring purchases

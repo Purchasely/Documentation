@@ -253,7 +253,7 @@ Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
         ) { result -> // your billing result
             if (continuation.isActive) continuation.resume(
                 when (result) {
-                    BillingResult.SUCCESS  -> { Purchasely.synchronize(); PLYInterceptResult.SUCCESS }
+                    BillingResult.SUCCESS  -> PLYInterceptResult.SUCCESS // SDK auto-synchronizes on success in observer mode
                     BillingResult.CANCELLED -> PLYInterceptResult.NOT_HANDLED
                     else -> PLYInterceptResult.FAILED
                 }

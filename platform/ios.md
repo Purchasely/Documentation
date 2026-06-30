@@ -362,7 +362,7 @@ PLYPresentationBuilder
 
 ### Observer Mode
 
-In `.observer` mode, you handle transactions with your own infrastructure. Use the Action Interceptor to capture purchase intents (see below), and call `Purchasely.synchronize(success:failure:)` after a successful purchase so Purchasely can track revenue and analytics.
+In `.observer` mode, you handle transactions with your own infrastructure. Use the Action Interceptor to capture purchase intents (see below); when you return the success result the SDK calls `synchronize()` automatically so Purchasely can track revenue and analytics.
 
 ---
 
@@ -423,7 +423,7 @@ The interceptor receives a `PLYInterceptorInfo` (the v6 replacement for `PLYPres
 
 ### Observer Mode with In-House Infrastructure
 
-Intercept the purchase and restore actions to perform them with your own purchase system, then synchronize with Purchasely:
+Intercept the purchase and restore actions to perform them with your own purchase system; when you return the success result the SDK calls `synchronize()` automatically so Purchasely receives the transaction:
 
 ```swift
 Purchasely.interceptAction(.purchase) { info, params, completion in
@@ -435,8 +435,7 @@ Purchasely.interceptAction(.purchase) { info, params, completion in
 
     let success = MyPurchaseSystem.purchase(appleProductId)
     if success {
-        // synchronize new purchase with Purchasely
-        Purchasely.synchronize(success: {}, failure: { _ in })
+        // SDK auto-synchronizes on success in observer mode
         completion(.success) // notify the Purchasely paywall the action was handled
     } else {
         completion(.failed)
@@ -445,8 +444,7 @@ Purchasely.interceptAction(.purchase) { info, params, completion in
 
 Purchasely.interceptAction(.restore) { info, params, completion in
     MyPurchaseSystem.restorePurchases()
-    // synchronize all purchases with Purchasely
-    Purchasely.synchronize(success: {}, failure: { _ in })
+    // SDK auto-synchronizes on success in observer mode
     completion(.success) // notify the Purchasely paywall the action was handled
 }
 ```
@@ -467,9 +465,7 @@ Purchasely.interceptAction(.purchase) { info, params, completion in
         if let packages = offerings?.current?.availablePackages {
             if let package = packages.first(where: { $0.storeProduct.productIdentifier == appleProductId }) {
                 Purchases.shared.purchase(package: package) { (transaction, customerInfo, error, userCancelled) in
-                    /** IMPORTANT for Purchasely **/
-                    // synchronize new purchase with Purchasely
-                    Purchasely.synchronize(success: {}, failure: { _ in })
+                    // SDK auto-synchronizes on success in observer mode
                     // notify the Purchasely paywall the action was handled
                     completion(.success)
 
@@ -484,9 +480,7 @@ Purchasely.interceptAction(.purchase) { info, params, completion in
 
 Purchasely.interceptAction(.restore) { info, params, completion in
     Purchases.shared.restorePurchases { customerInfo, error in
-        /** IMPORTANT for Purchasely **/
-        // synchronize new purchase with Purchasely
-        Purchasely.synchronize(success: {}, failure: { _ in })
+        // SDK auto-synchronizes on success in observer mode
         // notify the Purchasely paywall the action was handled
         completion(.success)
     }
@@ -1037,7 +1031,7 @@ Purchasely.setDefaultPresentationDismissHandler { outcome in
 }
 ```
 
-> 📘 In `.observer` mode, remember to call `Purchasely.synchronize(success:failure:)` when a purchase happens.
+> 📘 In `.observer` mode, when your action interceptor returns the success result for a purchase or restore the SDK calls `Purchasely.synchronize(success:failure:)` automatically.
 
 ### Supported Deeplink Formats
 

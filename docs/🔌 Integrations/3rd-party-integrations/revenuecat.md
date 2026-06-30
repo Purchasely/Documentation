@@ -264,8 +264,8 @@ Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
                 },
                 onSuccess = { product, customerInfo ->
                     if (customerInfo.entitlements["my_entitlement_identifier"]?.isActive == true) {
-                        // Unlock that content and synchronize with Purchasely
-                        Purchasely.synchronize()
+                        // Unlock that content
+                        // SDK auto-synchronizes on success in observer mode
                     }
             })
         }
@@ -278,7 +278,7 @@ Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
     // restore purchases with RevenueCat
     Purchases.sharedInstance.restorePurchases(::showError) { customerInfo ->
         //... check customerInfo to see if entitlement is now active
-        Purchasely.synchronize()
+        // SDK auto-synchronizes on success in observer mode
     }
     //stop process on Purchasely side
     PLYInterceptResult.SUCCESS
@@ -304,8 +304,8 @@ Purchasely.interceptAction('purchase', async (info, payload) => {
       // and purchase with RevenueCat
       const { customerInfo } = await Purchases.purchasePackage(pkg);
       if (typeof customerInfo.entitlements.active.my_entitlement_identifier !== 'undefined') {
-        // Unlock that content and synchronize with Purchasely
-        Purchasely.synchronize();
+        // Unlock that content
+        // SDK auto-synchronizes on success in observer mode
       }
       return 'success';
     }
@@ -322,7 +322,7 @@ Purchasely.interceptAction('restore', async (info, payload) => {
   try {
     await Purchases.restorePurchases();
     // ... check restored customerInfo to see if entitlement is now active
-    Purchasely.synchronize();
+    // SDK auto-synchronizes on success in observer mode
     return 'success';
   } catch (e) {
     return 'failed';
@@ -349,7 +349,7 @@ await Purchasely.interceptAction(
         PurchaserInfo purchaserInfo = await Purchases.purchasePackage(product);
         if (purchaserInfo.entitlements.all["my_entitlement_identifier"].isActive) {
           // Unlock that great "pro" content
-          Purchasely.synchronize();
+          // SDK auto-synchronizes on success in observer mode
         }
         return PLYInterceptResult.success;
       }
@@ -367,7 +367,7 @@ await Purchasely.interceptAction(
     try {
       PurchaserInfo restoredInfo = await Purchases.restoreTransactions();
       // ... check restored purchaserInfo to see if entitlement is now active
-      Purchasely.synchronize();
+      // SDK auto-synchronizes on success in observer mode
       return PLYInterceptResult.success;
     } on PlatformException catch (e) {
       // Error restoring purchases
@@ -391,8 +391,8 @@ Purchasely.setPaywallActionInterceptor((result) => {
               Purchases.purchasePackage(product, ({ productIdentifier, purchaserInfo }) => {
                   Purchasely.onProcessAction(false);
                   if (typeof purchaserInfo.entitlements.active.my_entitlement_identifier !== "undefined") {
-                    // Unlock that great "pro" content and synchronize with Purchasely
-                    Purchasely.synchronize();
+                    // Unlock that great "pro" content
+                    // SDK auto-synchronizes on success in observer mode
                   }
                 },
                 ({error, userCancelled}) => {
@@ -413,7 +413,7 @@ Purchasely.setPaywallActionInterceptor((result) => {
           Purchasely.onProcessAction(false);
           
           //... check purchaserInfo to see if entitlement is now active
-          Purchasely.synchronize();
+          // SDK auto-synchronizes on success in observer mode
         },
         error => {
           // Error restoring purchases
@@ -430,7 +430,7 @@ Purchasely.setPaywallActionInterceptor((result) => {
 
 > 🚧 Synchroniztation
 >
-> When **a purchase or a restoration** is made with your current flow, call the `Purchasely.synchronize()` method so that new transactions are [caught](https://docs.purchasely.com/quick-start-1/sdk-configuration/observer-mode#4-sync-your-purchases-android-only) by our SDK (but not processed)
+> When **a purchase or a restoration** is made with your current flow, return a success result from the action interceptor. The SDK then synchronizes automatically so that new transactions are [caught](https://docs.purchasely.com/quick-start-1/sdk-configuration/observer-mode#4-sync-your-purchases-android-only) by our SDK (but not processed) — you no longer need to call `Purchasely.synchronize()` yourself in the interceptor success path.
 
 # Data processing
 

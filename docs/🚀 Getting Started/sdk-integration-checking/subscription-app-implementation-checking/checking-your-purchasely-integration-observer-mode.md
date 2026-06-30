@@ -62,7 +62,7 @@ Here is a checklist for your Purchasely Integration
 
 <br />
 
-* [ ] After the transaction has been processed, you synchronize it with the SDK (📚 [documentation](process-transactions-with-paywall-action-interceptor#implementing-the-paywall-action-intercept)) and close the paywall
+* [ ] After the transaction has been processed, you return a success result from the interceptor — the SDK then synchronizes it automatically (📚 [documentation](process-transactions-with-paywall-action-interceptor#implementing-the-paywall-action-intercept)) — and you close the paywall
 
 <br />
 

@@ -287,7 +287,7 @@ In `Full` mode the SDK launches the native purchase flow automatically when the 
 
 ### Observer mode
 
-In `Observer` mode you run purchases with your own billing system and use Purchasely for the paywall UI. Intercept `purchase` / `restore`, run your flow, then call `Purchasely.synchronize()` so Purchasely receives the transaction, and close the paywall yourself (Observer mode does not auto-close):
+In `Observer` mode you run purchases with your own billing system and use Purchasely for the paywall UI. Intercept `purchase` / `restore` and run your flow; when you acknowledge success the SDK calls `synchronize()` automatically so Purchasely receives the transaction, and close the paywall yourself (Observer mode does not auto-close):
 
 ```javascript
 Purchasely.setPaywallActionInterceptor((result) => {
@@ -296,7 +296,7 @@ Purchasely.setPaywallActionInterceptor((result) => {
 
         MyPurchaseSystem.purchase(storeProductId,
             () => {
-                Purchasely.synchronize();        // upload the receipt to Purchasely
+                // SDK auto-synchronizes on success in observer mode
                 Purchasely.onProcessAction(false); // you handled the purchase
                 Purchasely.closePresentation();    // Observer mode does not auto-close
             },
@@ -307,7 +307,7 @@ Purchasely.setPaywallActionInterceptor((result) => {
     } else if (result.action === Purchasely.PaywallAction.restore) {
         MyPurchaseSystem.restore(
             () => {
-                Purchasely.synchronize();
+                // SDK auto-synchronizes on success in observer mode
                 Purchasely.onProcessAction(false);
                 Purchasely.closePresentation();
             },
@@ -321,7 +321,7 @@ Purchasely.setPaywallActionInterceptor((result) => {
 
 ### `synchronize` reports completion
 
-In v6, `synchronize` accepts optional success / error callbacks and resolves when the native synchronization completes (the v5 fire-and-forget behavior is gone). Calling `Purchasely.synchronize()` with no arguments still works.
+In v6, `synchronize` accepts optional success / error callbacks and resolves when the native synchronization completes (the v5 fire-and-forget behavior is gone). Calling `Purchasely.synchronize()` with no arguments still works. Call this manually for transactions completed outside the interceptor (the SDK already auto-syncs when you acknowledge success for a purchase or restore in observer mode).
 
 ```javascript
 Purchasely.synchronize(
@@ -624,7 +624,7 @@ On Android this returns "No signing required on Android" — promotional offer s
 |---------|-------|
 | `SDK not configured` | Call `Purchasely.start(...)` before any other SDK method. |
 | Purchases do not validate / paywall does not auto-close after purchase | You are likely in the new default `Observer` mode. Pass `Purchasely.RunningMode.full`. |
-| Observer purchase does not update access | Call `Purchasely.synchronize()` after your billing flow succeeds. |
+| Observer purchase does not update access | The SDK auto-syncs when you acknowledge success for a purchase or restore in the interceptor. Call `Purchasely.synchronize()` manually only for purchases completed outside the interceptor. |
 | Purchases not working on Android | Install `@purchasely/cordova-plugin-purchasely-google` and keep every `io.purchasely:*` dependency on the same version. |
 | Paywall not displaying | Verify the placement exists in the Console, the SDK is initialized, and the device has network access. |
 | Deeplink does nothing | Ensure `Purchasely.allowDeeplink(true)` and that you forward the URL with `handleDeeplink(...)`. |

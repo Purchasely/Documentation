@@ -435,7 +435,7 @@ Purchasely.removeAllActionInterceptors()
 
 In **Full** mode, Purchasely performs purchases from Presentation buttons, validates receipts, and manages entitlements automatically. You only need to fetch the subscription status afterwards (see [Subscription Status & Entitlements](#subscription-status--entitlements)).
 
-In **Observer** mode, intercept the purchase and restore actions, run your own billing flow, then call `Purchasely.synchronize()` after success so Purchasely receives the transaction state. Suspend the interceptor until your billing flow returns so you can resolve `PLYInterceptResult` exactly once.
+In **Observer** mode, intercept the purchase and restore actions and run your own billing flow; when you return the success result the SDK calls `synchronize()` automatically so Purchasely receives the transaction state. Suspend the interceptor until your billing flow returns so you can resolve `PLYInterceptResult` exactly once.
 
 ```kotlin
 Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
@@ -448,7 +448,7 @@ Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
         startBilling(info.activity, purchase.plan.store_product_id, offerToken) { result ->
             if (continuation.isActive) continuation.resume(
                 when (result) {
-                    BillingResult.SUCCESS   -> { Purchasely.synchronize(); PLYInterceptResult.SUCCESS }
+                    BillingResult.SUCCESS   -> PLYInterceptResult.SUCCESS // SDK auto-synchronizes on success in observer mode
                     BillingResult.CANCELLED -> PLYInterceptResult.NOT_HANDLED
                     else                    -> PLYInterceptResult.FAILED
                 }
@@ -459,14 +459,14 @@ Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
 
 Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
     MyPurchaseSystem.restoreAllPurchases()
-    Purchasely.synchronize() // synchronize all purchases with Purchasely
+    // SDK auto-synchronizes on success in observer mode
     PLYInterceptResult.SUCCESS
 }
 ```
 
 ### `synchronize()` with callbacks
 
-`Purchasely.synchronize()` gains optional completion callbacks in v6 and refreshes the subscriptions cache before firing `onSuccess`. Both parameters default to `null`, so existing `Purchasely.synchronize()` calls keep working.
+`Purchasely.synchronize()` gains optional completion callbacks in v6 and refreshes the subscriptions cache before firing `onSuccess`. Both parameters default to `null`, so existing `Purchasely.synchronize()` calls keep working. Call this manually for transactions completed outside the interceptor (the SDK already auto-syncs when an interceptor returns the success result for a purchase or restore in observer mode).
 
 ```kotlin
 Purchasely.synchronize(
@@ -836,7 +836,7 @@ For example, with `listOf(GoogleStore(), AmazonStore())`, if Google Play Billing
 | Presentation does not display | Placement ID or `screenId`, the SDK initialization callback, and network logs. |
 | Close result is missing | Use `display(context) { outcome }` or `onDismissed { outcome }` (not `onCloseRequested`, which only signals the user's close request). |
 | Purchases do not validate / Screen does not auto-close after purchase | You are likely in the new default `Observer` mode. Set `.runningMode(PLYRunningMode.Full)`. |
-| Observer purchase does not update access | Call `Purchasely.synchronize()` after your billing flow succeeds. |
+| Observer purchase does not update access | The SDK auto-syncs when your interceptor returns the success result for a purchase or restore. Call `Purchasely.synchronize()` manually only for purchases completed outside the interceptor. |
 | `PLYError.NoStoreConfigured` on purchase | No store was provided in Full mode; add `GoogleStore()` (or another store) to `.stores(...)`. |
 | Deeplink does nothing | Ensure `Purchasely.allowDeeplink = true`; for `singleTask`/`singleTop` activities call `setIntent(intent)` in `onNewIntent`. |
 | `interceptAction<T>` does not compile | Compile with `jvmTarget = 11`, or use the `Class`-based overload. |
