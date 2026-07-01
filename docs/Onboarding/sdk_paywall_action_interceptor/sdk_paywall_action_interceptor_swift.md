@@ -23,7 +23,7 @@ Purchasely.interceptAction(.purchase) { info, params, completion in
 
     let success = MyPurchaseSystem.purchase(appleProductId)
     if success {
-        Purchasely.synchronize() // synchronize new purchase with Purchasely
+        // SDK auto-synchronizes on success in observer mode
         completion(.success) // notify Purchasely paywall the action was handled
     } else {
         completion(.failed)
@@ -32,7 +32,7 @@ Purchasely.interceptAction(.purchase) { info, params, completion in
 
 Purchasely.interceptAction(.restore) { info, params, completion in
     MyPurchaseSystem.restorePurchases()
-    Purchasely.synchronize() // synchronize all purchases with Purchasely
+    // SDK auto-synchronizes on success in observer mode
     completion(.success) // notify Purchasely paywall the action was handled
 }
 ```
@@ -50,8 +50,7 @@ Purchasely.interceptAction(.purchase) { info, params, completion in
             if let package = packages.first(where: { $0.storeProduct.productIdentifier == appleProductId }) {
                 Purchases.shared.purchase(package: package) { (transaction, customerInfo, error, userCancelled) in
                     /** IMPORTANT for Purchasely **/
-                    // synchronize new purchase with Purchasely
-                    Purchasely.synchronize()
+                    // SDK auto-synchronizes on success in observer mode
                     // notify Purchasely paywall the action was handled
                     completion(.success)
 
@@ -67,8 +66,7 @@ Purchasely.interceptAction(.purchase) { info, params, completion in
 Purchasely.interceptAction(.restore) { info, params, completion in
     Purchases.shared.restorePurchases { customerInfo, error in
         /** IMPORTANT for Purchasely **/
-        // synchronize new purchase with Purchasely
-        Purchasely.synchronize()
+        // SDK auto-synchronizes on success in observer mode
         // notify Purchasely paywall the action was handled
         completion(.success)
     }

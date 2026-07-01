@@ -27,8 +27,7 @@ private void OnPaywallActionIntercepted(PaywallAction action)
 				var offerId = action.parameters.offer?.storeOfferId;
 
 				MyPurchaseSystem.purchase(storeProductId, basePlanId, offerId);
-				// if purchase successful, synchronize all purchases with Purchasely
-				purchasely.Synchronize();
+				// SDK auto-synchronizes on success in observer mode
 				
 				// notify Purchasely paywall to stop processing action
 				purchasely.ProcessPaywallAction(false);
@@ -36,8 +35,7 @@ private void OnPaywallActionIntercepted(PaywallAction action)
 				break;
 			case "restore":
 				MyPurchaseSystem.restoreTransactions();
-        // synchronize all purchases with Purchasely
-				purchasely.Synchronize();
+        // SDK auto-synchronizes on success in observer mode
 				// notify Purchasely paywall to stop processing action
 				purchasely.ProcessPaywallAction(false);
 				break;
@@ -72,8 +70,7 @@ private void OnPaywallActionIntercepted(PaywallAction action)
             purchases.PurchasePackage(package, (product, customerInfo, userCancelled, error) =>
             {
               if (customerInfo.Entitlements.Active.ContainsKey("my_entitlement_identifier")) {
-                // synchronize purchases with Purchasely
-								purchasely.Synchronize();
+                // SDK auto-synchronizes on success in observer mode
               }
               
               // notify Purchasely paywall to stop processing action and hide loader
@@ -91,8 +88,7 @@ private void OnPaywallActionIntercepted(PaywallAction action)
         {
             //... check purchaserInfo to see if entitlement is now active
           
-          	// synchronize all purchases with Purchasely
-            purchasely.Synchronize();
+          	// SDK auto-synchronizes on success in observer mode
             // notify Purchasely paywall to stop processing action
             purchasely.ProcessPaywallAction(false);
             // dismiss the paywall if you want

@@ -391,7 +391,7 @@ await Purchasely.interceptAction(
 
       final success = await MyPurchaseSystem.purchase(storeProductId);
       if (success) {
-        await Purchasely.synchronize(); // synchronize the new purchase with Purchasely
+        // SDK auto-synchronizes on success in observer mode
         await info.presentation?.close(); // observer mode: dismiss it yourself
         return PLYInterceptResult.success;
       }
@@ -408,7 +408,7 @@ await Purchasely.interceptAction(
   (info, payload) async {
     try {
       await MyPurchaseSystem.restoreAllPurchases();
-      await Purchasely.synchronize(); // synchronize all purchases with Purchasely
+      // SDK auto-synchronizes on success in observer mode
       await info.presentation?.close();
       return PLYInterceptResult.success;
     } catch (e) {
@@ -419,7 +419,7 @@ await Purchasely.interceptAction(
 );
 ```
 
-> 📘 `synchronize()` now reports completion. The 6.0 native SDKs expose success/error callbacks on `synchronize()`. The Dart `Purchasely.synchronize()` keeps its `Future<void>` signature but now **resolves when the synchronization actually completes** and **throws a `PlatformException` on failure**. `await` it (and optionally `try/catch`) before chaining a follow-up presentation that targets subscribers.
+> 📘 `synchronize()` now reports completion. The 6.0 native SDKs expose success/error callbacks on `synchronize()`. The Dart `Purchasely.synchronize()` keeps its `Future<void>` signature but now **resolves when the synchronization actually completes** and **throws a `PlatformException` on failure**. `await` it (and optionally `try/catch`) before chaining a follow-up presentation that targets subscribers. Call this manually for transactions completed outside the interceptor (the SDK already auto-syncs when an interceptor returns the success result for a purchase or restore in observer mode).
 
 ---
 
@@ -895,7 +895,7 @@ Expanded(
    - The SDK is properly initialized (the `start()` future returned `true`)
    - You have an active internet connection
 
-5. **Observer purchase does not update access**: Call `await Purchasely.synchronize()` after your billing flow succeeds.
+5. **Observer purchase does not update access**: The SDK auto-syncs when your interceptor returns the success result for a purchase or restore. Call `await Purchasely.synchronize()` manually only for purchases completed outside the interceptor.
 
 6. **iOS pod install issues**: Ensure your iOS deployment target is set to at least **13.4** in your Podfile.
 

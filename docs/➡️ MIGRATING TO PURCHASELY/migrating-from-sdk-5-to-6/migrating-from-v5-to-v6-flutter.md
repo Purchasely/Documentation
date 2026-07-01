@@ -358,7 +358,7 @@ Action kinds (`PLYPresentationActionKind`): `close`, `closeAll`, `login`, `navig
 
 > 📘 Observer‑mode bridge
 >
-> In `observer` mode, intercept `purchase` / `restore`, run your own billing flow, then call `Purchasely.synchronize()` and return `PLYInterceptResult.success`. On Android, `PLYPurchasePayload.subscriptionOffer` is a nullable `PLYSubscriptionOffer` carrying `subscriptionId`, `basePlanId`, `offerId`, and `offerToken`.
+> In `observer` mode, intercept `purchase` / `restore`, run your own billing flow, then return `PLYInterceptResult.success`. The SDK synchronizes the transaction automatically on a success result — no manual `Purchasely.synchronize()` call is needed in this path. On Android, `PLYPurchasePayload.subscriptionOffer` is a nullable `PLYSubscriptionOffer` carrying `subscriptionId`, `basePlanId`, `offerId`, and `offerToken`.
 
 ***
 

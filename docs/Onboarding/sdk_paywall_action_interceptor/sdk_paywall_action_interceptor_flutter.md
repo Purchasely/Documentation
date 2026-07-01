@@ -14,7 +14,7 @@ Here is a code sample using the Action Interceptor to perform the purchase and r
 
 Register **one handler per action kind** with `Purchasely.interceptAction(kind, handler)`. The handler returns a `PLYInterceptResult` (`success` / `failed` / `notHandled`) — there is no more `Purchasely.onProcessAction(bool)`.
 
-> **Observer mode:** after handling a purchase, do your own billing, call `await Purchasely.synchronize()` and return `PLYInterceptResult.success`. In observer mode the presentation does **not** auto-close, so dismiss it yourself with `info.presentation?.close()`.
+> **Observer mode:** after handling a purchase, do your own billing and return `PLYInterceptResult.success` — the SDK calls `synchronize()` automatically to report the transaction. In observer mode the presentation does **not** auto-close, so dismiss it yourself with `info.presentation?.close()`.
 
 ```dart In-House
 import 'package:flutter/foundation.dart';
@@ -39,7 +39,7 @@ await Purchasely.interceptAction(
 
       final success = await MyPurchaseSystem.purchase(storeProductId);
       if (success) {
-        await Purchasely.synchronize(); // synchronize new purchase with Purchasely
+        // SDK auto-synchronizes on success in observer mode
         // In observer mode, dismiss the presentation yourself
         await info.presentation?.close();
         return PLYInterceptResult.success; // notify Purchasely the action was handled
@@ -57,7 +57,7 @@ await Purchasely.interceptAction(
   (info, payload) async {
     try {
       await MyPurchaseSystem.restoreAllPurchases();
-      await Purchasely.synchronize(); // synchronize all purchases with Purchasely
+      // SDK auto-synchronizes on success in observer mode
       // In observer mode, dismiss the presentation yourself
       await info.presentation?.close();
       return PLYInterceptResult.success; // notify Purchasely the action was handled
@@ -95,8 +95,8 @@ await Purchasely.interceptAction(
         // start purchase with RevenueCat
         final purchaserInfo = await Purchases.purchasePackage(monthly);
         if (purchaserInfo.entitlements.all['my_entitlement_identifier']?.isActive == true) {
-          // Unlock that great "pro" content and synchronize with Purchasely
-          await Purchasely.synchronize();
+          // Unlock that great "pro" content
+          // SDK auto-synchronizes on success in observer mode
           // In observer mode, dismiss the presentation yourself
           await info.presentation?.close();
           return PLYInterceptResult.success; // notify Purchasely the action was handled
@@ -117,7 +117,7 @@ await Purchasely.interceptAction(
       final restoredInfo = await Purchases.restoreTransactions();
       // ... check restored purchaserInfo to see if entitlement is now active
 
-      await Purchasely.synchronize(); // synchronize all purchases with Purchasely
+      // SDK auto-synchronizes on success in observer mode
       // In observer mode, dismiss the presentation yourself
       await info.presentation?.close();
       return PLYInterceptResult.success; // notify Purchasely the action was handled

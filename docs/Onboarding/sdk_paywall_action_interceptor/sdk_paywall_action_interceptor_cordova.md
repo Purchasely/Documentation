@@ -20,8 +20,7 @@ Purchasely.setPaywallActionInterceptor((result) => {
 
         MyPurchaseSystem.purchase(storeProductId, ({ success, error }) => {
             if (success) {
-                // synchronize all purchases with Purchasely
-                Purchasely.synchronize();
+                // SDK auto-synchronizes on success in observer mode
             }
             // notify Purchasely paywall to stop processing action
             Purchasely.onProcessAction(false);
@@ -32,8 +31,7 @@ Purchasely.setPaywallActionInterceptor((result) => {
     } else if (result.action === Purchasely.PaywallAction.restore) {
         MyPurchaseSystem.restoreTransactions(
             info => {
-                // synchronize all purchases with Purchasely
-                Purchasely.synchronize();
+                // SDK auto-synchronizes on success in observer mode
                 // notify Purchasely paywall to stop processing action
                 Purchasely.onProcessAction(false);
             },
@@ -63,8 +61,7 @@ Purchasely.setPaywallActionInterceptor((result) => {
              
               Purchases.purchasePackage(product, ({ productIdentifier, purchaserInfo }) => {
                   if (typeof purchaserInfo.entitlements.active.my_entitlement_identifier !== "undefined") {
-                    // synchronize all purchases with Purchasely
-                    Purchasely.synchronize();
+                    // SDK auto-synchronizes on success in observer mode
                   }
                   // notify Purchasely paywall to stop processing action
           				Purchasely.onProcessAction(false);
@@ -83,8 +80,7 @@ Purchasely.setPaywallActionInterceptor((result) => {
     } if (result.action === Purchasely.PaywallAction.restore) {
       Purchases.restoreTransactions(
         info => {
-          // synchronize all purchases with Purchasely
-          Purchasely.synchronize();
+          // SDK auto-synchronizes on success in observer mode
           // notify Purchasely paywall to stop processing action
           Purchasely.onProcessAction(false);
         },

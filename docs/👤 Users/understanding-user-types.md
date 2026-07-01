@@ -61,7 +61,7 @@ For this type of user:
 * The purchase is made on a version of your app not using the Purchasely SDK.
 * The subscription was obtained through family sharing.
 * An error occurred during the purchase (app closed during the purchase, network issue).
-* You are in [observer mode](observer-mode) and do not call [Purchasely.synchronize()](process-transactions-with-paywall-action-interceptor#processing-transactions-with-your-in-house-system).
+* You are in [observer mode](observer-mode) and the transaction was completed **outside** the paywall action interceptor (for purchases handled inside the interceptor, the SDK now synchronizes automatically on a success result), without a manual [Purchasely.synchronize()](process-transactions-with-paywall-action-interceptor#processing-transactions-with-your-in-house-system) call to report it.
 
 <br />
 

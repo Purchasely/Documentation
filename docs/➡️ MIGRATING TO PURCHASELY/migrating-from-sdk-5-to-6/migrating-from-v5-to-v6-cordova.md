@@ -153,13 +153,13 @@ The native subscriptions-list UI was removed from both SDKs in v6. `Purchasely.p
 
 ## 7. Observer-mode purchase flow (unchanged JS pattern)
 
-The action interceptor API (`setPaywallActionInterceptor` + `onProcessAction`) is unchanged. In Observer mode, run your own billing, synchronize, then close the screen:
+The action interceptor API (`setPaywallActionInterceptor` + `onProcessAction`) is unchanged. In Observer mode, run your own billing, then close the screen — the SDK synchronizes the transaction automatically when you report success:
 
 ```javascript
 Purchasely.setPaywallActionInterceptor((result) => {
     if (result.action === Purchasely.PaywallAction.purchase) {
         // run your own billing flow, then:
-        Purchasely.synchronize();          // upload the receipt to Purchasely
+        // SDK auto-synchronizes on success in observer mode
         Purchasely.onProcessAction(false); // you handled the purchase
         Purchasely.closePresentation();    // Observer mode does not auto-close
     } else {

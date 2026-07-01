@@ -23,7 +23,7 @@ Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
     val success = MyPurchaseSystem.purchase(offerToken)
 
     if (success) {
-        Purchasely.synchronize() // synchronize new purchase
+        // SDK auto-synchronizes on success in observer mode
         PLYInterceptResult.SUCCESS
     } else {
         PLYInterceptResult.FAILED
@@ -32,7 +32,7 @@ Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
 
 Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
     MyPurchaseSystem.restoreAllPurchases()
-    Purchasely.synchronize() // synchronize all purchases with Purchasely
+    // SDK auto-synchronizes on success in observer mode
     PLYInterceptResult.SUCCESS
 }
 ```
@@ -61,8 +61,8 @@ Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
                 },
                 onSuccess = { product, customerInfo ->
                     if (customerInfo.entitlements["my_entitlement_identifier"]?.isActive == true) {
-                        // Unlock that content and synchronize with Purchasely
-                        Purchasely.synchronize()
+                        // Unlock that content
+                        // SDK auto-synchronizes on success in observer mode
                     }
             })
         }
@@ -76,7 +76,7 @@ Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
     Purchases.sharedInstance.restorePurchases(::showError) { customerInfo ->
         //... check customerInfo to see if entitlement is now active
 
-        Purchasely.synchronize() // synchronize all purchases with Purchasely
+        // SDK auto-synchronizes on success in observer mode
     }
 
     PLYInterceptResult.SUCCESS // notify Purchasely the action was handled

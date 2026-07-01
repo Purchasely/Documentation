@@ -445,7 +445,7 @@ Purchasely.interceptAction('purchase', async (info, payload) => {
 
         const success = await MyPurchaseSystem.purchase(storeProductId);
         if (success) {
-            await Purchasely.synchronize(); // synchronize the new purchase with Purchasely
+            // SDK auto-synchronizes on success in observer mode
             return 'success'; // notify Purchasely the action was handled
         }
         return 'failed';
@@ -458,7 +458,7 @@ Purchasely.interceptAction('purchase', async (info, payload) => {
 Purchasely.interceptAction('restore', async (info, payload) => {
     try {
         await MyPurchaseSystem.restorePurchases();
-        await Purchasely.synchronize(); // synchronize all purchases with Purchasely
+        // SDK auto-synchronizes on success in observer mode
         return 'success'; // notify Purchasely the action was handled
     } catch (e) {
         // Error restoring purchases
@@ -467,7 +467,7 @@ Purchasely.interceptAction('restore', async (info, payload) => {
 });
 ```
 
-> 📘 `synchronize()` now reports completion. In v6 `Purchasely.synchronize()` returns a `Promise<boolean>` that **resolves when the synchronization actually completes** and **rejects on failure**. `await` it (and optionally `try/catch`) before chaining a follow-up presentation that targets subscribers. Fire-and-forget callers stay source-compatible with the previous behavior.
+> 📘 `synchronize()` now reports completion. In v6 `Purchasely.synchronize()` returns a `Promise<boolean>` that **resolves when the synchronization actually completes** and **rejects on failure**. `await` it (and optionally `try/catch`) before chaining a follow-up presentation that targets subscribers. Fire-and-forget callers stay source-compatible with the previous behavior. Call this manually for transactions completed outside the interceptor (the SDK already auto-syncs when an interceptor returns the success result for a purchase or restore in observer mode).
 
 ---
 
@@ -1105,7 +1105,7 @@ Purchasely.revokeDataProcessingConsent([
    - The SDK is properly initialized (the `start()` promise resolved `true`)
    - You have an active internet connection
 
-5. **Observer purchase does not update access**: Call `await Purchasely.synchronize()` after your billing flow succeeds.
+5. **Observer purchase does not update access**: The SDK auto-syncs when your interceptor returns the success result for a purchase or restore. Call `await Purchasely.synchronize()` manually only for purchases completed outside the interceptor.
 
 6. **iOS pod install issues**: Ensure your iOS deployment target is set to at least **13.4** in your Podfile, then run `cd ios && pod install --repo-update`.
 

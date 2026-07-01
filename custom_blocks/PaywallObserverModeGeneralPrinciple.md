@@ -10,5 +10,5 @@ A typical purchase flow will be as follows:
 3. the app processes the transaction on its own
    * either through a 3rd party SDK (like RevenueCat)
    * or directly through StoreKit or Google Play Billing
-4. once processed, the app synchronizes the transaction with the Purchasely SDK by calling the  `Purchasely.synchronize()` method
+4. once processed, the app returns a success result to the <Glossary>Action Interceptor</Glossary>; the Purchasely SDK then automatically synchronizes the transaction (it is observed, not processed, by Purchasely) — no manual `Purchasely.synchronize()` call is needed
 5. and notifies the Purchasely SDK that the paywall can now be closed
