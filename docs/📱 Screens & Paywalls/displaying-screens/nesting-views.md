@@ -184,160 +184,81 @@ Since **PLYPresentationView** is a **StatelessWidget**, you can easily add it to
 
 # React Native
 
-> 📘 Contribution appreciated
->
-> We are working to make this feature available directly from our SDK without the need to manually copy the `PLYPresentationView.tsx` file.\
-> However, we are currently facing an issue with react dependencies that we haven't been able to resolve.\
-> You can test it by importing PLYPresentationViewBeta and using that view:\
-> `import { PLYPresentationViewBeta } from 'react-native-purchasely';`
->
-> We are primarily iOS and Android developers, so any help from the React Native community would be greatly appreciated!
+React Native developers can nest a Purchasely Screen with the **`PLYPresentationView`** component shipped in `react-native-purchasely` (no need to copy any file into your project). Build a `PresentationRequest`, `preload()` it, then pass it to the component through the `request` prop — the native view resolves the loaded presentation by the request's `requestId`, so there is no second network fetch. Because it is a regular React component, you can place it anywhere in your view tree (for example inside a half-height container) to size the paywall as you like.
 
-## 1. Create the view component File
+## Display the PLYPresentationView
 
-Create a file named **`PLYPurchaselyView.tsx `** in your project and add the following code:
+```typescript React Native
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
+import Purchasely, {
+  PLYPresentationView,
+  ProductResult,
+  type PLYPresentationViewResult,
+  type PLYPresentationRequest,
+} from 'react-native-purchasely';
 
-```coffeescript React Native
-import {useEffect, useRef, useCallback} from 'react';
-import {Platform, UIManager, findNodeHandle, NativeModules, requireNativeComponent} from 'react-native';
+const PaywallScreen = ({ navigation }: { navigation: any }) => {
+  const [request, setRequest] = useState<PLYPresentationRequest | null>(null);
 
-import { type PresentPresentationResult } from 'react-native-purchasely';
+  // Preload the presentation before rendering the view
+  useEffect(() => {
+    const preload = async () => {
+      const req = Purchasely.presentation.placement('ACCOUNT').build();
+      // you can also target a specific screen with Purchasely.presentation.screen('my_paywall_1')
+      await req.preload();
+      setRequest(req);
+    };
+    preload();
+  }, []);
 
-export const PurchaselyView = requireNativeComponent('PurchaselyView');
-
-interface PLYPresentationViewProps {
-  placementId?: string; // Made optional
-  presentation?: any; // Made optional
-  onPresentationClosed: (result: PresentPresentationResult) => void;
-  flex?: number;
-}
-
-const PLYPresentationView: React.FC<PLYPresentationViewProps> = ({
-  placementId,
-  presentation,
-  onPresentationClosed,
-  flex = 1,
-}) => {
-  const ref = useRef<any>(null);
-
-  const handlePresentationClosed = useCallback(
-    (result: PresentPresentationResult) => {
-      if (onPresentationClosed) {
-        onPresentationClosed(result);
-      }
-    },
-    [onPresentationClosed],
-  );
-
-  NativeModules.PurchaselyView.onPresentationClosed().then(
-    (result: PresentPresentationResult) => {
-      handlePresentationClosed(result);
-    },
-  );
-
-  if (Platform.OS === 'android') {
-    const createFragment = (viewId: number) =>
-      UIManager.dispatchViewManagerCommand(
-        viewId,
-        // @ts-ignore
-        UIManager.PurchaselyView.Commands.create.toString(),
-        [viewId],
-      );
-
-    useEffect(() => {
-      const viewId = findNodeHandle(ref.current);
-      if (viewId) {
-        createFragment(viewId);
-      }
-
-      // Assuming you're setting up an event listener or similar for onPresentationClosed
-      // Ensure the implementation here matches how your native module expects to handle this callback
-
-      return () => {
-        // Clean up any event listeners or other resources
-      };
-    }, []);
-  }
-
-  return (
-    <PurchaselyView
-      // @ts-ignore
-      style={{flex}}
-      placementId={placementId}
-      presentation={presentation}
-      {...(Platform.OS === 'android' && {ref: ref})}
-    />
-  );
-};
-
-export { PLYPresentationView };
-```
-
-## 2. Import PLYPresentationView in the Desired File
-
-```coffeescript React Native
-import React from 'react';
-import { View, Text } from 'react-native';
-import {PLYPresentationView} from './PLYPresentationView';
-```
-
-## 3. Display the PLYPresentationView
-
-Use the **`PLYPresentationView`** component within your main file to display the nested paywall view:
-
-```coffeescript React Native
-var PaywallScreen = ({
-  navigation,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  route,
-}: {
-  navigation: NavigationProp<any>;
-  route: any;
-}) => {
-  // Optionally, fetch the presentation before showing it
-  fetchPresentation();
-
-  // set a callback to know the result after the presentation is closed
-  const callback = (result: PresentPresentationResult) => {
-    console.log('### Paywall closed');
-    console.log('### Result is ' + result.result);
+  // Called when the nested paywall is closed
+  const onPresentationClosed = (result: PLYPresentationViewResult) => {
     switch (result.result) {
       case ProductResult.PRODUCT_RESULT_PURCHASED:
       case ProductResult.PRODUCT_RESULT_RESTORED:
         if (result.plan != null) {
           console.log('User purchased ' + result.plan.name);
         }
-
         break;
       case ProductResult.PRODUCT_RESULT_CANCELLED:
         console.log('User cancelled');
         break;
     }
+    // Remove the component from your tree to close the Purchasely Screen
     navigation.goBack();
   };
 
+  if (request == null) {
+    return null; // or render your own loading indicator
+  }
+
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <PLYPresentationView
-        placementId="ACCOUNT"
-        // instead of setting a placementId, you can set a presentation instance directly 
-        // from the result of fetchPresentation
-        //presentation={presentationForComponent}
-        onPresentationClosed={callback}
+        request={request}
+        flex={1}
+        onPresentationClosed={onPresentationClosed}
       />
     </View>
   );
 };
 
-const fetchPresentation = async () => {
-  try {
-    const request = Purchasely.presentation.placement('Settings').build();
-    presentationForComponent = await request.preload();
-    console.log('presentation fetched is %s', presentationForComponent?.screenId);
-  } catch (e) {
-    console.error(e);
-  }
-};
+export default PaywallScreen;
+```
+
+> 📘 The embedded view reports `{ result, plan }`
+>
+> `onPresentationClosed` receives a `PLYPresentationViewResult`: `result` is a `ProductResult` (`PRODUCT_RESULT_PURCHASED` / `PRODUCT_RESULT_RESTORED` / `PRODUCT_RESULT_CANCELLED`) and `plan` is the purchased / restored plan (or `null` when the user simply closed the screen). This is the couple the native embedded view emits — **not** the 5-field `PLYPresentationOutcome` returned by a full-screen `display()`.
+
+If you don't preload a request, you can pass a `placementId` directly (or a presentation you preloaded yourself via the `presentation` prop); the view falls back to these when no `request` is set.
+
+```typescript React Native
+<PLYPresentationView
+  placementId="ACCOUNT"
+  flex={1}
+  onPresentationClosed={(result) => console.log('Closed:', result.result, result.plan)}
+/>
 ```
 
 By following these guidelines, you can effectively nest the Purchasely paywall view within your app's interface, allowing for a customized display that fits your app's design and user experience requirements.

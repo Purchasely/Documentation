@@ -2,9 +2,9 @@
 title: Handling the paywall result (presentation outcome)
 excerpt: >-
   How to retrieve the result of a paywall when it closes — purchase, restore,
-  cancellation or simple dismissal — across iOS, Android and Flutter, and how
-  the SDK routes that outcome between a per-presentation handler and the global
-  default handler.
+  cancellation or simple dismissal — across iOS, Android, Flutter and React
+  Native, and how the SDK routes that outcome between a per-presentation handler
+  and the global default handler.
 deprecated: false
 hidden: false
 metadata:
@@ -24,8 +24,9 @@ next:
 > * iOS: 6.0.0
 > * Android: 6.0.0
 > * Flutter: 6.0.0
+> * React Native: 6.0.0-rc.2
 >
-> On v5 the equivalent result type was `PLYProductViewControllerResult` (iOS) / `PresentPresentationResult` (Flutter), and the global handler was named `setDefaultPresentationResultHandler`. See the [v5 → v6 migration guides](migrating-from-sdk-5-to-6).
+> On v5 the equivalent result type was `PLYProductViewControllerResult` (iOS) / `PresentPresentationResult` (Flutter / React Native), and the global handler was named `setDefaultPresentationResultHandler`. See the [v5 → v6 migration guides](migrating-from-sdk-5-to-6).
 
 # Overview
 
@@ -47,13 +48,13 @@ There are **three channels** through which an outcome can reach your code:
 
 The outcome is the same conceptual object on every platform. It carries five fields:
 
-| Field | iOS type | Android type | Flutter type | Meaning |
-|-------|----------|--------------|--------------|---------|
-| `purchaseResult` | `PLYPurchaseResult` | `PLYPurchaseResult?` | `PLYPurchaseResult?` | The purchase action result: `purchased` / `restored` / `cancelled`. On iOS a `.none` sentinel means "no purchase action"; on Android/Flutter the same is expressed as `null`. |
-| `plan` | `PLYPlan?` | `PLYPlan?` | `PLYPlan?` | The plan involved in the purchase, when applicable. |
-| `presentation` | `PLYPresentation?` | `PLYPresentation?` | `PLYPresentation?` | The presentation that produced this outcome (`null` if it never reached display). |
-| `closeReason` | `PLYCloseReason` | `PLYCloseReason?` | `PLYCloseReason?` | Why the paywall closed when no purchase happened. |
-| `error` | `Error?` | `PLYError?` | `PLYPresentationError?` | Display error. Mutually exclusive with `closeReason`. Reserved on iOS (always `nil` in 6.0). |
+| Field | iOS type | Android type | Flutter type | React Native type | Meaning |
+|-------|----------|--------------|--------------|-------------------|---------|
+| `purchaseResult` | `PLYPurchaseResult` | `PLYPurchaseResult?` | `PLYPurchaseResult?` | `PLYPurchaseResult?` | The purchase action result: `purchased` / `restored` / `cancelled`. On iOS a `.none` sentinel means "no purchase action"; on Android/Flutter/React Native the same is expressed as `null`. On React Native it is a string union (`'purchased' \| 'restored' \| 'cancelled' \| null`). |
+| `plan` | `PLYPlan?` | `PLYPlan?` | `PLYPlan?` | `PurchaselyPlan?` | The plan involved in the purchase, when applicable. |
+| `presentation` | `PLYPresentation?` | `PLYPresentation?` | `PLYPresentation?` | `PLYPresentation?` | The presentation that produced this outcome (`null` if it never reached display). |
+| `closeReason` | `PLYCloseReason` | `PLYCloseReason?` | `PLYCloseReason?` | `PLYCloseReason?` | Why the paywall closed when no purchase happened. On React Native a string union (`'button' \| 'backSystem' \| 'programmatic' \| null`). |
+| `error` | `Error?` | `PLYError?` | `PLYPresentationError?` | `PLYPresentationError?` | Display error. Mutually exclusive with `closeReason`. Reserved on iOS (always `nil` in 6.0). |
 
 ### `PLYPurchaseResult`
 
@@ -75,7 +76,7 @@ The outcome is the same conceptual object on every platform. It carries five fie
 
 ## 1. The return value of the display call
 
-On **Flutter** and **Android**, the display call resolves with the outcome at dismiss time, so you can read it inline.
+On **Flutter**, **Android** and **React Native**, the display call resolves with the outcome at dismiss time, so you can read it inline.
 
 ```dart Flutter
 final outcome = await PLYPresentationBuilder.placement('<PLACEMENT_ID>')
@@ -109,10 +110,23 @@ let presentation = try await PLYPresentationBuilder
     .preload()
 presentation.display(from: self)
 ```
+```typescript React Native
+// React Native display() resolves at dismiss with the 5-field outcome
+const outcome = await Purchasely.presentation
+    .placement('<PLACEMENT_ID>')
+    .build()
+    .display();
+
+if (outcome.purchaseResult === 'purchased' || outcome.purchaseResult === 'restored') {
+    // unlock content
+} else {
+    // dismissed: outcome.closeReason ('button' | 'backSystem' | 'programmatic')
+}
+```
 
 > 🚧 iOS has no "return value" channel
 >
-> The iOS `display(...)` / `request.preload()` / `request.display()` async methods return the **`PLYPresentation` handle**, not the outcome. To read the result on iOS you must use a **per-presentation `onDismissed`** (channel 2) or the **default handler** (channel 3). Only **Flutter** and **Android** expose the outcome as the awaited return value.
+> The iOS `display(...)` / `request.preload()` / `request.display()` async methods return the **`PLYPresentation` handle**, not the outcome. To read the result on iOS you must use a **per-presentation `onDismissed`** (channel 2) or the **default handler** (channel 3). Only **Flutter**, **Android** and **React Native** expose the outcome as the awaited return value.
 
 ## 2. A per-presentation dismiss handler (`onDismissed`)
 
@@ -152,6 +166,19 @@ PLYPresentationBuilder.placement('<PLACEMENT_ID>')
     .build()
     .display(const PLYTransition.fullScreen());
 ```
+```typescript React Native
+Purchasely.presentation
+    .placement('<PLACEMENT_ID>')
+    .onDismissed((outcome) => {
+        if (outcome.purchaseResult === 'purchased' || outcome.purchaseResult === 'restored') {
+            // unlock content
+        } else {
+            // dismissed: outcome.closeReason
+        }
+    })
+    .build()
+    .display();
+```
 
 ## 3. The global default dismiss handler
 
@@ -173,6 +200,14 @@ Purchasely.setDefaultPresentationDismissHandler((outcome) {
       '${outcome.purchaseResult} / ${outcome.closeReason}');
 });
 ```
+```typescript React Native
+Purchasely.setDefaultPresentationDismissHandler((outcome) => {
+    // outcome: { presentation, purchaseResult, plan, closeReason, error }
+    console.log('SDK presentation dismissed:', outcome.purchaseResult, '/', outcome.closeReason);
+});
+// Only one handler at a time; remove with the returned subscription's .remove()
+// or Purchasely.removeDefaultPresentationDismissHandler().
+```
 
 > 📘 Set it once, at startup
 >
@@ -188,7 +223,11 @@ In the native SDKs this is literally a single fallback expression:
 * **iOS** — the default handler fires only when the presentation has **no** inline `onDismissed`
 * **Flutter** — `entry.presentation?.onDismissed ?? entry.request?.onDismissed`, falling back to the default handler when both are `null`
 
-The return value of the display call is resolved **separately** and in **addition** to the selected handler (on Flutter/Android, which expose it).
+The return value of the display call is resolved **separately** and in **addition** to the selected handler (on Flutter/Android/React Native, which expose it).
+
+> 📘 React Native routing differs
+>
+> On React Native the awaited `display()` resolves with the outcome and the request's own `onDismissed` fires, but the **global default handler is reserved for presentations the SDK opens itself** (deeplinks, campaigns, promoted IAP). It does **not** act as a fallback for presentations you display yourself, so the four cases below — which describe the native / Flutter fallback — do not map one-to-one to React Native. For a presentation you display, read the outcome from `await display()` and/or a local `onDismissed`.
 
 ## The four cases
 
@@ -284,4 +323,4 @@ For presentations your app never calls `display()` on — **deeplinks**, **campa
 * [Using Placements to display Screens & Paywalls](displaying-screens-placements)
 * [Pre-fetching Screens](pre-fetching)
 * [Controling Screen visibility](show-hide-close-screens)
-* [Migrating to v6 — iOS](migrating-from-v5-to-v6-ios) · [Android](migrating-from-v5-to-v6-android) · [Flutter](migrating-from-v5-to-v6-flutter)
+* [Migrating to v6 — iOS](migrating-from-v5-to-v6-ios) · [Android](migrating-from-v5-to-v6-android) · [Flutter](migrating-from-v5-to-v6-flutter) · [React Native](migrating-from-v5-to-v6-react-native)
