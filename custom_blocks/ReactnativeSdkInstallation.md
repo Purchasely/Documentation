@@ -9,7 +9,7 @@ We rely on [NPM](https://www.npmjs.com/package/react-native-purchasely) to distr
 npm install react-native-purchasely --save
 ```
 
-Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android 21)
+Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android minSdk 23)
 
 ```yaml iOS
 // Podfile
@@ -24,7 +24,7 @@ platform :ios, '13.4'
 // Edit file android/build.gradle
 buildscript {
     ext {
-        minSdkVersion = 21 //min version must not be below 21
+        minSdkVersion = 23 //min version must not be below 23
         compileSdkVersion = 36
         targetSdkVersion = 35
     }
@@ -48,9 +48,9 @@ See below to add the store you want to use
 >
 > ```json package.json
 > "dependencies": {
->   "react-native-purchasely": "6.0.0-rc.1",
->   "@purchasely/react-native-purchasely-google": "6.0.0-rc.1",
->   "@purchasely/react-native-purchasely-android-player": "6.0.0-rc.1",
+>   "react-native-purchasely": "6.0.0-rc.2",
+>   "@purchasely/react-native-purchasely-google": "6.0.0-rc.2",
+>   "@purchasely/react-native-purchasely-android-player": "6.0.0-rc.2",
 > },
 > ```
 

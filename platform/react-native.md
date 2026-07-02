@@ -1,6 +1,6 @@
 # Purchasely React Native SDK Documentation
 
-This guide covers the Purchasely React Native SDK **v6** (`6.0.0-rc.1`) for JavaScript / TypeScript apps. The bridge wraps the Purchasely 6.0 native SDKs (iOS `Purchasely 6.0.0-rc.1`, Android `io.purchasely:core 6.0.0-rc.1`) and displays **Presentations** (Screens / paywalls) configured in the Console through placements, direct `screen` lookups, campaigns, deeplinks and Flows.
+This guide covers the Purchasely React Native SDK **v6** (`6.0.0-rc.2`) for JavaScript / TypeScript apps. The bridge wraps the Purchasely 6.0 native SDKs (iOS `Purchasely 6.0.0-rc.2`, Android `io.purchasely:core 6.0.0-rc.2`) and displays **Presentations** (Screens / paywalls) configured in the Console through placements, direct `screen` lookups, campaigns, deeplinks and Flows.
 
 > 📘 SDK v6 — what changed
 >
@@ -37,11 +37,11 @@ This guide covers the Purchasely React Native SDK **v6** (`6.0.0-rc.1`) for Java
 
 | Requirement | iOS | Android |
 |-------------|-----|---------|
-| Minimum OS Version | 13.4 | 21 (minSdkVersion) |
+| Minimum OS Version | 13.4 | 23 (minSdkVersion) |
 | compileSdkVersion | - | 36 |
 | targetSdkVersion | - | 35 |
 
-The SDK packages are pinned to `6.0.0-rc.1`. Pin every Purchasely package to that **exact** version — this is a pre-release, so do **not** use a floating range (`^6.0.0`, `6.x`, …).
+The SDK packages are pinned to `6.0.0-rc.2`. Pin every Purchasely package to that **exact** version — this is a pre-release, so do **not** use a floating range (`^6.0.0`, `6.x`, …).
 
 ---
 
@@ -55,7 +55,7 @@ We rely on [NPM](https://www.npmjs.com/package/react-native-purchasely) to distr
 npm install react-native-purchasely --save
 ```
 
-Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android minSdk 21).
+Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android minSdk 23).
 
 ### iOS Setup
 
@@ -77,7 +77,7 @@ Then run:
 cd ios && pod install
 ```
 
-The iOS native dependency (`Purchasely 6.0.0-rc.1`) is published on the CocoaPods trunk, so it resolves from the public repositories with no extra configuration.
+The iOS native dependency (`Purchasely 6.0.0-rc.2`) is published on the CocoaPods trunk, so it resolves from the public repositories with no extra configuration.
 
 ### Android Setup
 
@@ -87,7 +87,7 @@ Update your `android/build.gradle` file:
 // Edit file android/build.gradle
 buildscript {
     ext {
-        minSdkVersion = 21 //min version must not be below 21
+        minSdkVersion = 23 //min version must not be below 23
         compileSdkVersion = 36
         targetSdkVersion = 35
     }
@@ -100,7 +100,7 @@ allprojects {
 }
 ```
 
-The Android native dependencies (`io.purchasely:core` / `google-play` / `player` `6.0.0-rc.1`) are published on **Maven Central**, so they resolve from the public repositories with no extra configuration.
+The Android native dependencies (`io.purchasely:core` / `google-play` / `player` `6.0.0-rc.2`) are published on **Maven Central**, so they resolve from the public repositories with no extra configuration.
 
 ### Android Dependencies
 
@@ -139,14 +139,14 @@ npm install @purchasely/react-native-purchasely-android-player --save
 
 #### Version Matching (Critical)
 
-> ⚠️ **All Purchasely packages must be pinned to the exact same version.** Mismatched versions cause runtime errors. Pin each package to `6.0.0-rc.1` — do **not** use a floating range.
+> ⚠️ **All Purchasely packages must be pinned to the exact same version.** Mismatched versions cause runtime errors. Pin each package to `6.0.0-rc.2` — do **not** use a floating range.
 
 ```json
 // package.json
 "dependencies": {
-  "react-native-purchasely": "6.0.0-rc.1",
-  "@purchasely/react-native-purchasely-google": "6.0.0-rc.1",
-  "@purchasely/react-native-purchasely-android-player": "6.0.0-rc.1"
+  "react-native-purchasely": "6.0.0-rc.2",
+  "@purchasely/react-native-purchasely-google": "6.0.0-rc.2",
+  "@purchasely/react-native-purchasely-android-player": "6.0.0-rc.2"
 }
 ```
 
@@ -1098,7 +1098,7 @@ Purchasely.revokeDataProcessingConsent([
 
 2. **Purchases not validating / paywall does not auto-close after purchase**: You are likely in the new default `'observer'` mode. Pass `.runningMode('full')` for Purchasely to own the purchase flow. In observer mode, presentations do not auto-close — dismiss them yourself with `request.close()`.
 
-3. **Purchases not working on Android**: Verify that you've added `@purchasely/react-native-purchasely-google` and that all Purchasely packages are pinned to the exact same version (`6.0.0-rc.1`).
+3. **Purchases not working on Android**: Verify that you've added `@purchasely/react-native-purchasely-google` and that all Purchasely packages are pinned to the exact same version (`6.0.0-rc.2`).
 
 4. **Paywall not displaying**: Check that:
    - The placement / screen exists in your Purchasely Console

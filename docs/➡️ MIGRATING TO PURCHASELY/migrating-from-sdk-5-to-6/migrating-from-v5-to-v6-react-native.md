@@ -2,7 +2,7 @@
 title: Migrating to v6 — React Native
 excerpt: >-
   Breaking changes and migration steps to upgrade the Purchasely React Native
-  SDK from v5.x to v6.0.0-rc.1
+  SDK from v5.x to v6.0.0-rc.2
 deprecated: false
 hidden: false
 metadata:
@@ -56,17 +56,17 @@ The React Native SDK v6 is **paywall‑API‑only**: the legacy v5 paywall API h
 Pin the **exact** pre‑release version (no caret / range):
 
 ```bash
-npm install react-native-purchasely@6.0.0-rc.1
+npm install react-native-purchasely@6.0.0-rc.2
 # optional Android stores:
-npm install @purchasely/react-native-purchasely-google@6.0.0-rc.1
-npm install @purchasely/react-native-purchasely-android-player@6.0.0-rc.1 # video support in paywalls
-npm install @purchasely/react-native-purchasely-amazon@6.0.0-rc.1
-npm install @purchasely/react-native-purchasely-huawei@6.0.0-rc.1
+npm install @purchasely/react-native-purchasely-google@6.0.0-rc.2
+npm install @purchasely/react-native-purchasely-android-player@6.0.0-rc.2 # video support in paywalls
+npm install @purchasely/react-native-purchasely-amazon@6.0.0-rc.2
+npm install @purchasely/react-native-purchasely-huawei@6.0.0-rc.2
 ```
 
 iOS: `cd ios && pod install`. Android: autolinking handles the native modules.
 
-The bridge pulls the native pins automatically (iOS pod `Purchasely 6.0.0-rc.1`, Android `io.purchasely:core:6.0.0-rc.1`). Minimum OS versions: **iOS 13.4**, **Android `minSdkVersion 21`**.
+The bridge pulls the native pins automatically (iOS pod `Purchasely 6.0.0-rc.2`, Android `io.purchasely:core:6.0.0-rc.2`). Minimum OS versions: **iOS 13.4**, **Android `minSdkVersion 23`**.
 
 ***
 
