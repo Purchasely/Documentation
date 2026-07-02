@@ -21,13 +21,13 @@ To manage deeplinks you need to do up to 3 things:
 To enable the Purchasely SDK to analyze the deeplink, the app needs to pass it using the following code. You can also allow deeplinks at initialization with `Purchasely.builder('YOUR_API_KEY').allowDeeplink(true).start()`.
 
 ```javascript React Native
-const handled = await Purchasely.isDeeplinkHandled('app://ply/presentations/');
+const handled = await Purchasely.handleDeeplink('app://ply/presentations/');
 console.log('Deeplink handled by Purchasely? ' + handled);
 ```
 
-> 📘 React Native keeps `isDeeplinkHandled`
+> 📘 `isDeeplinkHandled` was renamed to `handleDeeplink`
 >
-> In v6 the runtime method is still `Purchasely.isDeeplinkHandled(uri)`. Allowing deeplinks at startup now uses `allowDeeplink(true)` on the builder (the v5 startup permission method has been removed).
+> In v6 the runtime method is `Purchasely.handleDeeplink(uri)` (same signature, `Promise<boolean>`). The v5 names `isDeeplinkHandled` and `readyToOpenDeeplink` **no longer exist** (no alias). Allow deeplinks at startup with `allowDeeplink(true)` on the builder; for a deeplink captured at cold start, pass it to the builder with `handleDeeplink(url)` and the SDK replays it once `start()` completes.
 
 ### FORBIDDING THE DISPLAY
 

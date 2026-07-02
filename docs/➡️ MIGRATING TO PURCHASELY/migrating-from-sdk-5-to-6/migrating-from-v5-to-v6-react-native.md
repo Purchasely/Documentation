@@ -42,12 +42,13 @@ The React Native SDK v6 is **paywall‑API‑only**: the legacy v5 paywall API h
 | `setPaywallActionInterceptorCallback(cb)` + `onProcessAction(bool)`  | `Purchasely.interceptAction(kind, handler)` returning `'success' \| 'failed' \| 'notHandled'` |
 | `setDefaultPresentationResultCallback` / `…ResultHandler`            | `Purchasely.setDefaultPresentationDismissHandler(outcome => …)`               |
 | `Purchasely.readyToOpenDeeplink(true)`                               | `Purchasely.builder(apiKey).allowDeeplink(true).start()`                      |
+| `Purchasely.isDeeplinkHandled(uri)`                                  | **Renamed** `Purchasely.handleDeeplink(uri)` (same signature) ⚠️             |
 | `ProductResult` ordinal enum (`PRODUCT_RESULT_PURCHASED`, …)         | `purchaseResult` string union (`'purchased' \| 'cancelled' \| 'restored'`)    |
 | `Purchasely.presentSubscriptions()`                                  | **Removed — no replacement** (build your own screen) ⚠️                       |
 
-> 📘 `isDeeplinkHandled` is **unchanged** in React Native
+> 📘 `isDeeplinkHandled` was **renamed** to `handleDeeplink`
 >
-> Unlike the native iOS/Android SDKs (which renamed it `handleDeeplink`), the React Native bridge keeps `Purchasely.isDeeplinkHandled(uri)`. Do not rename it.
+> Like the native iOS/Android SDKs, the React Native bridge renamed this method to `Purchasely.handleDeeplink(uri)` (same signature, still returns `Promise<boolean>`). The v5 names `isDeeplinkHandled` and `readyToOpenDeeplink` **no longer exist** — there is no alias.
 
 ***
 
@@ -119,7 +120,7 @@ Every modifier takes a **plain string** (not an enum): `runningMode('full')`, `l
 
 ## 3. Displaying a paywall
 
-`Purchasely.presentation` is the `PresentationBuilder`. Pick an entry point (`.placement(id)`, `.screen(id)`, `.default()`), chain options, call `.build()` to get a `PresentationRequest`, then `.display()`. `display()` resolves at **dismiss** with a `PresentationOutcome`.
+`Purchasely.presentation` is the `PresentationBuilder`. Pick an entry point (`.placement(id)`, `.screen(id)`, `.defaultSource()`), chain options, call `.build()` to get a `PresentationRequest`, then `.display()`. `display()` resolves at **dismiss** with a `PresentationOutcome`. (`.defaultSource()` is the canonical cross-platform factory; `.default()` is a kept alias for the iOS-style name.)
 
 ### Before (v5 — removed)
 
@@ -155,7 +156,7 @@ if (outcome.error) {
 } else if (outcome.purchaseResult === 'purchased' || outcome.purchaseResult === 'restored') {
   console.log('Purchased', outcome.plan?.name)
 } else {
-  console.log('Dismissed', outcome.closeReason) // 'button' | 'backSystem' | 'interactiveDismiss' | 'programmatic'
+  console.log('Dismissed', outcome.closeReason) // 'button' | 'backSystem' | 'programmatic'
 }
 ```
 
@@ -176,7 +177,9 @@ await Purchasely.presentation.screen('SCREEN_ID').build().display()
 
 ### Builder options & lifecycle callbacks
 
-The builder also accepts `.backgroundColor()`, `.progressColor()`, `.displayCloseButton()` (Android), `.displayBackButton()` (Android), and lifecycle hooks `.onLoaded()`, `.onPresented()`, `.onCloseRequested()`, `.onDismissed()` — set them before `.build()`.
+The builder also accepts `.backgroundColor()`, `.progressColor()`, `.displayCloseButton()`, `.displayBackButton()`, and lifecycle hooks `.onLoaded()`, `.onPresented()`, `.onCloseRequested()`, `.onDismissed()` — set them before `.build()`.
+
+`.displayCloseButton()` / `.displayBackButton()` behave differently per platform: on **Android** they are a full toggle (`true` shows, `false` hides); on **iOS** only `false` acts (it hides the button) — passing `true` is a no-op and the button follows the paywall's own configuration.
 
 `display()` accepts an optional `Transition` **object**:
 
@@ -204,10 +207,12 @@ const result = await Purchasely.presentPresentation({ presentation })
 
 ```typescript
 const request = Purchasely.presentation.placement('ONBOARDING').build()
-const presentation = await request.preload() // resolves when the screen is loaded
+const loaded = await request.preload() // resolves to a PLYLoadedPresentation when the screen is loaded
 // later, when ready to show it:
 const outcome = await request.display()
 ```
+
+`preload()` resolves to a **`PLYLoadedPresentation`**: the presentation data (`screenId`, `placementId`, `plans`, …) **plus** `display([transition])`, `close()` and `back()` methods that delegate to the originating request. So you can also drive the lifecycle straight from the loaded object — `await loaded.display()` — instead of holding onto `request` (parity with the Flutter SDK).
 
 ***
 
@@ -290,13 +295,13 @@ Known action kinds: `close`, `closeAll`, `login`, `navigate`, `purchase`, `resto
 // Allow deeplinks (replaces readyToOpenDeeplink(true)) — set at start:
 await Purchasely.builder('YOUR_API_KEY').allowDeeplink(true).start()
 
-// Pass a deeplink to the SDK — UNCHANGED in React Native:
-const handled = await Purchasely.isDeeplinkHandled('app://ply/presentations/')
+// Pass a deeplink to the SDK — RENAMED from isDeeplinkHandled to handleDeeplink:
+const handled = await Purchasely.handleDeeplink('app://ply/presentations/')
 ```
 
-> 📘 `isDeeplinkHandled` stays — do not rename to `handleDeeplink`
+> 📘 `isDeeplinkHandled` was renamed to `handleDeeplink`
 >
-> The native iOS/Android SDKs renamed this to `handleDeeplink`, but the React Native bridge keeps the v5 name `isDeeplinkHandled(uri)` with the same signature.
+> Like the native iOS/Android SDKs, the React Native bridge renamed this method to `Purchasely.handleDeeplink(uri)` (same signature). The v5 names `isDeeplinkHandled` and `readyToOpenDeeplink` **no longer exist** — there is no alias, so any call to `isDeeplinkHandled` fails to compile.
 
 There are **two distinct paywall flows** — don't conflate them:
 
@@ -323,7 +328,7 @@ const subscription = Purchasely.setDefaultPresentationDismissHandler((outcome) =
     'SDK paywall dismissed:',
     outcome.presentation?.screenId,
     outcome.purchaseResult, // 'purchased' | 'restored' | 'cancelled' | null
-    outcome.closeReason     // 'button' | 'backSystem' | 'interactiveDismiss' | 'programmatic' | null
+    outcome.closeReason     // 'button' | 'backSystem' | 'programmatic' | null
   )
 })
 
@@ -336,7 +341,7 @@ Purchasely.removeDefaultPresentationDismissHandler()
 
 > 📘 Platform note
 >
-> `closeReason` is the cross‑platform superset: Android reports `backSystem` (system back), iOS reports `interactiveDismiss` (swipe‑down / nav pop). `error` is reserved (always `null` in 6.0).
+> `closeReason` is one of `'button'`, `'backSystem'` or `'programmatic'`. System dismissals surface as `'backSystem'` on both platforms — the Android system back gesture/button and the iOS interactive swipe‑down / nav pop both map there. `error` is reserved (always `null` in 6.0).
 
 ***
 
@@ -382,8 +387,8 @@ All **core** SDK methods are unchanged in name, signature, and behaviour. Only t
 - **Attributes**: `setUserAttributeWith{String,Number,Boolean,Date,StringArray,NumberArray,BooleanArray}`, `incrementUserAttribute`, `decrementUserAttribute`, `userAttributes`, `userAttribute`, `clearUserAttribute`, `clearUserAttributes`, `clearBuiltInAttributes`, `setAttribute`.
 - **Listeners**: `addEventListener` / `removeEventListener`, `addPurchasedListener` / `removePurchasedListener`, `addUserAttributeSetListener` / `removeUserAttributeSetListener`, `addUserAttributeRemovedListener` / `removeUserAttributeRemovedListener`.
 - **Client (BYOS) presentations**: `clientPresentationDisplayed`, `clientPresentationClosed`.
-- **Misc**: `setLogLevel`, `setLanguage`, `setThemeMode`, `setDebugMode`, `isDeeplinkHandled`, `revokeDataProcessingConsent`, `getConstants`, `close`.
-- **Embedded component**: `PLYPresentationView` — unchanged.
+- **Misc**: `setLogLevel`, `setLanguage`, `setThemeMode`, `setDebugMode`, `revokeDataProcessingConsent`, `getConstants`, `close`. (`isDeeplinkHandled` was **renamed** to `handleDeeplink` — see §7.)
+- **Embedded component**: `PLYPresentationView` — the `placementId` / `presentation` props still work; v6 **adds** a `request` prop so you can pass a preloaded `PresentationRequest` (parity with Flutter). Its `onPresentationClosed` receives a `{ result, plan }` `PLYPresentationViewResult` (a `ProductResult` + plan), not the 5-field outcome.
 
 ***
 
@@ -399,13 +404,13 @@ All **core** SDK methods are unchanged in name, signature, and behaviour. Only t
 - [ ] Replace `setPaywallActionInterceptorCallback` + `onProcessAction` with `interceptAction(kind, handler)` returning `'success' | 'failed' | 'notHandled'`
 - [ ] Replace `setDefaultPresentationResultCallback` / `…ResultHandler` with `setDefaultPresentationDismissHandler`
 - [ ] Replace `readyToOpenDeeplink(true)` with `.allowDeeplink(true)` on the builder
+- [ ] Rename `isDeeplinkHandled(uri)` to `handleDeeplink(uri)` (same signature; `isDeeplinkHandled` / `readyToOpenDeeplink` no longer exist)
 - [ ] Read `purchaseResult` as a string (`'purchased' | 'cancelled' | 'restored'`) instead of the `ProductResult` ordinal
 - [ ] Remove `presentSubscriptions()` and build your own screen from `userSubscriptions()` / `userSubscriptionsHistory()`
 
 ### Keep as‑is
 
-- [ ] `isDeeplinkHandled(uri)` — **not** renamed in React Native
 - [ ] All core / user / products / attributes / listeners methods
-- [ ] `PLYPresentationView` embedded component
+- [ ] `PLYPresentationView` embedded component (still accepts `placementId` / `presentation`; the `request` prop is additive)
 
 <br />

@@ -4,7 +4,7 @@ This guide covers the Purchasely React Native SDK **v6** (`6.0.0-rc.2`) for Java
 
 > 📘 SDK v6 — what changed
 >
-> v6 is a major release with breaking changes on the **paywall surface only**: **starting the SDK** (`Purchasely.builder(...)`), **displaying / preloading / closing a presentation**, and the **action interceptor**. Everything else on the `Purchasely` object — purchases, restore, identity, catalog, subscriptions, user attributes, events, dynamic offerings, consent and config — keeps its v5 signatures. React Native keeps `Purchasely.isDeeplinkHandled(uri)` for passing a deeplink to the SDK.
+> v6 is a major release with breaking changes on the **paywall surface only**: **starting the SDK** (`Purchasely.builder(...)`), **displaying / preloading / closing a presentation**, and the **action interceptor**. Everything else on the `Purchasely` object — purchases, restore, identity, catalog, subscriptions, user attributes, events, dynamic offerings, consent and config — keeps its v5 signatures. The one deeplink change: the runtime entry point `Purchasely.isDeeplinkHandled(uri)` was **renamed** to `Purchasely.handleDeeplink(uri)` (same signature) to match the native SDKs — `isDeeplinkHandled` and `readyToOpenDeeplink` no longer exist.
 >
 > The most impactful change for new integrations is that the **default running mode is now `'observer'`** (it was Full in v5). If you want Purchasely to handle and validate purchases, set `.runningMode('full')` explicitly. See [SDK Initialization](#sdk-initialization).
 
@@ -250,6 +250,7 @@ try {
 | `.logLevel(level)` | `'debug'`, `'info'`, `'warn'`, `'error'` (default) | Use `'debug'` in development |
 | `.allowDeeplink(bool)` | `true` / `false` (default `false`) | Replaces the v5 startup deeplink-permission method |
 | `.allowCampaigns(bool)` | `true` (default) / `false` | Gate Purchasely campaign display |
+| `.handleDeeplink(url)` | `string \| null` | Cold-start deeplink captured at launch; replayed automatically once `start()` completes (no separate `handleDeeplink()` call needed) |
 | `.stores(list)` | `['google' \| 'huawei' \| 'amazon']` | Android only |
 | `.storekitVersion(v)` | `'storeKit2'` (default), `'storeKit1'` | iOS only; replaces the `storeKit1` boolean |
 | `.start()` | — | `Promise<boolean>`; resolves once the SDK is configured |
@@ -310,8 +311,11 @@ await Purchasely.presentation.screen('SCREEN_ID').contentId('CONTENT_ID').build(
 ```typescript
 Purchasely.presentation.placement('onboarding'); // by placement id
 Purchasely.presentation.screen('screen_abc123'); // direct Console Screen lookup
-Purchasely.presentation.default();               // default handler for deeplinks / campaigns
+Purchasely.presentation.defaultSource();         // SDK default placement (canonical, cross-platform)
+Purchasely.presentation.default();               // alias of defaultSource() kept for parity with the iOS native name
 ```
+
+`defaultSource()` is the canonical cross-platform factory (it matches the Flutter SDK); `default()` is a thin alias kept because the native iOS API names this factory `default`. Both build the same request.
 
 To display a Flow, use its deeplink `app_scheme://ply/flows/FLOW_ID`.
 
@@ -325,14 +329,19 @@ Purchasely.presentation
     .contentId('my_content_id')
     .backgroundColor('#000000')      // hex color
     .progressColor('#FFFFFF')        // hex color
-    .displayCloseButton(true)        // Android only (no-op on iOS)
-    .displayBackButton(true)         // Android only (no-op on iOS)
+    .displayCloseButton(true)        // toggle the close button (see platform note)
+    .displayBackButton(true)         // toggle the back button (see platform note)
     .onLoaded((presentation, error) => { /* screen loaded */ })
     .onPresented((presentation, error) => { /* screen presented */ })
     .onCloseRequested(() => { /* user requested close */ })
     .onDismissed((outcome) => { /* screen dismissed */ })
     .build();
 ```
+
+> 📘 `displayCloseButton` / `displayBackButton` behave differently per platform
+>
+> - **Android** — full toggle: `true` shows the button, `false` hides it.
+> - **iOS** — removal only: only `false` has an effect (it hides the button). Passing `true` is a **no-op** — the button follows the paywall's own configuration.
 
 ### Transitions
 
@@ -362,10 +371,10 @@ The `Transition` object accepts:
 | `presentation` | `Presentation \| null` | The displayed presentation (or `null` if it never reached display) |
 | `purchaseResult` | `string \| null` | `'purchased'` \| `'restored'` \| `'cancelled'` \| `null` |
 | `plan` | `PurchaselyPlan \| null` | The purchased plan (when `purchaseResult` is `'purchased'` / `'restored'`) |
-| `closeReason` | `string \| null` | `'button'` \| `'backSystem'` \| `'interactiveDismiss'` \| `'programmatic'` (when no purchase) |
+| `closeReason` | `string \| null` | `'button'` \| `'backSystem'` \| `'programmatic'` (when no purchase) |
 | `error` | `PresentationError \| null` | Display error; mutually exclusive with `closeReason` |
 
-`purchaseResult` is `null` when the user dismissed the screen without a purchase action. Platform note: Android never reports `'interactiveDismiss'`; iOS never reports `'backSystem'`.
+`purchaseResult` is `null` when the user dismissed the screen without a purchase action. Platform note: system dismissals surface as `'backSystem'` on both platforms — the Android system back gesture/button and the iOS interactive swipe-down / navigation pop both map to `'backSystem'`.
 
 ### Presentation lifecycle (display / close / back)
 
@@ -782,6 +791,8 @@ Purchasely, by default, shows the paywall screen with a loading indicator while 
 
 Build a `PresentationRequest`, `preload()` it to fetch the screen from the network, then `display()` the **same** request when you are ready.
 
+`preload()` resolves to a **`PLYLoadedPresentation`** — the presentation data (`screenId`, `placementId`, `plans`, …) **plus** `display([transition])`, `close()` and `back()` methods that delegate to the originating request. You can therefore drive the whole lifecycle straight from the loaded object (`loaded.display()`) instead of keeping a separate reference to the request. (This mirrors the Flutter SDK.)
+
 ```typescript
 import Purchasely, { PLYPresentationType } from 'react-native-purchasely';
 
@@ -789,7 +800,7 @@ try {
     // Build a request for the placement
     const request = Purchasely.presentation.placement('ONBOARDING').build();
 
-    // Pre-fetch the presentation to display; resolves once the screen is loaded
+    // Pre-fetch the presentation; resolves to a PLYLoadedPresentation once the screen is loaded
     const presentation = await request.preload();
 
     if (presentation == null) {
@@ -831,6 +842,17 @@ try {
 }
 ```
 
+Because the `PLYLoadedPresentation` carries the lifecycle methods, you can also skip the extra `request` reference and drive it from the loaded object directly:
+
+```typescript
+const loaded = await Purchasely.presentation.placement('ONBOARDING').build().preload();
+const outcome = await loaded.display();   // show
+// loaded.close();                        // dismiss programmatically
+// loaded.back();                         // step back inside a Flow
+```
+
+> ⚠️ On **Android**, `close()` (whether called on the request or the loaded presentation) dismisses **all** displayed presentations — the native SDK does not yet expose a per-request close. On **iOS** it closes only the targeted presentation.
+
 ### Presentation Types
 
 | Type (`PLYPresentationType`) | Description |
@@ -862,16 +884,16 @@ await Purchasely.builder('YOUR_API_KEY')
 
 ### Passing the Deeplink to the SDK
 
-To let the Purchasely SDK analyze a deeplink received by the app, pass it with `isDeeplinkHandled`:
+To let the Purchasely SDK analyze a deeplink received by the app, pass it with `handleDeeplink`:
 
 ```typescript
-const handled = await Purchasely.isDeeplinkHandled('app://ply/presentations/');
+const handled = await Purchasely.handleDeeplink('app://ply/presentations/');
 console.log('Deeplink handled by Purchasely? ' + handled);
 ```
 
-> 📘 React Native keeps `isDeeplinkHandled`
+> 📘 `isDeeplinkHandled` was renamed to `handleDeeplink`
 >
-> In v6 the runtime method for passing a deeplink is still `Purchasely.isDeeplinkHandled(uri)`. Only the startup permission changed: it now uses `.allowDeeplink(true)` on the builder (the v5 startup permission method has been removed).
+> In v6 the runtime method for passing a deeplink is `Purchasely.handleDeeplink(uri)` (same signature — it still returns a `Promise<boolean>`). The v5 names `isDeeplinkHandled` **and** `readyToOpenDeeplink` **no longer exist** (no alias). Allow deeplinks at startup with `.allowDeeplink(true)` on the builder. For a deeplink captured at **cold start**, pass it to the builder with `.handleDeeplink(url)`; the SDK replays it automatically once `start()` completes.
 
 ### Forbidding the Display
 
@@ -914,30 +936,44 @@ const subscription = Purchasely.setDefaultPresentationDismissHandler((outcome) =
 
 ## Embedded Presentations
 
-To render a presentation inline inside your component tree — as opposed to full-screen / modal — use the `PLYPresentationView` component. Pass a `placementId` (or a preloaded `presentation`) and a close callback.
+To render a presentation inline inside your component tree — as opposed to full-screen / modal — use the `PLYPresentationView` component.
+
+The recommended input is a **preloaded request** (parity with the Flutter SDK): build a `PresentationRequest`, `preload()` it, then pass it through the `request` prop. The native view resolves the loaded presentation by the request's `requestId`, so there is no second network fetch.
 
 ```tsx
-import { PLYPresentationView } from 'react-native-purchasely';
+import Purchasely, { PLYPresentationView, ProductResult } from 'react-native-purchasely';
+
+// Preload before rendering (e.g. in an effect or during navigation)
+const request = Purchasely.presentation.placement('ONBOARDING').build();
+await request.preload();
 
 <PLYPresentationView
-    placementId="ONBOARDING"
+    request={request}
     flex={1}
     onPresentationClosed={(result) => {
-        console.log('Closed with result:', result);
+        // result: { result: ProductResult, plan: PurchaselyPlan | null }
+        if (
+            result.result === ProductResult.PRODUCT_RESULT_PURCHASED ||
+            result.result === ProductResult.PRODUCT_RESULT_RESTORED
+        ) {
+            console.log('User purchased', result.plan?.name);
+        }
         // Remove the component from your tree to close the Purchasely Screen
     }}
 />
 ```
 
-You can also feed it a presentation you preloaded yourself:
+> 📘 The embedded view reports a `PLYPresentationViewResult`, not the 5-field outcome
+>
+> Unlike the full-screen `display()` (which resolves a `PLYPresentationOutcome`), the native embedded view emits a **`{ result, plan }`** couple: `result` is a `ProductResult` (`PRODUCT_RESULT_PURCHASED` / `PRODUCT_RESULT_RESTORED` / `PRODUCT_RESULT_CANCELLED`) and `plan` is the purchased / restored `PurchaselyPlan` (or `null` when the user simply closed the screen).
+
+If you don't preload a request, the view falls back to a `placementId` (or a presentation you preloaded yourself):
 
 ```tsx
-const presentation = await Purchasely.presentation.placement('ONBOARDING').build().preload();
-
 <PLYPresentationView
-    presentation={presentation}
+    placementId="ONBOARDING"
     flex={1}
-    onPresentationClosed={(result) => console.log('Closed:', result)}
+    onPresentationClosed={(result) => console.log('Closed:', result.result, result.plan)}
 />
 ```
 
