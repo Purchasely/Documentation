@@ -67,8 +67,8 @@ Each platform documentation file includes:
 A Placement is a location in the user journey where a paywall can appear (e.g., "ONBOARDING", "SETTINGS", "PREMIUM_FEATURE"). Use placements to display paywalls:
 
 ```
-// Pseudocode - see platform docs for actual syntax
-Purchasely.presentPresentationForPlacement("ONBOARDING")
+// Pseudocode (v6) - see platform docs for actual syntax
+Purchasely.presentation.placement("ONBOARDING").build().display()
 ```
 
 ### Android Dependencies (Cross-Platform SDKs)
