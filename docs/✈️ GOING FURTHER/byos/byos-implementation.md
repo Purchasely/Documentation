@@ -161,7 +161,7 @@ Based on the Screen ID, your delegate / provider should instantiate the correspo
 public class CustomScreenViewDelegate: PLYCustomScreenViewDelegate {
     
     @ViewBuilder public func view(for presentation: PLYPresentation) -> some View {
-        switch presentation.id {
+        switch presentation.screenId {
         case "login":
             VStack {
                 Spacer()
@@ -184,7 +184,7 @@ public class CustomScreenViewDelegate: PLYCustomScreenViewDelegate {
 // UIKit
 public class MyCustomScreenViewControllerDelegate: PLYCustomScreenViewControllerDelegate {
     public func viewController(for presentation: PLYPresentation) -> UIViewController? {
-        switch presentation.id {
+        switch presentation.screenId {
         case "login":
             LoginViewController()
         default:
@@ -197,7 +197,7 @@ public class MyCustomScreenViewControllerDelegate: PLYCustomScreenViewController
 class CustomScreenProvider(private val context: Context) : PLYCustomScreenProvider {
 
     override fun onCustomScreenRequested(presentation: PLYPresentation): PLYCustomScreen? {
-        return when(presentation.id) {
+        return when(presentation.screenId) {
             "login" -> {
                 // Custom Login View
                 PLYCustomScreen.View(yourCustomLoginView) 
@@ -286,7 +286,7 @@ Purchasely.setCustomScreenProvider(customScreenProvider)
 Purchasely.setCustomScreenProvider(
     object : PLYCustomScreenProvider {
         override fun onCustomScreenRequested(presentation: PLYPresentation): PLYCustomScreen? {
-            return when(presentation.id) {
+            return when(presentation.screenId) {
                 "login" -> {
                     // Custom Login View
                     PLYCustomScreen.View(yourCustomLoginView)
@@ -349,7 +349,7 @@ presentation.execute(connection)
 public class CustomScreenViewDelegate: PLYCustomScreenViewDelegate {
     
     @ViewBuilder public func view(for presentation: PLYPresentation) -> some View {
-        switch presentation.id {
+        switch presentation.screenId {
         case "login":
             VStack {
                 Spacer()
@@ -373,7 +373,7 @@ public class CustomScreenViewDelegate: PLYCustomScreenViewDelegate {
 // UIKit
 public class MyCustomScreenViewControllerDelegate: PLYCustomScreenViewControllerDelegate {
     public func viewController(for presentation: PLYPresentation) -> UIViewController? {
-        switch presentation.id {
+        switch presentation.screenId {
         case "login":
             LoginViewController()
         default:
@@ -386,7 +386,7 @@ public class MyCustomScreenViewControllerDelegate: PLYCustomScreenViewController
 Purchasely.setCustomScreenProvider(
     object : PLYCustomScreenProvider {
         override fun onCustomScreenRequested(presentation: PLYPresentation): PLYCustomScreen? {
-            return when(presentation.id) {
+            return when(presentation.screenId) {
                 "login" -> {
                     // Find connection
                     val connection = presentation.connections.firstOrNull { it.id == "login" }

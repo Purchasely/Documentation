@@ -65,7 +65,7 @@ PLYPresentationBuilder
              // nothing to display
              
          } else if presentation.type == .client {
-             let presentationId = presentation.id
+             let presentationId = presentation.screenId
              let planIds = presentation.plans
              
              // display your own Screen

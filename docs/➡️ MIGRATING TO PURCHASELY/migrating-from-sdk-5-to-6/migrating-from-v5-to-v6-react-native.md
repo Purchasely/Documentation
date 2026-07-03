@@ -107,8 +107,8 @@ const configured = await Purchasely.builder('YOUR_API_KEY')
   .appUserId('user_id')         // optional, defaults to anonymous
   .runningMode('full')          // 'observer' (default) | 'full' — set 'full' for purchase handling
   .logLevel('error')            // 'debug' | 'info' | 'warn' | 'error'
-  .allowDeeplink(true)          // replaces readyToOpenDeeplink(true); defaults to false
-  .allowCampaigns(true)         // automatic campaigns; defaults to true
+  .allowDeeplink(true)          // replaces readyToOpenDeeplink(true); defaults to true
+  .allowCampaigns(true)         // automatic campaigns; defaults to true, independent from deeplinks
   .stores(['google'])           // Android only: 'google' | 'huawei' | 'amazon'
   .storekitVersion('storeKit2') // iOS only: 'storeKit1' | 'storeKit2'
   .start()                      // Promise<boolean>

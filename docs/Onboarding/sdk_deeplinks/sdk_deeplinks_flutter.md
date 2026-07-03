@@ -27,7 +27,7 @@ print('Deeplink handled by Purchasely? $handled');
 
 > 📘 `handleDeeplink` replaces the v5 name
 >
-> In v6 the runtime method is `Purchasely.handleDeeplink(uri)`. The old `isDeeplinkHandled` name remains only as a deprecated alias.
+> In v6 the runtime method is `Purchasely.handleDeeplink(uri)`. The old `isDeeplinkHandled` name was removed.
 
 #### Cold start (deeplink that launched the app)
 
@@ -67,7 +67,7 @@ Purchasely.allowDeeplink(false);
 Purchasely.allowDeeplink(true);
 ```
 
-> 📘 You only need this if you want to **defer** deeplinks. Do nothing and they display as soon as they are received. `allowDeeplink` replaces the v5 `readyToOpenDeeplink` name, which remains only as a deprecated alias.
+> 📘 You only need this if you want to **defer** deeplinks. Do nothing and they display as soon as they are received. `allowDeeplink` replaces the v5 `readyToOpenDeeplink` name, which was removed.
 
 ### SETTING THE DEFAULT PRESENTATION HANDLER
 

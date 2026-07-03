@@ -1,6 +1,6 @@
 # Purchasely iOS SDK Documentation
 
-This document provides comprehensive documentation for integrating and using the Purchasely iOS SDK with Swift (version 6.0.0-rc.1).
+This document provides comprehensive documentation for integrating and using the Purchasely iOS SDK with Swift (version 6.0.0-rc.2).
 
 ---
 
@@ -31,7 +31,7 @@ This document provides comprehensive documentation for integrating and using the
 | iOS | 13.4+ |
 | Xcode | 14.0+ |
 | Swift | 5.5+ |
-| Purchasely SDK | 6.0.0-rc.1 |
+| Purchasely SDK | 6.0.0-rc.2 |
 
 > 📘 SwiftUI integration requires iOS 13.4 or later.
 
@@ -76,7 +76,7 @@ carthage update
    ```
    https://github.com/Purchasely/Purchasely-iOS
    ```
-3. Select the version you want to use (6.0.0-rc.1 or later)
+3. Select the version you want to use (6.0.0-rc.2 or later)
 4. Click **Add Package**
 
 ---
@@ -191,7 +191,7 @@ Purchasely paywalls are displayed using **placements**. A placement is a specifi
 
 ### Display a Placement (one line)
 
-The simplest way to display a paywall is the `Purchasely.display(for:transition:)` convenience. It wraps `PLYPresentationBuilder.forPlacementId(...).build().display(transition:)` and presents the paywall automatically. Pass `transition: nil` to honor the backend-defined display mode, or pass a `PLYDisplayMode` to override it.
+The simplest way to display a paywall is the `Purchasely.display(for:transition:)` convenience. It wraps `PLYPresentationBuilder.forPlacementId(...).build().display(transition:)` and presents the paywall automatically. Pass `transition: nil` to honor the backend-defined display mode, or pass a `PLYTransition` to override it.
 
 ```swift
 // Backend-defined display mode
@@ -837,7 +837,7 @@ PLYPresentationBuilder
             // Nothing to display
 
         } else if presentation.type == .client {
-            let presentationId = presentation.id
+            let presentationId = presentation.screenId
             let plans = presentation.plans // [PLYPresentationPlan] — inspect planVendorId / storeProductId
             // Display your own Screen
         }
@@ -1146,4 +1146,4 @@ Purchasely
 
 ---
 
-*This documentation is for Purchasely iOS SDK version 6.0.0-rc.1*
+*This documentation is for Purchasely iOS SDK version 6.0.0-rc.2*

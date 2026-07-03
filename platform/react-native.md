@@ -205,8 +205,8 @@ try {
         .appUserId(null)              // optional if you already know your user id
         .runningMode('full')          // 'observer' (default) | 'full'
         .logLevel('error')            // set to 'debug' in development mode to see logs
-        .allowDeeplink(true)          // allow Purchasely to open deeplinks (default false)
-        .allowCampaigns(true)         // allow Purchasely campaigns (default true)
+        .allowDeeplink(true)          // allow Purchasely to open deeplinks (default true)
+        .allowCampaigns(true)         // allow Purchasely campaigns (default true, independent from deeplinks)
         .stores(['google'])           // Android only: 'google' | 'huawei' | 'amazon'
         .storekitVersion('storeKit2') // iOS only: 'storeKit2' (default) | 'storeKit1'
         .start();                     // resolves to a boolean
@@ -232,7 +232,7 @@ try {
         .runningMode('observer')      // 'observer' (default) | 'full'
         .logLevel('error')            // set to 'debug' in development mode to see logs
         .allowDeeplink(true)          // allow Purchasely to open deeplinks
-        .allowCampaigns(true)         // allow Purchasely campaigns
+        .allowCampaigns(true)         // allow Purchasely campaigns (independent from deeplinks)
         .stores(['google'])           // Android only: 'google' | 'huawei' | 'amazon'
         .storekitVersion('storeKit2') // iOS only: 'storeKit2' (default) | 'storeKit1'
         .start();
@@ -248,8 +248,8 @@ try {
 | `.appUserId(id)` | `string \| null` | Associate purchases with a user; anonymous by default |
 | `.runningMode(mode)` | `'observer'` (default), `'full'` | `'full'` lets Purchasely own the purchase flow |
 | `.logLevel(level)` | `'debug'`, `'info'`, `'warn'`, `'error'` (default) | Use `'debug'` in development |
-| `.allowDeeplink(bool)` | `true` / `false` (default `false`) | Replaces the v5 startup deeplink-permission method |
-| `.allowCampaigns(bool)` | `true` (default) / `false` | Gate Purchasely campaign display |
+| `.allowDeeplink(bool)` | `true` (default) / `false` | Replaces the v5 startup deeplink-permission method |
+| `.allowCampaigns(bool)` | `true` (default) / `false` | Gate Purchasely campaign display independently from deeplinks |
 | `.handleDeeplink(url)` | `string \| null` | Cold-start deeplink captured at launch; replayed automatically once `start()` completes (no separate `handleDeeplink()` call needed) |
 | `.stores(list)` | `['google' \| 'huawei' \| 'amazon']` | Android only |
 | `.storekitVersion(v)` | `'storeKit2'` (default), `'storeKit1'` | iOS only; replaces the `storeKit1` boolean |
@@ -351,6 +351,10 @@ Purchasely.presentation
 await Purchasely.presentation.placement('ONBOARDING').build().display({ type: 'fullScreen' });
 await Purchasely.presentation.placement('ONBOARDING').build().display({ type: 'modal', dismissible: false });
 await Purchasely.presentation.placement('ONBOARDING').build().display({ type: 'push' });
+await Purchasely.presentation.placement('ONBOARDING').build().display({
+    type: 'drawer',
+    height: { type: 'percentage', value: 0.5 },
+});
 ```
 
 The `Transition` object accepts:
@@ -358,7 +362,8 @@ The `Transition` object accepts:
 | Field | Type | Description |
 |-------|------|-------------|
 | `type` | `'fullScreen' \| 'push' \| 'modal' \| 'drawer' \| 'popin' \| 'inlinePaywall'` | Transition mode |
-| `heightPercentage` | `number?` | Height ratio for `drawer` / `popin` |
+| `width` | `{ type: 'pixel' \| 'percentage', value: number }?` | Width for `popin` |
+| `height` | `{ type: 'pixel' \| 'percentage', value: number }?` | Height for `drawer` / `popin` |
 | `dismissible` | `boolean?` | Whether the user can dismiss interactively |
 | `backgroundColors` | `{ light?, dark? }?` | Backdrop colors per theme |
 
@@ -874,7 +879,7 @@ To manage deeplinks you can do up to 3 things:
 
 ### Allowing the Display
 
-Deeplink display is allowed via the start builder (it defaults to `false`):
+Deeplink display is allowed via the start builder (it defaults to `true`):
 
 ```typescript
 await Purchasely.builder('YOUR_API_KEY')
@@ -907,7 +912,7 @@ Purchasely.allowDeeplink(false);
 Purchasely.allowDeeplink(true);
 ```
 
-Campaigns follow the same principle through `allowCampaigns` (also `true` by default):
+Campaigns follow the same principle through `allowCampaigns` (also `true` by default, independent from `allowDeeplink`):
 `Purchasely.allowCampaigns(false)` / `Purchasely.allowCampaigns(true)`.
 
 ### Setting the Default Presentation Dismiss Handler

@@ -8,8 +8,8 @@ recipe:
 ---
 ```kotlin Android
 // 1) build.gradle.kts — add the dependencies
-implementation("io.purchasely:core:6.0.0-rc.1")
-implementation("io.purchasely:google-play:6.0.0-rc.1")
+implementation("io.purchasely:core:6.0.0-rc.2")
+implementation("io.purchasely:google-play:6.0.0-rc.2")
 
 // 2) Initialize and start the SDK (e.g. in Application.onCreate)
 Purchasely {

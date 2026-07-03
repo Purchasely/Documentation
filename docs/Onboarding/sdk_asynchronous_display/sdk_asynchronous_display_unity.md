@@ -95,7 +95,7 @@ private void OnFetchPresentationSuccess(Presentation presentation)
 	{
 		case PresentationType.Normal:
 		case PresentationType.Fallback:
-			_purchasely.PresentPresentationWithId(presentation.id,
+			_purchasely.PresentPresentationWithId(presentation.screenId,
 				OnPresentationResult,
 				OnPresentationContentLoaded,
 				OnPresentationContentClosed);

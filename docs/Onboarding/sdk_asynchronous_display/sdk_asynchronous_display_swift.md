@@ -49,7 +49,7 @@ Call `PLYPresentationBuilder.forPlacementId(...).build().preload` for a placemen
 
 ```swift PLYPresentation properties
 class PLYPresentation(
-    id: String?
+    screenId: String?
     placementId: String?
     audienceId: String?
     abTestId: String?
@@ -98,7 +98,7 @@ PLYPresentationBuilder
              // nothing to display
              
          } else if presentation.type == .client {
-             let presentationId = presentation.id
+             let presentationId = presentation.screenId
              let planIds = presentation.plans
              
              // display your own paywall

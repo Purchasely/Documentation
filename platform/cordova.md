@@ -47,8 +47,8 @@ The v6 native Android SDK is built with Kotlin 2.2.x and `compileSdk 36`; make s
 The Purchasely Cordova SDK is split into two plugins. **Both must be pinned to the exact same version.**
 
 ```shell
-cordova plugin add @purchasely/cordova-plugin-purchasely@6.0.0-rc.1
-cordova plugin add @purchasely/cordova-plugin-purchasely-google@6.0.0-rc.1
+cordova plugin add @purchasely/cordova-plugin-purchasely@6.0.0-rc.2
+cordova plugin add @purchasely/cordova-plugin-purchasely-google@6.0.0-rc.2
 ```
 
 | Plugin | Purpose |
@@ -60,8 +60,8 @@ These plugins pull the native SDKs:
 
 | Platform | Native artifact |
 |----------|-----------------|
-| iOS | `pod 'Purchasely', '6.0.0-rc.1'` (CocoaPods) |
-| Android | `io.purchasely:core:6.0.0-rc.1` + `io.purchasely:google-play:6.0.0-rc.1` (Maven Central) |
+| iOS | `pod 'Purchasely', '6.0.0-rc.2'` (CocoaPods) |
+| Android | `io.purchasely:core:6.0.0-rc.2` + `io.purchasely:google-play:6.0.0-rc.2` (Maven Central) |
 
 > There is **no video player plugin on Cordova** — the `io.purchasely:player` artifact is not bridged.
 
@@ -106,13 +106,13 @@ allprojects {
 
 #### Version matching (critical)
 
-> ⚠️ **Every `io.purchasely:*` dependency must resolve to the same version.** A stray `6.0.0` (release) ranks *above* `6.0.0-rc.1` in Gradle and silently upgrades `core`, producing a `NoSuchMethodError` at runtime. Keep both plugins on the same pre-release string.
+> ⚠️ **Every `io.purchasely:*` dependency must resolve to the same version.** A stray `6.0.0` (release) ranks *above* `6.0.0-rc.2` in Gradle and silently upgrades `core`, producing a `NoSuchMethodError` at runtime. Keep both plugins on the same pre-release string.
 
 ```json
 // package.json
 "dependencies": {
-  "@purchasely/cordova-plugin-purchasely": "6.0.0-rc.1",
-  "@purchasely/cordova-plugin-purchasely-google": "6.0.0-rc.1"
+  "@purchasely/cordova-plugin-purchasely": "6.0.0-rc.2",
+  "@purchasely/cordova-plugin-purchasely-google": "6.0.0-rc.2"
 }
 ```
 
@@ -628,7 +628,7 @@ On Android this returns "No signing required on Android" — promotional offer s
 | Purchases not working on Android | Install `@purchasely/cordova-plugin-purchasely-google` and keep every `io.purchasely:*` dependency on the same version. |
 | Paywall not displaying | Verify the placement exists in the Console, the SDK is initialized, and the device has network access. |
 | Deeplink does nothing | Ensure `Purchasely.allowDeeplink(true)` and that you forward the URL with `handleDeeplink(...)`. |
-| `NoSuchMethodError` at runtime (Android) | A stray `io.purchasely:*:6.0.0` outranks `6.0.0-rc.1`; pin every artifact to the same string. |
+| `NoSuchMethodError` at runtime (Android) | A stray `io.purchasely:*:6.0.0` outranks `6.0.0-rc.2`; pin every artifact to the same string. |
 
 ### Debug logging
 

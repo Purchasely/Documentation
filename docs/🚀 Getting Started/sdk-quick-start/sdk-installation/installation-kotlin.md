@@ -49,7 +49,7 @@ apply plugin: 'com.huawei.agconnect'
 
 dependencies {
     //Add this line to integrate Huawei Mobile Services with Purchasely
-    implementation 'io.purchasely:huawei-services:6.0.0-rc.1'
+    implementation 'io.purchasely:huawei-services:6.0.0-rc.2'
 }
 ```
 
@@ -72,7 +72,7 @@ Purchasely.Builder(applicationContext)
 
 You only need to add one dependency
 
-`implementation 'io.purchasely:amazon:6.0.0-rc.1'`
+`implementation 'io.purchasely:amazon:6.0.0-rc.2'`
 
 This dependency contains the class `AmazonStore` that you must add to `Purchasely.Builder` to be used by the SDK
 

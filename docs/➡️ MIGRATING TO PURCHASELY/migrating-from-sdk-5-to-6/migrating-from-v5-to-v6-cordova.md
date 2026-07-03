@@ -2,7 +2,7 @@
 title: Migrating to v6 — Cordova
 excerpt: >-
   Breaking changes and migration steps to upgrade the Purchasely Cordova SDK
-  from v5.x to v6.0.0-rc.1
+  from v5.x to v6.0.0-rc.2
 deprecated: false
 hidden: false
 metadata:
@@ -43,18 +43,18 @@ This guide covers the **Cordova** plugin (JavaScript). For other platforms, see 
 Both Cordova plugins must be pinned to the **same** version:
 
 ```shell
-cordova plugin add @purchasely/cordova-plugin-purchasely@6.0.0-rc.1
-cordova plugin add @purchasely/cordova-plugin-purchasely-google@6.0.0-rc.1
+cordova plugin add @purchasely/cordova-plugin-purchasely@6.0.0-rc.2
+cordova plugin add @purchasely/cordova-plugin-purchasely-google@6.0.0-rc.2
 ```
 
 This pulls the native SDKs:
 
 | Platform | Native artifact |
 |----------|-----------------|
-| iOS | `pod 'Purchasely', '6.0.0-rc.1'` (CocoaPods) |
-| Android | `io.purchasely:core:6.0.0-rc.1` + `io.purchasely:google-play:6.0.0-rc.1` (Maven Central) |
+| iOS | `pod 'Purchasely', '6.0.0-rc.2'` (CocoaPods) |
+| Android | `io.purchasely:core:6.0.0-rc.2` + `io.purchasely:google-play:6.0.0-rc.2` (Maven Central) |
 
-> ⚠️ Every `io.purchasely:*` dependency must resolve to the same pre-release. A stray `6.0.0` (release) ranks *above* `6.0.0-rc.1` in Gradle and silently upgrades `core`, producing a `NoSuchMethodError` at runtime.
+> ⚠️ Every `io.purchasely:*` dependency must resolve to the same pre-release. A stray `6.0.0` (release) ranks *above* `6.0.0-rc.2` in Gradle and silently upgrades `core`, producing a `NoSuchMethodError` at runtime.
 
 Minimum OS versions for v6: **iOS 13.4**, **Android API 23** (`compileSdk 36`). There is **no video player plugin on Cordova** (`io.purchasely:player` is not bridged).
 

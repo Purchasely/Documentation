@@ -152,13 +152,14 @@ PLYPresentation {
       }
       PLYTransitionType.DRAWER -> {
         // Handle drawer transition
-        val heightPercentage = it.displayMode?.heightPercentage
-        Log.d("Purchasely", "Display it as a drawer transition with height percentage: $heightPercentage")
+        val height = it.displayMode?.height
+        Log.d("Purchasely", "Display it as a drawer transition with height: $height")
       }
       PLYTransitionType.POPIN -> {
         // Handle pop-in transition
-        val heightPercentage = it.displayMode?.heightPercentage
-        Log.d("Purchasely", "Display it as a pop-in transition with height percentage: $heightPercentage")
+        val width = it.displayMode?.width
+        val height = it.displayMode?.height
+        Log.d("Purchasely", "Display it as a pop-in transition with width: $width and height: $height")
       }
       null -> {
         // Handle no transition

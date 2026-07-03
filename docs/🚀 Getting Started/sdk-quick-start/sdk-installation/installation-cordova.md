@@ -24,9 +24,9 @@ To add our stores dependencies to your project, you just need to add them to the
 ```typescript build.gradle
 dependencies {
     //Amazon App Store
-    implementation 'io.purchasely:amazon:6.0.0-rc.1'
+    implementation 'io.purchasely:amazon:6.0.0-rc.2'
     
     //Huawei Mobile Services
-    implementation 'io.purchasely:huawei-services:6.0.0-rc.1'
+    implementation 'io.purchasely:huawei-services:6.0.0-rc.2'
 }
 ```

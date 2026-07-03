@@ -3,7 +3,7 @@ name: PLYPresentation
 ---
 ```coffeescript Swift
 class PLYPresentation {
-  let id: String?
+  let screenId: String?
   let height: Int?
   let language: String
   let flowId: String?
@@ -21,7 +21,7 @@ class PLYPresentation {
 ```
 ```coffeescript Kotlin
 data class PLYPresentation(
-    val id: String?,
+    val screenId: String?,
   	val height: Int?,
 		val flowId: String?,
     val placementId: String?,
@@ -37,7 +37,7 @@ data class PLYPresentation(
 ```
 ```typescript React Native
 export type PurchaselyPresentation = {
-  id: string;
+  screenId: string;
   height: int | null;
   placementId?: string | null;
   audienceId?: string | null;

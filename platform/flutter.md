@@ -1,10 +1,10 @@
 # Purchasely Flutter SDK Documentation
 
-This guide covers the Purchasely Flutter SDK **v6** (`6.0.0-rc.1`) for Dart apps. The plugin bridges to the Purchasely 6.0 native SDKs (iOS `Purchasely 6.0.0-rc.1`, Android `io.purchasely:core 6.0.0-rc.1`) and displays **Presentations** (Screens / paywalls) configured in the Console through placements, direct `screen` lookups, campaigns, deeplinks and Flows.
+This guide covers the Purchasely Flutter SDK **v6** (`6.0.0-rc.2`) for Dart apps. The plugin bridges to the Purchasely 6.0 native SDKs (iOS `Purchasely 6.0.0-rc.2`, Android `io.purchasely:core 6.0.0-rc.2`) and displays **Presentations** (Screens / paywalls) configured in the Console through placements, direct `screen` lookups, campaigns, deeplinks and Flows.
 
 > 📘 SDK v6 — what changed
 >
-> v6 is a major release with breaking changes on the **paywall surface only**: **starting the SDK**, **displaying / preloading / closing a presentation**, and the **action interceptor**. Everything else on the `Purchasely` class — purchases, restore, identity, catalog, subscriptions, user attributes, events, dynamic offerings, consent and config — remains source-compatible. Deeplinks gain the v6 names (`allowDeeplink`, `handleDeeplink`) while the old v5 names remain as deprecated aliases.
+> v6 is a major release with breaking changes on the **paywall surface only**: **starting the SDK**, **displaying / preloading / closing a presentation**, and the **action interceptor**. Everything else on the `Purchasely` class — purchases, restore, identity, catalog, subscriptions, user attributes, events, dynamic offerings, consent and config — remains source-compatible. Deeplinks use the v6 names (`allowDeeplink`, `handleDeeplink`); the old v5 names were removed.
 >
 > The most impactful change for new integrations is that the **default running mode is now `PLYRunningMode.observer`** (it was Full in v5). If you want Purchasely to handle and validate purchases, set `.runningMode(PLYRunningMode.full)` explicitly. See [SDK Initialization](#sdk-initialization).
 
@@ -49,7 +49,7 @@ We rely on [pub.dev](https://pub.dev/packages/purchasely_flutter) to distribute 
 Pin the Purchasely Flutter SDK to the exact version:
 
 ```shell
-flutter pub add purchasely_flutter:6.0.0-rc.1
+flutter pub add purchasely_flutter:6.0.0-rc.2
 ```
 
 Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android minSdk 23).
@@ -74,7 +74,7 @@ Then run:
 cd ios && pod install
 ```
 
-The iOS native dependency (`Purchasely 6.0.0-rc.1`) is published on the CocoaPods trunk, so it resolves from the public repositories with no extra configuration.
+The iOS native dependency (`Purchasely 6.0.0-rc.2`) is published on the CocoaPods trunk, so it resolves from the public repositories with no extra configuration.
 
 ### Android Setup
 
@@ -97,7 +97,7 @@ allprojects {
 }
 ```
 
-The Android native dependencies (`io.purchasely:core` / `google-play` / `player` `6.0.0-rc.1`) are published on **Maven Central**, so they resolve from the public repositories with no `mavenLocal()`.
+The Android native dependencies (`io.purchasely:core` / `google-play` / `player` `6.0.0-rc.2`) are published on **Maven Central**, so they resolve from the public repositories with no `mavenLocal()`.
 
 ### Android Dependencies
 
@@ -110,7 +110,7 @@ With Android, you can choose to use Google Play Store and/or Huawei AppGallery a
 If your app is distributed on the **Google Play Store**, you **must** install the Google Play Billing dependency:
 
 ```shell
-flutter pub add purchasely_google:6.0.0-rc.1
+flutter pub add purchasely_google:6.0.0-rc.2
 ```
 
 **Why is this required?**
@@ -126,7 +126,7 @@ flutter pub add purchasely_google:6.0.0-rc.1
 If your paywalls contain videos, you **must** install the Android video player dependency:
 
 ```shell
-flutter pub add purchasely_android_player:6.0.0-rc.1
+flutter pub add purchasely_android_player:6.0.0-rc.2
 ```
 
 **Why is this required?**
@@ -136,14 +136,14 @@ flutter pub add purchasely_android_player:6.0.0-rc.1
 
 #### Version Matching (Critical)
 
-> ⚠️ **All Purchasely packages must be pinned to the exact same version.** Mismatched versions cause runtime errors. Pin each package to `6.0.0-rc.1` — do **not** use a floating range (`^6.0.0`, `5.+`, …).
+> ⚠️ **All Purchasely packages must be pinned to the exact same version.** Mismatched versions cause runtime errors. Pin each package to `6.0.0-rc.2` — do **not** use a floating range (`^6.0.0`, `5.+`, …).
 
 ```yaml
 # pubspec.yaml
 dependencies:
-  purchasely_flutter: 6.0.0-rc.1
-  purchasely_google: 6.0.0-rc.1
-  purchasely_android_player: 6.0.0-rc.1
+  purchasely_flutter: 6.0.0-rc.2
+  purchasely_google: 6.0.0-rc.2
+  purchasely_android_player: 6.0.0-rc.2
 ```
 
 #### Complete Android Installation Example
@@ -152,9 +152,9 @@ For a typical app distributed on Google Play Store with video paywalls:
 
 ```shell
 # Install all required dependencies (same exact version)
-flutter pub add purchasely_flutter:6.0.0-rc.1
-flutter pub add purchasely_google:6.0.0-rc.1
-flutter pub add purchasely_android_player:6.0.0-rc.1
+flutter pub add purchasely_flutter:6.0.0-rc.2
+flutter pub add purchasely_google:6.0.0-rc.2
+flutter pub add purchasely_android_player:6.0.0-rc.2
 ```
 
 Then initialize with the Google store:
@@ -196,7 +196,7 @@ final bool configured = await Purchasely.apiKey('<<X-API-KEY>>')
     .stores([PLYStore.google])                    // Android only: google | huawei | amazon
     .storekitVersion(PLYStorekitVersion.storeKit2) // iOS only: storeKit2 (default) | storeKit1
     .allowDeeplink(true)                          // allow the SDK to open deeplinks (default true)
-    .allowCampaigns(true)                         // optional campaign display gate (default true)
+    .allowCampaigns(true)                         // independent campaign display gate (default true)
     .start();
 
 if (!configured) {
@@ -777,7 +777,7 @@ final handled = await Purchasely.handleDeeplink('app://ply/presentations/');
 print('Deeplink handled by Purchasely? $handled');
 ```
 
-> 📘 `handleDeeplink` replaces the v5 `isDeeplinkHandled` name, which remains only as a deprecated alias.
+> 📘 `handleDeeplink` replaces the v5 `isDeeplinkHandled` name, which was removed in v6.
 
 ### Forbidding the Display
 
@@ -791,10 +791,10 @@ Purchasely.allowDeeplink(false);
 Purchasely.allowDeeplink(true);
 ```
 
-Campaigns follow the same principle through `allowCampaigns` (also `true` by default):
+Campaigns follow the same principle through `allowCampaigns` (also `true` by default, independent from `allowDeeplink`):
 `Purchasely.allowCampaigns(false)` / `Purchasely.allowCampaigns(true)`.
 
-> 📘 `allowDeeplink` replaces the v5 `readyToOpenDeeplink` name, which remains only as a deprecated alias.
+> 📘 `allowDeeplink` replaces the v5 `readyToOpenDeeplink` name, which was removed in v6.
 
 ### Setting the Default Presentation Dismiss Handler
 
@@ -888,7 +888,7 @@ Expanded(
 
 2. **Purchases not validating / paywall does not auto-close after purchase**: You are likely in the new default `Observer` mode. Set `.runningMode(PLYRunningMode.full)` for Purchasely to own the purchase flow. In observer mode, presentations do not auto-close — dismiss them with `info.presentation?.close()`.
 
-3. **Purchases not working on Android**: Verify that you've added `purchasely_google` and that all Purchasely packages are pinned to the exact same version (`6.0.0-rc.1`).
+3. **Purchases not working on Android**: Verify that you've added `purchasely_google` and that all Purchasely packages are pinned to the exact same version (`6.0.0-rc.2`).
 
 4. **Paywall not displaying**: Check that:
    - The placement / screen exists in your Purchasely Console

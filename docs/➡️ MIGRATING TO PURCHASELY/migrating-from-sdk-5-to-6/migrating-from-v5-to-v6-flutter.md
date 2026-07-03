@@ -12,7 +12,7 @@ next:
 ---
 This guide covers the **Flutter SDK** (Dart). For the native layers this plugin bridges to, see the [iOS guide](migrating-from-v5-to-v6-ios) or the [Android guide](migrating-from-v5-to-v6-android), or the platform pages listed on the [migration overview](migrating-from-sdk-5-to-6).
 
-Version 6.0.0-rc.1 (the first Flutter release candidate) adapts the Flutter plugin to the Purchasely 6.0 native SDKs (iOS `Purchasely 6.0.0-rc.2`, Android `io.purchasely:core 6.0.0-rc.2`). The paywall surface — starting the SDK, displaying / preloading / closing a presentation, and the action interceptor — moves to a fluent builder API. Everything else on the `Purchasely` class (purchases, restore, identity, catalog, subscriptions, user attributes, events, dynamic offerings, consent and config) remains source‑compatible.
+Version 6.0.0-rc.2 adapts the Flutter plugin to the Purchasely 6.0 native SDKs (iOS `Purchasely 6.0.0-rc.2`, Android `io.purchasely:core 6.0.0-rc.2`). The paywall surface — starting the SDK, displaying / preloading / closing a presentation, and the action interceptor — moves to a fluent builder API. Everything else on the `Purchasely` class (purchases, restore, identity, catalog, subscriptions, user attributes, events, dynamic offerings, consent and config) remains source‑compatible except for the renamed deeplink methods listed below.
 
 > 📘 Breaking type renames (v5 → v6)
 >
@@ -40,8 +40,8 @@ Version 6.0.0-rc.1 (the first Flutter release candidate) adapts the Flutter plug
 | `PLYPaywallActionParameters` (action payload) | `PLYActionPayload` (+ typed `PLY*Payload` subclasses) |
 | `setPaywallActionInterceptorCallback` + `onProcessAction(bool)` | `Purchasely.interceptAction(kind, handler)` returning `PLYInterceptResult` |
 | `setDefaultPresentationResultHandler(cb)` | `Purchasely.setDefaultPresentationDismissHandler(cb)` |
-| `readyToOpenDeeplink(_)` | `allowDeeplink(_)` (old name kept as deprecated alias) |
-| `isDeeplinkHandled(_)` | `handleDeeplink(_)` (old name kept as deprecated alias) |
+| `readyToOpenDeeplink(_)` | `allowDeeplink(_)` (old name removed) |
+| `isDeeplinkHandled(_)` | `handleDeeplink(_)` (old name removed) |
 | `presentSubscriptions()` | **removed** — build your own from `userSubscriptions()` |
 
 > 📘 Three areas are breaking: **starting the SDK**, **displaying / preloading / closing a presentation**, and the **action interceptor**. Everything not in the table above keeps source‑compatible `Purchasely.*` signatures — see [What's unchanged](#what-stays-the-same).
@@ -54,9 +54,9 @@ Pin all Purchasely packages to the **exact same** version. Mismatched versions c
 
 ```yaml
 dependencies:
-  purchasely_flutter: 6.0.0-rc.1
-  purchasely_google: 6.0.0-rc.1          # required if you distribute on Google Play
-  purchasely_android_player: 6.0.0-rc.1  # optional, video paywalls on Android
+  purchasely_flutter: 6.0.0-rc.2
+  purchasely_google: 6.0.0-rc.2          # required if you distribute on Google Play
+  purchasely_android_player: 6.0.0-rc.2  # optional, video paywalls on Android
 ```
 
 Then:
@@ -451,7 +451,7 @@ final history = await Purchasely.userSubscriptionsHistory(); // expired subscrip
 
 ## What stays the same
 
-Only the **paywall surface** (start, display / preload / close / back, the action interceptor, default dismiss handler) has breaking API changes. Every other `Purchasely.*` method remains source‑compatible; deeplinks add v6 names with deprecated aliases:
+Only the **paywall surface** (start, display / preload / close / back, the action interceptor, default dismiss handler) has breaking API changes. Every other `Purchasely.*` method remains source‑compatible except the deeplink renames:
 
 * **Purchases**: `purchaseWithPlanVendorId`, `signPromotionalOffer`.
 * **Restore**: `restoreAllProducts`, `silentRestoreAllProducts`, `userDidConsumeSubscriptionContent`.
@@ -462,7 +462,7 @@ Only the **paywall surface** (start, display / preload / close / back, the actio
 * **Events**: `listenToEvents` / `stopListeningToEvents`, `listenToPurchases` / `stopListeningToPurchases`.
 * **Dynamic offerings**: `setDynamicOffering`, `getDynamicOfferings`, `removeDynamicOffering`, `clearDynamicOfferings`.
 * **Consent**: `revokeDataProcessingConsent`.
-* **Config / misc**: `setLanguage`, `setThemeMode`, `setLogLevel`, `synchronize` (now awaitable — see section 9), `allowDeeplink`, `handleDeeplink`, `setDebugMode`. (`readyToOpenDeeplink` / `isDeeplinkHandled` remain deprecated aliases.)
+* **Config / misc**: `setLanguage`, `setThemeMode`, `setLogLevel`, `synchronize` (now awaitable — see section 9), `allowDeeplink`, `handleDeeplink`, `setDebugMode`. (`readyToOpenDeeplink` / `isDeeplinkHandled` were removed.)
 
 ***
 
@@ -470,7 +470,7 @@ Only the **paywall surface** (start, display / preload / close / back, the actio
 
 ### Breaking (must fix to compile)
 
-* [ ] Pin `purchasely_flutter` / `purchasely_google` / `purchasely_android_player` to `6.0.0-rc.1`
+* [ ] Pin `purchasely_flutter` / `purchasely_google` / `purchasely_android_player` to `6.0.0-rc.2`
 * [ ] Rename v5 types: `PresentPresentationResult` → `PLYPresentationOutcome`, `PLYPaywallAction` → `PLYPresentationActionKind`, `PLYPaywallInfo` → `PLYInterceptorInfo`, `PLYPaywallActionParameters` → `PLYActionPayload`
 * [ ] Remove `PLYRunningMode.transactionOnly` and `PLYRunningMode.paywallObserver` — only `observer` and `full` remain
 * [ ] Replace `Purchasely.start(apiKey: …)` with `Purchasely.apiKey('…').…start()` (or `PurchaselyBuilder.apiKey('…').…start()`)
@@ -493,7 +493,7 @@ Only the **paywall surface** (start, display / preload / close / back, the actio
 
 ### Verify
 
-1. `flutter pub get` succeeds with all packages at `6.0.0-rc.1`.
+1. `flutter pub get` succeeds with all packages at `6.0.0-rc.2`.
 2. The init `Future<bool>` resolves `true`.
 3. A placement‑based presentation displays; a `screen` presentation displays.
 4. The `PLYPresentationOutcome` resolves with the expected `purchaseResult` / `closeReason`.

@@ -2,7 +2,7 @@
 title: Migrating to v6 — iOS
 excerpt: >-
   Breaking changes and migration steps to upgrade the Purchasely iOS SDK from
-  v5.x to v6.0.0-rc.1
+  v5.x to v6.0.0-rc.2
 deprecated: false
 hidden: false
 metadata:
@@ -14,7 +14,7 @@ next:
 ---
 This guide covers the **native iOS SDK** (Swift & Objective‑C). For other platforms, see the [Android guide](migrating-from-v5-to-v6-android) or the platform pages listed on the [migration overview](migrating-from-sdk-5-to-6).
 
-Version 6.0.0-rc.1 introduces a fluent initialization builder, a granular per‑action interceptor API, clearer naming, and a consolidated paywall display surface built around `PLYPresentationBuilder`. `PLYPresentation` becomes a protocol (most call sites compile unchanged).
+Version 6.0.0-rc.2 introduces a fluent initialization builder, a granular per‑action interceptor API, clearer naming, and a consolidated paywall display surface built around `PLYPresentationBuilder`. `PLYPresentation` becomes a protocol (most call sites compile unchanged).
 
 ***
 
