@@ -625,8 +625,7 @@ In **Full** mode, fetch active subscriptions directly from the SDK to manage ent
 Purchasely.userSubscriptions(
     onSuccess = { subscriptions ->
         // Each subscription contains the plan purchased and the source it was bought from.
-        // To let a user cancel, call Purchasely.displaySubscriptionCancellationInstruction(activity)
-        // which shows a dialog explaining how to unsubscribe via the Google Play settings.
+        // Build your own subscription-management entry point from this data.
     },
     onError = { throwable ->
         Log.e("Purchasely", "Subscription fetch failed", throwable)

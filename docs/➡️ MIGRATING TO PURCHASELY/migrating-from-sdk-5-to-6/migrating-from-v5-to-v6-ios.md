@@ -353,12 +353,12 @@ The `ply/products/*` and `ply/plans/*` deeplink formats are **removed** in v6. D
 
 ## 8. Display mode sizing (new)
 
-`PLYDisplayMode` exposes new sizing for drawer / popin: `height`, `width` (popin only) and `dismissible`. `PLYDimension` is now public:
+`PLYTransition` exposes new sizing for drawer / popin: `height`, `width` (popin only) and `dismissible`. `PLYDimension` is now public:
 
 ```swift
-let drawer = PLYDisplayMode.drawer(height: .value(400))                 // 400px tall
-let popin  = PLYDisplayMode.popin(width: .percentage(0.9), height: .value(500))
-let blocked = PLYDisplayMode.modal(dismissible: false)                  // block ambient dismiss
+let drawer = PLYTransition.drawer(height: .value(400))                 // 400px tall
+let popin  = PLYTransition.popin(width: .percentage(0.9), height: .value(500))
+let blocked = PLYTransition.modal(dismissible: false)                  // block ambient dismiss
 ```
 
 When `dismissible` is `false`, ambient dismiss (background tap, swipe‑down, iPad form‑sheet tap‑outside) is blocked; the close button and programmatic dismiss still work.

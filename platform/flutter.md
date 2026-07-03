@@ -568,7 +568,7 @@ final history = await Purchasely.userSubscriptionsHistory();
 >
 > The native subscriptions screen was removed from the 6.0 SDKs on both platforms, so `Purchasely.presentSubscriptions()` has been **removed entirely** from the Flutter API — the method no longer exists. There is no drop-in replacement: build your own subscriptions screen with `userSubscriptions()` / `userSubscriptionsHistory()`.
 >
-> The cancellation survey UI was likewise removed, so `Purchasely.displaySubscriptionCancellationInstruction()` is kept for source compatibility but is a **no-op** on both Android and iOS.
+> The cancellation survey UI was likewise removed, so `Purchasely.displaySubscriptionCancellationInstruction()` has also been **removed** from Flutter v6.
 
 ---
 

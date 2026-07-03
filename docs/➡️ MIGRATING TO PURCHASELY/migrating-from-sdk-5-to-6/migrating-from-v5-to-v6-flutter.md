@@ -438,7 +438,7 @@ No call‑site change is required for code that already `await`ed it.
 The built‑in subscription management and cancellation survey UI was **removed** from the 6.0 native SDKs on both platforms.
 
 * `Purchasely.presentSubscriptions()` is **removed entirely** from the Flutter API (Dart, iOS, Android). It is no longer a no‑op — the method no longer exists. There is no drop‑in replacement.
-* `Purchasely.displaySubscriptionCancellationInstruction()` is **kept** for source compatibility but is now a **no‑op** on both platforms.
+* `Purchasely.displaySubscriptionCancellationInstruction()` is **removed** from Flutter v6 too.
 
 Build your own subscriptions screen from the data APIs that remain:
 
@@ -457,7 +457,7 @@ Only the **paywall surface** (start, display / preload / close / back, the actio
 * **Restore**: `restoreAllProducts`, `silentRestoreAllProducts`, `userDidConsumeSubscriptionContent`.
 * **Identity**: `userLogin`, `userLogout`, `isAnonymous`, `anonymousUserId`.
 * **Catalog**: `allProducts`, `productWithIdentifier`, `planWithIdentifier`, `isEligibleForIntroOffer`.
-* **Subscriptions data**: `userSubscriptions`, `userSubscriptionsHistory`, `displaySubscriptionCancellationInstruction` (now a no‑op). `presentSubscriptions()` is **removed** — see section 10.
+* **Subscriptions data**: `userSubscriptions`, `userSubscriptionsHistory`. `presentSubscriptions()` and `displaySubscriptionCancellationInstruction()` are **removed** — see section 10.
 * **User attributes**: `setUserAttributeWithString` / `WithInt` / `WithDouble` / `WithBoolean` / `WithDate` / `WithStringArray` / …, `incrementUserAttribute`, `decrementUserAttribute`, `userAttribute`, `userAttributes`, `clearUserAttribute`, `clearUserAttributes`, `setUserAttributeListener`.
 * **Events**: `listenToEvents` / `stopListeningToEvents`, `listenToPurchases` / `stopListeningToPurchases`.
 * **Dynamic offerings**: `setDynamicOffering`, `getDynamicOfferings`, `removeDynamicOffering`, `clearDynamicOfferings`.
