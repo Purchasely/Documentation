@@ -21,7 +21,7 @@ next:
 To add Huawei as a store, you can use our NPM dependency
 
 ```shell
-npm install @purchasely/react-native-purchasely-huawei --save
+npm install @purchasely/react-native-purchasely-huawei@6.0.0-rc.2 --save
 ```
 
 Then you must add Huawei in the list of stores when starting the SDK with the builder
@@ -40,7 +40,7 @@ await Purchasely.builder('<<X-API-KEY>>')
 To add Amazon as a store, you can use our NPM dependency
 
 ```shell
-npm install @purchasely/react-native-purchasely-amazon --save
+npm install @purchasely/react-native-purchasely-amazon@6.0.0-rc.2 --save
 ```
 
 Then you must add Amazon in the list of stores when starting the SDK with the builder

@@ -60,7 +60,7 @@ We recommend always using the latest version within the current major version (c
 * **React Native**  
   ```json package.json
   "dependencies": {  
-    "react-native-purchasely": "^5.0.0"  
+    "react-native-purchasely": "6.0.0-rc.2"  
   }
   ```
 * **Flutter**

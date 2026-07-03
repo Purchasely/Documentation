@@ -43,7 +43,7 @@ implementation 'io.purchasely:player:6.0.0-rc.2'
 ## React Native
 
 ```coffeescript npm
-npm install @purchasely/react-native-purchasely-android-player --save
+npm install @purchasely/react-native-purchasely-android-player@6.0.0-rc.2 --save
 ```
 
 ## Flutter

@@ -52,7 +52,7 @@ We rely on [NPM](https://www.npmjs.com/package/react-native-purchasely) to distr
 ### Main Dependency
 
 ```shell
-npm install react-native-purchasely --save
+npm install react-native-purchasely@6.0.0-rc.2 --save
 ```
 
 Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android minSdk 23).
@@ -113,7 +113,7 @@ With Android, you can choose to use Google Play Store and/or Huawei AppGallery a
 If your app is distributed on the **Google Play Store**, you **must** install the Google Play Billing dependency:
 
 ```shell
-npm install @purchasely/react-native-purchasely-google --save
+npm install @purchasely/react-native-purchasely-google@6.0.0-rc.2 --save
 ```
 
 **Why is this required?**
@@ -129,7 +129,7 @@ npm install @purchasely/react-native-purchasely-google --save
 If your paywalls contain videos, you **must** install the Android video player dependency:
 
 ```shell
-npm install @purchasely/react-native-purchasely-android-player --save
+npm install @purchasely/react-native-purchasely-android-player@6.0.0-rc.2 --save
 ```
 
 **Why is this required?**
@@ -153,8 +153,8 @@ npm install @purchasely/react-native-purchasely-android-player --save
 The two remaining alternative stores follow the same pattern:
 
 ```shell
-npm install @purchasely/react-native-purchasely-amazon --save
-npm install @purchasely/react-native-purchasely-huawei --save
+npm install @purchasely/react-native-purchasely-amazon@6.0.0-rc.2 --save
+npm install @purchasely/react-native-purchasely-huawei@6.0.0-rc.2 --save
 ```
 
 #### Complete Android Installation Example
@@ -163,9 +163,9 @@ For a typical app distributed on Google Play Store with video paywalls:
 
 ```shell
 # Install all required dependencies (same exact version)
-npm install react-native-purchasely --save
-npm install @purchasely/react-native-purchasely-google --save
-npm install @purchasely/react-native-purchasely-android-player --save
+npm install react-native-purchasely@6.0.0-rc.2 --save
+npm install @purchasely/react-native-purchasely-google@6.0.0-rc.2 --save
+npm install @purchasely/react-native-purchasely-android-player@6.0.0-rc.2 --save
 ```
 
 Then initialize with the Google store:

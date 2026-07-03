@@ -15,7 +15,7 @@ We rely on [NPM](https://www.npmjs.com/package/react-native-purchasely) to distr
 # Main dependency
 
 ```shell
-npm install react-native-purchasely --save
+npm install react-native-purchasely@6.0.0-rc.2 --save
 ```
 
 Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android minSdk 23)
@@ -68,7 +68,7 @@ See below to add the store you want to use
 To add Google as a store, you can use our NPM dependency
 
 ```shell
-npm install @purchasely/react-native-purchasely-google --save
+npm install @purchasely/react-native-purchasely-google@6.0.0-rc.2 --save
 ```
 
 Then you must add Google in the list of stores when starting the SDK with the builder
@@ -88,7 +88,7 @@ A video player is not provided by default on Android to avoid conflict with anot
 We provide one in an external dependency that is detected and handled automatically
 
 ```shell
-npm install @purchasely/react-native-purchasely-android-player --save
+npm install @purchasely/react-native-purchasely-android-player@6.0.0-rc.2 --save
 ```
 
 <ReactnativeSdkInstallation />
