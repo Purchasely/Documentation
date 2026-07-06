@@ -377,7 +377,6 @@ The v6 interceptor is registered **per action** and returns a `PLYInterceptResul
 
 ```kotlin
 import io.purchasely.ext.PLYInterceptResult
-import io.purchasely.ext.interceptAction
 import io.purchasely.ext.presentation.PLYPresentationAction
 
 Purchasely.interceptAction<PLYPresentationAction.Login> { info, _ ->
@@ -394,6 +393,15 @@ Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
         // Display your terms & conditions, then proceed
     }
     PLYInterceptResult.NOT_HANDLED // let the SDK perform the purchase
+}
+```
+
+The `interceptAction<T> { … }` lambda above is a `suspend` lambda: you **return** the `PLYInterceptResult`. If your call site is not a coroutine, use the `Class`-based overload (select it with `::class.java`) and return the result later through the `result` lambda — call it exactly once, synchronously or after async work:
+
+```kotlin
+Purchasely.interceptAction(PLYPresentationAction.Purchase::class.java) { info, action, result ->
+    val purchase = action as PLYPresentationAction.Purchase   // not cast for you here
+    result(PLYInterceptResult.NOT_HANDLED)
 }
 ```
 
@@ -435,7 +443,9 @@ Purchasely.removeAllActionInterceptors()
 
 In **Full** mode, Purchasely performs purchases from Presentation buttons, validates receipts, and manages entitlements automatically. You only need to fetch the subscription status afterwards (see [Subscription Status & Entitlements](#subscription-status--entitlements)).
 
-In **Observer** mode, intercept the purchase and restore actions and run your own billing flow; when you return the success result the SDK calls `synchronize()` automatically so Purchasely receives the transaction state. Suspend the interceptor until your billing flow returns so you can resolve `PLYInterceptResult` exactly once.
+In **Observer** mode, intercept the purchase and restore actions and run your own billing flow; when you return the success result the SDK calls `synchronize()` automatically so Purchasely receives the transaction state. Defer the interceptor result until your billing flow returns so you can resolve `PLYInterceptResult` exactly once.
+
+With the coroutine (reified) overload, suspend until the billing callback resolves:
 
 ```kotlin
 Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
@@ -461,6 +471,25 @@ Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
     MyPurchaseSystem.restoreAllPurchases()
     // SDK auto-synchronizes on success in observer mode
     PLYInterceptResult.SUCCESS
+}
+```
+
+If you'd rather not use coroutines, the `Class`-based overload gives you the same deferral for free — call `result(…)` from inside your billing callback:
+
+```kotlin
+Purchasely.interceptAction(PLYPresentationAction.Purchase::class.java) { info, action, result ->
+    val purchase = action as PLYPresentationAction.Purchase
+    val offerToken = purchase.subscriptionOffer?.offerToken
+
+    startBilling(info.activity, purchase.plan.store_product_id, offerToken) { billingResult ->
+        result(
+            when (billingResult) {
+                BillingResult.SUCCESS   -> PLYInterceptResult.SUCCESS // SDK auto-synchronizes on success in observer mode
+                BillingResult.CANCELLED -> PLYInterceptResult.NOT_HANDLED
+                else                    -> PLYInterceptResult.FAILED
+            }
+        )
+    }
 }
 ```
 
