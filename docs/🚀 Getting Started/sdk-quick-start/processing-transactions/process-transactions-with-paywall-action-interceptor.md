@@ -86,6 +86,19 @@ Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
     // SDK auto-synchronizes on success in observer mode
     PLYInterceptResult.SUCCESS // notify Purchasely paywall to stop processing action
 }
+
+// The interceptAction<T> { … } lambda above is a suspend lambda: you RETURN the result.
+// If your call site is not a coroutine (e.g. your billing system reports through a callback),
+// use the Class-based overload (::class.java) and return the result via the `result` lambda:
+Purchasely.interceptAction(PLYPresentationAction.Purchase::class.java) { info, action, result ->
+    val purchase = action as PLYPresentationAction.Purchase   // not cast for you here
+    val offerToken = purchase.subscriptionOffer?.offerToken
+
+    MyPurchaseSystem.purchase(offerToken) { success ->
+        // called later from your billing callback — call result exactly once
+        result(if (success) PLYInterceptResult.SUCCESS else PLYInterceptResult.FAILED)
+    }
+}
 ```
 ```javascript React Native
 // Register one interceptor per action kind; each returns 'success' | 'failed' | 'notHandled'.

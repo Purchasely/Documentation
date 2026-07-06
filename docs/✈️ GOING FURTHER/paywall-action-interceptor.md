@@ -67,6 +67,17 @@ Purchasely.interceptAction<PLYPresentationAction.Login> { info, _ ->
     }
     PLYInterceptResult.NOT_HANDLED
 }
+
+// The interceptAction<T> { … } lambda above is a suspend lambda: you RETURN the result.
+// If your call site is not a coroutine, use the Class-based overload (::class.java) and
+// return the result later via the `result` lambda — call it exactly once:
+Purchasely.interceptAction(PLYPresentationAction.Login::class.java) { info, action, result ->
+    if (info?.activity == null) return@interceptAction result(PLYInterceptResult.NOT_HANDLED)
+    presentLogin(info.activity) { userLoggedIn ->
+        Purchasely.userLogin("MY_USER_ID")
+        result(PLYInterceptResult.SUCCESS)
+    }
+}
 ```
 ```typescript React Native
 import { Linking } from 'react-native';

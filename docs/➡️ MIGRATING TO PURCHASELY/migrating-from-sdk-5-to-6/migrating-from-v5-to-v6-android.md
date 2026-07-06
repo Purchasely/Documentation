@@ -228,7 +228,17 @@ Purchasely.interceptAction<PLYPresentationAction.Login> { info, _ ->
 }
 ```
 
-Java callers use the `Class`‑based overload:
+The reified `interceptAction<T> { … }` lambda is `suspend` — you **return** the `PLYInterceptResult` directly. If your call site is **not** a coroutine, use the `Class`‑based overload (select it with `::class.java`) and hand the result back later through the `result` lambda:
+
+```kotlin
+// Kotlin without coroutines — call result(…) exactly once, synchronously or after async work
+Purchasely.interceptAction(PLYPresentationAction.Purchase::class.java) { info, action, result ->
+    val purchase = action as PLYPresentationAction.Purchase   // not cast for you here
+    result(PLYInterceptResult.NOT_HANDLED)
+}
+```
+
+Java callers use the same `Class`‑based overload:
 
 ```java
 Purchasely.interceptAction(PLYPresentationAction.Purchase.class, (info, action, result) -> {
@@ -241,7 +251,7 @@ Remove interceptors with `Purchasely.removeActionInterceptor<PLYPresentationActi
 
 ### Observer‑mode bridge
 
-In Observer mode, suspend the interceptor until your own billing flow returns:
+In Observer mode, defer the interceptor result until your own billing flow returns. With the coroutine (reified) overload, suspend until the callback resolves:
 
 ```kotlin
 Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
@@ -259,6 +269,27 @@ Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
                 }
             )
         }
+    }
+}
+```
+
+If you don't want to deal with coroutines, the `Class`‑based overload gives you the same deferral for free — just call `result(…)` from inside your billing callback:
+
+```kotlin
+Purchasely.interceptAction(PLYPresentationAction.Purchase::class.java) { info, action, result ->
+    val purchase = action as PLYPresentationAction.Purchase
+    startBilling(
+        info?.activity,
+        purchase.plan.store_product_id,
+        purchase.subscriptionOffer?.offerToken
+    ) { billingResult ->
+        result(
+            when (billingResult) {
+                BillingResult.SUCCESS   -> PLYInterceptResult.SUCCESS // SDK auto-synchronizes on success in observer mode
+                BillingResult.CANCELLED -> PLYInterceptResult.NOT_HANDLED
+                else -> PLYInterceptResult.FAILED
+            }
+        )
     }
 }
 ```

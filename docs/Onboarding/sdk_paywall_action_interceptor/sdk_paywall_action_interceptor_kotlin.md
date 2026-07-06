@@ -82,3 +82,18 @@ Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
     PLYInterceptResult.SUCCESS // notify Purchasely the action was handled
 }
 ```
+
+The reified `interceptAction<T> { … }` lambda above is a `suspend` lambda: you **return** the `PLYInterceptResult`. If your billing system reports its outcome through a callback, prefer the `Class`‑based overload — you don't need a coroutine, and you return the result from inside the callback by calling `result(…)`:
+
+```kotlin No coroutine
+// Select the Class-based overload with ::class.java. Call result(…) exactly once.
+Purchasely.interceptAction(PLYPresentationAction.Purchase::class.java) { info, action, result ->
+    val purchase = action as PLYPresentationAction.Purchase   // not cast for you here
+    val offerToken = purchase.subscriptionOffer?.offerToken
+
+    MyPurchaseSystem.purchase(offerToken) { success ->
+        // called later, from your billing callback — no suspend / coroutine needed
+        result(if (success) PLYInterceptResult.SUCCESS else PLYInterceptResult.FAILED)
+    }
+}
+```
