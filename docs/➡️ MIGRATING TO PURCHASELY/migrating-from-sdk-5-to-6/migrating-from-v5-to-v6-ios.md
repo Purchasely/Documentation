@@ -106,7 +106,7 @@ Purchasely
 | `environment(_:)`      | `.prod`                                                                                               |
 | `themeMode(_:)`        | `.system`                                                                                             |
 | `allowDeeplink(_:)`    | `true` — deeplinks display immediately; pass `false` to defer until `Purchasely.allowDeeplink(true)`  |
-| `allowCampaigns(_:)`   | `true` — campaigns display immediately; pass `false` to defer until `Purchasely.allowCampaigns(true)` |
+| `allowCampaigns(_:)`   | `true` (was `false` in v5) — campaigns display once the SDK is configured; pass `false` to defer until `Purchasely.allowCampaigns(true)` |
 | `handleDeeplink(_:)`   | unset — pass a cold‑start deeplink to display once the SDK has started                                |
 
 ***
@@ -176,7 +176,7 @@ Purchasely.interceptAction(.login) { info, params, completion in
 
 | `PLYPresentationInfo` (removed)          | `PLYInterceptorInfo` (new)                         |
 | ---------------------------------------- | -------------------------------------------------- |
-| `info.presentationId`                    | `info.presentation?.id`                            |
+| `info.presentationId`                    | `info.presentation?.screenId`                      |
 | `info.placementId`                       | `info.presentation?.placementId`                   |
 | `info.audienceId`                        | `info.presentation?.audienceId`                    |
 | `info.abTestId` / `info.abTestVariantId` | `info.presentation?.abTestId` / `…abTestVariantId` |
@@ -281,7 +281,7 @@ For a direct Screen, a completion, or richer configuration, use `PLYPresentation
 
 ## 4. `PLYPresentation` is now a protocol
 
-`PLYPresentation` changed from a class to a public `@objc` protocol. **Reading members and calling methods works unchanged** — every property (`id`, `placementId`, `plans`, `metadata`, …) and method (`display(from:)`, `close()`, `back()`, …) is a protocol requirement that resolves identically.
+`PLYPresentation` changed from a class to a public `@objc` protocol. **Reading members and calling methods works unchanged** — every property (`screenId`, `placementId`, `plans`, `metadata`, …) and method (`display(from:)`, `close()`, `back()`, …) is a protocol requirement that resolves identically.
 
 Where you may need a change:
 
@@ -321,11 +321,11 @@ Purchasely.closeAllScreens()   // was Purchasely.closeDisplayedPresentation()
 
 ***
 
-## 7. Deeplinks (deprecated renames)
+## 7. Deeplinks (renamed — breaking)
 
-The old methods still compile but are deprecated (removal in v7):
+The old methods are **removed** in v6 (they no longer exist — no alias). Update the call sites:
 
-| v5 (deprecated)                           | v6                              |
+| v5 (removed)                              | v6                              |
 | ----------------------------------------- | ------------------------------- |
 | `Purchasely.readyToOpenDeeplink(_:)`      | `Purchasely.allowDeeplink(_:)`  |
 | `Purchasely.isDeeplinkHandled(deeplink:)` | `Purchasely.handleDeeplink(_:)` |
@@ -382,11 +382,11 @@ When `dismissible` is `false`, ambient dismiss (background tap, swipe‑down, iP
 - [ ] Replace `Purchasely.closeDisplayedPresentation()` with `Purchasely.closeAllScreens()`
 - [ ] Update `Purchasely.display(...)` to `Purchasely.display(for: placementId, transition: …)`
 - [ ] In Objective‑C, change `PLYPresentation *` to `id<PLYPresentation>`
+- [ ] Replace `readyToOpenDeeplink(_:)` with `allowDeeplink(_:)` and `isDeeplinkHandled(deeplink:)` with `handleDeeplink(_:)` (old names removed)
 
 ### Deprecated (fix before v7)
 
 - [ ] Migrate the pre‑`start` `set*` class funcs to chain modifiers
-- [ ] Replace `readyToOpenDeeplink(_:)` with `allowDeeplink(_:)` and `isDeeplinkHandled(deeplink:)` with `handleDeeplink(_:)`
 - [ ] Build and verify no deprecation warnings remain
 
 <br />
