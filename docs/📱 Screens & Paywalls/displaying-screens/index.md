@@ -56,7 +56,7 @@ Purchasely SDK will by default display a controller (iOS) / activity (android) o
 
 Otherwise, you can also use [Nested Views](nesting-views) to display a Purchasely Screen inside your own component.
 
-## Cordova / Unity
+## Cordova
 
 Purchasely SDK will display a controller (iOS) / activity (android) on top of your Screen to display the paywall. You can [control the Screen visibility](show-hide-close-screens) to hide it to show your content and present it again afterwards.
 

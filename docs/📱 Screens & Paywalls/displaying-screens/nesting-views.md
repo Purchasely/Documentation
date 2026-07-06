@@ -20,10 +20,6 @@ However, for develops who want to customize the size of their paywalls,such as d
 
 Currently, this functionality is available for native technologies (`Swift` and `Kotlin`) as well as `Flutter` and `React Native`.
 
-> 🚧 Compatibility Notice
->
-> Please note that this feature is not available for **`Cordova`** and **`Unity`**.
-
 # Swift
 
 Purchasely provides a [UIViewController](https://developer.apple.com/documentation/uikit/uiviewcontroller) instance, you can display it directly using the `present()` method. This UIViewController contains a [UIView](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621460-view) instance that you can use to integrate it in your own [UIView](https://developer.apple.com/documentation/uikit/uiview).

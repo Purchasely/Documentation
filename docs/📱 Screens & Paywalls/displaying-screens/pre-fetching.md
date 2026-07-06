@@ -206,7 +206,7 @@ try {
   print(e);
 }
 ```
-```csharp Unity
+```csharp
 private PurchaselyRuntime.Purchasely _purchasely;
 
 ...

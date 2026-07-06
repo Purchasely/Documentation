@@ -202,7 +202,7 @@ Purchasely.setPaywallActionInterceptor((result) => {
 	}
 });
 ```
-```csharp Unity
+```csharp
 private PurchaselyRuntime.Purchasely _purchasely;
 
 purchasely.SetPaywallActionInterceptor(OnPaywallActionIntercepted);

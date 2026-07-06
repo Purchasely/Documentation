@@ -70,7 +70,7 @@ class PLYSubscription {
   PLYProduct? product;
 }
 ```
-```csharp Unity
+```csharp
 public class SubscriptionData
 {
   public Plan plan;

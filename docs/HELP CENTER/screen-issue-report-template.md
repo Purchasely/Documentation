@@ -54,7 +54,7 @@ Please specify **how the Screen is displayed** in your app:
 
 Please include details about your setup:
 
-* **App name and platform:** iOS / Android / Web / React Native / Flutter / Unity / Cordova
+* **App name and platform:** iOS / Android / Web / React Native / Flutter / Cordova
 * **SDK version:**
 * **App version:**
 * **Environment:** Production / Sandbox / Staging

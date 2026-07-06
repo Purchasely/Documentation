@@ -60,8 +60,6 @@ Add the native android dependency in the `build.gradle` file of your android pro
 implementation 'io.purchasely:player:6.0.0-rc.2'
 ```
 
-## Unity
-
 Already included in the SDK.
 
 # Custom video player

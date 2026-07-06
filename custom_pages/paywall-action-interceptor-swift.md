@@ -27,8 +27,6 @@ Purchasely.setPaywallActionInterceptor()
 
 # Cordova
 
-# Unity
-
 ```Text Swift
 ```
 ```Text Kotlin

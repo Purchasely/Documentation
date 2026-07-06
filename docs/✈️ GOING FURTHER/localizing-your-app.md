@@ -71,7 +71,7 @@ Purchasely.setLanguage("en");
 // Force language to spanish
 Purchasely.setLanguage("es");
 ```
-```csharp Unity
+```csharp
 // Force language to spanish
 _purchasely.SetLanguage("es");
 ```

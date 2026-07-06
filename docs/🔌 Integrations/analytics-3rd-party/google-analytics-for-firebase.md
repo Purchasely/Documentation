@@ -64,7 +64,7 @@ FirebasePlugin.getId(function(appInstanceId) {
 ```
 ```Text Flutter
 ```
-```Text Unity
+```Text
 ```
 
 > 📘 You can always give your custom User ID to Analytics if you need more detailed metrics, as detailed in[ Set a User ID documentation](https://firebase.google.com/docs/analytics/userid). But make sure it matches the `vendor_id` you give to Purchasely to avoid discrepancies.

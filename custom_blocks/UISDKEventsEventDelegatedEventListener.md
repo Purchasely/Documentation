@@ -22,7 +22,7 @@ Purchasely.eventListener = eventListener
 ```javascript Cordova
 // Nothing special to setup, just go to "Receiving events" below
 ```
-```csharp Unity
+```csharp
 //not available at the moment
 ```
 
@@ -73,7 +73,7 @@ Purchasely.addEventsListener((event) => {
        console.log(event);
 });
 ```
-```csharp Unity
+```csharp
 //not available at the moment
 ```
 

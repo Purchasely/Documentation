@@ -52,7 +52,7 @@ Purchasely.allowCampaigns(false);
 // later, once your app is ready
 Purchasely.allowCampaigns(true);
 ```
-```csharp Unity
+```csharp
 _purchasely.SetAllowCampaigns(false);
 // later, once your app is ready
 _purchasely.SetAllowCampaigns(true);

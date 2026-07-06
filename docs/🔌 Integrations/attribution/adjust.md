@@ -98,7 +98,7 @@ Purchasely.setAttribute(PLYAttribute.adjust_id, "adjust_user_id");
 ```coffeescript Cordova
 Purchasely.setAttribute(Purchasely.Attribute.ADJUST_ID, Adjust.getAdid());
 ```
-```coffeescript Unity
+```coffeescript
 private PurchaselyRuntime.Purchasely _purchasely;
 
 _purchasely.SetAttribute(PLYAttribute.ADJUST_ID, "test_adjust_id");

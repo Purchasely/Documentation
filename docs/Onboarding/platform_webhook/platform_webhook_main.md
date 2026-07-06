@@ -190,7 +190,7 @@ Purchasely.getAnonymousUserId((anonymousId) => {
 	console.log("Purchasely anonymous Id: " + anonymousId);
 });
 ```
-```csharp Unity
+```csharp
 private PurchaselyRuntime.Purchasely _purchasely;
 
 _purchasely.GetAnonymousUserId();

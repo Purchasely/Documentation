@@ -111,7 +111,7 @@ Purchasely.userLogin('john.doe');
 ```kotlin Flutter
 Purchasely.userLogin('john.doe');
 ```
-```kotlin Unity
+```kotlin
 private PurchaselyRuntime.Purchasely _purchasely;
 ...
 _purchasely.UserLogin("john.doe", OnUserLoginCompleted);

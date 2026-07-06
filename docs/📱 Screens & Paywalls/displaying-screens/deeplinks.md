@@ -116,7 +116,7 @@ Purchasely.setDefaultPresentationDismissHandler((result) => {
 	}
 });
 ```
-```csharp Unity
+```csharp
 _purchasely.SetDefaultPresentationResultHandler((result, plan) =>
 {
     Log($"Presentation Result: {result}.");

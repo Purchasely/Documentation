@@ -113,7 +113,7 @@ if (!configured) {
         return;
 }
 ```
-```csharp Unity
+```csharp
 private PurchaselyRuntime.Purchasely _purchasely;
 
 _purchasely = new PurchaselyRuntime.Purchasely("USER_ID",
@@ -257,7 +257,7 @@ if (!configured) {
         return;
 }
 ```
-```csharp Unity
+```csharp
 private PurchaselyRuntime.Purchasely _purchasely;
 
 _purchasely = new PurchaselyRuntime.Purchasely("USER_ID",

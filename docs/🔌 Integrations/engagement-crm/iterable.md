@@ -70,7 +70,7 @@ Purchasely.setAttribute(Purchasely.Attribute.ITERABLE_USER_ID, id);
 
 Purchasely.setAttribute(Purchasely.Attribute.ITERABLE_USER_EMAIL, email);
 ```
-```Text Unity
+```Text
 private PurchaselyRuntime.Purchasely _purchasely;
 ...
 _purchasely.SetAttribute(PLYAttribute.ITERABLE_USER_ID, id);

@@ -241,7 +241,7 @@ Purchasely.setUserAttributeWithDouble("doubleKey", 1.2);
 Purchasely.setUserAttributeWithBoolean("booleanKey", true);
 Purchasely.setUserAttributeWithDate("dateKey", DateTime.now());
 ```
-```csharp Unity
+```csharp
 private PurchaselyRuntime.Purchasely _purchasely;
 
 //Set one attribute by key and value
@@ -310,7 +310,7 @@ Purchasely.userAttribute("key_string", value => {
   console.log("User attribute string " + value);
 });
 ```
-```csharp Unity
+```csharp
 private PurchaselyRuntime.Purchasely _purchasely;
 
 _purchasely.GetUserAttribute("AttributeID")
@@ -380,7 +380,7 @@ Purchasely.userAttribute("viewed_articles", value => {
   Purchasely.setUserAttributeWithInt("viewed_articles", value + 1);
 });
 ```
-```csharp Unity
+```csharp
 // Not available at the moment, you can do
 private PurchaselyRuntime.Purchasely _purchasely;
 
@@ -427,7 +427,7 @@ Purchasely.clearUserAttribute("key_string");
 //Remove all attributes
 Purchasely.clearUserAttributes();
 ```
-```csharp Unity
+```csharp
 //Remove one attribute
 _purchasely.ClearUserAttribute("StringAttribute");
 	
@@ -490,7 +490,7 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7, processin
 ```
 ```javascript Cordova
 ```
-```csharp Unity
+```csharp
 ```
 
 <br />
@@ -537,7 +537,7 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7, processin
 ```
 ```javascript Cordova
 ```
-```csharp Unity
+```csharp
 ```
 
 <br />

@@ -85,7 +85,7 @@ Purchasely.handleDeeplink("app://ply/presentations/", (handled) => {
 	console.log("Was deeplink handled by Purchasely? " + handled);
 });
 ```
-```csharp Unity
+```csharp
 private PurchaselyRuntime.Purchasely _purchasely;
 
 _purchasely.HandleDeeplink("app://ply/presentations/");
@@ -140,7 +140,7 @@ Purchasely.allowDeeplink(false);
 // later
 Purchasely.allowDeeplink(true);
 ```
-```csharp Unity
+```csharp
 _purchasely.SetAllowDeeplink(false);
 // later
 _purchasely.SetAllowDeeplink(true);

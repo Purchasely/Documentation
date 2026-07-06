@@ -53,7 +53,7 @@ Purchasely.setThemeMode(PLYThemeMode.dark);
 // use device theme to set automatically in dark or light mode
 Purchasely.setThemeMode(PLYThemeMode.system);
 ```
-```csharp Unity
+```csharp
 // force dark mode for all Purchasely screens
 Purchasely.setThemeMode(Purchasely.ThemeMode.dark);
 

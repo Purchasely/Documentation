@@ -60,7 +60,7 @@ Purchasely.setAttribute(PLYAttribute.clever_tap_id, "clever_tap_id");
 ```coffeescript Cordova
 Purchasely.setAttribute(Purchasely.Attribute.CLEVER_TAP_ID, "clever_tap_id");
 ```
-```coffeescript Unity
+```coffeescript
 private PurchaselyRuntime.Purchasely _purchasely;
 
 _purchasely.SetAttribute(PLYAttribute.CLEVER_TAP_ID, "clever_tap_id");

@@ -51,7 +51,7 @@ Purchasely.setAttribute(Attributes.BRANCH_USER_DEVELOPER_IDENTITY, "Actual Branc
 ```
 ```coffeescript Cordova
 ```
-```coffeescript Unity
+```coffeescript
 ```
 
 ## 2. Activating the Branch integration

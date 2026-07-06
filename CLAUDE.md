@@ -16,7 +16,7 @@ Purchasely is a **SaaS platform empowering subscription apps**. It helps mobile 
 
 ### Core Components
 
-1. **Mobile SDK** - Available in Swift, Kotlin, Objective-C, Java, React Native, Flutter, Cordova, and Unity
+1. **Mobile SDK** - Available in Swift, Kotlin, Objective-C, Java, React Native, Flutter, and Cordova
 2. **Cloud Backend** - Subscription infrastructure for transaction processing and entitlement management
 3. **Web Console** - Design user journeys, build paywalls, run campaigns, and access analytics
 
@@ -103,7 +103,6 @@ For React Native, Flutter, and Cordova: the main SDK does NOT include Google Pla
 | Android | Kotlin/Java | `io.purchasely:core` (Maven) |
 | React Native | JavaScript/TypeScript | `react-native-purchasely` (npm) |
 | Flutter | Dart | `purchasely_flutter` (pub.dev) |
-| Unity | C# | `io.purchasely:unity` |
 | Cordova | JavaScript | `cordova-plugin-purchasely` |
 
 ### SDK Version Naming
@@ -308,7 +307,7 @@ The documentation uses custom MDX components:
 SDK code examples are primarily in:
 - `custom_blocks/SDKDisplayMethodCodeSnipped.md` - Display methods
 - `custom_blocks/*SdkInstallation.md` - Installation per platform
-- Individual doc files with code blocks for Swift, Kotlin, React Native, Flutter, Cordova, Unity
+- Individual doc files with code blocks for Swift, Kotlin, React Native, Flutter, and Cordova
 
 ---
 

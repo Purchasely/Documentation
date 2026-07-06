@@ -21,7 +21,6 @@ next:
 > * ReactNative: 4.0.1
 > * Cordova: 4.1.0
 > * Flutter: 4.0.0
-> * Unity: 4.1.0
 
 ## Native iOS and Android
 
@@ -48,7 +47,7 @@ PLYPresentation {
 Purchasely.closeAllScreens()
 ```
 
-## React Native, Flutter, Cordova and Unity
+## React Native, Flutter, Cordova
 
 Managing the visibility of screens in your application is essential for providing a seamless user experience. The Purchasely SDK allows you to control the visibility of screens, enabling you to:
 
@@ -75,7 +74,7 @@ request.close()
 ```coffeescript Cordova
 Purchasely.hidePresentation()
 ```
-```coffeescript Unity
+```coffeescript
 private PurchaselyRuntime.Purchasely _purchasely
 
 _purchasely.HidePresentation()
@@ -96,7 +95,7 @@ request.display()
 ```coffeescript Cordova
 Purchasely.showPresentation()
 ```
-```coffeescript Unity
+```coffeescript
 private PurchaselyRuntime.Purchasely _purchasely
 
 _purchasely.ShowPresentation()
@@ -117,7 +116,7 @@ request.close()
 ```coffeescript Cordova
 Purchasely.closePresentation()
 ```
-```coffeescript Unity
+```coffeescript
 private PurchaselyRuntime.Purchasely _purchasely
 
 _purchasely.ClosePresentation()

@@ -79,7 +79,7 @@ Purchasely.presentPresentationWithIdentifier(
     }
 );
 ```
-```csharp Unity
+```csharp
 _purchasely.PresentPresentationForPlacement(placementId,
 			OnPresentationResult,
 			OnPresentationContentLoaded,
@@ -130,7 +130,7 @@ Purchasely.purchaseWithPlanVendorId("PLAN_VENDOR_ID", "my_content_id", (plan) =>
 	console.log(error);
 });
 ```
-```csharp Unity
+```csharp
 _purchasely.Purchase(planId, LogPlan, Log, offerId, contentId);
 ```
 

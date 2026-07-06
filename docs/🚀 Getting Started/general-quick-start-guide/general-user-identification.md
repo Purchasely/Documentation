@@ -48,7 +48,7 @@ Purchasely.getAnonymousUserId((anonymousId) => {
 	console.log("Purchasely anonymous Id: " + anonymousId);
 });
 ```
-```csharp Unity
+```csharp
 private PurchaselyRuntime.Purchasely _purchasely;
 
 _purchasely.GetAnonymousUserId();
@@ -170,7 +170,7 @@ Purchasely.userLogin("123456789", (shouldRefresh) => {
 	}
 });
 ```
-```csharp Unity
+```csharp
 Purchasely.UserLogin("123456789", (shouldRefresh) => {
 	if (shouldRefresh) {
 		// You should call your backend to refresh user entitlements
@@ -207,7 +207,7 @@ Purchasely.userLogout();
 ```javascript Cordova
 Purchasely.userLogout();
 ```
-```csharp Unity
+```csharp
 Purchasely.UserLogout();
 ```
 

@@ -25,9 +25,6 @@ next:
       slug: installation-flutter
       title: Flutter
     - type: basic
-      slug: installation-unity
-      title: Unity
-    - type: basic
       slug: installation-cordova
       title: Cordova
 ---
@@ -39,7 +36,6 @@ Purchasely SDK supports multiple platforms. The SDK is developed in Swift for iO
 * Android (Kotlin)
 * React Native
 * Flutter
-* Unity
 * Cordova
 
 # SDK Version Naming Convention
@@ -71,14 +67,6 @@ We recommend always using the latest version within the current major version (c
   dependencies:  
     purchasely: ^5.0.0
   ```
-* **Unity**  
-  ```xml
-  <dependency>  
-    <groupId>io.purchasely</groupId>  
-    <artifactId>unity</artifactId>  
-    <version>[4.0,4.999]</version>  
-  </dependency>
-  ```
 * **Cordova**  
   ```json package.json
   "dependencies": {  
@@ -98,5 +86,4 @@ You can find the detailed installation guides for each platform via the followin
 * **Android (Kotlin)**: [Android SDK Documentation](installation-kotlin)
 * **React Native**: [React Native SDK Documentation](installation-react-native)
 * **Flutter**: [Flutter SDK Documentation](installation-flutter)
-* **Unity**: [Unity SDK Documentation](installation-unity)
 * **Cordova**: [Cordova SDK Documentation](installation-cordova)

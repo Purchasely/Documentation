@@ -22,7 +22,6 @@ This feature is particularly useful for understanding user behavior, analyzing s
 > * Flutter: 4.4.0
 > * ReactNative: 4.4.0
 > * Cordova: 4.4.0
-> * Unity: 4.4.0
 
 ## Implementation
 
@@ -78,7 +77,7 @@ try {
   print(e);
 }
 ```
-```csharp Unity
+```csharp
 private PurchaselyRuntime.Purchasely _purchasely;
 
 ...
