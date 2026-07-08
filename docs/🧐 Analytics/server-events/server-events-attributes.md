@@ -561,12 +561,14 @@ next:
 
         Used with events that regards a subscription.
 
-        Contains the Purchasely internal unique identifier of the subscription
+        Contains the Purchasely internal unique identifier of the previous subscription that the current subscription (`purchasely_subscription_id`) replaces.
 
-        Used with for the following events:  
-        `SUBSCRIPTION_CROSSGRADED`  
-        `SUBSCRIPTION_DOWNGRADED`  
-        `SUBSCRIPTION_UPGRADED`
+        This field is present whenever the subscription is a new record chained to a previous one:
+
+        * on plan changes: `SUBSCRIPTION_CROSSGRADED`, `SUBSCRIPTION_DOWNGRADED`, `SUBSCRIPTION_UPGRADED`
+        * on reactivations: when a purchase or renewal transaction is processed after the previous subscription had already been marked as expired, a new subscription is created and linked to the previous one. In that case the field can appear on other events, such as `SUBSCRIPTION_RENEWED` (frequent in sandbox where periods are compressed).
+
+        Every subsequent event of a chained subscription carries it.
       </td>
     </tr>
 
