@@ -1,6 +1,8 @@
 ---
 title: Purchasely AI Plugin
-excerpt: Install and use the Purchasely AI Plugin to implement, review, debug and migrate your SDK integration
+excerpt: >-
+  Install and use the Purchasely AI Plugin to implement, review, debug and
+  migrate your SDK integration
 deprecated: false
 hidden: false
 metadata:
@@ -8,17 +10,17 @@ metadata:
   description: ''
   robots: index
 ---
-[Open the Purchasely AI Plugin on GitHub](https://github.com/Purchasely/Purchasely-AI-Plugin)
+Full description, capabilities and changelog on <Anchor target="_blank" href="https://github.com/Purchasely/Purchasely-AI-Plugin">Github</Anchor>
 
 The Purchasely AI Plugin helps AI coding assistants understand Purchasely SDK integrations across iOS, Android, React Native, Flutter and Cordova. It gives your assistant Purchasely-specific playbooks, references and commands so it can implement the SDK, review an existing integration, debug common issues and migrate older SDK code.
 
 Use it when you want to:
 
-* implement Purchasely in a new app
-* check whether an existing integration follows the recommended setup
-* debug paywall display, purchase, deeplink or synchronization issues
-* migrate an app from SDK v5 to SDK v6
-* ask detailed SDK questions inside your coding assistant
+- implement Purchasely in a new app
+- check whether an existing integration follows the recommended setup
+- debug paywall display, purchase, deeplink or synchronization issues
+- migrate an app from SDK v5 to SDK v6
+- ask detailed SDK questions inside your coding assistant
 
 The plugin is updated for every new SDK version. It is also updated between SDK releases when new integration topics, edge cases or questions come up with the Purchasely team, so the AI assistant can reference newer guidance faster than a full documentation cycle.
 
@@ -28,13 +30,13 @@ The plugin is updated for every new SDK version. It is also updated between SDK 
 
 The complete Claude Code plugin includes slash commands, skills, hooks, references and a Purchasely SDK expert agent. Other AI coding tools can install the portable skills and use the same implementation playbooks.
 
-| Capability | Use it for |
-|------------|------------|
+| Capability                                       | Use it for                                                                                                                                      |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | `purchasely-integrate` / `/purchasely:integrate` | Implement the SDK from scratch: install dependencies, initialize the SDK, display paywalls, configure deeplinks and set up transaction handling |
-| `purchasely-review` / `/purchasely:review` | Scan an existing integration and report missing setup, deprecated APIs, risky patterns and recommended fixes |
-| `purchasely-debug` / `/purchasely:debug` | Investigate common issues such as blank paywalls, screens closing unexpectedly, purchase failures, deeplink problems or synchronization errors |
-| `purchasely-migrate` / `/purchasely:migrate` | Upgrade an existing integration to a newer SDK version, including the v5 to v6 builder APIs |
-| `purchasely-sdk-expert` | Ask SDK questions and get platform-specific implementation guidance |
+| `purchasely-review` / `/purchasely:review`       | Scan an existing integration and report missing setup, deprecated APIs, risky patterns and recommended fixes                                    |
+| `purchasely-debug` / `/purchasely:debug`         | Investigate common issues such as blank paywalls, screens closing unexpectedly, purchase failures, deeplink problems or synchronization errors  |
+| `purchasely-migrate` / `/purchasely:migrate`     | Upgrade an existing integration to a newer SDK version, including the v5 to v6 builder APIs                                                     |
+| `purchasely-sdk-expert`                          | Ask SDK questions and get platform-specific implementation guidance                                                                             |
 
 ***
 
