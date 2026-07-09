@@ -334,7 +334,7 @@ Use it for the repetitive parts first: SDK start, presentation display / preload
     Then open `/plugins`, search for `purchasely`, install the plugin, and ask Codex to use the `purchasely-migrate` skill on your app.
 
   </Tab>
-  <Tab title="NPX Skills">
+  <Tab title="Other">
 
     ```shell
     npx skills add Purchasely/Purchasely-AI-Plugin
