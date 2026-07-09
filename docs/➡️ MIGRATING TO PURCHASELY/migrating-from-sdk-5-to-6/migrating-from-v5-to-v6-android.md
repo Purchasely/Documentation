@@ -2,7 +2,7 @@
 title: Migrating to v6 — Android
 excerpt: >-
   Breaking changes and migration steps to upgrade the Purchasely Android SDK
-  from v5.x to v6.0.0-rc.2
+  from v5.x to v6.0.0-rc.3
 deprecated: false
 hidden: false
 metadata:
@@ -47,9 +47,9 @@ This guide covers the **native Android SDK** (Kotlin & Java). For other platform
 
 ```kotlin
 dependencies {
-    implementation("io.purchasely:core:6.0.0-rc.2")
-    implementation("io.purchasely:google-play:6.0.0-rc.2")
-    implementation("io.purchasely:player:6.0.0-rc.2") // optional, video support
+    implementation("io.purchasely:core:6.0.0-rc.3")
+    implementation("io.purchasely:google-play:6.0.0-rc.3")
+    implementation("io.purchasely:player:6.0.0-rc.3") // optional, video support
 }
 ```
 
