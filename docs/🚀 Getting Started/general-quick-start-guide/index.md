@@ -36,28 +36,32 @@ next:
 
 The Purchasely SDK is developed natively on the following platforms:
 
-* iOS - Swift (minimum version 13.4)
-* Android - Kotlin (minimum version 23)
+- iOS - Swift (minimum version 13.4)
+- Android - Kotlin (minimum version 23)
 
 For hybrid apps, our <Glossary>bridge sdk</Glossary>s are available for:
 
-* React Native
-* Flutter
-* Cordova
+- React Native
+- Flutter
+- Cordova
 
 # Current version per platform
 
-| Platform         | SDK Version                    |
-| :--------------- | :----------------------------- |
-| **iOS**          | 6.0.0-rc.2     |
-| **Android**      | 6.0.0-rc.2 |
-| **Flutter**      | 6.0.0-rc.2 |
-| **React Native** | 6.0.0-rc.2      |
-| **Cordova**      | 6.0.0-rc.2 |
+| Platform         | SDK Version |
+| :--------------- | :---------- |
+| **iOS**          | 6.0.0-rc.2  |
+| **Android**      | 6.0.0-rc.2  |
+| **Flutter**      | 6.0.0-rc.2  |
+| **React Native** | 6.0.0-rc.2  |
+| **Cordova**      | 6.0.0-rc.2  |
 
 # Implementation process
 
-> 💡 You can use the [Purchasely AI Plugin](purchasely-ai-plugin) to guide the implementation in your codebase. The `purchasely-integrate` skill can inspect your app, apply the right platform steps, and help you install, initialize and display your first Purchasely experience.
+<Callout icon="💡" theme="default">
+  ### AI Plugin
+
+  You can use the [Purchasely AI Plugin](purchasely-ai-plugin) to guide the implementation in your codebase. The `purchasely-integrate` skill can inspect your app, apply the right platform steps, and help you install, initialize and display your first Purchasely experience.
+</Callout>
 
 Follow these steps to implement the SDK into your app:
 
