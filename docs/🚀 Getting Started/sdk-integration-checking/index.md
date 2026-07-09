@@ -18,6 +18,8 @@ next:
 ---
 Here is a checklist for your Purchasely Integration
 
+> 💡 You can also use the [Purchasely AI Plugin](purchasely-ai-plugin) to review your implementation. The `purchasely-review` skill scans your codebase for missing setup, deprecated APIs, risky patterns and common integration mistakes before you run the manual checks below.
+
 ## 0. The App is properly set up
 
 📚 Documentation: [Application setup](application-setup)

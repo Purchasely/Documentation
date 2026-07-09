@@ -62,6 +62,8 @@ For hybrid apps, our <Glossary>bridge sdk</Glossary>s are available for:
 
 # Implementation process
 
+> 💡 You can use the [Purchasely AI Plugin](purchasely-ai-plugin) to guide the implementation in your codebase. The `purchasely-integrate` skill can inspect your app, apply the right platform steps, and help you install, initialize, display paywalls and configure transaction handling.
+
 Follow these steps to implement the SDK into your app:
 
 1. [Install the SDK](sdk-installation) by importing it into your app project
