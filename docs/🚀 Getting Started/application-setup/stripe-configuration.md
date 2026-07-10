@@ -176,6 +176,43 @@ curl \
 >
 > If you want to prevent this, check the user's current subscription status (via [webhooks](server-events) or the SDK) before triggering a Stripe checkout, and ask the user to cancel their existing store subscription first.
 
+## Polling the validation status (optional)
+
+The `POST /receipts` call returns the identifier of the receipt notification:
+
+```json
+{ "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE" }
+```
+
+The receipt is validated asynchronously. You can poll `GET /receipts/{id}` with the same authentication headers to know whether the subscription was successfully associated:
+
+```curl
+curl \
+  --request GET \
+  -i \
+  -H "X-API-KEY:{{YOUR_API_KEY}}" \
+  -H "X-PLATFORM-TYPE:STRIPE" \
+  https://s2s.purchasely.io/receipts/{{RECEIPT_ID}}
+```
+
+Example response:
+
+```json
+{
+  "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
+  "validation_status": "completed",
+  "error_message": null
+}
+```
+
+| `validation_status` | Meaning |
+|---|---|
+| `verifying` | The receipt was received and is being validated. Poll again later. |
+| `completed` | The subscription was validated and associated with the user. |
+| `failed` | The validation failed; `error_message` describes the reason (e.g. an unknown Stripe subscription or a price not associated with any plan). |
+
+`error_message` is only set when `validation_status` is `failed`.
+
 ## Passing integration attributes (optional)
 
 You can include `integration_*` fields in the JSON body so that Purchasely associates the subscriber with your analytics and engagement platforms (Amplitude, Mixpanel, Airship, Adjust, etc.). This lets those platforms receive subscription lifecycle events automatically.
