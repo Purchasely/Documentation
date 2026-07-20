@@ -6,7 +6,7 @@ We rely on [Pub.dev](https://pub.dev/packages/purchasely_flutter/install) to dis
 # Main dependency
 
 ```shell
-flutter pub add purchasely_flutter:6.0.0-rc.2
+flutter pub add purchasely_flutter:6.0.0
 ```
 
 Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android 23)
@@ -39,26 +39,27 @@ allprojects {
 
 # Android setup
 
-We do include a store by default in our SDK, with Android you can choose to use Google and/or Huawei and/or Amazon.  
-See below to add the store you want to use
+We do include a store by default in our SDK, with Android you can choose to use Google and/or Huawei and/or Amazon.<br />See below to add the store you want to use
 
-> 📘 Versioning
->
-> All your dependencies **must** always be at the **exact same version**. Pin each package to `6.0.0-rc.2` — do not use a floating range (`^6.0.0`, `5.+`, …).
->
-> ```yaml pubspec.yaml
-> dependencies:
->   purchasely_flutter: 6.0.0-rc.2
->   purchasely_google: 6.0.0-rc.2
->   purchasely_android_player: 6.0.0-rc.2
-> ```
+<Callout icon="📘" theme="info">
+  ### Versioning
+
+  All your dependencies **must** always be at the **exact same version**. Pin each package to `6.0.0` — do not use a floating range (`^6.0.0`, `5.+`, …).
+
+  ```yaml pubspec.yaml
+  dependencies:
+    purchasely_flutter: 6.0.0
+    purchasely_google: 6.0.0
+    purchasely_android_player: 6.0.0
+  ```
+</Callout>
 
 ## Google Play Billing
 
 To add Google as a store, you can use our pub.dev dependency
 
 ```shell
-flutter pub add purchasely_google:6.0.0-rc.2
+flutter pub add purchasely_google:6.0.0
 ```
 
 Then you must add Google in the list of stores when starting the SDK with the builder
@@ -74,17 +75,12 @@ await Purchasely.apiKey('<<X-API-KEY>>')
 
 <br />
 
-<Callout icon="⚠️" theme="warn">
-  **Google Play Billing v8**
-
-  If you use Google Play Billing in version 8, please [read this](google-play-billing-v8) to make it work with Purchasely
-</Callout>
-
 ## Video Player
 
-A video player is not provided by default on Android to avoid conflict with another dependency you may have  
-We provide one in an external dependency that is detected and handled automatically
+A video player is not provided by default on Android to avoid conflict with another dependency you may have<br />We provide one in an external dependency that is detected and handled automatically
 
 ```shell
-flutter pub add purchasely_android_player:6.0.0-rc.2
+flutter pub add purchasely_android_player:6.0.0
 ```
+
+<br />
