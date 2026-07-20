@@ -5,7 +5,7 @@ name: android sdk installation
 
 - minSdkVersion: 23
 - compileSdkVersion: 36
-- Kotlin: 2.+
+- Kotlin: 2.2.+
 - Gradle 8.+
 - Android Gradle Plugin: 8.+
 - JDK 11
