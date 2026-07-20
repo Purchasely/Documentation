@@ -10,7 +10,11 @@ metadata:
   description: ''
   robots: index
 ---
-Purchasely is a platform to build, personalize, and measure native in-app experiences—and, for subscription apps, to also streamline in-app purchase processing and entitlement management.
+Purchasely is the app experience solution that gives product, growth, and CRM teams full control over every user journey inside their apps.
+
+At its core is Purchasely Pulse, our AI engine: it analyzes behavior, builds campaigns, and deploys personalized experiences across the entire user lifecycle, from first-click to winback, without a single release cycle.
+
+By turning static apps into living, adaptive products, Purchasely helps market-leading apps lift activation, conversion, and retention to capture the full revenue potential of every user.
 
 Purchasely helps mobile teams:
 
@@ -69,17 +73,13 @@ It is composed of:
 
 ### Platform Components
 
-![](https://files.readme.io/b3a78cf17de41fdccaedad9c1da8fa4c6bc3fd5b056a6c8620b7de5d935562a9-image.png)
-
-<br />
+![](https://files.readme.io/8c79a0bbcb0988773b58bb8ec8ab49deb586cf5ff564bce573b30a2afcfb3264-image.png)
 
 ### Typical architecture for subscription apps
 
 
-<Image src="https://files.readme.io/004c51c-image.png" align="center" border={true} />
+<Image src="https://files.readme.io/0f17e52609b5924b70d0d6641ac2ce25aad298d9ff36dbea7f7764527586fd30-image.png" border={true} />
 
-
-<br />
 
 <br />
 
