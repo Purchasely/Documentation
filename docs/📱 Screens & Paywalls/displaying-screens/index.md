@@ -28,9 +28,11 @@ next:
       slug: handling-presentation-result
       title: Handling the paywall result (presentation outcome)
 ---
-> 🚧 Native UI
->
-> Our SDK create Screen with native iOS and Android components, UI Kit and Android Views, for the best performance and compatibility. As such, some limitations may apply with a <Glossary>bridge sdk</Glossary>.
+<Callout icon="🚧" theme="warn">
+  ### Native UI
+
+  Our SDK create Screen with native iOS and Android components, UI Kit and Android Views, for the best performance and compatibility. As such, some limitations may apply with a <Glossary>bridge sdk</Glossary>.
+</Callout>
 
 Purchasely will provide a native view to display in your application, consequently you can completely customize its behavior and its allocated Screen space to decide for example if you want to display it in full mode or in a pop-in
 
@@ -38,13 +40,17 @@ Purchasely will provide a native view to display in your application, consequent
 
 The SDK returns a **native view**, so you decide how and where it is displayed (full screen, pop-in, nested…).
 
-| Platform | What the SDK provides | Safe areas / insets | Close button |
-| --- | --- | --- | --- |
-| **iOS** | A native [`UIViewController`](https://developer.apple.com/documentation/uikit/uiviewcontroller) — [present](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621380-present) it however you like | Not respected by default — you decide whether to display below or behind the notch | Rendered on top, automatically respects safe areas |
-| **Android** | A native [`View`](https://developer.android.com/reference/android/view/View) — add it to your layout hierarchy (another View, a Fragment or an Activity) | Not respected by default — you decide below or behind the status & navigation bars | Rendered on top, automatically respects the top inset (portrait) and right inset (landscape) |
-| **Flutter / React Native / Cordova** | A controller (iOS) / activity (Android) displayed on top of your Screen by default | Handled by the native layer | Managed by the SDK |
+| Platform                             | What the SDK provides                                                                                                                                                                                             | Safe areas / insets                                                                | Close button                                                                                 |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **iOS**                              | A native [`UIViewController`](https://developer.apple.com/documentation/uikit/uiviewcontroller) — [present](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621380-present) it however you like | Not respected by default — you decide whether to display below or behind the notch | Rendered on top, automatically respects safe areas                                           |
+| **Android**                          | A native [`View`](https://developer.android.com/reference/android/view/View) — add it to your layout hierarchy (another View, a Fragment or an Activity)                                                          | Not respected by default — you decide below or behind the status & navigation bars | Rendered on top, automatically respects the top inset (portrait) and right inset (landscape) |
+| **Flutter / React Native / Cordova** | A controller (iOS) / activity (Android) displayed on top of your Screen by default                                                                                                                                | Handled by the native layer                                                        | Managed by the SDK                                                                           |
 
-> 📘 On Flutter, React Native and Cordova, you can [control the Screen visibility](show-hide-close-screens) to hide the paywall and present it again later, or use [Nested Views](nesting-views) to embed a Purchasely Screen inside your own component.
+<Callout icon="📘" theme="info">
+  ### Screen Visibility
+
+  On Flutter, React Native and Cordova, you can [control the Screen visibility](show-hide-close-screens) to hide the paywall and present it again later, or use [Nested Views](nesting-views) to embed a Purchasely Screen inside your own component.
+</Callout>
 
 # Placements
 
@@ -68,5 +74,4 @@ If you wish to change the layout of those dialogs or change the content, you can
 
 # Display deeplinks yourself
 
-If you have setup deeplinks with Purchasely, the SDK will automatically display them in a specific UIViewController (iOS) or Activity (Android).\
-However, you can display a Purchasely Screen yourself inside your own View if you [implement a PLYUIHandler](ui-handler-deeplinks).
+If you have setup deeplinks with Purchasely, the SDK will automatically display them in a specific UIViewController (iOS) or Activity (Android).<br />However, you can display a Purchasely Screen yourself inside your own View if you [implement a PLYUIHandler](ui-handler-deeplinks).
