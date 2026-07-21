@@ -115,7 +115,7 @@ For offerings using _1 Year Upfront_ (or any plan without a commitment), the tag
 
 The billing plan is entirely driven by the Screen configuration: the SDK purchases with the billing plan you selected in the Console, with no code change required.
 
-If your app takes over the purchase flow (**PaywallObserver** mode or a custom `purchase` action interceptor), you need to know which billing plan the offering is selling to pass the matching purchase option to StoreKit. The [action interceptor](paywall-action-interceptor) gives you all the commitment information:
+If your app takes over the purchase flow (**Observer** mode or a custom `purchase` action interceptor), you need to know which billing plan the offering is selling to pass the matching purchase option to StoreKit. The [action interceptor](paywall-action-interceptor) gives you all the commitment information:
 
 * `params.billingPlanType` (iOS): the billing plan selected on the offering in the Screen Composer (`upFront`, `monthly`, or `unspecified` for a regular plan)
 * `plan.commitmentInfo`: the billing plans available on the store product, each with its billing price, billing period, total price and number of payments

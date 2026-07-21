@@ -68,7 +68,7 @@ Documentation/
 
 Each file is a complete SDK integration guide with:
 - Requirements and Installation (including Android dependencies)
-- SDK Initialization (Full Mode & PaywallObserver Mode)
+- SDK Initialization (Full Mode & Observer Mode)
 - Displaying Paywalls with Placements
 - Processing Transactions
 - Paywall Action Interceptor
@@ -131,7 +131,7 @@ Purchasely offers two distinct modes:
 - Manages user entitlements
 - Best for: New apps or those wanting a complete subscription infrastructure
 
-### 2. PaywallObserver Mode
+### 2. Observer Mode
 - Works alongside **existing subscription infrastructure** (RevenueCat, in-house, etc.)
 - Transactions observed but not processed by Purchasely
 - Access to all no-code growth features

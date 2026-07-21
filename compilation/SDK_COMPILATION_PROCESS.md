@@ -296,7 +296,7 @@ Use this checklist when creating documentation for a new platform:
 
 - [ ] **Requirements** - SDK version, OS version, language version
 - [ ] **Installation** - Package manager commands, dependencies
-- [ ] **Initialization** - Full mode and PaywallObserver mode
+- [ ] **Initialization** - Full mode and Observer mode
 - [ ] **API Key** - Where to find it
 - [ ] **Display Paywall** - Basic placement display
 - [ ] **Handle Results** - Purchase, restore, cancel callbacks

@@ -596,7 +596,7 @@ Purchasely.setAttribute(.oneSignalUserId, value: oneSignalUserId)
 
 ***
 
-## 9. PaywallObserver mode notes
+## 9. Observer mode notes
 
 - The default running mode is now `.observer` — if you are intentionally in Observer mode, nothing to change at initialization; if you expect Purchasely to process purchases, add `.runningMode(.full)` (see §2).
 - Interceptors returning `.notHandled` for `.purchase` / `.restore` in Observer mode log a warning and skip — the SDK cannot execute purchases in this mode (see §3).
