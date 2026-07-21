@@ -53,7 +53,7 @@ Here is a checklist for your Purchasely Integration
 
 ### [Optional] A/A testing your paywall
 
-* [ ] You created a Screen leveraging the feature "Use Your Own Paywall" (📚 [documentation](use-your-own-paywall)) and implemented the code to display it
+* [ ] You created a Screen leveraging the feature "Use Your Own Paywall" (📚 [documentation](bring-your-own-paywall)) and implemented the code to display it
 
 <br />
 
