@@ -37,7 +37,7 @@ The easiest way to add video support is by including the Purchasely player depen
 ## Android native
 
 ```coffeescript Gradle
-implementation 'io.purchasely:player:6.0.0-rc.2'
+implementation 'io.purchasely:player:6.0.1'
 ```
 
 ## React Native
@@ -57,7 +57,7 @@ flutter pub add purchasely_android_player
 Add the native android dependency in the `build.gradle` file of your android project:
 
 ```coffeescript Gradle
-implementation 'io.purchasely:player:6.0.0-rc.2'
+implementation 'io.purchasely:player:6.0.1'
 ```
 
 Already included in the SDK.

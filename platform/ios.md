@@ -1,6 +1,6 @@
 # Purchasely iOS SDK Documentation
 
-This document provides comprehensive documentation for integrating and using the Purchasely iOS SDK with Swift (version 6.0.0-rc.2).
+This document provides comprehensive documentation for integrating and using the Purchasely iOS SDK with Swift (version 6.0.0).
 
 ---
 
@@ -31,7 +31,7 @@ This document provides comprehensive documentation for integrating and using the
 | iOS | 13.4+ |
 | Xcode | 14.0+ |
 | Swift | 5.5+ |
-| Purchasely SDK | 6.0.0-rc.2 |
+| Purchasely SDK | 6.0.0 |
 
 > 📘 SwiftUI integration requires iOS 13.4 or later.
 
@@ -76,7 +76,7 @@ carthage update
    ```
    https://github.com/Purchasely/Purchasely-iOS
    ```
-3. Select the version you want to use (6.0.0-rc.2 or later)
+3. Select the version you want to use (6.0.0 or later)
 4. Click **Add Package**
 
 ---
@@ -1146,4 +1146,4 @@ Purchasely
 
 ---
 
-*This documentation is for Purchasely iOS SDK version 6.0.0-rc.2*
+*This documentation is for Purchasely iOS SDK version 6.0.0*

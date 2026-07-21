@@ -12,7 +12,7 @@ The goal is to compile all scattered documentation into a single, comprehensive 
 
 ## Target version & sources of truth (v6)
 
-The compiled docs target **SDK 6.0.0-rc.2**. When compiling or re-compiling, verify every API name, signature, enum case and default against the authoritative sources — **do not guess or rely on the scattered docs alone**:
+The compiled docs target the stable v6 SDKs (iOS & Flutter **6.0.0**, Android **6.0.1**). When compiling or re-compiling, verify every API name, signature, enum case and default against the authoritative sources — **do not guess or rely on the scattered docs alone**:
 
 | Platform | Migration guide (authoritative) | SDK source to grep |
 |----------|---------------------------------|--------------------|
@@ -164,7 +164,7 @@ Use this standard structure for all platform documentation:
 - Include alternative stores section (Huawei, Amazon)
 - Presentation API: `PLYPresentation { }.preload`, `display(context) { outcome -> }`, `buildView`/`getFragment`, `onCloseRequested` (renamed from `onClose`); presentation types live in `io.purchasely.ext.presentation.*`
 - Include ProGuard rules
-- Dependencies: `io.purchasely:core`, `io.purchasely:google-play`, `io.purchasely:player` (version **6.0.0-rc.2**); Gradle 9.3.0+, Kotlin 2.2.x, JDK 11, minSdk 23, compileSdk 36
+- Dependencies: `io.purchasely:core`, `io.purchasely:google-play`, `io.purchasely:player` (version **6.0.1**); Gradle 9.3.0+, Kotlin 2.2.x, JDK 11, minSdk 23, compileSdk 36
 
 ### iOS/Swift
 - **Swift only** — do NOT include Objective-C snippets (no longer documented)
@@ -406,7 +406,7 @@ Before finalizing the documentation:
 - [ ] Consistent formatting throughout
 - [ ] All sections have content
 - [ ] Links to Purchasely Console are correct
-- [ ] Version number is **6.0.0-rc.2**
+- [ ] Version number is **6.0.0** (iOS & Flutter) or **6.0.1** (Android)
 - [ ] Table of contents matches actual sections
 
 ---

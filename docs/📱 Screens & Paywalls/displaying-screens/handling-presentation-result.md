@@ -22,7 +22,7 @@ next:
 > The unified `PLYPresentationOutcome` model and the routing rule described here are part of the **6.0** display API.
 >
 > * iOS: 6.0.0
-> * Android: 6.0.0
+> * Android: 6.0.1
 > * Flutter: 6.0.0
 > * React Native: 6.0.0-rc.2
 >

@@ -15,7 +15,7 @@ We rely on [Pub.dev](https://pub.dev/packages/purchasely_flutter/install) to dis
 # Main dependency
 
 ```shell
-flutter pub add purchasely_flutter:6.0.0-rc.2
+flutter pub add purchasely_flutter:6.0.0
 ```
 
 Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android 23)
@@ -53,13 +53,13 @@ See below to add the store you want to use
 
 > 📘 Versioning
 >
-> All your dependencies **must** always be at the **exact same version**. Pin each package to `6.0.0-rc.2` — do not use a floating range (`^6.0.0`, `5.+`, …).
+> All your dependencies **must** always be at the **exact same version**. Pin each package to `6.0.0` — do not use a floating range (`^6.0.0`, `5.+`, …).
 >
 > ```yaml pubspec.yaml
 > dependencies:
->   purchasely_flutter: 6.0.0-rc.2
->   purchasely_google: 6.0.0-rc.2
->   purchasely_android_player: 6.0.0-rc.2
+>   purchasely_flutter: 6.0.0
+>   purchasely_google: 6.0.0
+>   purchasely_android_player: 6.0.0
 > ```
 
 <br />
@@ -70,7 +70,7 @@ A video player is not provided by default on Android to avoid conflict with anot
 We provide one in an external dependency that is detected and handled automatically
 
 ```shell
-flutter pub add purchasely_android_player:6.0.0-rc.2
+flutter pub add purchasely_android_player:6.0.0
 ```
 
 <br />

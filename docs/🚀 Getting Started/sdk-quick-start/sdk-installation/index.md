@@ -54,7 +54,7 @@ We recommend always using the latest version within the current major version (c
   ```
 * **Android (Kotlin, Gradle)**  
   ```groovy Gradle
-  implementation 'io.purchasely.core:5.+'
+  implementation 'io.purchasely:core:6.+'
   ```
 * **React Native**  
   ```json package.json
@@ -65,7 +65,7 @@ We recommend always using the latest version within the current major version (c
 * **Flutter**
   ```yaml pubspec.yaml
   dependencies:  
-    purchasely: ^5.0.0
+    purchasely_flutter: ^6.0.0
   ```
 * **Cordova**  
   ```json package.json
