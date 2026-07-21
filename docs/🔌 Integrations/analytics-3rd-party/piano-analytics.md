@@ -54,7 +54,7 @@ ATInternet.getInstance().defaultTracker.getUserId {
 Purchasely.setAttribute(Attributes.AT_INTERNET_ID_CLIENT, atInternetUserId);
 ```
 
-See the [CleverTap Documentation](https://developer.clevertap.com/docs/api-quickstart-guide) for more information.
+See the [AT Internet / Piano documentation](https://developers.atinternet-solutions.com/) for more information on retrieving the client ID.
 
 ## 2 - Retrieve your `Site ID` from the Piano Dashboard
 

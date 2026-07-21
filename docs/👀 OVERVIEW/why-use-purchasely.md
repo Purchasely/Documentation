@@ -46,8 +46,6 @@ Mobile teams constantly iterate on onboarding, activation, engagement, and conve
 
 Purchasely’s SDK is designed to be:
 
-Our SDK is:
-
 * **Super lightweight**: Less than 2 MB on iOS and less than 1 MB on Android
 * **Native**: developed in **Swift** and **Kotlin**, relies on core OS technologies to provide the best possible experience (dark mode, haptic feedback, localization, support for all devices and orientations…).
 * **Always up to date**: We implement the latest StoreKit and Play Store features so that you don't have to bother with that. This opens up your marketing team to a lot of new possibilities.

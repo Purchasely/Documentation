@@ -18,13 +18,13 @@ next:
 
 [MoEngage](https://www.moengage.com/) is a leading Customer Engagement Platform.
 
-This integration will allow you to get all the available Purchasely events to CleverTap and get a better and deeper understanding of your subscription business and customer behavior. In addition you will be able to trigger automated communication based on those events, messages that could be linked to a Purchasely powered Screen to engage, upsell, retain customers.
+This integration will allow you to get all the available Purchasely events to MoEngage and get a better and deeper understanding of your subscription business and customer behavior. In addition you will be able to trigger automated communication based on those events, messages that could be linked to a Purchasely powered Screen to engage, upsell, retain customers.
 
 <br />
 
 # Integrating Purchasely with MoEngage
 
-The integration requires 5 steps:
+The integration requires 4 steps:
 
 1. Associate users with the `MoEngage Unique ID` (SDK implementation)
 2. Activate the **MoEngage** integration in the Purchasely Console
@@ -90,9 +90,9 @@ Enable the integration and configure it
 * The _APP_ID_ for your MoEngage account is available on the MoEngage Dashboard in _Settings > App Settings > General Settings > Data API settings > DATA API ID_
 * Write down your _DATA API ID_
 
-### Retrieve your MoEngage DATA API ID from MoEngage's dashboard
+### Retrieving your MoEngage DATA API KEY from MoEngage's dashboard
 
-* The _APP_ID_ for your MoEngage account is available on the MoEngage Dashboard in _Settings > App Settings > General Settings > Data API settings > DATA API KEY_
+* The _DATA API KEY_ for your MoEngage account is available on the MoEngage Dashboard in _Settings > App Settings > General Settings > Data API settings > DATA API KEY_
 * Write down your _DATA API KEY_
 
 <br />

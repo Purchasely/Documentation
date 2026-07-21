@@ -47,12 +47,6 @@ Purchasely.setAttribute(Attribute.BRANCH_USER_DEVELOPER_IDENTITY, "Actual Branch
 ```coffeescript React Native
 Purchasely.setAttribute(Attributes.BRANCH_USER_DEVELOPER_IDENTITY, "Actual Branch User ID");
 ```
-```coffeescript Flutter
-```
-```coffeescript Cordova
-```
-```coffeescript
-```
 
 ## 2. Activating the Branch integration
 
@@ -61,7 +55,7 @@ Purchasely.setAttribute(Attributes.BRANCH_USER_DEVELOPER_IDENTITY, "Actual Branc
 1. Follow the [Branch documentation](https://help.branch.io/using-branch/docs/profile-settings#branch-key-and-secret)
 2. Write down your API Key
 
-### Retrieve your Branch API Key from Branch's dashboard
+### Retrieve your Branch API Secret from Branch's dashboard
 
 1. Follow the [Branch documentation](https://help.branch.io/using-branch/docs/profile-settings#branch-key-and-secret)
 2. Write down your API Secret

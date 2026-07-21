@@ -19,7 +19,7 @@ next:
 ---
 # Integrating Purchasely with Braze
 
-The integration requires 5 steps:
+The integration requires 4 steps:
 
 1. Set the **Braze User ID** in the app
 2. Activate the **Braze** integration in the Purchasely Console
@@ -88,7 +88,7 @@ AppboyPlugin.addAlias(
 
 When the anonymous user later becomes logged in, Purchasely will automatically send following events using the provided user id
 
-## 1 - Activate the Braze integration in the Purchasely Console
+## 2 - Activate the Braze integration in the Purchasely Console
 
 To use Braze with Purchasely, go to the section [Integrations](https://console.purchasely.io/external-integrations) of Purchasely Console and click on Braze
 

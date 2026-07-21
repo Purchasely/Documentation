@@ -95,54 +95,11 @@ Break down the bars into segments:
 
 Select what the green line represents:
 
-<Table>
-  <thead>
-    <tr>
-      <th>
-        Option
-      </th>
-
-      <th>
-        Description
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td>
-        **Overall conversion rate**
-      </td>
-
-      <td>
-        This aggregates the conversion to:
-
-        * subscriptions starting with an introductory or promotional offer
-        * subscription starting directly in full-price
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        **Conversion rate to full price**
-      </td>
-
-      <td>
-        Conversion rate to full-price paid subscriptions
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        **Conversion rate to intro or promo offer**
-      </td>
-
-      <td>
-        Conversion rate to trials, intro offers, and promotional offers
-      </td>
-    </tr>
-  </tbody>
-</Table>
+| Option | Description |
+| --- | --- |
+| **Overall conversion rate** | Aggregates conversions to subscriptions starting with an introductory or promotional offer, and subscriptions starting directly at full price |
+| **Conversion rate to full price** | Conversion rate to full-price paid subscriptions |
+| **Conversion rate to intro or promo offer** | Conversion rate to trials, intro offers, and promotional offers |
 
 Note: the overall conversion rate is not the sum of the conversion rate to full price and conversion rate to intro or promo offer because some subscriptions starting in intro and promo offer eventually convert to a full-price subscription. In the overall rate, they are only counted once.
 

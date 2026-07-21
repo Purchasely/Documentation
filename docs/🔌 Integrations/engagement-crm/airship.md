@@ -16,35 +16,6 @@ next:
       slug: batch
       title: Batch
 ---
-If you have anonymous users in your app, we'll need the Airship channel to send purchase events to Airship on your behalf.
-
-```coffeescript Swift
-if let channelId = UAirship.channel()?.identifier {
-	Purchasely.setAttribute(.airshipChannelId, value: channelId)
-}
-```
-```coffeescript Kotlin
-UAirship.shared().channel.id?.let {
-    Purchasely.setAttribute(Attribute.AIRSHIP_CHANNEL_ID, it)
-}
-```
-```coffeescript React Native
-var channelId = UrbanAirship.getChannelId().then(channelId => {
-  Purchasely.setAttribute(Attributes.AIRSHIP_CHANNEL_ID, channelId);
-}));
-```
-```coffeescript Flutter
-Purchasely.setAttribute(PLYAttribute.airship_channel_id, "airship_channel_id");
-```
-```coffeescript Cordova
-Purchasely.setAttribute(Purchasely.Attribute.AIRSHIP_CHANNEL_ID, "channelId");
-```
-```coffeescript
-private PurchaselyRuntime.Purchasely _purchasely;
-
-Purchasely.setAttribute(PLYAttribute.AIRSHIP_CHANNEL_ID, "channelId");
-```
-
 # Integrating Purchasely with Airship
 
 The integration requires 5 steps:
