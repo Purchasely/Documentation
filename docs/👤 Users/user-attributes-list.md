@@ -93,7 +93,7 @@ This set of attributes are built-in (automatically gathered by the SDK) and conc
       </td>
 
       <td>
-        The user device type. It will be one of the following: **_Phone, Pad, TV, Computer, Car_ **and**unknown**.
+        The user device type. It will be one of the following: _**Phone, Pad, TV, Computer, Car**_ and _**unknown**_.
       </td>
 
       <td>
@@ -759,11 +759,11 @@ These attributes allow you to target any subscribers that have active subscripti
       <td>
         The type of special offer the user is enjoying right now. It can be either one of the following:
 
-        * **Free trial**_: User is in free trial
-        * **Promotional Offer**_: User is benefitting from a promotional offer.
-        * **Intro Offer**_: User is benefitting from a discounted introductory price (not free).
-        * **Promo code**_: User has redeemed a Promo code and the associated promotion is still valid.
-        * *_None_**: User is paying the full price (regular price) for the subscription.
+        * **Free trial**: User is in free trial
+        * **Promotional Offer**: User is benefitting from a promotional offer.
+        * **Intro Offer**: User is benefitting from a discounted introductory price (not free).
+        * **Promo code**: User has redeemed a Promo code and the associated promotion is still valid.
+        * **None**: User is paying the full price (regular price) for the subscription.
       </td>
 
       <td>
@@ -929,9 +929,9 @@ These attributes allow you to target any subscribers that have active subscripti
       <td>
         The status of the subscription. It can be either one of the below:
 
-        * **Auto Renewing**_: Subscribers with an active auto-renewing subscription.
-        * *_Auto Renewing canceled_**: Subscribers who have canceled the auto-renewing of their subscription.
-        * *_Grace period_**: Subscribers who are past their billing date but still enjoying their premium features.
+        * **Auto Renewing**: Subscribers with an active auto-renewing subscription.
+        * **Auto Renewing canceled**: Subscribers who have canceled the auto-renewing of their subscription.
+        * **Grace period**: Subscribers who are past their billing date but still enjoying their premium features.
       </td>
 
       <td>
@@ -1030,11 +1030,11 @@ Depending on whether an import has been made or not and on the duration of the p
       <td>
         The lapsed subscription status. It will be either one of the following:
 
-        * **Onhold**_: The user is in the billing retry state.
-        * **Deactivated**_: The user voluntarily terminated their subscription.
-        * **Revoked**_: The user requested for the refund and revoked their subscription.
-        * **Paused**_: The user has paused the subscription instead of terminated it. It is available only for Android users.
-        * *_Unpaid_**: The billing retry has ended.
+        * **Onhold**: The user is in the billing retry state.
+        * **Deactivated**: The user voluntarily terminated their subscription.
+        * **Revoked**: The user requested for the refund and revoked their subscription.
+        * **Paused**: The user has paused the subscription instead of terminated it. It is available only for Android users.
+        * **Unpaid**: The billing retry has ended.
       </td>
 
       <td>
