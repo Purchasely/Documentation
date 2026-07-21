@@ -201,18 +201,14 @@ await Purchasely.interceptAction(
 );
 ```
 ```javascript Cordova
-Purchasely.setPaywallActionInterceptor((result) => {
-   if (result.action === Purchasely.PaywallAction.login) {
-      console.log('User wants to login');
-      //Present your own screen for user to log in
-      Purchasely.closePresentation();
-      Purchasely.userLogin('MY_USER_ID');
-      //Call this method to update Purchasely Paywall
-      Purchasely.onProcessAction(true);
-    } else {
-      Purchasely.onProcessAction(true);
-    }
-  });
+Purchasely.interceptAction(Purchasely.PresentationAction.login, (info, parameters) => {
+  console.log('User wants to login');
+  // Present your own screen for user to log in
+  Purchasely.closePresentation();
+  Purchasely.userLogin('MY_USER_ID');
+  // Return success to refresh the Purchasely paywall
+  return Purchasely.InterceptResult.success;
+});
 ```
 
 > 🚧 Update your Screen

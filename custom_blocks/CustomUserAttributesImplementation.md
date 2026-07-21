@@ -271,12 +271,70 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles", processingLegalBas
 Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7, processingLegalBasis: .essential)
 ```
 ```coffeescript Kotlin
+//Set one attribute by key and value
+Purchasely.setUserAttribute("age", 20, PLYDataProcessingLegalBasis.ESSENTIAL)
+Purchasely.setUserAttribute("size", 175.5f, PLYDataProcessingLegalBasis.ESSENTIAL)
+Purchasely.setUserAttribute("subscribed", true, PLYDataProcessingLegalBasis.ESSENTIAL)
+Purchasely.setUserAttribute("date", Date(), PLYDataProcessingLegalBasis.ESSENTIAL)
+Purchasely.setUserAttribute("gender", "Female", PLYDataProcessingLegalBasis.ESSENTIAL)
+
+// Increment a user attribute
+// increment by 1 a specific attribute, it will be created if not set
+Purchasely.incrementUserAttribute("viewed_articles", processingLegalBasis = PLYDataProcessingLegalBasis.ESSENTIAL)
+// you can also set a specfic number to increment
+Purchasely.incrementUserAttribute("viewed_articles", 3, PLYDataProcessingLegalBasis.ESSENTIAL)
+
+// Decrement a user attribute
+// decrement by 1, it will be created if not set
+Purchasely.decrementUserAttribute("viewed_articles", processingLegalBasis = PLYDataProcessingLegalBasis.ESSENTIAL)
+// you can also set a specific number to decrement
+Purchasely.decrementUserAttribute("viewed_articles", 7, PLYDataProcessingLegalBasis.ESSENTIAL)
 ```
 ```typescript React Native
+//Set one attribute by key and value
+Purchasely.setUserAttributeWithString("gender", "man", PLYDataProcessingLegalBasis.ESSENTIAL);
+Purchasely.setUserAttributeWithNumber("age", 21, PLYDataProcessingLegalBasis.ESSENTIAL);
+Purchasely.setUserAttributeWithNumber("weight", 78.2, PLYDataProcessingLegalBasis.ESSENTIAL);
+Purchasely.setUserAttributeWithBoolean("premium", true, PLYDataProcessingLegalBasis.ESSENTIAL);
+Purchasely.setUserAttributeWithDate("subscription_date", new Date(), PLYDataProcessingLegalBasis.ESSENTIAL);
+
+// Increment a user attribute
+// increment by 1 a specific attribute, it will be created if not set
+Purchasely.incrementUserAttribute({key: 'viewed_articles', legalBasis: PLYDataProcessingLegalBasis.ESSENTIAL});
+// you can also set a specfic number to increment
+Purchasely.incrementUserAttribute({key: 'viewed_articles', value: 3, legalBasis: PLYDataProcessingLegalBasis.ESSENTIAL});
+
+// Decrement a user attribute
+// decrement by 1, it will be created if not set
+Purchasely.decrementUserAttribute({key: 'viewed_articles', legalBasis: PLYDataProcessingLegalBasis.ESSENTIAL});
+// you can also set a specific number to decrement
+Purchasely.decrementUserAttribute({key: 'viewed_articles', value: 7, legalBasis: PLYDataProcessingLegalBasis.ESSENTIAL});
 ```
 ```coffeescript Flutter
+Purchasely.setUserAttributeWithString("stringKey", "StringValue", processingLegalBasis: PLYDataProcessingLegalBasis.essential);
+Purchasely.setUserAttributeWithInt("intKey", 3, processingLegalBasis: PLYDataProcessingLegalBasis.essential);
+Purchasely.setUserAttributeWithDouble("doubleKey", 1.2, processingLegalBasis: PLYDataProcessingLegalBasis.essential);
+Purchasely.setUserAttributeWithBoolean("booleanKey", true, processingLegalBasis: PLYDataProcessingLegalBasis.essential);
+Purchasely.setUserAttributeWithDate("dateKey", DateTime.now(), processingLegalBasis: PLYDataProcessingLegalBasis.essential);
+
+// Increment a user attribute
+// increment by 1 a specific attribute, it will be created if not set
+Purchasely.incrementUserAttribute("viewed_articles", processingLegalBasis: PLYDataProcessingLegalBasis.essential);
+// you can also set a specfic number to increment
+Purchasely.incrementUserAttribute("viewed_articles", value:3, processingLegalBasis: PLYDataProcessingLegalBasis.essential);
+
+// Decrement a user attribute
+// decrement by 1, it will be created if not set
+Purchasely.decrementUserAttribute("viewed_articles", processingLegalBasis: PLYDataProcessingLegalBasis.essential);
+// you can also set a specific number to decrement
+Purchasely.decrementUserAttribute("viewed_articles", value:7, processingLegalBasis: PLYDataProcessingLegalBasis.essential);
 ```
 ```javascript Cordova
+//Set one attribute by key and value
+Purchasely.setUserAttributeWithString("key_string", "value_string", Purchasely.DataProcessingLegalBasis.essential);
+Purchasely.setUserAttributeWithBoolean("key_boolean", true, Purchasely.DataProcessingLegalBasis.essential);
+Purchasely.setUserAttributeWithInt("key_int", 7, Purchasely.DataProcessingLegalBasis.essential);
+Purchasely.setUserAttributeWithDouble("key_double", 4.5, Purchasely.DataProcessingLegalBasis.essential);
 ```
 
 ### `optional` Custom User Attributes
@@ -312,12 +370,70 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles", processingLegalBas
 Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7, processingLegalBasis: .optional)
 ```
 ```coffeescript Kotlin
+//Set one attribute by key and value
+Purchasely.setUserAttribute("age", 20, PLYDataProcessingLegalBasis.OPTIONAL)
+Purchasely.setUserAttribute("size", 175.5f, PLYDataProcessingLegalBasis.OPTIONAL)
+Purchasely.setUserAttribute("subscribed", true, PLYDataProcessingLegalBasis.OPTIONAL)
+Purchasely.setUserAttribute("date", Date(), PLYDataProcessingLegalBasis.OPTIONAL)
+Purchasely.setUserAttribute("gender", "Female", PLYDataProcessingLegalBasis.OPTIONAL)
+
+// Increment a user attribute
+// increment by 1 a specific attribute, it will be created if not set
+Purchasely.incrementUserAttribute("viewed_articles", processingLegalBasis = PLYDataProcessingLegalBasis.OPTIONAL)
+// you can also set a specfic number to increment
+Purchasely.incrementUserAttribute("viewed_articles", 3, PLYDataProcessingLegalBasis.OPTIONAL)
+
+// Decrement a user attribute
+// decrement by 1, it will be created if not set
+Purchasely.decrementUserAttribute("viewed_articles", processingLegalBasis = PLYDataProcessingLegalBasis.OPTIONAL)
+// you can also set a specific number to decrement
+Purchasely.decrementUserAttribute("viewed_articles", 7, PLYDataProcessingLegalBasis.OPTIONAL)
 ```
 ```typescript React Native
+//Set one attribute by key and value
+Purchasely.setUserAttributeWithString("gender", "man", PLYDataProcessingLegalBasis.OPTIONAL);
+Purchasely.setUserAttributeWithNumber("age", 21, PLYDataProcessingLegalBasis.OPTIONAL);
+Purchasely.setUserAttributeWithNumber("weight", 78.2, PLYDataProcessingLegalBasis.OPTIONAL);
+Purchasely.setUserAttributeWithBoolean("premium", true, PLYDataProcessingLegalBasis.OPTIONAL);
+Purchasely.setUserAttributeWithDate("subscription_date", new Date(), PLYDataProcessingLegalBasis.OPTIONAL);
+
+// Increment a user attribute
+// increment by 1 a specific attribute, it will be created if not set
+Purchasely.incrementUserAttribute({key: 'viewed_articles', legalBasis: PLYDataProcessingLegalBasis.OPTIONAL});
+// you can also set a specfic number to increment
+Purchasely.incrementUserAttribute({key: 'viewed_articles', value: 3, legalBasis: PLYDataProcessingLegalBasis.OPTIONAL});
+
+// Decrement a user attribute
+// decrement by 1, it will be created if not set
+Purchasely.decrementUserAttribute({key: 'viewed_articles', legalBasis: PLYDataProcessingLegalBasis.OPTIONAL});
+// you can also set a specific number to decrement
+Purchasely.decrementUserAttribute({key: 'viewed_articles', value: 7, legalBasis: PLYDataProcessingLegalBasis.OPTIONAL});
 ```
 ```coffeescript Flutter
+Purchasely.setUserAttributeWithString("stringKey", "StringValue", processingLegalBasis: PLYDataProcessingLegalBasis.optional);
+Purchasely.setUserAttributeWithInt("intKey", 3, processingLegalBasis: PLYDataProcessingLegalBasis.optional);
+Purchasely.setUserAttributeWithDouble("doubleKey", 1.2, processingLegalBasis: PLYDataProcessingLegalBasis.optional);
+Purchasely.setUserAttributeWithBoolean("booleanKey", true, processingLegalBasis: PLYDataProcessingLegalBasis.optional);
+Purchasely.setUserAttributeWithDate("dateKey", DateTime.now(), processingLegalBasis: PLYDataProcessingLegalBasis.optional);
+
+// Increment a user attribute
+// increment by 1 a specific attribute, it will be created if not set
+Purchasely.incrementUserAttribute("viewed_articles", processingLegalBasis: PLYDataProcessingLegalBasis.optional);
+// you can also set a specfic number to increment
+Purchasely.incrementUserAttribute("viewed_articles", value:3, processingLegalBasis: PLYDataProcessingLegalBasis.optional);
+
+// Decrement a user attribute
+// decrement by 1, it will be created if not set
+Purchasely.decrementUserAttribute("viewed_articles", processingLegalBasis: PLYDataProcessingLegalBasis.optional);
+// you can also set a specific number to decrement
+Purchasely.decrementUserAttribute("viewed_articles", value:7, processingLegalBasis: PLYDataProcessingLegalBasis.optional);
 ```
 ```javascript Cordova
+//Set one attribute by key and value
+Purchasely.setUserAttributeWithString("key_string", "value_string", Purchasely.DataProcessingLegalBasis.optional);
+Purchasely.setUserAttributeWithBoolean("key_boolean", true, Purchasely.DataProcessingLegalBasis.optional);
+Purchasely.setUserAttributeWithInt("key_int", 7, Purchasely.DataProcessingLegalBasis.optional);
+Purchasely.setUserAttributeWithDouble("key_double", 4.5, Purchasely.DataProcessingLegalBasis.optional);
 ```
 
 > ❗️ Custom User Attributes set prior to the upgrading the SDK to version 5.4 onwards

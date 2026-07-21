@@ -144,12 +144,7 @@ Sample backend code for:
 * updating the entitlements in the database
 * acknowledging the processing of the events
 
-```javascript
-```
-```ruby Ruby
-```
-```kotlin Kotlin
-```
+See [Managing entitlements with your own backend](backend-entitlements) for backend implementation details.
 
 # MANAGING APP ENTITLEMENTS
 

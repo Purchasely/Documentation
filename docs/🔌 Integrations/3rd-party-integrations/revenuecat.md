@@ -377,53 +377,33 @@ await Purchasely.interceptAction(
 );
 ```
 ```typescript Cordova
-Purchasely.setPaywallActionInterceptor((result) => {
-    if (result.action === Purchasely.PaywallAction.purchase) {
-      //the store product id (sku) the user clicked on in the paywall
-      const storeProductId = result.parameters.plan.productId
-      
-      Purchases.getOfferings(
-          offerings => {
-            if (offerings.current && offerings.current.monthly) {  
-              //get your package from RevenueCat
-              const product = offerings.current.monthly;
-             
-              Purchases.purchasePackage(product, ({ productIdentifier, purchaserInfo }) => {
-                  Purchasely.onProcessAction(false);
-                  if (typeof purchaserInfo.entitlements.active.my_entitlement_identifier !== "undefined") {
-                    // Unlock that great "pro" content
-                    // SDK auto-synchronizes on success in observer mode
-                  }
-                },
-                ({error, userCancelled}) => {
-                  // Error making purchase
-                  Purchasely.onProcessAction(false);
-                }
-              );
-  
-            }
-          },
-          error => {
-    
-          }
-      );
-    } if (result.action === Purchasely.PaywallAction.restore) {
-      Purchases.restoreTransactions(
-        info => {
-          Purchasely.onProcessAction(false);
-          
-          //... check purchaserInfo to see if entitlement is now active
-          // SDK auto-synchronizes on success in observer mode
-        },
-        error => {
-          // Error restoring purchases
-          Purchasely.onProcessAction(false);
-        }
-      );
-    } else {
-      Purchasely.onProcessAction(true);
+Purchasely.interceptAction(Purchasely.PresentationAction.purchase, async (info, parameters) => {
+  // the store product id (sku) the user clicked on in the paywall
+  const storeProductId = parameters.plan.productId;
+  try {
+    const offerings = await Purchases.getOfferings();
+    if (offerings.current && offerings.current.monthly) {
+      const packageToBuy = offerings.current.monthly;
+      const { purchaserInfo } = await Purchases.purchasePackage(packageToBuy);
+      if (typeof purchaserInfo.entitlements.active.my_entitlement_identifier !== 'undefined') {
+        // SDK auto-synchronizes on success in observer mode
+      }
     }
-  });
+    return Purchasely.InterceptResult.success;
+  } catch (e) {
+    return Purchasely.InterceptResult.failed;
+  }
+});
+
+Purchasely.interceptAction(Purchasely.PresentationAction.restore, async (info, parameters) => {
+  try {
+    await Purchases.restoreTransactions();
+    // SDK auto-synchronizes on success in observer mode
+    return Purchasely.InterceptResult.success;
+  } catch (e) {
+    return Purchasely.InterceptResult.failed;
+  }
+});
 ```
 
 <br />
