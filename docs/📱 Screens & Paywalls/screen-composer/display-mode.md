@@ -172,7 +172,38 @@ PLYPresentation {
 }
 ```
 ```swift
-TO BE COMPLETED
+PLYPresentationBuilder
+    .forPlacementId("onboarding")
+    .build()
+    .preload { presentation, error in
+        guard let presentation = presentation else {
+            print("Error fetching presentation")
+            return
+        }
+
+        switch presentation.transition.type {
+        case .push:
+            // Handle push transition
+            print("Display it as a push transition")
+        case .fullScreen:
+            // Handle fullscreen transition
+            print("Display it as a fullscreen transition")
+        case .modal:
+            // Handle modal transition
+            print("Display it as a modal transition")
+        case .drawer:
+            // Handle drawer transition
+            print("Display it as a drawer transition")
+        case .popin:
+            // Handle pop-in transition
+            print("Display it as a pop-in transition")
+        case .inlinePaywall:
+            // Handle inline paywall (behaves like fullscreen)
+            print("Display it as an inline paywall")
+        }
+
+        presentation.display()
+    }
 ```
 
 <br />

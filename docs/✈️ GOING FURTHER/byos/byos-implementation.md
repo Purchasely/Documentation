@@ -32,15 +32,7 @@ Here’s the general lifecycle of a Custom Screen:
 4. While the Custom Screen is visible, the app manages all user interactions and business logic (e.g., text inputs, sign-in flow, validation, API calls)
 5. When the user completes the step, the app calls the SDK’s execute method with the selected connection, indicating what should happen next
 
-## Using BYOS Inside a Flow
-
-When a Flow reaches a Custom Screen step, the same handover mechanism applies:
-
-1. The SDK requests the next screen in the Flow sequence.
-2. The SDK detects that the step is a Custom Screen and triggers the callback with the Screen ID and its connections.
-3. The app creates the native view controller and returns it to the SDK, which displays it with the Flow’s configured transition
-4. The app manages all interactions on the Custom Screen while the Custom Screen is displayed
-5. The app resumes the Flow by calling the SDK’s execute method with the selected connection, and the Flow continues to the next mapped step.
+**Inside a Flow:** the same handover mechanism applies, with three differences — (1) in step 1, the SDK requests the *next* screen in the Flow's sequence rather than an arbitrary fetch; (2) in step 3, the Custom Screen is displayed using the Flow's configured transition instead of a generic modal/push/drawer; (3) in step 5, calling the execute method resumes the Flow, advancing it to the next mapped step for the selected connection.
 
 <br />
 

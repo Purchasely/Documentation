@@ -24,11 +24,29 @@ Use this to personalize Screens without duplicating content.
 2. Turn on Conditional visibility.
 
    <Image align="left" border={true} width="400px" src="https://files.readme.io/240a7415a56dcbb0010bac781741127d203c1a2407097ffad406a7813a4a5776-image.png" className="border" />
-3. Choose a Condition type
+3. Choose a Condition type (Screen interactions or User data).
 
    <Image align="left" border={true} width="400px" src="https://files.readme.io/8b7889302dd0d93d78cfe974bb93a0565fe37d02c43c865a8199b30f6bd406d8-image.png" className="border" />
-4. Configure the condition that determines when the component is shown (see below)
-5. Preview your Screen in different combinations of conditions
+4. Pick the specific interaction trigger / user condition, then configure its parameters (see the table below).
+5. Preview your Screen in different combinations of conditions.
+
+<br />
+
+> 📘 Compatible with SDK v5.0
+>
+> All condition types below are retro-compatible until SDK v5.0, **except Eligibility for an Offer, which requires SDK v5.6+** (see table below).
+
+## Condition type parameters
+
+| Category | Condition type | Parameters to configure | Minimum SDK |
+| --- | --- | --- | --- |
+| Screen interaction | [Plan selected](#plan-selected) | Plan picker ID, then the Plan | v5.0 |
+| Screen interaction | [Quiz answer selected](#quiz-answer-selected) | Quiz ID, then the Answer | v5.0 |
+| Screen interaction | [Switch state](#switch-state) | Switch ID, then the state (`on` / `off`) | v5.0 |
+| Screen interaction | [Tab selected](#tab-selected) | Tab component, then the Tab | v5.0 |
+| User data | [Eligibility for an Offer](#eligibility-for-an-offer) | Eligibility rule (is eligible / is not eligible for the Introductory Offer) | **v5.6+** |
+| User data | [User attribute value](#user-attribute-value) | User attribute, then its value | v5.0 |
+| User data | [Audience](#audience) | Audience | v5.0 (requires a Placement or Flow) |
 
 <br />
 
@@ -36,48 +54,9 @@ Use this to personalize Screens without duplicating content.
 
 Use when visibility depends on actions the user takes in the current Screen.
 
-Available interaction triggers:
-
-* [Plan selected](conditional-visibility#plan-selected) – a plan/an offering is selected in a plan picker
-* [Quiz answer selected](conditional-visibility#quiz-answer-selected) – a quiz answer is chosen
-* [Switch state](conditional-visibility#switch-state) – a switch is ON or OFF
-* [Tab selected](conditional-visibility#tab-selected) – a tab / segmented control is selected
-
-<br />
-
 ### Plan selected
 
-<Callout icon="📘" theme="info">
-  **Compatible with SDK v5.0**
-
-  Plan-based rules are retro-compatible until SDK v5.0
-</Callout>
-
 This interaction lets you show a component only when a particular plan is selected. This is particularly useful when you want to change the price or CTA.
-
-To assign a visibility condition to a particular plan:
-
-* Turn on Conditional Visibility
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
-* Condition type: select "Screen interactions"
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/614b56c28698dcd3eda488bad4701c32f2ad8c9c1a8560f8fe2af51c7e929a44-image.png" className="border" />
-* Interaction trigger: select "Plan selected"
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/bbfc055a955e7e1024eb938024034f8b8926888f0681a15f8bfefde6e81c4f93-image.png" className="border" />
-* Then select the desired Plan picker ID
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/5255f60dd2c491d79a1126d02a1603d0bb6d29cbb93a606877f37643c5cc377f-image.png" className="border" />
-* And finally select the desired Plan
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/477cd41b5afe9c801077f413c595b83b83a997fbb4eeab4ad6d4f5feea3733d0-image.png" className="border" />
-
-  <br />
-
-<br />
-
-<br />
 
 **Example**:
 
@@ -95,49 +74,9 @@ To display different CTA copies depending on the Plan selected:
 
 <br />
 
-<br />
-
 ### Quiz answer selected
 
-<Callout icon="📘" theme="info">
-  **Compatible with SDK v5.0**
-
-  Answer-based rules are retro-compatible until SDK v5.0
-</Callout>
-
 This interaction lets you show a component only when a particular answer is selected in a [Quiz](quiz). This can be useful if you want to display additional information when the user selects a particular answer.
-
-To assign a visibility condition to a Quiz answer:
-
-* Turn on Conditional Visibility
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
-* Condition type: select "Screen interactions"
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/614b56c28698dcd3eda488bad4701c32f2ad8c9c1a8560f8fe2af51c7e929a44-image.png" className="border" />
-* Interaction trigger: select "Quiz answer selected"
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/e14287a5754137376df5cc1ea2988ca0c76faba437cdadf75a0fbd2f2ab1b639-image.png" className="border" />
-
-  <br />
-* Then select the desired Quiz ID
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/bcf1bd1044fe71703b319970f4504aaae4929155fb077c414e96a3b12c3d96f6-image.png" className="border" />
-
-  <br />
-* And finally select the desired Answer
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/02ddf2634e7f42931f015b2790d335f13d87f4e65fc39d18d9c369ebbbe49e8a-image.png" className="border" />
-
-  <br />
-
-<br />
-
-<br />
-
-<br />
-
-<br />
 
 **Example:**
 
@@ -147,39 +86,7 @@ To assign a visibility condition to a Quiz answer:
 
 ### Switch state
 
-<Callout icon="📘" theme="info">
-  **Compatible with SDK v5.0**
-
-  Switch-based rules are retro-compatible until SDK v5.0
-</Callout>
-
 This interaction lets you show a component depending on whether a Switch is ON or OFF. This can be useful activate an optional free trial and adjust the copy / components accordingly.
-
-To assign a visibility condition to a Switch state:
-
-* Turn on Conditional Visibility
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
-* Condition type: select "Screen interactions"
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/614b56c28698dcd3eda488bad4701c32f2ad8c9c1a8560f8fe2af51c7e929a44-image.png" className="border" />
-* Interaction trigger: select "Switch state"
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/10ccfe1b1f9707ae4f382f37d162f52c0926390e152d219a528e9da245aec119-image.png" className="border" />
-
-  <br />
-* Then select the desired Switch ID
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/055ad62c4d87a85d458706f6a2f6107e321c2b5535e1f3734c2d48fb3c8a3705-image.png" className="border" />
-* And finally select the desired state (`on` or `off`)
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/22585862032dc1b5a31aa836272456d2ec382dac0c949e55e1a02bcd8d8fe96c-image.png" className="border" />
-
-  <br />
-
-<br />
-
-<br />
 
 **Example:**
 
@@ -189,41 +96,7 @@ To assign a visibility condition to a Switch state:
 
 ### Tab selected
 
-<Callout icon="📘" theme="info">
-  **Compatible with SDK v5.0**
-
-  Tab-based rules are retro-compatible until SDK v5.0
-</Callout>
-
 This interaction lets you show a component depending on whether a particular Tab / segmented control is selected or not. This can be update the header of a paywall based on the Tab / segmented control selected
-
-To assign a visibility condition to a Tab selected:
-
-* Turn on Conditional Visibility
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
-* Condition type: select "Screen interactions"
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/614b56c28698dcd3eda488bad4701c32f2ad8c9c1a8560f8fe2af51c7e929a44-image.png" className="border" />
-* Interaction trigger: select "Tab selected"
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/1340a79ba22bb2d83ded37b15e2eb45585c3ce158a33d060f281053a285b8244-image.png" className="border" />
-* Then select the desired Tab component
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/68e8aa271fb27f7b06448c724d2c9d1de7132e0853d7c4154708dd801c7557a0-image.png" className="border" />
-
-  <br />
-* And finally select the desired tab
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/599afca6198a7d983cf2bccfb4fd79a96be02067b8a0eb26785a1a4eff02f9ce-image.png" className="border" />
-
-  <br />
-
-<br />
-
-<br />
-
-<br />
 
 **Example:**
 
@@ -232,14 +105,6 @@ To assign a visibility condition to a Tab selected:
 ## User data
 
 Use when visibility depends on the user profile or context.
-
-Available User conditions are:
-
-* [Eligibility for an Offer](conditional-visibility#eligibility-for-an-offer) - User is eligible / not eligible to the Introductory Offer
-* [User attribute value](conditional-visibility#user-attribute-value) - User has a given `User attribute, value`
-* [Audience](conditional-visibility#audience) - User belongs to an Audience
-
-<br />
 
 ### Eligibility for an Offer
 
@@ -253,46 +118,6 @@ Available User conditions are:
 
 This user condition lets you display a component if the a user is eligible / not eligible to the Introductory Offer of any of the Offerings associated with the Paywall. Combined with [Offer mode text override capabilities](offer-mode), it is particularly useful when you want to personalize your Paywall with a "Blinkist timeline" component - explaining how the free trial works - only when the user can still benefit from the free trial.
 
-To assign a Visibility Condition based on the a user eligibility for an Introductory Offer:
-
-* Turn on Conditional visibility
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/df90612b7cf117b34107864db34e6ff4cc58777c74539738c66cf8ad487381a5-image.png" className="border" />
-
-  <br />
-
-<br />
-
-* Condition type: select "User data"
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/7b3cdbbdad8a6415ff04a5b8f32a4eefad25a0f6846e5aba3be48e0bc7459d07-image.png" className="border" />
-
-<br />
-
-<br />
-
-* User condition: select Eligibility to an Offer
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/30432644ed0550dd3266ee360b19c85b6164cee44518ccafd7c8acdf35dda6e2-image.png" className="border" />
-
-<br />
-
-<br />
-
-<br />
-
-* And finally select the eligibility rule: is eligible / is not available for the Introductory Offer
-
-  <Image align="left" border={false} width="400px" src="https://files.readme.io/16d4b216c9aba657d97792bca83af73c4f2deed8400092f27945e44786890198-image.png" />
-
-  <br />
-
-<br />
-
-<br />
-
-<br />
-
 **Example:**
 
 <Image align="center" border={true} src="https://files.readme.io/a12d5e2951c3aae805fa1fad7571c2c8613c680be5d9879220c1634139ed18a0-heaspace_pw2.gif" className="border" />
@@ -301,55 +126,9 @@ To assign a Visibility Condition based on the a user eligibility for an Introduc
 
 ### User attribute value
 
-<Callout icon="📘" theme="info">
-  **Compatible with SDK v5.0**
-
-  This user-attribute-based rules are retro-compatible until SDK v5.0
-</Callout>
-
 This user condition lets you display a component depending on the value of a user attribute. This is particularly useful if you want to tailor your Paywall / Screen based on the user insights (e.g.: how the user has responsed to a Quiz).
 
 It is limited to one single user attribute and one single value. If you want to combine several User attributes and values with Boolean Operators, check [Audience-based conditional visibility rules](conditional-visibility#audience) below.
-
-To assign a Visibility Condition based on a User attribute:
-
-* Turn on Conditional Visibility
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/a3a4de535bae97a896f31de2cbaa963b3b60407b21e9b09446d309bfe3fede84-image.png" className="border" />
-
-  <br />
-
-<br />
-
-* Condition type: select "User data"
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/dc082c5e96333518fe07d5e4d4c58ae4eb31d717abcf6f0a667e71187e38be37-image.png" className="border" />
-
-<br />
-
-<br />
-
-* User condition: select User attribute value
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/1e7bfc7d00aa9a832bfb1f1d9663b6357787e163e4a3ae112ac1a126cca11ce3-image.png" className="border" />
-
-<br />
-
-<br />
-
-<br />
-
-<br />
-
-<br />
-
-<br />
-
-* And finally select / type the desired User attribute value
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/2ce65518201ee18cc835eccf11aff40e52600e54365d099374c091b148c242ba-image.png" className="border" />
-
-<br />
 
 **Example:**
 
@@ -367,12 +146,6 @@ More info about the [Preview](preview)
 
 ### Audience
 
-<Callout icon="📘" theme="info">
-  **Compatible with SDK v5.0**
-
-  This conditional visibility rule is retro-compatible until SDK v5.0
-</Callout>
-
 <Callout icon="❗️" theme="error">
   **Only works with a Placement or within a Flow**
 
@@ -382,48 +155,6 @@ More info about the [Preview](preview)
 </Callout>
 
 This user condition lets you display a component only if the User belongs to a particular Audience. This is particularly useful to tailor the Screen or Paywall to the user insights. The [Audiences](audiences) used are the same ones as those used to target users in a Placement.
-
-To assign a Visibility Condition based on an Audience:
-
-* Turn on Conditional Visibility
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/c14d0f68c958f30cf04bc9223ca98a47fdd5fad8125e0b35a1d425f306090c27-image.png" className="border" />
-
-<br />
-
-<br />
-
-* Condition type: select "User data"
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/dc082c5e96333518fe07d5e4d4c58ae4eb31d717abcf6f0a667e71187e38be37-image.png" className="border" />
-
-<br />
-
-* User condition: select "Audience"
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/476cf9be1b7df4c7c7c0be2371bc4bf1a79dd01c2f997dca445e2aa918e5b379-image.png" className="border" />
-
-<br />
-
-<br />
-
-<br />
-
-* Finally select the desired Audience or create a new one
-
-  <Image align="left" border={true} width="400px" src="https://files.readme.io/cadc8b30b7c83d7e937f6767c923148b93baa46285d32489aa9e5a595f8cd8db-image.png" className="border" />
-
-<br />
-
-<br />
-
-<br />
-
-<br />
-
-<br />
-
-<br />
 
 **Example:**
 

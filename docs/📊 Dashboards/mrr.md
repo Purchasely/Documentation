@@ -66,7 +66,7 @@ Use the **Daily / Weekly / Monthly** selector to control the time resolution of 
 
 ### Filters
 
-Click **Filters** to narrow the data. You can combine multiple filters.
+<DashboardFilters />
 
 | Filter               | Description                                                      |
 | -------------------- | ---------------------------------------------------------------- |

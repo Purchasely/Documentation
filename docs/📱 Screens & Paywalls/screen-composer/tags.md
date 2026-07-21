@@ -504,7 +504,7 @@ These tags comes handy for your to calculate percentage difference and the price
         * yearly: $99.99/year
         * monthly: $9.99/month
           * **\{\{PERCENTAGE_COMPARISON(YEARLY,MONTHLY)}}** will display 17%
-          * **\{\{PERCENTAGE_COMPARISON(MONTHLY,YEARLY)}}** will display 20%_
+          * **\{\{PERCENTAGE_COMPARISON(MONTHLY,YEARLY)}}** will display 20%
       </td>
     </tr>
 
@@ -525,7 +525,7 @@ These tags comes handy for your to calculate percentage difference and the price
         * yearly: $99.99/year
         * monthly: $9.99/month
           * **\{\{DISCOUNT_PERCENTAGE(YEARLY,MONTHLY)}}** will display 17%
-          * *\{\{DISCOUNT_PERCENTAGE(MONTHLY,YEARLY)}}** will display 17%_
+          * **\{\{DISCOUNT_PERCENTAGE(MONTHLY,YEARLY)}}** will display 17%
       </td>
     </tr>
 
@@ -543,9 +543,11 @@ These tags comes handy for your to calculate percentage difference and the price
         With:
 
         * yearly: $99.99/year
-        * monthly: $9.99/monthThe output will be:
+        * monthly: $9.99/month
+
+          * The output will be:
           * **\{\{RAISE_PERCENTAGE(YEARLY,MONTHLY)}}** will display 20%
-            * *\{\{RAISE_PERCENTAGE(MONTHLY,YEARLY)}}** will display 20%_
+          * **\{\{RAISE_PERCENTAGE(MONTHLY,YEARLY)}}** will display 20%
       </td>
     </tr>
 
@@ -566,10 +568,10 @@ These tags comes handy for your to calculate percentage difference and the price
         * monthly: $9.99/month
 
           * The output will be:
-          * *\{\{PRICE_COMPARISON(YEARLY,MONTHLY)}}** will display $19.89  
+          * **\{\{PRICE_COMPARISON(YEARLY,MONTHLY)}}** will display $19.89  
             => the monthly plan costs $19.89 more than the yearly plan on a yearly base
-            * *\{\{PRICE_COMPARISON(MONTHLY,YEARLY)}}** will display $1.66  
-              => the monthly plan costs $1.66 more than the yearly plan on a monthly base_
+          * **\{\{PRICE_COMPARISON(MONTHLY,YEARLY)}}** will display $1.66  
+            => the monthly plan costs $1.66 more than the yearly plan on a monthly base
       </td>
     </tr>
   </tbody>
@@ -587,9 +589,9 @@ These tags can be used to display the price and duration of the both introductor
 
 These set of tags are very useful to create dynamic countdowns. You can integrate them in any label of your Screen. 3 different types of Timers are offered:
 
-* [Relative countdown](#timer-relative)
-* [Absolute countdown](#timer-absolute)
-* [User countdown](#timer-user-countdown)
+* Relative countdown
+* Absolute countdown
+* User countdown
 
 Timers are not only a simple tag but rather a _set of tags_ composed of different sub-tags (`TIMER(MONTHS)`, `TIMER(DAYS)`, `TIMER(MINUTES)`, `TIMER(SECONDS)`) that can be manipulated independently.
 

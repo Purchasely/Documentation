@@ -16,14 +16,7 @@ next:
       slug: cta-for-plan-picker
       title: CTA for Plan picker
 ---
-# General overview
-
-A Plan Picker is a paywall component that allows users to view and select subscription Plans or one-time purchase options. User can choose which Plan they want to purchase and confirm it by clicking on the purchase CTA.
-
-In the Screen Composer, the purchase CTA is a separated component from the Plan picker, called [CTA for Plan pickers](cta-plan-pickers) that can be put in a different surface:
-
-* Plan pickers allow user to choose which plan they are interested in
-* CTAs for Plan pickers are required to trigger the purchase action of the selected Plan
+<PlanPickerShared />
 
 <br />
 
@@ -56,13 +49,7 @@ Here are all the parameters that can be adjusted for the Plan picker:
 
 <br />
 
-* **Picker styles**
-
-  * You can define 2 different `background` and `border` for each picker depending on its state: `unselected` / `selected`
-
-    <Image align="center" className="border" border={true} src="https://files.readme.io/bc4f2b08bbbadf7e7b29479ee3e12cbc5af0e1954bedb1ced2a6dea9f3e72965-selected_unselected.gif" />
-
-    <br />
+<PlanPickerStyles />
 * **Pickers layout**
 
   * `Scrollable`: If you want the picker to be scrollable horizontally and overflow from the Screen, you can enable this switch. In this case, you will need to define the `Width` for the pickers
@@ -80,17 +67,7 @@ Here are all the parameters that can be adjusted for the Plan picker:
 * **Pickers padding**: As usual, you can adjust the spacing between the pickers borders and the contents (Texts) inside the picker.
 * **Margin**: This allows you to define the spacing between the outside border of the whole component and the other components (top & bottom) or the edges (left and right) of the surface.
 
-## Configuring the pickers
-
-Each picker must be associated with a Plan and can be optionally associated to an Offer (Promotional Offer). You must have associated the Plans to the Screen ([Manage Plan section](screen-composer#1-paywalls-only-define-the-plans)) prior to mapping it with the pickers.
-
-<Image align="center" className="border" width="350px" border={true} src="https://files.readme.io/699b637d2f04b8464a232f2a4b65ccd4b32e96f508a5f4f2fc8da40c0fe683ac-image.png" />
-
-The `Default` switch allows you define that one Picker should be selected by default when the Screen is displayed (without need for the User to manually select it). Only one picker can be selected by default.
-
-Margin Top / Bottom / Left & Right can be defined specifically for each picker.
-
-<br />
+<PlanPickerConfiguringPickers />
 
 An `Icon` can be configured for each picker individually. When enabled, you can define:
 
@@ -137,18 +114,7 @@ Example:
 
 <br />
 
-## Leveraging tags
-
-[Tags](tags) can be used inside Texts. You can either type them directly in plain text by putting them between pairs of curly brackets (eg: `{{PRICE}}` `{{AMOUNT}}` `{{DURATION}}`). You can also click on the **`{{TAGS}}`** button in the bar just above the text input.
-
-If you want the tag to refer to the button mapped with the element, choose the option "Use element's plan / default plan" after selecting your tag:
-
-<Image align="center" className="border" width="350px" border={true} src="https://files.readme.io/d3f414ad991b1762ae6c9fce2a8bbbd43f05157bed88c6bdf74dafff06de766f-image.png" />
-
-* In this case, the tag should appear without parameters when displayed in the text field.
-* The advantage is that you will not need to update the tag if you update the Plan associated to the picker.
-
-If you want the tag to refer to another Plan (eg: to strike through a former price), you can pick the desired Plan directly
+<PlanPickerTagsUsage />
 
 <br />
 

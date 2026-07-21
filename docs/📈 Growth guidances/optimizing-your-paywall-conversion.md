@@ -57,57 +57,20 @@ The number of Screens viewed corresponds to the bars of the chart and is associa
 > This KPI is particularly useful to measure the commercial pressure to which your free users are exposed.\
 > *It should be above 1 to make sure that at least every free user is exposed to a Paywall*
 
-### Breaking down the Screens views by Screen
+### Breaking down the Screens views by dimension
+
+The Screens viewed chart can be grouped by any of the following dimensions:
+
+| Dimension | What it shows / insight | Tip |
+|---|---|---|
+| Screen | Volumes of impressions for each Screen | Put your effort on optimizing the Screens that are the most viewed; don't spend too much time on Screens that are rarely displayed |
+| Placement | The touch points (Placements) where users are exposed to a Paywall, and the corresponding traffic for each Placement | Focus on tailoring the messaging for the most displayed Placements; avoid over-investing in Placements that have little traffic |
+| Country | The origins of your users by country | Identify the countries with the best optimization potential, then tailor the experience by [localizing your Screens](localization) and adjusting pricing with [Price A/B tests](ab-tests) |
+| Audience | How often your different Audiences (if you've built any) are exposed to Paywalls | Identify the most relevant Audiences, then dig deeper by setting a specific filter |
 
 <Image alt="Screens viewed grouped by Screens" align="center" border={true} src="https://files.readme.io/3dfca5b7be29ee6b565c3fccefd51d6c308b079d1b69886d9059656e618a3ca6-image.png">
   Screens viewed grouped by Screens
 </Image>
-
-This view provides insights on the volumes of impressions for each Screen:
-
-💡 Put your effort on optimizing the Screens that are the most viewed
-
-💡 Don't spend too much time on Screen that are rarely displayed
-
-<br />
-
-### Breaking down the Screens views by Placement
-
-<Image alt="Screens viewed grouped by Placement" align="center" border={true} src="https://files.readme.io/5e19b937cceedcdf962fe9d69850ecb7373eaa4a99137b947df9e54cf7f8f66f-image.png">
-  Screens viewed grouped by Placement
-</Image>
-
-This view provides insights on the touch points (Placements) where users are exposed to a Paywall and the corresponding traffic for each Placement
-
-💡 Focus on tailoring the messaging for the most displayed Placement
-
-💡 On the other hand, avoid spending too much time on tailoring the messaging for the Placements that have few traffic.
-
-### Breaking down the Screens views by Country
-
-<Image alt="Screens viewed grouped by Country" align="center" border={true} src="https://files.readme.io/23ec80a43cceaf395e91b8d2398076bfee6a3349dfa6d7a2b99505111b42c5f3-image.png">
-  Screens viewed grouped by Country
-</Image>
-
-This view provides insights on the origins of your users by countries:
-
-💡 Use this chart to identify the countries with the best potential of optimization
-
-💡 Tailor the user experience for these countries by [localizing your Screens](localization) and adjusting the pricing with [Price A/B tests](ab-tests)
-
-<br />
-
-### Breaking down the Screens views by Audience
-
-<Image alt="Screens viewed groupes by Audience" align="center" border={true} src="https://files.readme.io/440ffd9bf7e8dc478bd7b235478d0f9db20f55eb7086b6a3fca263804e77f9e2-image.png">
-  Screens viewed groupes by Audience
-</Image>
-
-If you have built Audiences, this view will allow you to assess how often your different Audiences are exposed to Paywalls:
-
-💡 Use it to identify the most relevant Audiences and then dig deeper for these particular Audiences by setting a specific filter
-
-<Image align="center" className="border" border={true} src="https://files.readme.io/0ed7cef5cae354a6783c34277f536de06fe92926dee3fb1104b2b005c0497895-image.png" />
 
 <br />
 
@@ -198,51 +161,19 @@ This view provides insights on the proportion of your users which end up paying 
 
 The **CVR to Regular price** is the main monetization KPI that you should try to optimize.
 
-#### Breaking down Conversion Rates by Plan
+#### Breaking down Conversion Rates by dimension
 
-* <Image align="center" className="border" border={true} src="https://files.readme.io/450463d237cdfb5c802f3051275a36922e48c695a66a383bae97e077e94b5801-image.png" />
+The CVR chart can also be grouped by dimension:
 
-  This view provides insights on the respective CVR for each Plan presented in your Paywalls.
-
-#### Breaking down Conversion Rates by Placement
+| Dimension | What it shows / insight | Tip |
+|---|---|---|
+| Plan | The respective CVR for each Plan presented in your Paywalls | — |
+| Placement | The CVR for each Placement | Focus your efforts on improving the Placements that are the most viewed with the lower CVR, for a bigger impact. Assess the CVR alongside the absolute number of Conversions for each Placement |
+| Country | The CVR for each Country | Focus first on tier 1 countries (high volumes of Unique Viewers and high CVRs); then tailor Paywall copy or prices for tier 2 countries (high volumes of Unique Viewers and low CVRs) with Paywall experiments or A/B tests |
+| Platform | The CVR per Platform | iOS usually shows a higher CVR — iOS users generally have more financial means and a higher propensity to purchase than Android users — so prioritize optimizing iOS CVR for better ROI |
+| Audience | The CVR per Audience | Tailor the Paywall copywriting specifically for each Audience; sell the value created by your app in a user-centric manner rather than listing features |
 
 <Image align="center" className="border" border={true} src="https://files.readme.io/1e6d0be3ac3bda5ba765d15390eff5d827bb9bf69c2dc590f039692e14592998-image.png" />
-
-This view provides insights on the CVR for each Placement
-
-💡 Focus your efforts on improving the Placements which are the most viewed with the lower CVR for a bigger impact.
-
-💡 Assess in parallel the CVR and the absolute number of Conversions for the different Placements
-
-#### Breaking down Conversion Rates by Country
-
-<Image align="center" className="border" border={true} src="https://files.readme.io/9d859e2008917f73f87273ac618fc344b968908cb5f7a6d6c47a0a46d18a67ab-image.png" />
-
-This view provides insights on the CVR for each Country
-
-💡 Focus your first efforts on improving it for the tier 1 countries (the ones with high volumes of Unique Viewers and high CVRs)
-
-💡 Then tailor the Paywall copy or prices for Tier 2 countries (the ones with high volumes of Unique Viewers and low CVRs) by launching a set of Paywall experiments or A/B tests
-
-#### Breaking down Conversion Rates by Platform
-
-<Image align="center" className="border" border={true} src="https://files.readme.io/ee227cf0eefd6cfaec08ecbcf45369f5270bac5508fa69c2b9f8f73c7dc67856-image.png" />
-
-This view provides insights on the CVR per Platform
-
-💡 In most cases, iOS has a higher CVR because of iOS users generally have more financial means and a higher propensity to purchase compared to Android users
-
-💡 Put more efforts on optimizing iOS CVR as you will get a better ROI on your actions
-
-#### Breaking down Conversion Rates by Audience
-
-<Image align="center" className="border" border={true} src="https://files.readme.io/a1402c61e9d629d0b4114ef9a4b0d21abbefe03ca23694dce03a02b25c46e3b7-image.png" />
-
-This view provides insights on the CVR per Audience
-
-💡 Tailor the copywriting of your Paywall specifically for each Audience
-
-💡 Sell the value created by your app in a user centric manner rather than the features of the app
 
 ### Measuring the Number of Conversions
 

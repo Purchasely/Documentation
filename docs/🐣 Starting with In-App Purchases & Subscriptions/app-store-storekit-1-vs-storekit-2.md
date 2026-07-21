@@ -60,16 +60,17 @@ StoreKit 2 simplifies in-app purchase logic, improves reliability, enhances secu
 
 | Category                | StoreKit 1                                                                          | StoreKit 2                                                                          |
 | ----------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| **Language design**     | Objective-C and early Swift; delegate-based (`SKPaymentQueue`, `SKProductsRequest`) | Swift-native; async/await concurrency, strongly typed APIs                          |
+| **Language**     | Objective-C and (early) Swift; delegate-based (`SKPaymentQueue`, `SKProductsRequest`) | Swift-only; async/await concurrency, strongly typed APIs                          |
 | **Product retrieval**   | `SKProductsRequest` with delegate callbacks                                         | `Product.products(for:)` (async)                                                    |
-| **Purchase flow**       | Add `SKPayment` to queue, handle observer updates manually                          | `try await product.purchase()` returns structured results                           |
-| **Restore purchases**   | Manual “Restore” button, complex logic                                              | `Transaction.currentEntitlements` provides real-time entitlements automatically     |
-| **Subscription status** | Requires server validation and custom logic                                         | Built-in `SubscriptionStatus` and `Transaction` API                                 |
-| **Receipt validation**  | Manual receipt parsing (ASN.1 / JSON)                                               | Built-in cryptographic verification (`VerificationResult`)                          |
+| **Purchase / transaction handling** | Add `SKPayment` to queue; observer pattern with delegate callbacks handles updates manually | `try await product.purchase()` returns structured results via async/await |
+| **Restore purchases / flow** | Manual "Restore" button; requires calling `restoreCompletedTransactions()`, complex logic | `Transaction.currentEntitlements` provides real-time entitlements automatically; automatic sync across devices |
+| **Entitlements** | Must be persisted manually and restored explicitly | Managed automatically via `Transaction.currentEntitlements` |
+| **Subscription status / renewal info** | Requires server validation and custom logic                                         | Built-in `SubscriptionStatus` and `Transaction` API, plus `RenewalInfo`                                 |
+| **Receipt validation**  | Manual receipt parsing (ASN.1 / JSON); app receipt must be read and verified manually                                               | Built-in cryptographic verification (`VerificationResult`, JWS signed transactions)                          |
 | **Security**            | Developer-managed                                                                   | Transactions cryptographically signed by Apple (JWS)                                |
-| **UI / Paywall**        | Fully custom                                                                        | Built-in SwiftUI views: `StoreView`, `SubscriptionStoreView`, etc.                  |
-| **Testing**             | Sandbox only; limited StoreKit configuration support                                | Enhanced StoreKit Testing in Xcode with simulated renewals, billing issues, refunds |
-| **Server integration**  | App Store Server API (v1, deprecated)                                               | App Store Server API v2 with richer transaction data                                |
+| **UI / Paywall integration**        | Fully custom                                                                        | Built-in SwiftUI views: `StoreView`, `ProductView`, `SubscriptionStoreView`, etc.                  |
+| **Testing**             | Sandbox only; limited StoreKit configuration support                                | Enhanced StoreKit Testing in Xcode with full simulation (renewals, refunds, billing retry) |
+| **Server integration / communication**  | App Store Server API v1 (deprecated)                                               | App Store Server API v2 with richer transaction data (modern JWS model)                                |
 | **Cross-device sync**   | Manual restore logic                                                                | Automatic entitlement syncing across devices                                        |
 
 ***
@@ -139,12 +140,6 @@ if let product = products.first {
         break  
     }  
 }
-
-
-for await transaction in Transaction.currentEntitlements {  
-    // Automatically includes all active purchases  
-    print("User owns: \(transaction.productID)")  
-}
 ```
 
 ### Checking Entitlements (No Restore Needed)
@@ -155,20 +150,6 @@ for await transaction in Transaction.currentEntitlements {
     print("User owns: \(transaction.productID)")  
 }
 ```
-
-# 🧱 Architecture Differences
-
-| Concept                       | StoreKit 1                                         | StoreKit 2                                                                           |
-| ----------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| **Transaction handling**      | Observer pattern with delegate callbacks           | Async/await return values with structured types                                      |
-| **Entitlements**              | Must be persisted manually and restored explicitly | Managed automatically via `Transaction.currentEntitlements`                          |
-| **Restore flow**              | Requires calling `restoreCompletedTransactions()`  | Automatic entitlement sync across devices                                            |
-| **Receipt validation**        | App receipt must be read and verified manually     | Built-in cryptographic validation (JWS signed transactions)                          |
-| **Server communication**      | App Store Server API v1                            | App Store Server API v2 (modern JSON Web Signature model)                            |
-| **Subscription renewal info** | Requires custom server logic                       | Built-in APIs like `RenewalInfo` and `SubscriptionStatus`                            |
-| **UI integration**            | Fully custom implementation                        | Built-in SwiftUI paywall views (`StoreView`, `ProductView`, `SubscriptionStoreView`) |
-| **Language support**          | Objective-C and Swift                              | Swift-only (async/await concurrency)                                                 |
-| **Testing tools**             | Sandbox + limited StoreKit Config support          | Xcode StoreKit Testing with full simulation (renewal, refund, billing retry)         |
 
 ***
 

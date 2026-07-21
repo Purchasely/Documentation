@@ -65,13 +65,6 @@ The only change you need to make is if you are in observer mode, if you are in f
 
 # Requirements
 
-## Purchasely SDK
-
-* **iOS**: 4.0.1
-* **Flutter**: 4.0.1
-* **React Native**: 4.0.1
-* **Cordova**: 4.1.0
-
 ## OS version (built with Xcode 14 or later)
 
 * iOS 15

@@ -113,16 +113,16 @@ To reactivate all processing, you must call the `revokeDataProcessingConsent` AP
 Purchasely.revokeDataProcessingConsent(for: [])
 ```
 ```kotlin
-Purchasely.revokeDataProcessingConsent(setOf(PLYDataProcessingPurpose.IdentifiedAnalytics))
+Purchasely.revokeDataProcessingConsent(emptySet())
 ```
 ```javascript React Native
-Purchasely.revokeDataProcessingConsent([PLYDataProcessingPurpose.IDENTIFIED_ANALYTICS])
+Purchasely.revokeDataProcessingConsent([])
 ```
 ```javascript Flutter
-Purchasely.revokeDataProcessingConsent([PLYDataProcessingPurpose.identifiedAnalytics]);
+Purchasely.revokeDataProcessingConsent([]);
 ```
 ```javascript Cordova
-Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.identifiedAnalytics])
+Purchasely.revokeDataProcessingConsent([])
 ```
 
 ###

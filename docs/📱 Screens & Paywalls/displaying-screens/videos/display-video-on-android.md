@@ -73,7 +73,7 @@ This player needs to be a `View` and must implement `PLYPlayerInterface`.
 
 ```coffeescript Kotlin
 interface PLYPlayerInterface {  
-  fun setup(url: String, contentMode: String, isMuted: Boolean)  
+  fun setup(url: String, contentMode: String, isMuted: Boolean, repeat: Boolean = true)  
   fun play()  
   fun pause()  
   fun release()  
@@ -140,47 +140,5 @@ class Media3PlayerView(context: Context) : PlayerView(context), PLYPlayerInterfa
     override fun release() {
         exoPlayer.release()
     }
-}
-```
-```coffeescript Kotlin - ExoPlayer
-class PurchaselyPlayerView(context: Context) : PlayerView(context), PLYPlayerInterface {
-  private var exoPlayer: SimpleExoPlayer = SimpleExoPlayer.Builder(context).build()
-
-  override fun setup(url: String, contentMode: String, isMuted: Boolean) {
-      val mediaItem = MediaItem.fromUri(Uri.parse(url))
-      exoPlayer.addMediaItem(mediaItem)
-      exoPlayer.playWhenReady = false
-      exoPlayer.prepare()
-
-      resizeMode = when (contentMode) {
-          "fill" -> AspectRatioFrameLayout.RESIZE_MODE_ZOOM
-          "fit" -> AspectRatioFrameLayout.RESIZE_MODE_FIT
-          else -> AspectRatioFrameLayout.RESIZE_MODE_ZOOM
-      }
-
-      player = exoPlayer
-      controllerAutoShow = false
-
-      if (isMuted) {
-          exoPlayer.volume = 0f
-      } else {
-          exoPlayer.volume = 1f
-      }
-
-      exoPlayer.repeatMode = Player.REPEAT_MODE_ALL
-      hideController()
-  }
-
-  override fun play() {
-      exoPlayer.play()
-  }
-
-  override fun pause() {
-      exoPlayer.pause()
-  }
-
-  override fun release() {
-      exoPlayer.release()
-  }
 }
 ```

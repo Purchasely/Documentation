@@ -61,16 +61,12 @@ To learn more about fetching and displaying screens using the Purchasely SDK, re
 
 ### Hide a Screen
 
+> 📘 Flutter & React Native: hide and close are the same call
+>
+> As of SDK v6, Flutter and React Native no longer expose a separate hide primitive — `hidePresentation()` was replaced by the same `close()` call used to close a screen (see each SDK's `MIGRATION-v6.md`). Use the samples in [Close a Screen](#close-a-screen) below to temporarily dismiss a screen on those platforms.
+
 Use **`Purchasely.hidePresentation() `**&#x74;o hide a screen without closing it. This method is useful when you want to temporarily hide the screen and bring it back later.
 
-```coffeescript Flutter
-// On the loaded Presentation handle (from preload() or outcome.presentation)
-presentation.close()
-```
-```coffeescript React Native
-// On the request returned by .build()
-request.close()
-```
 ```coffeescript Cordova
 Purchasely.hidePresentation()
 ```
