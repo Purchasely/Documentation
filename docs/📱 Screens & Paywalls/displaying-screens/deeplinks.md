@@ -116,14 +116,6 @@ Purchasely.setDefaultPresentationDismissHandler((result) => {
 	}
 });
 ```
-```csharp
-_purchasely.SetDefaultPresentationResultHandler((result, plan) =>
-{
-    Log($"Presentation Result: {result}.");
-});
-
-```
-
 > 📘 Keep in mind
 >
 > The callback `PLYProductViewControllerResult`(iOS) / `ProductViewResultListener`(Android) is optional, you can set to null if you do not need it. You can override it when you display a presentation directly.

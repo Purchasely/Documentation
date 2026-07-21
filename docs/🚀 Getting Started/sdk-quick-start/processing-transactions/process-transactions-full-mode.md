@@ -147,36 +147,6 @@ Purchasely.presentPresentationForPlacement(
 	}
 );
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-_purchasely.PresentPresentationForPlacement(
-  	'onboarding',
-  	OnPresentationResult,
-  	OnPresentationContentLoaded,
-  	OnPresentationContentClosed,
-  	'contentId',
-  	true
-);
-
-private void OnPresentationResult(ProductViewResult result, Plan plan)
-{
-  Log($"Presentation Result: {result}.");
-
-  switch(result) {
-    case ProductViewResult.Purchased:
-      Log($"Purchased Plan: {plan.name}.");
-      break;
-    case ProductViewResult.Restored':
-      Log($"Restored purchases");
-      break;
-    case ProductViewResult.Cancelled:
-      Log($"Nothing happened");
-      break;
-  }
-}
-```
-
 <br />
 
 Once you get the information that the purchase has been processed, you can update the entitlements to unlock the access to the premium contents

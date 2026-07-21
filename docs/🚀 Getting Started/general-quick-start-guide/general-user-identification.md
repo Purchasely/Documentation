@@ -48,12 +48,6 @@ Purchasely.getAnonymousUserId((anonymousId) => {
 	console.log("Purchasely anonymous Id: " + anonymousId);
 });
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-_purchasely.GetAnonymousUserId();
-```
-
 # Logged-in users
 
 To login a user, just provides your user id. Purchasely will save this user id for all sessions moving forward until you call `Purchasely.userLogout()` or the user uninstall the application.  
@@ -170,14 +164,6 @@ Purchasely.userLogin("123456789", (shouldRefresh) => {
 	}
 });
 ```
-```csharp
-Purchasely.UserLogin("123456789", (shouldRefresh) => {
-	if (shouldRefresh) {
-		// You should call your backend to refresh user entitlements
-	}
-});
-```
-
 <br />
 
 # Sign out users
@@ -207,8 +193,4 @@ Purchasely.userLogout();
 ```javascript Cordova
 Purchasely.userLogout();
 ```
-```csharp
-Purchasely.UserLogout();
-```
-
 <br />

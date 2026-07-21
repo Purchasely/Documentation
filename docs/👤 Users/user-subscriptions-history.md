@@ -77,31 +77,6 @@ try {
   print(e);
 }
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-...
-_purchasely.GetUserSubscriptionsHistory(OnGetSubscriptionsHistorySuccess, Log);
-...
-
-private void OnGetSubscriptionsHistorySuccess(List<SubscriptionData> subscriptionData)
-{
-  Log("Get Subscriptions history succeed.");
-
-  foreach (var subscription in subscriptionData)
-  {
-    Log($"Subscription ID: {subscription.id}");
-
-    var plan = subscription.plan;
-    if (plan != null)
-      LogPlan(plan);
-
-    var product = subscription.product;
-    if (product != null)
-      LogProduct(product);
-  }
-}
-```
 ```javascript Cordova
 Purchasely.userSubscriptionsHistory(subscriptions => {
        console.log("Subscriptions history" + subscriptions);

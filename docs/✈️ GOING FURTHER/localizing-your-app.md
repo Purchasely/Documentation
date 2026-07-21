@@ -71,10 +71,6 @@ Purchasely.setLanguage("en");
 // Force language to spanish
 Purchasely.setLanguage("es");
 ```
-```csharp
-// Force language to spanish
-_purchasely.SetLanguage("es");
-```
 
 > 🚧 Keep in Mind
 >

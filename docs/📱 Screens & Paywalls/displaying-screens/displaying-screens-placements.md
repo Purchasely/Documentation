@@ -89,18 +89,6 @@ await Purchasely.presentation
 ```typescript Flutter
 await PLYPresentationBuilder.placement('<<default_placement>>').build().display();
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-_purchasely.PresentPresentationForPlacement(
-  	'<<default_placement>>',
-  	OnPresentationResult,
-  	OnPresentationContentLoaded,
-  	OnPresentationContentClosed,
-  	'contentId',
-  	true
-);
-```
 ```javascript Cordova
 Purchasely.presentPresentationForPlacement('<<default_placement>>');
 ```

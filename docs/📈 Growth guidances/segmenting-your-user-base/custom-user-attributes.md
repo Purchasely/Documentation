@@ -241,16 +241,6 @@ Purchasely.setUserAttributeWithDouble("doubleKey", 1.2);
 Purchasely.setUserAttributeWithBoolean("booleanKey", true);
 Purchasely.setUserAttributeWithDate("dateKey", DateTime.now());
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-//Set one attribute by key and value
-_purchasely.SetUserAttribute("StringAttribute", "String message");
-_purchasely.SetUserAttribute("IntAttribute", -100);
-_purchasely.SetUserAttribute("FloatAttribute", 147.5f);
-_purchasely.SetUserAttribute("BoolAttribute", true);
-_purchasely.SetUserAttribute("DateAttribute", DateTime.Now);
-```
 ```javascript Cordova
 //Set one attribute by key and value	
 Purchasely.setUserAttributeWithString("key_string", "value_string");
@@ -309,11 +299,6 @@ attributes.forEach((key, value) {
 Purchasely.userAttribute("key_string", value => {
   console.log("User attribute string " + value);
 });
-```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-_purchasely.GetUserAttribute("AttributeID")
 ```
 
 ## Incrementing / decrementing counters
@@ -380,13 +365,6 @@ Purchasely.userAttribute("viewed_articles", value => {
   Purchasely.setUserAttributeWithInt("viewed_articles", value + 1);
 });
 ```
-```csharp
-// Not available at the moment, you can do
-private PurchaselyRuntime.Purchasely _purchasely;
-
-var viewedArticles = _purchasely.GetUserAttribute("viewed_articles");
-_purchasely.SetUserAttribute("viewed_articles", viewedArticles + 1);
-```
 
 ## Clearing Custom User Attributes
 
@@ -426,13 +404,6 @@ Purchasely.clearUserAttribute("key_string");
 	
 //Remove all attributes
 Purchasely.clearUserAttributes();
-```
-```csharp
-//Remove one attribute
-_purchasely.ClearUserAttribute("StringAttribute");
-	
-//Remove all attributes
-_purchasely.ClearUserAttributes();
 ```
 
 > 👍 Clear after log out

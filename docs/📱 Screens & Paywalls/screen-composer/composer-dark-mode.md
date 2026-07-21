@@ -53,14 +53,6 @@ Purchasely.setThemeMode(PLYThemeMode.dark);
 // use device theme to set automatically in dark or light mode
 Purchasely.setThemeMode(PLYThemeMode.system);
 ```
-```csharp
-// force dark mode for all Purchasely screens
-Purchasely.setThemeMode(Purchasely.ThemeMode.dark);
-
-// use device theme to set automatically in dark or light mode
-Purchasely.setThemeMode(Purchasely.ThemeMode.light);
-
-```
 ```javascript Cordova
 // force dark mode for all Purchasely screens
 Purchasely.setThemeMode(Purchasely.ThemeMode.dark);

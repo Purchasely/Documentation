@@ -70,11 +70,6 @@ Use **`Purchasely.hidePresentation() `**&#x74;o hide a screen without closing it
 ```coffeescript Cordova
 Purchasely.hidePresentation()
 ```
-```coffeescript
-private PurchaselyRuntime.Purchasely _purchasely
-
-_purchasely.HidePresentation()
-```
 
 ### Show a Screen
 
@@ -91,11 +86,6 @@ request.display()
 ```coffeescript Cordova
 Purchasely.showPresentation()
 ```
-```coffeescript
-private PurchaselyRuntime.Purchasely _purchasely
-
-_purchasely.ShowPresentation()
-```
 
 ### Close a Screen
 
@@ -111,9 +101,4 @@ request.close()
 ```
 ```coffeescript Cordova
 Purchasely.closePresentation()
-```
-```coffeescript
-private PurchaselyRuntime.Purchasely _purchasely
-
-_purchasely.ClosePresentation()
 ```

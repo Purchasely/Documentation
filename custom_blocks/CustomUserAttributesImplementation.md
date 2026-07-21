@@ -65,16 +65,6 @@ Purchasely.setUserAttributeWithDouble("doubleKey", 1.2);
 Purchasely.setUserAttributeWithBoolean("booleanKey", true);
 Purchasely.setUserAttributeWithDate("dateKey", DateTime.now());
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-//Set one attribute by key and value
-_purchasely.SetUserAttribute("StringAttribute", "String message");
-_purchasely.SetUserAttribute("IntAttribute", -100);
-_purchasely.SetUserAttribute("FloatAttribute", 147.5f);
-_purchasely.SetUserAttribute("BoolAttribute", true);
-_purchasely.SetUserAttribute("DateAttribute", DateTime.Now);
-```
 ```javascript Cordova
 //Set one attribute by key and value	
 Purchasely.setUserAttributeWithString("key_string", "value_string");
@@ -134,12 +124,6 @@ Purchasely.userAttribute("key_string", value => {
   console.log("User attribute string " + value);
 });
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-_purchasely.GetUserAttribute("AttributeID")
-```
-
 ## Incrementing / decrementing counters
 
 It is possible to count the number of times a particular action is performed by the User by using an Integer (Int) as a Custom User Attribute. To automatically increase / decrease the counters, the method `incrementUserAttribute()` and `decrementUserAttribute()` can be used.
@@ -204,14 +188,6 @@ Purchasely.userAttribute("viewed_articles", value => {
   Purchasely.setUserAttributeWithInt("viewed_articles", value + 1);
 });
 ```
-```csharp
-// Not available at the moment, you can do
-private PurchaselyRuntime.Purchasely _purchasely;
-
-var viewedArticles = _purchasely.GetUserAttribute("viewed_articles");
-_purchasely.SetUserAttribute("viewed_articles", viewedArticles + 1);
-```
-
 ## Clearing Custom User Attributes
 
 You can clear either a specific attribute, identified by its key, or all attributes at once.
@@ -251,14 +227,6 @@ Purchasely.clearUserAttribute("key_string");
 //Remove all attributes
 Purchasely.clearUserAttributes();
 ```
-```csharp
-//Remove one attribute
-_purchasely.ClearUserAttribute("StringAttribute");
-	
-//Remove all attributes
-_purchasely.ClearUserAttributes();
-```
-
 > 👍 Clear after log out
 >
 > Purchasely SDK will automatically clear all your user attributes when you call `Purchasely.userLogout()` unless you call `Purchasely.userLogout(false)`
@@ -310,8 +278,6 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7, processin
 ```
 ```javascript Cordova
 ```
-```csharp
-```
 
 ### `optional` Custom User Attributes
 
@@ -329,7 +295,7 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7, processin
 //Set one attribute by key and value
 Purchasely.setUserAttribute(withIntValue: 20, forKey: "age", processingLegalBasis: .optional)
 Purchasely.setUserAttribute(withDoubleValue: 175.5, forKey: "size", processingLegalBasis: .optional)
-Purchasely.setUserAttribute(withBoolValue: true, forKey: "subscribed", processingLegalBasis: .essentiaoptional)
+Purchasely.setUserAttribute(withBoolValue: true, forKey: "subscribed", processingLegalBasis: .optional)
 Purchasely.setUserAttribute(withDateValue: Date(), forKey: "date", processingLegalBasis: .optional)
 Purchasely.setUserAttribute(withStringValue: "Female", forKey: "gender", processingLegalBasis: .optional)
 
@@ -352,8 +318,6 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7, processin
 ```coffeescript Flutter
 ```
 ```javascript Cordova
-```
-```csharp
 ```
 
 > ❗️ Custom User Attributes set prior to the upgrading the SDK to version 5.4 onwards

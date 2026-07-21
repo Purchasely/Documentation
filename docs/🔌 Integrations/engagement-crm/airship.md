@@ -145,11 +145,6 @@ UAirship.setNamedUser("YOUR_USER_ID")
 
 Purchasely.setAttribute(Purchasely.Attribute.AIRSHIP_USER_ID, "YOUR_USER_ID");
 ```
-```coffeescript
-private PurchaselyRuntime.Purchasely _purchasely;
-
-Purchasely.setAttribute(PLYAttribute.AIRSHIP_USER_ID, "userId");
-```
 
 > 📘 For further information
 >
@@ -220,9 +215,4 @@ Purchasely.setAttribute(PLYAttribute.airship_channel_id, "airship_channel_id");
 ```
 ```coffeescript Cordova
 Purchasely.setAttribute(Purchasely.Attribute.AIRSHIP_CHANNEL_ID, "channelId");
-```
-```coffeescript
-private PurchaselyRuntime.Purchasely _purchasely;
-
-Purchasely.setAttribute(PLYAttribute.AIRSHIP_CHANNEL_ID, "channelId");
 ```

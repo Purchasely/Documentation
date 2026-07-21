@@ -81,31 +81,6 @@ try {
   print(e);
 }
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-...
-_purchasely.GetUserSubscriptions(OnGetSubscriptionsSuccess, Log);
-...
-
-private void OnGetSubscriptionsSuccess(List<SubscriptionData> subscriptionData)
-	{
-		Log("Get Subscription Data Success.");
-
-		foreach (var subscription in subscriptionData)
-		{
-			Log($"Subscription ID: {subscription.id}");
-
-			var plan = subscription.plan;
-			if (plan != null)
-				LogPlan(plan);
-
-			var product = subscription.product;
-			if (product != null)
-				LogProduct(product);
-		}
-	}
-```
 ```javascript Cordova
 Purchasely.userSubscriptions(subscriptions => {
        console.log("Subscriptions " + subscriptions);
@@ -182,31 +157,6 @@ try {
 } catch (e) {
   print(e);
 }
-```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-...
-_purchasely.GetUserSubscriptions(OnGetSubscriptionsSuccess, Log);
-...
-
-private void OnGetSubscriptionsSuccess(List<SubscriptionData> subscriptionData)
-	{
-		Log("Get Subscription Data Success.");
-
-		foreach (var subscription in subscriptionData)
-		{
-			Log($"Subscription ID: {subscription.id}");
-
-			var plan = subscription.plan;
-			if (plan != null)
-				LogPlan(plan);
-
-			var product = subscription.product;
-			if (product != null)
-				LogProduct(product);
-		}
-	}
 ```
 ```javascript Cordova
 Purchasely.userSubscriptions(subscriptions => {

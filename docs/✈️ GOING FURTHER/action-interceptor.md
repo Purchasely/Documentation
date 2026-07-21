@@ -38,9 +38,9 @@ Every interceptor **must return a result** telling the SDK how your app handled 
 >
 > Any action for which you did **not** register an interceptor is performed by the SDK as usual — so a button never stays stuck spinning. You don't need to return `NOT_HANDLED` for actions you aren't interested in.
 
-> 📘 Cordova &amp; Unity (C#) use a boolean instead
+> 📘 Cordova
 >
-> These bridges expose `Purchasely.onProcessAction(processAction)` (Cordova) / `purchasely.ProcessPaywallAction(processAction)` (Unity). Pass **`true`** to let the SDK perform the default action (equivalent to `NOT_HANDLED`), or **`false`** once your app has handled the action itself (equivalent to `SUCCESS`).
+> Cordova exposes the same three results as `Purchasely.InterceptResult.success` / `.failed` / `.notHandled`. Return one of them from your `interceptAction` handler — there is no separate "process action" step.
 
 > 📘 `synchronize()` is only needed outside the interceptor
 >
@@ -70,19 +70,19 @@ Note: This mechanism can also be used in `full` mode.
 ```swift
 // Intercept the tap on login
 Purchasely.interceptAction(.login) { [weak self] info, params, completion in
-	// When the user has completed the process
-	// Return .notHandled to reload the paywall if user is logged in
-	self?.presentLogin(above: info?.controller) { (loggedIn) in
-		Purchasely.userLogin(with: "MY_USER_ID")
-		completion(loggedIn ? .notHandled : .success)
-	}
+    // When the user has completed the process
+    // Return .notHandled to reload the paywall if user is logged in
+    self?.presentLogin(above: info?.controller) { (loggedIn) in
+        Purchasely.userLogin(with: "MY_USER_ID")
+        completion(loggedIn ? .notHandled : .success)
+    }
 }
 
 // Intercept the tap on purchase to display the terms and condition
 Purchasely.interceptAction(.purchase) { [weak self] info, params, completion in
-	self?.presentTermsAndConditions(above: info?.controller) { (userAcceptedTerms) in
-		completion(userAcceptedTerms ? .notHandled : .success)
-	}
+    self?.presentTermsAndConditions(above: info?.controller) { (userAcceptedTerms) in
+        completion(userAcceptedTerms ? .notHandled : .success)
+    }
 }
 ```
 ```kotlin
@@ -212,97 +212,42 @@ await Purchasely.interceptAction(
   },
 );
 ```
-```swift Cordova
-Purchasely.setPaywallActionInterceptor((result) => {
-	console.log('Received action from paywall' + result.info.presentationId);
-	
-	if (result.action === Purchasely.PaywallAction.navigate) {
-		console.log(
-		'User wants to navigate to website ' +
-			result.parameters.title +
-			' ' +
-			result.parameters.url
-		);
-		Purchasely.onProcessAction(true);
-	} else if (result.action === Purchasely.PaywallAction.close) {
-		console.log('User wants to close paywall');
-		Purchasely.onProcessAction(true);
-	} else if (result.action === Purchasely.PaywallAction.login) {
-		console.log('User wants to login');
-		//Present your own screen for user to log in
-		Purchasely.closePresentation();
-		Purchasely.userLogin('MY_USER_ID');
-		//Call this method to update Purchasely Paywall
-		Purchasely.onProcessAction(true);
-	} else if (result.action === Purchasely.PaywallAction.open_presentation) {
-		console.log('User wants to open a new paywall');
-		Purchasely.onProcessAction(true);
-	} else if (result.action === Purchasely.PaywallAction.purchase) {
-		console.log('User wants to purchase');
-		//If you want to intercept it, close presentation and display your screen
-		Purchasely.closePresentation();
-	} else if (result.action === Purchasely.PaywallAction.restore) {
-		console.log('User wants to restore his purchases');
-		Purchasely.onProcessAction(true);
-	} else {
-		console.log('Action unknown ' + result.action);
-		Purchasely.onProcessAction(true);
-	}
+```javascript Cordova
+// Register one handler per action kind; each returns a Purchasely.InterceptResult.
+Purchasely.interceptAction(Purchasely.PresentationAction.navigate, (info, parameters) => {
+  console.log('User wants to navigate');
+  return Purchasely.InterceptResult.notHandled;
 });
-```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
 
-purchasely.SetPaywallActionInterceptor(OnPaywallActionIntercepted);
+Purchasely.interceptAction(Purchasely.PresentationAction.close, (info, parameters) => {
+  console.log('User wants to close paywall');
+  return Purchasely.InterceptResult.notHandled;
+});
 
-private void OnPaywallActionIntercepted(PaywallAction action)
-{
-    Log($"Purchasely Paywall Action Intercepted. Action: {action.action}.");
+Purchasely.interceptAction(Purchasely.PresentationAction.login, (info, parameters) => {
+  console.log('User wants to login');
+  // Present your own screen for the user to log in
+  Purchasely.closePresentation();
+  Purchasely.userLogin('MY_USER_ID');
+  // Return success to refresh the Purchasely paywall
+  return Purchasely.InterceptResult.success;
+});
 
-    switch (action.action)
-    {
-        case "navigate":
-            Log("User wants to navigate");
-            purchasely.ProcessPaywallAction(true);
-            break;
+Purchasely.interceptAction(Purchasely.PresentationAction.open_presentation, (info, parameters) => {
+  console.log('User wants to open a new paywall');
+  return Purchasely.InterceptResult.notHandled;
+});
 
-        case "close":
-            Log("User wants to close paywall");
-            purchasely.ProcessPaywallAction(false);
-            break;
+Purchasely.interceptAction(Purchasely.PresentationAction.purchase, (info, parameters) => {
+  console.log('User wants to purchase');
+  // Return notHandled to let the SDK run the purchase, or handle it yourself and return success
+  return Purchasely.InterceptResult.notHandled;
+});
 
-        case "login":
-            Log("User wants to login");
-            // Present your own screen for user to log in
-            purchasely.ClosePresentation();
-            purchasely.UserLogin("MY_USER_ID");
-            // Call this method to update Purchasely Paywall
-            purchasely.ProcessPaywallAction(true);
-            break;
-
-        case "open_presentation":
-            Log("User wants to open a new presentation");
-            purchasely.ProcessPaywallAction(true);
-            break;
-
-        case "purchase":
-            Log("User wants to purchase");
-            // If you want to intercept it, close presentation and display your screen
-            purchasely.ClosePresentation();
-            purchasely.ProcessPaywallAction(false);
-            break;
-
-        case "restore":
-            Log("User wants to restore his purchases");
-            purchasely.ProcessPaywallAction(true);
-            break;
-
-        default:
-            Log($"Action unknown {action.action}");
-            purchasely.ProcessPaywallAction(true);
-            break;
-    }
-}
+Purchasely.interceptAction(Purchasely.PresentationAction.restore, (info, parameters) => {
+  console.log('User wants to restore his purchases');
+  return Purchasely.InterceptResult.notHandled;
+});
 ```
 
 <br />

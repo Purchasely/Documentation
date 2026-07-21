@@ -70,11 +70,6 @@ mixpanel.getDistinctId(function(distinctId) {
 String? distinctId = await mixpanel?.getDistinctId();
 Purchasely.setAttribute(PLYAttribute.mixpanel_distinct_id, distinctId);
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-...
-_purchasely.SetAttribute(PLYAttribute.MIXPANEL_DISTINCT_ID, Mixpanel.DistinctId);
-```
 
 ## 2 - Activating the Mixpanel integration
 

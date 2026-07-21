@@ -70,12 +70,6 @@ Purchasely.setAttribute(Purchasely.Attribute.ITERABLE_USER_ID, id);
 
 Purchasely.setAttribute(Purchasely.Attribute.ITERABLE_USER_EMAIL, email);
 ```
-```Text
-private PurchaselyRuntime.Purchasely _purchasely;
-...
-_purchasely.SetAttribute(PLYAttribute.ITERABLE_USER_ID, id);
-_purchasely.SetAttribute(PLYAttribute.ITERABLE_USER_EMAIL, email);
-```
 
 <br />
 

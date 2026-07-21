@@ -79,14 +79,6 @@ Purchasely.presentPresentationWithIdentifier(
     }
 );
 ```
-```csharp
-_purchasely.PresentPresentationForPlacement(placementId,
-			OnPresentationResult,
-			OnPresentationContentLoaded,
-			OnPresentationContexntClosed,
-			contentId,
-			true);
-```
 
 or manually
 
@@ -129,9 +121,6 @@ Purchasely.purchaseWithPlanVendorId("PLAN_VENDOR_ID", "my_content_id", (plan) =>
 }, (error) => {
 	console.log(error);
 });
-```
-```csharp
-_purchasely.Purchase(planId, LogPlan, Log, offerId, contentId);
 ```
 
 Once the Purchasely Platform have checked that the customer purchase is genuine and wasn't already used, it will send you the following event on the Webhook that includes content\_id :

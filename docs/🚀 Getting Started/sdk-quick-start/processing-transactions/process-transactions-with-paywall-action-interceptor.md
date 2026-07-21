@@ -185,78 +185,31 @@ await Purchasely.interceptAction(
   },
 );
 ```
-```swift Cordova
-Purchasely.setPaywallActionInterceptor((result) => {
-    if (result.action === Purchasely.PaywallAction.purchase) {
-        // the store product id (sku) the user clicked on in the paywall
-        const storeProductId = result.parameters.plan.productId;
-
-        MyPurchaseSystem.purchase(storeProductId, ({ success, error }) => {
-            if (success) {
-                // SDK auto-synchronizes on success in observer mode
-            }
-            // notify Purchasely paywall to stop processing action
-            Purchasely.onProcessAction(false);
-        }, ({ error, userCancelled }) => {
-            // Error making purchase
-            Purchasely.onProcessAction(false);
-        });
-    } else if (result.action === Purchasely.PaywallAction.restore) {
-        MyPurchaseSystem.restoreTransactions(
-            info => {
-                // SDK auto-synchronizes on success in observer mode
-                // notify Purchasely paywall to stop processing action
-                Purchasely.onProcessAction(false);
-            },
-            error => {
-                // Error restoring purchases
-                // notify Purchasely paywall to stop processing action
-                Purchasely.onProcessAction(false);
-            }
-        );
-    } else {
-        // notify Purchasely paywall to continue other actions
-        Purchasely.onProcessAction(true);
-    }
+```javascript Cordova
+// Register one handler per action; each returns (or resolves to) a Purchasely.InterceptResult.
+Purchasely.interceptAction(Purchasely.PresentationAction.purchase, async (info, parameters) => {
+  // the store product id (sku) the user clicked on in the paywall
+  const storeProductId = parameters.plan.productId;
+  try {
+    await MyPurchaseSystem.purchase(storeProductId);
+    // SDK auto-synchronizes on success in observer mode
+    return Purchasely.InterceptResult.success;
+  } catch (e) {
+    // Error making purchase
+    return Purchasely.InterceptResult.failed;
+  }
 });
-```
-```csharp
-purchasely.SetPaywallActionInterceptor(OnPaywallActionIntercepted);
 
-private void OnPaywallActionIntercepted(PaywallAction action)
-	{
-		Log($"Purchasely Paywall Action Intercepted. Action: {action.action}.");
-
-		switch (action.action)
-		{
-			case "purchase":
-				var storeProductId = action.parameters.plan?.storeProductId;
-				var basePlanId = action.parameters.plan?.basePlanId;
-				var offerId = action.parameters.offer?.storeOfferId;
-
-				MyPurchaseSystem.purchase(storeProductId, basePlanId, offerId);
-				// SDK auto-synchronizes on success in observer mode
-				
-				// notify Purchasely paywall to stop processing action
-				purchasely.ProcessPaywallAction(false);
-        
-        // dismiss the paywall if you want
-        purchasely.ClosePresentation();
-
-				break;
-			case "restore":
-				MyPurchaseSystem.restoreTransactions();
-        // SDK auto-synchronizes on success in observer mode
-				// notify Purchasely paywall to stop processing action
-				purchasely.ProcessPaywallAction(false);
-        // dismiss the paywall if you want
-        purchasely.ClosePresentation();
-				break;
-			default:
-					purchasely.ProcessPaywallAction(true);
-					break;
-		}
-}
+Purchasely.interceptAction(Purchasely.PresentationAction.restore, async (info, parameters) => {
+  try {
+    await MyPurchaseSystem.restoreTransactions();
+    // SDK auto-synchronizes on success in observer mode
+    return Purchasely.InterceptResult.success;
+  } catch (e) {
+    // Error restoring purchases
+    return Purchasely.InterceptResult.failed;
+  }
+});
 ```
 
 > 📘 You don't need to call `synchronize()` yourself here
@@ -451,110 +404,37 @@ await Purchasely.interceptAction(
   },
 );
 ```
-```swift Cordova
-Purchasely.setPaywallActionInterceptor((result) => {
-    if (result.action === Purchasely.PaywallAction.purchase) {
-      //the store product id (sku) the user clicked on in the paywall
-      const storeProductId = result.parameters.plan.productId
-      
-      Purchases.getOfferings(
-          offerings => {
-            if (offerings.current && offerings.current.monthly) {  
-              //get your package from RevenueCat
-              const product = offerings.current.monthly;
-             
-              Purchases.purchasePackage(product, ({ productIdentifier, purchaserInfo }) => {
-                  if (typeof purchaserInfo.entitlements.active.my_entitlement_identifier !== "undefined") {
-                    // SDK auto-synchronizes on success in observer mode
-                  }
-                  // notify Purchasely paywall to stop processing action
-          				Purchasely.onProcessAction(false);
-                },
-                ({error, userCancelled}) => {
-                  // Error making purchase
-                  Purchasely.onProcessAction(false)
-                }
-              );
-            }
-          },
-          error => {
-     				Purchasely.onProcessAction(false)
-          }
-      );
-    } if (result.action === Purchasely.PaywallAction.restore) {
-      Purchases.restoreTransactions(
-        info => {
-          // SDK auto-synchronizes on success in observer mode
-          // notify Purchasely paywall to stop processing action
-          Purchasely.onProcessAction(false);
-        },
-        error => {
-          // Error restoring purchases
-          // notify Purchasely paywall to stop processing action
-          Purchasely.onProcessAction(false);
-        }
-      );
-    } else {
-      // notify Purchasely paywall to continue other actions
-      Purchasely.onProcessAction(true);
+```javascript Cordova
+Purchasely.interceptAction(Purchasely.PresentationAction.purchase, async (info, parameters) => {
+  // the store product id (sku) the user clicked on in the paywall
+  const storeProductId = parameters.plan.productId;
+  try {
+    const offerings = await Purchases.getOfferings();
+    if (offerings.current && offerings.current.monthly) {
+      // get your package from RevenueCat
+      const packageToBuy = offerings.current.monthly;
+      const { purchaserInfo } = await Purchases.purchasePackage(packageToBuy);
+      if (typeof purchaserInfo.entitlements.active.my_entitlement_identifier !== 'undefined') {
+        // SDK auto-synchronizes on success in observer mode
+      }
     }
-  });
-```
-```csharp
-purchasely.SetPaywallActionInterceptor(OnPaywallActionIntercepted);
+    return Purchasely.InterceptResult.success;
+  } catch (e) {
+    // Error making purchase
+    return Purchasely.InterceptResult.failed;
+  }
+});
 
-private void OnPaywallActionIntercepted(PaywallAction action)
-	{
-		Log($"Purchasely Paywall Action Intercepted. Action: {action.action}.");
-
-		switch (action.action)
-		{
-			case "purchase":
-				var storeProductId = action.parameters.plan?.storeProductId;
-				var basePlanId = action.parameters.plan?.basePlanId; //only for Android with Google
-				var offerId = action.parameters.offer?.storeOfferId;
-        
-        var purchases = GetComponent<Purchases>();
-        purchases.GetOfferings((offerings, error) =>
-        {
-          // Get the offering and product that matches the storeProductId and offerID
-          // Here just a sample from RevenueCat documentation with the Monthly product
-          if (offerings.Current != null && offerings.Current.Monthly != null){
-            var product = offerings.Current.Monthly.Product;
-            
-            purchases.PurchasePackage(package, (product, customerInfo, userCancelled, error) =>
-            {
-              if (customerInfo.Entitlements.Active.ContainsKey("my_entitlement_identifier")) {
-                // SDK auto-synchronizes on success in observer mode
-              }
-              
-              // notify Purchasely paywall to stop processing action and hide loader
-							purchasely.ProcessPaywallAction(false);
-              
-              // dismiss the paywall if you want
-              purchasely.ClosePresentation();
-            });
-          }
-        });
-				break;
-			case "restore":
-				var purchases = GetComponent<Purchases>();
-        purchases.RestorePurchases((info, error) =>
-        {
-            //... check purchaserInfo to see if entitlement is now active
-          
-          	// SDK auto-synchronizes on success in observer mode
-            // notify Purchasely paywall to stop processing action
-            purchasely.ProcessPaywallAction(false);
-            // dismiss the paywall if you want
-            purchasely.ClosePresentation();
-        }
-				break;
-			default:
-					purchasely.ProcessPaywallAction(true);
-					break;
-		}
-}
+Purchasely.interceptAction(Purchasely.PresentationAction.restore, async (info, parameters) => {
+  try {
+    await Purchases.restoreTransactions();
+    // SDK auto-synchronizes on success in observer mode
+    return Purchasely.InterceptResult.success;
+  } catch (e) {
+    // Error restoring purchases
+    return Purchasely.InterceptResult.failed;
+  }
+});
 ```
 
 <br />

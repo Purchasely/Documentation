@@ -111,11 +111,6 @@ Purchasely.userLogin('john.doe');
 ```kotlin Flutter
 Purchasely.userLogin('john.doe');
 ```
-```kotlin
-private PurchaselyRuntime.Purchasely _purchasely;
-...
-_purchasely.UserLogin("john.doe", OnUserLoginCompleted);
-```
 
 Then set **Batch** SDK with:
 

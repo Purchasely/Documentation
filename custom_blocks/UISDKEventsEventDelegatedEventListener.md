@@ -22,10 +22,6 @@ Purchasely.eventListener = eventListener
 ```javascript Cordova
 // Nothing special to setup, just go to "Receiving events" below
 ```
-```csharp
-//not available at the moment
-```
-
 This code must be inserted after starting the SDK.
 
 ### Receiving events
@@ -73,8 +69,4 @@ Purchasely.addEventsListener((event) => {
        console.log(event);
 });
 ```
-```csharp
-//not available at the moment
-```
-
 Once received, these events can be directly forwarded to your internal Analytics or 3rd-party Analytics SDK inside your app.

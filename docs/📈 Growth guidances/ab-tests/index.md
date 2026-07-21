@@ -120,12 +120,6 @@ To prevent this and ensure that the user consistently remains in the same cohort
   String anonymousId = await Purchasely.anonymousUserId;
   Purchasely.setUserAttributeWithString("ply_ab_test_user_id", anonymousId);
   ```
-  ```csharp
-  private PurchaselyRuntime.Purchasely _purchasely;
-
-  //Set one attribute by key and value
-  _purchasely.SetUserAttribute("ply_ab_test_user_id", Purchasely.getAnonymousUserId());
-  ```
   ```javascript Cordova
   //Set one attribute by key and value	
   Purchasely.setUserAttributeWithString("ply_ab_test_user_id", Purchasely.getAnonymousUserId());

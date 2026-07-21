@@ -111,11 +111,6 @@ Purchasely.getAnonymousUserId((anonymousId) => {
 	console.log("Purchasely anonymous Id: " + anonymousId);
 });
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-_purchasely.GetAnonymousUserId();
-```
 
 > 🚧 Enhanced operational efficiency and Support
 >
@@ -144,13 +139,6 @@ Purchasely.userLogin('123456789');
 ```
 ```javascript Cordova
 Purchasely.userLogin("123456789", (shouldRefresh) => {
-	if (shouldRefresh) {
-		// You should call your backend to refresh user entitlements
-	}
-});
-```
-```csharp
-Purchasely.UserLogin("123456789", (shouldRefresh) => {
 	if (shouldRefresh) {
 		// You should call your backend to refresh user entitlements
 	}
@@ -226,18 +214,6 @@ Purchasely.setPaywallActionInterceptor((result) => {
     }
   });
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-...
-_purchasely.SetPaywallActionInterceptor(OnPaywallActionIntercepted);
-...
-
-private void OnPaywallActionIntercepted(PaywallAction action)
-{
-    Log($"Purchasely Paywall Action Intercepted. Action: {action.action}.");
-}
-```
 
 > 🚧 Update your Screen
 >
@@ -270,9 +246,6 @@ Purchasely.userLogout();
 ```
 ```javascript Cordova
 Purchasely.userLogout();
-```
-```csharp
-Purchasely.UserLogout();
 ```
 
 <br />
@@ -317,13 +290,6 @@ Purchasely.userLogin('123456789').then((refresh) => {
 ```
 ```javascript Cordova
 Purchasely.userLogin("123456789", (shouldRefresh) => {
-	if (shouldRefresh) {
-		// You should call your backend to refresh user entitlements
-	}
-});
-```
-```csharp
-Purchasely.UserLogin("123456789", (shouldRefresh) => {
 	if (shouldRefresh) {
 		// You should call your backend to refresh user entitlements
 	}

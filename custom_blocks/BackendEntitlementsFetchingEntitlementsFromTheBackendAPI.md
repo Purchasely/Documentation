@@ -24,10 +24,4 @@ Purchasely.getAnonymousUserId((anonymousId) => {
 	console.log("Purchasely anonymous Id: " + anonymousId);
 });
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-_purchasely.GetAnonymousUserId();
-```
-
 The backend shall respond with the entitlements associated with the `user ID` or `anonymous user ID`.

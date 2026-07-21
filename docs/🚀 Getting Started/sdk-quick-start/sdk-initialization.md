@@ -113,16 +113,6 @@ if (!configured) {
         return;
 }
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-_purchasely = new PurchaselyRuntime.Purchasely("USER_ID",
-			false, // true for StoreKit 1, false for StoreKit 2
-			LogLevel.Debug,
-			RunningMode.Full,
-			OnPurchaselyStart,
-			OnPurchaselyEvent);
-```
 ```javascript Cordova
 /**
 * @params String apiKey
@@ -256,16 +246,6 @@ if (!configured) {
         print('Purchasely SDK not configured');
         return;
 }
-```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-_purchasely = new PurchaselyRuntime.Purchasely("USER_ID",
-			false, // true for StoreKit 1, false for StoreKit 2
-			LogLevel.Debug,
-			RunningMode.Observer,
-			OnPurchaselyStart,
-			OnPurchaselyEvent);
 ```
 ```javascript Cordova
 /**

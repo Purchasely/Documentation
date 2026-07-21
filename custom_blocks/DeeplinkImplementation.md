@@ -85,12 +85,6 @@ Purchasely.handleDeeplink("app://ply/presentations/", (handled) => {
 	console.log("Was deeplink handled by Purchasely? " + handled);
 });
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-
-_purchasely.HandleDeeplink("app://ply/presentations/");
-```
-
 > 📘 Passing the deeplink at start
 >
 > When your app is launched **from** a deeplink (cold start), you can hand it to the SDK directly at initialization instead of waiting for the SDK to be ready:
@@ -140,12 +134,6 @@ Purchasely.allowDeeplink(false);
 // later
 Purchasely.allowDeeplink(true);
 ```
-```csharp
-_purchasely.SetAllowDeeplink(false);
-// later
-_purchasely.SetAllowDeeplink(true);
-```
-
 > 📘 You only need this if you want to **defer** deeplinks. If you do nothing, deeplinks display as soon as they are received.
 
 ## 3. Forbidding campaigns

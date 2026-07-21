@@ -66,11 +66,6 @@ var appsFlyerId = window.plugins.appsFlyer.getAppsFlyerUID(getUserIdCallbackFn);
 
 Purchasely.setAttribute(Purchasely.Attribute.APPSFLYER_ID, appsFlyerId);
 ```
-```coffeescript
-private PurchaselyRuntime.Purchasely _purchasely;
-
-_purchasely.SetAttribute(PLYAttribute.APPSFLYER_ID, "test_appsflyer_id");
-```
 
 ## 2. Activating the AppsFlyer integration
 

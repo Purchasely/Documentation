@@ -54,11 +54,6 @@ Purchasely.setAttribute(Purchasely.Attribute.MOENGAGE_UNIQUE_ID, id);
 ```Text Flutter
 Purchasely.setAttribute(PLYAttribute.moengageUniqueId, id);
 ```
-```Text
-private PurchaselyRuntime.Purchasely _purchasely;
-...
-_purchasely.SetAttribute(PLYAttribute.MOENGAGE_UNIQUE_ID, id);
-```
 
 See the[ MoEngage Documentation ](https://developers.moengage.com/)for more information
 

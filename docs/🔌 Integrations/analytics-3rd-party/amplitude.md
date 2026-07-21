@@ -54,12 +54,6 @@ Purchasely.setAttribute(PLYAttribute.amplitudeDeviceId, Amplitude.getInstance().
 Purchasely.setAttribute(Purchasely.Attribute.AMPLITUDE_USER_ID, Amplitude.getInstance().getUserId());
 Purchasely.setAttribute(Purchasely.Attribute.AMPLITUDE_DEVICE_ID, Amplitude.getInstance().getDeviceId());
 ```
-```csharp
-private PurchaselyRuntime.Purchasely _purchasely;
-...
-_purchasely.SetAttribute(PLYAttribute.AMPLITUDE_USER_ID, Amplitude.getInstance().getUserId());
-_purchasely.SetAttribute(PLYAttribute.AMPLITUDE_DEVICE_ID, Amplitude.getInstance().getDeviceId());
-```
 
 # Console configuration
 
