@@ -299,13 +299,13 @@ This replaces the ambiguous `processAction(true/false)` pattern and makes observ
 
 ## Platform support
 
-| Platform | Version | v6 migration guide |
-|----------|---------|--------------------|
-| iOS / Swift / Objective‑C | `6.0.0-rc.3` | ✅ Available |
-| Android / Kotlin / Java | `6.0.0-rc.3` | ✅ Available |
-| Flutter | `6.0.0-rc.2` | ✅ Available |
-| React Native | `6.0.0-rc.2` | ✅ Available |
-| Cordova | `6.0.0-rc.2` | ✅ Available |
+| Platform | v6 version | Status | Migration guide |
+|----------|------------|--------|-----------------|
+| iOS / Swift / Objective‑C | `6.0.0` | ✅ Stable | [Migrating to v6 — iOS](migrating-from-v5-to-v6-ios) |
+| Android / Kotlin / Java | `6.0.1` | ✅ Stable | [Migrating to v6 — Android](migrating-from-v5-to-v6-android) |
+| Flutter | `6.0.0` | ✅ Stable | [Migrating to v6 — Flutter](migrating-from-v5-to-v6-flutter) |
+| React Native | `6.0.0-rc.2` | 🚧 Release candidate | [Migrating to v6 — React Native](migrating-from-v5-to-v6-react-native) |
+| Cordova | `6.0.0-rc.2` | 🚧 Release candidate | [Migrating to v6 — Cordova](migrating-from-v5-to-v6-cordova) |
 
 ***
 
