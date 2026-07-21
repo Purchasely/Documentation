@@ -309,7 +309,7 @@ The Purchasely Platform allow you to run the following A/B tests:
 * `UI A/B tests`: these are tests which involve different Screens.\
   These Screens can be:
   * either configured via the Purchasely Screen Builder and rendered by the Purchasely SDK
-  * either handled directly by your app, such as your existing / legacy Paywall, by leveraging the feature [Use Your Own Paywall](use-your-own-paywall).\
+  * either handled directly by your app, such as your existing / legacy Paywall, by leveraging the feature [Use Your Own Paywall](bring-your-own-paywall).\
     [More information on UI A/B tests here](ab-test-configuration#ui-ab-tests).
 * `Price A/B tests`: these are tests leveraging the same Screen, where it is possible to remap the Plans associated to the each variants, allowing to associate SKU with different Regular Price or Introductory Offers.\
   [More information on Price A/B tests here](ab-test-configuration#price-ab-tests).

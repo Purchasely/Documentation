@@ -80,11 +80,6 @@ To determine the Offer Type of a subscriber, you can leverage the [User Attribut
 
 <br />
 
-The same User Attribute exists for lapsed subscribers. It is called `Expired Sub. Offer Type` (SDK version >= 4.4.0). This reflects the Offer Type the user was benefitting from when the subscription expired.\
-*E.g.: a user who did not convert their free trial will have the value`Expired Sub. Offer Type` = `Free Trial`.*
-
-<br />
-
 ### Webhooks
 
 For [Server Events](server-events) sent on the webhook, the attribute `offer_type` has the value `NONE` when the user doesn't benefit from any offer at the time.

@@ -39,8 +39,6 @@ Purchasely provides you with Built-in User Attributes that allow to target users
 
 ![](https://files.readme.io/63bc7bb-Product_demo_December_2_subscription_attributes.012.png)
 
-Purchasely provides you with Built-in User Attributes that allow to target users at every stage of their lifecycle
-
 * When they are not Premium Members yet, to try to turn them into loyal subscribers
 * When they are in they are benefiting from the Introductory Offer
 * When they are Premium Members paying the regular price

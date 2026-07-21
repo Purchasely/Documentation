@@ -559,10 +559,4 @@ private void OnPaywallActionIntercepted(PaywallAction action)
 
 <br />
 
-> 📘 You don't need to call `synchronize()` yourself here
->
-> When your interceptor returns the success result for a purchase or restore in observer mode, the Purchasely SDK calls `synchronize()` automatically to observe the transaction (fetch the receipt and pass it to the Purchasely Platform without interfering with it). Call `synchronize()` manually only for transactions completed outside the interceptor — see your platform page's "synchronize() with callbacks" section.
-
-<br />
-
 [More details on the Action Interceptor and how to intercept of types of actions](paywall-action-interceptor)

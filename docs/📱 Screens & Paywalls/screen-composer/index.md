@@ -147,17 +147,19 @@ Layouts define the way the Purchasely SDK will organise and display the componen
 
 <Image align="center" className="border" border={true} src="https://files.readme.io/4a2413960881a5d07b29fe6570c1e9f4f38b3a1d5b72bbfe165a61ea1b5dbc8e-Screen_Recording_2025-07-24_at_19.37.53.gif" />
 
-9 layouts are available (and we will continue adding new ones regularly):
+9 layouts are available (and we keep adding more):
 
-* **Fill height**: with this layout, the Screen is not scrollable even if it exceeds the height of the device screen and all the components must fit in the device screen. If necessary, the Purchasely SDK will expand one component to fill the whole device screen or shrink it.  The component to be expanded can be configured by right clicking on it in the Screen structure and selecting "Expand to fill"
-* **Fill height multi-groups**: this layout allows you to organize components in several groups. It can be particularly useful for Survey Screens. The same expansion / shrinking rules apply with this layout.
-* **Scroll**: this layout will stack the components from the top of of the device screen. No component will be expanded if they don't fill the height of the device screen and a scroll bar will be displayed if they exceed the height of the screen.
-* **Scroll multi group**: This layout allows you to organize components in several groups. It can be particularly useful for Survey Screens. this layout will stack the components from the top of the device screen. No component will be expanded if they don't fill the height of the device screen and a scroll bar will be displayed if they exceed the height of the screen.
-* **Sticky button**: this layout features 2 different "surfaces" to which components can be associated. The **Body** is scrollable and the **Bottom bar** remains sticky at the bottom of the device screen. This layout is perfect for long paywalls to make the Call To Action always visible on the device even when the user scrolls down.
-* **Tabs**: this layout organizes components across multiple tabs or sections, providing a clear structure for displaying multi-tier subscription offers. This layout is particularly effective for showcasing the features and benefits associated with each subscription plan, helping users compare and select the option that best suits their needs.
-* **Segmented controls**: this layout offers a similar organizational structure as Tabs but presents the sections in the form of horizontal segmented controls. This layout is ideal for a streamlined and compact interface, ensuring users can quickly switch between subscription tiers or options with minimal effort.
-* **Carousel**: This layout offers up to 20 slides that can be used for onboarding, surveys, or quizzes. The component added to this layout can be expanded by right-clicking on it in the Screen Structure and selecting 'Expand to fill'.
-* **Switch**: This layout works along with switch component. It offers a way where you can: Enable free trials for subscription plans, Offer instalment payments on Android, letting users pay monthly instead of all at once, Save user preferences by linking the Switch to custom user attributes - perfect for: Newsletter opt-ins,Privacy settings,Terms & conditions acceptance. With more control over offers and settings, the Switch helps boost both conversion rates and user experience.
+| Layout | How it works | Best for |
+| --- | --- | --- |
+| **Fill height** | Not scrollable — every component must fit the screen; the SDK expands (or shrinks) one component to fill it (right-click → "Expand to fill") | Screens that fit a single viewport |
+| **Fill height multi-groups** | Same fit/expand rules, with components organised in several groups | Survey screens |
+| **Scroll** | Stacks components from the top; no expansion; scrolls when content exceeds the screen | Standard content |
+| **Scroll multi-group** | Same as Scroll, with components organised in several groups | Survey screens |
+| **Sticky button** | Two surfaces: a scrollable **Body** and a **Bottom bar** that stays sticky | Long paywalls keeping the CTA always visible |
+| **Tabs** | Components split across tabs/sections | Comparing multi-tier subscription offers |
+| **Segmented controls** | Like Tabs, but with horizontal segmented controls | Compact switching between tiers |
+| **Carousel** | Up to 20 slides; the component can be expanded (right-click → "Expand to fill") | Onboarding, surveys, quizzes |
+| **Switch** | Works with the Switch component: enable free trials, offer Android instalments, or save user preferences via custom attributes (opt-ins, privacy, T&C) | Boosting conversion with toggles |
 
 ## Surfaces
 
@@ -217,8 +219,7 @@ Here are the capabilities offered by each Component
 * [Multiple Choice Questions](mcq)
 * [CTAs for Multiple Choice Questions](mcq#5-configuring-the-cta-associated-to-the-mcq)
 * [Bulleted list](bulleted-lists) 
-* [Timeline vertical](timeline-vertical)(Blinkist component)
-* [Carousel](carousel)
+* [Timeline vertical](timeline-vertical)
 * [Footers](footer)
 * [Countdowns](countdown)
 * [FAQ](FAQ)

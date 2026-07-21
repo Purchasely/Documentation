@@ -55,7 +55,7 @@ You can search user with their user ID or anonymous ID. Purchasely doesn't conta
 
  The user history page contains many useful information to know about the user subscription lifecycle. Let us say, this page contains three sections. 
 
-1. Section 1 consists of the Main properties of the user such as their store name, pruchased date, the [subscription current status](https://start.purchasely.com/docs/user-attributes-list#built-in-active-subscription-attributes), the subscription ID, transaction ID sent from the stores and etc.
+1. Section 1 consists of the Main properties of the user such as their store name, pruchased date, the [subscription current status](user-attributes-list#built-in-active-subscription-attributes), the subscription ID, transaction ID sent from the stores and etc.
 2. Section 2 consists of the history of the user subscription
 3. Section 3 links to another page, which shows all the historique and the present Webhook events triggered for this specific user. 
 

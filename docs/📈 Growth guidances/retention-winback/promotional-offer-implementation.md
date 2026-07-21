@@ -18,13 +18,17 @@ next:
 >
 > If you use a prior version of the SDK your users won’t see a discount and will purchase at the regular price.
 
+> 📘 v6 running mode
+>
+> On SDK v6, `observer` is the default running mode. If you want Purchasely to trigger the promotional offer purchase automatically (as described in `full` mode below), you must set `full` explicitly.
+
 Promotional offers can be used to offer a specific discount to current or past subscribers. It is a great way to retain or win-back a customer. You will be able to set up as many as you want by creating specific paywalls with those offers.
 
 # `full` mode - Trigger the purchase of an offer
 
 In `full mode` Purchasely handles automatically the promotional offer purchase directly from a Purchasely Paywall and you have nothing to do.
 
-If you are [using your own paywall](use-your-own-paywall) or need the SDK to process the promotional offer transaction from your own purchase buttons, you can do it really easily by providing the `PLYPlan` and `PLYOffer` you want to use for the purchase
+If you are [using your own paywall](bring-your-own-paywall) or need the SDK to process the promotional offer transaction from your own purchase buttons, you can do it really easily by providing the `PLYPlan` and `PLYOffer` you want to use for the purchase
 
 ```swift Swift
 // First get the plan you want to purchase

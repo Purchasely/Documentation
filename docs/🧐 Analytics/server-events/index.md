@@ -14,8 +14,11 @@ next:
       slug: entitlement-events
       title: Entitlement Events
     - type: basic
-      slug: subscription-events
-      title: Subscription Events
+      slug: lifecycle-events
+      title: Lifecycle Events
+    - type: basic
+      slug: offer-events
+      title: Offer Events
     - type: basic
       slug: transactional-event
       title: Transactional Event
@@ -64,7 +67,7 @@ They can be used to:
 
 * track the different phases of the subscribers lifecycle 
 * create automations and campaigns for each stage of the subscribers' journey
-* identify growth opportunities by analyzing them in the [Events Dashboard of the Purchasely Console](dasbhoard-events)
+* identify growth opportunities by analyzing them in the [Events Dashboard of the Purchasely Console](subscription-events)
 
 [More details on Lifecycle Events](lifecycle-events)
 

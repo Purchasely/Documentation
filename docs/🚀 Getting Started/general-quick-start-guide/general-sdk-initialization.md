@@ -21,6 +21,17 @@ next:
 
 <SDKInitializationAdvice />
 
+> 🚧 Major change in v6 — default running mode is now `observer`
+>
+> In SDK v5 the default running mode was **Full** (Purchasely handles and validates purchases).
+> In **SDK v6 the default is `observer`** (Purchasely only observes transactions, without processing them).
+>
+> This change is **silent** — your code keeps compiling. If you want Purchasely to handle the
+> purchase flow and validate receipts, you **must** now set the mode explicitly:
+> `.runningMode(.full)` on iOS, `.runningMode(PLYRunningMode.Full)` on Android.
+>
+> See the [v6 migration guide](migrating-from-sdk-5-to-6) for details.
+
 ```swift Swift
 import Purchasely
 

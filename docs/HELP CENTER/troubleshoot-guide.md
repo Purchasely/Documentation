@@ -13,10 +13,4 @@ metadata:
 next:
   description: ''
 ---
-Product not found iOS
-
-* sign paid apps agreement
-
-Purchase validation iOS
-
-* Not in simulator
+This page has moved to the [Purchasely Help Center](https://help.purchasely.io).

@@ -42,7 +42,7 @@ For example, you could push a "high-intent trial users" segment from your CDP an
 
 # Custom Audiences API
 
-The Custom Audiences API allows you to create and manage User Custom Audiences in Purchasely programmatically. Unlike <Glossary>Audience</Glossary>s — which are rule-based and evaluated dynamically from User Attributes — **Custom Audiences** are static lists of user identifiers that you sync from external tools such as Braze, Amplitude, or your CDP.
+The Custom Audiences API allows you to create and manage User Custom Audiences in Purchasely programmatically.
 
 Once synced, Custom Audiences can be used in <Glossary>Placement</Glossary>s, Campaigns,  Flows, A/B tests just like Audiences, allowing you to display different Screens to specific groups of users.
 

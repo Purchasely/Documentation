@@ -12,7 +12,7 @@ metadata:
 next:
   description: ''
 ---
-Purchasely, by default, [shows the Screen](displaying-your-first-screen) with a loading indicator while fetching the Screen from the network and preparing it for display.
+Purchasely, by default, shows the Screen with a loading indicator while fetching it from the network and preparing it for display.
 
 Using the `PLYPresentation` builder with its `preload` method (iOS: `PLYPresentationBuilder`), you can pre-fetch the Screen from the network before displaying it. This provides the following benefits:
 
@@ -20,7 +20,7 @@ Using the `PLYPresentation` builder with its `preload` method (iOS: `PLYPresenta
 * Handle network errors gracefully
 * Show a custom loading screen
 * Pre-load the Screen while users navigate through your app, such as during onboarding screens
-* Choose [not to display a Screen](disable-placements.md) for a specific placement
+* Choose [not to display a Screen](displaying-screens-placements) for a specific placement
 * Display [your own Screen](byos)
 
 ## Implementation
@@ -34,10 +34,12 @@ Build a `PLYPresentation` (Android) / `PLYPresentationBuilder` (iOS) **for** a p
 
 A presentation can be one of the following types:
 
-* **Normal**: The default behavior, a Purchasely Screen created from our console.
-* **Fallback**: A Purchasely Screen, but not the one you requested, as it could not be found.
-* **Deactivated**: No [Screen associated](disable-placements.md) with that placement, possibly for a specific A/B test or an [audience](https://help.purchasely.io/en/articles/6940943-disable-a-paywall-for-a-placement).
-* **Client**: You [created a Custom Screen in the Purchasely Console](byos-configuration) and should [display it](byos-implementation). Use the list of plans to determine which offers to display to your users.
+| Type | Meaning | What to do |
+| --- | --- | --- |
+| **Normal** | The default: a Purchasely Screen created from your console | Display it |
+| **Fallback** | A Purchasely Screen, but not the one you requested (it could not be found) | Display it |
+| **Deactivated** | No [Screen associated](displaying-screens-placements) with that placement (e.g. a specific A/B test or [audience](https://help.purchasely.io/en/articles/6940943-disable-a-paywall-for-a-placement)) | Display nothing |
+| **Client** | You [created a Custom Screen](byos-configuration) and should [display it yourself](byos-implementation) | Use the list of `plans` to know which offers to show |
 
 ```swift Swift
 // fetch presentation for placement

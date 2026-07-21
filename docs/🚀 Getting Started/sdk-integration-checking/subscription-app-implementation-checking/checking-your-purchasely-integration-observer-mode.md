@@ -14,7 +14,7 @@ next:
 ---
 Here is a checklist for your Purchasely Integration
 
-## 0. The App is properly set up and plugged with the app stores
+## 1. The App is properly set up and plugged with the app stores
 
 📚 Documentation: [Application setup](application-setup)
 
@@ -23,7 +23,7 @@ Here is a checklist for your Purchasely Integration
 
 <br />
 
-## 1. The SDK is properly initialized
+## 2. The SDK is properly initialized
 
 📚 Documentation: [SDK Initialization](sdk-initialization)
 
@@ -35,7 +35,7 @@ Here is a checklist for your Purchasely Integration
 
 <br />
 
-## 2. Paywalls are properly displayed through Placements
+## 3. Paywalls are properly displayed through Placements
 
 * [ ] You have displayed a Paywall by associating it with a Placement and by making a direct call to the placement on the app side (📚 [documentation](displaying-screens-placements#direct-call))
 
@@ -52,7 +52,7 @@ Here is a checklist for your Purchasely Integration
 
 <br />
 
-## 5. Transactions are properly processed
+## 4. Transactions are properly processed
 
 * [ ] A [Plan has been properly configured](product-plans-setup) and mapped with a Paywall
 
@@ -74,7 +74,7 @@ For more details on Sandbox purchases and sandbox testing, please refer to the �
 
 <br />
 
-## 6. [Optional and advanced] You leverage the Purchasely Server Events to fetch the subscription lifecycle events and process it
+## 5. [Optional and advanced] You leverage the Purchasely Server Events to fetch the subscription lifecycle events and process it
 
 ### Webhook
 
@@ -92,7 +92,7 @@ For more details on Sandbox purchases and sandbox testing, please refer to the �
 
 ### 3rd-party analytics integration
 
-📚 Documentation: [Combining Analytics Platforms with Purchasely](analytics-3rd-party))
+📚 Documentation: [Combining Analytics Platforms with Purchasely](analytics-3rd-party)
 
 * [ ] You have enable the 3rd party integration with the desired analytics platform
 
@@ -112,7 +112,7 @@ For more details on Sandbox purchases and sandbox testing, please refer to the �
 
 ### 3rd-party engagement & CRM integration
 
-📚 Documentation: [Combining Engagement/CRM platforms with Purchasely](engagement-crm))
+📚 Documentation: [Combining Engagement/CRM platforms with Purchasely](engagement-crm)
 
 * [ ] You have enable the 3rd party integration with the desired analytics platform
 

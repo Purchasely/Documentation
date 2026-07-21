@@ -118,7 +118,7 @@ Body examples:
   "user_id": "1234",
 }
 ```
-```json Google Play Store - < Billing v5
+```json Google Play Store - >= Billing v5
 {
   // Mandatory
   "purchase_token": "aaaNNNcccDDDeeeFFF",
@@ -391,7 +391,7 @@ identifier;user_id;is_unknown
 310001721313211;1234;false
 310001234567890;;true
 ```
-```json Google Play Store - < Billing v5
+```json Google Play Store - >= Billing v5
 identifier;store_product_id;user_id;is_unknown
 aaaNNNcccDDDeeeFFF;subscription_id:base_plan_id;1234;false
 000111222333444555;subscription_id:base_plan_id;;true

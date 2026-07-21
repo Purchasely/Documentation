@@ -36,29 +36,15 @@ Purchasely will provide a native view to display in your application, consequent
 
 # Overview
 
-## iOS
+The SDK returns a **native view**, so you decide how and where it is displayed (full screen, pop-in, nested…).
 
-Purchasely SDK will provide a native [UI View Controller](https://developer.apple.com/documentation/uikit/uiviewcontroller), you can [present](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621380-present) it in the way you like.
+| Platform | What the SDK provides | Safe areas / insets | Close button |
+| --- | --- | --- | --- |
+| **iOS** | A native [`UIViewController`](https://developer.apple.com/documentation/uikit/uiviewcontroller) — [present](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621380-present) it however you like | Not respected by default — you decide whether to display below or behind the notch | Rendered on top, automatically respects safe areas |
+| **Android** | A native [`View`](https://developer.android.com/reference/android/view/View) — add it to your layout hierarchy (another View, a Fragment or an Activity) | Not respected by default — you decide below or behind the status & navigation bars | Rendered on top, automatically respects the top inset (portrait) and right inset (landscape) |
+| **Flutter / React Native / Cordova** | A controller (iOS) / activity (Android) displayed on top of your Screen by default | Handled by the native layer | Managed by the SDK |
 
-The presentation will not respect safe areas, it is up to you to decide if you want to display it below or behind the notch.\
-However, the close button is rendered on top of the presentation and as such will respect automatically safe areas
-
-## Android
-
-Purchasely SDK will provide a native [Android View](https://developer.android.com/reference/android/view/View), you must add it to your layout hierarchy to be visible. You are in full control of its container (another View, a Fragment or an Activity) so you can decide how it will be rendered.
-
-The presentation will not respect insets, it is up to you to decide if you want to display it below or behind the status bar and navigation bar.\
-However, the close button is rendered on top of the presentation and as such will respect automatically the top inset in portrait mode and right inset in landscape mode.
-
-## Flutter / React Native
-
-Purchasely SDK will by default display a controller (iOS) / activity (android) on top of your Screen to display the paywall. You can [control the Screen visibility](show-hide-close-screens) to hide it to show your content and present it again afterwards.
-
-Otherwise, you can also use [Nested Views](nesting-views) to display a Purchasely Screen inside your own component.
-
-## Cordova
-
-Purchasely SDK will display a controller (iOS) / activity (android) on top of your Screen to display the paywall. You can [control the Screen visibility](show-hide-close-screens) to hide it to show your content and present it again afterwards.
+> 📘 On Flutter, React Native and Cordova, you can [control the Screen visibility](show-hide-close-screens) to hide the paywall and present it again later, or use [Nested Views](nesting-views) to embed a Purchasely Screen inside your own component.
 
 # Placements
 
