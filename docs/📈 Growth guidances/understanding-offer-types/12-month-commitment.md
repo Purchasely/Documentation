@@ -117,8 +117,8 @@ The billing plan is entirely driven by the Screen configuration: the SDK purchas
 
 If your app takes over the purchase flow (**Observer** mode or a custom `purchase` action interceptor), you need to know which billing plan the offering is selling to pass the matching purchase option to StoreKit. The [action interceptor](paywall-action-interceptor) gives you all the commitment information:
 
-* `params.billingPlanType` (iOS): the billing plan selected on the offering in the Screen Composer (`upFront`, `monthly`, or `unspecified` for a regular plan)
-* `plan.commitmentInfo`: the billing plans available on the store product, each with its billing price, billing period, total price and number of payments
+- `params.billingPlanType` (iOS): the billing plan selected on the offering in the Screen Composer (`upFront`, `monthly`, or `unspecified` for a regular plan)
+- `plan.commitmentInfo`: the billing plans available on the store product, each with its billing price, billing period, total price and number of payments
 
 ```swift Swift
 Purchasely.interceptAction(.purchase) { info, params, completion in
@@ -204,10 +204,14 @@ Purchasely supports Google Play installment subscriptions out of the box, with n
 
 To learn more about creating installment plans, check Google's documentation:
 
-* [Installment subscriptions in the Play Billing overview](https://developer.android.com/google/play/billing/subscriptions)
-* [Create and manage subscriptions in the Play Console](https://support.google.com/googleplay/android-developer/answer/140504)
+- [Installment subscriptions in the Play Billing overview](https://developer.android.com/google/play/billing/subscriptions)
+- [Create and manage subscriptions in the Play Console](https://support.google.com/googleplay/android-developer/answer/140504)
 
-> 📘 Google installment subscriptions are only available in a limited set of countries (Brazil, France, Italy and Spain at the time of writing). Refer to Google's documentation above for the up-to-date list.
+<Callout icon="📘" theme="info">
+  ### Availability
+
+  Google installment subscriptions are only available in a limited set of countries (Brazil, France, Italy and Spain at the time of writing). Refer to Google's documentation above for the up-to-date list.
+</Callout>
 
 # Server events
 
