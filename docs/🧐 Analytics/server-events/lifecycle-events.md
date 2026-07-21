@@ -487,7 +487,7 @@ The Google Play Store has a PAUSE mechanism allowing subscribers to suspend thei
 # MONTHLY SUBSCRIPTION WITH 12-MONTH COMMITMENT
 
 **App Store only**\
-A *monthly subscription with a 12-month commitment* is a yearly subscription that is **billed in 12 monthly installments** instead of a single upfront payment: the subscriber commits to a full year but is charged once a month. This billing mode is available on the App Store starting with iOS 26.4.
+A *monthly subscription with a 12-month commitment* is a yearly subscription that is **billed in 12 monthly installments** instead of a single upfront payment: the subscriber commits to a full year but is charged once a month. This billing mode is available on the App Store starting with iOS 26.4. To learn how to configure and sell this billing plan on your paywalls, see [12-Month Commitment (Paid Monthly)](12-month-commitment).
 
 Each monthly charge generates an `INSTALLMENT_PAID` event, so a single committed subscription produces **12 `INSTALLMENT_PAID` events per year**. To avoid amplifying automations driven by your existing lifecycle events, those events keep their standard meaning and still fire only at the relevant moments:
 

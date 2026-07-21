@@ -98,3 +98,7 @@ For offerings using *1 Year Upfront* (or any plan without a commitment), the tag
 The billing plan is entirely driven by the Screen configuration: the SDK purchases with the billing plan you selected in the Console, with no code change required.
 
 If your app takes over the purchase flow (**PaywallObserver** mode or a custom `purchase` action interceptor), the purchase action parameters expose the `billingPlanType` of the plan (`upFront` or `monthly`), so you can pass the matching purchase option to StoreKit.
+
+# Server events
+
+On the backend side, each monthly installment billed to a committed subscriber generates an `INSTALLMENT_PAID` webhook event (12 per year for a committed subscription). Refunding a past installment generates `INSTALLMENT_REFUNDED` instead, without closing the subscription or ending the commitment. Events for a committed subscription also carry dedicated `commitment_*` attributes (installment number, commitment expiration date, auto-renewal status, and more). See [Lifecycle Events](lifecycle-events) and [Server Events Attributes](server-events-attributes) for details.
