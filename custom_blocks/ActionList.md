@@ -38,7 +38,7 @@ name: Action list
   <Image align="center" className="border" width="350px" border={true} src="https://files.readme.io/d9aa81b04c800121abd7eb93114e08f7e2ec090b50fbda961f76310f4a8386c9-image.png" />
 
   <br />
-* **`Login`**: a tap on the button will handover the control to the app (using the [Action interceptor](paywall-action-interceptor)) and provide the value "Login", so that the app can display the sign-in form
+* **`Login`**: a tap on the button will handover the control to the app (using the [Action interceptor](action-interceptor)) and provide the value "Login", so that the app can display the sign-in form
 
   <Image align="center" className="border" width="350px" border={true} src="https://files.readme.io/49edbd8677ccde4a5549e75989f5ea2f303fab11df8b115dd6d3605b5f999b3c-image.png" />
 

@@ -58,7 +58,7 @@ Here is a checklist for your Purchasely Integration
 
 <br />
 
-* [ ] When users tap on the purchase button, you leverage the Action Interceptor to process the transaction (📚 [documentation](paywall-action-interceptor))
+* [ ] When users tap on the purchase button, you leverage the Action Interceptor to process the transaction (📚 [documentation](action-interceptor))
 
 <br />
 

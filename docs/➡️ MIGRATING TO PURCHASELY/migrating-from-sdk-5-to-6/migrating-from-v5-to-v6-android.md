@@ -807,7 +807,7 @@ These were never part of the documented integration surface. If you were reading
 
 ## 8. Observer mode bridge
 
-If you run in Observer mode (now the default — see [section 2](#2-sdk-initialization)), you bridge paywall purchase buttons to your own billing stack through the interceptor, then report the transaction with `synchronize()`.
+If you run in Observer mode (now the default — see [section 2](#2-sdk-initialization)), you bridge paywall purchase buttons to your own billing stack through the interceptor and return `PLYInterceptResult.SUCCESS` — the SDK then synchronizes the transaction automatically (see the callout below), so no manual `synchronize()` call is needed on that path.
 
 ### Bridging the Purchase action
 

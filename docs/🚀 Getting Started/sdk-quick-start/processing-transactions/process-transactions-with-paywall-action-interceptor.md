@@ -559,4 +559,4 @@ private void OnPaywallActionIntercepted(PaywallAction action)
 
 <br />
 
-[More details on the Action Interceptor and how to intercept of types of actions](paywall-action-interceptor)
+[More details on the Action Interceptor and how to intercept of types of actions](action-interceptor)

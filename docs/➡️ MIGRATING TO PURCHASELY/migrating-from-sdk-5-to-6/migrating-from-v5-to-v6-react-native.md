@@ -360,7 +360,7 @@ try {
 }
 ```
 
-> 💡 In Observer mode after a host‑side purchase, `await Purchasely.synchronize()` before chaining a follow‑up placement so the receipt is uploaded first.
+> 💡 In Observer mode, after a purchase made **outside** the action interceptor, `await Purchasely.synchronize()` before chaining a follow‑up placement so the receipt is uploaded first. For purchases handled **inside** the interceptor, returning `'success'` already synchronizes the transaction — no manual `synchronize()` call is needed.
 
 ***
 

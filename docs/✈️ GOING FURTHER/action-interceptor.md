@@ -24,6 +24,43 @@ next:
 
 <PaywallActionInterceptorActionsIntercepted />
 
+# Responding to an action: `SUCCESS`, `FAILED`, `NOT_HANDLED`
+
+Every interceptor **must return a result** telling the SDK how your app handled the action. The SDK relies on this value to decide what to do next — perform the action itself, stop, or move on to the next action. There are three possible results:
+
+| Result | iOS (Swift) | Android (Kotlin) | React Native | Flutter | What the SDK does |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **`SUCCESS`** | `completion(.success)` | `PLYInterceptResult.SUCCESS` | `return 'success'` | `PLYInterceptResult.success` | Your app handled the action. The SDK marks it done and **moves on to the next action** in the chain. For `purchase` / `restore` in `observer` mode, the SDK also **synchronizes the transaction automatically** — no `synchronize()` call needed. |
+| **`FAILED`** | `completion(.failed)` | `PLYInterceptResult.FAILED` | `return 'failed'` | `PLYInterceptResult.failed` | Your app tried but failed. The SDK **stops the chain** (e.g. it won't open a screen after a failed purchase) and the button stops its loading state. |
+| **`NOT_HANDLED`** | `completion(.notHandled)` | `PLYInterceptResult.NOT_HANDLED` | `return 'notHandled'` | `PLYInterceptResult.notHandled` | Your app declines to handle this occurrence. The SDK **performs the default action itself** (triggers the native purchase flow, opens the login screen, navigates…). Exception: in `observer` mode Purchasely never processes `purchase` / `restore`, so `NOT_HANDLED` on those does nothing. |
+
+> 👍 You only register the actions you want to override
+>
+> Any action for which you did **not** register an interceptor is performed by the SDK as usual — so a button never stays stuck spinning. You don't need to return `NOT_HANDLED` for actions you aren't interested in.
+
+> 📘 Cordova &amp; Unity (C#) use a boolean instead
+>
+> These bridges expose `Purchasely.onProcessAction(processAction)` (Cordova) / `purchasely.ProcessPaywallAction(processAction)` (Unity). Pass **`true`** to let the SDK perform the default action (equivalent to `NOT_HANDLED`), or **`false`** once your app has handled the action itself (equivalent to `SUCCESS`).
+
+> 📘 `synchronize()` is only needed outside the interceptor
+>
+> In `observer` mode, returning `SUCCESS` on `purchase` / `restore` already triggers synchronization. Call `Purchasely.synchronize()` yourself **only** for transactions completed outside the paywall action interceptor — for example a purchase made in your own store screen or [BYOS](byos-implementation). See [observer — using the Action Interceptor](process-transactions-with-paywall-action-interceptor).
+
+# Chaining several actions on one component
+
+In the Screen Composer, a single component (a button, for instance) can be configured with **more than one action** — for example a `purchase` followed by an `open_screen`. The SDK runs the actions **in order, one after the other, and only moves to the next action if the previous one succeeded**:
+
+* If an action returns **`SUCCESS`** (or you return `NOT_HANDLED` and the SDK's own handling succeeds), the SDK runs the **next** action.
+* If an action returns **`FAILED`** (or the SDK's own handling fails), the **remaining actions are skipped**.
+
+**Example** — a paywall button configured with `purchase`, then `open_screen`:
+
+1. the user taps the button → the `purchase` action runs;
+2. if the purchase completes successfully, the SDK moves on and runs `open_screen` (e.g. a "thank you" or onboarding screen);
+3. if the purchase fails or is cancelled, `open_screen` is **not** executed.
+
+This is exactly why returning the right result matters: returning `SUCCESS` too early would open the follow-up screen even though nothing was purchased, while returning `FAILED` / `NOT_HANDLED` by mistake would break the chain.
+
 # Intercepting an action
 
 Here is a sample code to show how to intercept a login or to make the user accept terms & conditions before proceeding to the purchase.
