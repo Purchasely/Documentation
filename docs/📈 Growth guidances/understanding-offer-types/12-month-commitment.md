@@ -75,7 +75,11 @@ Once enabled on the Plan, the monthly commitment can be selected per offering in
 2. Select the **Plan** for your offering
 3. A **Commitment billing type** field appears: select **Monthly with 12-Month Commitment**
 
-![Commitment billing type on an offering in the Screen Composer](images/commitment-screen-offering.png)
+
+<Image src="https://files.readme.io/f87ed0dc5ddd476d761be10c513d8c2ea7febca93f7f06ad6c4cc548f8d87c97-CleanShot_2026-07-21_at_10.44.222x.png" align="center" caption="Select the billing type Monthly for your offering in your Screen" border={true} />
+
+
+<br />
 
 The **Offer** dropdown depends on the selected billing type: promotional offers are scoped to a billing plan, so changing the _Commitment billing type_ resets the selected offer. Make sure your promotional offers are associated with the right billing plan when you create them.
 
