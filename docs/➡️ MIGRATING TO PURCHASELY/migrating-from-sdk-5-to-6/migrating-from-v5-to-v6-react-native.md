@@ -2,7 +2,7 @@
 title: Migrating to v6 — React Native
 excerpt: >-
   Breaking changes and migration steps to upgrade the Purchasely React Native
-  SDK from v5.x to v6.0.0-rc.2
+  SDK from v5.x to v6.0.0
 deprecated: false
 hidden: false
 metadata:
@@ -54,20 +54,20 @@ The React Native SDK v6 is **paywall‑API‑only**: the legacy v5 paywall API h
 
 ## 1. Update dependencies
 
-Pin the **exact** pre‑release version (no caret / range):
+Pin the **exact** version (no caret / range):
 
 ```bash
-npm install react-native-purchasely@6.0.0-rc.2
+npm install react-native-purchasely@6.0.0
 # optional Android stores:
-npm install @purchasely/react-native-purchasely-google@6.0.0-rc.2
-npm install @purchasely/react-native-purchasely-android-player@6.0.0-rc.2 # video support in paywalls
-npm install @purchasely/react-native-purchasely-amazon@6.0.0-rc.2
-npm install @purchasely/react-native-purchasely-huawei@6.0.0-rc.2
+npm install @purchasely/react-native-purchasely-google@6.0.0
+npm install @purchasely/react-native-purchasely-android-player@6.0.0 # video support in paywalls
+npm install @purchasely/react-native-purchasely-amazon@6.0.0
+npm install @purchasely/react-native-purchasely-huawei@6.0.0
 ```
 
 iOS: `cd ios && pod install`. Android: autolinking handles the native modules.
 
-The bridge pulls the native pins automatically (iOS pod `Purchasely 6.0.0-rc.2`, Android `io.purchasely:core:6.0.0-rc.2`). Minimum OS versions: **iOS 13.4**, **Android `minSdkVersion 23`**.
+The bridge pulls the native pins automatically (iOS pod `Purchasely 6.0.0`, Android `io.purchasely:core:6.0.1`). Minimum OS versions: **iOS 15.1**, **Android `minSdkVersion 23`**.
 
 ***
 
@@ -107,8 +107,8 @@ const configured = await Purchasely.builder('YOUR_API_KEY')
   .appUserId('user_id')         // optional, defaults to anonymous
   .runningMode('full')          // 'observer' (default) | 'full' — set 'full' for purchase handling
   .logLevel('error')            // 'debug' | 'info' | 'warn' | 'error'
-  .allowDeeplink(true)          // replaces readyToOpenDeeplink(true); defaults to true
-  .allowCampaigns(true)         // automatic campaigns; defaults to true, independent from deeplinks
+  .allowDeeplink(true)          // replaces readyToOpenDeeplink(true); native default: true
+  .allowCampaigns(true)         // automatic campaigns; native default: true, independent from deeplinks
   .stores(['google'])           // Android only: 'google' | 'huawei' | 'amazon'
   .storekitVersion('storeKit2') // iOS only: 'storeKit1' | 'storeKit2'
   .start()                      // Promise<boolean>
@@ -228,9 +228,9 @@ request.close()    // hide / close
 request.back()     // navigate back inside a multi‑step (Flow) presentation
 ```
 
-> 🚧 `request.close()` closes everything
+> 🚧 `request.close()` behaves differently per platform
 >
-> `request.close()` currently dismisses **all** displayed presentations (the native SDK does not yet expose a per‑request close). If you stack presentations, closing one will dismiss the others.
+> On **iOS**, `request.close()` closes the **specific** presentation identified by its `requestId` (falling back to closing all Purchasely screens when the request is no longer tracked). On **Android**, the native SDK does not yet expose a per‑request close, so it dismisses **all** displayed presentations — if you stack presentations (e.g. a product page inside an onboarding flow), closing one will also dismiss the others.
 
 ***
 
@@ -341,7 +341,7 @@ Purchasely.removeDefaultPresentationDismissHandler()
 
 > 📘 Platform note
 >
-> `closeReason` is one of `'button'`, `'backSystem'` or `'programmatic'`. System dismissals surface as `'backSystem'` on both platforms — the Android system back gesture/button and the iOS interactive swipe‑down / nav pop both map there. `error` is reserved (always `null` in 6.0).
+> `closeReason` is one of `'button'`, `'backSystem'` or `'programmatic'`. System dismissals surface as `'backSystem'` on both platforms — the Android system back gesture/button and the iOS interactive swipe‑down / nav pop both map there. `error` is populated when the presentation fails to load or display; when `error` is set, `closeReason` is `null` (the two are mutually exclusive).
 
 ***
 
@@ -384,11 +384,11 @@ All **core** SDK methods are unchanged in name, signature, and behaviour. Only t
 - **User**: `userLogin`, `userLogout`, `getAnonymousUserId`, `isAnonymous`.
 - **Products**: `allProducts`, `productWithIdentifier`, `planWithIdentifier`, `purchaseWithPlanVendorId`, `signPromotionalOffer`, `isEligibleForIntroOffer`, and dynamic offerings (`setDynamicOffering`, `getDynamicOfferings`, `removeDynamicOffering`, `clearDynamicOfferings`).
 - **Subscriptions data**: `userSubscriptions`, `userSubscriptionsHistory`, `restoreAllProducts`, `silentRestoreAllProducts`, `userDidConsumeSubscriptionContent`.
-- **Attributes**: `setUserAttributeWith{String,Number,Boolean,Date,StringArray,NumberArray,BooleanArray}`, `incrementUserAttribute`, `decrementUserAttribute`, `userAttributes`, `userAttribute`, `clearUserAttribute`, `clearUserAttributes`, `clearBuiltInAttributes`, `setAttribute`.
+- **Attributes**: `setUserAttributeWith{String,Number,Int,Double,Boolean,Date,StringArray,NumberArray,IntArray,DoubleArray,BooleanArray}`, `incrementUserAttribute`, `decrementUserAttribute`, `userAttributes`, `userAttribute`, `clearUserAttribute`, `clearUserAttributes`, `clearBuiltInAttributes`, `setAttribute`.
 - **Listeners**: `addEventListener` / `removeEventListener`, `addPurchasedListener` / `removePurchasedListener`, `addUserAttributeSetListener` / `removeUserAttributeSetListener`, `addUserAttributeRemovedListener` / `removeUserAttributeRemovedListener`.
 - **Client (BYOS) presentations**: `clientPresentationDisplayed`, `clientPresentationClosed`.
-- **Misc**: `setLogLevel`, `setLanguage`, `setThemeMode`, `setDebugMode`, `revokeDataProcessingConsent`, `getConstants`, `close`. (`isDeeplinkHandled` was **renamed** to `handleDeeplink` — see §7.)
-- **Embedded component**: `PLYPresentationView` — the `placementId` / `presentation` props still work; v6 **adds** a `request` prop so you can pass a preloaded `PresentationRequest` (parity with Flutter). Its `onPresentationClosed` receives a `{ result, plan }` `PLYPresentationViewResult` (a `ProductResult` + plan), not the 5-field outcome.
+- **Misc**: `setLogLevel`, `setLanguage`, `setThemeMode`, `setDebugMode`, `revokeDataProcessingConsent`. (`isDeeplinkHandled` was **renamed** to `handleDeeplink` — see §7. The v5 top-level `getConstants()` and `close()` are **removed** in v6 — use `closeAllScreens()` to programmatically dismiss any visible paywall.)
+- **Embedded component**: `PLYPresentationView` — the `placementId` / `presentation` props still work; v6 **adds** a `request` prop so you can pass a preloaded `PresentationRequest` (parity with Flutter). Its `onPresentationClosed` now receives the same 5-field `PLYPresentationOutcome` (`{ presentation, purchaseResult, plan, closeReason, error }`) that `request.display()` resolves with — the v5 `{ result, plan }` `PLYPresentationViewResult` shape was removed.
 
 ***
 
