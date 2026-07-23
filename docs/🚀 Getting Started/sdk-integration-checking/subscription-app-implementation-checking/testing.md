@@ -46,6 +46,24 @@ A sandbox purchase is a type of simulated transaction used in app development fo
 
 [More details on configuring Apple In-App Purchases for testing purposes](apple-in-app-purchases)
 
+### Prices may show in USD (wrong currency) in Sandbox & TestFlight
+
+In the **Sandbox** and **TestFlight** environments, the product metadata request that the SDK uses to build the paywall (`SKProductsRequest` / StoreKit 2 `Product.products(for:)`) frequently returns prices in **USD**, regardless of the tester's storefront or the device's Region setting. As a result, a paywall can display e.g. `$17.49` while the store account is set to a Eurozone country and the App Store shows the price in euros.
+
+This is a **known limitation of Apple's test environments, not a Purchasely issue**, and it does not happen in production:
+
+* The **native purchase sheet** (the confirmation popup shown when the user taps *Subscribe*) *is* resolved with the account's real storefront, so it correctly shows the local currency (e.g. `19,99 €`). Seeing the correct price there but a `$` price on the paywall is the tell-tale sign of this behavior.
+* The currency returned by `SKProductsRequest` follows the **App Store storefront of the signed-in account**, not the device's Region/Language setting.
+* Once the app is released on the App Store, the paywall displays the correct localized price automatically — **no SDK or screen change is required.**
+
+**To verify in TestFlight without waiting for release**, tap **Restore** (or re-authenticate) with an Apple ID whose storefront matches the target country; this can force StoreKit to return the correct currency.
+
+Apple references:
+
+* [SKProductsRequest always returns as USD not local currency](https://developer.apple.com/forums/thread/705895) — an Apple App Store Commerce engineer confirms the currency follows the signed-in account's storefront and that this is sandbox/TestFlight-specific.
+* [Subscription IAP Sandbox: SKProduct reports a different price than the purchase modal](https://developer.apple.com/forums/thread/732947)
+* [In-app purchase returns US price instead of the local price](https://developer.apple.com/forums/thread/706641)
+
 ## Google Play Billing Sandbox Purchases
 
 **Google Play Billing** also provides a sandbox environment for testing In-App Purchases without real financial transactions. This environment helps developers ensure their In-App Purchase functionality works correctly before going live. Key aspects include:
