@@ -125,17 +125,12 @@ The important default is still the running mode: **v6 starts in Observer mode un
   <Tab title="Cordova">
 
     ```javascript
-    Purchasely.start(
-      {
-        apiKey: 'YOUR_API_KEY',
-        appUserId: 'user_123',
-        runningMode: Purchasely.RunningMode.full,
-        allowDeeplink: true,
-        allowCampaigns: true,
-      },
-      (isConfigured) => {},
-      (error) => console.error(error)
-    );
+    const isConfigured = await Purchasely.builder('YOUR_API_KEY')
+      .appUserId('user_123')
+      .runningMode(Purchasely.RunningMode.full)
+      .allowDeeplink(true)
+      .allowCampaigns(true)
+      .start();
     ```
 
   </Tab>
@@ -204,14 +199,13 @@ Use the builder to target a placement, screen or default presentation, then choo
   <Tab title="Cordova">
 
     ```javascript
-    Purchasely.fetchPresentationForPlacement('ONBOARDING', (presentation) => {
-      Purchasely.presentPresentation(
-        presentation,
-        Purchasely.TransitionType.fullScreen,
-        (outcome) => {},
-        (error) => console.error(error)
-      );
-    });
+    const request = Purchasely.presentation
+      .placement('ONBOARDING')
+      .contentId('premium')
+      .build();
+
+    const loaded = await request.preload();
+    const outcome = await loaded.display();
     ```
 
   </Tab>
@@ -305,7 +299,7 @@ This replaces the ambiguous `processAction(true/false)` pattern and makes observ
 | Android / Kotlin / Java | `6.0.1` | ✅ Stable | [Migrating to v6 — Android](migrating-from-v5-to-v6-android) |
 | Flutter | `6.0.0` | ✅ Stable | [Migrating to v6 — Flutter](migrating-from-v5-to-v6-flutter) |
 | React Native | `6.0.0` | ✅ Stable | [Migrating to v6 — React Native](migrating-from-v5-to-v6-react-native) |
-| Cordova | `6.0.0-rc.2` | 🚧 Release candidate | [Migrating to v6 — Cordova](migrating-from-v5-to-v6-cordova) |
+| Cordova | `6.0.0` | ✅ Stable | [Migrating to v6 — Cordova](migrating-from-v5-to-v6-cordova) |
 
 ***
 
