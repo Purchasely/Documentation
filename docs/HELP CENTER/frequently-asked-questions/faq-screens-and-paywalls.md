@@ -90,7 +90,7 @@ Two different things control this:
 * The **Screen's own close button**, configured in the Composer — see [Close button](composer-close-button).
 * Your **host navigation**. If you present the paywall inside your own navigation controller or fragment with its own nav bar, that chrome belongs to your app and the Composer cannot remove it. Present it modally / full screen, or hide your nav bar for that route.
 
-📚 [Showing and hiding the close button](show-hide-close-screens)
+📚 [Close button configuration](composer-close-button) · [Controlling Screen visibility](show-hide-close-screens)
 
 <br />
 
@@ -105,11 +105,114 @@ In order of likelihood:
 
 <br />
 
+# Why is my custom font not applied, or why is my text clipped?
+
+Because the Screen is rendered with **native** iOS and Android components, the font has to exist in the **native project**. The font file you upload in the Console is used **only for the Composer preview** — it is never shipped to the device.
+
+So a font works only if all three are true:
+
+1. The font is added to the **iOS project** (per Apple's guide, registered in `Info.plist` under `UIAppFonts`) **and** to the **Android project** (`main/assets` or, preferably, `res/font`).
+2. The **iOS font name** field in the Console matches the font's internal **PostScript name** — not the filename. Renaming a font file does nothing: iOS resolves fonts by internal metadata. Use `UIFont.familyNames()` then `UIFont.fontNames(forFamilyName:)` to get the real name.
+3. The **Android font name** field matches the resource name (verify with `ResourcesCompat.getFont(context, R.font.myfont)`).
+
+If one platform is missing the font, the OS silently substitutes a fallback — which changes line height and wrapping, and is the usual cause of **clipped multiline text on one platform only**.
+
+If you use a bridge SDK (React Native, Flutter, Cordova), the font still has to be added to the underlying iOS and Android projects.
+
+📚 [Custom fonts](composer-custom-fonts) · [Figma plugin](figma-plugin)
+
+<br />
+
+# Why is one of my strings not translated?
+
+There are **two separate** localization layers, and they are edited in different places:
+
+| Layer                     | What it covers                                                                                     | Where you edit it                                                                                         |
+| :------------------------ | :------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------- |
+| **Screen content**        | Everything you typed in the Composer — titles, CTA labels, benefit lists, FAQ blocks.               | Per Screen, language tab by language tab, or in bulk with **Smart Localization** (a CSV of keys × languages). See [Screen localization](composer-localization). |
+| **SDK system strings**    | Error messages, the Restore button, "Already subscribed? Sign in", the Ask to Buy waiting screen.  | Override the `ply_*` keys in your own `Localizable.strings` / `strings.xml`. See [Localizing your app](localizing-your-app). |
+
+Consequences:
+
+* A string that stays in English while the rest of the Screen is translated is usually an **SDK system string** in a language the SDK does not ship. The SDK ships **17 languages** and falls back to English; Screen content supports far more.
+* A missing translation on a Screen means that **language tab was not filled in** for that component. There is no automatic fallback to the default language per component.
+* Prices, durations and renewal terms are formatted **by the store**, not by us — `{{PRICE}}`, `{{AMOUNT}}`, `{{DURATION}}` and the other [tags](tags) resolve at display time from the store's own localized data.
+* The app's **default language is chosen at app creation and cannot be changed afterwards**.
+
+To force a language instead of following the OS:
+
+```swift Swift
+Purchasely.setLanguage(from: Locale(identifier: "es"))
+```
+```kotlin Kotlin
+Purchasely.language = Locale("es")
+```
+
+<br />
+
+# How is the "Already subscribed? Sign in" button controlled?
+
+It is displayed **when no user ID is set**. As soon as you call `Purchasely.userLogin()` — or pass the user ID at initialization — the button disappears, because the user is already identified.
+
+To handle the tap, intercept the `login` action and hand back the result:
+
+```swift Swift
+Purchasely.interceptAction(.login) { [weak self] info, params, completion in
+    self?.presentLogin(above: info?.controller) { loggedIn in
+        completion(loggedIn ? .success : .notHandled)
+    }
+}
+```
+```kotlin Kotlin
+Purchasely.interceptAction<PLYPresentationAction.Login> { info, _ ->
+    val activity = info?.activity ?: return@interceptAction PLYInterceptResult.NOT_HANDLED
+    // present your login UI, then return the result
+}
+```
+
+* User signs in **and has a subscription** → dismiss the paywall.
+* User signs in **without a subscription** → dismiss your login UI and report success so the paywall reloads.
+* User cancels → report that it was not handled.
+
+📚 [Identifying users](user-identification) · [Paywall action interceptor](action-interceptor)
+
+<br />
+
+# Why does a user see a different Screen than the one I expect?
+
+A Placement resolves in a strict order, and the first match wins:
+
+1. The SDK walks the Audiences attached to the Placement **from the highest priority down** (top of the list = highest).
+2. The first Audience the user belongs to determines the Screen.
+3. If no Audience matches, the Screen attached to **_Everyone else_** is served.
+4. A running **A/B test** overrides that result with one of its variants.
+
+So a user can belong to several Audiences and still see only one Screen — the highest-priority one. If the wrong Screen appears, reorder the Audiences on the Placement (**`⋮` → Prioritize audiences**) rather than editing the Audiences themselves.
+
+Two things that regularly surprise people:
+
+* **Audience is not the same as [conditional visibility](conditional-visibility).** An Audience picks *which Screen* is served; conditional visibility hides or shows *components inside* a Screen. If a component must appear only for some users, that is conditional visibility, not an Audience.
+* **Expired-subscription attributes are only populated for subscriptions Purchasely knows about.** For a user who churned before you integrated Purchasely — or whose subscription was never imported — only `Has expired subscription` is set, computed from the local receipt. Audiences built on the finer expired attributes will not match those users.
+
+To see what actually resolved for a device, use [Debug Mode](debug-mode) — the Debug Panel names the Placement, Audience, A/B test and variant applied.
+
+📚 [Audiences](audiences) · [Leveraging Audiences](leveraging-audiences) · [Placements](displaying-screens-placements)
+
+<br />
+
 # Can I embed a paywall inside one of my own screens?
 
-Yes — inline / nested display is supported on all platforms.
+Yes — nested display is supported on Swift, Kotlin (including Compose), Flutter and React Native. Cordova is not supported.
 
-📚 [Displaying inline paywalls](displaying-inline-paywalls) · [Nesting views](nesting-views) · [Displaying Screens with SwiftUI](displaying-screens-with-swiftui)
+Three rules cover most inline issues:
+
+1. **Pre-fetch the Placement first.** A nested view is built from a **preloaded** presentation, not from a placement ID. On Android, `buildView(context)` requires a loaded presentation.
+2. **The height is set in the Composer**, on the first item (the layout) of the Screen structure. The SDK also exposes it as `PLYPresentation.height` on the preloaded presentation, so you can size your container from it instead of hardcoding a value.
+3. **Your host view owns the layout and the removal.** In UIKit you add the presentation's view as a subview and pin its four anchors; in SwiftUI you use `presentation.swiftUIView`; on Android you add the built view to your container. On close, the SDK calls `onCloseRequested` — **removing the view from your layout is your responsibility**, the SDK does not do it for you.
+
+The Console preview is not a size reference for a nested paywall: the preview renders at full-screen proportions while the device renders at your container's size. Compare against the device.
+
+📚 [Displaying inline paywalls](displaying-inline-paywalls) · [Nesting views](nesting-views) · [Displaying Screens with SwiftUI](displaying-screens-with-swiftui) · [Pre-fetching](pre-fetching)
 
 <br />
 

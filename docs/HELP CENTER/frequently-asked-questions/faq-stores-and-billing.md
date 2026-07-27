@@ -108,6 +108,29 @@ Yes. Web checkout has been available since SDK 5.3 and relies on [Stripe Payment
 
 <br />
 
+# My yearly plan is generating monthly transactions — is that normal?
+
+Yes, if the Plan has the **12-month commitment paid monthly** billing plan enabled. It is not a separate product: it is an additional billing plan on the same yearly SKU, and Purchasely serves whichever one the user is eligible for.
+
+| Billing plan                         | The user is charged         | Example                      |
+| :----------------------------------- | :-------------------------- | :--------------------------- |
+| **1 Year Upfront** (always enabled)  | The full price, once a year | $119.88 today                |
+| **Monthly with 12-Month Commitment** | Every month, for 12 months  | $9.99/month, $119.88 in total |
+
+What surprises people most:
+
+* Each monthly payment is an **independent transaction** granting one month of access, so you see 12 transactions per commitment cycle.
+* If the user **cancels during the commitment, billing continues** to the end of the 12 periods and access is kept until then.
+* **Upgrades** take effect immediately and end the commitment; **downgrades** are deferred to the end of it.
+* The **billing grace period does not apply** to commitments — a failed monthly payment suspends access immediately and restores it on recovery.
+* Apple requires you to **display both** the monthly amount and the total commitment before purchase. Combining `{{MONTHLY_AMOUNT}}` and `{{PRICE}}` in your offering copy covers that.
+
+Purchasely automatically falls back to **1 Year Upfront** for users whose App Store country is not eligible (the US and Singapore are excluded by Apple), and for users on older OS or SDK versions. No app-side handling needed.
+
+📚 [12-Month Commitment (Paid Monthly)](12-month-commitment)
+
+<br />
+
 # How do refunds and grace periods appear?
 
 * **Grace period and billing retry** are reflected in the subscription status, and you can trigger a dedicated [Campaign](campaigns) for users in that state.

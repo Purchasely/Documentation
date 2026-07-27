@@ -25,8 +25,17 @@ next:
       slug: faq-screens-and-paywalls
       title: Screens & paywalls
     - type: basic
+      slug: faq-flows-and-byos
+      title: Flows & BYOS
+    - type: basic
       slug: faq-stores-and-billing
       title: Stores & billing
+    - type: basic
+      slug: faq-testing-and-sandbox
+      title: Testing & sandbox
+    - type: basic
+      slug: faq-console-and-environments
+      title: Console & environments
     - type: basic
       slug: faq-analytics-and-data
       title: Analytics & data
@@ -47,9 +56,12 @@ This FAQ collects the questions our support and solution engineering teams answe
 | :------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Integration & getting started](faq-integration)                     | The minimal path to a working paywall, running modes, entitlement architecture, SDK footprint, what requires an app release and what does not. |
 | [Users & identity](faq-users-and-identity)                           | Pseudonymous identifiers, anonymous users, subscription transfer on login, logout behavior, unknown users.                                     |
-| [Screens & paywalls](faq-screens-and-paywalls)                       | Layouts and components, localization, dark mode, A/B tests, and the rendering issues we see most often (missing prices, cut-off CTAs, cache).  |
+| [Screens & paywalls](faq-screens-and-paywalls)                       | Layouts and components, fonts, localization, Audiences, and the rendering issues we see most often (missing prices, cut-off CTAs, cache).      |
+| [Flows & BYOS](faq-flows-and-byos)                                   | Multi-step journeys, transitions, how a Flow reports its outcome, and plugging your own native screens into a Flow.                            |
 | [Stores & billing](faq-stores-and-billing)                           | Store guideline compliance, StoreKit, Google Play Billing, offers and promo codes, Ask to Buy, family sharing, refunds, web checkout.          |
-| [Analytics & data](faq-analytics-and-data)                           | Events, webhooks, exports, dashboard discrepancies, third-party forwarding, subscriber base import.                                            |
+| [Testing & sandbox](faq-testing-and-sandbox)                         | What is normal store behavior in sandbox and TestFlight, and what is an actual bug worth reporting.                                            |
+| [Console & environments](faq-console-and-environments)               | Copying a Screen from staging to production, why a Plan refuses to be deleted, roles and access, empty dashboards.                             |
+| [Analytics & data](faq-analytics-and-data)                           | Events, webhooks, exports, revenue reconciliation, A/B test reading, third-party forwarding, subscriber base import.                           |
 | [Privacy, security & compliance](faq-privacy-and-compliance)         | GDPR roles, DPA, data processing register and consent API, children-oriented apps, certifications, data export and deletion.                   |
 | [Product capabilities](faq-product-and-roadmap)                      | What the platform covers today, what is in beta, and how to influence what comes next.                                                        |
 

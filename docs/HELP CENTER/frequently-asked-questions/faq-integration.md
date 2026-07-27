@@ -68,9 +68,7 @@ Purchasely.userLogin("your_opaque_id")
 // 3. Display
 PLYPresentation {
     placementId("my_placement")
-}.preload { presentation, error ->
-    presentation?.display(context)
-}
+}.build().display(context)
 ```
 
 📚 [SDK installation](sdk-installation) · [SDK initialization](sdk-initialization) · [Displaying Screens with Placements](displaying-screens-placements)
@@ -122,6 +120,117 @@ Set the user identifier **before** the first paywall is displayed, either via `a
 * **Do not gate your app launch on a successful `start()`.** Render your UI, and let paywall display fail gracefully.
 * Always handle the error branch of the fetch/display call and provide a fallback path (skip the paywall, or show a native screen).
 * Because Screens are fetched from our servers, [pre-fetching](pre-fetching) at launch removes most of the perceived latency on the first display.
+
+<br />
+
+# Do I have to resolve every action interceptor?
+
+Yes. **Every interceptor must return a result** telling the SDK how your app handled the action:
+
+| Result        | Effect                                                                                                      |
+| :------------ | :---------------------------------------------------------------------------------------------------------- |
+| `SUCCESS`     | The action succeeded. The chain continues to the next action on that button. In Observer mode, `purchase` and `restore` also trigger synchronization automatically. |
+| `FAILED`      | Stops the chain, the remaining actions are skipped, and the button leaves its loading state.                  |
+| `NOT_HANDLED` | You did not handle it — the SDK performs its own default behavior for that action.                            |
+
+```swift Swift
+Purchasely.interceptAction(.purchase) { info, params, completion in
+    guard let productId = params?.plan?.appleProductId else {
+        return completion(.notHandled)
+    }
+    myBillingStack.purchase(productId) { ok in
+        completion(ok ? .success : .failed)
+    }
+}
+```
+```kotlin Kotlin
+Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
+    val activity = info?.activity ?: return@interceptAction PLYInterceptResult.NOT_HANDLED
+    when (myBillingStack.launch(activity, purchase)) {
+        BillingResult.SUCCESS -> PLYInterceptResult.SUCCESS
+        else -> PLYInterceptResult.FAILED
+    }
+}
+```
+
+Notes that matter in practice:
+
+* On Kotlin, the reified form above is a **suspend** lambda — you *return* the result. There is also a `Class`-based overload for non-coroutine call sites, `Purchasely.interceptAction(PLYPresentationAction.Purchase::class.java) { info, action, result -> … }`, where you must call `result` **exactly once**, synchronously or after your async work.
+* An action with **no registered interceptor** is performed by the SDK, so a button never stays stuck spinning. The risk is the opposite: registering an interceptor and then never resolving it.
+* Actions run **in order** and only advance if the previous one succeeded. A `purchase` that fails will not run the `open_screen` configured after it.
+* **Do not intercept `open_presentation` or `open_placement`** unless you have discussed it with us — overriding them breaks A/B test, Audience and Campaign tracking.
+
+📚 [Paywall action interceptor](action-interceptor) · [Processing transactions with the interceptor](process-transactions-with-paywall-action-interceptor) · [Action types](action-types)
+
+<br />
+
+# Which parameters do I get in the interceptor, and which can be null?
+
+The payload differs by platform, and this is where most integration surprises come from.
+
+**iOS** — the action carries a `params` object and an `info` object:
+
+| What you need                              | Where it is                                                                 |
+| :----------------------------------------- | :-------------------------------------------------------------------------- |
+| The store product to purchase              | `params?.plan?.appleProductId` — **optional**, guard it and return `.notHandled` |
+| A promotional offer                        | `params?.promoOffer?.storeOfferId`                                           |
+| 12-month commitment billing plan           | `params?.billingPlanType` — `upFront`, `monthly` or `unspecified`            |
+| Web checkout data                          | `params?.url`, `params?.clientReferenceId`, `params?.queryParameterKey`, `params?.webCheckoutProvider` |
+| The presenting controller                  | `info?.controller`                                                          |
+| Targeting context                          | `info?.presentation?.placementId` / `.audienceId` / `.abTestId` / `.abTestVariantId` / `.campaignId`, and `info?.contentId` |
+
+**Android** — there is no wrapper parameters object any more: the fields live **on the action subclass itself**.
+
+| Action              | Fields                                                                          |
+| :------------------ | :------------------------------------------------------------------------------ |
+| `Purchase`          | `plan`, `subscriptionOffer` (**nullable**), `offer`                              |
+| `Close` / `CloseAll`| `closeReason`                                                                    |
+| `Navigate`          | `url`, `title`                                                                   |
+| `OpenPresentation`  | `presentationId`                                                                 |
+| `OpenPlacement`     | `placementId`                                                                    |
+| `WebCheckout`       | `url`, `clientReferenceId`, `queryParameterKey`, `webCheckoutProvider`            |
+| `Restore` / `Login` / `PromoCode` | no parameters                                                      |
+
+For a Google Play purchase you typically read `purchase.subscriptionOffer?.subscriptionId`, `?.basePlanId`, `?.offerId` and `?.offerToken`. Because `subscriptionOffer` is nullable, always handle the null branch rather than force-unwrapping — that is the usual cause of a paywall button that does nothing on a plan without an offer.
+
+> ❗️ `planVendorId` is not part of the interceptor payload
+>
+> It is a Dynamic Offering input and a field of `PLYPresentationPlan`. If you need the Purchasely-side plan reference in the interceptor, read it from the `plan` object you are given.
+
+Migrating from v5? The `proceed` closure is gone: `processAction(false)` becomes `.success` and `processAction(true)` becomes `.notHandled`. To detach an interceptor, use `removeActionInterceptor(...)` or `removeAllActionInterceptors()`.
+
+<br />
+
+# In Observer mode, when do I have to call `synchronize()`?
+
+Less often than most integrations assume.
+
+| Situation                                                                        | What to do                                                                          |
+| :------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
+| Purchase or restore made **through the paywall**, bridged via the interceptor      | **Nothing.** Returning the success result already triggers synchronization for you.  |
+| Purchase made **outside** the paywall — your own store screen, a BYOS Custom Screen | Call `Purchasely.synchronize()` yourself once your billing flow completes.            |
+
+```swift Swift
+Purchasely.synchronize(success: { }, failure: { error in })
+```
+```kotlin Kotlin
+Purchasely.synchronize(
+    onSuccess = { plan -> /* plan is the validated PLYPlan, or null */ },
+    onError = { error -> }
+)
+```
+
+On Android the subscriptions cache is refreshed **before** `onSuccess` fires, so a normal cached `userSubscriptions(...)` read from that callback already returns the fresh entitlements — no polling with an arbitrary delay.
+
+> ⚠️ `NOT_HANDLED` does nothing useful on purchase / restore in Observer mode
+>
+> Purchasely never processes those actions in Observer mode, so returning `.notHandled` logs a warning and skips. Return the success or failure result instead.
+
+> ❗️ Finishing the transaction stays your responsibility
+>
+> In Observer mode the SDK observes the receipt for analytics but does **not** finish the transaction (App Store) or acknowledge it (Google Play). Your own billing code must still do that.
+
+📚 [Observer mode](observer-mode) · [Checking your integration in Observer mode](checking-your-purchasely-integration-observer-mode)
 
 <br />
 

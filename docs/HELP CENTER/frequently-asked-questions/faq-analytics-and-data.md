@@ -67,6 +67,68 @@ If the gap survives all five, open a support request with the dashboard, the dat
 
 <br />
 
+# Why doesn't my revenue match the store's own report?
+
+Because the two measure different things. The Purchasely **Revenue** chart shows **gross** revenue:
+
+* it is **what the user paid**, VAT included,
+* **before** the store commission (typically 15–30%) is deducted,
+* attributed to the **transaction date**,
+* and it is **not MRR** — a yearly subscription shows its full amount on the day of the transaction, not spread over 12 months.
+
+A Google Play or App Store payout report is net of commission and often net of tax, and it is attributed to a settlement period rather than a transaction date. Those two numbers are not supposed to be equal.
+
+Before opening a ticket, reconcile in this order: same date range → same platform filter → gross vs net → transaction date vs payout period → refunds (which land in a later period on the store side).
+
+📚 [Revenue](revenue) · [MRR](mrr) · [Subscription refunds](subscription-refunds)
+
+<br />
+
+# Why aren't my A/B test variants split 50/50?
+
+Several reasons, and most of them are by design:
+
+* **Weights are configurable.** Each variant carries a weight, and the total must equal 100. Use **Equalize** in the Console if you want an even split — the defaults are not necessarily what you want.
+* **Assignment is deterministic, not balanced in real time.** A user is bucketed by a hash of their identifier (0–99), so a given user always sees the same variant. Over a small sample that hash does not produce an exactly even split.
+* **Unique Viewers counts `PRESENTATION_VIEWED` events**, not assignments. If one variant is a Flow and the other a single Screen, or if one variant is slower to render, exposure counts can diverge even with identical weights.
+* **Anonymous users reinstalling** get a new identifier, and therefore a new bucket.
+
+A large, persistent imbalance that none of the above explains is worth reporting with the test ID, the weights configured and the observed counts.
+
+<br />
+
+# How do I run an A/B test with a real control group?
+
+Two structures, depending on what you want to measure:
+
+* **Screen A vs Screen B** — the standard case. Keep the test **type** consistent: a UI test changes the Screen, a Price test changes the Plans. Mixing the two makes the result uninterpretable.
+* **Paywall vs no paywall** — the variant serves no Screen, so the SDK returns a *deactivated* presentation and your app shows nothing. That is how you measure the paywall's own impact rather than one design against another.
+
+Constraints to know up front:
+
+* **One Placement per test.** A Placement already used by another test cannot be reused.
+* **One test per Audience + Placement combination.**
+* An **Audience ID cannot be changed** once it has been associated with an A/B test or a transaction.
+
+📚 [A/B test configuration](ab-test-configuration) · [A/B test results](ab-test-results)
+
+<br />
+
+# When can I read an A/B test result?
+
+The Console computes Bayesian significance, so wait for it rather than eyeballing the numbers. Practically:
+
+* run for **1 to 2 weeks minimum**, to cover a full weekly cycle,
+* aim for **95%+** significance,
+* watch **View to Paid** (subscriptions started + trials converted, over unique viewers) rather than raw counts,
+* remember that **Trial Ongoing** users have not resolved yet — a test read before the trials mature will overstate whichever variant pushed trials hardest.
+
+Revenue, ARPU and ARPPU stay live even after the test is stopped.
+
+📚 [A/B test results](ab-test-results)
+
+<br />
+
 # Can I export subscriptions or automate reporting?
 
 * **Ad hoc** — every [Dashboard](subscription-base-evolution) has a **Download CSV** on its data table.
