@@ -67,4 +67,4 @@ If you have videos in your paywall, you must provide a video player to play them
 
 We do provide a player dependency which will be detected automatically by our SDK if you do not have a video player in your application<br />`implementation 'io.purchasely:player:6.0.1'`
 
-If you already have your own player that support HLS video, you can also provide your own player view, more information [here](https://help.purchasely.io/en/articles/5963004-displaying-a-video-on-android-devices)
+If you already have your own player that support HLS video, you can also provide your own player view, more information in [Displaying a video on Android](display-video-on-android)

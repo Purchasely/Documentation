@@ -12,7 +12,7 @@ metadata:
 next:
   description: ''
 ---
-Purchasely automatically adapts to the device theme, displaying presentations in either light or dark mode based on the user’s settings. If you've configured a [dark mode](https://help.purchasely.io/en/articles/8656909-dark-mode-feature) in Purchasely console, it will be utilized when the user's device is in dark mode. Otherwise, Purchasely defaults to light mode.
+Purchasely automatically adapts to the device theme, displaying presentations in either light or dark mode based on the user’s settings. If you've configured a dark mode in the Purchasely Console, it will be utilized when the user's device is in dark mode. Otherwise, Purchasely defaults to light mode.
 
 # Manually set your preferred mode
 

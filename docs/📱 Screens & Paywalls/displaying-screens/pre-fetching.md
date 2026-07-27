@@ -38,7 +38,7 @@ A presentation can be one of the following types:
 | --- | --- | --- |
 | **Normal** | The default: a Purchasely Screen created from your console | Display it |
 | **Fallback** | A Purchasely Screen, but not the one you requested (it could not be found) | Display it |
-| **Deactivated** | No [Screen associated](displaying-screens-placements) with that placement (e.g. a specific A/B test or [audience](https://help.purchasely.io/en/articles/6940943-disable-a-paywall-for-a-placement)) | Display nothing |
+| **Deactivated** | No [Screen associated](displaying-screens-placements) with that placement (e.g. a specific A/B test or [audience](segmenting-your-user-base) deliberately serves no Screen) | Display nothing |
 | **Client** | You [created a Custom Screen](byos-configuration) and should [display it yourself](byos-implementation) | Use the list of `plans` to know which offers to show |
 
 ```swift Swift

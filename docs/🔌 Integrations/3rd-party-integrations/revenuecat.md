@@ -57,7 +57,7 @@ A “plan” is an item (SKU) you sell on Apple/Google, such as a subscription, 
 **In RevenueCat’s terms**:\
 A “product” is an item (SKU) you sell on Apple/Google which is equivalent to what is defined as a “plan” by Purchasely.
 
-Refer to [help center](https://help.purchasely.com/en/collections/3507048-products-plans) to learn more.
+Refer to [Products & Plans setup](product-plans-setup) to learn more.
 
 You can also provide us with [a csv file](subscribers-base-import) to fill in all the correct information on your behalf.
 
