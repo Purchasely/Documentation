@@ -16,39 +16,45 @@ This guide covers the **React Native SDK** (`react-native-purchasely`). For the 
 
 The React Native SDK v6 is **paywall‑API‑only**: the legacy v5 paywall API has been **removed** (not deprecated). Calling any removed method fails to compile (TypeScript) and the method no longer exists at runtime. The new surface is built around three entry points on the `Purchasely` default export: `Purchasely.builder(apiKey)`, `Purchasely.presentation`, and `Purchasely.interceptAction(kind, handler)`.
 
-> 📘 Scope
->
-> Every "Before" example reflects the public **v5** API as shipped in the last v5.x release. If a snippet does not match what your project compiled against, reach out to the Customer Success team.
+<Callout icon="📘" theme="info">
+  ### Scope
 
-> 💡 Let the AI help you migrate
->
-> The Purchasely AI plugin and the `purchasely-integrate`, `purchasely-review` and `purchasely-debug` skills can read your integration and rewrite the v5 paywall calls to the v6 builder API for you. Point them at the files that call `Purchasely.start`, `presentPresentationForPlacement`, `fetchPresentation`, `setPaywallActionInterceptorCallback`, etc.
+  Every "Before" example reflects the public **v5** API as shipped in the last v5.x release. If a snippet does not match what your project compiled against, reach out to the Customer Success team.
+</Callout>
+
+<Callout icon="💡" theme="default">
+  ### Let the AI help you migrate
+
+  The Purchasely AI plugin and the `purchasely-integrate`, `purchasely-review` and `purchasely-debug` skills can read your integration and rewrite the v5 paywall calls to the v6 builder API for you. Point them at the files that call `Purchasely.start`, `presentPresentationForPlacement`, `fetchPresentation`, `setPaywallActionInterceptorCallback`, etc.
+</Callout>
 
 ***
 
 ## Summary of breaking changes
 
-| v5                                                                   | v6                                                                            |
-| -------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| Default running mode `'full'`                                        | Default running mode `'observer'` ⚠️                                          |
-| `Purchasely.start({ apiKey, … })`                                    | `Purchasely.builder(apiKey).…start()`                                         |
-| `Purchasely.startWithAPIKey(apiKey, …)`                              | `Purchasely.builder(apiKey).…start()`                                         |
-| `Purchasely.fetchPresentation({ placementId })`                      | `Purchasely.presentation.placement(id).build().preload()`                     |
-| `Purchasely.presentPresentationForPlacement({ placementVendorId })`  | `Purchasely.presentation.placement(id).build().display()`                     |
-| `Purchasely.presentPresentationWithIdentifier({ presentationVendorId })` | `Purchasely.presentation.screen(id).build().display()`                    |
-| `Purchasely.presentProductWithIdentifier(productId, …)`              | `Purchasely.presentation.screen(id).contentId(contentId).build().display()`   |
-| `Purchasely.presentPlanWithIdentifier(planId, …)`                    | `Purchasely.presentation.screen(id).build().display()`                        |
-| `Purchasely.showPresentation()` / `hidePresentation()` / `closePresentation()` | `request.display()` / `request.close()`                             |
-| `setPaywallActionInterceptorCallback(cb)` + `onProcessAction(bool)`  | `Purchasely.interceptAction(kind, handler)` returning `'success' \| 'failed' \| 'notHandled'` |
-| `setDefaultPresentationResultCallback` / `…ResultHandler`            | `Purchasely.setDefaultPresentationDismissHandler(outcome => …)`               |
-| `Purchasely.readyToOpenDeeplink(true)`                               | `Purchasely.builder(apiKey).allowDeeplink(true).start()`                      |
-| `Purchasely.isDeeplinkHandled(uri)`                                  | **Renamed** `Purchasely.handleDeeplink(uri)` (same signature) ⚠️             |
-| `ProductResult` ordinal enum (`PRODUCT_RESULT_PURCHASED`, …)         | `purchaseResult` string union (`'purchased' \| 'cancelled' \| 'restored'`)    |
-| `Purchasely.presentSubscriptions()`                                  | **Removed — no replacement** (build your own screen) ⚠️                       |
+| v5                                                                             | v6                                                                                            |
+| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| Default running mode `'full'`                                                  | Default running mode `'observer'` ⚠️                                                          |
+| `Purchasely.start({ apiKey, … })`                                              | `Purchasely.builder(apiKey).…start()`                                                         |
+| `Purchasely.startWithAPIKey(apiKey, …)`                                        | `Purchasely.builder(apiKey).…start()`                                                         |
+| `Purchasely.fetchPresentation({ placementId })`                                | `Purchasely.presentation.placement(id).build().preload()`                                     |
+| `Purchasely.presentPresentationForPlacement({ placementVendorId })`            | `Purchasely.presentation.placement(id).build().display()`                                     |
+| `Purchasely.presentPresentationWithIdentifier({ presentationVendorId })`       | `Purchasely.presentation.screen(id).build().display()`                                        |
+| `Purchasely.presentProductWithIdentifier(productId, …)`                        | `Purchasely.presentation.screen(id).contentId(contentId).build().display()`                   |
+| `Purchasely.presentPlanWithIdentifier(planId, …)`                              | `Purchasely.presentation.screen(id).build().display()`                                        |
+| `Purchasely.showPresentation()` / `hidePresentation()` / `closePresentation()` | `request.display()` / `request.close()`                                                       |
+| `setPaywallActionInterceptorCallback(cb)` + `onProcessAction(bool)`            | `Purchasely.interceptAction(kind, handler)` returning `'success' \| 'failed' \| 'notHandled'` |
+| `setDefaultPresentationResultCallback` / `…ResultHandler`                      | `Purchasely.setDefaultPresentationDismissHandler(outcome => …)`                               |
+| `Purchasely.readyToOpenDeeplink(true)`                                         | `Purchasely.builder(apiKey).allowDeeplink(true).start()`                                      |
+| `Purchasely.isDeeplinkHandled(uri)`                                            | **Renamed** `Purchasely.handleDeeplink(uri)` (same signature) ⚠️                              |
+| `ProductResult` ordinal enum (`PRODUCT_RESULT_PURCHASED`, …)                   | `purchaseResult` string union (`'purchased' \| 'cancelled' \| 'restored'`)                    |
+| `Purchasely.presentSubscriptions()`                                            | **Removed — no replacement** (build your own screen) ⚠️                                       |
 
-> 📘 `isDeeplinkHandled` was **renamed** to `handleDeeplink`
->
-> Like the native iOS/Android SDKs, the React Native bridge renamed this method to `Purchasely.handleDeeplink(uri)` (same signature, still returns `Promise<boolean>`). The v5 names `isDeeplinkHandled` and `readyToOpenDeeplink` **no longer exist** — there is no alias.
+<Callout icon="📘" theme="info">
+  ### `isDeeplinkHandled` was **renamed** to `handleDeeplink`
+
+  Like the native iOS/Android SDKs, the React Native bridge renamed this method to `Purchasely.handleDeeplink(uri)` (same signature, still returns `Promise<boolean>`). The v5 names `isDeeplinkHandled` and `readyToOpenDeeplink` **no longer exist** — there is no alias.
+</Callout>
 
 ***
 
@@ -58,16 +64,15 @@ Pin the **exact** version (no caret / range):
 
 ```bash
 npm install react-native-purchasely@6.0.0
-# optional Android stores:
+# optional Google Billing in-app purchases for Android:
 npm install @purchasely/react-native-purchasely-google@6.0.0
-npm install @purchasely/react-native-purchasely-android-player@6.0.0 # video support in paywalls
-npm install @purchasely/react-native-purchasely-amazon@6.0.0
-npm install @purchasely/react-native-purchasely-huawei@6.0.0
+# video support in Screens for Android
+npm install @purchasely/react-native-purchasely-android-player@6.0.0
 ```
 
 iOS: `cd ios && pod install`. Android: autolinking handles the native modules.
 
-The bridge pulls the native pins automatically (iOS pod `Purchasely 6.0.0`, Android `io.purchasely:core:6.0.1`). Minimum OS versions: **iOS 15.1**, **Android `minSdkVersion 23`**.
+The bridge pulls the native pins automatically (iOS pod `Purchasely 6.0.0`, Android `io.purchasely:core:6.0.1`). Minimum OS versions: **iOS 15.1**, **Android&#x20;**`minSdkVersion 23`.
 
 ***
 
@@ -75,11 +80,13 @@ The bridge pulls the native pins automatically (iOS pod `Purchasely 6.0.0`, Andr
 
 ### Default running mode is now `'observer'` ⚠️
 
-The default `runningMode` changed from `'full'` to `'observer'`. **If you want Purchasely to handle and validate purchases, pass `.runningMode('full')` explicitly.**
+The default `runningMode` changed from `'full'` to `'observer'`. **If you want Purchasely to handle and validate purchases, pass&#x20;**`.runningMode('full')`**&#x20;explicitly.**
 
-> 🚧 This change is silent
->
-> Your code still compiles — there is **no** type error. If you relied on the implicit `full` default, your app will **stop owning the purchase flow** until you add `.runningMode('full')`. Audit every `start()` / `builder()` call. The fallback for an unknown/unset value now resolves to `observer`, never `full`.
+<Callout icon="🚧" theme="warn">
+  ### This change is silent
+
+  Your code still compiles — there is **no** type error. If you relied on the implicit `full` default, your app will **stop owning the purchase flow** until you add `.runningMode('full')`. Audit every `start()` / `builder()` call. The fallback for an unknown/unset value now resolves to `observer`, never `full`.
+</Callout>
 
 ### Before (v5 — removed)
 
@@ -212,7 +219,7 @@ const loaded = await request.preload() // resolves to a PLYLoadedPresentation wh
 const outcome = await request.display()
 ```
 
-`preload()` resolves to a **`PLYLoadedPresentation`**: the presentation data (`screenId`, `placementId`, `plans`, …) **plus** `display([transition])`, `close()` and `back()` methods that delegate to the originating request. So you can also drive the lifecycle straight from the loaded object — `await loaded.display()` — instead of holding onto `request` (parity with the Flutter SDK).
+`preload()` resolves to a `PLYLoadedPresentation`: the presentation data (`screenId`, `placementId`, `plans`, …) **plus** `display([transition])`, `close()` and `back()` methods that delegate to the originating request. So you can also drive the lifecycle straight from the loaded object — `await loaded.display()` — instead of holding onto `request` (parity with the Flutter SDK).
 
 ***
 
@@ -228,9 +235,11 @@ request.close()    // hide / close
 request.back()     // navigate back inside a multi‑step (Flow) presentation
 ```
 
-> 🚧 `request.close()` behaves differently per platform
->
-> On **iOS**, `request.close()` closes the **specific** presentation identified by its `requestId` (falling back to closing all Purchasely screens when the request is no longer tracked). On **Android**, the native SDK does not yet expose a per‑request close, so it dismisses **all** displayed presentations — if you stack presentations (e.g. a product page inside an onboarding flow), closing one will also dismiss the others.
+<Callout icon="🚧" theme="warn">
+  ### `request.close()` behaves differently per platform
+
+  On **iOS**, `request.close()` closes the **specific** presentation identified by its `requestId` (falling back to closing all Purchasely screens when the request is no longer tracked). On **Android**, the native SDK does not yet expose a per‑request close, so it dismisses **all** displayed presentations — if you stack presentations (e.g. a product page inside an onboarding flow), closing one will also dismiss the others.
+</Callout>
 
 ***
 
@@ -277,11 +286,11 @@ Purchasely.removeActionInterceptor('purchase')
 Purchasely.removeAllActionInterceptors()
 ```
 
-| Result        | Meaning                                                 |
-| ------------- | ------------------------------------------------------- |
-| `'success'`     | App handled the action — SDK skips its default behavior |
-| `'failed'`      | App tried but failed — breaks the action chain          |
-| `'notHandled'`  | SDK should handle the action itself                     |
+| Result         | Meaning                                                 |
+| -------------- | ------------------------------------------------------- |
+| `'success'`    | App handled the action — SDK skips its default behavior |
+| `'failed'`     | App tried but failed — breaks the action chain          |
+| `'notHandled'` | SDK should handle the action itself                     |
 
 `onProcessAction(false)` → return `'success'`; `onProcessAction(true)` → return `'notHandled'`.
 
@@ -299,9 +308,11 @@ await Purchasely.builder('YOUR_API_KEY').allowDeeplink(true).start()
 const handled = await Purchasely.handleDeeplink('app://ply/presentations/')
 ```
 
-> 📘 `isDeeplinkHandled` was renamed to `handleDeeplink`
->
-> Like the native iOS/Android SDKs, the React Native bridge renamed this method to `Purchasely.handleDeeplink(uri)` (same signature). The v5 names `isDeeplinkHandled` and `readyToOpenDeeplink` **no longer exist** — there is no alias, so any call to `isDeeplinkHandled` fails to compile.
+<Callout icon="📘" theme="info">
+  ### `isDeeplinkHandled` was renamed to `handleDeeplink`
+
+  Like the native iOS/Android SDKs, the React Native bridge renamed this method to `Purchasely.handleDeeplink(uri)` (same signature). The v5 names `isDeeplinkHandled` and `readyToOpenDeeplink` **no longer exist** — there is no alias, so any call to `isDeeplinkHandled` fails to compile.
+</Callout>
 
 There are **two distinct paywall flows** — don't conflate them:
 
@@ -339,15 +350,17 @@ subscription.remove()
 Purchasely.removeDefaultPresentationDismissHandler()
 ```
 
-> 📘 Platform note
->
-> `closeReason` is one of `'button'`, `'backSystem'` or `'programmatic'`. System dismissals surface as `'backSystem'` on both platforms — the Android system back gesture/button and the iOS interactive swipe‑down / nav pop both map there. `error` is populated when the presentation fails to load or display; when `error` is set, `closeReason` is `null` (the two are mutually exclusive).
+<Callout icon="📘" theme="info">
+  ### Platform note
+
+  `closeReason` is one of `'button'`, `'backSystem'` or `'programmatic'`. System dismissals surface as `'backSystem'` on both platforms — the Android system back gesture/button and the iOS interactive swipe‑down / nav pop both map there. `error` is populated when the presentation fails to load or display; when `error` is set, `closeReason` is `null` (the two are mutually exclusive).
+</Callout>
 
 ***
 
 ## 8. Synchronize (now awaitable)
 
-`Purchasely.synchronize()` previously returned `void` (fire‑and‑forget). The v6 native SDKs expose completion callbacks, so the bridge now returns a **`Promise<boolean>`** that resolves when the receipt synchronization completes and rejects on failure.
+`Purchasely.synchronize()` previously returned `void` (fire‑and‑forget). The v6 native SDKs expose completion callbacks, so the bridge now returns a `Promise<boolean>` that resolves when the receipt synchronization completes and rejects on failure.
 
 This is **source‑compatible**: existing fire‑and‑forget callers keep working (they just ignore the returned promise). New code can await it:
 
@@ -360,7 +373,9 @@ try {
 }
 ```
 
-> 💡 In Observer mode, after a purchase made **outside** the action interceptor, `await Purchasely.synchronize()` before chaining a follow‑up placement so the receipt is uploaded first. For purchases handled **inside** the interceptor, returning `'success'` already synchronizes the transaction — no manual `synchronize()` call is needed.
+<Callout icon="💡" theme="default">
+  ### In Observer mode, after a purchase made **outside** the action interceptor, `await Purchasely.synchronize()` before chaining a follow‑up placement so the receipt is uploaded first. For purchases handled **inside** the interceptor, returning `'success'` already synchronizes the transaction — no manual `synchronize()` call is needed.
+</Callout>
 
 ***
 
@@ -379,7 +394,7 @@ const history = await Purchasely.userSubscriptionsHistory()       // full histor
 
 ## 10. What's unchanged
 
-All **core** SDK methods are unchanged in name, signature, and behaviour. Only the v5 *paywall* surface was removed (plus `synchronize`, which gained an awaitable result — see §8). The following keep working exactly as in v5:
+All **core** SDK methods are unchanged in name, signature, and behaviour. Only the v5 _paywall_ surface was removed (plus `synchronize`, which gained an awaitable result — see §8). The following keep working exactly as in v5:
 
 - **User**: `userLogin`, `userLogout`, `getAnonymousUserId`, `isAnonymous`.
 - **Products**: `allProducts`, `productWithIdentifier`, `planWithIdentifier`, `purchaseWithPlanVendorId`, `signPromotionalOffer`, `isEligibleForIntroOffer`, and dynamic offerings (`setDynamicOffering`, `getDynamicOfferings`, `removeDynamicOffering`, `clearDynamicOfferings`).
