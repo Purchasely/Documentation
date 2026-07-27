@@ -6,7 +6,7 @@ We rely on [NPM](https://www.npmjs.com/package/react-native-purchasely) to distr
 # Main dependency
 
 ```shell
-npm install react-native-purchasely@6.0.0-rc.2 --save
+npm install react-native-purchasely@6.0.0 --save
 ```
 
 Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android minSdk 23)
@@ -39,27 +39,28 @@ allprojects {
 
 # Android setup
 
-We do include a store by default in our SDK, with Android you can choose to use Google and/or Huawei and/or Amazon.  
-See below to add the store you want to use
+We do include a store by default in our SDK, with Android you can choose to use Google and/or Huawei and/or Amazon.<br />See below to add the store you want to use
 
-> 📘 Versioning
->
-> All your dependencies **must** always be at the **same version** for example
->
-> ```json package.json
-> "dependencies": {
->   "react-native-purchasely": "6.0.0-rc.2",
->   "@purchasely/react-native-purchasely-google": "6.0.0-rc.2",
->   "@purchasely/react-native-purchasely-android-player": "6.0.0-rc.2",
-> },
-> ```
+<Callout icon="📘" theme="info">
+  ### Versioning
+
+  All your dependencies **must** always be at the **same version** for example
+
+  ```json package.json
+  "dependencies": {
+    "react-native-purchasely": "6.0.0",
+    "@purchasely/react-native-purchasely-google": "6.0.0",
+    "@purchasely/react-native-purchasely-android-player": "6.0.0",
+  },
+  ```
+</Callout>
 
 ## Google Play Billing
 
 To add Google as a store, you can use our NPM dependency
 
 ```shell
-npm install @purchasely/react-native-purchasely-google@6.0.0-rc.2 --save
+npm install @purchasely/react-native-purchasely-google@6.0.0 --save
 ```
 
 Then you must add Google in the list of stores when starting the SDK with the builder
@@ -83,9 +84,10 @@ await Purchasely.builder('<<X-API-KEY>>')
 
 ## Video Player
 
-A video player is not provided by default on Android to avoid conflict with another dependency you may have  
-We provide one in an external dependency that is detected and handled automatically
+A video player is not provided by default on Android to avoid conflict with another dependency you may have<br />We provide one in an external dependency that is detected and handled automatically
 
 ```shell
-npm install @purchasely/react-native-purchasely-android-player@6.0.0-rc.2 --save
+npm install @purchasely/react-native-purchasely-android-player@6.0.0 --save
 ```
+
+<br />
