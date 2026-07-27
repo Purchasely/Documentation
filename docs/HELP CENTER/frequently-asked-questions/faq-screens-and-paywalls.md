@@ -19,13 +19,13 @@ next:
 
 Everything goes through the [Screen Composer](screen-composer) — no-code, drag & drop, and updated without an app release.
 
-| Area                | What is available                                                                                                                                                                                                                                                                                                                                     |
-| :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Layouts**         | Fill height, scroll, sticky button, tabs, carousel.                                                                                                                                                                                                                                                                                                    |
+| Area                | What is available                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| :------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Layouts**         | Fill height, scroll, sticky button, tabs, carousel.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | **Components**      | [Vertical](plan-pickers-vertical), [horizontal](plan-pickers-horizontal) and [expandable](expandable-pickers) plan pickers, multi-action [CTAs](buttons), [comparison tables](table-comparison), [timelines](timeline-vertical), [countdowns](countdown), [progress bars](progress-bars), [reviews](reviews), dynamic [tags](tags), [images](images), [videos](videos-1), [Lottie animations](lottie-animations), [quizzes](quiz), [FAQ blocks](faq), [bulleted lists](bulleted-lists). |
-| **Personalization** | [Color palette](color-palette), [custom fonts](composer-custom-fonts), native [dark mode](composer-dark-mode), [safe area](safe-area) handling, automatic [adaptation to screen sizes and orientations](composer-adapting-screens-to-devices), and [conditional visibility](conditional-visibility) driven by user data or by what the user does inside the Screen — so you personalize without duplicating Screens. |
-| **Localization**    | Per Screen, language by language, plus localization of the SDK's own system strings. See [Screen localization](composer-localization) and [Localizing your app](localizing-your-app).                                                                                                                                                                    |
-| **A/B tests**       | Up to 26 variants per test, deterministic assignment by hash of the user ID (a given user always sees the same variant), Bayesian statistical significance. Stripe web transactions are included in the results. See [A/B tests](ab-tests).                                                                                                              |
+| **Personalization** | [Color palette](color-palette), [custom fonts](composer-custom-fonts), native [dark mode](composer-dark-mode), [safe area](safe-area) handling, automatic [adaptation to screen sizes and orientations](composer-adapting-screens-to-devices), and [conditional visibility](conditional-visibility) driven by user data or by what the user does inside the Screen — so you personalize without duplicating Screens.                                                                    |
+| **Localization**    | Per Screen, language by language, plus localization of the SDK's own system strings. See [Screen localization](composer-localization) and [Localizing your app](localizing-your-app).                                                                                                                                                                                                                                                                                                   |
+| **A/B tests**       | Up to 26 variants per test, deterministic assignment by hash of the user ID (a given user always sees the same variant), Bayesian statistical significance. Stripe web transactions are included in the results. See [A/B tests](ab-tests).                                                                                                                                                                                                                                             |
 
 Beyond the single Screen: [Flows](flows) (multi-step journeys with conditional routing), [Placements](displaying-screens-placements), [Audiences](segmenting-your-user-base), programmatic [Campaigns](campaigns) (win-back, cancel survey, grace period) and [BYOS](byos) to insert one of your own native screens inside a Purchasely Flow.
 
@@ -63,10 +63,10 @@ Enable [Debug Mode](debug-mode) first — the Debug Panel tells you exactly whic
 
 Some differences are expected, some are bugs. Expected:
 
-* **Font metrics.** The same font renders with different line heights and fallback behavior on each platform. If a font family is not embedded for one platform, the OS substitutes it — which changes wrapping and can clip text. See [Custom fonts](composer-custom-fonts).
-* **System string localization.** Prices, durations and renewal terms are formatted by the store, not by us, so wording differs.
-* **Safe area and notch handling.** Check the [safe area](safe-area) configuration.
-* **Nav bar and status bar treatment**, which follows each platform's conventions.
+- **Font metrics.** The same font renders with different line heights and fallback behavior on each platform. If a font family is not embedded for one platform, the OS substitutes it — which changes wrapping and can clip text. See [Custom fonts](composer-custom-fonts).
+- **System string localization.** Prices, durations and renewal terms are formatted by the store, not by us, so wording differs.
+- **Safe area and notch handling.** Check the [safe area](safe-area) configuration.
+- **Nav bar and status bar treatment**, which follows each platform's conventions.
 
 If the layout itself is wrong on one platform only, report it with the [Screen Issue Report Template](screen-issue-report-template), including screenshots from **both** platforms and both light and dark mode.
 
@@ -76,10 +76,10 @@ If the layout itself is wrong on one platform only, report it with the [Screen I
 
 This is almost always a layout configuration rather than an SDK bug:
 
-* **Fill height layout with more content than the viewport.** Fill height does not scroll by design. Switch the Screen to a scroll layout, or to scroll with a sticky button so the CTA stays pinned.
-* **A component set to [Expand to fill](expand-to-fill) inside a scrollable container.** "Expand to fill" needs a bounded parent height; in a scroll container it has nothing to expand against.
-* **Fixed heights on a small device.** Test on a small screen (and on a very tall one such as an S20 Ultra or a Pro Max) using [Preview](preview) and [adaptive settings](composer-adapting-screens-to-devices).
-* **Inline paywall with an unbounded container.** When embedding, the host view must give the paywall a real height. See [Displaying inline paywalls](displaying-inline-paywalls) and [Nesting views](nesting-views).
+- **Fill height layout with more content than the viewport.** Fill height does not scroll by design. Switch the Screen to a scroll layout, or to scroll with a sticky button so the CTA stays pinned.
+- **A component set to [Expand to fill](expand-to-fill) inside a scrollable container.** "Expand to fill" needs a bounded parent height; in a scroll container it has nothing to expand against.
+- **Fixed heights on a small device.** Test on a small screen (and on a very tall one such as an S20 Ultra or a Pro Max) using [Preview](preview) and [adaptive settings](composer-adapting-screens-to-devices).
+- **Inline paywall with an unbounded container.** When embedding, the host view must give the paywall a real height. See [Displaying inline paywalls](displaying-inline-paywalls) and [Nesting views](nesting-views).
 
 <br />
 
@@ -87,8 +87,8 @@ This is almost always a layout configuration rather than an SDK bug:
 
 Two different things control this:
 
-* The **Screen's own close button**, configured in the Composer — see [Close button](composer-close-button).
-* Your **host navigation**. If you present the paywall inside your own navigation controller or fragment with its own nav bar, that chrome belongs to your app and the Composer cannot remove it. Present it modally / full screen, or hide your nav bar for that route.
+- The **Screen's own close button**, configured in the Composer — see [Close button](composer-close-button).
+- Your **host navigation**. If you present the paywall inside your own navigation controller or fragment with its own nav bar, that chrome belongs to your app and the Composer cannot remove it. Present it modally / full screen, or hide your nav bar for that route.
 
 📚 [Close button configuration](composer-close-button) · [Controlling Screen visibility](show-hide-close-screens)
 
@@ -127,17 +127,17 @@ If you use a bridge SDK (React Native, Flutter, Cordova), the font still has to 
 
 There are **two separate** localization layers, and they are edited in different places:
 
-| Layer                     | What it covers                                                                                     | Where you edit it                                                                                         |
-| :------------------------ | :------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------- |
-| **Screen content**        | Everything you typed in the Composer — titles, CTA labels, benefit lists, FAQ blocks.               | Per Screen, language tab by language tab, or in bulk with **Smart Localization** (a CSV of keys × languages). See [Screen localization](composer-localization). |
-| **SDK system strings**    | Error messages, the Restore button, "Already subscribed? Sign in", the Ask to Buy waiting screen.  | Override the `ply_*` keys in your own `Localizable.strings` / `strings.xml`. See [Localizing your app](localizing-your-app). |
+| Layer                  | What it covers                                                                                    | Where you edit it                                                                                                                                               |
+| :--------------------- | :------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Screen content**     | Everything you typed in the Composer — titles, CTA labels, benefit lists, FAQ blocks.             | Per Screen, language tab by language tab, or in bulk with **Smart Localization** (a CSV of keys × languages). See [Screen localization](composer-localization). |
+| **SDK system strings** | Error messages, the Restore button, "Already subscribed? Sign in", the Ask to Buy waiting screen. | Override the `ply_*` keys in your own `Localizable.strings` / `strings.xml`. See [Localizing your app](localizing-your-app).                                    |
 
 Consequences:
 
-* A string that stays in English while the rest of the Screen is translated is usually an **SDK system string** in a language the SDK does not ship. The SDK ships **17 languages** and falls back to English; Screen content supports far more.
-* A missing translation on a Screen means that **language tab was not filled in** for that component. There is no automatic fallback to the default language per component.
-* Prices, durations and renewal terms are formatted **by the store**, not by us — `{{PRICE}}`, `{{AMOUNT}}`, `{{DURATION}}` and the other [tags](tags) resolve at display time from the store's own localized data.
-* The app's **default language is chosen at app creation and cannot be changed afterwards**.
+- A string that stays in English while the rest of the Screen is translated is usually an **SDK system string** in a language the SDK does not ship. The SDK ships **17 languages** and falls back to English; Screen content supports far more.
+- A missing translation on a Screen means that **language tab was not filled in** for that component. There is no automatic fallback to the default language per component.
+- Prices, durations and renewal terms are formatted **by the store**, not by us — `{{PRICE}}`, `{{AMOUNT}}`, `{{DURATION}}` and the other [tags](tags) resolve at display time from the store's own localized data.
+- The app's **default language is chosen at app creation and cannot be changed afterwards**.
 
 To force a language instead of following the OS:
 
@@ -150,34 +150,6 @@ Purchasely.language = Locale("es")
 
 <br />
 
-# How is the "Already subscribed? Sign in" button controlled?
-
-It is displayed **when no user ID is set**. As soon as you call `Purchasely.userLogin()` — or pass the user ID at initialization — the button disappears, because the user is already identified.
-
-To handle the tap, intercept the `login` action and hand back the result:
-
-```swift Swift
-Purchasely.interceptAction(.login) { [weak self] info, params, completion in
-    self?.presentLogin(above: info?.controller) { loggedIn in
-        completion(loggedIn ? .success : .notHandled)
-    }
-}
-```
-```kotlin Kotlin
-Purchasely.interceptAction<PLYPresentationAction.Login> { info, _ ->
-    val activity = info?.activity ?: return@interceptAction PLYInterceptResult.NOT_HANDLED
-    // present your login UI, then return the result
-}
-```
-
-* User signs in **and has a subscription** → dismiss the paywall.
-* User signs in **without a subscription** → dismiss your login UI and report success so the paywall reloads.
-* User cancels → report that it was not handled.
-
-📚 [Identifying users](user-identification) · [Paywall action interceptor](action-interceptor)
-
-<br />
-
 # Why does a user see a different Screen than the one I expect?
 
 A Placement resolves in a strict order, and the first match wins:
@@ -187,12 +159,12 @@ A Placement resolves in a strict order, and the first match wins:
 3. If no Audience matches, the Screen attached to **_Everyone else_** is served.
 4. A running **A/B test** overrides that result with one of its variants.
 
-So a user can belong to several Audiences and still see only one Screen — the highest-priority one. If the wrong Screen appears, reorder the Audiences on the Placement (**`⋮` → Prioritize audiences**) rather than editing the Audiences themselves.
+So a user can belong to several Audiences and still see only one Screen — the highest-priority one. If the wrong Screen appears, reorder the Audiences on the Placement (`⋮`**&#x20;→ Prioritize audiences**) rather than editing the Audiences themselves.
 
 Two things that regularly surprise people:
 
-* **Audience is not the same as [conditional visibility](conditional-visibility).** An Audience picks *which Screen* is served; conditional visibility hides or shows *components inside* a Screen. If a component must appear only for some users, that is conditional visibility, not an Audience.
-* **Expired-subscription attributes are only populated for subscriptions Purchasely knows about.** For a user who churned before you integrated Purchasely — or whose subscription was never imported — only `Has expired subscription` is set, computed from the local receipt. Audiences built on the finer expired attributes will not match those users.
+- **Audience is not the same as [conditional visibility](conditional-visibility).** An Audience picks _which Screen_ is served; conditional visibility hides or shows _components inside_ a Screen. If a component must appear only for some users, that is conditional visibility, not an Audience.
+- **Expired-subscription attributes are only populated for subscriptions Purchasely knows about.** For a user who churned before you integrated Purchasely — or whose subscription was never imported — only `Has expired subscription` is set, computed from the local receipt. Audiences built on the finer expired attributes will not match those users.
 
 To see what actually resolved for a device, use [Debug Mode](debug-mode) — the Debug Panel names the Placement, Audience, A/B test and variant applied.
 
@@ -236,8 +208,10 @@ Yes, via the Figma plugin.
 
 Use the [Screen Issue Report Template](screen-issue-report-template). The fields that matter most and are most often missing:
 
-* the **link to the Screen** in the Console,
-* **how** the Screen is displayed (Placement, deeplink, programmatic call, inline view),
-* **SDK version, app version, platform, environment**,
-* screenshots or a recording in **both** light and dark mode,
-* whether the issue affects **all** users or only some (device, language, eligibility, entitlement).
+- the **link to the Screen** in the Console,
+- **how** the Screen is displayed (Placement, deeplink, programmatic call, inline view),
+- **SDK version, app version, platform, environment**,
+- screenshots or a recording in **both** light and dark mode,
+- whether the issue affects **all** users or only some (device, language, eligibility, entitlement).
+
+<br />
