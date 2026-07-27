@@ -16,9 +16,11 @@ next:
       slug: tailoring-flows-to-user-insights
       title: Tailoring Flows to the user insights
 ---
-> 🚧 SDK v5.5.0+ recommended
+> 🚧 Minimum SDK versions
 >
-> Flows require to integrate SDK v5.3 and above. They are supported since this version, but we recommend v5.5.0 for a better stability and data consistency.
+> Flows are supported since SDK **v5.3**, and this documentation describes the **6.0** display API.
+>
+> On v5, the snippets on these pages differ: the presentation builder, `PLYPresentationOutcome` and `getFragment { outcome -> }` are v6. See the [v5 → v6 migration guides](migrating-from-sdk-5-to-6) if you are still on 5.x.
 
 Flows allow you to tailor the user journey based on user insights, enabling deeply personalized experiences that drive higher engagement and conversion. For your users, this means a more relevant and frictionless journey - from onboarding to paywall exposure - aligned with their needs, goals, or motivations. Instead of receiving a generic flow, each user is guided through content, features, and offers that actually resonate with them.
 

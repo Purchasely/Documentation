@@ -1,6 +1,6 @@
 ---
 title: Controling Screen visibility
-excerpt: This section describes how to manage Screen's visibility
+excerpt: This section describes how to close a Screen programmatically
 deprecated: false
 hidden: false
 metadata:
@@ -16,89 +16,126 @@ next:
 ---
 > 🚧 Minimum SDK versions
 >
-> * iOS: 5.3.0
-> * Android: 5.3.0
-> * ReactNative: 4.0.1
-> * Cordova: 4.1.0
-> * Flutter: 4.0.0
+> The lifecycle described here is the **6.0** display API.
+>
+> * iOS: 6.0.0
+> * Android: 6.0.1
+> * Flutter: 6.0.0
+> * React Native: 6.0.0-rc.2
+> * Cordova: 6.0.0
 
-## Native iOS and Android
+> ❗️ There is no `hide` primitive any more
+>
+> In v5, `hidePresentation()` / `showPresentation()` / `closePresentation()` let you temporarily dismiss a Screen and bring it back. **All three are removed in v6.**
+>
+> | v5                                                | v6                                                                 |
+> | :------------------------------------------------ | :----------------------------------------------------------------- |
+> | `Purchasely.closeDisplayedPresentation()` (iOS)   | `Purchasely.closeAllScreens()`                                     |
+> | `Purchasely.hidePresentation()`                   | `close()` — then display again to bring the Screen back            |
+> | `Purchasely.showPresentation()`                   | `display()` on the presentation handle or on the request            |
+> | `Purchasely.closePresentation()`                  | `close()` (kept as a deprecated alias on Cordova only)             |
+>
+> To show a Screen again after closing it, **fetch it again** with `preload`. See the [v5 → v6 migration guides](migrating-from-sdk-5-to-6).
 
-You can close all opened Purchasely screens programmatically calling the method `close()` on the [presentation](pre-fetching) object currently displayed.
+# Two different scopes
+
+| Method                          | What it closes                                                              |
+| :------------------------------ | :--------------------------------------------------------------------------- |
+| `close()` on a presentation      | **That** presentation. Available on the loaded presentation handle.          |
+| `Purchasely.closeAllScreens()`   | **Every** Purchasely Screen currently displayed, whatever the display path.   |
+
+Use `closeAllScreens()` when you need a guaranteed clean slate — for example when your app navigates away, or after handling a purchase yourself in Observer mode, where presentations no longer auto-close.
+
+Both produce a `programmatic` close reason in the [presentation outcome](handling-presentation-result).
+
+<br />
+
+# Native iOS and Android
+
+Call `close()` on the loaded [presentation](pre-fetching) object.
 
 ```swift Swift
 PLYPresentationBuilder
     .forPlacementId("onboarding")
     .build()
     .preload { presentation, error in
-        // when displayed, call close
+        // once displayed, close this presentation
         presentation?.close()
     }
+
+// Or, at any time, close every displayed Purchasely Screen
+Purchasely.closeAllScreens()
 ```
 ```kotlin Kotlin
 PLYPresentation {
-  placementId("onboarding")
+    placementId("onboarding")
 }.preload { presentation, error ->
-  // when displayed, call close
-  presentation?.close()
+    // once displayed, close this presentation
+    presentation?.close()
 }
 
-// Alternatively you can call this method at anytime
+// Or, at any time, close every displayed Purchasely Screen
 Purchasely.closeAllScreens()
 ```
 
-## React Native, Flutter, Cordova
-
-Managing the visibility of screens in your application is essential for providing a seamless user experience. The Purchasely SDK allows you to control the visibility of screens, enabling you to:
-
-* Hide a Screen.
-* Show again a hidden Screen.
-* Close permanently a Screen.
-
-To learn more about fetching and displaying screens using the Purchasely SDK, refer to the [displaying screens](displaying-screens) documentation.
-
-## Implementation
-
-### Hide a Screen
-
-> 📘 Flutter & React Native: hide and close are the same call
+> 📘 `back()` is also available
 >
-> As of SDK v6, Flutter and React Native no longer expose a separate hide primitive — `hidePresentation()` was replaced by the same `close()` call used to close a screen (see each SDK's `MIGRATION-v6.md`). Use the samples in [Close a Screen](#close-a-screen) below to temporarily dismiss a screen on those platforms.
+> On the loaded presentation, `back()` navigates to the previous step instead of dismissing — useful inside a [Flow](flows).
 
-Use **`Purchasely.hidePresentation() `**&#x74;o hide a screen without closing it. This method is useful when you want to temporarily hide the screen and bring it back later.
+<br />
 
-```coffeescript Cordova
-Purchasely.hidePresentation()
+# Flutter
+
+The imperative global methods are gone. Use the loaded `PLYPresentation` handle, obtained from `preload()` or from `outcome.presentation`.
+
+```dart Flutter
+// Close this presentation
+presentation.close();
+
+// Display it (again) — after a close you must preload it first
+presentation.display();
 ```
 
-### Show a Screen
+<br />
 
-Use **`Purchasely.showPresentation()`** to display a screen that was previously hidden using **`hidePresentation()`**.
+# React Native
 
-```coffeescript Flutter
-// On the loaded Presentation handle (from preload() or outcome.presentation)
-presentation.display()
-```
-```coffeescript React Native
-// On the request returned by .build()
-request.display()
-```
-```coffeescript Cordova
-Purchasely.showPresentation()
+Use the request returned by `.build()`.
+
+```typescript React Native
+const request = Purchasely.presentation.placement('onboarding').build();
+
+await request.display();
+
+// Dismiss it
+request.close();
 ```
 
-### Close a Screen
+> 🚧 `request.close()` does not have the same scope on both platforms
+>
+> * **iOS** — closes the **specific** presentation identified by its `requestId`, falling back to closing all Purchasely Screens when the request is no longer tracked.
+> * **Android** — the native SDK does not expose a per-request close yet, so it dismisses **all** displayed presentations. If you stack presentations (for example a product page inside an onboarding Flow), closing one also dismisses the others.
+>
+> The v5 top-level `close()` is removed. Use `Purchasely.closeAllScreens()` when you explicitly want to dismiss everything.
 
-Use **`Purchasely.closePresentation()`** to close the current screen permanently. If you want to display the screen again after closing it, you will have to fetch it again by calling the `preload` method.
+<br />
 
-```coffeescript Flutter
-// On the loaded Presentation handle (from preload() or outcome.presentation)
-presentation.close()
+# Cordova
+
+```javascript Cordova
+// Dismiss the presentation of this request
+request.close();
+
+// Or close every displayed Purchasely Screen
+Purchasely.closeAllScreens();
 ```
-```coffeescript React Native
-// On the request returned by .build()
-request.close()
-```
-```coffeescript Cordova
-Purchasely.closePresentation()
-```
+
+`request.back()` navigates back one step. On Cordova, `request.close()` always closes **every** displayed presentation, not only this request.
+
+> 📘 `closePresentation()` is a deprecated alias
+>
+> `closeAllScreens` is the canonical name on Cordova. `closePresentation()` still works with identical behavior but is deprecated. `showPresentation()` and `hidePresentation()` were **removed with no alias**.
+
+<br />
+
+To learn more about fetching and displaying Screens, see [displaying screens](displaying-screens).

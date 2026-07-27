@@ -18,9 +18,11 @@ next:
       slug: flow-implementation
       title: Prerequisites & Flows Implementation
 ---
-> 🚧 SDK v5.5.0+ recommended
+> 🚧 Minimum SDK versions
 >
-> Flows require to integrate SDK v5.3 and above. They are supported since this version, but we recommend v5.5.0 for a better stability and data consistency.
+> Flows are supported since SDK **v5.3**, and this documentation describes the **6.0** display API.
+>
+> On v5, the snippets on these pages differ: the presentation builder, `PLYPresentationOutcome` and `getFragment { outcome -> }` are v6. See the [v5 → v6 migration guides](migrating-from-sdk-5-to-6) if you are still on 5.x.
 
 In today’s saturated app market, the first few moments of a user's journey are make-or-break. Personalizing onboarding isn’t just a best practice - it’s a competitive necessity. By asking questions, segmenting users based on their answers, and aligning the experience with their goals using the Jobs-To-Be-Done (JTBD) framework, product teams can deeply connect with users' intent from the start.
 
@@ -79,7 +81,7 @@ If you're interested in enabling this feature, please contact your Customer Succ
 | Leverage Quizzes to collect user insights                                                    | ✅                      | ✅                     |
 | Tailor Flows to the user insights                                                            | ✅                      | ✅                     |
 | Associate a Flow with a Placement                                                            | ✅                      | ✅                     |
-| Access [Flow analytics](flow-analytics) to measure your funnel's performance and optimize it | ✅                      | ✅                     |
+| Access [Flow analytics](flow-analysis) to measure your funnel's performance and optimize it | ✅                      | ✅                     |
 | [Bring Your Own Screens](byos) into a Flow                                                   | ✅                      | ✅                     |
 | Number of Flows                                                                              | Limited to 1           | Unlimited             |
 | Number of Screens per Flow                                                                   | Limited to 5           | Unlimited             |

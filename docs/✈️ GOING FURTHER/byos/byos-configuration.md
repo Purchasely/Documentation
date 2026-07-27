@@ -14,9 +14,11 @@ next:
       title: BYOS - Implementation guide
       type: basic
 ---
-> 🚧 SDK v5.6.0+ mandatory
+> 🚧 Requirements
 >
-> BYOS requires SDK v5.6 ([changelog](/changelog/56)) or later and the use of the `display()` method to show In-App Experiences.
+> BYOS requires SDK **v5.6** ([changelog](/changelog/56)) or later and the use of the `display()` method to show In-App Experiences.
+>
+> The API described on these pages is the **6.0** one, and BYOS is available on **native Swift and Kotlin only** — React Native, Flutter and Cordova support is planned. See the [v5 → v6 migration guides](migrating-from-sdk-5-to-6) if you are still on 5.x.
 >
 > It is currently available for **native Swift and Kotlin apps** and will be extended to React Native, Flutter, and Cordova in a future release.
 
@@ -103,10 +105,23 @@ Custom Screens are also tracked outside of a Flow, but only when displayed via t
 
 If your app manually fetches Screens and displays the Custom Screen’s view controller itself - without using the SDK’s `display()` method - you must trigger the tracking events manually:
 
-* call `clientPresentationDisplayed(presentation)` when your Custom Screen is shown
-* call `clientPresentationClosed(presentation)` when it is dismissed
+* call `clientPresentationDisplayed(...)` when your Custom Screen is shown
+* call `clientPresentationClosed(...)` when it is dismissed
+
+```swift Swift
+Purchasely.clientPresentationDisplayed(with: presentation)
+Purchasely.clientPresentationClosed(with: presentation)
+```
+```kotlin Kotlin
+Purchasely.clientPresentationDisplayed(presentation)
+Purchasely.clientPresentationClosed(presentation)
+```
 
 These calls ensure the Custom Screen appears in your analytics.
+
+> 📘 Renamed in v6 on iOS
+>
+> `clientPresentationOpened(with:)` became `clientPresentationDisplayed(with:)`. The Android and Flutter names are unchanged.
 
 Finally, note that user interactions inside Custom Screens are not tracked by the SDK, since these screens are fully managed by your app. If you require interaction-level analytics, you should instrument them directly in your own client-side code.
 

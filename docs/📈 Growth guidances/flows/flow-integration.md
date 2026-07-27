@@ -16,9 +16,11 @@ next:
       slug: user-insights
       title: Leveraging Quizzes to fetch User Insights
 ---
-> 🚧 SDK v5.5.0+ recommended
+> 🚧 Minimum SDK versions
 >
-> Flows require to integrate SDK v5.3 and above. They are supported since this version, but we recommend v5.5.0 for a better stability and data consistency.
+> Flows are supported since SDK **v5.3**, and this documentation describes the **6.0** display API.
+>
+> On v5, the snippets on these pages differ: the presentation builder, `PLYPresentationOutcome` and `getFragment { outcome -> }` are v6. See the [v5 → v6 migration guides](migrating-from-sdk-5-to-6) if you are still on 5.x.
 
 # Integrating a Flow into your app
 
@@ -87,7 +89,7 @@ Here are how the different display modes available
 
 ## Mapping a Flow with a Placement
 
-Once created, Flows can be associated with a [Placement](placement)
+Once created, Flows can be associated with a [Placement](displaying-screens-placements)
 
 <Image align="center" className="border" border={true} src="https://files.readme.io/80c311eb197b69a6471f9db09ff67c3d6a67f844aac17ca9cf5efbd719c96ace-placement.gif" />
 

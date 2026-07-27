@@ -9,9 +9,11 @@ hidden: false
 metadata:
   robots: index
 ---
-> 🚧 SDK v5.6.0+ mandatory
+> 🚧 Requirements
 >
-> BYOS requires SDK v5.6 ([changelog](/changelog/56)) or later and the use of the `display()` method to show In-App Experiences.
+> BYOS requires SDK **v5.6** ([changelog](/changelog/56)) or later and the use of the `display()` method to show In-App Experiences.
+>
+> The API described on these pages is the **6.0** one, and BYOS is available on **native Swift and Kotlin only** — React Native, Flutter and Cordova support is planned. See the [v5 → v6 migration guides](migrating-from-sdk-5-to-6) if you are still on 5.x.
 >
 > It is currently available for **native Swift and Kotlin apps** and will be extended to React Native, Flutter, and Cordova in a future release.
 
@@ -49,18 +51,24 @@ This callback gives you the `PLYPresentation`containing:
 * the list of connections (exit points)
 
 ```swift
-@objc public class PLYPresentation: NSObject {
-  @objc public let id: String?
-	@objc public let language: String
-	@objc public let placementId: String?
-  @objc public let audienceId: String?
-  @objc public let abTestId: String?
-  @objc public let abTestVariantId: String?
-  @objc public let campaignId: String?
+// In v6 PLYPresentation is a protocol, not a class,
+// and the screen identifier is `screenId` (it was `id` in v5)
+@objc public protocol PLYPresentation: NSObjectProtocol {
+  var screenId: String { get }
+  var language: String { get }
+  var placementId: String? { get }
+  var audienceId: String? { get }
+  var abTestId: String? { get }
+  var abTestVariantId: String? { get }
+  var campaignId: String? { get }
+  var flowId: String? { get }
+  var type: PLYPresentationType { get }
+  var metadata: PLYPresentationMetadata? { get }
+  var isFlow: Bool { get }
 
   // ...
 
-  @objc public var connections: Set<PLYConnection>
+  var connections: Set<PLYConnection> { get }
 }
 
 /**
@@ -129,7 +137,7 @@ sealed class PLYCustomScreen {
  * Interface for providing custom screens within Purchasely flows.
  *
  * Clients should implement this interface and register it via
- * [Purchasely.seCustomScreenProvider] to provide their own UI for specific presentations.
+ * [Purchasely.setCustomScreenProvider] to provide their own UI for specific presentations.
  *
  * When a presentation is marked as client-controlled (type == CLIENT), the SDK will
  * invoke [onCustomScreenRequested] to obtain the custom screen implementation.

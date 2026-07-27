@@ -39,9 +39,11 @@ It might seem odd to bring your own paywall in a no-code environment, but it can
 
 <br />
 
-> 🚧 SDK v5.6.0+ mandatory
+> 🚧 Requirements
 >
-> To  SDK v5.6 ([changelog](/changelog/56)) or later and the use of the `display()` method to show In-App Experiences.
+> BYOS requires SDK **v5.6** ([changelog](/changelog/56)) or later and the use of the `display()` method to show In-App Experiences.
+>
+> The API described in the BYOS guides is the **6.0** one, and BYOS is available on **native Swift and Kotlin only** — React Native, Flutter and Cordova support is planned.
 
 <br />
 

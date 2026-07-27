@@ -88,11 +88,10 @@ if (outcome.purchaseResult == PLYPurchaseResult.purchased) {
 }
 ```
 ```kotlin Android
-// Coroutine context — PLYPresentationSession.await() resolves at dismiss
-val outcome = PLYPresentation { placementId("<PLACEMENT_ID>") }
-    .build()
-    .display(context)
-    .await()
+// Coroutine context — PLYPresentationSession.await() resolves at dismiss.
+// display() returns a session only on a *loaded* presentation, so preload() first.
+val loaded = PLYPresentation { placementId("<PLACEMENT_ID>") }.preload()
+val outcome = loaded.display(context).await()
 
 when (outcome.purchaseResult) {
     PLYPurchaseResult.PURCHASED -> { /* unlock content */ }
@@ -154,7 +153,7 @@ PLYPresentation {
             PLYPurchaseResult.CANCELLED, null -> { /* dismissed: ${outcome.closeReason} */ }
         }
     }
-}.build().display(context)
+}.display(context)
 ```
 ```dart Flutter
 PLYPresentationBuilder.placement('<PLACEMENT_ID>')

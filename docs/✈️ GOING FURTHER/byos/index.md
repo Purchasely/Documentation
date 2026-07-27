@@ -43,9 +43,11 @@ You should use BYOS in the following situations:
 
    <br />
 
-> 🚧 SDK v5.6.0+ mandatory
+> 🚧 Requirements
 >
-> BYOS requires SDK v5.6 ([changelog](/changelog/56)) or later and the use of the `display()` method to show In-App Experiences.
+> BYOS requires SDK **v5.6** ([changelog](/changelog/56)) or later and the use of the `display()` method to show In-App Experiences.
+>
+> The API described on these pages is the **6.0** one, and BYOS is available on **native Swift and Kotlin only** — React Native, Flutter and Cordova support is planned. See the [v5 → v6 migration guides](migrating-from-sdk-5-to-6) if you are still on 5.x.
 >
 > It is currently available for **native Swift and Kotlin apps** and will be extended to React Native, Flutter, and Cordova in a future release.
 

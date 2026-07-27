@@ -32,7 +32,7 @@ PLYPresentationBuilder
 ```kotlin Kotlin
 PLYPresentation {
     placementId("onboarding")
-}.build().display(context)
+}.display(context)
 ```
 
 Calling `display()` is what makes the Flow work: the SDK then handles navigation between Screens according to the configured Transitions, and applies the Flow's Display Mode. **If you render the presentation yourself instead of calling `display()`, you lose the Flow navigation.**

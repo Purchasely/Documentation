@@ -1,39 +1,46 @@
 ---
 name: PLYPresentation
 ---
-```coffeescript Swift
-class PLYPresentation {
-  let screenId: String?
-  let height: Int?
-  let language: String
-  let flowId: String?
-  let placementId: String?
-  let audienceId: String?
-  let abTestId: String?
-  let abTestVariantId: String?
-  let type: PLYPresentationType
-  let controller: PLYPresentationViewController?
-  let plans: [PLYPresentationPlan]
-  let metadata: PLYPresentationMetadata?
-  let backgroundColor: UIColor?
+```swift Swift
+// In v6 PLYPresentation is a protocol, not a class
+@objc public protocol PLYPresentation: NSObjectProtocol {
+  var screenId: String { get }
+  var height: Int { get }
+  var language: String { get }
+  var flowId: String? { get }
+  var placementId: String? { get }
+  var audienceId: String? { get }
+  var abTestId: String? { get }
+  var abTestVariantId: String? { get }
+  var campaignId: String? { get }
+  var type: PLYPresentationType { get }
+  var transition: PLYTransition { get }
+  var controller: PLYPresentationViewController? { get }
+  var plans: [PLYPresentationPlan] { get }
+  var metadata: PLYPresentationMetadata? { get }
+  var backgroundColor: UIColor? { get }
+  var connections: Set<PLYConnection> { get }
+  var isFlow: Bool { get }
 }
-
 ```
-```coffeescript Kotlin
-data class PLYPresentation(
-    val screenId: String?,
-  	val height: Int?,
-		val flowId: String?,
-    val placementId: String?,
-    val audienceId: String?,
-    val abTestId: String?,
-    val abTestVariantId: String?,
-    val language: String?,
+```kotlin Kotlin
+// PLYPresentation is a typealias for PLYPresentationBase.Loaded
+class Loaded(
+    val screenId: String? = null,
+    val height: Int = 0,
+    val flowId: String? = null,
+    val placementId: String? = null,
+    val audienceId: String? = null,
+    val abTestId: String? = null,
+    val abTestVariantId: String? = null,
+    val language: String? = null,
     val type: PLYPresentationType,
+    val displayMode: PLYTransition? = null,
     val plans: List<PLYPresentationPlan>,
-    val metadata: PLYPresentationMetadata?,
-    val backgroundColor: String?
-}
+    val metadata: PLYPresentationMetadata? = null,
+    val backgroundColor: String? = null,
+    val connections: List<PLYConnection> = listOf(),
+)
 ```
 ```typescript React Native
 export type PurchaselyPresentation = {

@@ -16,9 +16,11 @@ next:
       slug: flow-configuration
       title: Building a Flow with the Flow Composer
 ---
-> 🚧 SDK v5.5.0+ recommended
+> 🚧 Minimum SDK versions
 >
-> Flows require to integrate SDK v5.3 and above. They are supported since this version, but we recommend v5.5.0 for a better stability and data consistency.
+> Flows are supported since SDK **v5.3**, and this documentation describes the **6.0** display API.
+>
+> On v5, the snippets on these pages differ: the presentation builder, `PLYPresentationOutcome` and `getFragment { outcome -> }` are v6. See the [v5 → v6 migration guides](migrating-from-sdk-5-to-6) if you are still on 5.x.
 
 <br />
 
@@ -64,7 +66,7 @@ The `display()` method automatically:
 
 ## 2. Manually integrating the Flow inside of your app (Only on Android)
 
-If you want to integrate the Flow manually into your app / parent view, you should check the attribute `displayMode` carried by the `PLYPresentation` returned by the pre-fetching
+If you want to integrate the Flow manually into your app / parent view, you should check the attribute `displayMode` carried by the `PLYPresentation` returned by the pre-fetching.
 
 ```kotlin Kotlin
 PLYPresentation {
@@ -76,21 +78,23 @@ PLYPresentation {
   }
 
   presentation?.let {
-    val fragment = it.getFragment(){ result, plan ->
-      when(result) {
-        PLYPurchaseResult.PURCHASED -> Log.d("Purchasely", "User purchased ${plan?.name}")
-        PLYPurchaseResult.CANCELLED -> Log.d("Purchasely", "User cancelled purchased")
-        PLYPurchaseResult.RESTORED -> Log.d("Purchasely", "User restored ${plan?.name}")
+    // In v6 the callback delivers a single PLYPresentationOutcome
+    val fragment = it.getFragment { outcome ->
+      when (outcome.purchaseResult) {
+        PLYPurchaseResult.PURCHASED -> Log.d("Purchasely", "User purchased ${outcome.plan?.name}")
+        PLYPurchaseResult.RESTORED  -> Log.d("Purchasely", "User restored ${outcome.plan?.name}")
+        PLYPurchaseResult.CANCELLED,
+        null -> Log.d("Purchasely", "Dismissed: ${outcome.closeReason}")
       }
     }
 
-    when(it.displayMode?.type) {
+    when (it.displayMode?.type) {
       PLYTransitionType.PUSH -> {
         // Handle push transition
         Log.d("Purchasely", "Display it as a push transition")
       }
       PLYTransitionType.FULLSCREEN -> {
-        // Handle pop transition
+        // Handle fullscreen transition
         Log.d("Purchasely", "Display it as a fullscreen transition")
       }
       PLYTransitionType.MODAL -> {
@@ -119,6 +123,12 @@ PLYPresentation {
 }
 ```
 
+> 📘 `displayMode` on Android, `transition` on iOS
+>
+> The property carrying the transition is named `displayMode` on Android (of type `PLYTransition?`) and was renamed to `transition` on iOS in v6 (`PLYDisplayMode` / `PLYDisplayModeType` became `PLYTransition` / `PLYTransitionType`, with no compatibility aliases).
+>
+> Since v6, the `width` and `height` of a `PLYTransition` are `PLYTransitionDimension` values — either `PLYDimensionType.PIXEL` (in dp) or `PERCENTAGE` (a `0.0`–`1.0` ratio). The former `heightPercentage` is deprecated but still read as a fallback. Defaults are unchanged: drawer 60%, pop-in 50% height.
+
 <br />
 
 ## 3. Using the Flow deeplink
@@ -130,9 +140,9 @@ You can also display the Flow yourself by implementing the [UIHandler](ui-handle
 Quick example:
 
 ```swift Swift
-
 extension myClass: PLYUIHandler {
-    func display(presentation: PLYPresentation, from sourceController: UIViewController?, proceed: @escaping () -> ()) {
+    // In v6, PLYPresentation is a protocol — the parameter is `any PLYPresentation`
+    func display(presentation: any PLYPresentation, from sourceController: UIViewController?, proceed: @escaping () -> ()) {
       presentation.display(from: nil)
     }
 }

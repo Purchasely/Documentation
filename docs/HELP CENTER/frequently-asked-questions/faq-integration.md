@@ -68,7 +68,7 @@ Purchasely.userLogin("your_opaque_id")
 // 3. Display
 PLYPresentation {
     placementId("my_placement")
-}.build().display(context)
+}.display(context)
 ```
 
 📚 [SDK installation](sdk-installation) · [SDK initialization](sdk-initialization) · [Displaying Screens with Placements](displaying-screens-placements)
