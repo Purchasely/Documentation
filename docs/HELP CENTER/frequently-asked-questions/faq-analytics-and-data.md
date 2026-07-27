@@ -9,15 +9,15 @@ metadata:
   title: 'FAQ: Analytics & data'
   description: >-
     What data Purchasely produces, how to get it out (webhooks, forwarding,
-    Client API, CSV exports), why a dashboard number may differ from your own,
-    and how to import an existing subscriber base.
+    CSV exports), why a dashboard number may differ from your own, and how to
+    import an existing subscriber base.
   robots: index
 next:
   description: ''
 ---
 # What data does Purchasely produce, and how do I get it out?
 
-Four channels, in decreasing order of completeness:
+Three channels, in decreasing order of completeness:
 
 | Channel                                      | What it gives you                                                                                                                                                                                                 |
 | :------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -132,7 +132,7 @@ Revenue, ARPU and ARPPU stay live even after the test is stopped.
 
 - **Ad hoc** — every [Dashboard](subscription-base-evolution) has a **Download CSV** on its data table.
 - **Continuous** — the webhook is the right channel. Replicate the events into your own warehouse and you can build any report without depending on our UI.
-- **Programmatic** — the Client API covers configuration and audience operations today. If you need a specific dataset pulled on a schedule, raise it with your account team so it is prioritized against the API roadmap.
+- **Programmatic** — there is no API to pull subscription datasets or aggregated statistics on a schedule today. The Client API covers configuration and audience operations, not reporting. If you need a scheduled export, raise it with your account team so it is prioritized against the API roadmap.
 
 <br />
 

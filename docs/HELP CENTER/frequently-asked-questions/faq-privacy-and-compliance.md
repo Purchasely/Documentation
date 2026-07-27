@@ -120,7 +120,6 @@ Continuously, through the channels you already have:
 
 * **[S2S webhooks](webhook)** — real-time JSON on the whole lifecycle (entitlement events, 27 lifecycle events, offer events, `TRANSACTION_PROCESSED`). The most complete channel: you replicate the data on your side permanently.
 * **[Third-party forwarding](engagement-crm)** to your analytics and CRM tools.
-* **Client API** at `https://api.purchasely.io/client/mobile_applications/{app_id}` with a Bearer token, for programmatic operations.
 * **CSV exports** from the [Console dashboards](subscription-base-evolution).
 
 📚 [Analytics & data](faq-analytics-and-data)
