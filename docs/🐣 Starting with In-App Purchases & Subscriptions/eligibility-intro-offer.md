@@ -92,7 +92,7 @@ Purchasely.plan(with: "planId") { plan in
     // Failure completion
 }
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 // Using coroutines
 viewModelScope.launch {
   try {

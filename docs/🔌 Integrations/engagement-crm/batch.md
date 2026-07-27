@@ -130,10 +130,10 @@ For more details, see **Batch** documentation:
 >
 > If your users in Batch are tracked using a different ID from Purchasely, you can tell our SDK and we will use this ID instead:
 >
-> ```coffeescript Swift
+> ```swift Swift
 > Purchasely.setAttribute(.batchCustomUserId, value: "theUserId")
 > ```
-> ```coffeescript Kotlin
+> ```kotlin Kotlin
 > Purchasely.setAttribute(Attribute.BATCH_CUSTOM_USER_ID, "YOUR_USER_ID")
 > ```
 

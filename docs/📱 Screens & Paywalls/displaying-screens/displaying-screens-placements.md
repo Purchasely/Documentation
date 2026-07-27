@@ -58,7 +58,7 @@ PLYPresentationBuilder.forPlacementId(placementId).build().preload { presentatio
     let purchaselyController = presentation?.controller
 }
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 // Retrieve the view to display in your layout hierarchy
 PLYPresentation {
   placementId("<<default_placement>>")

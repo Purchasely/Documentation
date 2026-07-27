@@ -68,7 +68,7 @@ If you want to, you can rename the events sent to Airship:
 
 **Sample event sent by Purchasely to Airship:**
 
-```coffeescript PURCHASE_VALIDATED
+```json PURCHASE_VALIDATED
 {  
   "body": {  
     "name": "purchase_validated_server",  
@@ -122,25 +122,25 @@ In your app, when a user sign-in, associate their id in Airship.
 
 If the Airship UserId differs from the Purchasely UserId, you can also pass the value you gave to Airship to Purchasely SDK (see second code block):
 
-```coffeescript Swift
+```swift Swift
 UAirship.namedUser().identifier = "theUserId"
 
 Purchasely.setAttribute(.airshipUserId, value: "theUserId")
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 UAirship.shared().namedUser.id = "YOUR_USER_ID"
 
 Purchasely.setAttribute(Attribute.AIRSHIP_USER_ID, "YOUR_USER_ID")
 ```
-```coffeescript React Native
+```typescript React Native
 UAirship.setNamedUser("YOUR_USER_ID")
 
 Purchasely.setAttribute(Attributes.AIRSHIP_USER_ID, "YOUR_USER_ID");
 ```
-```coffeescript Flutter
+```dart Flutter
 Purchasely.setAttribute(PLYAttribute.airship_user_id, "airship_user_id");
 ```
-```coffeescript Cordova
+```javascript Cordova
 UAirship.setNamedUser("YOUR_USER_ID")
 
 Purchasely.setAttribute(Purchasely.Attribute.AIRSHIP_USER_ID, "YOUR_USER_ID");
@@ -156,7 +156,7 @@ By restricting association to server-side calls only, you have the added securit
 
 Use the Airship API to associate your users [here](https://docs.airship.com/api/ua/#operation-api-named_users-associate-post):
 
-```coffeescript Ruby
+```ruby Ruby
 require 'urbanairship'
 
 UA = Urbanairship
@@ -169,14 +169,14 @@ named_user.associate(
     device_type: 'ios'
   )
 ```
-```coffeescript Python
+```python Python
 import urbanairship as ua
 
 airship = ua.Airship('<app key>', '<master secret>')
 named_user = ua.NamedUser(airship, 'user-id-1234')
 resp = named_user.associate('df6a6b50-9843-0304-d5a5-743f246a4946', 'ios')
 ```
-```coffeescript Java
+```java Java
 UrbanAirshipClient client = UrbanAirshipClient.newBuilder()
         .setKey("<app key>")
         .setSecret("<master secret>")
@@ -195,24 +195,24 @@ Response<String> response = client.execute(request);
 
 If you have anonymous users in your app, we'll need the Airship channel to send purchase events to Airship on your behalf.
 
-```coffeescript Swift
+```swift Swift
 if let channelId = UAirship.channel()?.identifier {
 	Purchasely.setAttribute(.airshipChannelId, value: channelId)
 }
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 UAirship.shared().channel.id?.let {
     Purchasely.setAttribute(Attribute.AIRSHIP_CHANNEL_ID, it)
 }
 ```
-```coffeescript React Native
+```typescript React Native
 var channelId = UrbanAirship.getChannelId().then(channelId => {
   Purchasely.setAttribute(Attributes.AIRSHIP_CHANNEL_ID, channelId);
 }));
 ```
-```coffeescript Flutter
+```dart Flutter
 Purchasely.setAttribute(PLYAttribute.airship_channel_id, "airship_channel_id");
 ```
-```coffeescript Cordova
+```javascript Cordova
 Purchasely.setAttribute(Purchasely.Attribute.AIRSHIP_CHANNEL_ID, "channelId");
 ```

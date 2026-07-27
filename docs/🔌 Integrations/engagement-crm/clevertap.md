@@ -37,27 +37,27 @@ The integration requires 5 steps:
 
 This has to be done at the app level by using the following piece of code:
 
-```coffeescript Swift
+```swift Swift
 CleverTap.autoIntegrate()
 if let clevertapId = CleverTap.sharedInstance()?.profileGetID() {
     Purchasely.setAttribute(.clevertapId, value: clevertapId)
 }
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 val cleverTap = CleverTapAPI.getDefaultInstance(applicationContext)
 cleverTap?.cleverTapID?.let {
     Purchasely.setAttribute(Attribute.CLEVER_TAP_ID, it)
 }
 ```
-```coffeescript React Native
+```typescript React Native
 CleverTap.getCleverTapID((err, res) => {
     Purchasely.setAttribute(Attributes.CLEVER_TAP_ID, res);
 });
 ```
-```coffeescript Flutter
+```dart Flutter
 Purchasely.setAttribute(PLYAttribute.clever_tap_id, "clever_tap_id");
 ```
-```coffeescript Cordova
+```javascript Cordova
 Purchasely.setAttribute(Purchasely.Attribute.CLEVER_TAP_ID, "clever_tap_id");
 ```
 

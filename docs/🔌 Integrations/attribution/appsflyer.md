@@ -33,16 +33,16 @@ The integration of AppsFlyer requires 2 steps:
 
 See [iOS](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#getappsflyeruid) or [Android](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#getappsflyeruid) Appsflyer documentation for more information.
 
-```coffeescript Swift
+```swift Swift
 Purchasely.setAttribute(.appsflyerId, value: AppsFlyerLib.shared().getAppsFlyerUID())
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 AppsFlyerLib.getInstance().getAppsFlyerUID(applicationContext)?.let {
     Purchasely.setAttribute(Attribute.APPSFLYER_ID, it)
 }
 
 ```
-```coffeescript React Native
+```typescript React Native
 appsFlyer.getAppsFlyerUID((err, appsFlyerUID) => {
   if (err) {
     console.error(err);
@@ -52,12 +52,12 @@ appsFlyer.getAppsFlyerUID((err, appsFlyerUID) => {
 });
 
 ```
-```coffeescript Flutter
+```dart Flutter
 appsFlyerSdk.getAppsFlyerUID().then((AppsFlyerId) {
   Purchasely.setAttribute(PLYAttribute.appsflyer_id,AppsFlyerId);
 });
 ```
-```coffeescript Cordova
+```javascript Cordova
 var  getUserIdCallbackFn = function(id) {
 alert('received id is: ' + id);
 }

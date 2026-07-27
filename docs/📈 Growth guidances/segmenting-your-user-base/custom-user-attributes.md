@@ -214,7 +214,7 @@ Purchasely.setUserAttribute(withStringValue: "Female", forKey: "gender")
    ]
  )        
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 //Set one attribute by key and value
 Purchasely.setUserAttribute("age", 20)
 
@@ -233,7 +233,7 @@ Purchasely.setUserAttributeWithNumber("weight", 78.2);
 Purchasely.setUserAttributeWithBoolean("premium", true);
 Purchasely.setUserAttributeWithDate("subscription_date", new Date());
 ```
-```coffeescript Flutter
+```dart Flutter
 //Set one attribute by key and value
 Purchasely.setUserAttributeWithString("stringKey", "StringValue");
 Purchasely.setUserAttributeWithInt("intKey", 3);
@@ -264,7 +264,7 @@ Purchasely.userAttributes.forEach { attribute in
     print("Attribute \(attribute.key) = \(attribute.value)")
 }
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 //return an int since it was set with that type
 val age = Purchasely.userAttribute("age") 
 
@@ -284,7 +284,7 @@ const dateAttribute = await Purchasely.userAttribute("subscription_date"); //ret
 //for a date you need to parse the iso 8601 string to retrieve the date object
 console.log(new Date(dateAttribute).getFullYear());
 ```
-```coffeescript Flutter
+```dart Flutter
 Purchasely.setUserAttributeWithInt("age", 21);
 
 dynamic dateAttribute = await Purchasely.userAttribute("age");
@@ -320,7 +320,7 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles")
 // you can also set a specific number to decrement
 Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7)
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 // Increment a user attribute
 // increment by 1 a specific attribute, it will be created if not set
 Purchasely.incrementUserAttribute("viewed_articles")
@@ -346,7 +346,7 @@ Purchasely.decrementUserAttribute({key: 'viewed_articles'});
 // you can also set a specific number to decrement
 Purchasely.decrementUserAttribute({key: 'viewed_articles', value: 7});
 ```
-```coffeescript Flutter
+```dart Flutter
 // Increment a user attribute
 // increment by 1 a specific attribute, it will be created if not set
 Purchasely.incrementUserAttribute("viewed_articles");
@@ -377,7 +377,7 @@ Purchasely.clearUserAttribute(forKey: "size")
 //Remove all attributes
 Purchasely.clearUserAttributes()
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 //Remove one attribute
 Purchasely.clearUserAttribute("size")
 
@@ -391,7 +391,7 @@ Purchasely.clearUserAttribute("size")
 //Remove all attributes
 Purchasely.clearUserAttributes()
 ```
-```coffeescript Flutter
+```dart Flutter
 //Remove one attribute
 Purchasely.clearUserAttribute("dateKey");
 
@@ -453,7 +453,7 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles", processingLegalBas
 // you can also set a specific number to decrement
 Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7, processingLegalBasis: .essential)
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 //Set one attribute by key and value
 Purchasely.setUserAttribute("age", 20, PLYDataProcessingLegalBasis.ESSENTIAL)
 Purchasely.setUserAttribute("size", 175.5f, PLYDataProcessingLegalBasis.ESSENTIAL)
@@ -493,7 +493,7 @@ Purchasely.decrementUserAttribute({key: 'viewed_articles', legalBasis: PLYDataPr
 // you can also set a specific number to decrement
 Purchasely.decrementUserAttribute({key: 'viewed_articles', value: 7, legalBasis: PLYDataProcessingLegalBasis.ESSENTIAL});
 ```
-```coffeescript Flutter
+```dart Flutter
 Purchasely.setUserAttributeWithString("stringKey", "StringValue", processingLegalBasis: PLYDataProcessingLegalBasis.essential);
 Purchasely.setUserAttributeWithInt("intKey", 3, processingLegalBasis: PLYDataProcessingLegalBasis.essential);
 Purchasely.setUserAttributeWithDouble("doubleKey", 1.2, processingLegalBasis: PLYDataProcessingLegalBasis.essential);
@@ -556,7 +556,7 @@ Purchasely.decrementUserAttribute(withKey: "viewed_articles", processingLegalBas
 // you can also set a specific number to decrement
 Purchasely.decrementUserAttribute(withKey: "viewed_articles", value:7, processingLegalBasis: .optional)
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 //Set one attribute by key and value
 Purchasely.setUserAttribute("age", 20, PLYDataProcessingLegalBasis.OPTIONAL)
 Purchasely.setUserAttribute("size", 175.5f, PLYDataProcessingLegalBasis.OPTIONAL)
@@ -596,7 +596,7 @@ Purchasely.decrementUserAttribute({key: 'viewed_articles', legalBasis: PLYDataPr
 // you can also set a specific number to decrement
 Purchasely.decrementUserAttribute({key: 'viewed_articles', value: 7, legalBasis: PLYDataProcessingLegalBasis.OPTIONAL});
 ```
-```coffeescript Flutter
+```dart Flutter
 Purchasely.setUserAttributeWithString("stringKey", "StringValue", processingLegalBasis: PLYDataProcessingLegalBasis.optional);
 Purchasely.setUserAttributeWithInt("intKey", 3, processingLegalBasis: PLYDataProcessingLegalBasis.optional);
 Purchasely.setUserAttributeWithDouble("doubleKey", 1.2, processingLegalBasis: PLYDataProcessingLegalBasis.optional);

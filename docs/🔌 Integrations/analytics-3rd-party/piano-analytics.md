@@ -42,15 +42,15 @@ The activation requires 7 steps
 
 This has to be done at the app level by using the following piece of code:
 
-```coffeescript Swift
+```swift Swift
 Purchasely.setAttribute(.atInternetIdClient, value: ATInternet.sharedInstance.defaultTracker.getUserId())
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 ATInternet.getInstance().defaultTracker.getUserId {
     if(it != null) Purchasely.setAttribute(Attribute.AT_INTERNET_ID_CLIENT, it)
 }
 ```
-```coffeescript React Native
+```typescript React Native
 Purchasely.setAttribute(Attributes.AT_INTERNET_ID_CLIENT, atInternetUserId);
 ```
 

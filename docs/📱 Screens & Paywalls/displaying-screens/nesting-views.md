@@ -26,7 +26,7 @@ Purchasely provides a [UIViewController](https://developer.apple.com/documentati
 
 The preloaded presentation also provides the property `swiftUIView` to display Purchasely Screen with your SwiftUI View
 
-```coffeescript Swift
+```swift Swift
 import Purchasely
 
 var controller: UIViewController?

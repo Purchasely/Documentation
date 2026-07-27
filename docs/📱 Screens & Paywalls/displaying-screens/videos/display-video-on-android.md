@@ -36,19 +36,19 @@ The easiest way to add video support is by including the Purchasely player depen
 
 ## Android native
 
-```coffeescript Gradle
+```groovy Gradle
 implementation 'io.purchasely:player:6.0.1'
 ```
 
 ## React Native
 
-```coffeescript npm
+```shell npm
 npm install @purchasely/react-native-purchasely-android-player@6.0.0-rc.2 --save
 ```
 
 ## Flutter
 
-```coffeescript Flutter
+```dart Flutter
 flutter pub add purchasely_android_player
 ```
 
@@ -56,7 +56,7 @@ flutter pub add purchasely_android_player
 
 Add the native android dependency in the `build.gradle` file of your android project:
 
-```coffeescript Gradle
+```groovy Gradle
 implementation 'io.purchasely:player:6.0.1'
 ```
 
@@ -71,7 +71,7 @@ Already included in the SDK.
 You can use your own video player for Purchasely Screens.\
 This player needs to be a `View` and must implement `PLYPlayerInterface`.
 
-```coffeescript Kotlin
+```kotlin Kotlin
 interface PLYPlayerInterface {  
   fun setup(url: String, contentMode: String, isMuted: Boolean, repeat: Boolean = true)  
   fun play()  
@@ -83,20 +83,20 @@ interface PLYPlayerInterface {
 You can declare it to the SDK either by specifying the path to your class:\
 (**Notice**: your class must **have a constructor** with `android.content.Context` as **unique parameter**)
 
-```coffeescript Kotlin
+```kotlin Kotlin
 Purchasely.playerView = "com.myapp.ui.player.MyPlayerView"
 ```
 
 Or by providing an instance of your class:\
 (**Notice**: you should set it to null when the player is no longer needed to avoid memory leaks)
 
-```coffeescript Kotlin
+```kotlin Kotlin
 Purchasely.playerView = MyPlayerView(context)
 ```
 
 ## A sample of implementation of `PLYPlayerInterface`:
 
-```coffeescript Kotlin - Media3
+```kotlin Kotlin - Media3
 @OptIn(UnstableApi::class)
 class Media3PlayerView(context: Context) : PlayerView(context), PLYPlayerInterface {
 

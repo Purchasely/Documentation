@@ -32,7 +32,7 @@ Purchasely.setThemeMode(.dark)
 // use device theme to set automatically in dark or light mode
 Purchasely.setThemeMode(.system) 
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 // force dark mode for all Purchasely screens
 Purchasely.setThemeMode(PLYThemeMode.DARK)
 
@@ -46,7 +46,7 @@ Purchasely.setThemeMode(PLYThemeMode.DARK);
 // use device theme to set automatically in dark or light mode
 Purchasely.setThemeMode(PLYThemeMode.SYSTEM);
 ```
-```coffeescript Flutter
+```dart Flutter
 // force dark mode for all Purchasely screens
 Purchasely.setThemeMode(PLYThemeMode.dark);
 

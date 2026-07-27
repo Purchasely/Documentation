@@ -37,14 +37,14 @@ Here are some links to the appropriate Branch documentation : [Android](https://
 
 Then, inform our SDK of the User ID used:
 
-```coffeescript Swift
+```swift Swift
 Purchasely.setAttribute(.branchUserDeveloperIdentity, value: "Actual Branch User ID")
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 Purchasely.setAttribute(Attribute.BRANCH_USER_DEVELOPER_IDENTITY, "Actual Branch User ID")
 
 ```
-```coffeescript React Native
+```typescript React Native
 Purchasely.setAttribute(Attributes.BRANCH_USER_DEVELOPER_IDENTITY, "Actual Branch User ID");
 ```
 

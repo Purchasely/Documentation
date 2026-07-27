@@ -22,11 +22,11 @@ When integrating the Purchasely SDK into your app, managing deeplinks becomes es
 
 To effortlessly display deeplink-triggered Screens, your app must notify the Purchasely SDK when it is ready to handle interactions that may cover its UI. This ensures smooth transitions during critical app processes, such as dismissing loading screens upon completion or displaying onboarding flows before allowing purchases. To notify the SDK, call the following method:
 
-```coffeescript Swift
+```swift Swift
 // Call it in your viewDidAppear
 Purchasely.allowDeeplink(true)
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 Purchasely.allowDeeplink = true
 ```
 
@@ -57,14 +57,14 @@ If you wish to display the deep link yourself accordingly to your navigation arc
 
 You must override the method display(presentation) that will be invoked each time a deep link will be trigged
 
-```coffeescript Swift
+```swift Swift
 @objc public protocol PLYUIHandler {
   @objc optional func display(presentation: PLYPresentation,
                               from sourceController: UIViewController?,
                               proceed: @escaping () -> ())
 }
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 interface PLYUIHandler {
     /**
      * @param presentation the presentation to display
@@ -78,7 +78,7 @@ interface PLYUIHandler {
 
 You can either display the Screen on your own or invoke the **`proceed`** function to let the SDK handle it.
 
-```coffeescript Swift
+```swift Swift
 // Your custom UI handler
 class CustomUIHandler: NSObject, PLYUIHandler {
     
@@ -109,7 +109,7 @@ class CustomUIHandler: NSObject, PLYUIHandler {
 // Set it once in your code
 Purchasely.setUIHandler(CustomUIHandler())
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 Purchasely.uiHandler = object : PLYUIHandler {
   override fun onPresentation(presentation: PLYPresentation, proceed: () -> Unit) {
       // First possiblity, just call proceed() to let the SDK displays it

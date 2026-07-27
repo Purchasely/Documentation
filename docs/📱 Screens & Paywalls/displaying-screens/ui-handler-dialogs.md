@@ -40,12 +40,12 @@ This is achieved by providing an implementation of **`PLYUIHandler`**.  This wil
 
 ### PLYUIHandler Interface
 
-```coffeescript Swift
+```swift Swift
 @objc public protocol PLYUIHandler {
     @objc optional func display(alert: PLYAlertMessage, with error: Error?, proceed: @escaping () -> ())
 }
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 interface PLYUIHandler {
     /**
      * @param alert the alert to display
@@ -63,7 +63,7 @@ interface PLYUIHandler {
 
 You can either display your own custom dialog or call the proceed function to let the SDK display the default dialog. You also have the option to handle specific alert types with your custom dialog and use the default SDK dialog for others
 
-```coffeescript Swift
+```swift Swift
 // Your custom UI handler
 class CustomUIHandler: NSObject, PLYUIHandler {
     
@@ -79,7 +79,7 @@ class CustomUIHandler: NSObject, PLYUIHandler {
 
 Purchasely.setUIHandler(CustomUIHandler())
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 Purchasely.uiHandler = object : PLYUIHandler {
   override fun onAlert(alert: PLYAlertMessage, purchaselyView: View, activity: Activity?, proceed: () -> Unit) {
     when(alert) {

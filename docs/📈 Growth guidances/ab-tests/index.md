@@ -107,7 +107,7 @@ To prevent this and ensure that the user consistently remains in the same cohort
     //Set one attribute by key and value
     Purchasely.setUserAttribute(withStringValue: Purchasely.anonymousUserId, forKey: "ply_ab_test_user_id")
   ```
-  ```coffeescript Kotlin
+  ```kotlin Kotlin
   //Set one attribute by key and value
   Purchasely.setUserAttribute("ply_ab_test_user_id",  Purchasely.anonymousUserId)
   ```
@@ -115,7 +115,7 @@ To prevent this and ensure that the user consistently remains in the same cohort
   //Set one attribute by key and value
   Purchasely.setUserAttributeWithString("ply_ab_test_user_id", Purchasely.getAnonymousUserId());
   ```
-  ```coffeescript Flutter
+  ```dart Flutter
   //Set one attribute by key and value
   String anonymousId = await Purchasely.anonymousUserId;
   Purchasely.setUserAttributeWithString("ply_ab_test_user_id", anonymousId);

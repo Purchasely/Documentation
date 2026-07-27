@@ -78,20 +78,20 @@ The integration of Adjust requires 3 steps:
 
 ## 1. Associating users to events
 
-```coffeescript Swift
+```swift Swift
 let adid = Adjust.adid()
 Purchasely.setAttribute(.adjustId, value: String(adid))
 ```
-```coffeescript Kotlin
+```kotlin Kotlin
 Purchasely.setAttribute(Attribute.ADJUST_ID, Adjust.getDefaultInstance().getAdid().toString())
 ```
-```coffeescript React Native
+```typescript React Native
 Purchasely.setAttribute(Attributes.ADJUST_ID, Adjust.getAdid());
 ```
-```coffeescript Flutter
+```dart Flutter
 Purchasely.setAttribute(PLYAttribute.adjust_id, "adjust_user_id");
 ```
-```coffeescript Cordova
+```javascript Cordova
 Purchasely.setAttribute(Purchasely.Attribute.ADJUST_ID, Adjust.getAdid());
 ```
 
