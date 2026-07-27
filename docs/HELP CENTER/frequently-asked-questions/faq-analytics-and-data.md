@@ -19,12 +19,11 @@ next:
 
 Four channels, in decreasing order of completeness:
 
-| Channel                                                        | What it gives you                                                                                                                                                                 |
-| :------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **[S2S webhooks](webhook)**                                    | Real-time JSON on the whole subscription lifecycle — entitlement events, 27 lifecycle events, offer events, `TRANSACTION_PROCESSED`. The most complete channel: you replicate the data on your side continuously. |
-| **[Third-party forwarding](engagement-crm)**           | Automatic forwarding of server events and subscription attributes to your analytics and CRM tools.                                                                                  |
-| **Client API**                                                 | Programmatic access at `https://api.purchasely.io/client/mobile_applications/{app_id}` with a Bearer token created in **Settings > Client API Keys**. See the [Custom Audiences API](custom-audiences-api). |
-| **CSV exports**                                                | **Download CSV** on the [Dashboards](subscription-base-evolution), respecting the active filters and granularity.                                                                             |
+| Channel                                      | What it gives you                                                                                                                                                                                                 |
+| :------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **[S2S webhooks](webhook)**                  | Real-time JSON on the whole subscription lifecycle — entitlement events, 27 lifecycle events, offer events, `TRANSACTION_PROCESSED`. The most complete channel: you replicate the data on your side continuously. |
+| **[Third-party forwarding](engagement-crm)** | Automatic forwarding of server events and subscription attributes to your analytics and CRM tools.                                                                                                                |
+| **CSV exports**                              | **Download CSV** on the [Dashboards](subscription-base-evolution), respecting the active filters and granularity.                                                                                                 |
 
 📚 [Purchasely Analytics overview](purchasely-analytics)
 
@@ -32,10 +31,10 @@ Four channels, in decreasing order of completeness:
 
 # What is the difference between Server Events and UI / SDK Events?
 
-| Family                                    | Where it comes from        | What it is for                                                                                    |
-| :---------------------------------------- | :------------------------- | :------------------------------------------------------------------------------------------------ |
-| **[Server Events](server-events)**        | Our backend                | Entitlements, subscription lifecycle, offers, revenue. Reliable, retried, and the source of truth. |
-| **[UI / SDK Events](ui-sdk-events)**      | The SDK, inside the app    | Paywall views, interactions, conversion funnels, quiz answers.                                    |
+| Family                               | Where it comes from     | What it is for                                                                                     |
+| :----------------------------------- | :---------------------- | :------------------------------------------------------------------------------------------------- |
+| **[Server Events](server-events)**   | Our backend             | Entitlements, subscription lifecycle, offers, revenue. Reliable, retried, and the source of truth. |
+| **[UI / SDK Events](ui-sdk-events)** | The SDK, inside the app | Paywall views, interactions, conversion funnels, quiz answers.                                     |
 
 The distinction matters when a number looks wrong: revenue and subscription counts come from Server Events, while everything about **paywall exposure and conversion** comes from UI / SDK Events emitted by the app.
 
@@ -71,10 +70,10 @@ If the gap survives all five, open a support request with the dashboard, the dat
 
 Because the two measure different things. The Purchasely **Revenue** chart shows **gross** revenue:
 
-* it is **what the user paid**, VAT included,
-* **before** the store commission (typically 15–30%) is deducted,
-* attributed to the **transaction date**,
-* and it is **not MRR** — a yearly subscription shows its full amount on the day of the transaction, not spread over 12 months.
+- it is **what the user paid**, VAT included,
+- **before** the store commission (typically 15–30%) is deducted,
+- attributed to the **transaction date**,
+- and it is **not MRR** — a yearly subscription shows its full amount on the day of the transaction, not spread over 12 months.
 
 A Google Play or App Store payout report is net of commission and often net of tax, and it is attributed to a settlement period rather than a transaction date. Those two numbers are not supposed to be equal.
 
@@ -88,10 +87,10 @@ Before opening a ticket, reconcile in this order: same date range → same platf
 
 Several reasons, and most of them are by design:
 
-* **Weights are configurable.** Each variant carries a weight, and the total must equal 100. Use **Equalize** in the Console if you want an even split — the defaults are not necessarily what you want.
-* **Assignment is deterministic, not balanced in real time.** A user is bucketed by a hash of their identifier (0–99), so a given user always sees the same variant. Over a small sample that hash does not produce an exactly even split.
-* **Unique Viewers counts `PRESENTATION_VIEWED` events**, not assignments. If one variant is a Flow and the other a single Screen, or if one variant is slower to render, exposure counts can diverge even with identical weights.
-* **Anonymous users reinstalling** get a new identifier, and therefore a new bucket.
+- **Weights are configurable.** Each variant carries a weight, and the total must equal 100. Use **Equalize** in the Console if you want an even split — the defaults are not necessarily what you want.
+- **Assignment is deterministic, not balanced in real time.** A user is bucketed by a hash of their identifier (0–99), so a given user always sees the same variant. Over a small sample that hash does not produce an exactly even split.
+- **Unique Viewers counts&#x20;**`PRESENTATION_VIEWED`**&#x20;events**, not assignments. If one variant is a Flow and the other a single Screen, or if one variant is slower to render, exposure counts can diverge even with identical weights.
+- **Anonymous users reinstalling** get a new identifier, and therefore a new bucket.
 
 A large, persistent imbalance that none of the above explains is worth reporting with the test ID, the weights configured and the observed counts.
 
@@ -101,14 +100,14 @@ A large, persistent imbalance that none of the above explains is worth reporting
 
 Two structures, depending on what you want to measure:
 
-* **Screen A vs Screen B** — the standard case. Keep the test **type** consistent: a UI test changes the Screen, a Price test changes the Plans. Mixing the two makes the result uninterpretable.
-* **Paywall vs no paywall** — the variant serves no Screen, so the SDK returns a *deactivated* presentation and your app shows nothing. That is how you measure the paywall's own impact rather than one design against another.
+- **Screen A vs Screen B** — the standard case. Keep the test **type** consistent: a UI test changes the Screen, a Price test changes the Plans. Mixing the two makes the result uninterpretable.
+- **Paywall vs no paywall** — the variant serves no Screen, so the SDK returns a _deactivated_ presentation and your app shows nothing. That is how you measure the paywall's own impact rather than one design against another.
 
 Constraints to know up front:
 
-* **One Placement per test.** A Placement already used by another test cannot be reused.
-* **One test per Audience + Placement combination.**
-* An **Audience ID cannot be changed** once it has been associated with an A/B test or a transaction.
+- **One Placement per test.** A Placement already used by another test cannot be reused.
+- **One test per Audience + Placement combination.**
+- An **Audience ID cannot be changed** once it has been associated with an A/B test or a transaction.
 
 📚 [A/B test configuration](ab-test-configuration) · [A/B test results](ab-test-results)
 
@@ -118,10 +117,10 @@ Constraints to know up front:
 
 The Console computes Bayesian significance, so wait for it rather than eyeballing the numbers. Practically:
 
-* run for **1 to 2 weeks minimum**, to cover a full weekly cycle,
-* aim for **95%+** significance,
-* watch **View to Paid** (subscriptions started + trials converted, over unique viewers) rather than raw counts,
-* remember that **Trial Ongoing** users have not resolved yet — a test read before the trials mature will overstate whichever variant pushed trials hardest.
+- run for **1 to 2 weeks minimum**, to cover a full weekly cycle,
+- aim for **95%+** significance,
+- watch **View to Paid** (subscriptions started + trials converted, over unique viewers) rather than raw counts,
+- remember that **Trial Ongoing** users have not resolved yet — a test read before the trials mature will overstate whichever variant pushed trials hardest.
 
 Revenue, ARPU and ARPPU stay live even after the test is stopped.
 
@@ -131,23 +130,23 @@ Revenue, ARPU and ARPPU stay live even after the test is stopped.
 
 # Can I export subscriptions or automate reporting?
 
-* **Ad hoc** — every [Dashboard](subscription-base-evolution) has a **Download CSV** on its data table.
-* **Continuous** — the webhook is the right channel. Replicate the events into your own warehouse and you can build any report without depending on our UI.
-* **Programmatic** — the Client API covers configuration and audience operations today. If you need a specific dataset pulled on a schedule, raise it with your account team so it is prioritized against the API roadmap.
+- **Ad hoc** — every [Dashboard](subscription-base-evolution) has a **Download CSV** on its data table.
+- **Continuous** — the webhook is the right channel. Replicate the events into your own warehouse and you can build any report without depending on our UI.
+- **Programmatic** — the Client API covers configuration and audience operations today. If you need a specific dataset pulled on a schedule, raise it with your account team so it is prioritized against the API roadmap.
 
 <br />
 
 # Which dashboards should I look at?
 
-| Question                                        | Dashboard                                                                       |
-| :---------------------------------------------- | :------------------------------------------------------------------------------ |
-| Is my subscriber base growing?                  | [Subscription base evolution](subscription-base-evolution) · [Paid subscription movements](paid-subscription-movements) |
-| How healthy is my base?                         | [Subscription status](subscription-status) · [Subscription retention](subscription-retention)                          |
-| How much revenue am I making?                   | [MRR](mrr) · [Revenue](revenue)                                                 |
-| Do my paywalls convert?                         | [Screens and conversions](screens-and-conversions) · [Funnel](funnel)           |
-| Which SDK versions are actually in the wild?    | [SDK versions](sdk-versions)                                                    |
-| Is the platform healthy right now?              | [Platform health](platform-health)                                              |
-| How many active users do I have?                | [Active users and app sessions](active-users-and-app-sessions)                  |
+| Question                                     | Dashboard                                                                                                               |
+| :------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
+| Is my subscriber base growing?               | [Subscription base evolution](subscription-base-evolution) · [Paid subscription movements](paid-subscription-movements) |
+| How healthy is my base?                      | [Subscription status](subscription-status) · [Subscription retention](subscription-retention)                           |
+| How much revenue am I making?                | [MRR](mrr) · [Revenue](revenue)                                                                                         |
+| Do my paywalls convert?                      | [Screens and conversions](screens-and-conversions) · [Funnel](funnel)                                                   |
+| Which SDK versions are actually in the wild? | [SDK versions](sdk-versions)                                                                                            |
+| Is the platform healthy right now?           | [Platform health](platform-health)                                                                                      |
+| How many active users do I have?             | [Active users and app sessions](active-users-and-app-sessions)                                                          |
 
 <br />
 
@@ -155,10 +154,10 @@ Revenue, ARPU and ARPPU stay live even after the test is stopped.
 
 Yes, natively:
 
-* **Attribution / MMPs** — Adjust, AppsFlyer, Branch
-* **Analytics** — Amplitude, Mixpanel, Google Analytics for Firebase, Piano (AT Internet), Segment, CleverTap
-* **Engagement / CRM** — Airship, Braze, Batch, Customer.io, Iterable, MoEngage, OneSignal, Brevo
-* **Other** — Firebase, Slack, RevenueCat
+- **Attribution / MMPs** — Adjust, AppsFlyer, Branch
+- **Analytics** — Amplitude, Mixpanel, Google Analytics for Firebase, Piano (AT Internet), Segment, CleverTap
+- **Engagement / CRM** — Airship, Braze, Batch, Customer.io, Iterable, MoEngage, OneSignal, Brevo
+- **Other** — Firebase, Slack, RevenueCat
 
 Most integrations are server-side (S2S), which means they keep working even if the app is closed. Check the specific integration page for whether it also uses client-side SDK events.
 
