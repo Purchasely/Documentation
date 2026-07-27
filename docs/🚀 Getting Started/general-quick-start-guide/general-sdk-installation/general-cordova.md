@@ -15,7 +15,7 @@ We rely on [NPM](https://www.npmjs.com/package/@purchasely/cordova-plugin-purcha
 # Main dependency
 
 ```shell
-cordova plugin add @purchasely/cordova-plugin-purchasely@6.0.0-rc.2
+cordova plugin add @purchasely/cordova-plugin-purchasely@6.0.0
 ```
 
 Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android 23)
@@ -48,18 +48,19 @@ allprojects {
 
 # Android setup
 
-We do include a store by default in our SDK, with Android you can choose to use Google and/or Huawei and/or Amazon.  
-See below to add the store you want to use
+We do include a store by default in our SDK, with Android you can choose to use Google and/or Huawei and/or Amazon.<br />See below to add the store you want to use
 
-> 📘 Versioning
->
-> All your dependencies **must** always be at the **same version** for example
->
-> ```json package.json
-> "dependencies": {
->   "@purchasely/cordova-plugin-purchasely": "6.0.0-rc.2",
->   "@purchasely/cordova-plugin-purchasely-google": "6.0.0-rc.2"
-> },
-> ```
+<Callout icon="📘" theme="info">
+  ### Versioning
+
+  All your dependencies **must** always be at the **same version** for example
+
+  ```json package.json
+  "dependencies": {
+    "@purchasely/cordova-plugin-purchasely": "6.0.0",
+    "@purchasely/cordova-plugin-purchasely-google": "6.0.0"
+  },
+  ```
+</Callout>
 
 <br />
