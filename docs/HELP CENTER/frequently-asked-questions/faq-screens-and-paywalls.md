@@ -123,6 +123,21 @@ If you use a bridge SDK (React Native, Flutter, Cordova), the font still has to 
 
 <br />
 
+# My Lottie animation does not play, or nothing shows where it should
+
+Lottie is a **weak native dependency**: the Screen references the animation, but the rendering is done by the Lottie library in your app. If the library or the bridge is missing, the block renders as nothing — **with no error and no log**.
+
+Checklist:
+
+1. **iOS** — the `lottie-ios` dependency is added to the app **and** the `@objc(PLYLottieBridge)` bridge class is present. Without the bridge the SDK cannot reach Lottie even when the pod is installed.
+2. **Android** — the Airbnb Lottie dependency is added and `Purchasely.lottieView` / `PLYLottieInterface` is registered.
+3. **React Native, Flutter, Cordova** — the dependency and the bridge go into the underlying **iOS and Android host projects**, not the JS/Dart side.
+4. **The animation file itself** — keep the JSON reasonably small and validate it in a Lottie previewer; an unsupported or oversized animation fails silently too.
+
+📚 [Lottie animations](lottie-animations)
+
+<br />
+
 # Why is one of my strings not translated?
 
 There are **two separate** localization layers, and they are edited in different places:

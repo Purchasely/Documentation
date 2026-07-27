@@ -107,6 +107,28 @@ If none of these apply, report it with the [Screen Issue Report Template](screen
 
 <br />
 
+# The Flow closes but my app becomes unresponsive afterwards
+
+That is a Console configuration issue, not an SDK bug: the dismiss button is firing **Close** where it should fire **Close all**.
+
+| Action        | Intent                                  | Effect                                                                       |
+| :------------ | :-------------------------------------- | :--------------------------------------------------------------------------- |
+| **Close**     | Back navigation inside a multi-step Flow | Pops the current step and **keeps the Flow window alive** for the previous one |
+| **Close all** | Exit the paywall entirely                | Clears the remaining steps and **closes the Flow window**                     |
+
+Because the SDK holds Flow presentations in a dedicated window that survives across steps, a **Close** triggered on the last visible step leaves that window waiting for a next step that never comes. The window stays on top, invisible, and swallows touches — the app looks frozen.
+
+The convention:
+
+* **X button, "Not now", "Skip"** → **Close all** (the user wants out).
+* **Back arrow inside the Flow** → **Close** (the user wants the previous step).
+
+Fix it in the Screen Composer on the button's action. If you need an immediate workaround from the app side, map the `close` action to a full dismissal in your interceptor while the Screen is being corrected.
+
+📚 [Close button configuration](composer-close-button) · [Controlling Screen visibility](show-hide-close-screens)
+
+<br />
+
 # How do I know how a Flow ended, and whether a purchase was made?
 
 Through the standard presentation outcome — `PLYPresentationOutcome`, which carries:

@@ -123,6 +123,49 @@ Set the user identifier **before** the first paywall is displayed, either via `a
 
 <br />
 
+# What log level should I ship in production?
+
+`warn` is the recommended production level. `debug` is verbose by design — internal SDK state, network requests, presentation lifecycle — and belongs to development builds only.
+
+```swift Swift
+Purchasely
+    .apiKey("<<X-API-KEY>>")
+    .logLevel(.warn)
+    .start { _ in }
+```
+```kotlin Kotlin
+Purchasely {
+    context(applicationContext)
+    apiKey("<<X-API-KEY>>")
+    logLevel(LogLevel.WARN)
+}
+```
+
+On native SDK 6 the default is already `error`, the quietest level. On Android, `Purchasely.logcatEnabled` controls Logcat output independently of `logLevel`, and a custom logger receives every message regardless of level — so gate it on your own build flag rather than assuming `logLevel` filters it.
+
+When you need to act on a failure rather than just log it, decode the `PLYError` you get in the completion or error callback: it distinguishes a missing store configuration (`NoStoreConfigured`), a network failure, a user cancellation and a store-side rejection, which is the difference between retrying, staying silent and showing an alert.
+
+<br />
+
+# Do I need special ProGuard / R8 rules on Android?
+
+If your release build minifies, yes — otherwise the SDK's classes can be stripped and you get a `ClassNotFoundException` or `NoSuchMethodError` on initialization or on the first paywall, in release builds only.
+
+```text proguard-rules.pro
+-keep class io.purchasely.** { *; }
+-keep class io.purchasely.ext.** { *; }
+
+# Google Play Billing
+-keep class com.android.vending.billing.** { *; }
+
+# Huawei IAP (only if you ship the Huawei store)
+-keep class com.huawei.hms.iap.** { *; }
+```
+
+The tell-tale sign is a crash that reproduces on a release/minified build and never on debug. Always validate a release build before submitting, not only the debug one.
+
+<br />
+
 # Do I have to resolve every action interceptor?
 
 Yes. **Every interceptor must return a result** telling the SDK how your app handled the action:
@@ -305,6 +348,19 @@ Yes — that is exactly what [Observer mode](observer-mode) is for. Purchasely o
 3. Use the [Preview](preview) in the Console for layout checks, and a real device for anything store-related (prices, eligibility, purchase flow).
 
 📚 [Checking your Purchasely integration](sdk-integration-checking-full-mode)
+
+<br />
+
+# The SDK used to display a subscriptions screen — where did it go in SDK 6?
+
+The Purchasely-rendered subscriptions screen was **removed** in SDK 6, not deprecated to a no-op: `Purchasely.subscriptionsFragment()` (Android), `presentSubscriptions()` (Flutter, React Native) and `displaySubscriptionCancellationInstruction()` (Android, Flutter) no longer exist. iOS never shipped an equivalent.
+
+The replacement is a screen you own:
+
+1. Build the list from `Purchasely.userSubscriptions()` (and `userSubscriptionsHistory()` for past ones).
+2. Send cancel / upgrade / downgrade actions to the **native store page** — `AppStore.showManageSubscriptions(in:)` on iOS 15+, or `https://apps.apple.com/account/subscriptions`, and `https://play.google.com/store/account/subscriptions?sku=…&package=…` on Android.
+
+That is also what Apple and Google require: subscription management has to happen on the store side, not inside a custom in-app flow.
 
 <br />
 

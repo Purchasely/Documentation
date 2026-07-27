@@ -100,6 +100,45 @@ Eligibility between an introductory offer and a promotional offer is resolved au
 
 <br />
 
+# I override plans or offers at runtime with a Dynamic Offering and the paywall does not change
+
+Dynamic Offerings are resolved **server-side, at fetch time**. The consequence is an ordering rule:
+
+* Register the offering **before** fetching or displaying the Placement. Registering it after the Screen was fetched changes nothing on the Screen already loaded — re-fetch.
+* Offerings **persist** until you remove them, so a leftover offering from a previous screen or session still applies. Clear them before re-registering.
+* `billingPlanType` is **iOS-only**.
+
+> ❗️ One plan → one billing plan type per Screen
+>
+> If two offering references resolve to the **same plan** with **different** billing plan types in the same Screen, the billing type becomes ambiguous and resolves to *unspecified* — which reads as "the commitment plan randomly does not apply". Back up-front and monthly-commitment variants with **two distinct plans** instead.
+
+📚 [Dynamic offering](dynamic-offering)
+
+<br />
+
+# Does Google Play have an equivalent of the 12-month commitment?
+
+Yes — Google Play has its own native **installment subscriptions**, and it works differently: everything is configured on the **base plan in the Google Play Console**, there is nothing to set in the SDK and no Android counterpart to Apple's billing plan type. Once the base plan is an installment plan, Purchasely surfaces the commitment information the same way it does for Apple, and the `INSTALLMENT_*` server events report the individual payments.
+
+So a "yearly plan generating monthly transactions" is expected on both stores — through Apple's 12-month commitment paid monthly, or through a Google Play installment base plan.
+
+📚 [12-Month Commitment (Paid Monthly)](12-month-commitment)
+
+<br />
+
+# The same user has an active subscription on two stores at once — is that a bug?
+
+No. Purchasely does **not** enforce a single active subscription per user across platforms: App Store, Play Store, Huawei, Amazon and Stripe subscriptions for the same user ID coexist, each with its own independent lifecycle events. Posting a Stripe receipt for a user who already has an App Store subscription creates a second subscription — it does not transfer or cancel the first one, and no transfer event is emitted (transfers only happen when an existing subscription changes owner, typically anonymous → logged-in).
+
+If your product allows only one subscription per user, handle it before the purchase:
+
+* **Block** — check the user's current status (SDK, or your backend kept in sync by webhooks) and do not launch the store flow or post the web receipt if another platform is already active.
+* **Warn** — show a screen telling the user where their active subscription lives and how to cancel it.
+
+There is no way to force-deactivate the other platform's subscription from Purchasely, and it would not stop the store from billing the user anyway.
+
+<br />
+
 # Can I sell outside the store — web checkout or external purchase links?
 
 Yes. Web checkout has been available since SDK 5.3 and relies on [Stripe Payment Links](web-checkout). It is fully no-code, and web transactions are included in your A/B test results and revenue dashboards. Targeting a specific market (US, for example) is done natively with [Audiences](segmenting-your-user-base).
