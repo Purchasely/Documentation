@@ -101,14 +101,18 @@ The Preview allows you to simulate multiple visual and commercial contexts:
 
   <Image align="center" border={false} src="https://files.readme.io/3c513fa3c7e46c12bbfc8c2e357dd75e7f495ace044d294824e98a2b27ebe70c-storefronts.gif" />
 
+### Prices in the Console preview
+
 > 📘 Prices displayed as $X,XX in the Console preview instead of the real price
 >
-> The Purchasely Console itself is not directly plugged with the app stores front APIs - the ones providing the SKU informations to the mobile apps.
+> For **Google Play Store** subscriptions, the Console fetches the prices live from the Play Store: the preview displays the real price and currency of the selected store territory, even if no transaction has ever been observed for the product.
 >
-> The platform actually relies on past transactions to display the price tags in the Console Preview. 
+> For the **Apple App Store** (as well as Amazon Appstore, Huawei AppGallery and Stripe), the Console relies on past transactions to display the price tags in the Console Preview:
 >
 > * As long as no transaction has been observed, the price tags are replaced by the string `X.XX`
 > * As soon as the first transactions are processed or observed for this particular product, the `X.XX` will be replaced by the pricing observed for the offering.
+>
+> In every case this only affects the Console preview: the SDK fetches the prices directly from the store, so your users always see the correct price, in the currency of their store territory.
 
 ### Preview widget
 
