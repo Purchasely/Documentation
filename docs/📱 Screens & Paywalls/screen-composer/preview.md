@@ -107,7 +107,7 @@ The Preview allows you to simulate multiple visual and commercial contexts:
 >
 > For **Google Play Store** subscriptions, the Console fetches the prices live from the Play Store: the preview displays the real price and currency of the selected store territory, even if no transaction has ever been observed for the product.
 >
-> For the **Apple App Store** (as well as Amazon Appstore, Huawei AppGallery and Stripe), the Console is not directly plugged with the app stores front APIs - the ones providing the SKU informations to the mobile apps - and relies on past transactions to display the price tags in the Console Preview:
+> For the **Apple App Store** (as well as Amazon Appstore, Huawei AppGallery and Stripe), the Console relies on past transactions to display the price tags in the Console Preview:
 >
 > * As long as no transaction has been observed, the price tags are replaced by the string `X.XX`
 > * As soon as the first transactions are processed or observed for this particular product, the `X.XX` will be replaced by the pricing observed for the offering.
