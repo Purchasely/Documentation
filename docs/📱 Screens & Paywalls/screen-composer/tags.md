@@ -51,13 +51,9 @@ You can use 2 types of tags.
 
 > 🚧 Why does the preview display a `$XX.XX` instead of the actual price?
 >
-> In some cases, tags cannot be displayed properly in the preview of the Console. They are replaced by XX.XX
+> In some cases, tags cannot be displayed properly in the preview of the Console. They are replaced by `X.XX`
 >
-> The reason is that the Purchasely Console is not directly interfaced with the App stores. Therefore, it can only know the price of a SKUs in each territory once a transaction has been processed or observed by the Platform.
->
-> As soon as it is the case, the XX.XX will be replace by the actual price in the appropriate currency. Eg: $9.99
->
-> Be reassured however, the SDK fetches the information directly from the App stores, and therefore always displays the correct price, in the appropriate currency (the one from the user's App store territory).
+> 📚 More information: [Prices in the Console preview](preview#prices-in-the-console-preview)
 
 # Types of tags
 
