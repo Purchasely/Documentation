@@ -40,10 +40,9 @@ For each user, fill in the following form:
 
 <Image align="center" className="border" border={true} src="https://files.readme.io/ed6281f-image.png" />
 
-Users can have one of the following roles:
+Each team member is assigned a **role**, which determines what they can see and do in the Console. Six roles are available: **Read-only**, **Support**, **Editor**, **Developer**, **Full admin** and **Custom**. You pick the role when you send the invitation, and you can change it at any time afterwards.
 
-* `Admin`: they can invite other users
-* `Member`: they can't invite other users
+See [Roles & permissions](roles-and-permissions) for what each role grants, permission by permission.
 
 For each team member, you can control to which app they have access to. You can either enable each app individually or click on All apps to give them access to all the existing apps and the future ones that might be created later
 
