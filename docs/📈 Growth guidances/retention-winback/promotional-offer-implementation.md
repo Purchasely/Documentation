@@ -12,15 +12,19 @@ metadata:
 next:
   description: ''
 ---
-> 📘 Availability
->
-> The feature described in this section is supported starting from version 4.0.0 of Purchasely SDK.
->
-> If you use a prior version of the SDK your users won’t see a discount and will purchase at the regular price.
+<Callout icon="📘" theme="info">
+  ### Availability
 
-> 📘 v6 running mode
->
-> On SDK v6, `observer` is the default running mode. If you want Purchasely to trigger the promotional offer purchase automatically (as described in `full` mode below), you must set `full` explicitly.
+  The feature described in this section is supported starting from version 4.0.0 of Purchasely SDK.
+
+  If you use a prior version of the SDK your users won’t see a discount and will purchase at the regular price.
+</Callout>
+
+<Callout icon="📘" theme="info">
+  ### v6 running mode
+
+  On SDK v6, `observer` is the default running mode. If you want Purchasely to trigger the promotional offer purchase automatically (as described in `full` mode below), you must set `full` explicitly.
+</Callout>
 
 Promotional offers can be used to offer a specific discount to current or past subscribers. It is a great way to retain or win-back a customer. You will be able to set up as many as you want by creating specific paywalls with those offers.
 
@@ -102,17 +106,18 @@ try {
 When you are using Purchasely in [`observer`](observer-mode) mode, you can:
 
 1. retrieve the Plan and associated offer purchased by the user by using the [action interceptor](process-transactions-with-paywall-action-interceptor)
-2. sign it (iOS only) 
+2. sign it (iOS only)
 3. and do the purchase with your own transaction processor
 
 <br />
 
 Here is a code sample to sign the offer on iOS:
 
-> 🚧 iOS applicationUserName or appAccountToken
->
-> On iOS, you must use Purchasely **anonymous user in lowercase** as **applicationUsername** with StoreKit1 or **appAccountToken** with StoreKit2 if you use `Purchasely.signPromotionalOffer()` method\
-> Please look at sample code below for more details
+<Callout icon="🚧" theme="warn">
+  ### iOS applicationUserName or appAccountToken
+
+  On iOS, you must use Purchasely **anonymous user in lowercase** as **applicationUsername** with StoreKit1 or **appAccountToken** with StoreKit2 if you use `Purchasely.signPromotionalOffer()` method<br />Please look at sample code below for more details
+</Callout>
 
 ```swift Swift
 // Intercept the tap on purchase to display the terms and condition
@@ -125,7 +130,7 @@ Purchasely.interceptAction(.purchase) { [weak self] info, params, completion in
 
 	let offer = params?.promoOffer
 
-	// sign the offer
+	// You can sign the offer with purchasely
 	Purchasely.signPromotionalOffer(storeProductId: appleProductId,
 					storeOfferId: offer?.storeOfferId) { signature in
 		// Success completion
@@ -133,18 +138,19 @@ Purchasely.interceptAction(.purchase) { [weak self] info, params, completion in
 		// Failure completion
 	}
 
-	// Purchase with signature
+	// Then Purchase with signature
 
+        // FULL EXAMPLE with code
 	// Using StoreKit1
-	self?.purchaseUsingStoreKit1(plan)
+	self?.purchaseUsingStoreKit1(plan, offer)
 	// Using StoreKit2
-	self?.purchaseUsingStoreKit2(plan)
+	self?.purchaseUsingStoreKit2(plan, offer)
 
 	// Finally close the process with Purchasely
 	completion(.success)
 }
 
-func purchaseUsingStoreKit1(_ plan: PLYPlan) {
+func purchaseUsingStoreKit1(_ plan: PLYPlan, _ offer: PLYPromoOffer) {
 
   // First step: Get SKProduct using your own service
 
@@ -174,10 +180,10 @@ func purchaseUsingStoreKit1(_ plan: PLYPlan) {
   SKPaymentQueue.default().add(payment)
 }
 
-func purchaseUsingStoreKit2(_ plan: PLYPlan) {
+func purchaseUsingStoreKit2(_ plan: PLYPlan, _ offer: PLYPromoOffer) {
     if #available(iOS 15.0, *) {
       Purchasely.signPromotionalOffer(storeProductId: plan.appleProductId,
-                                      storeOfferId: plan.promoOffers.first?.storeOfferId,
+                                      storeOfferId: offer?.storeOfferId,
                                       success: { promoOfferSignature in
 
                Task {
