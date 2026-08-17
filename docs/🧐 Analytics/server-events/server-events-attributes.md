@@ -86,6 +86,17 @@ next:
 | `commitment_expires_at` | No | **string**<br>_in ISO 8601_<br>Date at which the current 12-month commitment term ends.<br><br>Only present for 12-month commitment subscriptions. |
 | `commitment_expires_at_ms` | No | **int**<br><br>_in milliseconds since the Epoch_<br>Same as `commitment_expires_at`, expressed in milliseconds.<br><br>Only present for 12-month commitment subscriptions. |
 | `commitment_will_auto_renew` | No | **boolean**<br><br>Whether the commitment will renew for a new 12-month term when the current one ends. This is distinct from the monthly billing of installments within the term.<br><br>Only present for 12-month commitment subscriptions. |
+| `retention_response_type` | No | **string**<br><br>What Purchasely answered when Apple requested a retention message at the App Store cancel sheet: `message`, `promotional_offer`, `alternate_plan`, or `none` — no targeting rule matched, Apple displays the default retention message configured for the product, if any.<br><br>Only present on `RETENTION_MESSAGE_REQUESTED` events, where the other `retention_*` attributes below are also filled according to the response type. |
+| `retention_request_identifier` | No | **string**<br><br>Apple's unique identifier for the retention message request. At most one `RETENTION_MESSAGE_REQUESTED` event is emitted per request identifier. |
+| `retention_user_locale` | No | **string**<br><br>The subscriber's locale as provided by Apple (e.g. `en-US`), used to pick the localization of the served message. |
+| `retention_rule_id` | No | **string**<br><br>ID of the targeting rule that served the response. Absent when `retention_response_type` is `none`. |
+| `retention_message_id` | No | **string**<br><br>Purchasely ID of the served retention message. Absent when `retention_response_type` is `none`. |
+| `retention_message_vendor_id` | No | **string**<br><br>Vendor ID of the served retention message. Absent when `retention_response_type` is `none`. |
+| `retention_message_identifier` | No | **string**<br><br>Apple identifier of the served message localization — the `messageIdentifier` returned to Apple. Absent when `retention_response_type` is `none`. |
+| `retention_offer_vendor_id` | No | **string**<br><br>Vendor ID of the promotional offer proposed to the subscriber. Only present when `retention_response_type` is `promotional_offer`. |
+| `retention_offer_appstore_id` | No | **string**<br><br>App Store identifier of the promotional offer proposed to the subscriber. Only present when `retention_response_type` is `promotional_offer`. |
+| `retention_alternate_plan_vendor_id` | No | **string**<br><br>Vendor ID of the plan proposed as a switch. Only present when `retention_response_type` is `alternate_plan`. |
+| `retention_alternate_plan_store_product_id` | No | **string**<br><br>App Store product ID of the plan proposed as a switch. Only present when `retention_response_type` is `alternate_plan`. |
 
 # Sample JSON Payloads
 
@@ -246,7 +257,7 @@ next:
   "user_id": "toto"
 }
 ```
-```Text SUBSCRIPTION_TERMINATED
+```json SUBSCRIPTION_TERMINATED
 {
   "api_version": 3,
   "cumulated_revenues_in_eur": 69.9,
@@ -325,6 +336,53 @@ next:
   "store_transaction_id": "2000000123456789",
   "subscription_status": "AUTO_RENEWING",
   "total_billing_periods": 12,
+  "user_id": "toto"
+}
+```
+```json RETENTION_MESSAGE_REQUESTED
+{
+  "api_version": 3,
+  "cumulated_revenues_in_eur": 59.94,
+  "customer_currency": "EUR",
+  "device_type": "PHONE",
+  "effective_next_renewal_at": "2026-08-10T10:00:00.000Z",
+  "effective_next_renewal_at_ms": 1786356000000,
+  "environment": "PRODUCTION",
+  "event_created_at": "2026-07-28T17:42:11.348Z",
+  "event_created_at_ms": 1785260531348,
+  "event_id": "a1b2c3d4-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+  "event_name": "RETENTION_MESSAGE_REQUESTED",
+  "is_family_shared": false,
+  "next_renewal_at": "2026-08-10T10:00:00.000Z",
+  "next_renewal_at_ms": 1786356000000,
+  "offer_type": "NONE",
+  "original_purchased_at": "2026-01-10T10:00:00.000Z",
+  "original_purchased_at_ms": 1768039200000,
+  "plan": "monthly",
+  "plan_price_in_customer_currency": 9.99,
+  "plan_price_in_eur": 9.99,
+  "previous_offer_type": "NONE",
+  "product": "PURCHASELY_PLUS",
+  "purchase_type": "RENEWING_SUBSCRIPTION",
+  "purchased_at": "2026-07-10T10:00:00.000Z",
+  "purchased_at_ms": 1783677600000,
+  "purchasely_subscription_id": "subs_D7GnVQbUxvY6YxoeK6nhyPDkmyCVcfe",
+  "retention_message_id": "rtm_eFPoveSCc8Lu4nzSVH4cNsTMQhcq1IW7",
+  "retention_message_identifier": "6dd8b358-3e6b-4577-9e0f-9e2e7f8ce35d",
+  "retention_message_vendor_id": "comeback_message",
+  "retention_offer_appstore_id": "com.purchasely.plus.offer.comeback",
+  "retention_offer_vendor_id": "comeback_offer",
+  "retention_request_identifier": "9a2b4c6d-1e3f-4a5b-8c7d-0e1f2a3b4c5d",
+  "retention_response_type": "promotional_offer",
+  "retention_rule_id": "rtrule_uClhg7jmDt6FFwxFFei1VnpwGomdR",
+  "retention_user_locale": "en-US",
+  "store": "APPLE_APP_STORE",
+  "store_app_bundle_id": "com.purchasely.demo",
+  "store_country": "FR",
+  "store_original_transaction_id": "2000000111111111",
+  "store_product_id": "com.purchasely.plus.monthly",
+  "store_transaction_id": "2000000111111111",
+  "subscription_status": "AUTO_RENEWING",
   "user_id": "toto"
 }
 ```
