@@ -78,7 +78,7 @@ From the **Targeting** tab, you decide **who sees what** with retention audience
 * A **retention audience** is a set of criteria on the subscriber's subscription state (plan, trial, subscription age, etc.).
 * A **targeting rule** is an audience plus an action: show a message, offer a [promotional offer](promotional-offers-configuration), or propose a plan switch. Rules are evaluated in priority order — the first rule whose audience matches and whose response can be served wins.
 
-A rule is served when its message has an approved localization for the subscriber's locale (with language fallback, e.g. `en-US` → `en`), and — for offer and switch actions — when the action applies to the cancelling product: a promotional offer must belong to the product being cancelled, and a switch proposal must target a different plan. When a rule does not apply, the next one is evaluated, down to your catch-all rule or the default message.
+A rule is served when its message has an approved localization for the subscriber's locale (with language fallback, e.g. `en-US` → `en`). A promotional offer can retain the subscriber on their current product — or propose a **discounted switch** to another plan, by using an offer configured on that other plan (Apple applies it like a regular purchase). A switch proposal must target a different plan than the one being cancelled. When a rule does not apply, the next one is evaluated, down to your catch-all rule or the default message.
 
 > 🚧 Apple constraints to keep in mind
 >
@@ -97,4 +97,4 @@ Combined with the existing lifecycle events, it gives you the full cancel funnel
 * plan-change events — the subscriber accepted the switch proposal
 * no follow-up event — the subscriber left the cancel sheet and kept their subscription
 
-Apple also provides an aggregate daily report (App Store Connect → **App Store Retention Messaging**) with page views, cancels and saves, which complements the per-subscriber view.
+Apple also provides an aggregate daily retention report (page views, cancels and saves), which complements the per-subscriber view. Note that Retention Messaging is currently **API-only on Apple's side**: its App Store Connect pages, including this report, are announced by Apple but not live yet.
