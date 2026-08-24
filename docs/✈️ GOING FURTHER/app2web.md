@@ -1,5 +1,5 @@
 ---
-title: Implementing an app-to-web flow for US customers
+title: App-to-web funnels
 excerpt: >-
   This page provides details on linking web checkout flows to a Purchasely
   Paywall (App2Web) following the new App Store ruling
