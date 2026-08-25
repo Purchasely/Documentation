@@ -32,13 +32,15 @@ The error can also name `kotlinx-serialization-core` or `kotlinx-serialization-j
 
 Every React Native project that compiles with **Kotlin 2.1.x or lower**. This is the default of the current templates:
 
-| Project type | Default Kotlin version | Result with SDK 6.0.x |
-| --- | --- | --- |
-| Bare React Native 0.83 / 0.86 (community template) | 2.1.20 | Build fails |
-| Expo SDK 54 / 55 (no `kotlinVersion` set) | 2.0.21 | Build fails |
-| Any project set to 2.2.x | 2.2.0 and later | Build succeeds |
+| Project type                                       | Default Kotlin version | Result with SDK 6.0.x |
+| -------------------------------------------------- | ---------------------- | --------------------- |
+| Bare React Native 0.83 / 0.86 (community template) | 2.1.20                 | Build fails           |
+| Expo SDK 54 / 55 (no `kotlinVersion` set)          | 2.0.21                 | Build fails           |
+| Any project set to 2.2.x                           | 2.2.0 and later        | Build succeeds        |
 
 <Callout icon="⚠️" theme="warn">
+  ### Kotlin 2.2.x is sufficient
+
   Do **not** move the project to Kotlin 2.3.x. Kotlin 2.2.x is sufficient, and 2.3.x breaks several React Native and Expo modules that are locked to an earlier line.
 </Callout>
 
@@ -46,16 +48,9 @@ Every React Native project that compiles with **Kotlin 2.1.x or lower**. This is
 
 ## Root cause
 
-The Purchasely classes are not the problem. Every class in `io.purchasely:core` carries Kotlin metadata **2.0.0**, which any Kotlin 2.x compiler reads.
+Purchasely Android SDK compiles against `kotlin-stdlib:2.3.21` even when it asks for an earlier version.
 
-The problem comes from two transitive dependencies of the SDK:
-
-- `org.jetbrains.kotlin:kotlin-stdlib:2.3.21`
-- `org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0`
-
-Both carry Kotlin metadata **2.3.0**. Gradle keeps the highest version of each dependency in the graph, so the application compiles against `kotlin-stdlib:2.3.21` even when it asks for an earlier version.
-
-A Kotlin compiler reads metadata up to **one minor version ahead** of itself. The compiler states the limit in its own message: *"the compiler version 2.1.0 can read versions up to 2.2.0"*. A 2.1.x compiler therefore rejects metadata 2.3.0, and a 2.2.x compiler accepts it.
+A Kotlin compiler reads metadata up to **one minor version ahead** of itself. The compiler states the limit in its own message: _"the compiler version 2.1.0 can read versions up to 2.2.0"_. A 2.1.x compiler therefore rejects metadata 2.3.0, and a 2.2.x compiler accepts it.
 
 <Callout icon="far fa-lightbulb" theme="info">
   A dependency with newer metadata breaks the build even when the code does not use it. The compiler scans the `META-INF/*.kotlin_module` entry of every archive on the classpath.
@@ -103,7 +98,7 @@ npx react-native run-android
 
 An Expo project has no `android/build.gradle` under version control, so apply the same two changes through the configuration.
 
-**1. Set the Kotlin version with `expo-build-properties`.**
+**1. Set the Kotlin version with&#x20;**`expo-build-properties`**.**
 
 ```json
 {
@@ -123,6 +118,8 @@ An Expo project has no `android/build.gradle` under version control, so apply th
 ```
 
 <Callout icon="⚠️" theme="warn">
+  ### Filtered kotlin versions on Expo
+
   Use a Kotlin version that the Expo KSP table accepts: `2.2.20`, `2.2.10`, `2.2.0`, `2.1.21`, `2.1.20`, `2.0.21`. Expo stops the build on any other version with the message `Can't find KSP version for Kotlin version …`. Of these, only the 2.2.x versions solve the problem.
 </Callout>
 
@@ -202,8 +199,7 @@ On an Expo project, append the same block from the config plugin above.
 
 ## What not to do
 
-- **Do not force `kotlin-stdlib` or `kotlinx-serialization-json` to an earlier version.** The Purchasely artifacts are built and tested against those versions. An earlier runtime can fail at purchase time with `NoSuchMethodError`.
-- **Do not move the project to Kotlin 2.3.x.** It is not required, and it breaks modules that are locked to an earlier Kotlin line.
+- **Do not force&#x20;**`kotlin-stdlib`**&#x20;or&#x20;**`kotlinx-serialization-json`**&#x20;to an earlier version.** The Purchasely artifacts are built and tested against those versions. An earlier runtime can fail at purchase time with `NoSuchMethodError`.
 
 ***
 
