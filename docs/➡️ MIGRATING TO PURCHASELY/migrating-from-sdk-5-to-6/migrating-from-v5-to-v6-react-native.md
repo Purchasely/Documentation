@@ -74,6 +74,23 @@ iOS: `cd ios && pod install`. Android: autolinking handles the native modules.
 
 The bridge pulls the native pins automatically (iOS pod `Purchasely 6.0.0`, Android `io.purchasely:core:6.0.1`). Minimum OS versions: **iOS 15.1**, **Android&#x20;**`minSdkVersion 23`.
 
+### Android: the Kotlin toolchain must be 2.2.x or later
+
+`io.purchasely:core:6.0.1` brings `kotlin-stdlib:2.3.21` and `kotlinx-serialization-json:1.11.0`, whose Kotlin metadata is 2.3.0. A Kotlin compiler reads metadata up to one minor version ahead, so a project on Kotlin 2.1.x or lower stops with:
+
+```text
+Module was compiled with an incompatible version of Kotlin.
+The binary version of its metadata is 2.3.0, expected version is 2.1.0.
+```
+
+<Callout icon="⚠️" theme="warn">
+  **This is the most common blocker of the v6 upgrade on Android**
+
+  It affects bare React Native **and** Expo projects, because both templates still default to an earlier Kotlin version. Two edits are needed, not one: the Kotlin version, and the version on the Kotlin Gradle Plugin classpath. Do not move the project to Kotlin 2.3.x — 2.2.x is sufficient and 2.3.x breaks modules that are locked to an earlier line.
+
+  Full instructions for both setups: [React Native — Kotlin version required by SDK 6](react-native-kotlin-version).
+</Callout>
+
 ***
 
 ## 2. SDK initialization

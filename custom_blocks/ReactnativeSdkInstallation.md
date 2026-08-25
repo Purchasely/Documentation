@@ -91,3 +91,20 @@ npm install @purchasely/react-native-purchasely-android-player@6.0.0 --save
 ```
 
 <br />
+
+## Android build error: "incompatible version of Kotlin"
+
+The Android SDK requires a **Kotlin 2.2.x** toolchain or later. Both the bare React Native template and Expo still default to an earlier version, so the first Android build after the installation can stop with:
+
+```text
+Module was compiled with an incompatible version of Kotlin.
+The binary version of its metadata is 2.3.0, expected version is 2.1.0.
+```
+
+<Callout icon="⚠️" theme="warn">
+  **Kotlin version**
+
+  This affects bare React Native **and** Expo projects. Two edits are needed, not one: the Kotlin version, and the version on the Kotlin Gradle Plugin classpath. Both are documented in [React Native — Kotlin version required by SDK 6](react-native-kotlin-version).
+</Callout>
+
+<br />
