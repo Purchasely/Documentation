@@ -50,9 +50,7 @@ PLYPresentationBuilder.forPlacementId("my_placement_id")
         }
     }
     .build()
-    .preload { presentation, error in
-        let paywallCtrl = presentation?.controller
-    }
+    .display(completion: nil)
 ```
 ```kotlin
 PLYPresentation {

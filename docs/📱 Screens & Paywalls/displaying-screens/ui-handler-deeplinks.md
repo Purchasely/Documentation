@@ -93,8 +93,12 @@ class CustomUIHandler: NSObject, PLYUIHandler {
             // call display if it's a Flow
             presentation.display()
         } else {
-            // Get the View yourself to display it
-            
+            // Get the View yourself to display it.
+            // Keep a strong reference to `presentation` for as long as the
+            // controller or view is on screen, otherwise onPresented,
+            // onCloseRequested and onDismissed stop firing.
+            self.retainedPresentation = presentation
+
             // get the UIViewController
             let purchaselyController = presentation.controller
             // get the SwiftUI wrapper for Swift UI

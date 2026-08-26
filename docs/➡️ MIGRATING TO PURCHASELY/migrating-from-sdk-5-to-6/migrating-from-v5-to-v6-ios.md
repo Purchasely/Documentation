@@ -454,6 +454,8 @@ All the manual‑embedding factory methods are **removed** — `PLYPresentationB
 
 For UIKit, use `presentation.controller` after `preload()`. For SwiftUI, read `presentation.swiftUIView` — a `PLYPresentationView?` accessor (named `swiftUIView`, not `view`, to disambiguate from `UIKit.UIView`; returns `nil` for `.deactivated` presentations). Take the dismissal result from `onDismissed`.
 
+Whenever you take over the display this way, keep a strong reference to the `PLYPresentation` for as long as the controller or view is on screen, in a property rather than a local. If it is released, `onPresented`, `onCloseRequested` and `onDismissed` stop firing silently. `.build().display(completion: nil)` has no such requirement, because the SDK owns the display.
+
 ### Before (v5)
 
 ```swift

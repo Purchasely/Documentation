@@ -89,9 +89,9 @@ PLYPresentationBuilder
          }
          
          if presentation.type == .normal || presentation.type == .fallback {
-             let paywallController = presentation.controller
-             
-             // display paywall controller.
+             // let the SDK present it, so it keeps the presentation alive
+             // and your lifecycle callbacks keep firing
+             presentation.display(from: myUIViewController)
              
          } else if presentation.type == .deactivated {
              

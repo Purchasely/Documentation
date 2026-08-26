@@ -26,10 +26,16 @@ Purchasely provides a [UIViewController](https://developer.apple.com/documentati
 
 The preloaded presentation also provides the property `swiftUIView` to display Purchasely Screen with your SwiftUI View
 
+> 🚧 Keep the presentation alive
+>
+> When you take over the display yourself, you own the lifetime of the `PLYPresentation`. Keep a strong reference to it, in a property of the screen or coordinator that owns the paywall, for as long as the Purchasely controller or view is on screen. A local variable inside the `preload` closure is not enough: once the presentation is released, `onPresented`, `onCloseRequested` and `onDismissed` stop firing, without any error or log. The Screen itself keeps working, so only the callbacks look broken.
+
 ```swift Swift
 import Purchasely
 
-var controller: UIViewController?
+// A property of your view controller or coordinator, never a local: it must
+// outlive the preload closure and stay alive while the Screen is on screen
+var retainedPresentation: PLYPresentation?
 
 // Preload the presentation then read its controller
 PLYPresentationBuilder.forPlacementId("onboarding").build().preload { presentation, error in
@@ -37,7 +43,8 @@ PLYPresentationBuilder.forPlacementId("onboarding").build().preload { presentati
        print("Error while fetching presentation: \(error?.localizedDescription ?? "unknown")")
        return
    }
-         
+
+   self.retainedPresentation = presentation
    let purchaselyController = presentation.controller
 
 
@@ -46,14 +53,14 @@ self.present(purchaselyController, animated: true, completion: nil)
 
 // Option 2 - Display Purchasely UIView inside your own
 let targetView = UIView()
-let purchaselyView = purchaselyController?.view
+guard let purchaselyView = purchaselyController?.view else { return }
 targetView.addSubview(purchaselyView)
-purchaselyView?.translatesAutoresizingMaskIntoConstraints = false
+purchaselyView.translatesAutoresizingMaskIntoConstraints = false
 NSLayoutConstraint.activate([
-    purchaselyView!.topAnchor.constraint(equalTo: targetView.topAnchor),
-    purchaselyView!.bottomAnchor.constraint(equalTo: targetView.bottomAnchor),
-    purchaselyView!.leadingAnchor.constraint(equalTo: targetView.leadingAnchor),
-    purchaselyView!.trailingAnchor.constraint(equalTo: targetView.trailingAnchor)
+    purchaselyView.topAnchor.constraint(equalTo: targetView.topAnchor),
+    purchaselyView.bottomAnchor.constraint(equalTo: targetView.bottomAnchor),
+    purchaselyView.leadingAnchor.constraint(equalTo: targetView.leadingAnchor),
+    purchaselyView.trailingAnchor.constraint(equalTo: targetView.trailingAnchor)
 ])
 
 // Option 3 - Display with SwiftUI

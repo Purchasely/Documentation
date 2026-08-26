@@ -174,9 +174,7 @@ PLYPresentationBuilder.forPlacementId(placementId)
     .contentId(contentId)
     .onDismissed(completion)
     .build()
-    .preload { presentation, error in
-        let paywallCtrl = presentation?.controller
-    }
+    .display(completion: nil)
 ```
 ```kotlin Kotlin
 val placementId = "onboarding"

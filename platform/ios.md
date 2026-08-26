@@ -831,6 +831,11 @@ PLYPresentationBuilder
 
             // Alternatively: get the UIViewController to manage the transition yourself.
             // Note: this method won't work with Flows.
+            //
+            // Keep a strong reference to `presentation` for as long as that
+            // controller is on screen. Once the presentation is released,
+            // `onPresented`, `onCloseRequested` and `onDismissed` stop firing.
+            self.retainedPresentation = presentation
             let purchaselyController = presentation.controller
 
         } else if presentation.type == .deactivated {
@@ -887,10 +892,15 @@ func showPaywall() {
 
 ### Nesting the Paywall in Your Own Views
 
-A preloaded presentation exposes its `controller` (UIKit) so you can embed the underlying `UIView` in your own layout:
+A preloaded presentation exposes its `controller` (UIKit) so you can embed the underlying `UIView` in your own layout.
+
+When you take over the display, you own the lifetime of the `PLYPresentation`. Keep a strong reference to it, in a property of the screen or coordinator that owns the paywall, for as long as the controller or view is on screen. A local variable inside the `preload` closure is not enough: once the presentation is released, `onPresented`, `onCloseRequested` and `onDismissed` stop firing, with no error and no log. The Screen itself keeps working, so only the callbacks look broken.
 
 ```swift
 import Purchasely
+
+// A property of your view controller or coordinator, never a local
+var retainedPresentation: PLYPresentation?
 
 PLYPresentationBuilder
     .forPlacementId("onboarding")
@@ -900,6 +910,8 @@ PLYPresentationBuilder
             print("Error while fetching presentation: \(error?.localizedDescription ?? "unknown")")
             return
         }
+
+        self.retainedPresentation = presentation
 
         // `presentation.controller` is an optional PLYPresentationViewController?
         guard let purchaselyController = presentation.controller else { return }

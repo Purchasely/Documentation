@@ -59,6 +59,12 @@ PLYPresentationBuilder
            
            // alternatively: get the UIViewController to manage the transition yourself
 					// note: this method won't work with Flows
+					//
+					// When you present the controller yourself, keep a strong reference to
+					// `presentation` for as long as that controller is on screen. If the
+					// presentation is released, `onPresented`, `onCloseRequested` and
+					// `onDismissed` stop firing.
+					self.retainedPresentation = presentation
 					let purchaselyController = presentation.controller
 
              

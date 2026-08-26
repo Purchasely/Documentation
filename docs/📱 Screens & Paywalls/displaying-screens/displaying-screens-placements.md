@@ -53,10 +53,8 @@ In one line of code in your application, you can retrieve the UIViewController (
 
 ```swift Swift
 let placementId = "<<default_placement>>"
-// Get the UIViewController to present
-PLYPresentationBuilder.forPlacementId(placementId).build().preload { presentation, error in
-    let purchaselyController = presentation?.controller
-}
+// The SDK fetches the Screen and presents it for you
+PLYPresentationBuilder.forPlacementId(placementId).build().display(completion: nil)
 ```
 ```kotlin Kotlin
 // Retrieve the view to display in your layout hierarchy
