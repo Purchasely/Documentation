@@ -88,6 +88,7 @@ next:
 | `commitment_will_auto_renew` | No | **boolean**<br><br>Whether the commitment will renew for a new 12-month term when the current one ends. This is distinct from the monthly billing of installments within the term.<br><br>Only present for 12-month commitment subscriptions. |
 | `retention_response_type` | No | **string**<br><br>What Purchasely answered when Apple requested a retention message at the App Store cancel sheet: `message`, `promotional_offer`, `alternate_plan`, or `none` — no targeting rule matched, Apple displays the default retention message configured for the product, if any.<br><br>Only present on `RETENTION_MESSAGE_REQUESTED` events, where the other `retention_*` attributes below are also filled according to the response type. |
 | `retention_request_identifier` | No | **string**<br><br>Apple's unique identifier for the retention message request. At most one `RETENTION_MESSAGE_REQUESTED` event is emitted per request identifier. |
+| `retention_processing_duration_ms` | No | **int**<br><br>_in milliseconds_<br><br>Time Purchasely took to answer Apple's request, from the start of the evaluation to the response being sent. |
 | `retention_user_locale` | No | **string**<br><br>The subscriber's locale as provided by Apple (e.g. `en-US`), used to pick the localization of the served message. |
 | `retention_rule_id` | No | **string**<br><br>ID of the targeting rule that served the response. Absent when `retention_response_type` is `none`. |
 | `retention_message_id` | No | **string**<br><br>Purchasely ID of the served retention message. Absent when `retention_response_type` is `none`. |
@@ -372,6 +373,7 @@ next:
   "retention_message_vendor_id": "comeback_message",
   "retention_offer_appstore_id": "com.purchasely.plus.offer.comeback",
   "retention_offer_vendor_id": "comeback_offer",
+  "retention_processing_duration_ms": 243,
   "retention_request_identifier": "9a2b4c6d-1e3f-4a5b-8c7d-0e1f2a3b4c5d",
   "retention_response_type": "promotional_offer",
   "retention_rule_id": "rtrule_uClhg7jmDt6FFwxFFei1VnpwGomdR",
