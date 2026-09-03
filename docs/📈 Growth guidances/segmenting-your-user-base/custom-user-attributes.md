@@ -14,6 +14,12 @@ next:
 ---
 <CustomUserAttributesDefinition />
 
+> 📘 An attribute can arrive from a Web2App redemption (SDK 6.1.0)
+>
+> A successful [Web2App](web2app) redemption can carry a versioned `purchase_context` from the web funnel. The SDK restores the built-in and the custom user attributes of that context into its own stores, before it refreshes the entitlements.
+>
+> An audience can therefore match on an attribute that the user never set in the app. You target the value of the attribute in the same way, whatever its origin.
+
 # Configuring Custom User Attributes in the Console
 
 ## Creating a new Customer User Attribute

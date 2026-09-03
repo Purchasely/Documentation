@@ -28,7 +28,7 @@ If you have added a video to your Screen, you need to include our player depende
 
 > 📘 Compatibility
 >
-> Our implementation utilizes version `1.1.1` of **[Jetpack Media3](https://developer.android.com/media/media3)**. If your project uses a different version of **Exoplayer/Media3** that is not compatible with this version, you will need to provide a custom class to the Purchasely SDK.
+> Our implementation utilizes version `1.11.0` of **[Jetpack Media3](https://developer.android.com/media/media3)**. If your project uses a different version of **Exoplayer/Media3** that is not compatible with this version, you will need to provide a custom class to the Purchasely SDK.
 
 # Purchasely video player
 
@@ -37,7 +37,7 @@ The easiest way to add video support is by including the Purchasely player depen
 ## Android native
 
 ```groovy Gradle
-implementation 'io.purchasely:player:6.0.1'
+implementation 'io.purchasely:player:6.1.0'
 ```
 
 ## React Native
@@ -57,7 +57,7 @@ flutter pub add purchasely_android_player
 Add the native android dependency in the `build.gradle` file of your android project:
 
 ```groovy Gradle
-implementation 'io.purchasely:player:6.0.1'
+implementation 'io.purchasely:player:6.1.0'
 ```
 
 Already included in the SDK.

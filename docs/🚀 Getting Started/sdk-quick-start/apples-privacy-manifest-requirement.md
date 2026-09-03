@@ -16,12 +16,29 @@ Starting **May 1st, 2024**, Apple mandated that any newly developed app or updat
 
 To comply with this requirement, **third-party SDKs must provide their own privacy manifest files**, detailing the types of data they collect.  
 
-We want to reassure you that **Purchasely SDKs (v4.3.5 and later) fully comply with these regulations**. Our privacy manifest includes declarations for the following data types:
+We want to reassure you that **Purchasely SDKs fully comply with these regulations**. The iOS SDK has shipped a privacy manifest since v4.3.5. The list of declared data types **grew in 6.1.0**, when the SDK gained its [diagnostics and observability](sdk-diagnostics-and-observability) feature.
+
+Our `PrivacyInfo.xcprivacy` declares the following data types. It sets `NSPrivacyCollectedDataTypeLinked` to `false` and `NSPrivacyCollectedDataTypeTracking` to `false` for every one of them:
 
 * **User ID**  
 * **Device ID (IDFV)**  
 * **Product Interaction**  
 * **Purchase History**  
+* **`NSPrivacyCollectedDataTypePerformanceData`** *(new in 6.1.0)*  
+* **`NSPrivacyCollectedDataTypeOtherDiagnosticData`** *(new in 6.1.0)*  
+* **`NSPrivacyCollectedDataTypeCrashData`** *(new in 6.1.0)*  
+
+> 📘 About the three data types added in 6.1.0
+>
+> The three new data types each declare the single purpose `NSPrivacyCollectedDataTypePurposeAppFunctionality`. They are not linked to the user, and they are not used for tracking.
+>
+> The SDK detects its own crashes through MetricKit. It installs **no** crash handler, so it does not interfere with Crashlytics, Sentry or any other crash reporter in your app.
+>
+> The SDK collects no personal data, and it sanitizes the free text of a crash report.
+>
+> Update your App Store privacy answers when your report copies the SDK manifest.
+>
+> 📚 More information: [SDK diagnostics and observability](sdk-diagnostics-and-observability)
 
 To ensure compliance and avoid potential app submission rejections, it is essential that you **update the Purchasely iOS SDK**.
 
@@ -51,7 +68,7 @@ As an app developer, you do not need to duplicate it. However, we recommend the 
 
 ### **When Should the App Declare Additional Privacy Information?**
 
-If your app **collects additional data** beyond what Purchasely declares—such as location, contact information, or health data—you must include those in your own **PrivacyInfo.xcprivacy** file.
+If your app **collects additional data** beyond what Purchasely declares, such as location, contact information, or health data, you must include those in your own **PrivacyInfo.xcprivacy** file.
 
 ***
 

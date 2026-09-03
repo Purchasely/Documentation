@@ -54,6 +54,7 @@ next:
 | `selected_option_id` | NO | **string**<br><br>Contains the Option Id as set in the [Screen Composer](screen-composer) for a [plan picker](plan-pickers-horizontal), [survey](mcq), [faq](faq) or switch component.<br><br>_This attribute will be filled for`OPTIONS_SELECTED` and `OPTIONS_VALIDATED` events_ |
 | `selected_options` | NO | **Array of Strings**<br><br>Contains options selected (event `OPTIONS_SELECTED`) or validated (event `OPTIONS_VALIDATED`) by the user. The values provided match with the options configured in the [Screen Composer](screen-composer).<br><br>_This attribute will be filled for`OPTIONS_SELECTED` and `OPTIONS_VALIDATED` events_ |
 | `displayed_options` | NO | **Array of Strings**<br><br>List of options values displayed to the user. The values provided match with the options configured in the [Screen Composer](screen-composer).<br><br>_This attribute will be filled for`OPTIONS_SELECTED` and `OPTIONS_VALIDATED` events_ |
+| `redemption` | No | **object** (described [here](#redemption))<br><br>Contains the result of a [Web2App redemption](web2app).<br><br>_This attribute will only be filled for[Redemption events](ui-sdk-events-list#redemption-events)_ |
 
 <br />
 
@@ -104,6 +105,41 @@ The following properties are only set for the events `OPTIONS_SELECTED` and `OPT
 | `selected_option_id` | **string**<br><br>Contains the [Survey ID](https://docs.purchasely.com/docs/mcq#1-configuring-the-survey). |
 | `selected_options` | **Array of Strings**<br><br>Contains answers selected (event `OPTIONS_SELECTED`) or validated (event `OPTIONS_VALIDATED`) by the user. The values provided match with the [Answers values](https://docs.purchasely.com/docs/mcq#4-configuring-the-answers-available-and-associated-texts) configured. |
 | `displayed_options` | **Array of Strings**<br><br>List of Answers values displayed to the user. The values provided match with the [Answers values](https://docs.purchasely.com/docs/mcq#4-configuring-the-answers-available-and-associated-texts)  configured. |
+
+# Redemption
+
+The following properties are only set for the events `REDEMPTION_CONSUMED` and `REDEMPTION_FAILED`, which report the result of a [Web2App redemption](web2app) deeplink. They are available from SDK 6.1.0 on iOS and on Android. The two platforms emit the same JSON, and that JSON is the documented contract.
+
+A redemption comes from a deeplink and not from a Screen, so these events carry no paywall context.
+
+The `redemption` object holds:
+
+| Attribute | Description |
+| :--- | :--- |
+| `token` | **string**<br><br>Contains the token of the redeemed link.<br><br>This attribute is filled when the SDK knows the token. |
+| `receipt` | **object**<br><br>Contains the receipt the backend created for the transferred subscription. It holds `id`, the receipt identifier, and `validation_status`, the validation status of the receipt.<br><br>This attribute is filled for `REDEMPTION_CONSUMED`. |
+| `subscriptions` | **Array of objects**<br><br>Contains the active subscriptions and the non-consumables the redemption granted. Each entry holds `public_id`, `plan_id`, `store_type`, `subscription_status` and `environment`.<br><br>An expired subscription is left out: a redemption grants an entitlement, it does not report a history.<br><br>This attribute is filled for `REDEMPTION_CONSUMED`. |
+| `purchase_context` | **object** (described [here](#purchase-context))<br><br>Contains the context of the web funnel behind the subscription.<br><br>This attribute is filled when the backend returned a context. |
+| `error_code` | **string**<br><br>Contains the code of the failure.<br>Known values:<br><br>* `EXPIRED_REDEMPTION_TOKEN`<br>* `INVALID_REDEMPTION_TOKEN`<br><br>A transport failure or a parsing failure carries no code. This attribute is then absent. This matches how Android reports a network error.<br><br>This attribute is filled for `REDEMPTION_FAILED`. |
+
+The event also carries a top-level `error_message` for `REDEMPTION_FAILED`. It contains the message of the backend, or the reason the SDK produced when the request never reached the backend.
+
+<br />
+
+## Purchase context
+
+The `purchase_context` object is versioned. It holds:
+
+| Attribute | Description |
+| :--- | :--- |
+| `version` | **int**<br><br>Contains the version of the purchase context format. |
+| `source` | **string**<br><br>Contains the origin of the purchase.<br>_E.g.: `web2app`_ |
+| `sandbox` | **bool**<br><br>`true` when the purchase was made in a sandbox environment. |
+| `replay` | **bool**<br><br>`true` when the user replayed a link that was already redeemed. |
+| `built_in_attributes` | **Array of objects**<br><br>Contains the built-in user attributes the redemption restored. Each entry holds `key`, `type` and `value`.<br><br>An empty family reports nothing rather than an empty array. |
+| `custom_attributes` | **Array of objects**<br><br>Contains the [custom user attributes](custom-user-attributes) the redemption restored. Each entry holds `key`, `type` and `value`.<br><br>An empty family reports nothing rather than an empty array. |
+
+The values stay as the backend declared them. The SDK writes these attributes into its stores before it refreshes the entitlements, so every event after the redemption already carries them.
 
 # Payload sample
 
@@ -305,5 +341,72 @@ The following properties are only set for the events `OPTIONS_SELECTED` and `OPT
     "reponse_d",
     "reponse_e"
   ]																	// Answers displayed to the user
+}
+```
+
+```json REDEMPTION_CONSUMED
+{
+  "event_name" : "REDEMPTION_CONSUMED",
+  "event_created_at" : "2026-09-03T09:14:22.115Z",
+  "event_created_at_ms" : 1788426862115,
+  "device" : "iPhone15,2",
+  "type" : "PHONE",
+  "os_version" : "iOS 18.5",
+  "sdk_version" : "6.1.0",
+  "user_id" : "user_1",
+  "anonymous_user_id" : "67C77206-F279-4932-B322-69DC4319B517",
+  "redemption" : {
+    "token" : "rdm_tok_1",
+    "receipt" : {
+      "id" : "receipt_1",
+      "validation_status" : "COMPLETED"
+    },
+    "subscriptions" : [
+      {
+        "public_id" : "subs_1",
+        "plan_id" : "PURCHASELY_PLUS_YEARLY",
+        "store_type" : "APPLE_APP_STORE",
+        "subscription_status" : "AUTO_RENEWING",
+        "environment" : "PRODUCTION"
+      }
+    ],
+    "purchase_context" : {
+      "version" : 1,
+      "source" : "web2app",
+      "sandbox" : false,
+      "replay" : false,
+      "built_in_attributes" : [
+        {
+          "key" : "utm_source",
+          "type" : "string",
+          "value" : "facebook"
+        }
+      ],
+      "custom_attributes" : [
+        {
+          "key" : "quizz_answer",
+          "type" : "string",
+          "value" : "d"
+        }
+      ]
+    }
+  }
+}
+```
+```json REDEMPTION_FAILED
+{
+  "event_name" : "REDEMPTION_FAILED",
+  "event_created_at" : "2026-09-03T09:16:04.902Z",
+  "event_created_at_ms" : 1788426964902,
+  "device" : "iPhone15,2",
+  "type" : "PHONE",
+  "os_version" : "iOS 18.5",
+  "sdk_version" : "6.1.0",
+  "anonymous_user_id" : "67C77206-F279-4932-B322-69DC4319B517",
+  "error_message" : "Redemption link has expired.",
+  "redemption" : {
+    "token" : "rdm_tok_1",
+    "error_code" : "EXPIRED_REDEMPTION_TOKEN"
+  }
 }
 ```

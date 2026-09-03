@@ -33,7 +33,7 @@ next:
 | `PRESENTATION_CLOSED` | The Screen was closed | `.presentationClosed` / `PresentationClosed` |
 | `PRESENTATION_SELECTED` | The user selected a different tab / tile in the Screen | `.presentationSelected` / `PresentationSelected` |
 | `PRESENTATION_OPENED` | The user opened a different tab / tile in the Screen | `.presentationOpened` / `PresentationOpened` |
-| `PLAN_SELECTED` | The user selected a Plan on the Screen<br>*Deprecated with SDK versions 5.0+ — replaced by `OPTIONS_SELECTED`* | `.planSelected` / `PlanSelected` |
+| `PLAN_SELECTED` | The user selected a Plan on the Screen<br>*Deprecated with SDK versions 5.0+, replaced by `OPTIONS_SELECTED`* | `.planSelected` / `PlanSelected` |
 | `PURCHASE_TAPPED` | The user tapped on a purchase button | `.purchaseTapped` / `PurchaseTapped` |
 | `PURCHASE_CANCELLED` | The user cancelled the purchase action | `.purchaseCancelled` / `PurchaseCancelled` |
 | `LOGIN_TAPPED` | The user tapped on the login button | `.loginTapped` / `LoginTapped` |
@@ -84,12 +84,19 @@ next:
 | `USER_LOGGED_IN`  | The user logged in | `.userLoggedIn` / `UserLoggedIn`   |
 | `USER_LOGGED_OUT` | A user logged out  | `.userLoggedOut` / `UserLoggedOut` |
 
+# Redemption Events
+
+These events report the result of a [Web2App redemption](web2app) deeplink. They are available from SDK 6.1.0 on iOS and on Android. A redemption comes from a deeplink and not from a Screen, so these events carry no paywall context: `displayed_presentation`, `placement_id`, `audience_id`, `ab_test_id` and the Flow attributes are absent.
+
+The SDK also reports `REDEMPTION_CONSUMED` when the user replays a link that was already redeemed. The `replay` flag in the `purchase_context` tells a first redemption and a replay apart.
+
+| Event | Description | Value `iOS` / `Android` |
+| :--- | :--- | :--- |
+| `REDEMPTION_CONSUMED` | The redemption link was consumed: the subscription was transferred and the receipt was validated | `.redemptionConsumed` / `RedemptionConsumed` |
+| `REDEMPTION_FAILED` | The redemption failed: the link is expired, the link is not valid, or the request did not complete | `.redemptionFailed` / `RedemptionFailed` |
+
 # Miscellaneous Events
 
 | Event                           | Description                                                        | Value `iOS` / `Android`                                        |
 | :------------------------------ | :----------------------------------------------------------------- | :------------------------------------------------------------- |
-| `CANCELLATION_REASON_PUBLISHED` | The user replied to the [cancellation survey](cancellation-survey) | `.cancellationReasonPublished` / `CancellationReasonPublished` |
-| `SUBSCRIPTION_DETAILS_VIEWED`   | Detail page of a subscription viewed                               | `.subscriptionDetailsViewed` / `SubscriptionDetailsViewed`     |
-| `SUBSCRIPTION_PLAN_TAPPED`      | Tapped to change plan                                              | `.subscriptionPlanTapped` / `SubscriptionPlanTapped`           |
-| `SUBSCRIPTIONS_LIST_VIEWED`     | Subscriptions list viewed                                          | `.subscriptionsListViewed` / `SubscriptionListViewed`          |
 | `PURCHASE_FROM_STORE_TAPPED`    | The user opened the app from a Promoted In-App Purchase            | `.purchaseFromStoreTapped` / NA                                |

@@ -13,8 +13,8 @@ metadata:
 The Preview feature lets you validate how a Screen will look and behave before exposing it to end users.
 Purchasely provides two complementary preview mechanisms:
 
-1. Console Preview – fast iteration and visual checks directly in the Console
-2. In-App Preview – native rendering inside your app, as your users will see it
+1. Console Preview: fast iteration and visual checks directly in the Console
+2. In-App Preview: native rendering inside your app, as your users will see it
 
 Both should be used together to ensure design accuracy, functional correctness, and confidence before launch.
 
@@ -157,11 +157,28 @@ It will open your app and automatically trigger the associated Screen, which wil
 >
 > 📚 [Deeplink management](deeplinks-management)
 
-> 🚧 **How to make it work for Android ?**
+> 🚧 **The camera does not open my app scheme**
 >
-> On some devices, deeplinks like myapp:// are not opened by the camera, this is a limitation from Google.  
+> On some devices, a deeplink like myapp:// is not opened by the camera. This is a limitation from Google.  
 > Instead you can use [App Links](https://developer.android.com/training/app-links) like [https://myapp.com/](https://myapp.com/) as the scheme for your application.  
-> Purchasely will then use a link in this format: [https://myapp.com/ply/presentations_preview/MY_PAYWALL_ID](https://myapp.com/ply/presentations_preview/MY_PAYWALL_ID) embedded in the QR Code that should work on your device if you have followed [Android documentation](https://support.google.com/android/search?q=open+by+default)
+> Purchasely then uses a link in this format: `https://myapp.com/ply/presentations/MY_PAYWALL_ID?preview=1` embedded in the QR code. It works on your device when you have followed the [Android documentation](https://support.google.com/android/search?q=open+by+default).
+
+> 📘 How the preview options reach the Screen
+>
+> Both SDKs fetch a preview through the regular `presentations/{id}` route. The SDK forwards `preview=1` and the option keys in the query.
+>
+> The backend honours `theme_mode`, `language`, `intro_offer`, `ply_att` and `ply_audiences` only when `preview=1` is present. On Android this works in every 6.x build. On iOS this works from 6.1.0.
+>
+> Only the literal value `preview=1` counts. The values `preview=true`, `preview=yes` and a bare `preview` are not a preview on Android and not a preview on iOS. The two SDKs match exactly on this rule.
+>
+> A preview deeplink bypasses the `allowDeeplink` gate on both platforms. An author who scans a QR code expects the Screen. The gate exists to stop an unsolicited paywall, not a solicited one.
+>
+> Two limitations apply on both platforms:
+>
+> * The options apply to a Screen and not to a Flow. A Flow preview renders each step with the device defaults.
+> * A hand-edited link without `preview=1` renders a live presentation, and you get no warning.
+>
+> Before 6.1.0, iOS treated `ply/presentations/{id}?preview=1` as a live paywall: it routed the link to the deprecated `/presentations_preview` endpoint, which drops every option, and it did not bypass the gate. The same link worked on Android.
 
 ### Preview before publication
 

@@ -32,3 +32,12 @@ The Purchasely SDK manages deeplinks for:
 
 * **Update billing**\
   This deeplink `app_scheme://ply/update_billing` can be used to open the App Store / Play Store setttings to update credit card after a payment error
+
+<br />
+
+* **Web2App redemption**\
+  This deeplink `{app_scheme}://ply/redeem/{token}?auid={anonymous_user_id}` transfers a subscription bought on the web to the app
+
+  Your app does not build this link by hand. The backend, the email and the landing page produce it.
+
+  📚 More information: [Web2App](web2app)
