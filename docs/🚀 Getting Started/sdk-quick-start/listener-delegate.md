@@ -32,6 +32,73 @@ If you want to leverage these analytics and gain real-time insights on how users
 
 <br />
 
+# Web2App Redemption Delegate / Listener
+
+When a user opens a `ply/redeem/TOKEN` deeplink, the Purchasely SDK redeems the web subscription. The SDK reports the outcome to your app. Your app can also draw the result screen itself, instead of the built-in alert.
+
+This feature is available starting from the following versions:
+
+* iOS: v6.1.0+
+* Android: v6.1.0+
+
+## Functionning
+
+The SDK calls your delegate or your listener on the main thread. It calls it exactly once for each settled redemption.
+
+Keep `appHandlesRedemptionAlert` at `false`, the default value, to let the SDK present its own success or failure alert. The SDK then calls your app once the user acknowledges that alert. On Android the listener fires when the user dismisses the outcome alert, unless the app owns the alert. Set `appHandlesRedemptionAlert` to `true` to suppress the built-in alert. The SDK then calls your app as soon as the redemption settles, and your app must show its own result screen.
+
+## Implementation
+
+```swift Swift
+import Purchasely
+
+// In your AppDelegate
+Purchasely
+    .apiKey("<<X-API-KEY>>")
+    .webRedemptionDelegate(self, appHandlesRedemptionAlert: false)
+    .start()
+
+extension AppDelegate: PLYWebRedemptionDelegate {
+
+    func webRedemptionCompleted(result: PLYWebRedemptionResult) {
+        if result.isSuccess {
+            // Unlock the content and draw your result screen
+        } else {
+            print("Redemption failed: \(result.errorCode) \(result.errorMessage)")
+        }
+    }
+}
+```
+```kotlin
+Purchasely.Builder(applicationContext)
+    .apiKey("<<X-API-KEY>>")
+    .webRedemptionListener { result ->
+        when (result) {
+            is PLYWebRedemptionResult.Success -> {
+                val subscription = result.context?.subscription
+                // Unlock the content and draw your result screen
+            }
+            is PLYWebRedemptionResult.Failure -> {
+                println("Redemption failed: ${result.errorCode} ${result.errorMessage}")
+            }
+        }
+    }
+    .build()
+    .start { error -> }
+```
+
+On iOS the protocol is `PLYWebRedemptionDelegate`, and it requires the single method `webRedemptionCompleted(result:)`. The `PLYWebRedemptionResult` object exposes `isSuccess`, `errorCode`, `errorMessage`, `replay` and `context`. The `context` is a `PLYWebRedemptionContext`, and its `subscription` property is an optional `PLYSubscription`.
+
+On Android the callback method is `PLYWebRedemptionListener.onRedemptionCompleted`. The `PLYWebRedemptionResult` class is a sealed class of `Success(context, replay)` and `Failure(errorCode, errorMessage)`. The `subscription` property of the context is a `PLYSubscriptionData`, the type that `Purchasely.userSubscriptions()` returns.
+
+Check both levels for `null` on Android. The `context` of a `Success` is `null` when the response of the server carries nothing to describe. The `subscription` of a present context is separately `null` when the redemption unlocks no subscription. The SDK today always builds a context on a success, but the field stays nullable for a future response shape. The `errorCode` and the `errorMessage` of a `Failure` are also nullable.
+
+The `replay` value is `true` when the server reports that the token was already redeemed. It is `false` for a fresh redemption. The flag is a verdict of the server about the token, not an observation of the behaviour of the user. The SDK keeps no cache of the outcome, and it calls the server on every attempt.
+
+Android also provides a two-argument form of the builder method and of the DSL method: `webRedemptionListener(appHandlesRedemptionAlert = true) { result -> }`. Both forms take `appHandlesRedemptionAlert` first, then the listener.
+
+<br />
+
 # Custom User Attributes Listener
 
 The Purchasely SDK allows you to publish [Surveys](mcq), [gain insights on users and leverage them to personalize the journey](user-surveys).
