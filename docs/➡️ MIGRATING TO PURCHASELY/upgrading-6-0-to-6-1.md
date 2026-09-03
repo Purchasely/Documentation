@@ -48,13 +48,20 @@ Both APIs sit on the builder. They are optional, so your current code keeps work
 ```swift
 Purchasely.apiKey("...")
     .webRedemptionDelegate(self, appHandlesRedemptionAlert: false)
-    .appAnonymousUserId(myUUID)                  // taken only if no id exists yet
-    .appAnonymousUserId(myUUID, override: true)  // replaces an existing id
+    .appAnonymousUserId(myUUID)
     .start()
 ```
 
 - `webRedemptionDelegate(_:appHandlesRedemptionAlert:)` gives your app the result of a Web2App redemption. See [Web-to-app funnels (redemption)](web2app).
-- `appAnonymousUserId(_:)` and `appAnonymousUserId(_:override:)` take a `UUID?`. Pass `nil` to change nothing. The method never clears a stored id.
+- `appAnonymousUserId(_:)` takes a `UUID?`. The SDK applies the id only when the device holds no anonymous id yet. Pass `nil` to change nothing. The method never clears a stored id.
+
+Call `appAnonymousUserId(_:override:)` instead to replace an id that already exists. Use one form or the other, not both: each modifier returns a new builder, so a later call replaces an earlier one.
+
+```swift
+Purchasely.apiKey("...")
+    .appAnonymousUserId(myUUID, override: true)
+    .start()
+```
 
 ### 3. Two new events
 
