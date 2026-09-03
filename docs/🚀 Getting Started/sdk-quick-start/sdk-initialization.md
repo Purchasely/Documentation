@@ -32,7 +32,6 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
         .appUserId(nil) // optional if you already know your user id
         .runningMode(.full) // ⚠️ default is now .observer — set .full for Purchasely to handle purchases
         .storekitSettings(.storeKit2) // Set your StoreKit version
-        .webRedemptionDelegate(self, appHandlesRedemptionAlert: false) // SDK 6.1.0, your AppDelegate adopts PLYWebRedemptionDelegate
         .logLevel(.debug)
         .start { error in
             print(error == nil)
@@ -58,7 +57,6 @@ class YourApplication: Application() {
             userId(null) // optional if you already know your user id
             stores(listOf(GoogleStore())) // Set the list of stores you want to have
             runningMode(PLYRunningMode.Full) // ⚠️ default is now Observer — set Full for Purchasely to handle purchases
-            webRedemptionListener { result -> } // SDK 6.1.0, result of a Web2App redemption deeplink
             onInitialized { error ->
                 if (error == null) {
                     // Purchasely setup is complete
@@ -138,23 +136,26 @@ Purchasely.start(
 
 The parameter `runningMode` allows you to choose between the `full` mode and the `observer` mode.
 
-> 🚧 Major change in v6 — default running mode is now `observer`
->
-> In SDK v5 the default running mode was **Full** (Purchasely handles and validates purchases).
-> In **SDK v6 the default is `observer`** (Purchasely only observes transactions, without processing them).
->
-> This change is **silent** — your code keeps compiling. If you want Purchasely to handle the
-> purchase flow and validate receipts, you **must** now set the mode explicitly:
-> `.runningMode(.full)` on iOS, `.runningMode(PLYRunningMode.Full)` on Android.
->
-> See the [v6 migration guide](migrating-from-sdk-5-to-6) for details.
+<Callout icon="🚧" theme="warn">
+  ### Major change in v6 — default running mode is now `observer`
+
+  In SDK v5 the default running mode was **Full** (Purchasely handles and validates purchases).
+  In **SDK v6 the default is&#x20;**`observer` (Purchasely only observes transactions, without processing them).
+
+  This change is **silent** — your code keeps compiling. If you want Purchasely to handle the
+  purchase flow and validate receipts, you **must** now set the mode explicitly:
+  `.runningMode(.full)` on iOS, `.runningMode(PLYRunningMode.Full)` on Android.
+
+  See the [v6 migration guide](migrating-from-sdk-5-to-6) for details.
+</Callout>
 
 [More details on the SDK running modes.](running-modes)
 
-> 📘 This call is mandatory
->
-> Ensure that `Purchasely.start()` is **the first method executed** by your application.\
-> This process does not block the main thread, allowing you to call other SDK methods immediately after invoking this method.
+<Callout icon="📘" theme="info">
+  ### This call is mandatory
+
+  Ensure that `Purchasely.start()` is **the first method executed** by your application.<br />This process does not block the main thread, allowing you to call other SDK methods immediately after invoking this method.
+</Callout>
 
 The following operations occur during initialization (non-exhaustive list):
 
@@ -171,7 +172,9 @@ If you depend on any of this information at the start, you must wait for the [ca
 
 You can find your API Key in the section [App settings / Backend & SDK configuration](https://console.purchasely.io/settings?step=backend-sdk) of the Purchasely Console and copy it by clicking on the Copy button.
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/92ea305-image.png" />
+
+<Image src="https://files.readme.io/92ea305-image.png" align="center" border={true} />
+
 
 <br />
 
@@ -290,9 +293,11 @@ Each store has its own dependency that you must install. Read our [installation 
 
 ## Android API proxy
 
-> 📘 Requires SDK 6.1.0
->
-> The `proxy` method is available from Android SDK 6.1.0. The iOS equivalent is not in 6.1.0.
+<Callout icon="📘" theme="info">
+  ### Requires SDK 6.1.0
+
+  The `proxy` method is available from Android SDK 6.1.0. The iOS equivalent is not in 6.1.0.
+</Callout>
 
 Use a proxy when `api.purchasely.io` is unreachable, for example behind the Great Firewall in mainland China. Purchasely provides `https://svc.purchasely.io`. You can also host your own proxy.
 
@@ -313,9 +318,11 @@ The SDK accepts only an `https` URL. It refuses a blank, a non-https, a malforme
 
 ## Manual anonymous user id
 
-> 📘 Requires SDK 6.1.0
->
-> The manual anonymous user id is available from iOS SDK 6.1.0 and from Android SDK 6.1.0.
+<Callout icon="📘" theme="info">
+  ### Requires SDK 6.1.0
+
+  The manual anonymous user id is available from iOS SDK 6.1.0 and from Android SDK 6.1.0.
+</Callout>
 
 Give Purchasely the anonymous id that your app already uses. Both systems then report the same person. The two platforms do not share the same signature. Read the block for your platform.
 
@@ -355,9 +362,11 @@ The SDK takes your id only when the device holds no anonymous id yet. Use the `o
 
 ## Web2App redemption result
 
-> 📘 Requires SDK 6.1.0
->
-> The redemption delegate and the redemption listener are available from iOS SDK 6.1.0 and from Android SDK 6.1.0.
+<Callout icon="📘" theme="info">
+  ### Requires SDK 6.1.0
+
+  The redemption delegate and the redemption listener are available from iOS SDK 6.1.0 and from Android SDK 6.1.0.
+</Callout>
 
 The SDK tells your app the result of a `ply/redeem/TOKEN` deeplink. Declare the delegate on iOS, or the listener on Android, in the initialization chain. Keep `appHandlesRedemptionAlert` at `false` to let the SDK present its own success or failure popin. Set it to `true` to present your own result screen instead.
 
@@ -365,8 +374,7 @@ The SDK calls your delegate or your listener on the main thread. It calls it exa
 
 ## Callback on initialization
 
-If you **rely on a specific user subscription status**, such as eligibility for an introductory offer or current active subscription, **wait for the start method callback**. At that point, the SDK will have gathered all the necessary information to provide an accurate answer.\
-This **also applies when you want to display a placement** with an [Audience](segmenting-your-user-base) based on current or past subscription status.
+If you **rely on a specific user subscription status**, such as eligibility for an introductory offer or current active subscription, **wait for the start method callback**. At that point, the SDK will have gathered all the necessary information to provide an accurate answer.<br />This **also applies when you want to display a placement** with an [Audience](segmenting-your-user-base) based on current or past subscription status.
 
 Otherwise, you can [display a screen](displaying-screens) without waiting, as the SDK will automatically update the screen displayed when all necessary information about pricing and offers for your plans have been fetched.
 
