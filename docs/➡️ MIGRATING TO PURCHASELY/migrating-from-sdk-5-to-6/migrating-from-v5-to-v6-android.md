@@ -2,7 +2,7 @@
 title: Migrating to v6 — Android
 excerpt: >-
   Breaking changes and migration steps to upgrade the Purchasely Android SDK
-  from v5.x to v6.0.1
+  from v5.x to v6.1.0
 deprecated: false
 hidden: false
 metadata:
@@ -28,7 +28,7 @@ This guide covers the **native Android SDK** (Kotlin & Java). For other platform
 
 | Requirement | v6 value |
 | --- | --- |
-| SDK version | **6.0.1** (stable) |
+| SDK version | **6.1.0** (stable) |
 | Gradle | **9.3.0 minimum** (SDK built with 9.6.1) |
 | Android Gradle Plugin | SDK built with AGP 9.0.1 |
 | Kotlin | **2.2.x minimum**, K2 compiler (SDK built with 2.3.21) |
@@ -69,7 +69,7 @@ This guide covers the **native Android SDK** (Kotlin & Java). For other platform
 
 ## 1. Update your Gradle dependencies
 
-Bump every Purchasely artifact to **6.0.1** and make sure your build environment meets the [Requirements](#requirements).
+Bump every Purchasely artifact to **6.1.0** and make sure your build environment meets the [Requirements](#requirements).
 
 ### Before (v5)
 
@@ -85,13 +85,13 @@ dependencies {
 
 ```kotlin
 dependencies {
-    implementation("io.purchasely:core:6.0.1")
-    implementation("io.purchasely:google-play:6.0.1")
-    implementation("io.purchasely:player:6.0.1") // optional, video support
+    implementation("io.purchasely:core:6.1.0")
+    implementation("io.purchasely:google-play:6.1.0")
+    implementation("io.purchasely:player:6.1.0") // optional, video support
 }
 ```
 
-Alternative stores follow the same version: `io.purchasely:huawei-services:6.0.1`, `io.purchasely:amazon:6.0.1`.
+Alternative stores follow the same version: `io.purchasely:huawei-services:6.1.0`, `io.purchasely:amazon:6.1.0`.
 
 > 🚧 Kotlin `jvmTarget = 11`
 >
@@ -930,7 +930,7 @@ Purchasely.synchronize(onSuccess, onError);
 
 ## Migration checklist
 
-- [ ] Bump all `io.purchasely:*` dependencies to **6.0.1**; verify Gradle ≥ 9.3.0, Kotlin ≥ 2.2 with `jvmTarget = 11`, `minSdk` ≥ 23, `compileSdk` 36
+- [ ] Bump all `io.purchasely:*` dependencies to **6.1.0**; verify Gradle ≥ 9.3.0, Kotlin ≥ 2.2 with `jvmTarget = 11`, `minSdk` ≥ 23, `compileSdk` 36
 - [ ] **Set `.runningMode(PLYRunningMode.Full)` explicitly if Purchasely handles and validates your purchases** (the default is now Observer)
 - [ ] Rename `PLYRunningMode.PaywallObserver` → `PLYRunningMode.Observer`
 - [ ] Update the init callback: `start { isConfigured, error -> }` → `start { error -> }` (or adopt the Kotlin DSL with `onInitialized { error -> }`)

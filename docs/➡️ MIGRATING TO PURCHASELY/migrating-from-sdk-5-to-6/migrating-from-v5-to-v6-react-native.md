@@ -72,11 +72,11 @@ npm install @purchasely/react-native-purchasely-android-player@6.0.0
 
 iOS: `cd ios && pod install`. Android: autolinking handles the native modules.
 
-The bridge pulls the native pins automatically (iOS pod `Purchasely 6.0.0`, Android `io.purchasely:core:6.0.1`). Minimum OS versions: **iOS 15.1**, **Android&#x20;**`minSdkVersion 23`.
+The bridge pulls the native pins automatically (iOS pod `Purchasely 6.1.0`, Android `io.purchasely:core:6.1.0`). Minimum OS versions: **iOS 15.1**, **Android&#x20;**`minSdkVersion 23`.
 
 ### Android: the Kotlin toolchain must be 2.2.x or later
 
-`io.purchasely:core:6.0.1` brings `kotlin-stdlib:2.3.21` and `kotlinx-serialization-json:1.11.0`, whose Kotlin metadata is 2.3.0. A Kotlin compiler reads metadata up to one minor version ahead, so a project on Kotlin 2.1.x or lower stops with:
+`io.purchasely:core:6.1.0` brings `kotlin-stdlib:2.3.21` and `kotlinx-serialization-json:1.11.0`, whose Kotlin metadata is 2.3.0. A Kotlin compiler reads metadata up to one minor version ahead, so a project on Kotlin 2.1.x or lower stops with:
 
 ```text
 Module was compiled with an incompatible version of Kotlin.

@@ -2,7 +2,7 @@
 title: Migrating to v6 — iOS
 excerpt: >-
   Breaking changes and migration steps to upgrade the Purchasely iOS SDK from
-  v5.x to v6.0.0
+  v5.x to v6.1.0
 deprecated: false
 hidden: false
 metadata:
@@ -66,7 +66,7 @@ v6.0.0 adds a first‑class **Swift Package Manager** channel alongside the exis
 
 ```swift
 // In your Package.swift dependencies:
-.package(url: "https://github.com/Purchasely/Purchasely-iOS.git", from: "6.0.0")
+.package(url: "https://github.com/Purchasely/Purchasely-iOS.git", from: "6.1.0")
 ```
 
 In Xcode: *File ▸ Add Package Dependencies…* and enter `https://github.com/Purchasely/Purchasely-iOS`.
@@ -657,7 +657,7 @@ Purchasely.clientPresentationDisplayed(with: presentation)
 
 ### Breaking (must fix to compile)
 
-- [ ] Update your dependency pin to `6.0.0` (SPM `from: "6.0.0"` or CocoaPods `pod 'Purchasely', '~> 6.0'`)
+- [ ] Update your dependency pin to `6.1.0` (SPM `from: "6.1.0"` or CocoaPods `pod 'Purchasely', '~> 6.0'`)
 - [ ] Replace `Purchasely.start(withAPIKey:…)` with the fluent chain `Purchasely.apiKey("…")…start()`
 - [ ] If using Full mode, add explicit `.runningMode(.full)` (default changed to `.observer`) ⚠️
 - [ ] Replace `setPaywallActionsInterceptor { … }` with per‑action `Purchasely.interceptAction(.x) { … }`

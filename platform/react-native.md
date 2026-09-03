@@ -1,6 +1,6 @@
 # Purchasely React Native SDK Documentation
 
-This guide covers the Purchasely React Native SDK **v6** (`6.0.0-rc.2`) for JavaScript / TypeScript apps. The bridge wraps the Purchasely 6.0 native SDKs (iOS `Purchasely 6.0.0-rc.2`, Android `io.purchasely:core 6.0.0-rc.2`) and displays **Presentations** (Screens / paywalls) configured in the Console through placements, direct `screen` lookups, campaigns, deeplinks and Flows.
+This guide covers the Purchasely React Native SDK **v6** (`6.0.0-rc.2`) for JavaScript / TypeScript apps. The bridge wraps the Purchasely 6.0 native SDKs (iOS `Purchasely 6.1.0`, Android `io.purchasely:core 6.1.0`) and displays **Presentations** (Screens / paywalls) configured in the Console through placements, direct `screen` lookups, campaigns, deeplinks and Flows.
 
 > 📘 SDK v6 — what changed
 >
@@ -77,7 +77,7 @@ Then run:
 cd ios && pod install
 ```
 
-The iOS native dependency (`Purchasely 6.0.0-rc.2`) is published on the CocoaPods trunk, so it resolves from the public repositories with no extra configuration.
+The iOS native dependency (`Purchasely 6.1.0`) is published on the CocoaPods trunk, so it resolves from the public repositories with no extra configuration.
 
 ### Android Setup
 
@@ -100,7 +100,7 @@ allprojects {
 }
 ```
 
-The Android native dependencies (`io.purchasely:core` / `google-play` / `player` `6.0.0-rc.2`) are published on **Maven Central**, so they resolve from the public repositories with no extra configuration.
+The Android native dependencies (`io.purchasely:core` / `google-play` / `player` `6.1.0`) are published on **Maven Central**, so they resolve from the public repositories with no extra configuration.
 
 ### Android Dependencies
 

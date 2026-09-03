@@ -60,8 +60,8 @@ These plugins pull the native SDKs:
 
 | Platform | Native artifact |
 |----------|-----------------|
-| iOS | `pod 'Purchasely', '6.0.0'` (CocoaPods) |
-| Android | `io.purchasely:core:6.0.1` + `io.purchasely:google-play:6.0.1` (Maven Central) |
+| iOS | `pod 'Purchasely', '6.1.0'` (CocoaPods) |
+| Android | `io.purchasely:core:6.1.0` + `io.purchasely:google-play:6.1.0` (Maven Central) |
 
 > There is **no video player plugin on Cordova** — the `io.purchasely:player` artifact is not bridged.
 
@@ -647,7 +647,7 @@ On Android the success callback resolves with `null` (no-op) — promotional off
 | Purchases not working on Android | Install `@purchasely/cordova-plugin-purchasely-google` and keep every `io.purchasely:*` dependency on the same version. |
 | Paywall not displaying | Verify the placement exists in the Console, the SDK is initialized, and the device has network access. |
 | Deeplink does nothing | Ensure `Purchasely.allowDeeplink(true)` and that you forward the URL with `handleDeeplink(...)`. |
-| `NoSuchMethodError` at runtime (Android) | A mismatched `io.purchasely:*` version outranks the pinned one in Gradle; pin every artifact to the same string (`6.0.1`). |
+| `NoSuchMethodError` at runtime (Android) | A mismatched `io.purchasely:*` version outranks the pinned one in Gradle; pin every artifact to the same string (`6.1.0`). |
 
 ### Debug logging
 

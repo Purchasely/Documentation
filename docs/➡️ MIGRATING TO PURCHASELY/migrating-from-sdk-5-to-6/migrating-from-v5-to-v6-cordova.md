@@ -62,8 +62,8 @@ This pulls the native SDKs:
 
 | Platform | Native artifact |
 |----------|-----------------|
-| iOS | `pod 'Purchasely', '6.0.0'` (CocoaPods) |
-| Android | `io.purchasely:core:6.0.1` + `io.purchasely:google-play:6.0.1` (Maven Central) |
+| iOS | `pod 'Purchasely', '6.1.0'` (CocoaPods) |
+| Android | `io.purchasely:core:6.1.0` + `io.purchasely:google-play:6.1.0` (Maven Central) |
 
 > 📘 6.0.0 is a stable release
 >
