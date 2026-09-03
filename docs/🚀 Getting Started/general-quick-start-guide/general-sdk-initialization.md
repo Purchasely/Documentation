@@ -21,16 +21,18 @@ next:
 
 <SDKInitializationAdvice />
 
-> 🚧 Major change in v6 — default running mode is now `observer`
->
-> In SDK v5 the default running mode was **Full** (Purchasely handles and validates purchases).
-> In **SDK v6 the default is `observer`** (Purchasely only observes transactions, without processing them).
->
-> This change is **silent** — your code keeps compiling. If you want Purchasely to handle the
-> purchase flow and validate receipts, you **must** now set the mode explicitly:
-> `.runningMode(.full)` on iOS, `.runningMode(PLYRunningMode.Full)` on Android.
->
-> See the [v6 migration guide](migrating-from-sdk-5-to-6) for details.
+<Callout icon="🚧" theme="warn">
+  ### Major change in v6 — default running mode is now `observer`
+
+  In SDK v5 the default running mode was **Full** (Purchasely handles and validates purchases).
+  In **SDK v6 the default is&#x20;**`observer` (Purchasely only observes transactions, without processing them).
+
+  This change is **silent** — your code keeps compiling. If you want Purchasely to handle the
+  purchase flow and validate receipts, you **must** now set the mode explicitly:
+  `.runningMode(.full)` on iOS, `.runningMode(PLYRunningMode.Full)` on Android.
+
+  See the [v6 migration guide](migrating-from-sdk-5-to-6) for details.
+</Callout>
 
 ```swift Swift
 import Purchasely
@@ -39,8 +41,6 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     Purchasely
         .apiKey("<<X-API-KEY>>")
         .appUserId(nil) // optional if you already know your user id
-        .runningMode(.full)
-        .webRedemptionDelegate(self, appHandlesRedemptionAlert: false) // SDK 6.1.0, your AppDelegate adopts PLYWebRedemptionDelegate
         .logLevel(.debug)
         .start { error in
             print(error == nil)
@@ -64,9 +64,6 @@ class YourApplication: Application() {
             context(applicationContext)
             apiKey("<<X-API-KEY>>")
             userId(null) // optional if you already know your user id
-            stores(listOf(GoogleStore())) // Set the list of stores you want to have
-            runningMode(PLYRunningMode.Full) // ⚠️ default is now Observer — set Full for Purchasely to handle purchases
-            webRedemptionListener { result -> } // SDK 6.1.0, result of a Web2App redemption deeplink
             onInitialized { error ->
                 if (error == null) {
                     // Purchasely setup is complete
@@ -99,7 +96,6 @@ import Purchasely from 'react-native-purchasely';
 try {
     const configured = await Purchasely.builder('<<X-API-KEY>>')
         .appUserId(null)        // if you know your user id, set it here
-        .runningMode('full')    // ⚠️ default is now 'observer' — set 'full' for Purchasely to handle purchases
         .logLevel('error')      // set to 'debug' in development mode to see logs
         .start();
 } catch (e) {
@@ -143,10 +139,11 @@ Purchasely.start(
 
 [More details on the SDK running modes.](running-modes)
 
-> 📘 This call is mandatory
->
-> Ensure that `Purchasely.start()` is **the first method executed** by your application.  
-> This process does not block the main thread, allowing you to call other SDK methods immediately after invoking this method.
+<Callout icon="📘" theme="info">
+  ### This call is mandatory
+
+  Ensure that `Purchasely.start()` is **the first method executed** by your application.<br />This process does not block the main thread, allowing you to call other SDK methods immediately after invoking this method.
+</Callout>
 
 <br />
 
@@ -156,7 +153,9 @@ The API Key serves as a confidential identifier, enabling your application to au
 
 You can find your API Key in the section [App settings / Backend & SDK configuration](https://console.purchasely.io/settings?step=backend-sdk) of the Purchasely Console and copy it by clicking on the Copy button.
 
-<Image align="center" border={true} src="https://files.readme.io/92ea305-image.png" className="border" />
+
+<Image src="https://files.readme.io/92ea305-image.png" align="center" border={true} />
+
 
 <br />
 
@@ -166,9 +165,11 @@ You can find your API Key in the section [App settings / Backend & SDK configura
 
 ## Manual anonymous user id
 
-> 📘 Requires SDK 6.1.0
->
-> The manual anonymous user id is available from iOS SDK 6.1.0 and from Android SDK 6.1.0.
+<Callout icon="📘" theme="info">
+  ### Requires SDK 6.1.0
+
+  The manual anonymous user id is available from iOS SDK 6.1.0 and from Android SDK 6.1.0.
+</Callout>
 
 Give Purchasely the anonymous id that your app already uses. Both systems then report the same person. The two platforms do not share the same signature. Read the block for your platform.
 
@@ -208,9 +209,11 @@ The SDK takes your id only when the device holds no anonymous id yet. Use the `o
 
 ## Android API proxy
 
-> 📘 Requires SDK 6.1.0
->
-> The `proxy` method is available from Android SDK 6.1.0. The iOS equivalent is not in 6.1.0.
+<Callout icon="📘" theme="info">
+  ### Requires SDK 6.1.0
+
+  The `proxy` method is available from Android SDK 6.1.0. The iOS equivalent is not in 6.1.0.
+</Callout>
 
 Use a proxy when `api.purchasely.io` is unreachable, for example behind the Great Firewall in mainland China. Purchasely provides `https://svc.purchasely.io`. You can also host your own proxy.
 
@@ -227,9 +230,11 @@ The SDK accepts only an `https` URL. It refuses a blank, a non-https, a malforme
 
 ## Web2App redemption result
 
-> 📘 Requires SDK 6.1.0
->
-> The redemption delegate and the redemption listener are available from iOS SDK 6.1.0 and from Android SDK 6.1.0.
+<Callout icon="📘" theme="info">
+  ### Requires SDK 6.1.0
+
+  The redemption delegate and the redemption listener are available from iOS SDK 6.1.0 and from Android SDK 6.1.0.
+</Callout>
 
 The SDK tells your app the result of a `ply/redeem/TOKEN` deeplink. Declare the delegate on iOS, or the listener on Android, in the initialization chain. Keep `appHandlesRedemptionAlert` at `false` to let the SDK present its own success or failure popin. Set it to `true` to present your own result screen instead.
 
@@ -244,5 +249,3 @@ You can display a screen without waiting the SDK to be fully initialized.
 The callback returns a single value:
 
 * `error`: `nil` when the SDK was initialized successfully and the configuration is correct. If it is not `nil`, you can still use Purchasely SDK, and it indicates the specific error that occurred.
-
-<br />
