@@ -39,6 +39,12 @@ The register is exposed directly in the SDK since **v5.4**, with the legal basis
 | **#3**     | Personalization of the journey and of the offers presented                    | Legitimate interest **or** consent         | Yes       |
 | **#4**     | Recommendation of offers displayed spontaneously (Campaigns)                  | Legitimate interest **or** consent         | Yes       |
 
+**SDK diagnostics fall under #1, so they are not revocable.** From SDK 6.1.0 the iOS SDK can report its own traces, logs and crashes to Purchasely, so support can diagnose a paywall problem without a reproduction. That is operational, not audience measurement, so it sits under Processing #1 and the consent API does not switch it off.
+
+It is off by default. Purchasely enables it from the backend, per app, per build environment and per signal family. There is no SDK API to turn it on, and Purchasely can turn it off remotely with no app release. The SDK collects no personal data and sanitizes free text from a crash report. The iOS privacy manifest declares performance data, other diagnostic data and crash data, all with the `AppFunctionality` purpose, none linked to the user and none used for tracking.
+
+See [SDK diagnostics and observability](sdk-diagnostics-and-observability).
+
 The API is granular, and you wire your CMP to it:
 
 ```swift Swift

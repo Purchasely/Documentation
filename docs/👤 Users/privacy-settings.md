@@ -58,6 +58,18 @@ More details on each processing are provided in the [Data Processing Agreement](
 
 <br />
 
+> ℹ️ SDK diagnostics fall under Processing #1
+>
+> From SDK 6.1.0 the iOS SDK can report its own traces, logs and crashes to Purchasely, so the support team can find the cause of a paywall problem without a reproduction. That collection falls under **Processing #1** and is therefore **not revocable**: it exists to keep the Services working technically and operationally, and it is not audience measurement.
+>
+> The data is performance data, other diagnostic data and crash data, all declared in the iOS SDK privacy manifest with the `AppFunctionality` purpose. Purchasely does not link it to the user and does not use it for tracking. The SDK collects no personal data and sanitizes free text from a crash report.
+>
+> The feature is off by default. Purchasely enables it from the backend, per app, per build environment and per signal family. There is no SDK API to turn it on, and Purchasely can turn it off remotely with no app release.
+>
+> See [SDK diagnostics and observability](sdk-diagnostics-and-observability) for the full description.
+
+<br />
+
 <br />
 
 # How It Works: Consent Flow & SDK Integration
