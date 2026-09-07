@@ -71,15 +71,15 @@ class MyActivity : FragmentActivity() {
 
 }
 ```
-```javascript React Native
+```typescript React Native
 Purchasely.handleDeeplink('app://ply/presentations/')
           .then((value) => console.log('Deeplink handled by Purchasely ? ' + value));
 ```
-```java Flutter
+```dart Flutter
 Purchasely.handleDeeplink('app://ply/presentations/')
           .then((value) => print('Deeplink handled by Purchasely ? $value'));
 ```
-```swift Cordova
+```javascript Cordova
 // If you grab the deeplink inside your Cordova code you can call
 Purchasely.handleDeeplink("app://ply/presentations/", (handled) => {
 	console.log("Was deeplink handled by Purchasely? " + handled);
@@ -87,7 +87,7 @@ Purchasely.handleDeeplink("app://ply/presentations/", (handled) => {
 ```
 > 📘 Passing the deeplink at start
 >
-> When your app is launched **from** a deeplink (cold start), you can hand it to the SDK directly at initialization instead of waiting for the SDK to be ready:
+> When your app is launched **from** a deeplink (cold start), you can hand it to the SDK directly at initialization instead of waiting for the SDK to be ready. Every platform provides the method on the initialization chain, so no separate `handleDeeplink` call is needed. The SDK resolves the link once `start` completes, with the configuration loaded and the user applied.
 >
 > ```swift
 > // iOS
@@ -98,6 +98,23 @@ Purchasely.handleDeeplink("app://ply/presentations/", (handled) => {
 > // Android
 > Purchasely.Builder(context).handleDeeplink(intent.data).build().start { error -> }
 > ```
+>
+> ```typescript
+> // React Native
+> await Purchasely.builder('YOUR_API_KEY').handleDeeplink(url).stores(['google']).start();
+> ```
+>
+> ```dart
+> // Flutter
+> await Purchasely.apiKey('YOUR_API_KEY').handleDeeplink(url).stores([PLYStore.google]).start();
+> ```
+>
+> ```javascript
+> // Cordova — the builder method is deeplink(), not handleDeeplink()
+> await Purchasely.builder('YOUR_API_KEY').deeplink(url).stores([Purchasely.Store.google]).start();
+> ```
+>
+> A deeplink that reaches the SDK before the configuration settles is never lost. The SDK queues it and resolves it as soon as `start` finishes, whichever way your app handed it over. A Web2App redemption link never waits behind a queued paywall link: iOS puts it at the front of the queue, and Android hands it to the redemption intake out of band.
 
 ## 2. Forbidding the display
 
@@ -119,17 +136,17 @@ Purchasely.allowDeeplink = false
 // Re-enable it once your app is ready — any queued deeplink displays immediately
 Purchasely.allowDeeplink = true
 ```
-```javascript React Native
+```typescript React Native
 Purchasely.allowDeeplink(false);
 // later
 Purchasely.allowDeeplink(true);
 ```
-```java Flutter
+```dart Flutter
 Purchasely.allowDeeplink(false);
 // later
 Purchasely.allowDeeplink(true);
 ```
-```swift Cordova
+```javascript Cordova
 Purchasely.allowDeeplink(false);
 // later
 Purchasely.allowDeeplink(true);
@@ -149,6 +166,21 @@ Purchasely.allowCampaigns(true)
 Purchasely.allowCampaigns = false
 // later
 Purchasely.allowCampaigns = true
+```
+```typescript React Native
+Purchasely.allowCampaigns(false);
+// later
+Purchasely.allowCampaigns(true);
+```
+```dart Flutter
+Purchasely.allowCampaigns(false);
+// later
+Purchasely.allowCampaigns(true);
+```
+```javascript Cordova
+Purchasely.allowCampaigns(false);
+// later
+Purchasely.allowCampaigns(true);
 ```
 
 `allowDeeplink` and `allowCampaigns` are independent: gating one does not affect the other.
