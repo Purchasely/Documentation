@@ -3,11 +3,10 @@ name: Deeplink implementation
 ---
 # Deeplink implementation
 
-To manage deeplinks you need to do up to 3 things:
+To manage deeplinks you need to do up to 2 things:
 
 1. Pass the deeplink to the Purchasely SDK when it is received by the application (**not required on Android** — see below)
-2. Optionally control when Purchasely is allowed to display content over your interface
-3. Set a default presentation handler to get the result of what was done by the user on the paywall / screen
+2. Optionally control when Purchasely is allowed to display content over your interface, for deeplinks and for campaigns
 
 ## 1. Passing the deeplink to Purchasely SDK
 
