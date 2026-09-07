@@ -7,13 +7,25 @@ metadata:
 published_at: '2026-09-07T07:00:00.000Z'
 type: added
 ---
-SDK 6.1.0 is available for iOS and Android.
+Purchasely SDK 6.1.0 is a minor release that opens the web-to-app funnel to your app, lets you own the anonymous user id, and routes API traffic through a proxy where `api.purchasely.io` is unreachable.
+
+This version also adds two redemption analytics events and, on iOS, an opt-in diagnostics channel that lets Purchasely support find the cause of a paywall problem without a reproduction.
+
+<Callout icon="far fa-circle-info" theme="info">
+  ### SDK 6.1 is a minor release. No breaking change.
+
+  Two points need your attention:<br />1. An app that switches exhaustively over the SDK event type must add `REDEMPTION_CONSUMED` and `REDEMPTION_FAILED`.<br />2. An iOS app must update its App Store privacy answers if the report copies the SDK privacy manifest.<br /><br />Full steps for every platform: <Anchor target="_blank" href="https://docs.purchasely.com/docs/upgrading-6-0-to-6-1">Upgrading from SDK 6.0 to 6.1</Anchor>.
+</Callout>
 
 ## Highlights
 
-- Web-to-App funnel and redemption
-- Purchasely API proxy for China
-- Set your anonymous user id
+- Web-to-app funnel redemption callback (iOS, Android)
+- Two new redemption analytics events (iOS, Android)
+- Set your own anonymous user id (iOS, Android)
+- Purchasely API proxy for regions such as mainland China (Android)
+- SDK diagnostics and crash reporting (iOS)
+
+***
 
 ## Version per platform
 
@@ -27,112 +39,185 @@ Detailed changelogs are available on each platform's GitHub repository:
 | **React Native** | [6.1.0](https://github.com/Purchasely/Purchasely-ReactNative/releases) |
 | **Cordova**      | [6.1.0](https://github.com/Purchasely/Purchasely-Cordova/releases)     |
 
-## Web-to-app funnels
+***
 
-### Redemption callback
+# 🚀 Features
 
-**iOS and Android.** A user buys a subscription on the web, taps the link in their email, and lands in your app. The SDK now tells your app the result, and lets your app draw the result screen instead of the built-in alert.
+## 🌐 Web-to-App Funnel Redemption
 
-```swift iOS
-Purchasely.apiKey("...")
-    .webRedemptionDelegate(self, appHandlesRedemptionAlert: false)
-    .start()
-```
+A user buys a subscription on the web, taps the link in the confirmation email, and lands in your app. The SDK now reports the result of that redemption to your app, and lets your app draw the result screen instead of the built-in alert.
 
-```kotlin Android
-Purchasely.Builder(context)
-    .apiKey("...")
-    .webRedemptionListener(appHandlesRedemptionAlert = false) { result -> }
-    .build()
-```
+Register the listener **before** `start()`. A redemption can settle during `start()`, from a cold start that the link itself triggered, or from a token that a previous launch left pending.
 
-The SDK calls you on the main thread, exactly once per settled redemption. Set `appHandlesRedemptionAlert` to `true` to suppress the built-in alert and show your own screen.
+<Tabs>
+  <Tab title="iOS">
+    ```swift
+    try await Purchasely
+        .apiKey("YOUR_API_KEY")
+        .webRedemptionDelegate(self, appHandlesRedemptionAlert: false)
+        .start()
+    ```
+  </Tab>
 
-A successful redemption can also restore the built-in and custom user attributes from the web funnel, before the entitlements refresh, so every later event and every audience already sees them.
+  <Tab title="Android">
+    ```kotlin
+    Purchasely.Builder(applicationContext)
+        .apiKey("YOUR_API_KEY")
+        .webRedemptionListener(appHandlesRedemptionAlert = false) { result -> }
+        .build()
 
-Two things worth knowing, both documented on the new page:
+    Purchasely.start { error -> }
+    ```
+  </Tab>
+</Tabs>
 
-- A redemption deeplink is **not** subject to `allowDeeplink`. A user who taps a link in their email always gets their subscription.
-- On iOS, when a link has expired the `errorMessage` can contain a masked email address, so you can tell the user where the fresh link went. Show it to the user; do not forward it to your analytics.
+The SDK calls your listener on the main thread, exactly once per settled redemption. Set `appHandlesRedemptionAlert` to `true` alert and show your own screen.
+
+A successful redemption also restores the built-in and custom user attributes from the web funnel, before the entitlements refrd every audience already sees them.
+
+Two rules are worth knowing:
+
+- A redemption deeplink is **not** subject to `allowDeeplink`. A user who taps the link in their email always gets their subscr
+- On iOS, when a link has expired, `errorMessage` can contain a masked email address, so you can tell the user where the fresh link went. Show it to the user. Do not forward it to your analytics.
 
 New page: [Web-to-app funnels (redemption)](doc:web2app)
 
-### Two new analytics events
+## 📊 Two New Redemption Events
 
-**iOS and Android.** `REDEMPTION_CONSUMED` and `REDEMPTION_FAILED`. Neither existed before 6.1.0 on either platform. Both platforms also emit the consumed event when a user re-taps an already-redeemed link: a replay is a success, and the `replay` flag tells the two apart.
+`REDEMPTION_CONSUMED` and `REDEMPTION_FAILED`. Neither event existed before 6.1.0.
+
+Both platforms also emit `REDEMPTION_CONSUMED` when a user re-taps a link that was already redeemed. A replay is a success, and the `replay` flag tells the two cases apart.
 
 If your app switches exhaustively over the event type, add the two cases.
 
 Reference: [UI and SDK events](doc:ui-sdk-events-list)
 
-## Set the anonymous user id yourself
+## 🆔 Set Your Own Anonymous User ID
 
-**iOS and Android.** Give Purchasely the anonymous id your app already uses, so both systems report the same person. The SDK applies it at start, and only when the device holds no anonymous id yet.
+Give Purchasely the anonymous id your app already uses, so both systems report the same person. Both platforms take a `UUID` and store it uppercase, so the same id produces the same value on iOS and on Android.
 
-```swift iOS
-Purchasely.apiKey("...")
-    .appAnonymousUserId(myUUID)
-    .start()
-```
+**First launch, or any device that holds no anonymous id yet.** Pass the id. The SDK applies it at `start()`.
 
-```kotlin Android
-Purchasely.Builder(context)
-    .apiKey("...")
-    .anonymousUserId(myUuid)
-    .build()
-```
+<Tabs>
+  <Tab title="iOS">
+    ```swift
+    try await Purchasely
+        .apiKey("YOUR_API_KEY")
+        .appAnonymousUserId(myUUID)
+        .start()
+    ```
+  </Tab>
 
-Both platforms take a UUID, and both store it uppercase, so the same id produces the same value on iOS and on Android. Use the `override` form to replace an id that already exists. Neither platform offers a setter: identity is part of the initialization.
+  <Tab title="Android">
+    ```kotlin
+    Purchasely.Builder(applicationContext)
+        .apiKey("YOUR_API_KEY")
+        .anonymousUserId(myUuid)
+        .build()
+    ```
+  </Tab>
+</Tabs>
 
-## Route the API traffic through a proxy
+**Device that already holds an anonymous id.** Add the `override` parameter. Without it, the SDK keeps the stored id and ignores your value.
 
-Use it when `api.purchasely.io` is unreachable, for example in mainland China. Purchasely operates a proxy, and you can host your own.
+<Tabs>
+  <Tab title="iOS">
+    ```swift
+    try await Purchasely
+        .apiKey("YOUR_API_KEY")
+        .appAnonymousUserId(myUUID, override: true)
+        .start()
+    ```
+  </Tab>
 
-```kotlin Android
-Purchasely.Builder(context)
-    .apiKey("...")
+  <Tab title="Android">
+    ```kotlin
+    Purchasely.Builder(applicationContext)
+        .apiKey("YOUR_API_KEY")
+        .anonymousUserId(myUuid, override = true)
+        .build()
+    ```
+  </Tab>
+</Tabs>
+
+<Callout icon="⚠️" theme="warn">
+  ### `override: true` splits the user history.
+
+  An app that updates from 6.0 or from 5.x already holds an anonymous id that the SDK generated. On that install, the plain cal
+
+  When you pass `override: true`, the backend keeps every event, purchase and subscription recorded against the previous id. Thtwo identities, so the device loses access to the earlier history. The SDK logs a warning each time the flag replaces a storedid.
+</Callout>
+
+Neither platform offers a setter. Identity is part of the initialization, by design.
+
+## 🌏 API Proxy
+
+**Android only in 6.1.0.** The iOS SDK and the iOS side of the bridges ignore this option.
+
+Route Purchasely API traffic through a proxy when `api.purchasely.io` is unreachable, for example in mainland China. Purchaselyu can host your own.
+
+```kotlin
+Purchasely.Builder(applicationContext)
+    .apiKey("YOUR_API_KEY")
     .proxy(api = "https://svc.purchasely.io")
     .build()
 ```
 
-Only `https` is accepted. A bad value is refused with a log, and the SDK keeps the production host. `paywall.purchasely.io` and `tracking.purchasely.io` always stay on production.
+The SDK overrides the API host only. `paywall.purchasely.io` and `tracking.purchasely.io` always stay on production. Only an `https` base URL is accepted. The SDK refuses any other value with an error log and keeps the production host.
 
-## SDK diagnostics
+## 🩺 SDK Diagnostics and Observability
 
-**iOS only in 6.1.0.** The iOS SDK can now report its own traces, logs and crashes to Purchasely, so our support team can find the cause of a paywall problem in your app without asking you for a reproduction.
+**iOS only in 6.1.0.** The iOS SDK can report its own traces, logs and crashes to Purchasely, so our support team can find the cause of a paywall problem in your app without asking you for a reproduction.
 
-- Crash detection uses MetricKit and installs **no** crash handler, so it never interferes with Crashlytics, Sentry or any other crash reporter in your app. It reports only a crash the SDK caused.
-- It is off by default. Purchasely enables it per app, per build environment and per signal family. There is no SDK API to turn it on, and we can turn it off remotely with no release on your side.
+- Crash detection uses MetricKit and installs **no** crash handler. It never interferes with Crashlytics, Sentry or any other crash reporter in your app, and it reports only a crash that the SDK caused.
+- It is off by default. Purchasely enables it per app, per build environment and per signal family. There is no SDK API to turnt off remotely with no release on your side.
 - The SDK sends no personal data, and free text from a crash report is sanitized.
-
-**Action for iOS apps:** `PrivacyInfo.xcprivacy` now declares three more data types, all with the `AppFunctionality` purpose, neither linked to the user nor used for tracking: performance data, other diagnostic data, and crash data. Update your App Store privacy answers if your report copies the SDK manifest.
-
-This collection falls under Processing #1 of the Data Processing Register, so it is not revocable through the consent API.
+- This collection falls under Processing #1 of the Data Processing Register, so the consent API does not revoke it.
 
 New page: [SDK diagnostics and observability](doc:sdk-diagnostics-and-observability)
 
-## Fixes
+***
 
-**iOS**
+# 🍎 iOS
+
+## ✨ Features & Improvements
+
+- Web-to-app redemption delegate, with `appHandlesRedemptionAlert` to draw your own result screen
+- `REDEMPTION_CONSUMED` and `REDEMPTION_FAILED` analytics events
+- `appAnonymousUserId(_:)` and `appAnonymousUserId(_:override:)` on the initialization builder
+- User attributes from the web funnel restored on a successful redemption
+- SDK diagnostics: traces, logs and MetricKit crash reports, off by default and enabled remotely by Purchasely
+
+## ⚠️ Action Required
+
+`PrivacyInfo.xcprivacy` now declares three more data types: performance data, other diagnostic data, and crash data. All three ` purpose. None is linked to the user, and none is used for tracking.
+
+Update your App Store privacy answers if your report copies the SDK privacy manifest.
+
+## 🐛 Fixes & Reliability
 
 - A cancelled web checkout no longer wedges the action queue. Before the fix, every later tap on the paywall did nothing.
 - A flow delivers its shared outcome once, from the step that closed it.
 - A close action ends itself instead of waiting on the outcome delivery.
 - A deeplink no longer strands the queue when the screen has no product.
-- The renderer no longer degrades the paywall through Auto Layout constraint churn, which could make a paywall slow and then unresponsive.
+- The renderer no longer degrades the paywall through Auto Layout constraint churn, which could make a paywall slow and then un
 - Closing a paywall closes only that paywall, not the whole SDK window.
 - The host key window is restored without a change to `isHidden`, which removes the black frame at the end of a dismissal.
-- An analytics event keeps its nested object properties. Before the fix, the SDK dropped them.
+- An analytics event keeps its nested object properties.
 
-**Android**
+***
+
+# 🤖 Android
+
+## ✨ Features & Improvements
+
+- Web-to-app redemption listener, with `appHandlesRedemptionAlert` to draw your own result screen
+- `REDEMPTION_CONSUMED` and `REDEMPTION_FAILED` analytics events
+- `anonymousUserId(id, override)` on the `Builder` and on the Kotlin DSL
+- User attributes from the web funnel restored on a successful redemption
+- `proxy(api:)` on the `Builder` and on the Kotlin DSL, to route API traffic through a proxy
+
+## 🐛 Fixes & Reliability
 
 - `Purchasely.start(callback)` always invokes its callback exactly once. Four paths could return without a result, or invoke the callback twice. An app that gated its UI on that callback could wait forever.
 - The redemption listener reports when the user dismisses the outcome alert, not before it.
-
-## Dependencies
-
-**Android.** `androidx.media3` 1.9.1 to 1.11.0, and `androidx.constraintlayout` 2.2.1 to 2.2.2. An app that pins either one itself should check the bump.
-
-## Upgrading
-
-Full steps for every platform, including React Native, Flutter and Cordova: [Upgrading from SDK 6.0 to 6.1](doc:upgrading-6-0-to-6-1)
