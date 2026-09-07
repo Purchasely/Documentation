@@ -70,7 +70,6 @@ class YourApplication: Application() {
             .userId(null)
             .stores(listOf(GoogleStore()))
             .runningMode(PLYRunningMode.Full)
-            .webRedemptionListener { result -> } // SDK 6.1.0, result of a Web2App redemption deeplink
             .build()
             .start { error ->
                 if (error == null) {
@@ -294,18 +293,6 @@ Each store has its own dependency that you must install. Read our [installation 
 ## User identification
 
 <UserType />
-
-## Web2App redemption result
-
-<Callout icon="📘" theme="info">
-  ### Requires SDK 6.1.0
-
-  The redemption delegate and the redemption listener are available from iOS SDK 6.1.0 and from Android SDK 6.1.0.
-</Callout>
-
-The SDK tells your app the result of a `ply/redeem/TOKEN` deeplink. Declare the delegate on iOS, or the listener on Android, in the initialization chain. Keep `appHandlesRedemptionAlert` at `false` to let the SDK present its own success or failure popin. Set it to `true` to present your own result screen instead.
-
-The SDK calls your delegate or your listener on the main thread. It calls it exactly once for each settled redemption. On Android the `Purchasely { }` DSL and the `Purchasely.Builder` chain both provide the method. Read [Listeners / Delegates](listener-delegate) for the callback shape and for the result properties.
 
 ## Callback on initialization
 

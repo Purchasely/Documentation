@@ -36,10 +36,9 @@ If you want to leverage these analytics and gain real-time insights on how users
 
 When a user opens a `ply/redeem/TOKEN` deeplink, the Purchasely SDK redeems the web subscription. The SDK reports the outcome to your app. Your app can also draw the result screen itself, instead of the built-in alert.
 
-This feature is available starting from the following versions:
+This feature is available from v6.1.0 on iOS, Android, React Native, Flutter and Cordova.
 
-* iOS: v6.1.0+
-* Android: v6.1.0+
+Read [Web-to-app funnels (redemption)](web2app) for the whole funnel: the shape of the link, the delivery contract, the events and the security rules.
 
 ## Functionning
 
@@ -69,7 +68,7 @@ extension AppDelegate: PLYWebRedemptionDelegate {
     }
 }
 ```
-```kotlin
+```kotlin Kotlin
 Purchasely.Builder(applicationContext)
     .apiKey("<<X-API-KEY>>")
     .webRedemptionListener { result ->
@@ -86,6 +85,42 @@ Purchasely.Builder(applicationContext)
     .build()
     .start { error -> }
 ```
+```typescript React Native
+await Purchasely.builder('<<X-API-KEY>>')
+  .webRedemptionListener((result) => {
+    if (result.isSuccess) {
+      // Unlock the content and draw your result screen
+    } else {
+      console.log(`Redemption failed: ${result.errorCode} ${result.errorMessage}`);
+    }
+  })
+  .stores(['google'])
+  .start();
+```
+```dart Flutter
+await Purchasely.apiKey('<<X-API-KEY>>')
+    .webRedemptionListener((result) {
+      if (result.isSuccess) {
+        // Unlock the content and draw your result screen
+      } else {
+        debugPrint('Redemption failed: ${result.errorCode} ${result.errorMessage}');
+      }
+    })
+    .stores([PLYStore.google])
+    .start();
+```
+```javascript Cordova
+await Purchasely.builder('<<X-API-KEY>>')
+    .webRedemptionListener(function (result) {
+        if (result.isSuccess) {
+            // Unlock the content and draw your result screen
+        } else {
+            console.log('Redemption failed: ' + result.errorCode + ' ' + result.errorMessage);
+        }
+    })
+    .stores([Purchasely.Store.google])
+    .start();
+```
 
 On iOS the protocol is `PLYWebRedemptionDelegate`, and it requires the single method `webRedemptionCompleted(result:)`. The `PLYWebRedemptionResult` object exposes `isSuccess`, `errorCode`, `errorMessage`, `replay` and `context`. The `context` is a `PLYWebRedemptionContext`, and its `subscription` property is an optional `PLYSubscription`.
 
@@ -96,6 +131,8 @@ Check both levels for `null` on Android. The `context` of a `Success` is `null` 
 The `replay` value is `true` when the server reports that the token was already redeemed. It is `false` for a fresh redemption. The flag is a verdict of the server about the token, not an observation of the behaviour of the user. The SDK keeps no cache of the outcome, and it calls the server on every attempt.
 
 Android also provides a two-argument form of the builder method and of the DSL method: `webRedemptionListener(appHandlesRedemptionAlert = true) { result -> }`. Both forms take `appHandlesRedemptionAlert` first, then the listener.
+
+React Native, Flutter and Cordova give one flat result object, with the same five properties as iOS. Each bridge takes the callback first and `appHandlesRedemptionAlert` as an optional second argument. Register the callback in the chain, and not with the runtime function that each bridge also provides: a redemption can settle during `start()`, when the link is what launches the app.
 
 <br />
 
