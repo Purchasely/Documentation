@@ -150,13 +150,6 @@ Neither platform offers a setter. Identity is part of the initialization, by des
 <Tabs>
   <Tab title="iOS">
     ```swift
-    // Purchasely's own proxy
-    try await Purchasely
-        .apiKey("YOUR_API_KEY")
-        .proxy()
-        .start()
-
-    // Your own proxy
     try await Purchasely
         .apiKey("YOUR_API_KEY")
         .proxy(api: URL(string: "https://svc.purchasely.io")!)
@@ -179,14 +172,6 @@ The SDK overrides the API host only. This setting does not affect the paywall ho
 The value must be an `https` base URL with a host, and carry no query, no fragment and no credentials. The SDK refuses any other value with an error log and keeps the production host, so a misconfiguration never breaks the SDK.
 
 The setting applies at `start()`. Neither platform offers a runtime setter.
-
-<Callout icon="⚠️" theme="warn">
-  ### `proxy()` with no argument does not mean the same thing on the two platforms.
-
-  On iOS, `proxy()` selects Purchasely's own proxy at `https://svc.purchasely.io`. On Android, `proxy()` passes `api = null`, which clears the proxy and routes back to `api.purchasely.io`.
-
-  Pass the host explicitly on both platforms to avoid the ambiguity.
-</Callout>
 
 ***
 
