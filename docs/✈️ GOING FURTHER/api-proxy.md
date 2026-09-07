@@ -94,7 +94,7 @@ await Purchasely.builder('<<X-API-KEY>>')
     .start();
 ```
 
-The three bridges take the base URL as a string, and each one forwards the value to the native SDK, which validates it. The argument is required on the three bridges. A chain that never calls the method keeps the current setting.
+The three bridges take the base URL as a string and forward the value to the native SDK. The rules below therefore apply on every platform. The argument is required on the three bridges. A chain that never calls the method keeps the current setting.
 
 <Callout icon="❗️" theme="error">
   ### The no-argument form does the opposite on the two native platforms
