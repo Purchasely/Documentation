@@ -43,7 +43,7 @@ implementation 'io.purchasely:player:6.1.0'
 ## React Native
 
 ```shell npm
-npm install @purchasely/react-native-purchasely-android-player@6.0.0-rc.2 --save
+npm install @purchasely/react-native-purchasely-android-player@6.1.0 --save
 ```
 
 ## Flutter

@@ -30,9 +30,9 @@ Pin all Purchasely packages to the **exact same** version. Mismatched versions c
 
 ```yaml
 dependencies:
-  purchasely_flutter: 6.0.0
-  purchasely_google: 6.0.0          # required if you distribute on Google Play
-  purchasely_android_player: 6.0.0  # optional, video paywalls on Android
+  purchasely_flutter: 6.1.0
+  purchasely_google: 6.1.0          # required if you distribute on Google Play
+  purchasely_android_player: 6.1.0  # optional, video paywalls on Android
 ```
 
 Host build requirements:

@@ -99,7 +99,7 @@ For React Native, Flutter, and Cordova: the main SDK does NOT include Google Pla
 
 | Platform | Language | Package |
 |----------|----------|---------|
-| iOS | Swift/Objective-C | `pod 'Purchasely'` or SPM |
+| iOS | Swift/Objective-C | `pod 'Purchasely', '6.1.0'` or SPM |
 | Android | Kotlin/Java | `io.purchasely:core` (Maven) |
 | React Native | JavaScript/TypeScript | `react-native-purchasely` (npm) |
 | Flutter | Dart | `purchasely_flutter` (pub.dev) |
@@ -112,7 +112,7 @@ Format: `x.y.z`
 - **Minor (y)**: New features (backward compatible)
 - **Patch (z)**: Bug fixes
 
-Current major version: **5.x**
+Current major version: **6.x** (6.1.0 on every platform)
 
 ### Minimum Requirements
 

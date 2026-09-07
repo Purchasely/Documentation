@@ -16,13 +16,13 @@ next:
 ---
 > 🚧 Minimum SDK versions
 >
-> The lifecycle described here is the **6.0** display API.
+> The lifecycle described here is the **v6** display API. Every SDK is at 6.1.0.
 >
-> * iOS: 6.0.0
-> * Android: 6.0.1
-> * Flutter: 6.0.0
-> * React Native: 6.0.0-rc.2
-> * Cordova: 6.0.0
+> * iOS: 6.1.0
+> * Android: 6.1.0
+> * Flutter: 6.1.0
+> * React Native: 6.1.0
+> * Cordova: 6.1.0
 
 > ❗️ There is no `hide` primitive any more
 >

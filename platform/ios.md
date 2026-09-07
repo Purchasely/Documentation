@@ -46,7 +46,7 @@ Purchasely supports three installation methods: CocoaPods, Carthage, and Swift P
 Add Purchasely to your `Podfile`:
 
 ```ruby
-pod 'Purchasely'
+pod 'Purchasely', '6.1.0'
 ```
 
 Then run:

@@ -7,7 +7,7 @@ metadata:
   robots: index
 ---
 <Callout icon="far fa-info" theme="info">
-  ### Applies to React Native SDK 6.0.x on Android
+  ### Applies to the React Native SDK 6.x on Android
 
   This article applies to **both** bare React Native projects and Expo projects. It is not specific to Expo.
 </Callout>
@@ -32,7 +32,7 @@ The error can also name `kotlinx-serialization-core` or `kotlinx-serialization-j
 
 Every React Native project that compiles with **Kotlin 2.1.x or lower**. This is the default of the current templates:
 
-| Project type                                       | Default Kotlin version | Result with SDK 6.0.x |
+| Project type                                       | Default Kotlin version | Result with SDK 6.x |
 | -------------------------------------------------- | ---------------------- | --------------------- |
 | Bare React Native 0.83 / 0.86 (community template) | 2.1.20                 | Build fails           |
 | Expo SDK 54 / 55 (no `kotlinVersion` set)          | 2.0.21                 | Build fails           |
@@ -205,6 +205,6 @@ On an Expo project, append the same block from the config plugin above.
 
 ## Reference project
 
-A working Expo project that carries every fix in this article is available in the SDK repository. It uses Expo SDK 55, React Native 0.83, the New Architecture, `react-native-purchasely` 6.0.0, `react-native-gesture-handler` and `react-native-true-sheet`.
+A working Expo project that carries every fix in this article is available in the SDK repository. It uses Expo SDK 55, React Native 0.83, the New Architecture, `react-native-purchasely` 6.1.0, `react-native-gesture-handler` and `react-native-true-sheet`.
 
 👉 [test-projects/expo-purchasely-test](https://github.com/Purchasely/Purchasely-ReactNative/tree/main/test-projects/expo-purchasely-test)

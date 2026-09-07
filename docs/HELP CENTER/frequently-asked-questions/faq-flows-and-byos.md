@@ -154,7 +154,7 @@ You receive it through one of two handlers:
 >
 > Presentations the **SDK opens itself** — deeplinks, Campaigns, promoted in-app purchases — have no display call for you to await and nowhere to attach `onDismissed`. Their outcome always goes to the global handler. Without it registered, you never learn what happened.
 
-Minimum SDK versions for `PLYPresentationOutcome`: iOS 6.0.0, Android 6.0.1, Flutter 6.0.0, React Native 6.0.0-rc.2. On React Native, the global handler covers only SDK-opened presentations, not the ones you display yourself.
+Minimum SDK versions for `PLYPresentationOutcome`: 6.1.0 on every platform. On React Native, the global handler covers only SDK-opened presentations, not the ones you display yourself.
 
 📚 [Handling the presentation result](handling-presentation-result)
 

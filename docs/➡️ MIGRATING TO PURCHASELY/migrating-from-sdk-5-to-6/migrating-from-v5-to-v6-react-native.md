@@ -63,11 +63,11 @@ The React Native SDK v6 is **paywall‑API‑only**: the legacy v5 paywall API h
 Pin the **exact** version (no caret / range):
 
 ```bash
-npm install react-native-purchasely@6.0.0
+npm install react-native-purchasely@6.1.0
 # optional Google Billing in-app purchases for Android:
-npm install @purchasely/react-native-purchasely-google@6.0.0
+npm install @purchasely/react-native-purchasely-google@6.1.0
 # video support in Screens for Android
-npm install @purchasely/react-native-purchasely-android-player@6.0.0
+npm install @purchasely/react-native-purchasely-android-player@6.1.0
 ```
 
 iOS: `cd ios && pod install`. Android: autolinking handles the native modules.

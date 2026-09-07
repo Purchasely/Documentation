@@ -74,7 +74,7 @@ In Xcode: *File ▸ Add Package Dependencies…* and enter `https://github.com/P
 **CocoaPods:**
 
 ```ruby
-pod 'Purchasely', '~> 6.0'
+pod 'Purchasely', '6.1.0'
 ```
 
 **Carthage** continues to work unchanged (`binary "…/Purchasely.json"`).
@@ -657,7 +657,7 @@ Purchasely.clientPresentationDisplayed(with: presentation)
 
 ### Breaking (must fix to compile)
 
-- [ ] Update your dependency pin to `6.1.0` (SPM `from: "6.1.0"` or CocoaPods `pod 'Purchasely', '~> 6.0'`)
+- [ ] Update your dependency pin to `6.1.0` (SPM `from: "6.1.0"` or CocoaPods `pod 'Purchasely', '6.1.0'`)
 - [ ] Replace `Purchasely.start(withAPIKey:…)` with the fluent chain `Purchasely.apiKey("…")…start()`
 - [ ] If using Full mode, add explicit `.runningMode(.full)` (default changed to `.observer`) ⚠️
 - [ ] Replace `setPaywallActionsInterceptor { … }` with per‑action `Purchasely.interceptAction(.x) { … }`

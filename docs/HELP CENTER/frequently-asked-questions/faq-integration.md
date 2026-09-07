@@ -309,7 +309,7 @@ Under 2 MB on iOS and under 1 MB on Android. Both are native (Swift / Kotlin), w
 
 | Platform      | Language               | Package                                                                          |
 | :------------ | :--------------------- | :------------------------------------------------------------------------------- |
-| iOS           | Swift / Objective-C    | `pod 'Purchasely'` or Swift Package Manager — [guide](installation-swift)         |
+| iOS           | Swift / Objective-C    | `pod 'Purchasely', '6.1.0'` or Swift Package Manager — [guide](installation-swift)         |
 | Android       | Kotlin / Java          | `io.purchasely:core` (Maven) — [guide](installation-kotlin)                       |
 | React Native  | TypeScript             | `react-native-purchasely` — [guide](installation-react-native)                    |
 | Flutter       | Dart                   | `purchasely_flutter` — [guide](installation-flutter)                              |

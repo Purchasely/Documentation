@@ -6,7 +6,7 @@ name: ios sdk installation
 **CocaPods**
 
 You can use CocoaPods to install Purchasely by adding it to your Podfile:\
-`pod 'Purchasely'`
+`pod 'Purchasely', '6.1.0'`
 
 **Carthage**\
 You can use Carthage to install Purchasely by adding it to your Cartfile:\

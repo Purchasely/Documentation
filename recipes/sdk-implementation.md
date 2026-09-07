@@ -35,7 +35,7 @@ Purchasely.setDefaultPresentationDismissHandler { outcome ->
 ```
 ```swift iOS
 // 1) Podfile — add the dependency
-pod 'Purchasely'
+pod 'Purchasely', '6.1.0'
 
 // 2) Initialize and start the SDK (e.g. in AppDelegate)
 Purchasely

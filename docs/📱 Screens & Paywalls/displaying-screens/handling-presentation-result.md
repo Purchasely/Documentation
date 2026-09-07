@@ -21,10 +21,10 @@ next:
 >
 > The unified `PLYPresentationOutcome` model and the routing rule described here are part of the **6.0** display API.
 >
-> * iOS: 6.0.0
-> * Android: 6.0.1
-> * Flutter: 6.0.0
-> * React Native: 6.0.0-rc.2
+> * iOS: 6.1.0
+> * Android: 6.1.0
+> * Flutter: 6.1.0
+> * React Native: 6.1.0
 >
 > On v5 the equivalent result type was `PLYProductViewControllerResult` (iOS) / `PresentPresentationResult` (Flutter / React Native), and the global handler was named `setDefaultPresentationResultHandler`. See the [v5 → v6 migration guides](migrating-from-sdk-5-to-6).
 

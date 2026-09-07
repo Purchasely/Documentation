@@ -47,8 +47,8 @@ The v6 native Android SDK is built with Kotlin 2.2.x and `compileSdk 36`; make s
 The Purchasely Cordova SDK is split into two plugins. **Both must be pinned to the exact same version.**
 
 ```shell
-cordova plugin add @purchasely/cordova-plugin-purchasely@6.0.0
-cordova plugin add @purchasely/cordova-plugin-purchasely-google@6.0.0
+cordova plugin add @purchasely/cordova-plugin-purchasely@6.1.0
+cordova plugin add @purchasely/cordova-plugin-purchasely-google@6.1.0
 ```
 
 | Plugin | Purpose |
@@ -111,8 +111,8 @@ allprojects {
 ```json
 // package.json
 "dependencies": {
-  "@purchasely/cordova-plugin-purchasely": "6.0.0",
-  "@purchasely/cordova-plugin-purchasely-google": "6.0.0"
+  "@purchasely/cordova-plugin-purchasely": "6.1.0",
+  "@purchasely/cordova-plugin-purchasely-google": "6.1.0"
 }
 ```
 

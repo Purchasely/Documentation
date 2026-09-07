@@ -6,7 +6,7 @@ We rely on [Pub.dev](https://pub.dev/packages/purchasely_flutter/install) to dis
 # Main dependency
 
 ```shell
-flutter pub add purchasely_flutter:6.0.0
+flutter pub add purchasely_flutter:6.1.0
 ```
 
 Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android 23)
@@ -44,13 +44,13 @@ We do include a store by default in our SDK, with Android you can choose to use 
 <Callout icon="📘" theme="info">
   ### Versioning
 
-  All your dependencies **must** always be at the **exact same version**. Pin each package to `6.0.0` — do not use a floating range (`^6.0.0`, `5.+`, …).
+  All your dependencies **must** always be at the **exact same version**. Pin each package to `6.1.0` — do not use a floating range (`^6.1.0`, `6.+`, …).
 
   ```yaml pubspec.yaml
   dependencies:
-    purchasely_flutter: 6.0.0
-    purchasely_google: 6.0.0
-    purchasely_android_player: 6.0.0
+    purchasely_flutter: 6.1.0
+    purchasely_google: 6.1.0
+    purchasely_android_player: 6.1.0
   ```
 </Callout>
 
@@ -59,7 +59,7 @@ We do include a store by default in our SDK, with Android you can choose to use 
 To add Google as a store, you can use our pub.dev dependency
 
 ```shell
-flutter pub add purchasely_google:6.0.0
+flutter pub add purchasely_google:6.1.0
 ```
 
 Then you must add Google in the list of stores when starting the SDK with the builder
@@ -80,7 +80,7 @@ await Purchasely.apiKey('<<X-API-KEY>>')
 A video player is not provided by default on Android to avoid conflict with another dependency you may have<br />We provide one in an external dependency that is detected and handled automatically
 
 ```shell
-flutter pub add purchasely_android_player:6.0.0
+flutter pub add purchasely_android_player:6.1.0
 ```
 
 <br />

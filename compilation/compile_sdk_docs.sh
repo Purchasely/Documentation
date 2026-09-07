@@ -51,11 +51,11 @@ generate_prompt() {
     local output_file="platform/${platform}.md"
 
     cat > "compile_${platform}_prompt.txt" << EOF
-Compile / RE-compile the comprehensive ${platform_upper} SDK documentation file, targeting SDK v6.0.0, following compilation/SDK_COMPILATION_PROCESS.md.
+Compile / RE-compile the comprehensive ${platform_upper} SDK documentation file, targeting SDK v6.1.0, following compilation/SDK_COMPILATION_PROCESS.md.
 
 TASK: (Over)write ${output_file}
 
-PLATFORM: ${platform_upper}   (target SDK version: 6.0.0)
+PLATFORM: ${platform_upper}   (target SDK version: 6.1.0)
 
 PROCESS TO FOLLOW:
 1. Read compilation/SDK_COMPILATION_PROCESS.md for the complete process and the standard 15-section structure.
@@ -75,7 +75,7 @@ V6 RULES (critical):
 - Use the v6 APIs only. The following v5 names are REMOVED/renamed and must NOT appear as usable code:
   iOS:     start(withAPIKey:), setPaywallActionsInterceptor, fetchPresentation, presentationController/productController/planController, closeDisplayedPresentation, controller.PresentationView, PLYPresentationInfo
   Android: setPaywallActionsInterceptor, fetchPresentation, presentationView(...), PLYPresentationProperties, PLYProductViewResult, PaywallObserver, readyToOpenDeeplink, isDeeplinkHandled, subscriptionsFragment, purchaseHistory, intro*/INTRO_*/TRIAL_*
-- Use version 6.0.0 wherever a version appears. Android build reqs: Gradle 9.3.0+, Kotlin 2.2.x, JDK 11, minSdk 23, compileSdk 35.
+- Use version 6.1.0 wherever a version appears. Android build reqs: Gradle 9.3.0+, Kotlin 2.2.x, JDK 11, minSdk 23, compileSdk 35.
 
 CODE-BLOCK SELECTION:
 - Trust the LABEL after the language fence (e.g. swift Swift, kotlin Kotlin), not the highlighter token — some Cordova/Flutter blocks are mislabeled swift/kotlin.
@@ -186,9 +186,9 @@ main() {
 
             # Create a master instruction file
             cat > "COMPILE_ALL_PLATFORMS.md" << 'EOF'
-# Compile All Platform SDKs (target SDK v6.0.0)
+# Compile All Platform SDKs (target SDK v6.1.0)
 
-Please (re)compile SDK documentation for all platforms following the process in `SDK_COMPILATION_PROCESS.md`. Target SDK version is **6.0.0**. If a `platform/<platform>.md` already exists, use it as the structural/quality template and overwrite it with refreshed v6 content.
+Please (re)compile SDK documentation for all platforms following the process in `SDK_COMPILATION_PROCESS.md`. Target SDK version is **6.1.0**. If a `platform/<platform>.md` already exists, use it as the structural/quality template and overwrite it with refreshed v6 content.
 
 ## Sources of truth for v6 (verify against these — do not guess)
 
@@ -201,7 +201,7 @@ Please (re)compile SDK documentation for all platforms following the process in 
 ### 1. Android (android.md)
 - Language: **Kotlin only** (Java is no longer documented — do NOT include `java Java` blocks)
 - Code identifiers: `kotlin`, `Kotlin`
-- v6 specifics: default running mode is **Observer** (set `PLYRunningMode.Full` for purchase handling); `PLYPresentation { }.preload`, `interceptAction<…>`, `PLYPresentationOutcome`, presentation types in `io.purchasely.ext.presentation.*`; deps `io.purchasely:core/google-play/player:6.0.0`, Gradle 9.3.0+, Kotlin 2.2.x
+- v6 specifics: default running mode is **Observer** (set `PLYRunningMode.Full` for purchase handling); `PLYPresentation { }.preload`, `interceptAction<…>`, `PLYPresentationOutcome`, presentation types in `io.purchasely.ext.presentation.*`; deps `io.purchasely:core/google-play/player:6.1.0`, Gradle 9.3.0+, Kotlin 2.2.x
 
 ### 2. iOS (ios.md)
 - Language: **Swift only** (Objective-C is no longer documented — do NOT include `objectivec` blocks)

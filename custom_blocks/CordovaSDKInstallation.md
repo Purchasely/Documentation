@@ -6,7 +6,7 @@ We rely on [NPM](https://www.npmjs.com/package/@purchasely/cordova-plugin-purcha
 # Main dependency
 
 ```shell
-cordova plugin add @purchasely/cordova-plugin-purchasely@6.0.0
+cordova plugin add @purchasely/cordova-plugin-purchasely@6.1.0
 ```
 
 Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android 6)
@@ -49,8 +49,8 @@ We do not include a store by default in our SDK; with Android you can choose to 
 
   ```json package.json
   "dependencies": {
-    "@purchasely/cordova-plugin-purchasely": "6.0.0",
-    "@purchasely/cordova-plugin-purchasely-google": "6.0.0"
+    "@purchasely/cordova-plugin-purchasely": "6.1.0",
+    "@purchasely/cordova-plugin-purchasely-google": "6.1.0"
   },
   ```
 </Callout>
@@ -60,7 +60,7 @@ We do not include a store by default in our SDK; with Android you can choose to 
 To add Google as a store, you can use our NPM dependency
 
 ```shell
-cordova plugin add @purchasely/cordova-plugin-purchasely-google@6.0.0
+cordova plugin add @purchasely/cordova-plugin-purchasely-google@6.1.0
 ```
 
 Then you must add Google in the list of stores
