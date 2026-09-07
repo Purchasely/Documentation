@@ -7,7 +7,7 @@ metadata:
 published_at: '2026-09-07T07:00:00.000Z'
 type: added
 ---
-Purchasely SDK 6.1.0 is a minor release that opens the web-to-app funnel to your app, lets you own the anonymous user id, and routes API traffic through a proxy where `api.purchasely.io` is unreachable.
+Purchasely SDK 6.1.0 is a minor release that opens the web-to-app funnel to your app, lets you own the anonymous user id, and routes API traffic through a proxy where Purchasely API is unreachable.
 
 This version also adds two redemption analytics events and, on iOS, an opt-in diagnostics channel that lets Purchasely support find the cause of a paywall problem without a reproduction.
 
@@ -190,7 +190,7 @@ New page: [SDK diagnostics and observability](doc:sdk-diagnostics-and-observabil
 
 ## ⚠️ Action Required
 
-`PrivacyInfo.xcprivacy` now declares three more data types: performance data, other diagnostic data, and crash data. All three ` purpose. None is linked to the user, and none is used for tracking.
+`PrivacyInfo.xcprivacy` now declares three more data types: performance data, other diagnostic data, and crash data. All three \` purpose. None is linked to the user, and none is used for tracking.
 
 Update your App Store privacy answers if your report copies the SDK privacy manifest.
 
