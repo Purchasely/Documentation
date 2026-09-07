@@ -11,19 +11,12 @@ Purchasely SDK 6.1.0 is a minor release that opens the web-to-app funnel to your
 
 This version also adds two redemption analytics events and, on iOS, an opt-in diagnostics channel that lets Purchasely support find the cause of a paywall problem without a reproduction.
 
-<Callout icon="far fa-circle-info" theme="info">
-  ### SDK 6.1 is a minor release. No breaking change.
-
-  Two points need your attention:<br />1. An app that switches exhaustively over the SDK event type must add `REDEMPTION_CONSUMED` and `REDEMPTION_FAILED`.<br />2. An iOS app must update its App Store privacy answers if the report copies the SDK privacy manifest.<br /><br />Full steps for every platform: <Anchor target="_blank" href="https://docs.purchasely.com/docs/upgrading-6-0-to-6-1">Upgrading from SDK 6.0 to 6.1</Anchor>.
-</Callout>
-
 ## Highlights
 
-- Web-to-app funnel redemption callback (iOS, Android)
-- Two new redemption analytics events (iOS, Android)
-- Set your own anonymous user id (iOS, Android)
-- Purchasely API proxy for regions such as mainland China (Android)
-- SDK diagnostics and crash reporting (iOS)
+- Web-to-app funnel redemption callback
+- Two new redemption analytics events
+- Set your own anonymous user id
+- Purchasely API proxy for regions such as mainland China
 
 ***
 
@@ -164,17 +157,6 @@ Purchasely.Builder(applicationContext)
 ```
 
 The SDK overrides the API host only. `paywall.purchasely.io` and `tracking.purchasely.io` always stay on production. Only an `https` base URL is accepted. The SDK refuses any other value with an error log and keeps the production host.
-
-## 🩺 SDK Diagnostics and Observability
-
-**iOS only in 6.1.0.** The iOS SDK can report its own traces, logs and crashes to Purchasely, so our support team can find the cause of a paywall problem in your app without asking you for a reproduction.
-
-- Crash detection uses MetricKit and installs **no** crash handler. It never interferes with Crashlytics, Sentry or any other crash reporter in your app, and it reports only a crash that the SDK caused.
-- It is off by default. Purchasely enables it per app, per build environment and per signal family. There is no SDK API to turnt off remotely with no release on your side.
-- The SDK sends no personal data, and free text from a crash report is sanitized.
-- This collection falls under Processing #1 of the Data Processing Register, so the consent API does not revoke it.
-
-New page: [SDK diagnostics and observability](doc:sdk-diagnostics-and-observability)
 
 ***
 
