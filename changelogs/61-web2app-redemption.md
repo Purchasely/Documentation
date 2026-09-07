@@ -145,18 +145,48 @@ Neither platform offers a setter. Identity is part of the initialization, by des
 
 ## 🌏 API Proxy
 
-**Android only in 6.1.0.** The iOS SDK and the iOS side of the bridges ignore this option.
+**iOS and Android.** Route Purchasely API traffic through a proxy when `api.purchasely.io` is unreachable, for example in mainland China, where the paywall host and the tracking host stay reachable. Purchasely operates a proxy at `https://svc.purchasely.io`, and you can host your own.
 
-Route Purchasely API traffic through a proxy when `api.purchasely.io` is unreachable, for example in mainland China. Purchaselyu can host your own.
+<Tabs>
+  <Tab title="iOS">
+    ```swift
+    // Purchasely's own proxy
+    try await Purchasely
+        .apiKey("YOUR_API_KEY")
+        .proxy()
+        .start()
 
-```kotlin
-Purchasely.Builder(applicationContext)
-    .apiKey("YOUR_API_KEY")
-    .proxy(api = "https://svc.purchasely.io")
-    .build()
-```
+    // Your own proxy
+    try await Purchasely
+        .apiKey("YOUR_API_KEY")
+        .proxy(api: URL(string: "https://svc.purchasely.io")!)
+        .start()
+    ```
+  </Tab>
 
-The SDK overrides the API host only. `paywall.purchasely.io` and `tracking.purchasely.io` always stay on production. Only an `https` base URL is accepted. The SDK refuses any other value with an error log and keeps the production host.
+  <Tab title="Android">
+    ```kotlin
+    Purchasely.Builder(applicationContext)
+        .apiKey("YOUR_API_KEY")
+        .proxy(api = "https://svc.purchasely.io")
+        .build()
+    ```
+  </Tab>
+</Tabs>
+
+The SDK overrides the API host only. This setting does not affect the paywall host or the tracking host.
+
+The value must be an `https` base URL with a host, and carry no query, no fragment and no credentials. The SDK refuses any other value with an error log and keeps the production host, so a misconfiguration never breaks the SDK.
+
+The setting applies at `start()`. Neither platform offers a runtime setter.
+
+<Callout icon="⚠️" theme="warn">
+  ### `proxy()` with no argument does not mean the same thing on the two platforms.
+
+  On iOS, `proxy()` selects Purchasely's own proxy at `https://svc.purchasely.io`. On Android, `proxy()` passes `api = null`, which clears the proxy and routes back to `api.purchasely.io`.
+
+  Pass the host explicitly on both platforms to avoid the ambiguity.
+</Callout>
 
 ***
 
