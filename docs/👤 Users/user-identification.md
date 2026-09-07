@@ -124,11 +124,11 @@ Purchasely.getAnonymousUserId((anonymousId) => {
 
 > 📘 Requires SDK 6.1.0
 >
-> The method is available from iOS SDK 6.1.0 and from Android SDK 6.1.0. The React Native, Flutter and Cordova bridges do not expose it yet.
+> The method is available from 6.1.0 on iOS, Android, React Native, Flutter and Cordova.
 
 Your app can give Purchasely the anonymous id that your app already uses, instead of the id that the SDK generates. Purchasely then reports the same id as your app. Your web platform and your mobile app can also give the same person one id.
 
-Give the id in the initialization chain. Neither platform provides a setter. iOS applies the id when `start()` runs, and Android applies it when `build()` runs, so the first network call already carries your id. SDK v6 removed the former `Purchasely.setAnonymousUserId(id)` method.
+Give the id in the initialization chain. No platform provides a setter. iOS and the three bridges apply the id when `start()` runs, and Android applies it when `build()` runs, so the first network call already carries your id. SDK v6 removed the former `Purchasely.setAnonymousUserId(id)` method.
 
 ```swift Swift
 Purchasely
@@ -144,8 +144,28 @@ Purchasely.Builder(applicationContext)
     .build()
     .start { error -> }
 ```
+```typescript React Native
+await Purchasely.builder('<<X-API-KEY>>')
+  .anonymousUserId('3F2504E0-4F89-11D3-9A0C-0305E82C3301')
+  .stores(['google'])
+  .start();
+```
+```dart Flutter
+await Purchasely.apiKey('<<X-API-KEY>>')
+    .anonymousUserId('3F2504E0-4F89-11D3-9A0C-0305E82C3301')
+    .stores([PLYStore.google])
+    .start();
+```
+```javascript Cordova
+await Purchasely.builder('<<X-API-KEY>>')
+    .anonymousUserId('3F2504E0-4F89-11D3-9A0C-0305E82C3301')
+    .stores([Purchasely.Store.google])
+    .start();
+```
 
-The parameter is a UUID on both platforms: `UUID` on iOS and `java.util.UUID` on Android. The type refuses a malformed id at compile time, so the SDK needs no validation rule. Apple accepts a UUID only for `Transaction.appAccountToken`, so the type also stops an id that StoreKit refuses.
+On iOS and on Android, the parameter is a UUID type: `UUID` on iOS and `java.util.UUID` on Android. The type refuses a malformed id at compile time, so the SDK needs no validation rule. Apple accepts a UUID only for `Transaction.appAccountToken`, so the type also stops an id that StoreKit refuses.
+
+JavaScript and Dart have no UUID type, so the id crosses the bridge as a string. The string must be a canonical UUID. The bridge refuses any other value, writes an error log and skips the option. The initialization still succeeds.
 
 A `nil` value, or a `null` value, changes nothing. The method never clears a stored id.
 
@@ -167,6 +187,24 @@ Purchasely.Builder(applicationContext)
     .build()
     .start { error -> }
 ```
+```typescript React Native
+await Purchasely.builder('<<X-API-KEY>>')
+  .anonymousUserId('3F2504E0-4F89-11D3-9A0C-0305E82C3301', true)
+  .stores(['google'])
+  .start();
+```
+```dart Flutter
+await Purchasely.apiKey('<<X-API-KEY>>')
+    .anonymousUserId('3F2504E0-4F89-11D3-9A0C-0305E82C3301', override: true)
+    .stores([PLYStore.google])
+    .start();
+```
+```javascript Cordova
+await Purchasely.builder('<<X-API-KEY>>')
+    .anonymousUserId('3F2504E0-4F89-11D3-9A0C-0305E82C3301', true)
+    .stores([Purchasely.Store.google])
+    .start();
+```
 
 Write one form in one chain, not both. Each call replaces the value of the call before it.
 
@@ -176,11 +214,11 @@ Write one form in one chain, not both. Each call replaces the value of the call 
 
 ### The stored form of the id
 
-Both SDKs store your id as an uppercase UUID string, because `UUID.uuidString` on iOS always returns uppercase characters. Send the same uppercase form from your backend when you compare the two ids. The id that the Android SDK generates for itself stays lowercase. Purchasely treats an anonymous user id as an opaque string, so the two forms coexist.
+Every SDK stores your id as an uppercase UUID string, because `UUID.uuidString` on iOS always returns uppercase characters. Send the same uppercase form from your backend when you compare the two ids. The id that the Android SDK generates for itself stays lowercase. Purchasely treats an anonymous user id as an opaque string, so the two forms coexist.
 
 ### An origin prefix is not valid here
 
-An anonymous user id that Purchasely issues can carry a lowercase origin prefix, such as `web_<uuid>` or `mob_<uuid>`. That form belongs to the `auid` parameter of a redemption deeplink, which the Purchasely backend issues. Your app cannot supply that form, because the parameter is a UUID.
+An anonymous user id that Purchasely issues can carry a lowercase origin prefix, such as `web_<uuid>` or `mob_<uuid>`. That form belongs to the `auid` parameter of a redemption deeplink, which the Purchasely backend issues. Your app cannot supply that form. The native type forbids it, and the bridges refuse a string that is not a bare canonical UUID.
 
 ### Your id wins over a redemption deeplink
 

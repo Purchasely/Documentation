@@ -20,7 +20,7 @@ Purchasely operates a proxy at `https://svc.purchasely.io`. You can also host yo
 <Callout icon="🚧" theme="warn">
   ### SDK v6.1.0+ required
 
-  The proxy is available from v6.1.0 on iOS and on Android. It is not available on React Native, Flutter or Cordova.
+  The proxy is available from v6.1.0 on iOS, Android, React Native, Flutter and Cordova.
 </Callout>
 
 # What the proxy moves
@@ -73,17 +73,42 @@ Purchasely.Builder(applicationContext)
 
 The parameter is a `String?`. The `null` value restores `api.purchasely.io`, and it also clears a proxy that an earlier `build()` set. The `Purchasely { }` DSL provides the same method.
 
-<Callout icon="❗️" theme="error">
-  ### The no-argument form does the opposite on the two platforms
+# React Native, Flutter and Cordova
 
-  On iOS, `proxy()` selects the Purchasely proxy. On Android, `proxy()` restores `api.purchasely.io`, because the parameter has a default value of `null`. Always write the URL. The explicit form gives the same result on both platforms.
+```typescript React Native
+await Purchasely.builder('<<X-API-KEY>>')
+  .proxy('https://svc.purchasely.io') // null restores api.purchasely.io
+  .stores(['google'])
+  .start();
+```
+```dart Flutter
+await Purchasely.apiKey('<<X-API-KEY>>')
+    .proxy('https://svc.purchasely.io') // null restores api.purchasely.io
+    .stores([PLYStore.google])
+    .start();
+```
+```javascript Cordova
+await Purchasely.builder('<<X-API-KEY>>')
+    .proxy('https://svc.purchasely.io') // null restores api.purchasely.io
+    .stores([Purchasely.Store.google])
+    .start();
+```
+
+The three bridges take the base URL as a string, and each one forwards the value to the native SDK, which validates it. The argument is required on the three bridges. A chain that never calls the method keeps the current setting.
+
+<Callout icon="❗️" theme="error">
+  ### The no-argument form does the opposite on the two native platforms
+
+  On iOS, `proxy()` selects the Purchasely proxy. On Android, `proxy()` restores `api.purchasely.io`, because the parameter has a default value of `null`. Always write the URL. The explicit form gives the same result everywhere.
 </Callout>
 
-| Call | iOS | Android |
-| :--- | :--- | :--- |
-| `proxy()` | Selects `https://svc.purchasely.io` | Restores `api.purchasely.io` |
-| `proxy(api:)` with a URL | Selects that URL | Selects that URL |
-| `proxy(api: nil)` and `proxy(api = null)` | Restores `api.purchasely.io` | Restores `api.purchasely.io` |
+| Call | iOS | Android | React Native, Flutter, Cordova |
+| :--- | :--- | :--- | :--- |
+| No argument | Selects `https://svc.purchasely.io` | Restores `api.purchasely.io` | Not available. React Native and Flutter require the argument at compile time, and Cordova refuses the call with an error log |
+| A URL | Selects that URL | Selects that URL | Selects that URL |
+| `nil` and `null` | Restores `api.purchasely.io` | Restores `api.purchasely.io` | Restores `api.purchasely.io` |
+
+The bridges make the argument mandatory for this reason. One shorthand cannot mean two different things on the two native platforms that a bridge drives.
 
 # URL rules
 
