@@ -2,12 +2,24 @@
 title: 6.1 - Web2App Redemption
 author: Kevin Herembourg
 hidden: false
+metadata:
+  robots: noindex
 published_at: '2026-09-07T07:00:00.000Z'
 type: added
 ---
-SDK 6.1.0 is available for iOS and Android. It replaces iOS 6.0.1 and Android 6.0.2.
+SDK 6.1.0 is available for iOS and Android.
 
-This release is asymmetric. Each entry says which platform it applies to.
+## Version per platform
+
+Detailed changelogs are available on each platform's GitHub repository:
+
+| Platform         | SDK Version                                                            |
+| :--------------- | :--------------------------------------------------------------------- |
+| **iOS**          | [6.1.0](https://github.com/Purchasely/Purchasely-iOS/releases)         |
+| **Android**      | [6.1.0](https://github.com/Purchasely/Purchasely-Android/releases)     |
+| **Flutter**      | [6.1.0](https://github.com/Purchasely/Purchasely-Flutter/releases)     |
+| **React Native** | [6.1.0](https://github.com/Purchasely/Purchasely-ReactNative/releases) |
+| **Cordova**      | [6.1.0](https://github.com/Purchasely/Purchasely-Cordova/releases)     |
 
 ## Web-to-app funnels
 
