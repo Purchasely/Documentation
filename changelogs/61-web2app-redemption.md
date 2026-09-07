@@ -9,6 +9,14 @@ type: added
 ---
 SDK 6.1.0 is available for iOS and Android.
 
+## Highlights
+
+- Apple monthly subscriptions with 12-month commitment
+- Google Play Billing v8 support
+- Personalized tags for dynamic paywall content
+- Custom back button support
+- Campaigns and deeplinks enabled by default
+
 ## Version per platform
 
 Detailed changelogs are available on each platform's GitHub repository:
