@@ -42,7 +42,3 @@ If you want the purchases and subscriptions to be associated to a user and not a
 ### WEB2APP REDEMPTION
 
 Requires SDK 6.1.0. Your class must adopt `PLYWebRedemptionDelegate`. The SDK calls `webRedemptionCompleted(result: PLYWebRedemptionResult)` on the main thread, once per redemption. Set `appHandlesRedemptionAlert` to `true` to draw your own result screen.
-
-### ANONYMOUS USER ID
-
-Requires SDK 6.1.0. The parameter of `appAnonymousUserId` is a `UUID`, and the SDK stores it as an uppercase string. The SDK takes the id only when the device holds no anonymous id yet. Use `.appAnonymousUserId(myUUID, override: true)` to replace an id that already exists.

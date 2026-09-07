@@ -44,6 +44,8 @@ If you never call `userLogin()`, the SDK generates an `anonymous_user_id` automa
 | **Anonymous → logged-in**         | On `userLogin()`, Purchasely transfers the subscription to your ID automatically. A `shouldRefreshCredentials` callback tells you whether to refresh the user's rights. On the webhook side: `DEACTIVATE` on the anonymous ID and `ACTIVATE` on the connected one. |
 | **Logout**                        | `userLogout()` removes the application ID, the SDK falls back to the device's anonymous ID, and user attributes are purged (this last behavior can be disabled).                                                                    |
 
+From SDK 6.1.0 on iOS and Android, your app can also supply the anonymous ID itself, instead of letting the SDK generate one. Your web ID and your mobile ID then describe the same person. Read [Identifying users](user-identification) for the rules, for the `override` flag and for its effect on the user history.
+
 Two limits worth knowing:
 
 * **Consumables and non-consumables are not transferable** from the anonymous user to the connected account. Subscriptions are.

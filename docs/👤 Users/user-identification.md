@@ -120,6 +120,72 @@ Purchasely.getAnonymousUserId((anonymousId) => {
 >
 > If you don't want to manage anonymous users you could use our mobile API to check [subscription status](subscription-status) and unlock the content locally.
 
+## Provide your own anonymous user id
+
+> 📘 Requires SDK 6.1.0
+>
+> The method is available from iOS SDK 6.1.0 and from Android SDK 6.1.0. The React Native, Flutter and Cordova bridges do not expose it yet.
+
+Your app can give Purchasely the anonymous id that your app already uses, instead of the id that the SDK generates. Purchasely then reports the same id as your app. Your web platform and your mobile app can also give the same person one id.
+
+Give the id in the initialization chain. Neither platform provides a setter. iOS applies the id when `start()` runs, and Android applies it when `build()` runs, so the first network call already carries your id. SDK v6 removed the former `Purchasely.setAnonymousUserId(id)` method.
+
+```swift Swift
+Purchasely
+    .apiKey("<<X-API-KEY>>")
+    .appAnonymousUserId(myUUID)
+    .start()
+```
+```kotlin Kotlin
+Purchasely.Builder(applicationContext)
+    .apiKey("<<X-API-KEY>>")
+    .anonymousUserId(myUuid)
+    .stores(listOf(GoogleStore()))
+    .build()
+    .start { error -> }
+```
+
+The parameter is a UUID on both platforms: `UUID` on iOS and `java.util.UUID` on Android. The type refuses a malformed id at compile time, so the SDK needs no validation rule. Apple accepts a UUID only for `Transaction.appAccountToken`, so the type also stops an id that StoreKit refuses.
+
+A `nil` value, or a `null` value, changes nothing. The method never clears a stored id.
+
+### The SDK keeps an id that already exists
+
+The SDK takes your id only when the device holds no anonymous id yet. This is usually the first launch. Use the `override` form to replace an id that already exists.
+
+```swift Swift
+Purchasely
+    .apiKey("<<X-API-KEY>>")
+    .appAnonymousUserId(myUUID, override: true)
+    .start()
+```
+```kotlin Kotlin
+Purchasely.Builder(applicationContext)
+    .apiKey("<<X-API-KEY>>")
+    .anonymousUserId(myUuid, override = true)
+    .stores(listOf(GoogleStore()))
+    .build()
+    .start { error -> }
+```
+
+Write one form in one chain, not both. Each call replaces the value of the call before it.
+
+> ❗️ The override splits the user history
+>
+> Purchasely keeps every event, purchase and subscription that Purchasely recorded against the previous id. The SDK does not merge the two identities, so the device loses access to the earlier history. On iOS, the SDK writes a warning each time the flag replaces a stored id. Use `override` only when you accept that loss.
+
+### The stored form of the id
+
+Both SDKs store your id as an uppercase UUID string, because `UUID.uuidString` on iOS always returns uppercase characters. Send the same uppercase form from your backend when you compare the two ids. The id that the Android SDK generates for itself stays lowercase. Purchasely treats an anonymous user id as an opaque string, so the two forms coexist.
+
+### An origin prefix is not valid here
+
+An anonymous user id that Purchasely issues can carry a lowercase origin prefix, such as `web_<uuid>` or `mob_<uuid>`. That form belongs to the `auid` parameter of a redemption deeplink, which the Purchasely backend issues. Your app cannot supply that form, because the parameter is a UUID.
+
+### Your id wins over a redemption deeplink
+
+The id that your app supplies wins over the id that a Web2App redemption deeplink carries, because the SDK applies your id first. Read [Web-to-app funnels (redemption)](web2app) for the redemption rules.
+
 # Authenticate users
 
 To authenticate an anonymous user, just provides your user id. Purchasely will save this user id for all sessions moving forward until you call `Purchasely.userLogout()` or the user uninstall the application.\
