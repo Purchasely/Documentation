@@ -25,13 +25,19 @@ If you want to quickly test your first in-app Purchase, we invite you to directl
 This first method to display a Placement was already presented at the stage **Display your first screen through a placement**
 
 ```swift
-let placementId = "ONBOARDING"
-PLYPresentationBuilder.forPlacementId(placementId)
-    .contentId(contentId)
-    .onDismissed(completion)
-    .build()
-    .preload { presentation, error in
+PLYPresentationBuilder.forPlacementId("ONBOARDING")
+    .contentId("my_content_id")
+    .onDismissed { outcome in
+        switch outcome.purchaseResult {
+        case .purchased, .restored:
+            // unlock the content
+            break
+        default:
+            break
+        }
     }
+    .build()
+    .display()
 ```
 
 ### 2\. USING THE ASYNCHRONOUS DISPLAY WITH PRE-FETCH
