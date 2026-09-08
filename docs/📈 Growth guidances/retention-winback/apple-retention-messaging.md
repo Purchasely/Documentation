@@ -27,7 +27,7 @@ Everything is server-driven: **no SDK update and no app release** are needed. Th
 1. The subscriber taps **Cancel subscription** in their App Store settings.
 2. Apple calls Purchasely in real time.
 3. Purchasely evaluates your **targeting rules** in priority order and answers with the first matching rule's action: a message, a promotional offer, or a plan switch proposal.
-4. Apple natively displays the response. When no rule matches, Apple displays the **default message** you configured for the product and locale.
+4. Apple natively displays the response. When no rule matches, Apple displays the **default message** you configured for the product and language.
 
 Every request is recorded as a [`RETENTION_MESSAGE_REQUESTED`](https://docs.purchasely.com/docs/lifecycle-events) server event, so you can measure the cancel funnel and the performance of your retention strategy (see [Measuring](#measuring-your-retention-strategy) below).
 
@@ -59,7 +59,7 @@ The Setup tab also shows your **message slots** usage — Apple limits the numbe
 
 # Creating messages
 
-From the **Messages** tab, a retention message is authored once and translated into as many locales as you serve; each localization is submitted to Apple and reviewed individually (statuses: **In review**, **Approved**, **Rejected**). Only approved localizations are served to subscribers.
+From the **Messages** tab, a retention message is authored once and translated into as many languages as you serve; each localization is submitted to Apple and reviewed individually (statuses: **In review**, **Approved**, **Rejected**). Only approved localizations are served to subscribers.
 
 * In **sandbox**, Apple approves messages automatically — you can test the full flow instantly.
 * In **production**, each localization goes through Apple's review before it can be displayed.
@@ -69,7 +69,7 @@ From the **Images** tab, you can upload **hero images** and **bullet icons** tha
 
 ## Default messages
 
-The default message is what Apple displays when no targeting rule matches the cancelling subscriber. Defaults are assigned per **product × locale** from the Messages tab: for full coverage, assign a default message to every product and locale you serve. The **By product** view of the Messages tab shows this as a product × locale matrix, flags every combination left without a default, and lets you assign one by clicking the cell.
+The default message is what Apple displays when no targeting rule matches the cancelling subscriber. Defaults are assigned per **product × language** from the Messages tab: for full coverage, assign a default message to every product and language you serve. A language automatically covers every App Store storefront of that language (English covers the US, UK, Australian and Canadian storefronts). The **By product** view of the Messages tab shows this as a product × language matrix, flags every combination left without a default, and lets you assign one by clicking the cell.
 
 # Targeting
 
@@ -78,7 +78,7 @@ From the **Targeting** tab, you decide **who sees what** with retention audience
 * A **retention audience** is a set of criteria on the subscriber's subscription state (plan, trial, subscription age, etc.).
 * A **targeting rule** is an audience plus an action: show a message, offer a [promotional offer](promotional-offers-configuration), or propose a plan switch. Rules are evaluated in priority order — the first rule whose audience matches and whose response can be served wins.
 
-A rule is served when its message has an approved localization for the subscriber's locale (with language fallback, e.g. `en-US` → `en`). A promotional offer can retain the subscriber on their current product — or propose a **discounted switch** to another plan, by using an offer configured on that other plan (Apple applies it like a regular purchase). A switch proposal must target a different plan than the one being cancelled. When a rule does not apply, the next one is evaluated, down to your catch-all rule or the default message.
+A rule is served when its message has an approved localization in the subscriber's language, whatever their App Store storefront. A promotional offer can retain the subscriber on their current product — or propose a **discounted switch** to another plan, by using an offer configured on that other plan (Apple applies it like a regular purchase). A switch proposal must target a different plan than the one being cancelled. When a rule does not apply, the next one is evaluated, down to your catch-all rule or the default message.
 
 > 🚧 Apple constraints to keep in mind
 >
