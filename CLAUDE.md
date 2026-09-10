@@ -137,7 +137,7 @@ Purchasely offers two distinct modes:
 - Access to all no-code growth features
 - Best for: Apps with established IAP systems wanting growth tools
 
-Switch modes via `runningMode` parameter in `Purchasely.start()`
+Set the mode with the `runningMode` modifier of the v6 start builder, before `start()`. The v5 `Purchasely.start()` parameter no longer exists.
 
 ---
 
