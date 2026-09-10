@@ -41,6 +41,26 @@ while the Purchasely SDK relies on:
 
 ***
 
+## ⚠️ Minimum Purchasely SDK version: 5.4.0
+
+The two fixes below need **`io.purchasely:google-play` 5.4.0 or later**.
+
+Purchasely SDK 5.3.x and earlier call `enablePendingPurchases()` without an argument. Google Play Billing 8 removed this method. The build gives no error, but at run time the SDK throws a `NoSuchMethodError`, the `BillingClient` never connects, and the Screens show no prices. The two fixes below do not correct this. You must update the SDK.
+
+| Purchasely Android SDK | Google Play Billing 8 | Artifact built with Kotlin |
+| ---------------------- | --------------------- | -------------------------- |
+| 5.3.x and earlier      | ❌ `NoSuchMethodError` at run time | 2.0 |
+| 5.4.0                  | ✅ with the fixes below | 2.0 |
+| 5.5.x and 5.6.0        | ✅ with the fixes below | 2.1 |
+| 5.7.x                  | ✅ with the fixes below | 2.2 |
+| 6.x                    | ✅ Billing 8 included   | 2.3 |
+
+An older Kotlin compiler cannot read the metadata of an artifact built with a newer Kotlin version. If your project is on Kotlin 2.0, for example a React Native project before version 0.79, use SDK **5.4.0**.
+
+<Callout icon="far fa-lightbulb" theme="info">
+  On React Native, Flutter and Cordova, this version is the version of the native Android artifact. Check which native version your bridge package pins.
+</Callout>
+
 ## ✅ Fix #1 — Use `billing-ktx` (recommended)
 
 Make sure your app uses the Kotlin variant of Google Play Billing:
