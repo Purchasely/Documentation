@@ -72,6 +72,8 @@ On Purchasely Screens in full mode, the SDK will automatically display dialogs (
 
 If you wish to change the layout of those dialogs or change the content, you can[ implement a PLYUIHandler](ui-handler-dialogs) to display them yourselves.
 
+On Android, an alert dismissal also resumes the paywall action that triggered it, so your implementation must always call either `proceed()` or `alert.onDismiss()`. See [Dismissing the alert](ui-handler-dialogs#dismissing-the-alert-android).
+
 # Display deeplinks yourself
 
 If you have setup deeplinks with Purchasely, the SDK will automatically display them in a specific UIViewController (iOS) or Activity (Android).<br />However, you can display a Purchasely Screen yourself inside your own View if you [implement a PLYUIHandler](ui-handler-deeplinks).
