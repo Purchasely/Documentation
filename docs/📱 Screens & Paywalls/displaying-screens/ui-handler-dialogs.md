@@ -59,6 +59,34 @@ interface PLYUIHandler {
 }
 ```
 
+On Android, this method must always end with a call to either `proceed()` or `alert.onDismiss()`. See [Dismissing the alert](#dismissing-the-alert-android) below.
+
+### Dismissing the alert (Android)
+
+Most alerts are the last step of a paywall action: a purchase, a restore, a plan change. On Android, the SDK keeps that action open until the alert is dismissed, and only then resumes the Screen — closing it after a successful purchase, or accepting taps again after an error.
+
+There are therefore **two** ways to signal that the alert is over, and you must always use one of them:
+
+| You call | What the SDK does |
+| --- | --- |
+| `proceed()` | Displays its own `AlertDialog` and dismisses the alert for you when the user taps its button. |
+| `alert.onDismiss()` | Dismisses the alert without displaying any dialog. Use it when you display your own. |
+
+<Callout icon="⚠️">
+  **Always signal the dismissal**
+
+  If you display your own dialog and call neither `proceed()` nor `alert.onDismiss()`, the paywall action is never completed. The Screen remains displayed and stops reacting to taps, including the close button, and later actions are never processed.
+
+  Call `alert.onDismiss()` from the dismiss callback of your own dialog.
+</Callout>
+
+`onDismiss()` is declared on the `PLYAlertMessage` base class, so it is available on every alert type without a `when` branch, and it runs exactly what the button of the SDK dialog would have run. The base class also exposes the strings the SDK would have displayed — `getTitleContent()`, `getContentMessage()` and `getButtonContent()` — so you can reuse them in your own dialog.
+
+Two rules to keep in mind:
+
+* Call `alert.onDismiss()` **after** your dialog is dismissed, not before: on a success alert the SDK resumes the flow and closes the Screen.
+* Never call both `proceed()` and `alert.onDismiss()` for the same alert, otherwise the SDK dialog is displayed on top of yours.
+
 ### PLYUIHandler implementation
 
 You can either display your own custom dialog or call the proceed function to let the SDK display the default dialog. You also have the option to handle specific alert types with your custom dialog and use the default SDK dialog for others
@@ -82,14 +110,21 @@ Purchasely.setUIHandler(CustomUIHandler())
 ```kotlin Kotlin
 Purchasely.uiHandler = object : PLYUIHandler {
   override fun onAlert(alert: PLYAlertMessage, purchaselyView: View, activity: Activity?, proceed: () -> Unit) {
+    val context = activity ?: return proceed() // no activity: let the SDK display the alert
     when(alert) {
-      is PLYAlertMessage.InAppSuccess -> { /* Display your own alert dialog */ }
-      is PLYAlertMessage.InAppSuccessUnauthentified -> { /* Display your own alert dialog */ }
+      is PLYAlertMessage.InAppSuccess,
+      is PLYAlertMessage.InAppSuccessUnauthentified ->
+        // Dismiss the alert once your dialog is closed, so the SDK resumes the Screen
+        showMyDialog(context, alert.getTitleContent(), alert.getContentMessage()) { alert.onDismiss() }
       else -> proceed()
     }
   }
 }
 ```
+
+> 📘 Reading the error
+>
+> On Android, `PLYAlertMessage` is a sealed class: the error is carried by the alert types that have one, for instance `PLYAlertMessage.InAppError` and `PLYAlertMessage.InAppRestorationError`. Inside a `when` branch, read it with `alert.error`. Its localized message is also returned by `alert.getContentMessage()`.
 
 <br />
 

@@ -593,6 +593,25 @@ public PLYCustomScreen onCustomScreenRequested(PLYPresentation presentation) { �
 public PLYCustomScreen onCustomScreenRequested(PLYPresentationBase.Loaded presentation) { … }
 ```
 
+### `PLYUIHandler` — custom alert dialogs must dismiss the alert
+
+If you implement `PLYUIHandler.onAlert` to display your own dialogs instead of the SDK ones, that method must always end with a call to either `proceed()` (the SDK displays its dialog and dismisses the alert for you) or `alert.onDismiss()` (the alert is dismissed with no SDK dialog).
+
+In v6, every paywall action goes through a single queue, and the action that triggered the alert — a purchase, a restore, a plan change — stays open until the alert is dismissed. An `onAlert` implementation that calls neither leaves that action pending: the Screen remains displayed and stops reacting to taps, including the close button. Early v5 releases did not wait for that dismissal, so a missing call went unnoticed.
+
+```kotlin
+Purchasely.uiHandler = object : PLYUIHandler {
+    override fun onAlert(alert: PLYAlertMessage, purchaselyView: View, activity: Activity?, proceed: () -> Unit) {
+        val context = activity ?: return proceed() // no activity: let the SDK display the alert
+        showMyDialog(context, alert.getTitleContent(), alert.getContentMessage()) {
+            alert.onDismiss() // dismisses the alert once your dialog is closed, no SDK dialog
+        }
+    }
+}
+```
+
+`onDismiss()` is declared on the `PLYAlertMessage` base class, so it covers every alert type without a `when` branch. Call it **after** your dialog is closed, not before: on a success alert the SDK resumes the flow and closes the Screen. See [Overriding SDK dialogs](ui-handler-dialogs) for the full contract.
+
 ### Deprecated (not removed)
 
 | Deprecated | Replacement |
@@ -941,6 +960,7 @@ Purchasely.synchronize(onSuccess, onError);
 - [ ] Rename `onClose` → `onCloseRequested`, `presentation.id` → `screenId`, `toMap()["id"]` → `toMap()["screenId"]`
 - [ ] Update imports: `io.purchasely.ext.*` → `io.purchasely.ext.presentation.*` for presentation types
 - [ ] Rename `setDefaultPresentationResultHandler` → `setDefaultPresentationDismissHandler`
+- [ ] If you implement `PLYUIHandler.onAlert` to display your own dialogs, make sure every branch ends with `proceed()` or `alert.onDismiss()` — otherwise the Screen stays displayed and unresponsive
 - [ ] Deeplinks: remove manual `handleDeeplink` calls (or keep them — they are deduped); handle the `singleTask`/`singleTop` + `onNewIntent` case with `setIntent(intent)`
 - [ ] If your app relied on deferred deeplinks or campaigns, set `.allowDeeplink(false)` / `.allowCampaigns(false)` at init and re-enable when your UI is ready (both now default to `true`)
 - [ ] Rename `readyToOpenDeeplink` → `allowDeeplink`, `isDeeplinkHandled` → `handleDeeplink`
