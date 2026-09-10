@@ -59,8 +59,8 @@ Each platform documentation file includes:
 
 ### Running Modes
 
-- **Full Mode**: Purchasely handles entire purchase flow (recommended for new apps)
-- **Observer Mode**: Use with existing IAP infrastructure (RevenueCat, etc.)
+- **Observer Mode**: Purchasely observes transactions, your app keeps the purchase flow. **This is the default since v6.**
+- **Full Mode**: Purchasely handles the entire purchase flow. Set `runningMode` to full explicitly.
 
 ### Placements
 
