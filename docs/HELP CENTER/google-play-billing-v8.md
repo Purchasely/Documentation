@@ -41,21 +41,30 @@ while the Purchasely SDK relies on:
 
 ***
 
-## ⚠️ Minimum Purchasely SDK version: 5.4.0
+## ⚠️ Requirements for these fixes
 
-The two fixes below need **`io.purchasely:google-play` 5.4.0 or later**.
+Two conditions are necessary. Both are independent of your own code.
 
-Purchasely SDK 5.3.x and earlier call `enablePendingPurchases()` without an argument. Google Play Billing 8 removed this method. The build gives no error, but at run time the SDK throws a `NoSuchMethodError`, the `BillingClient` never connects, and the Screens show no prices. The two fixes below do not correct this. You must update the SDK.
+### 1. Purchasely SDK 5.4.0 or later
 
-| Purchasely Android SDK | Google Play Billing 8 | Artifact built with Kotlin |
-| ---------------------- | --------------------- | -------------------------- |
-| 5.3.x and earlier      | ❌ `NoSuchMethodError` at run time | 2.0 |
-| 5.4.0                  | ✅ with the fixes below | 2.0 |
-| 5.5.x and 5.6.0        | ✅ with the fixes below | 2.1 |
-| 5.7.x                  | ✅ with the fixes below | 2.2 |
-| 6.x                    | ✅ Billing 8 included   | 2.3 |
+Purchasely SDK 5.3.x and earlier call `enablePendingPurchases()` without an argument. Google Play Billing 8 removed this method. The build gives no error. At run time the SDK throws a `NoSuchMethodError`, the `BillingClient` never connects, and the Screens show no prices.
 
-An older Kotlin compiler cannot read the metadata of an artifact built with a newer Kotlin version. If your project is on Kotlin 2.0, for example a React Native project before version 0.79, use SDK **5.4.0**.
+### 2. A Kotlin 2.1 compiler or later in your project
+
+Google Play Billing 8 is compiled with Kotlin metadata 2.2, and it brings `kotlin-stdlib` 2.2. A Kotlin 2.0 compiler refuses these artifacts:
+
+```
+Module was compiled with an incompatible version of Kotlin.
+The binary version of its metadata is 2.2.0, expected version is 2.0.0.
+```
+
+This second condition comes from Google Play Billing. No Purchasely version removes it. If your project is on Kotlin 2.0, for example a React Native project before version 0.79, move your project to Kotlin 2.1 or later first.
+
+| Purchasely Android SDK | Google Play Billing 8 | Minimum Kotlin compiler in your project |
+| ---------------------- | --------------------- | --------------------------------------- |
+| 5.3.x and earlier      | ❌ `NoSuchMethodError` at run time | not applicable |
+| 5.4.0 to 5.7.x         | ✅ with the fixes below | 2.1 |
+| 6.x                    | ✅ Billing 8 included   | 2.2 |
 
 <Callout icon="far fa-lightbulb" theme="info">
   On React Native, Flutter and Cordova, this version is the version of the native Android artifact. Check which native version your bridge package pins.
