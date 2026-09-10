@@ -125,13 +125,13 @@ Current major version: **5.x**
 
 Purchasely offers two distinct modes:
 
-### 1. Full Mode (Default)
+### 1. Full Mode (not the default since v6, set `runningMode` to full explicitly)
 - Purchasely handles **entire purchase flow**
 - Validates and acknowledges receipts with app stores
 - Manages user entitlements
 - Best for: New apps or those wanting a complete subscription infrastructure
 
-### 2. Observer Mode
+### 2. Observer Mode (default since v6)
 - Works alongside **existing subscription infrastructure** (RevenueCat, in-house, etc.)
 - Transactions observed but not processed by Purchasely
 - Access to all no-code growth features
