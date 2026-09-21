@@ -17,7 +17,7 @@ A **12-month commitment paid monthly** lets your users subscribe to an annual pl
 This billing structure lowers the entry barrier of your annual plan (a $9.99 first charge converts better than a $119.88 one) while securing 12 months of revenue.
 
 - On the **Apple App Store**, this is the _monthly subscription with a 12-month commitment_ billing plan introduced with iOS 26.4. It requires a dedicated configuration in the Purchasely Console, detailed in the [Apple App Store](#apple-app-store) section below.
-- On **Google Play**, the equivalent mechanism is _installment subscriptions_, which Purchasely supports out of the box: everything is configured in the Google Play Console, see the [Google Play Store](#google-play-store) section below.
+- On **Google Play**, the equivalent mechanism is _installment subscriptions_. The commitment terms are configured in the Google Play Console, on a dedicated base plan that gets its own Plan in the Purchasely Console, detailed in the [Google Play Store](#google-play-store) section below.
 
 # Apple App Store
 
@@ -200,19 +200,77 @@ await Purchasely.interceptAction(
 
 On Google Play, the same mechanism is called an **installment subscription**: the subscriber pays a fixed amount every month over a commitment period, and the plan renews automatically at the end of the commitment.
 
-Purchasely supports Google Play installment subscriptions out of the box, with no particular prerequisite: there is no billing type to enable on your Plan or your Screen. The whole configuration lives in the **Google Play Console**, where you create an installment base plan (commitment duration and renewal type) on your subscription. Purchasely then sells and tracks it like any other subscription.
-
-To learn more about creating installment plans, check Google's documentation:
-
-- [Installment subscriptions in the Play Billing overview](https://developer.android.com/google/play/billing/subscriptions)
-- [Create and manage subscriptions in the Play Console](https://support.google.com/googleplay/android-developer/answer/140504)
-
 <Callout icon="📘" theme="info">
   ### Availability
 
-  Google installment subscriptions are only available in a limited set of countries (Brazil, France, Italy and Spain at the time of writing). Refer to Google's documentation above for the up-to-date list.
+  - Installment subscriptions are only available in a limited set of countries (Brazil, France, Italy and Spain at the time of writing). Refer to [Google's documentation](https://developer.android.com/google/play/billing/subscriptions) for the up-to-date list.
+  - No code change on your side: an installment base plan is sold through the standard base plan mechanism, like any other Google Play base plan.
+  - Unlike the App Store, there is **no billing type to enable** on your Plan or on your Screen. The commitment terms live in the Google Play Console, and the installment base plan gets **its own Plan in the Purchasely Console**.
+</Callout>
+
+## How it works
+
+Google Play does not attach the commitment to the subscription product: it is a **separate base plan** of that product, of type _Installments_. A yearly subscription product can therefore carry two base plans side by side:
+
+| Base plan type              | User is charged             | Example                            |
+| :-------------------------- | :-------------------------- | :--------------------------------- |
+| **Auto-renewing** (P1Y)     | The full price, once a year | $119.88 today                      |
+| **Installments** (P1M × 12) | Every month, for 12 months  | $9.99/month, $119.88/year in total |
+
+With an installment base plan:
+
+- Each monthly payment grants one month of access, and the subscriber commits to the number of payments set in the Play Console (**committed payments count**).
+- If the user cancels during the commitment, the monthly billing continues until the end of the commitment.
+- At the end of the commitment, the base plan renews according to its **renewal type**: _Renews with commitment_ starts a new commitment period, _Renews without commitment_ falls back to a regular monthly subscription.
+- The two base plans belong to the same subscription product, so a subscriber can hold only one of them at a time. Moving from one to the other is a plan change handled by Google Play.
+
+[Create your installment base plan in the Google Play Console](play-store-configuring-in-app-subscriptions), then declare it in Purchasely as described below.
+
+## Configuring your Plan
+
+A Purchasely Plan references **exactly one Google Play base plan**, so the installment base plan needs **its own Plan**. You cannot add it to the Plan that already sells the yearly base plan, and the store reference of that Plan is locked as soon as a purchase has been recorded on it.
+
+1. Create a new Plan on the same Product, for example `MY_PLAN_INSTALLMENTS`
+2. Set its **Period** to _1 month (P1M)_, the billing period of the installment base plan
+3. Give it the **same level** as the yearly Plan, so your upgrade and downgrade rules stay consistent
+4. Select the **Google Play** application store, fill in the **Play Store Product id** and the **Base plan id** of your installment base plan
+5. Turn **off** the _Backwards compatible_ option on this Plan
+
+<Callout icon="🚧" theme="warn">
+  ### Keep the Backwards compatible option off
+
+  When _Backwards compatible_ is enabled, server events and exports report the bare Play Store product id instead of the full `productId:basePlanId` reference. With two base plans on the same product, an installment purchase and a yearly purchase would then be indistinguishable in your webhooks and your analytics.
+</Callout>
+
+## Configuring your Screen
+
+The yearly base plan and the installment base plan are two distinct Plans, so you can display both on the same Screen, each in its own offering. No commitment setting is involved.
+
+Keep in mind that a Plan is only served on the platform where it has a store product: an offering bound to your Android installment Plan renders an empty price on iOS, where the commitment is carried by the yearly Plan itself. Serve a dedicated Screen per platform, for example with an [Audience](audiences) targeting the user platform.
+
+## Displaying the right prices with Tags
+
+Purchasely reads the installment base plan as a **monthly plan**: the store reports the monthly charge and a monthly billing period. The commitment itself is not part of the price the SDK receives, so the [Tags](tags) behave as they do for any monthly plan:
+
+| Tag                  | Displays                                                                  | Example     |
+| :------------------- | :------------------------------------------------------------------------ | :---------- |
+| `{{PRICE}}`          | The monthly charge, with its period                                        | $9.99/month |
+| `{{AMOUNT}}`         | The monthly charge, without period                                         | $9.99       |
+| `{{MONTHLY_AMOUNT}}` | The monthly charge                                                         | $9.99       |
+| `{{YEARLY_AMOUNT}}`  | The monthly charge over a year, i.e. the total of a 12-payment commitment  | $119.88     |
+
+<Callout icon="🚧" theme="warn">
+  ### Write the commitment wording yourself
+
+  On Google Play the commitment duration is not carried by the price, so no tag renders it. State it in your offering copy, for example _"\{\{MONTHLY_AMOUNT\}\}/month for 12 months (\{\{YEARLY_AMOUNT\}\} in total)"_. `{{YEARLY_AMOUNT}}` only matches the total commitment when the commitment lasts 12 monthly payments.
 </Callout>
 
 # Server events
 
-On the backend side, each monthly installment billed to a committed subscriber generates an `INSTALLMENT_PAID` webhook event (12 per year for a committed subscription). Refunding a past installment generates `INSTALLMENT_REFUNDED` instead, without closing the subscription or ending the commitment. Events for a committed subscription also carry dedicated `commitment_*` attributes (installment number, commitment expiration date, auto-renewal status, and more). See [Lifecycle Events](lifecycle-events) and [Server Events Attributes](server-events-attributes) for details.
+Each monthly installment billed to a committed **App Store** subscriber generates an `INSTALLMENT_PAID` webhook event (12 per year for a committed subscription). Refunding a past installment generates `INSTALLMENT_REFUNDED` instead, without closing the subscription or ending the commitment. Events for a committed subscription also carry dedicated `commitment_*` attributes (installment number, commitment expiration date, auto-renewal status, and more). See [Lifecycle Events](lifecycle-events) and [Server Events Attributes](server-events-attributes) for details.
+
+<Callout icon="📘" theme="info">
+  ### Google Play installments
+
+  Commitment events and attributes are currently fed by the App Store only. An installment subscription bought on Google Play is tracked as a regular monthly subscription: every monthly charge is reported as a subscription renewal, and no `INSTALLMENT_PAID` event nor `commitment_*` attribute is sent.
+</Callout>
