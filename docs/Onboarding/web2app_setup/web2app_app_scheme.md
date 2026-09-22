@@ -1,5 +1,5 @@
 ---
-title: App scheme
+title: Web2App FAQ · App scheme
 excerpt: ''
 deprecated: false
 hidden: true
@@ -10,14 +10,26 @@ metadata:
 next:
   description: ''
 ---
-## Custom scheme or universal link?
+# What is the app scheme used for?
 
-A custom scheme (`sportelo://`) works immediately — no app update needed if it's already declared. Universal links open your app from an https link and feel more native, but require a manifest change and a new release.
+After the payment, the success screen and the receipt email open your app through its custom URL scheme, for example `yourapp://`. Purchasely builds the link; the scheme tells the phone which app to open. See [Setup 3 · Verify your mobile app](web2app-setup-mobile-app).
 
-## What do I need to change for universal links?
+# Where do I find my app's scheme?
 
-Add your web domain to the iOS [Associated Domains](https://developer.apple.com/documentation/xcode/supporting-associated-domains) and the Android [App Links intent filter](https://developer.android.com/training/app-links/verify-android-applinks), and host the `apple-app-site-association` and `assetlinks.json` files.
+In your app project: under URL Types in the target's Info tab on iOS, in the intent-filter of your launch activity on Android. If your app already handles Purchasely deeplinks, it already declares one.
 
-## How do I test it?
+# My app does not declare a scheme yet
 
-Trigger a purchase in your sandbox funnel with a [Stripe test card](https://docs.stripe.com/testing), then confirm the app opens and redeems the subscription from the success page.
+Add one and ship a new build: Apple's guide on [custom URL schemes](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app), Android's guide on [deep links](https://developer.android.com/training/app-links/deep-linking). Pick a scheme specific to your app to avoid collisions with other apps on the device.
+
+# Can I use universal links or App Links instead?
+
+Not for redemption today: links use the custom scheme only.
+
+# Are the iOS and Android schemes different?
+
+They are entered per platform, in the Apple and Google tabs, and are usually the same value. Purchasely picks the right one from the device that opens the link. The scheme is shared with App settings → Stores.
+
+# How do I test it?
+
+Open the sandbox URL of a Web Flow on your phone, pay with a [Stripe test card](https://docs.stripe.com/testing), then tap the button on the success screen. The app must open and confirm the activation. See [Test and go live](web2app-test-and-go-live).
