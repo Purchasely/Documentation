@@ -29,7 +29,7 @@ Open **Web2App → Flows**: `https://console.purchasely.io/web2app?tab=flows`.
 | **Screens** | The steps of your funnel: landing, quiz, text input, paywall… Each one is a Screen built in the Composer or generated from a prompt. A Screen can be shared with your In-App Flows: it renders in HTML on the web and natively in the app. |
 | **Transitions** | The arrows between Screens. A transition is triggered by an action on a Screen (a button, a quiz answer) and can carry conditions on the user attributes collected earlier. |
 | **Stripe Checkout** | Not a Screen you edit. When a Screen contains a purchase action, the purchase opens a secure Stripe checkout page embedded in the funnel. |
-| **Redeem step** | The success step that sends the subscriber to the app. Purchasely creates it and wires it for you as soon as a purchase action exists. |
+| **Redeem step** | The success step that sends the subscriber to the app, in two steps: the store links to install the app, then the redemption button that activates the subscription. Purchasely creates it and wires it for you as soon as a purchase action exists. |
 
 ## 1. Create the flow
 
