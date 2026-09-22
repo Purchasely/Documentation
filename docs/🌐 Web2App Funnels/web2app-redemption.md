@@ -1,6 +1,9 @@
 ---
-title: After the purchase: activating the subscription in the app
-excerpt: ''
+title: 'After the purchase: activating the subscription in the app'
+excerpt: >-
+  How a web subscriber lands in your app with an active subscription: the
+  success screen, the receipt email, the redemption link and what happens in the
+  app.
 deprecated: false
 hidden: true
 metadata:
@@ -8,8 +11,77 @@ metadata:
   description: ''
   robots: index
 next:
-  description: ''
+  description: 'Next, the SDK side: what your app needs, and how to tailor the welcome experience.'
+  pages:
+    - type: basic
+      slug: web2app-sdk-integration
+      title: SDK integration
 ---
-> 🚧 Draft
+The payment is only half of a Web2App Funnel. The other half is the **handover**: the subscriber must open your app and find their subscription active, without typing anything. Purchasely does this with a **redemption link**, delivered on the success screen and by email, that the SDK consumes when it opens the app. This page describes the journey and its edge cases; the [SDK integration](web2app-sdk-integration) page covers the code.
+
+## The journey
+
+1. **Checkout completed.** Stripe confirms the payment. Purchasely creates the subscription, owned for now by the anonymous web visitor.
+2. **Success screen.** The funnel lands on the **Redeem step**, which always presents two steps: **step 1**, the App Store and Play Store links to install your app if it is not there yet; **step 2**, the **redemption button** that opens the app and activates the subscription. On a phone, tapping the button opens your app directly through its custom URL scheme.
+3. **Receipt email.** In parallel, Purchasely emails the customer a receipt at the email address typed at checkout. It carries your app name and icon, the plan, and the same two steps as the success screen: the **App Store and Play Store links** to download the app, then the **redemption link** to activate the subscription. The subscriber can use it later, on any device.
+4. **The app opens.** The SDK detects the redemption link, calls Purchasely, activates the subscription for this app user and refreshes their entitlements. It shows a confirmation, and your app can react to it.
+
+<Image align="center" border={true} src="TODO-NICO-UPLOAD/redeem-01-success-screen-phone.png" alt="Success screen of a Web Flow on a phone: step 1 store links, step 2 redemption button" />
+
+<Image align="center" border={true} src="TODO-NICO-UPLOAD/redeem-02-receipt-email.png" alt="Receipt email with the plan, the store links to download the app and the button to activate the subscription" />
+
+<Image align="center" border={true} src="TODO-NICO-UPLOAD/redeem-03-app-confirmation.png" alt="The app opened from the link, with the SDK confirmation that the subscription is active" />
+
+> 📘 No sign-in required
 >
-> Success screen, redemption email, 4-hour validity, automatic new email when a link has expired, subscription transfer to the app user.
+> The subscriber does not need an account to activate the subscription. The link is enough: Purchasely attaches the subscription to the app user who opened it. If your app has accounts, ask the user to sign in or sign up right after the activation. When your app identifies the user with the SDK, the subscription is **automatically transferred** to their account (the user ID your app provides), and the transfer is reported in your webhooks. This is the same mechanism Purchasely uses to restore or transfer in-app subscriptions. See [SDK integration](web2app-sdk-integration).
+
+## The redemption link
+
+The link is unique to the subscription and works **once**: when it is consumed, the subscription is attached to the app user who opened it. If the subscriber later opens a link that has **expired** or has **already been used**, Purchasely automatically emails a **new redemption link** to the address entered at the Stripe checkout. Opening the link again on the device where it was already redeemed simply confirms the subscription.
+
+| Rule | Detail |
+| --- | --- |
+| **Validity** | A link is valid for **4 hours** after it is issued. |
+| **Expired or already-used link** | When the subscriber opens an expired or already-used link, from the email or from the success screen, Purchasely **automatically emails a new link** to the address entered at checkout and tells the subscriber to check their inbox. Nothing to do on your side. |
+| **Any device** | The link works on the device where the purchase was made and on any other one, for example a purchase on desktop and an activation on the phone, from the email. |
+| **App not installed** | Step 1 of the success screen links to the App Store and Play Store; the email carries the same store links. Once the app is installed, the subscriber taps the redemption button, or opens the link from the email, to activate. |
+| **Subscription no longer active** | If the subscription was cancelled or refunded before activation, the link shows an *unavailable* page and no email is sent. |
+
+The receipt email is sent from `redemption@purchasely.io` with your app name as sender, or from your own address once your [email domain](web2app-setup-domains-and-wallets) is configured. For sandbox purchases, its subject starts with `[Sandbox]`.
+
+## What happens to the subscription
+
+| Situation in the app | Result |
+| --- | --- |
+| The app user is **anonymous** | The subscription is attached to this anonymous user. When they later sign in and your app identifies them with the SDK, the subscription is transferred to their user ID, exactly as an in-app subscription would be on restore or transfer. Your webhooks receive the transfer events. |
+| The app user is **identified** (your app already called the SDK's login method) | The subscription is attached to their account directly. |
+| The user **already owns** the subscription (same link opened again) | Entitlements are refreshed, nothing else changes. |
+
+From then on, the subscription behaves like any Purchasely subscription: it appears in the user's subscriptions in the SDK, in the Console, in your dashboards, and its lifecycle is reported in your [webhooks](web2app-events-and-webhooks) with the `web2app` channel. Renewals, cancellations and refunds come from Stripe and are handled by Purchasely.
+
+## What the subscriber sees in the app
+
+The SDK handles the activation and shows a short confirmation. Three outcomes exist:
+
+| Outcome | Message shown by the SDK |
+| --- | --- |
+| **Success** | The subscription is active. |
+| **Expired link** | The link has expired and a new one was sent to the checkout email address, shown partially masked. |
+| **Invalid link** | The link does not match this app or its subscription is no longer available. |
+
+You can replace these messages with your own experience, for example a welcome Screen or a sign-up prompt: see [SDK integration](web2app-sdk-integration).
+
+## The context follows the user
+
+Along with the subscription, the app receives the **context of the web journey**: the UTM parameters of the campaign, the click identifiers and the user attributes collected in the funnel that you chose to keep. They are available in the SDK right after the activation, so the first session can skip the questions already answered and start where the funnel stopped.
+
+## Troubleshooting
+
+| Problem | Cause and solution |
+| --- | --- |
+| The button on the success screen does nothing. | The app is not installed, or the app scheme in the Console does not match the one declared in the app. See [Setup 3](web2app-setup-mobile-app). |
+| The app opens but nothing happens. | The app runs an SDK older than 6.1, or the URL is not forwarded to the SDK. See [SDK integration](web2app-sdk-integration). |
+| The subscriber says the link has expired or was already used. | Expected: a new email was sent automatically to the checkout address. Ask them to open the latest email. |
+| The subscriber never received the email. | Check the spam folder and the address typed at checkout. The email is sent within a minute of the purchase. |
+| The subscription is on the wrong account. | The link was opened while another user was signed in on the device. Contact support to move the subscription. |
