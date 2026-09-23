@@ -82,4 +82,4 @@ Seamless propagation of the subscription and of everything the user told you is 
 
 > 📘 Getting access
 >
-> Web2App Funnels are enabled per app. See [Getting access to Web2App Funnels](web2app-getting-access) to activate them with your Customer Success manager or Account Executive.
+> Web2App Funnels must be enabled on your Purchasely account. See [Getting access to Web2App Funnels](web2app-getting-access) to activate them with your Customer Success manager or Account Executive.

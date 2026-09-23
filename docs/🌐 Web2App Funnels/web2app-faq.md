@@ -15,7 +15,7 @@ next:
 ## Getting started
 
 **Do I need a new app or a new Purchasely project?**
-No. Web2App Funnels are enabled on your existing Purchasely app. The same plans, Screens, users and dashboards are used on the web and in the app.
+No. Web2App Funnels are enabled on your Purchasely account and used with your existing apps. The same plans, Screens, users and dashboards are used on the web and in the app.
 
 **Do I need to change my app?**
 Only if it runs a Purchasely SDK older than **6.1**, or if it does not declare a custom URL scheme yet. Nothing else: the SDK activates web subscriptions on its own. See [Setup 3](web2app-setup-mobile-app).
