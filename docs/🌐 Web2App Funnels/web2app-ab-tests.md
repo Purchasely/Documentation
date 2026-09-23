@@ -78,7 +78,7 @@ When a challenger wins, **stop the test** and make the winner the funnel behind 
 
 | Problem | Cause and solution |
 | --- | --- |
-| The **Web** option does not appear in *Where it runs*. | Web2App is not enabled on this app, or no Screen or flow is published on the web yet. |
+| The **Web** option does not appear in *Where it runs*. | Web2App Funnels are not enabled on your account, or no Screen or flow is published on the web yet. |
 | My challenger is not in the list. | It is not published on the web. Open it and turn on **Publish flow on Web**. |
 | I cannot start a second test on the same funnel. | One running test per URL. Stop the current test first. |
 | I see the same variant on every reload. | Expected: a visitor is pinned to a variant. Open the URL in a private window to draw again. |
