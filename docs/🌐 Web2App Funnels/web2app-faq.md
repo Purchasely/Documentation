@@ -35,7 +35,7 @@ Yes. A Screen renders natively in the app and in HTML on the web. Check it on th
 No. Every Web Flow ends with the Stripe checkout and the Redeem step. Downloads and app opens are tracked only when a subscription is attached to the redemption link.
 
 **Can I add a sign-up or login step in the funnel?**
-No. Visitors stay anonymous on the web. Ask them to sign up in the app, right after the activation: the subscription then follows their account. See [SDK integration](web2app-sdk-integration).
+No. Visitors stay anonymous on the web. Ask them to sign up in the app when the redemption link opens it, before the SDK consumes the link, so the subscription is attached to their account. See [SDK integration](web2app-sdk-integration).
 
 **Do my changes go live immediately?**
 Screen edits do. Changes to the structure of a flow (steps, transitions, settings) go live when you publish the flow. See [Build a Web Flow](web2app-build-a-web-flow).
@@ -81,7 +81,7 @@ From the receipt email: it carries the store links and the redemption link. The 
 The subscription is attached to their account directly.
 
 **What if they sign in later, or on another device?**
-When your app identifies the user with the SDK, the subscription is transferred to their user ID, exactly like an in-app subscription on restore. Your webhooks report the transfer.
+A subscription activated while the user was anonymous stays with that anonymous user: a later sign-in does not move it. To attach it to an account, the subscriber opens a fresh redemption link from the email while signed in. The recommended approach is to identify the user before the link is consumed, see [SDK integration](web2app-sdk-integration).
 
 **Can I show a specific welcome experience to web subscribers?**
 Yes: with the redemption delegate in your app, or without code with a Campaign triggered on `REDEMPTION_CONSUMED` (SDK 6.2). See [SDK integration](web2app-sdk-integration).

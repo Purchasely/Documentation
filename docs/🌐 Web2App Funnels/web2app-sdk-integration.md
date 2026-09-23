@@ -2,8 +2,8 @@
 title: SDK integration
 excerpt: >-
   What your app needs to activate web subscriptions, and how to use the
-  redemption delegate to tailor the welcome experience, handle sign-in and read
-  the subscription.
+  redemption delegate to tailor the welcome experience, identify the user before
+  the link is consumed, and read the subscription.
 deprecated: false
 hidden: true
 metadata:
@@ -106,9 +106,27 @@ The result carries:
 | `replay` | `true` when the link had already been consumed by this user; the entitlements were simply refreshed. |
 | `errorCode`, `errorMessage` | On failure: `EXPIRED_REDEMPTION_TOKEN` (a new link was emailed; the message contains the masked address), `INVALID_REDEMPTION_TOKEN`, or `nil` when the request never reached the server. |
 
-### A common pattern: confirm, then sign in or sign up
+### Who owns the subscription: identify the user before the link is consumed
 
-Many apps want the subscriber to have an account. The recommended sequence is: confirm the activation first, then invite the user to create an account or sign in. The subscription is already secured on this device, and it follows the account as soon as your app identifies the user with the SDK.
+The subscription is attached to the identity the SDK carries **at the moment the redemption link is consumed**:
+
+| When the link is consumed | Result |
+| --- | --- |
+| The user is **already identified** in the SDK (your app called `userLogin`, or passed the user ID at start) | The subscription is attached to their account directly. If it had been created for an anonymous web visitor, it is **transferred automatically** to the account and your webhooks report the transfer. Nothing to do. |
+| The user is **anonymous** | The subscription is attached to the anonymous user of this device. A later `userLogin` does **not** transfer it: the transfer has to be handled by your app, see below. |
+
+> 🚧 Sign in first, then let the SDK consume the link
+>
+> If your app has accounts, make sure the user is identified **before** handing the redemption link to the SDK. Do not rely on a later login to move the subscription.
+
+### Pattern: hold the link, sign in, then redeem
+
+Take control of the redemption link instead of letting the SDK consume it as soon as it arrives. On iOS your app already decides when it calls `handleDeeplink`; on Android, disable the automatic interception with `automaticDeeplinkHandling(false)` on the builder. Then:
+
+1. If the user is identified, hand the link to the SDK immediately.
+2. If the user is anonymous, keep the URL, show your sign-in or sign-up screen, identify the user with `userLogin`, and hand the link to the SDK in the login callback.
+
+The redemption delegate then confirms the activation, and you can show your welcome experience.
 
 **iOS**
 
@@ -117,19 +135,39 @@ import Purchasely
 
 final class AppDelegate: UIResponder, UIApplicationDelegate, PLYWebRedemptionDelegate {
 
+    private var pendingRedemptionURL: URL?
+
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let launchURL = launchOptions?[.url] as? URL
         Purchasely.apiKey("YOUR_API_KEY")
             .appUserId(Session.currentUserId)            // nil when the user is not signed in
-            .handleDeeplink(launchOptions?[.url] as? URL)
+            .handleDeeplink(Session.currentUserId != nil ? launchURL : nil)
             .webRedemptionDelegate(self, appHandlesRedemptionAlert: true)
             .start { error in }
+        if Session.currentUserId == nil, let url = launchURL { hold(url) }
         return true
     }
 
     func application(_ app: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        if Purchasely.isAnonymous() && Redemption.isRedemptionLink(url) {
+            hold(url)                                    // sign in first, redeem after
+            return true
+        }
         return Purchasely.handleDeeplink(url)
+    }
+
+    private func hold(_ url: URL) {
+        pendingRedemptionURL = url
+        Router.showSignUpOrSignIn(reason: .activateSubscription) { account in
+            Purchasely.userLogin(with: account.id) { _ in
+                if let pending = self.pendingRedemptionURL {
+                    self.pendingRedemptionURL = nil
+                    _ = Purchasely.handleDeeplink(pending)   // consumed with the account identity
+                }
+            }
+        }
     }
 
     // MARK: - PLYWebRedemptionDelegate
@@ -137,15 +175,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, PLYWebRedemptionDel
     func webRedemptionCompleted(result: PLYWebRedemptionResult) {
         switch result.asResult() {
         case .success(let context, let replay):
-            let planName = context?.subscription?.plan.name
-            if Purchasely.isAnonymous() {
-                // 1. Confirm, 2. invite to create an account or sign in
-                Router.showWelcome(planName: planName, thenPrompt: .signUpOrSignIn)
-            } else {
-                Router.showWelcome(planName: planName, thenPrompt: .none)
-            }
+            Router.showWelcome(planName: context?.subscription?.plan.name)
             if !replay { Analytics.track("web_subscription_activated") }
-
         case .failure(let errorCode, let errorMessage):
             // EXPIRED_REDEMPTION_TOKEN: a new link was emailed, errorMessage says where
             Router.showRedemptionError(code: errorCode, message: errorMessage)
@@ -167,16 +198,11 @@ class App : Application() {
         Purchasely.Builder(applicationContext)
             .apiKey("YOUR_API_KEY")
             .userId(Session.currentUserId)               // null when the user is not signed in
+            .automaticDeeplinkHandling(false)            // the app decides when links are consumed
             .webRedemptionListener(appHandlesRedemptionAlert = true) { result ->
                 when (result) {
                     is PLYWebRedemptionResult.Success -> {
-                        val planName = result.context?.subscription?.plan?.name
-                        if (Purchasely.isAnonymous()) {
-                            // 1. Confirm, 2. invite to create an account or sign in
-                            Router.showWelcome(planName, prompt = Prompt.SIGN_UP_OR_SIGN_IN)
-                        } else {
-                            Router.showWelcome(planName, prompt = Prompt.NONE)
-                        }
+                        Router.showWelcome(result.context?.subscription?.plan?.name)
                         if (!result.replay) Analytics.track("web_subscription_activated")
                     }
                     is PLYWebRedemptionResult.Failure -> {
@@ -189,31 +215,46 @@ class App : Application() {
             .start { isConfigured, error -> }
     }
 }
-```
 
-The delegate must be registered **before** `start`: there is no runtime setter. The code above assumes the app schemes are declared as described in [Setup 3](web2app-setup-mobile-app).
+class MainActivity : AppCompatActivity() {
 
-### Attach the subscription to the account after sign-in
+    private var pendingRedemptionUri: Uri? = null
 
-Once the user has signed in or created an account, identify them with the SDK as you already do for in-app purchases. The subscription activated for the anonymous user is **automatically transferred** to the user ID you provide, and your webhooks report the transfer. This is the same mechanism as the restore and transfer of in-app subscriptions: nothing specific to the web.
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        intent?.data?.let(::redeem)
+    }
 
-```swift
-Purchasely.userLogin(with: account.id) { shouldRefresh in
-    if shouldRefresh { /* reload your entitlements */ }
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        intent.data?.let(::redeem)
+    }
+
+    private fun redeem(uri: Uri) {
+        if (Purchasely.isAnonymous() && Redemption.isRedemptionLink(uri)) {
+            pendingRedemptionUri = uri                   // sign in first, redeem after
+            Router.showSignUpOrSignIn(reason = Reason.ACTIVATE_SUBSCRIPTION) { account ->
+                Purchasely.userLogin(account.id) {
+                    pendingRedemptionUri?.let { pending ->
+                        pendingRedemptionUri = null
+                        Purchasely.handleDeeplink(pending)   // consumed with the account identity
+                    }
+                }
+            }
+        } else {
+            Purchasely.handleDeeplink(uri)
+        }
+    }
 }
 ```
 
-```kotlin
-Purchasely.userLogin(account.id) { shouldRefresh ->
-    if (shouldRefresh) { /* reload your entitlements */ }
-}
-```
+`Session`, `Router` and `Redemption.isRedemptionLink` are placeholders for your own code; a redemption link is the only Purchasely deeplink that opens your app right after a web checkout, so a simple check on the URL path is enough. The delegate must be registered before `start`: there is no runtime setter. The app schemes must be declared as described in [Setup 3](web2app-setup-mobile-app).
 
-See [User identification](general-user-identification) for the rules that apply to identification and logout.
+### If the subscription was activated anonymously
 
-> 🚧 Sign in before or after, not during
->
-> Do not block the redemption behind a login wall: activate first, then ask. A subscriber who paid and cannot get in is the first cause of refunds. If the user is already signed in when the link opens, the subscription goes straight to their account.
+When a link has been consumed by an anonymous user, the subscription belongs to that anonymous user. A later `userLogin` does not move it. To attach it to an account afterwards, the subscriber must open a **fresh redemption link while signed in**: opening the original link again while signed in makes Purchasely email a new one to the checkout address, and that new link transfers the subscription to the account. Prefer the pattern above, which avoids this detour.
+
+If your app has no accounts, none of this applies: the subscription stays with the anonymous user of the device, like an anonymous in-app purchase.
 
 ## 4. Read the subscription
 
@@ -262,4 +303,4 @@ From SDK **6.2**, `REDEMPTION_CONSUMED` is also available as a **Campaign trigge
 | The app opens but nothing happens. | The URL is not forwarded to `handleDeeplink`, or only when the app is already running and not at initialization, or the SDK is older than 6.1. See [SDK initialization](sdk-initialization) and [Deeplinks management](deeplinks-management). |
 | The delegate is never called. | It must be registered on the builder before `start`. With `appHandlesRedemptionAlert = false`, it is called only after the user dismisses the SDK alert. |
 | `context.subscription` is `nil` on success. | The products were not loaded yet when the result arrived. The subscription is active: read it with `userSubscriptions`. |
-| The subscription disappears after the user signs in. | The app calls the SDK's logout, or logs in with an identifier that differs between sessions. Identify the user with a stable identifier. |
+| The subscription disappears after the user signs in. | The link was consumed while the user was anonymous, and a later login does not transfer it. Identify the user before handing the link to the SDK, or have the subscriber open a fresh link from the email while signed in. |
