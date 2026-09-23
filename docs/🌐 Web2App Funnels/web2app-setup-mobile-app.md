@@ -54,7 +54,7 @@ The step shows, for each platform, the SDK versions detected in the events recei
 
 > 📘 No code beyond deeplinks
 >
-> The SDK handles the whole activation on its own. The only integration point is the one your app already has for deeplinks. Optional hooks, to display a tailored welcome experience or react to the activation, are described in [SDK integration](web2app-sdk-integration).
+> The SDK handles the whole activation on its own. The only integration point is the one your app already has for deeplinks: the URL that opens the app must reach the SDK, including at **initialization** when the app is launched by the link. See [SDK initialization](sdk-initialization) and [Deeplinks management](deeplinks-management). Optional hooks, to display a tailored welcome experience or react to the activation, are described in [SDK integration](web2app-sdk-integration).
 
 ## 3.2 Configure your app scheme
 
@@ -76,7 +76,7 @@ Your app must declare the same scheme. If it already handles Purchasely deeplink
 
 * **iOS**: declare the scheme under *URL Types* in the target's Info tab (`CFBundleURLTypes` in `Info.plist`). See Apple's guide on [custom URL schemes](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app).
 * **Android**: add an `<intent-filter>` with your scheme on the activity that starts the app. See Android's guide on [deep links](https://developer.android.com/training/app-links/deep-linking).
-* Make sure the URL received by the app is passed to the Purchasely SDK, as described in [SDK integration](web2app-sdk-integration).
+* Make sure the URL received by the app is passed to the Purchasely SDK, at initialization and while the app runs, as described in [Deeplinks management](deeplinks-management) and [SDK integration](web2app-sdk-integration).
 
 > 🚧 Custom schemes only
 >

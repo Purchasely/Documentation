@@ -36,4 +36,4 @@ Purchasely received no event from that platform in 28 days. Check the SDK initia
 
 # Do I need to write code beyond updating?
 
-Only forwarding deeplinks to the SDK, which your app already does if it handles Purchasely deeplinks. Optional hooks to customize the welcome experience are described in [SDK integration](web2app-sdk-integration).
+Only forwarding deeplinks to the SDK, including the one that launches the app, which must be passed at SDK initialization. Your app already does it if it follows [SDK initialization](sdk-initialization) and [Deeplinks management](deeplinks-management). Optional hooks to customize the welcome experience are described in [SDK integration](web2app-sdk-integration).

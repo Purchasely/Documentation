@@ -17,7 +17,9 @@ next:
       slug: web2app-events-and-webhooks
       title: Events, attribution & webhooks
 ---
-The Purchasely SDK activates web subscriptions on its own: it recognizes the redemption link, calls Purchasely, refreshes the user's entitlements and confirms the outcome to the user. In most apps, **no code is needed beyond the deeplink handling you already have**. This page covers the minimum to check, then the optional hooks to build your own welcome experience: a confirmation Screen, a sign-in or sign-up prompt, reading the subscription that was just activated.
+The Purchasely SDK activates web subscriptions on its own: it recognizes the redemption link, calls Purchasely, refreshes the user's entitlements and confirms the outcome to the user. In most apps, **no code is needed beyond the deeplink handling you already have**, with one condition: the deeplink that opened the app must be **passed to the SDK when it is initialized**, as described in [SDK initialization](sdk-initialization) and [Deeplinks management](deeplinks-management). The way to pass it changed in SDK 6, so check your integration against those pages if you migrated from v5.
+
+This page covers the minimum to check, then the optional hooks to build your own welcome experience: a confirmation Screen, a sign-in or sign-up prompt, reading the subscription that was just activated.
 
 | Capability | Minimum SDK |
 | --- | --- |
@@ -27,7 +29,7 @@ The Purchasely SDK activates web subscriptions on its own: it recognizes the red
 
 ## 1. Forward deeplinks to the SDK
 
-The redemption link opens your app through its custom URL scheme. The SDK needs to receive that URL. If your app already forwards deeplinks to Purchasely, nothing changes.
+The redemption link opens your app through its custom URL scheme. The SDK needs to receive that URL, in both situations: when the app is **already running** and when it is **launched by the link**. If your app already forwards deeplinks to Purchasely as documented in [Deeplinks management](deeplinks-management), nothing changes. Redemption links are handled even when you gate other Purchasely deeplinks behind your onboarding.
 
 **iOS**
 
@@ -61,9 +63,9 @@ override fun onNewIntent(intent: Intent) {
 
 `handleDeeplink` returns `true` when the URL was a Purchasely link and is being handled.
 
-### Cold start
+### Cold start: pass the launch deeplink at initialization
 
-When the app is launched by the link, hand it to the start builder as well. The SDK then adopts the web visitor's identity before its first network call, which keeps the analytics of the journey continuous. Without it, the subscription is still activated.
+When the app is launched by the link, the URL is available before the SDK is started. Hand it to the **start builder** with `handleDeeplink`, as shown in [SDK initialization](sdk-initialization). This is what guarantees that a redemption link opened on a cold start is consumed, and it lets the SDK adopt the web visitor's identity before its first network call, so the analytics of the journey stay continuous.
 
 ```swift
 Purchasely.apiKey("YOUR_API_KEY")
@@ -257,7 +259,7 @@ From SDK **6.2**, `REDEMPTION_CONSUMED` is also available as a **Campaign trigge
 
 | Problem | Cause and solution |
 | --- | --- |
-| The app opens but nothing happens. | The URL is not forwarded to `handleDeeplink`, or the SDK is older than 6.1. |
+| The app opens but nothing happens. | The URL is not forwarded to `handleDeeplink`, or only when the app is already running and not at initialization, or the SDK is older than 6.1. See [SDK initialization](sdk-initialization) and [Deeplinks management](deeplinks-management). |
 | The delegate is never called. | It must be registered on the builder before `start`. With `appHandlesRedemptionAlert = false`, it is called only after the user dismisses the SDK alert. |
 | `context.subscription` is `nil` on success. | The products were not loaded yet when the result arrived. The subscription is active: read it with `userSubscriptions`. |
 | The subscription disappears after the user signs in. | The app calls the SDK's logout, or logs in with an identifier that differs between sessions. Identify the user with a stable identifier. |
