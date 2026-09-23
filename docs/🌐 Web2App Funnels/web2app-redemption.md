@@ -32,9 +32,9 @@ The payment is only half of a Web2App Funnel. The other half is the **handover**
 
 <Image align="center" border={true} src="TODO-NICO-UPLOAD/redeem-03-app-confirmation.png" alt="The app opened from the link, with the SDK confirmation that the subscription is active" />
 
-> 📘 No sign-in required
+> 📘 No sign-in required, but identify first if you have accounts
 >
-> The subscriber does not need an account to activate the subscription. The link is enough: Purchasely attaches the subscription to the app user who opened it. If your app has accounts, ask the user to sign in or sign up right after the activation. When your app identifies the user with the SDK, the subscription is **automatically transferred** to their account (the user ID your app provides), and the transfer is reported in your webhooks. This is the same mechanism Purchasely uses to restore or transfer in-app subscriptions. See [SDK integration](web2app-sdk-integration).
+> The subscriber does not need an account to activate the subscription: the link is enough, and Purchasely attaches the subscription to the app user who opened it. If your app has accounts, make sure the user is **signed in before the link is consumed**: the subscription is then attached to their account, or transferred to it automatically if it was created for an anonymous web visitor, and your webhooks report the transfer, exactly as for in-app subscriptions. A link consumed while the user is anonymous leaves the subscription on the anonymous user, and a later sign-in does not move it. See [SDK integration](web2app-sdk-integration) for the recommended pattern.
 
 ## The redemption link
 
@@ -54,8 +54,8 @@ The receipt email is sent from `redemption@purchasely.io` with your app name as 
 
 | Situation in the app | Result |
 | --- | --- |
-| The app user is **anonymous** | The subscription is attached to this anonymous user. When they later sign in and your app identifies them with the SDK, the subscription is transferred to their user ID, exactly as an in-app subscription would be on restore or transfer. Your webhooks receive the transfer events. |
-| The app user is **identified** (your app already called the SDK's login method) | The subscription is attached to their account directly. |
+| The app user is **anonymous** | The subscription is attached to this anonymous user. A later sign-in does **not** transfer it: to attach it to an account, the subscriber must open a fresh redemption link while signed in. To avoid this, identify the user before the link is consumed, see [SDK integration](web2app-sdk-integration). |
+| The app user is **identified** (your app already called the SDK's login method) | The subscription is attached to their account directly. If it had been created for an anonymous web visitor, it is transferred automatically and your webhooks report the transfer. |
 | The user **already owns** the subscription (same link opened again) | Entitlements are refreshed, nothing else changes. |
 
 From then on, the subscription behaves like any Purchasely subscription: it appears in the user's subscriptions in the SDK, in the Console, in your dashboards, and its lifecycle is reported in your [webhooks](web2app-events-and-webhooks) with the `web2app` channel. Renewals, cancellations and refunds come from Stripe and are handled by Purchasely.
@@ -84,4 +84,4 @@ Along with the subscription, the app receives the **context of the web journey**
 | The app opens but nothing happens. | The app runs an SDK older than 6.1, or the URL is not forwarded to the SDK. See [SDK integration](web2app-sdk-integration). |
 | The subscriber says the link has expired or was already used. | Expected: a new email was sent automatically to the checkout address. Ask them to open the latest email. |
 | The subscriber never received the email. | Check the spam folder and the address typed at checkout. The email is sent within a minute of the purchase. |
-| The subscription is on the wrong account. | The link was opened while another user was signed in on the device. Contact support to move the subscription. |
+| The subscription is on the wrong account, or on no account. | The link was consumed while another user, or no user, was signed in on the device. Have the subscriber open a fresh redemption link from the email while signed in with the right account. |
