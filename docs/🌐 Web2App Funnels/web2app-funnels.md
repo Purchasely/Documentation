@@ -4,17 +4,19 @@ excerpt: >-
   Start the onboarding on the web, finish it in the app. Why the best apps run
   Web2App funnels, and why Purchasely is the right place to build them.
 deprecated: false
-hidden: true
+hidden: false
+link:
+  new_tab: false
 metadata:
   title: ''
   description: ''
   robots: index
 next:
-  description: 'Next, see exactly what a Web Flow can and cannot contain.'
+  description: Next, see exactly what a Web Flow can and cannot contain.
   pages:
-    - type: basic
-      slug: web2app-capabilities-and-limitations
+    - slug: web2app-capabilities-and-limitations
       title: What you can and cannot build
+      type: basic
 ---
 **Web2App Funnels** let you acquire subscribers on the web and hand them over to your app. A visitor clicks an ad, lands on a web funnel you built in the Purchasely Console, answers a few questions, sees a paywall, pays with Stripe, and opens your app with an active subscription. No app release, no App Store fees, and the whole context of the visit follows the user into the app.
 
@@ -26,12 +28,12 @@ Onboarding has become hybrid: it starts on the web and finishes in the app. Two 
 
 The result is visible in the numbers.
 
-| Signal | Figure |
-| --- | --- |
-| Top-grossing apps running Web2App funnels | 82%, up from 46% two years ago |
-| Revenue coming from the web, for apps that scaled it | Up to 90% |
-| US App Store consumer spending, Q2 2026 vs Q2 2025 | Down 6% |
-| Lifetime value of a web subscription vs an in-app one | About 2× |
+| Signal                                                | Figure                         |
+| ----------------------------------------------------- | ------------------------------ |
+| Top-grossing apps running Web2App funnels             | 82%, up from 46% two years ago |
+| Revenue coming from the web, for apps that scaled it  | Up to 90%                      |
+| US App Store consumer spending, Q2 2026 vs Q2 2025    | Down 6%                        |
+| Lifetime value of a web subscription vs an in-app one | About 2×                       |
 
 Noom pioneered the playbook in 2017 with web quizzes. Flo, Headway, BetterMe, Opal and most top-grossing health, wellness and education apps run it today.
 
@@ -80,6 +82,8 @@ Seamless propagation of the subscription and of everything the user told you is 
 3. **Test in sandbox.** Run the funnel end to end with a Stripe test card and redeem in your app. See [Test and go live](web2app-test-and-go-live).
 4. **Publish and iterate.** Point your campaigns to the live URL, read the funnel, A/B test, repeat.
 
-> 📘 Getting access
->
-> Web2App Funnels must be enabled on your Purchasely account. See [Getting access to Web2App Funnels](web2app-getting-access) to activate them with your Customer Success manager or Account Executive.
+<Callout icon="📘" theme="info">
+  ### Getting access
+
+  Web2App Funnels must be enabled on your Purchasely account. See [Getting access to Web2App Funnels](web2app-getting-access) to activate them with your Customer Success manager or Account Executive.
+</Callout>
