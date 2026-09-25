@@ -45,6 +45,7 @@ Skip this step if you already have a pixel for your website: its Dataset ID is t
 
 2. Select **Web** and continue.
 
+
    <Image src="https://files.readme.io/60a33a6cb0c2a27b050285f3750431b06d93ab225fba18296576219ab9ff3dd3-image.png" border={true} />
 
 
@@ -53,6 +54,8 @@ Skip this step if you already have a pixel for your website: its Dataset ID is t
 
 <Image src="https://files.readme.io/8bff207253d37772da1e131d49792a5089a7279027b91a855238c0a1ec1361db-image.png" align="center" border={true} />
 
+
+<br />
 
 
 <Image src="https://files.readme.io/c65512cd362f7e2b7b26e7f5ed01329da72bf0f7539be7473c7940118f49bce0-image.png" align="center" border={true} />
@@ -113,6 +116,8 @@ You need to be an admin of the Meta business portfolio.
 <Image src="https://files.readme.io/ca9fdb5ff7873c4f2f5f690fdaf4d2bcea317e191a0d81ca3a039cf9d1e29b7f-image.png" align="center" border={true} />
 
 
+<br />
+
 
 <Image src="TODO-NICO-UPLOAD/ads/ads-meta-12-additional-events.png" alt="Meta Events Manager: additional events" align="center" border={true} />
 
@@ -133,6 +138,8 @@ Back in the Meta Pixel integration of the Console, paste the token into **Conver
 <Image src="https://files.readme.io/27499cfa0c4841bb2beadbdaba754a99caa3b1d7513b4931ba1c560fe0464962-image.png" align="center" border={true} />
 
 
+<br />
+
 
 <Image src="https://files.readme.io/6491d6aef3fe64cc881857ea3515cb1333a840efceb586911e4b32549c1864f0-image.png" align="center" border={true} />
 
@@ -141,15 +148,21 @@ Back in the Meta Pixel integration of the Console, paste the token into **Conver
 
 1. In Events Manager, open your dataset and go to the **Test events** tab.
 
-![](https://files.readme.io/e140d27a4341bbcc7cd7ff29900f148eefa1131e4f42664330fd2e01057259d7-image.png)
+
+<Image src="https://files.readme.io/e140d27a4341bbcc7cd7ff29900f148eefa1131e4f42664330fd2e01057259d7-image.png" align="center" border={true} />
+
 
 2. Copy the **sandbox URL** of a Web Flow and paste it in the Test Events field from Meta, then click on Test Events
 
-![](https://files.readme.io/6d6df7aa735df638601289465f4a493faf08f31224e3b4cfce457c7ee8b8aedc-image.png)
+
+<Image src="https://files.readme.io/6d6df7aa735df638601289465f4a493faf08f31224e3b4cfce457c7ee8b8aedc-image.png" align="center" border={true} />
+
 
 3. Browse a few screens and complete a purchase with a [Stripe test card](https://docs.stripe.com/testing). `PageView`, `ViewContent`, `InitiateCheckout` and `Purchase` appear in the tab.
 
-![](https://files.readme.io/1589118e4fe94f9553c4358ae351c3f1edfd01466a9856284af1bf7a9b08862c-image.png)
+
+<Image src="https://files.readme.io/1589118e4fe94f9553c4358ae351c3f1edfd01466a9856284af1bf7a9b08862c-image.png" align="center" border={true} />
+
 
 2. To confirm the Conversions API, click **Manage integrations** on the dataset overview: **Conversions API** shows _Active_ or _Waiting for first event_. Once a purchase has been made, the `Purchase` event shows _Multiple_ in the _Integrations_ column, meaning it was received from both the browser and the server.
 
