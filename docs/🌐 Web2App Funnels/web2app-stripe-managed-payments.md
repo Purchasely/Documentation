@@ -4,13 +4,13 @@ excerpt: >-
   Let Stripe be the merchant of record on your web checkout: what it changes,
   what it costs, and how to activate it in Stripe and in Purchasely.
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
   robots: index
 next:
-  description: 'Next, configure your web domain, your email domain and the wallets.'
+  description: Next, configure your web domain, your email domain and the wallets.
   pages:
     - type: basic
       slug: web2app-setup-domains-and-wallets
@@ -20,18 +20,22 @@ On the App Store and the Play Store, Apple and Google are the **merchant of reco
 
 Managed Payments is optional. It is step **1.3** of the Web2App setup, and we recommend it to most apps.
 
+
+<Image src="https://files.readme.io/f3bf30c4602b2df75890ccc61cb4ba4bd50ada9dc06d314a717f5058b69cba38-setup-stripe-03-managed-payments.webp" border={true} />
+
+
 ## Who is the merchant of record?
 
 The merchant of record is the legal entity that sells the subscription to the customer. It appears on the customer's card statement, is liable for collecting and remitting VAT and sales tax in every country where it sells, and handles refunds, disputes and payment support.
 
-| | **Deactivated**: you are the merchant of record | **Activated when available**: Stripe is the merchant of record |
-| --- | --- | --- |
-| Operational and support burden | More work for your team | Less work for your team |
-| VAT and sales tax | You register, collect and remit in every country you sell in | Stripe calculates, collects and remits for you |
-| Refunds, chargebacks, payment support | Handled by you | Handled by Stripe |
-| Declined payments | Follow your own Stripe retry settings | Stripe's recovery strategies retry payments declined by banks, so you lose fewer subscribers |
-| What the customer sees | Your business name | "Sold through Link" at checkout, and `LINK.COM*` on the card statement |
-| Stripe fees | Processing fees only | Processing fees + **3.5% per transaction** |
+|                                       | **Deactivated**: you are the merchant of record              | **Activated when available**: Stripe is the merchant of record                               |
+| ------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| Operational and support burden        | More work for your team                                      | Less work for your team                                                                      |
+| VAT and sales tax                     | You register, collect and remit in every country you sell in | Stripe calculates, collects and remits for you                                               |
+| Refunds, chargebacks, payment support | Handled by you                                               | Handled by Stripe                                                                            |
+| Declined payments                     | Follow your own Stripe retry settings                        | Stripe's recovery strategies retry payments declined by banks, so you lose fewer subscribers |
+| What the customer sees                | Your business name                                           | "Sold through Link" at checkout, and `LINK.COM*` on the card statement                       |
+| Stripe fees                           | Processing fees only                                         | Processing fees + **3.5% per transaction**                                                   |
 
 ## Activate Managed Payments
 
@@ -41,17 +45,21 @@ Activation happens in two places, **in this order**. Activating the option in th
 
 Follow Stripe's guide: [Managed Payments](https://docs.stripe.com/payments/managed-payments). Stripe checks that your account and your products are eligible. Do it in live mode and in test mode if you want to test the managed checkout on your sandbox URLs.
 
-> ❗️ Every product needs a Product category
->
-> In the Stripe Dashboard, each product you sell must have a **Product category**, which is a [Stripe tax code](https://docs.stripe.com/tax/tax-codes). Stripe uses it to apply the right VAT or sales tax rate in every country where the subscription is sold. A product without a tax code is not eligible: Managed Payments will not apply to its checkouts and you will remain the merchant of record for those sales. Set the category when you [create the product](stripe-configuring-subscriptions), or open the product and edit it.
+<Callout icon="❗️" theme="error">
+  ### Every product needs a Product category
+
+  In the Stripe Dashboard, each product you sell must have a **Product category**, which is a [Stripe tax code](https://docs.stripe.com/tax/tax-codes). Stripe uses it to apply the right VAT or sales tax rate in every country where the subscription is sold. A product without a tax code is not eligible: Managed Payments will not apply to its checkouts and you will remain the merchant of record for those sales. Set the category when you [create the product](stripe-configuring-subscriptions), or open the product and edit it.
+</Callout>
 
 ### 2. Activate the option in Purchasely
 
-In the Console, open **Web2App → Setup**, section *1. Connect Stripe*, step **1.3 Stripe managed payments**, and select **Activated when available**. The step header switches to *Merchant of record: Stripe*. Stripe must already be connected in step 1.1.
+In the Console, open **Web2App → Setup**, section _1. Connect Stripe_, step **1.3 Stripe managed payments**, and select **Activated when available**. The step header switches to _Merchant of record: Stripe_. Stripe must already be connected in step 1.1.
 
-<Image align="center" border={true} src="TODO-NICO-UPLOAD/setup-stripe-13-managed-payments-activated.webp" alt="Web2App setup, step 1.3: Stripe managed payments activated, merchant of record Stripe" />
 
-The same setting is available in **App settings → Stores → Stripe**.
+<Image src="https://files.readme.io/0fb87c3157bebd5b5bc68f99de641444ebf1c47608f03092716693e213b2dcd4-image.png" border={true} />
+
+
+The same setting is available in <Anchor target="_blank" href="https://console.purchasely.io/settings?step=stores&platform=stripe">**App settings → Stores → Stripe**</Anchor>.
 
 ## What does "activated when available" mean?
 
