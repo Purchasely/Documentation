@@ -2,17 +2,19 @@
 title: Getting access to Web2App Funnels
 excerpt: How to get Web2App Funnels enabled on your Purchasely account.
 deprecated: false
-hidden: true
+hidden: false
+link:
+  new_tab: false
 metadata:
   title: ''
   description: ''
   robots: index
 next:
-  description: 'Once enabled, start with the Stripe setup.'
+  description: Once enabled, start with the Stripe setup.
   pages:
-    - type: basic
-      slug: web2app-setup-stripe
+    - slug: web2app-setup-stripe
       title: Setup 1 · Connect Stripe
+      type: basic
 ---
 Web2App Funnels must be **enabled on your Purchasely account** before you can use them. Once your account is enabled, a **Web 2 App** entry appears in the sidebar of the Console for each of your apps, with the Setup and Flows tabs described in this section. The setup itself (Stripe, domains, mobile app, integrations) is then done app by app.
 
