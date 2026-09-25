@@ -51,17 +51,17 @@ Skip this step if you already have a pixel for your website: its Dataset ID is t
 3) Click **Create new dataset**, name it after your app and create it.
 
 
-<Image src="TODO-NICO-UPLOAD/ads/ads-meta-03-create-new-dataset.png" alt="Meta Events Manager: create new dataset" align="center" border={true} />
+<Image src="https://files.readme.io/8bff207253d37772da1e131d49792a5089a7279027b91a855238c0a1ec1361db-image.png" align="center" border={true} />
 
 
 
-<Image src="TODO-NICO-UPLOAD/ads/ads-meta-04-dataset-name.png" alt="Meta Events Manager: name the dataset" align="center" border={true} />
+<Image src="https://files.readme.io/c65512cd362f7e2b7b26e7f5ed01329da72bf0f7539be7473c7940118f49bce0-image.png" align="center" border={true} />
 
 
 4. Open the dataset, then its **Settings** tab, and copy the **Dataset ID**. This is your Pixel ID: a number, without letters.
 
 
-<Image src="TODO-NICO-UPLOAD/ads/ads-meta-05-dataset-id-CROP.png" alt="Meta Events Manager: dataset settings with the Dataset ID" align="center" border={true} />
+<Image src="https://files.readme.io/516a08285cbff86f6cbde4d3b9853051ae6ca1f35343411248606f7c7a6ab440-image.png" align="center" border={true} />
 
 
 ## 2. Enter the Pixel ID in the Console
@@ -72,7 +72,7 @@ Skip this step if you already have a pixel for your website: its Dataset ID is t
 4. Save.
 
 
-<Image src="TODO-NICO-UPLOAD/setup-ads-02-meta-pixel-form.png" alt="Purchasely Console: Meta Pixel integration with Pixel ID and Conversions API Access Token" align="center" border={true} />
+<Image src="https://files.readme.io/ccffbbaa9567b320087a4f91f204f1d1383ce0bc395866efe8a554216d7dd4f8-image.png" align="center" border={true} />
 
 
 Browser events start flowing to your dataset within minutes. Continue with the Conversions API to secure your purchase events.
@@ -84,33 +84,25 @@ You need to be an admin of the Meta business portfolio.
 1. In Events Manager, open your dataset. On the overview, click **Set up Conversions API** (or **Start your setup** in the Conversions API card).
 
 
-<Image src="TODO-NICO-UPLOAD/ads/ads-meta-06-dataset-overview-set-up-capi.png" alt="Meta Events Manager: dataset overview, Set up Conversions API" align="center" border={true} />
-
-
-
-<Image src="TODO-NICO-UPLOAD/ads/ads-meta-07-capi-start-setup-CROP.png" alt="Meta Events Manager: Conversions API, Start your setup" align="center" border={true} />
+<Image src="https://files.readme.io/e5051e8e21c033ba80fd7681b61cd50ce2ab9b75f26a7feeef1d7633e66b83fd-image.png" align="center" border={true} />
 
 
 2. Click **See other ways to set up**, select **Set up manually** and continue.
 
 
-<Image src="TODO-NICO-UPLOAD/ads/ads-meta-08-capi-set-up-manually-CROP.png" alt="Meta Events Manager: choose your setup, Set up manually" align="center" border={true} />
+<Image src="https://files.readme.io/f62abea10cc360749ab3d17f0754045faf9138c226dc29cf87a6ad8e83860c8a-image.png" align="center" border={true} />
 
 
 3. Select **Conversions API and Meta pixel**, then **Start CAPI setup** and **Finish** on the instructions screen.
 
 
-<Image src="TODO-NICO-UPLOAD/ads/ads-meta-09-capi-and-pixel-CROP.png" alt="Meta Events Manager: Conversions API and Meta pixel" align="center" border={true} />
-
-
-
-<Image src="TODO-NICO-UPLOAD/ads/ads-meta-10-capi-instructions-finish.png" alt="Meta Events Manager: Conversions API instructions, Finish" align="center" border={true} />
+<Image src="https://files.readme.io/19c67dfbc87a9fa84a8c1bf5d553a220a05b5011bd95f93e5102fe24c0574537-image.png" align="center" border={true} />
 
 
 4. Under _Manual implementation_, tick **Events sent using pixel code**, add **Purchase** under _Additional events_, and continue through the parameters and review steps.
 
 
-<Image src="TODO-NICO-UPLOAD/ads/ads-meta-11-events-sent-using-pixel.png" alt="Meta Events Manager: events sent using pixel code" align="center" border={true} />
+<Image src="https://files.readme.io/ca9fdb5ff7873c4f2f5f690fdaf4d2bcea317e191a0d81ca3a039cf9d1e29b7f-image.png" align="center" border={true} />
 
 
 
@@ -120,16 +112,22 @@ You need to be an admin of the Meta business portfolio.
 5. On the _Using the Conversions API_ page, go to **Generate an access token**, choose **Set up without Dataset Quality API**, click **Generate Access Token** and copy the token.
 
 
-<Image src="TODO-NICO-UPLOAD/ads/ads-meta-13-using-the-capi.png" alt="Meta Events Manager: Using the Conversions API" align="center" border={true} />
+<Image src="https://files.readme.io/53bc229de2d7d9cf775bebd216437d09c9d2194a8f2a1eaa49048fa8b8f92e80-image.png" align="center" border={true} />
 
 
-
-<Image src="TODO-NICO-UPLOAD/ads/ads-meta-14-generate-access-token.png" alt="Meta Events Manager: generate an access token" align="center" border={true} />
-
+![](https://files.readme.io/7d588bc456be10cffa8b0c17fc77800ce0450a22c5550f18a03b43f9b87da1df-image.png)
 
 ## 4. Enter the access token in the Console
 
 Back in the Meta Pixel integration of the Console, paste the token into **Conversions API Access Token** and save. Purchases are now also sent from Purchasely's servers. The token is stored encrypted and never exposed to the browser.
+
+
+<Image src="https://files.readme.io/27499cfa0c4841bb2beadbdaba754a99caa3b1d7513b4931ba1c560fe0464962-image.png" align="center" border={true} />
+
+
+
+<Image src="https://files.readme.io/6491d6aef3fe64cc881857ea3515cb1333a840efceb586911e4b32549c1864f0-image.png" align="center" border={true} />
+
 
 ## 5. Check that events arrive
 
