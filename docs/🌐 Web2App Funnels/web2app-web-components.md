@@ -4,7 +4,9 @@ excerpt: >-
   What the Screen Composer adds for the web: text inputs, custom HTML, and
   AI-generated components such as spin wheels, scratch cards and quizzes.
 deprecated: false
-hidden: true
+hidden: false
+link:
+  new_tab: false
 metadata:
   title: ''
   description: ''
@@ -12,9 +14,9 @@ metadata:
 next:
   description: Next, run UI and price A/B tests on your Web Flows.
   pages:
-    - type: basic
-      slug: web2app-ab-tests
+    - slug: web2app-ab-tests
       title: A/B testing Web Flows
+      type: basic
 ---
 Screens used in Web Flows are built in the same **Screen Composer** as your paywalls and onboarding Screens: same components, same layouts, same localization. This page covers what the Composer adds when a Screen is displayed on the web, and how to create the interactive components that make web funnels convert: spin wheels, scratch cards, quizzes and loading screens.
 
