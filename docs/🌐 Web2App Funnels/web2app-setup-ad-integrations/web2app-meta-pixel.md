@@ -68,12 +68,20 @@ Skip this step if you already have a pixel for your website: its Dataset ID is t
 
 1. In **Web2App → Setup**, section _4. External integrations_, open **Meta Pixel**.
 2. Enable the integration and paste the Dataset ID into **Pixel ID**.
-3. In the **Front events** tab, keep the four events enabled, or disable the ones you do not want to send.
-4. Save.
 
 
 <Image src="https://files.readme.io/ccffbbaa9567b320087a4f91f204f1d1383ce0bc395866efe8a554216d7dd4f8-image.png" align="center" border={true} />
 
+
+<br />
+
+3. In the **Front events** tab, keep the four events enabled, or disable the ones you do not want to send.
+
+![](https://files.readme.io/e189b096d1807a48392efc260ff2ddaca827d12e4de5a70c88414464e904dcdc-image.png)
+
+4. Save.
+
+<br />
 
 Browser events start flowing to your dataset within minutes. Continue with the Conversions API to secure your purchase events.
 
@@ -133,20 +141,19 @@ Back in the Meta Pixel integration of the Console, paste the token into **Conver
 
 1. In Events Manager, open your dataset and go to the **Test events** tab.
 
+![](https://files.readme.io/e140d27a4341bbcc7cd7ff29900f148eefa1131e4f42664330fd2e01057259d7-image.png)
 
-<Image src="TODO-NICO-UPLOAD/ads/ads-meta-15-test-events-CROP.png" alt="Meta Events Manager: Test events tab" align="center" border={true} />
+2. Copy the **sandbox URL** of a Web Flow and paste it in the Test Events field from Meta, then click on Test Events
 
+![](https://files.readme.io/6d6df7aa735df638601289465f4a493faf08f31224e3b4cfce457c7ee8b8aedc-image.png)
 
-2. Open the **sandbox URL** of a Web Flow, browse a few screens and complete a purchase with a [Stripe test card](https://docs.stripe.com/testing). `PageView`, `ViewContent`, `InitiateCheckout` and `Purchase` appear in the tab.
-3. To confirm the Conversions API, click **Manage integrations** on the dataset overview: **Conversions API** shows _Active_ or _Waiting for first event_. Once a purchase has been made, the `Purchase` event shows _Multiple_ in the _Integrations_ column, meaning it was received from both the browser and the server.
+3. Browse a few screens and complete a purchase with a [Stripe test card](https://docs.stripe.com/testing). `PageView`, `ViewContent`, `InitiateCheckout` and `Purchase` appear in the tab.
 
+![](https://files.readme.io/1589118e4fe94f9553c4358ae351c3f1edfd01466a9856284af1bf7a9b08862c-image.png)
 
-<Image src="TODO-NICO-UPLOAD/ads/ads-meta-16-manage-integrations-CROP.png" alt="Meta Events Manager: manage integrations" align="center" border={true} />
+2. To confirm the Conversions API, click **Manage integrations** on the dataset overview: **Conversions API** shows _Active_ or _Waiting for first event_. Once a purchase has been made, the `Purchase` event shows _Multiple_ in the _Integrations_ column, meaning it was received from both the browser and the server.
 
-
-
-<Image src="TODO-NICO-UPLOAD/ads/ads-meta-17-integrations-status-CROP.png" alt="Meta Events Manager: Conversions API and Meta pixel active" align="center" border={true} />
-
+<br />
 
 Sandbox purchases are real events for Meta. Use the _Test events_ tab, or a dedicated test dataset, if you do not want them mixed with live traffic.
 
