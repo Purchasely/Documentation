@@ -4,7 +4,7 @@ excerpt: >-
   Report your funnel events to Meta Events Manager, from the browser and from
   Purchasely's servers, to optimize Facebook and Instagram campaigns.
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''

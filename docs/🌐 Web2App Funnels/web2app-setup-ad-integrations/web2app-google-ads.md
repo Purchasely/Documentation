@@ -4,7 +4,7 @@ excerpt: >-
   Report your funnel purchases as Google Ads conversions to measure and optimize
   your Search, YouTube and Demand Gen campaigns.
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''

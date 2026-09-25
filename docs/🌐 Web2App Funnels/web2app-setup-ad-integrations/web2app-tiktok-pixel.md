@@ -4,7 +4,7 @@ excerpt: >-
   Report your funnel events to TikTok Events Manager, from the browser and from
   Purchasely's servers, to optimize TikTok Ads campaigns.
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''

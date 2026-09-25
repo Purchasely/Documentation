@@ -4,13 +4,13 @@ excerpt: >-
   Report your funnel events to X Ads to measure and optimize campaigns on X
   (formerly Twitter).
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
   robots: index
 next:
-  description: 'Next, run your funnel end to end in sandbox before going live.'
+  description: Next, run your funnel end to end in sandbox before going live.
   pages:
     - type: basic
       slug: web2app-test-and-go-live
