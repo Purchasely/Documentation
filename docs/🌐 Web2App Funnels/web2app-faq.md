@@ -4,13 +4,13 @@ excerpt: >-
   Answers to the questions that come up when launching Web2App Funnels, and the
   limits to know before you plan.
 deprecated: false
-hidden: true
+hidden: false
+link:
+  new_tab: false
 metadata:
   title: ''
   description: ''
   robots: index
-next:
-  description: ''
 ---
 ## Getting started
 
@@ -102,16 +102,16 @@ Yes, from the A/B tests section: UI variants as well as price variants through d
 
 ## Known limitations
 
-| Limitation | Status |
-| --- | --- |
-| Free trials and introductory prices on web checkouts | On the roadmap |
-| Stripe promotion codes at checkout | Not supported |
-| One-time purchases and lifetime plans on the web | Not supported |
-| Tablet and desktop layouts | On the roadmap; funnels render in smartphone width |
-| Universal links and App Links for redemption | Not supported; custom URL schemes only |
-| Apex domains and multi-level subdomains | Not supported; first-level subdomain only |
-| Several Stripe accounts on one app, or changing the account after purchases | Not supported; contact your Customer Success manager |
-| Sign-in or sign-up step inside the funnel | Not supported by design; see [SDK integration](web2app-sdk-integration) |
-| Web analytics tab in the Console | In development |
+| Limitation                                                                  | Status                                                                  |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Free trials and introductory prices on web checkouts                        | On the roadmap                                                          |
+| Stripe promotion codes at checkout                                          | Not supported                                                           |
+| One-time purchases and lifetime plans on the web                            | Not supported                                                           |
+| Tablet and desktop layouts                                                  | On the roadmap; funnels render in smartphone width                      |
+| Universal links and App Links for redemption                                | Not supported; custom URL schemes only                                  |
+| Apex domains and multi-level subdomains                                     | Not supported; first-level subdomain only                               |
+| Several Stripe accounts on one app, or changing the account after purchases | Not supported; contact your Customer Success manager                    |
+| Sign-in or sign-up step inside the funnel                                   | Not supported by design; see [SDK integration](web2app-sdk-integration) |
+| Web analytics tab in the Console                                            | In development                                                          |
 
 Something missing? Reach out to your Customer Success manager.
