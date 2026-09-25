@@ -4,7 +4,9 @@ excerpt: >-
   Install the Purchasely app on your Stripe account, map your plans to Stripe
   prices and choose who is the merchant of record.
 deprecated: false
-hidden: true
+hidden: false
+link:
+  new_tab: false
 metadata:
   title: ''
   description: ''
@@ -12,9 +14,9 @@ metadata:
 next:
   description: Next, configure your web domain, your email domain and the wallets.
   pages:
-    - type: basic
-      slug: web2app-setup-domains-and-wallets
+    - slug: web2app-setup-domains-and-wallets
       title: Setup 2 · Domains, emails & wallets
+      type: basic
 ---
 Stripe processes every payment made in a Web Flow. This first setup section connects your Stripe account to Purchasely, tells Purchasely which Stripe price to charge for each of your plans, and lets you decide who is the merchant of record. It takes about ten minutes.
 
