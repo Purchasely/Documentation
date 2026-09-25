@@ -5,27 +5,29 @@ excerpt: >-
   redemption delegate to tailor the welcome experience, identify the user before
   the link is consumed, and read the subscription.
 deprecated: false
-hidden: true
+hidden: false
+link:
+  new_tab: false
 metadata:
   title: ''
   description: ''
   robots: index
 next:
-  description: 'Next, the events and webhooks that report web purchases.'
+  description: Next, the events and webhooks that report web purchases.
   pages:
-    - type: basic
-      slug: web2app-events-and-webhooks
+    - slug: web2app-events-and-webhooks
       title: Events, attribution & webhooks
+      type: basic
 ---
 The Purchasely SDK activates web subscriptions on its own: it recognizes the redemption link, calls Purchasely, refreshes the user's entitlements and confirms the outcome to the user. In most apps, **no code is needed beyond the deeplink handling you already have**, with one condition: the deeplink that opened the app must be **passed to the SDK when it is initialized**, as described in [SDK initialization](sdk-initialization) and [Deeplinks management](deeplinks-management). The way to pass it changed in SDK 6, so check your integration against those pages if you migrated from v5.
 
 This page covers the minimum to check, then the optional hooks to build your own welcome experience: a confirmation Screen, a sign-in or sign-up prompt, reading the subscription that was just activated.
 
-| Capability | Minimum SDK |
-| --- | --- |
-| Activate a web subscription from the redemption link | **6.1** |
-| Redemption delegate (iOS) / listener (Android) | **6.1** |
-| Campaign triggered on the `REDEMPTION_CONSUMED` event | **6.2** |
+| Capability                                            | Minimum SDK |
+| ----------------------------------------------------- | ----------- |
+| Activate a web subscription from the redemption link  | **6.1**     |
+| Redemption delegate (iOS) / listener (Android)        | **6.1**     |
+| Campaign triggered on the `REDEMPTION_CONSUMED` event | **6.2**     |
 
 ## 1. Forward deeplinks to the SDK
 
@@ -99,25 +101,27 @@ With `appHandlesRedemptionAlert` left to `false`, the SDK keeps its alert and ca
 
 The result carries:
 
-| Field | Meaning |
-| --- | --- |
-| Success or failure | `isSuccess` on iOS, `Success` / `Failure` subclasses on Android. |
-| `context.subscription` | The activated subscription, with its plan and product. Same type as the ones returned by the SDK's subscription methods. |
-| `replay` | `true` when the link had already been consumed by this user; the entitlements were simply refreshed. |
+| Field                       | Meaning                                                                                                                                                                                   |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Success or failure          | `isSuccess` on iOS, `Success` / `Failure` subclasses on Android.                                                                                                                          |
+| `context.subscription`      | The activated subscription, with its plan and product. Same type as the ones returned by the SDK's subscription methods.                                                                  |
+| `replay`                    | `true` when the link had already been consumed by this user; the entitlements were simply refreshed.                                                                                      |
 | `errorCode`, `errorMessage` | On failure: `EXPIRED_REDEMPTION_TOKEN` (a new link was emailed; the message contains the masked address), `INVALID_REDEMPTION_TOKEN`, or `nil` when the request never reached the server. |
 
 ### Who owns the subscription: identify the user before the link is consumed
 
 The subscription is attached to the identity the SDK carries **at the moment the redemption link is consumed**:
 
-| When the link is consumed | Result |
-| --- | --- |
+| When the link is consumed                                                                                   | Result                                                                                                                                                                                                                |
+| ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | The user is **already identified** in the SDK (your app called `userLogin`, or passed the user ID at start) | The subscription is attached to their account directly. If it had been created for an anonymous web visitor, it is **transferred automatically** to the account and your webhooks report the transfer. Nothing to do. |
-| The user is **anonymous** | The subscription is attached to the anonymous user of this device. A later `userLogin` does **not** transfer it: the transfer has to be handled by your app, see below. |
+| The user is **anonymous**                                                                                   | The subscription is attached to the anonymous user of this device. A later `userLogin` does **not** transfer it: the transfer has to be handled by your app, see below.                                               |
 
-> 🚧 Sign in first, then let the SDK consume the link
->
-> If your app has accounts, make sure the user is identified **before** handing the redemption link to the SDK. Do not rely on a later login to move the subscription.
+<Callout icon="🚧" theme="warn">
+  ### Sign in first, then let the SDK consume the link
+
+  If your app has accounts, make sure the user is identified **before** handing the redemption link to the SDK. Do not rely on a later login to move the subscription.
+</Callout>
 
 ### Pattern: hold the link, sign in, then redeem
 
@@ -283,14 +287,14 @@ Web subscriptions carry Stripe as their store. See [Entitlements management](ent
 
 Every redemption also emits exactly one event to your Purchasely event listener:
 
-| Event | When | Notable properties |
-| --- | --- | --- |
+| Event                 | When                                                                   | Notable properties                                                                                                                     |
+| --------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | `REDEMPTION_CONSUMED` | The subscription was activated (or re-confirmed, with `replay: true`). | `redemption.subscriptions`, `redemption.purchase_context` with the `utm_*` attributes and the user attributes collected in the funnel. |
-| `REDEMPTION_FAILED` | The link could not be consumed. | `error_message`, `redemption.error_code`. |
+| `REDEMPTION_FAILED`   | The link could not be consumed.                                        | `error_message`, `redemption.error_code`.                                                                                              |
 
 `REDEMPTION_CONSUMED` fires after the funnel's context has been restored, so the UTM parameters are readable through the SDK's built-in attributes and the quiz answers through the user attributes, without parsing the event.
 
-From SDK **6.2**, `REDEMPTION_CONSUMED` is also available as a **Campaign trigger** in the Console. Use it to display a welcome Screen or an onboarding Flow to web subscribers without writing the delegate above: create a Campaign, choose *Redemption consumed* as trigger, and pick the Screen or Flow to display. See [Campaigns](campaigns).
+From SDK **6.2**, `REDEMPTION_CONSUMED` is also available as a **Campaign trigger** in the Console. Use it to display a welcome Screen or an onboarding Flow to web subscribers without writing the delegate above: create a Campaign, choose _Redemption consumed_ as trigger, and pick the Screen or Flow to display. See [Campaigns](campaigns).
 
 ## Cross-platform SDKs
 
@@ -298,9 +302,9 @@ From SDK **6.2**, `REDEMPTION_CONSUMED` is also available as a **Campaign trigge
 
 ## Troubleshooting
 
-| Problem | Cause and solution |
-| --- | --- |
-| The app opens but nothing happens. | The URL is not forwarded to `handleDeeplink`, or only when the app is already running and not at initialization, or the SDK is older than 6.1. See [SDK initialization](sdk-initialization) and [Deeplinks management](deeplinks-management). |
-| The delegate is never called. | It must be registered on the builder before `start`. With `appHandlesRedemptionAlert = false`, it is called only after the user dismisses the SDK alert. |
-| `context.subscription` is `nil` on success. | The products were not loaded yet when the result arrived. The subscription is active: read it with `userSubscriptions`. |
-| The subscription disappears after the user signs in. | The link was consumed while the user was anonymous, and a later login does not transfer it. Identify the user before handing the link to the SDK, or have the subscriber open a fresh link from the email while signed in. |
+| Problem                                              | Cause and solution                                                                                                                                                                                                                            |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The app opens but nothing happens.                   | The URL is not forwarded to `handleDeeplink`, or only when the app is already running and not at initialization, or the SDK is older than 6.1. See [SDK initialization](sdk-initialization) and [Deeplinks management](deeplinks-management). |
+| The delegate is never called.                        | It must be registered on the builder before `start`. With `appHandlesRedemptionAlert = false`, it is called only after the user dismisses the SDK alert.                                                                                      |
+| `context.subscription` is `nil` on success.          | The products were not loaded yet when the result arrived. The subscription is active: read it with `userSubscriptions`.                                                                                                                       |
+| The subscription disappears after the user signs in. | The link was consumed while the user was anonymous, and a later login does not transfer it. Identify the user before handing the link to the SDK, or have the subscriber open a fresh link from the email while signed in.                    |
