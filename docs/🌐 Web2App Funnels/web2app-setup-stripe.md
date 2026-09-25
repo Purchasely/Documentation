@@ -20,8 +20,8 @@ Stripe processes every payment made in a Web Flow. This first setup section conn
 
 You can complete it from two places in the Console:
 
-* [**Web2App → Setup**, section _1. Connect Stri&#x70;_&#x65;]()&#x20;
-* **App settings → Stores → Stripe**: `https://console.purchasely.io/settings?step=stores&platform=stripe`
+* <Anchor target="_blank" href="https://console.purchasely.io/web2app?tab=setup">**Web2App → Setup**, section _1. Connect Stri&#x70;_&#x65;</Anchor>&#x20;
+* <Anchor target="_blank" href="https://console.purchasely.io/settings?step=stores&platform=stripe">**App settings → Stores → Stripe**</Anchor>
 
 Both screens edit the same configuration.
 
@@ -142,7 +142,7 @@ A Web Flow sells **Purchasely plans**, the same plans your paywalls sell in the 
 2. Under _Stripe prices_, pick a price in the list. You can search by product name, price ID or amount. Each price carries a **SANDBOX** or **LIVEMODE** badge that tells you which mode it comes from.
 3. Add as many prices as needed, then save. The counter in the step header shows how many plans are mapped. Step 1.2 is complete as soon as **at least one plan** is mapped.
 
-You can also edit this mapping at any time from [**Products & Plans** in the Console]() (`https://console.purchasely.io/products-plans`): open a plan, then its **Stripe** tab.
+You can also edit this mapping at any time from <Anchor target="_blank" href="https://console.purchasely.io/products-plans">**Products & Plans** in the Console</Anchor>: open a plan, then its **Stripe** tab.
 
 <Callout icon="👍" theme="okay">
   ### One plan, every store
