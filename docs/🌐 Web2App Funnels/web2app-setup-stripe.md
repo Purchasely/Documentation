@@ -26,7 +26,7 @@ You can complete it from two places in the Console:
 Both screens edit the same configuration.
 
 
-<Image src="TODO-NICO-UPLOAD/setup-stripe-01-section-not-connected.webp" alt="Web2App setup, section 1. Connect Stripe, before any connection" align="center" border={true} />
+<Image src="https://files.readme.io/2e816fa4dcca98dcc5d1b238331bde4a516107d9bb317eba8c717c1517a17488-setup-stripe-01-section-not-connected.webp" border={true} />
 
 
 <Callout icon="📘" theme="info">
@@ -142,6 +142,10 @@ A Web Flow sells **Purchasely plans**, the same plans your paywalls sell in the 
 2. Under _Stripe prices_, pick a price in the list. You can search by product name, price ID or amount. Each price carries a **SANDBOX** or **LIVEMODE** badge that tells you which mode it comes from.
 3. Add as many prices as needed, then save. The counter in the step header shows how many plans are mapped. Step 1.2 is complete as soon as **at least one plan** is mapped.
 
+
+<Image src="https://files.readme.io/956b45be29034007299d3ee33cd3c25e2f82cb6658d2601a2c041d4831203306-setup-stripe-02-map-plans-to-stripe-prices.webp" border={true} />
+
+
 You can also edit this mapping at any time from <Anchor target="_blank" href="https://console.purchasely.io/products-plans">**Products & Plans** in the Console</Anchor>: open a plan, then its **Stripe** tab.
 
 <Callout icon="👍" theme="okay">
@@ -188,6 +192,10 @@ This step decides **who is the merchant of record** on your web checkout: you, o
 The option must be enabled **in Stripe first**, then activated in the Console. Benefits, prerequisites and the two-step activation are detailed on the dedicated page: [Stripe Managed Payments](web2app-stripe-managed-payments).
 
 By default the option is deactivated and you remain the merchant of record. Stripe must be connected before you can choose.
+
+
+<Image src="https://files.readme.io/30d5cc9651c9d0e7f3a2d0f2503a06fefbdef6d6bd5944ae0b0bd5b7672cac39-setup-stripe-03-managed-payments.webp" border={true} />
+
 
 ## Troubleshooting
 
