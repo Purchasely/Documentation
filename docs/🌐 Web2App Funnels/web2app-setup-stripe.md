@@ -20,7 +20,7 @@ Stripe processes every payment made in a Web Flow. This first setup section conn
 
 You can complete it from two places in the Console:
 
-* **Web2App → Setup**, section _1. Connect Stripe_: `https://console.purchasely.io/web2app?tab=setup`
+* [**Web2App → Setup**, section _1. Connect Stri&#x70;_&#x65;]()&#x20;
 * **App settings → Stores → Stripe**: `https://console.purchasely.io/settings?step=stores&platform=stripe`
 
 Both screens edit the same configuration.
