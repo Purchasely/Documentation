@@ -18,7 +18,7 @@ next:
 ---
 The second setup section is about the identity of your funnels: the domain they run on, the sender of the emails they trigger, and the wallets your visitors can pay with. It takes about ten minutes, plus the time your DNS provider needs to propagate records.
 
-Open **Web2App → Setup**, section _2. Configure your domain_: `https://console.purchasely.io/web2app?tab=setup`. The web domain and email domain are also available under **App settings**.
+Open **Web2App → Setup**, section _2. Configure your domain_: `https://console.purchasely.io/web2app?tab=setup`. The web domain is also available under **App settings**.
 
 | Step                       | Required                   | What it changes                                                            |
 | -------------------------- | -------------------------- | -------------------------------------------------------------------------- |
@@ -78,7 +78,7 @@ Verification usually completes within 10 to 20 minutes, but DNS propagation can 
 
 ## 2.2 Email domain
 
-After a purchase, Purchasely emails the customer a receipt containing the link that activates the subscription in your app. By default these emails come from a Purchasely address. With an email domain, they come from your brand, for example `welcome@yourapp.com`, which improves trust and deliverability.
+After a purchase, Purchasely emails the customer a receipt containing the link that activates the subscription in your app. By default it comes from `redemption@purchasely.io`, with your app name as sender. With an email domain, it comes from your brand, for example `welcome@yourapp.com`, which improves trust and deliverability.
 
 
 <Image src="https://files.readme.io/fcd468869083b746426ece0bb1e152baafdc0c77c2fbb2dc1e9f2188b96f27c1-image.png" border={true} />
@@ -86,22 +86,21 @@ After a purchase, Purchasely emails the customer a receipt containing the link t
 
 ### Add the DNS records
 
-1. In step 2.2, enter the **sender address** you want to use, for example `welcome@yourapp.com`, and save. Purchasely generates five DNS records.
-2. Add them at your DNS provider. Names are relative to your domain; some providers expect the full name (`email.yourapp.com`).
+1. In step 2.2, enter the **sending domain**, your domain (`yourapp.com`) or a subdomain (`email.yourapp.com`), and the **mailbox**, for example `welcome`. Save.
+2. Click **Verify sending domain**. Purchasely shows three DNS records.
+3. Add them at your DNS provider. Names are shown in full; if your provider appends your domain automatically, enter only the part before it.
 
-| Type  | Name                           | Purpose                                     |
-| ----- | ------------------------------ | ------------------------------------------- |
-| TXT   | `email`                        | Proves that you own the domain              |
-| TXT   | `_dmarc.email`                 | Sets the DMARC policy of the sending domain |
-| CNAME | `<selector1>._domainkey.email` | DKIM key used to sign your emails           |
-| CNAME | `<selector2>._domainkey.email` | DKIM key                                    |
-| CNAME | `<selector3>._domainkey.email` | DKIM key                                    |
+| Type  | Name                                  | Value                         | Purpose                           |
+| ----- | ------------------------------------- | ----------------------------- | --------------------------------- |
+| CNAME | `<token1>._domainkey.email.yourapp.com` | `<token1>.dkim.amazonses.com` | DKIM key used to sign your emails |
+| CNAME | `<token2>._domainkey.email.yourapp.com` | `<token2>.dkim.amazonses.com` | DKIM key                          |
+| CNAME | `<token3>._domainkey.email.yourapp.com` | `<token3>.dkim.amazonses.com` | DKIM key                          |
 
-The exact names and values are displayed in the step, with a copy button for each. What are [DKIM and DMARC](https://www.cloudflare.com/learning/email-security/dmarc-dkim-spf/)?
+The exact names and values are displayed in the step, with a copy button for each. No SPF or DMARC record is needed: DKIM is enough for your emails to pass DMARC, and a DMARC policy already set on your domain keeps applying. What are [DKIM and DMARC](https://www.cloudflare.com/learning/email-security/dmarc-dkim-spf/)?
 
-3. Purchasely re-checks the records every five minutes; click **Check now** to force a check. The status switches to **Verified** once all records resolve.
+4. Purchasely re-checks the records every five minutes; click **Check now** to force a check. The status switches to **Verified** once the three records resolve. Verification is attempted for 72 hours; after that, **Retry verification** generates three new records.
 
-Until the domain is verified, emails are sent from the Purchasely address. You can change the sender address or remove the domain at any time.
+Until the domain is verified, emails are sent from the Purchasely address. You can change the sending domain or the mailbox at any time: a new mailbox applies right away, a new domain needs its own verification.
 
 ## 2.3 Apple Pay & Google Pay
 
@@ -131,6 +130,6 @@ When your custom web domain becomes active, its registration is triggered automa
 | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | The web domain stays in _Verifying_ for hours.                     | The CNAME record is missing, points to another value than `web.purchasely.io`, or is proxied by Cloudflare. Check the record with your provider and click **Check now**. |
 | _This domain is not available._                                    | The subdomain is an apex domain, has several levels, or is already attached to another Purchasely app.                                                                   |
-| The email domain stays unverified.                                 | One of the five records is missing or has the wrong name. Some providers add your domain automatically: use the relative name in that case.                              |
+| The email domain stays unverified.                                 | One of the three records is missing or has the wrong name. Some providers add your domain automatically: enter only the part before it. After 72 hours, click **Retry verification** and add the new records. |
 | Apple Pay does not appear in the checkout.                         | Register the hosts in step 2.3 and test in Safari on an iPhone or a Mac with a card in Wallet.                                                                           |
 | The wallets appear on `web.purchasely.io` but not on my subdomain. | The subdomain was activated after the registration. Click **Register** again.                                                                                            |

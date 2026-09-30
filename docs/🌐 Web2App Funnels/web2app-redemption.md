@@ -48,7 +48,7 @@ The link is unique to the subscription and works **once**: when it is consumed, 
 | **App not installed** | Step 1 of the success screen links to the App Store and Play Store; the email carries the same store links. Once the app is installed, the subscriber taps the redemption button, or opens the link from the email, to activate. |
 | **Subscription no longer active** | If the subscription was cancelled or refunded before activation, the link shows an *unavailable* page and no email is sent. |
 
-The receipt email is sent from `redemption@purchasely.io` with your app name as sender, or from your own address once your [email domain](web2app-setup-domains-and-wallets) is configured. For sandbox purchases, its subject starts with `[Sandbox]`.
+The receipt email is sent from `redemption@purchasely.io` with your app name as sender, or from your own address once your [email domain](web2app-setup-domains-and-wallets) is verified. For sandbox purchases, its subject starts with `[Sandbox]`.
 
 ## What happens to the subscription
 

@@ -65,7 +65,7 @@ Screens can be personalized with the attributes collected earlier in the flow (f
 * Forward funnel events to **Meta, Google Ads, TikTok and X**, with server-side conversions for Meta and TikTok.
 * Keep UTM parameters and click IDs from the first visit to the purchase, and get them back in webhooks.
 * **A/B test** Web Flows: UI variants as well as price variants.
-* Send purchase and lifecycle emails from your own **email domain**.
+* Send the purchase receipt email from your own **email domain**.
 
 **In the app**
 
