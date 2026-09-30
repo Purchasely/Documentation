@@ -81,7 +81,7 @@ Verification usually completes within 10 to 20 minutes, but DNS propagation can 
 After a purchase, Purchasely emails the customer a receipt containing the link that activates the subscription in your app. By default it comes from `redemption@purchasely.io`, with your app name as sender. With an email domain, it comes from your brand, for example `welcome@yourapp.com`, which improves trust and deliverability.
 
 
-<Image src="https://files.readme.io/fcd468869083b746426ece0bb1e152baafdc0c77c2fbb2dc1e9f2188b96f27c1-image.png" border={true} />
+<Image src="https://files.readme.io/4e4ac6180f1c2c45adbb4fdb886d715bab760be63376e6546757067aad619ccb-Screenshot_2026-09-30_at_17.01.01.png" border={true} />
 
 
 ### Add the DNS records
@@ -90,8 +90,8 @@ After a purchase, Purchasely emails the customer a receipt containing the link t
 2. Click **Verify sending domain**. Purchasely shows three DNS records.
 3. Add them at your DNS provider. Names are shown in full; if your provider appends your domain automatically, enter only the part before it.
 
-| Type  | Name                                  | Value                         | Purpose                           |
-| ----- | ------------------------------------- | ----------------------------- | --------------------------------- |
+| Type  | Name                                    | Value                         | Purpose                           |
+| ----- | --------------------------------------- | ----------------------------- | --------------------------------- |
 | CNAME | `<token1>._domainkey.email.yourapp.com` | `<token1>.dkim.amazonses.com` | DKIM key used to sign your emails |
 | CNAME | `<token2>._domainkey.email.yourapp.com` | `<token2>.dkim.amazonses.com` | DKIM key                          |
 | CNAME | `<token3>._domainkey.email.yourapp.com` | `<token3>.dkim.amazonses.com` | DKIM key                          |
@@ -126,10 +126,10 @@ When your custom web domain becomes active, its registration is triggered automa
 
 ## Troubleshooting
 
-| Problem                                                            | Cause and solution                                                                                                                                                       |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| The web domain stays in _Verifying_ for hours.                     | The CNAME record is missing, points to another value than `web.purchasely.io`, or is proxied by Cloudflare. Check the record with your provider and click **Check now**. |
-| _This domain is not available._                                    | The subdomain is an apex domain, has several levels, or is already attached to another Purchasely app.                                                                   |
+| Problem                                                            | Cause and solution                                                                                                                                                                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The web domain stays in _Verifying_ for hours.                     | The CNAME record is missing, points to another value than `web.purchasely.io`, or is proxied by Cloudflare. Check the record with your provider and click **Check now**.                                      |
+| _This domain is not available._                                    | The subdomain is an apex domain, has several levels, or is already attached to another Purchasely app.                                                                                                        |
 | The email domain stays unverified.                                 | One of the three records is missing or has the wrong name. Some providers add your domain automatically: enter only the part before it. After 72 hours, click **Retry verification** and add the new records. |
-| Apple Pay does not appear in the checkout.                         | Register the hosts in step 2.3 and test in Safari on an iPhone or a Mac with a card in Wallet.                                                                           |
-| The wallets appear on `web.purchasely.io` but not on my subdomain. | The subdomain was activated after the registration. Click **Register** again.                                                                                            |
+| Apple Pay does not appear in the checkout.                         | Register the hosts in step 2.3 and test in Safari on an iPhone or a Mac with a card in Wallet.                                                                                                                |
+| The wallets appear on `web.purchasely.io` but not on my subdomain. | The subdomain was activated after the registration. Click **Register** again.                                                                                                                                 |
