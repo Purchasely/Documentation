@@ -68,6 +68,23 @@ Applies a margin at the bottom of the screen to ensure that elements such as foo
 
 This bottom safe area is applied when the display mode is set to any mode **except Pop-in**.
 
+***
+
+### How the safe area margin is calculated
+
+The safe area margin is not a fixed value. The SDK reads it from the device at runtime:
+
+- **Android**: the bottom system bar inset (`WindowInsets`), as described in the [Android edge-to-edge guide](https://developer.android.com/develop/ui/views/layout/edge-to-edge#system-bars-insets). The value follows the navigation bar type (gesture or buttons) and is updated when the device rotates.
+- **iOS**: the window `safeAreaInsets` (notch, Dynamic Island, home indicator).
+
+You cannot set the size of the safe area margin in the Screen Composer. The safe area margin is added to the padding and margins of your components.
+
+**Recommended setup:**
+
+- **Default**: activate the safe area at the bottom and set the bottom padding of your last component (or of the body) to `0`. The SDK puts your content just above the navigation bar.
+- **More space at the bottom**: keep the safe area at the bottom and add a bottom padding to the body, or a bottom margin to the last component (e.g.: 10px).
+- **Less space at the bottom** (not recommended): deactivate the safe area at the bottom and set your own bottom padding. Your content can then go below the system navigation bar on some devices.
+
 
 <Image src="https://files.readme.io/b80ac5996e8acb4facb51b08964355788303b05b728eb8a33cef62161108581b-image.png" align="center" width="700px" border={true} />
 
