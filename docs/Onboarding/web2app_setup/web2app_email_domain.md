@@ -32,6 +32,16 @@ Click **Verify sending domain** to see them. Names are shown in full; if your pr
 
 A DKIM record is missing or has the wrong name, often because the provider appended your domain a second time. Purchasely re-checks every five minutes; click **Check now** after fixing. Verification is attempted for 72 hours: the status then turns to **DNS records missing**, and **Retry verification** generates three new DKIM records to add (the MAIL FROM and DMARC records do not change). A **Paused** status means the email provider paused sending after too many bounces or complaints; emails use the Purchasely address while Purchasely support reviews it with you.
 
+# A record shows "Action needed"
+
+Waiting will not fix this record: its message says what to change.
+
+- **Several SPF or DMARC records at the same name.** They cancel each other out. A second DMARC record even switches off the DMARC policy of your whole domain, so keep only one.
+- **SPF record without `include:amazonses.com`.** Add it to your existing record rather than creating a second one.
+- **MX record not found within 72 hours.** Add it, then contact Purchasely support to restart the check.
+
+Your emails keep being sent from your domain meanwhile: only the DKIM records decide the domain's status.
+
 # Which mailbox can I use?
 
 Any name on your domain made of lowercase letters, digits, dots, dashes and underscores, with no dot at the start, at the end or twice in a row. Subscribers who reply to the email reach this mailbox, so pick one that exists.
