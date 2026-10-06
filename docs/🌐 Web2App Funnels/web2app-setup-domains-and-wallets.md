@@ -87,18 +87,21 @@ After a purchase, Purchasely emails the customer a receipt containing the link t
 ### Add the DNS records
 
 1. In step 2.2, enter the **sending domain**, your domain (`yourapp.com`) or a subdomain (`email.yourapp.com`), and the **mailbox**, for example `welcome`. Save.
-2. Click **Verify sending domain**. Purchasely shows three DNS records.
+2. Click **Verify sending domain**. Purchasely shows six DNS records.
 3. Add them at your DNS provider. Names are shown in full; if your provider appends your domain automatically, enter only the part before it.
 
-| Type  | Name                                    | Value                         | Purpose                           |
-| ----- | --------------------------------------- | ----------------------------- | --------------------------------- |
-| CNAME | `<token1>._domainkey.email.yourapp.com` | `<token1>.dkim.amazonses.com` | DKIM key used to sign your emails |
-| CNAME | `<token2>._domainkey.email.yourapp.com` | `<token2>.dkim.amazonses.com` | DKIM key                          |
-| CNAME | `<token3>._domainkey.email.yourapp.com` | `<token3>.dkim.amazonses.com` | DKIM key                          |
+| Type  | Name                                    | Value                                       | Purpose                                         |
+| ----- | --------------------------------------- | ------------------------------------------- | ----------------------------------------------- |
+| CNAME | `<token1>._domainkey.email.yourapp.com` | `<token1>.dkim.amazonses.com`               | DKIM key used to sign your emails (required)    |
+| CNAME | `<token2>._domainkey.email.yourapp.com` | `<token2>.dkim.amazonses.com`               | DKIM key (required)                             |
+| CNAME | `<token3>._domainkey.email.yourapp.com` | `<token3>.dkim.amazonses.com`               | DKIM key (required)                             |
+| MX    | `bounce.email.yourapp.com`              | `feedback-smtp.eu-west-1.amazonses.com`, priority `10` | MAIL FROM: bounces come back through your domain (recommended) |
+| TXT   | `bounce.email.yourapp.com`              | `v=spf1 include:amazonses.com ~all`         | MAIL FROM: SPF passes for your domain (recommended) |
+| TXT   | `_dmarc.email.yourapp.com`              | `v=DMARC1; p=none;`                         | DMARC policy (recommended)                      |
 
-The exact names and values are displayed in the step, with a copy button for each. No SPF or DMARC record is needed: DKIM is enough for your emails to pass DMARC, and a DMARC policy already set on your domain keeps applying. What are [DKIM and DMARC](https://www.cloudflare.com/learning/email-security/dmarc-dkim-spf/)?
+The exact names and values are displayed in the step, with a copy button for each. For the MX record, enter the priority in its own field (Cloudflare and most providers have one). Only the three DKIM records are required: they are enough for your emails to pass DMARC. The MAIL FROM records also make SPF pass for your domain. Gmail and Yahoo require a DMARC record from senders of more than 5,000 emails a day. A domain can have only one DMARC record: if yours already has one, on this name or on your main domain, skip it. The row then shows as verified, and your policy keeps applying. What are [DKIM, SPF and DMARC](https://www.cloudflare.com/learning/email-security/dmarc-dkim-spf/)?
 
-4. Purchasely re-checks the records every five minutes; click **Check now** to force a check. The status switches to **Verified** once the three records resolve. Verification is attempted for 72 hours; after that, **Retry verification** generates three new records.
+4. Purchasely re-checks the records every five minutes; click **Check now** to force a check. The status switches to **Verified** once the three DKIM records resolve. Verification is attempted for 72 hours; after that, **Retry verification** generates three new DKIM records (the MAIL FROM and DMARC records do not change).
 
 Until the domain is verified, emails are sent from the Purchasely address. You can change the sending domain or the mailbox at any time: a new mailbox applies right away, a new domain needs its own verification.
 

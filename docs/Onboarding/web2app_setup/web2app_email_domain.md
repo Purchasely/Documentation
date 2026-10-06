@@ -20,11 +20,17 @@ So that this email comes from your brand, for example `welcome@yourapp.com`, ins
 
 # Which DNS records do I need?
 
-Three CNAME records, shown once you click **Verify sending domain**. They carry the DKIM keys that sign your emails and prove that you own the domain. Names are shown in full (`<token>._domainkey.yourapp.com`); if your provider appends your domain automatically, enter only the part before it. No SPF or DMARC record is needed: DKIM is enough for your emails to pass DMARC, and a DMARC policy already set on your domain keeps applying. [What are DKIM and DMARC?](https://www.cloudflare.com/learning/email-security/dmarc-dkim-spf/)
+Click **Verify sending domain** to see them. Names are shown in full; if your provider appends your domain automatically, enter only the part before it.
+
+- **Three DKIM records (CNAME), required.** They carry the keys that sign your emails and prove that you own the domain (`<token>._domainkey.yourapp.com`). The domain is verified once they resolve.
+- **Two MAIL FROM records (MX and TXT on `bounce.yourapp.com`), recommended.** Bounces then come back through your domain, so SPF passes for your domain as well. Without them, emails still go out.
+- **One DMARC record (TXT on `_dmarc.yourapp.com`), recommended.** Gmail and Yahoo require one from senders of more than 5,000 emails a day. A domain can have only one DMARC record, so skip it if yours already has one: it then shows as verified, and your policy keeps applying.
+
+[What are DKIM, SPF and DMARC?](https://www.cloudflare.com/learning/email-security/dmarc-dkim-spf/)
 
 # The domain stays unverified
 
-One record is missing or has the wrong name, often because the provider appended your domain a second time. Purchasely re-checks every five minutes; click **Check now** after fixing. Verification is attempted for 72 hours: the status then turns to **DNS records missing**, and **Retry verification** generates three new records to add. A **Paused** status means the email provider paused sending after too many bounces or complaints; emails use the Purchasely address while Purchasely support reviews it with you.
+A DKIM record is missing or has the wrong name, often because the provider appended your domain a second time. Purchasely re-checks every five minutes; click **Check now** after fixing. Verification is attempted for 72 hours: the status then turns to **DNS records missing**, and **Retry verification** generates three new DKIM records to add (the MAIL FROM and DMARC records do not change). A **Paused** status means the email provider paused sending after too many bounces or complaints; emails use the Purchasely address while Purchasely support reviews it with you.
 
 # Which mailbox can I use?
 
