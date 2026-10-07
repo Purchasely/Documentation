@@ -651,8 +651,9 @@ You can mix user attribute tags with the other tags in the same label, for examp
 1. Select a text component. In the **Text** section, click the `{{TAG}}` button of the text field.
 2. In the **User attributes** category, click `USER_ATTRIBUTE`. Type `user` in the search field to find it quickly.
 
-   <!-- TODO(screenshot): upload tmp/user-attribute-tags/1-tag-menu.png to ReadMe and replace the src -->
+   <!-- TODO(screenshot): upload tmp/user-attribute-tags/1-tag-menu.png to ReadMe, then replace this comment with:
    <Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="The tag menu of a text field, filtered on the User attributes category" />
+   -->
 
 3. **PARAM 1**: select the attribute. The list shows:
    * your Custom User Attributes of type `String`, `Int`, `Float` and `Date`,
@@ -661,25 +662,29 @@ You can mix user attribute tags with the other tags in the same label, for examp
 
    To declare a new attribute, click **Create new Custom User Attribute** at the bottom of the list.
 
-   <!-- TODO(screenshot): upload tmp/user-attribute-tags/2-choose-attribute.png to ReadMe and replace the src -->
+   <!-- TODO(screenshot): upload tmp/user-attribute-tags/2-choose-attribute.png to ReadMe, then replace this comment with:
    <Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="PARAM 1 - choose the user attribute" />
+   -->
 
 4. **PARAM 2**: type the default value. The Screen shows this value when the user does not have a value for the attribute. Click **Next**.
 
-   <!-- TODO(screenshot): upload tmp/user-attribute-tags/3-default-value.png to ReadMe and replace the src -->
+   <!-- TODO(screenshot): upload tmp/user-attribute-tags/3-default-value.png to ReadMe, then replace this comment with:
    <Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="PARAM 2 - type the default value" />
+   -->
 
 5. **PARAM 3** (optional): click one or more formatters to add them to the chain. The **Preview** line shows the result with the default value.
 
-   <!-- TODO(screenshot): upload tmp/user-attribute-tags/4-filters.png to ReadMe and replace the src -->
+   <!-- TODO(screenshot): upload tmp/user-attribute-tags/4-filters.png to ReadMe, then replace this comment with:
    <Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="PARAM 3 - a chain of two formatters, round and append, with its preview" />
+   -->
 
 6. Click **Save** to insert the tag with its formatters, or **Skip** to insert it without formatters.
 
 The Console preview has no user, so it shows the default value.
 
-<!-- TODO(screenshot): upload tmp/user-attribute-tags/5-inserted.png to ReadMe and replace the src -->
+<!-- TODO(screenshot): upload tmp/user-attribute-tags/5-inserted.png to ReadMe, then replace this comment with:
 <Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="The tag in the text field, and the result in the Console preview" />
+-->
 
 ### Available formatters (filters)
 
