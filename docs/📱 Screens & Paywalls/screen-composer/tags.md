@@ -576,8 +576,6 @@ You can mix user attribute tags with the other tags in the same label, for examp
    <Image src="https://files.readme.io/89819e59823b37856b28d36c6c2c3ae08a14d6d3e154e6b21aebce009a35c7d2-1-tag-menu.png" align="center" caption="The tag menu of a text field, filtered on the User attributes category" border={true} />
 
 
-
-
 3. **PARAM 1**: select the attribute. The list shows:
 
    * your Custom User Attributes of type `String`, `Int`, `Float` and `Date`,
@@ -590,14 +588,10 @@ You can mix user attribute tags with the other tags in the same label, for examp
    <Image src="https://files.readme.io/756035e3414eeb4370669c9c07c5d3ec540ca5eb82576d412f6a06645b48529d-2-choose-attribute.png" align="center" caption="PARAM 1 - choose the user attribute" border={true} />
 
 
-
-
 4. **PARAM 2**: type the default value. The Screen shows this value when the user does not have a value for the attribute. Click **Next**.<br />
 
 
    <Image src="https://files.readme.io/86efb3642f0310970183ab3b8c0e95f1f936db8f99ce76f9e360a1f1ebeadf01-3-default-value.png" align="center" caption="PARAM 2 - type the default value" border={true} />
-
-
 
 
 5. **PARAM 3** (optional): click one or more formatters to add them to the chain. The **Preview** line shows the result with the default value.<br />
@@ -614,7 +608,7 @@ The Console preview has no user, so it shows the default value.<br />
 <Image src="https://files.readme.io/92130d925b43aee04c0585a6445cfb4c65d19ed0d31e43e78a09f877f5e4be9a-5-inserted.png" align="center" caption="The tag in the text field, and the result in the Console preview" border={true} />
 
 
-
+<br />
 
 ### Available formatters (filters)
 
@@ -661,5 +655,7 @@ Purchasely.setUserAttributeWithInt('articles_read', 12);
 More information: [Setting Custom User Attributes](custom-user-attributes#setting-custom-user-attributes).
 
 <Callout icon="🚧" theme="warn">
-  ### `Purchasely.userLogout()` clears the custom user attributes, unless you call `Purchasely.userLogout(false)`. After a logout, the tags show their default value until your app sets the attributes again.
+  ### User Log out
+
+  `Purchasely.userLogout()` clears the custom user attributes, unless you call `Purchasely.userLogout(false)`. After a logout, the tags show their default value until your app sets the attributes again.
 </Callout>
