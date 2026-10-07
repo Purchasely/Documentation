@@ -24,7 +24,7 @@ Using these tags will also ease to make your paywall compliant with the App Stor
 
 ## Where can you use tags?
 
-Tags can be used in any label on a Screen. You can add them by simply clicking on the `{{TAGS}}` inside the text field.
+Tags can be used in any label on a Screen. You can add them by simply clicking on the `{{TAG}}` button of the text field.
 
 <Image align="center" border={false} src="https://files.readme.io/1a358a8da1b12806e775d9a6030a7bdbe95a4c8076d0fc112c949c888315daf1-tags.gif" />
 
@@ -608,3 +608,124 @@ By default, the tags are separated by colon (":"). You can replace the colons by
 <br />
 
 For more information and capabilities about Countdowns. have a look at the [Countdown component](countdown)
+
+## User attribute tags
+
+User attribute tags show the value of a [Custom User Attribute](custom-user-attributes) in a label. Your app sends the value, and the Screen shows it. For example, use them to greet the user by name or to show a number of articles read.
+
+> 📘 Available from SDK 6.0.0
+>
+> User attribute tags need the native SDK 6.0.0 or higher on iOS and Android. This also applies to the React Native, Flutter and Cordova SDKs, which use the native SDKs. Older SDK versions do not replace these tags.
+
+### Syntax
+
+A user attribute tag uses the [Liquid](https://shopify.github.io/liquid/) syntax:
+
+```liquid
+{{ user.<attribute_key> | default: "<fallback>" | <filter> }}
+```
+
+* `user.<attribute_key>` is the key of the attribute, as declared in the [User Attributes](https://console.purchasely.io/user-attributes) section of the Console.
+* `default` is the text to show when the user does not have a value for this attribute.
+* The filters are optional. They change the format of the value. You can chain them.
+
+Examples:
+
+```liquid
+Hello {{ user.firstname | default: "friend" | capitalize }}!
+```
+
+* If `firstname` is `"julie"`, the device shows: Hello Julie!
+* If `firstname` is not set, the device shows: Hello Friend!
+
+```liquid
+You read {{ user.articles_read | default: "0" }} articles this month
+```
+
+* If `articles_read` is `12`, the device shows: You read 12 articles this month
+
+You can mix user attribute tags with the other tags in the same label, for example `{{ user.firstname | default: "" }}, get 1 year for {{PRICE}}`.
+
+### Add a user attribute tag in the Screen Composer
+
+1. Select a text component. In the **Text** section, click the `{{TAG}}` button of the text field.
+2. In the **User attributes** category, click `USER_ATTRIBUTE`. Type `user` in the search field to find it quickly.
+
+   <!-- TODO(screenshot): upload tmp/user-attribute-tags/1-tag-menu.png to ReadMe, then replace this comment with:
+   <Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="The tag menu of a text field, filtered on the User attributes category" />
+   -->
+
+3. **PARAM 1**: select the attribute. The list shows:
+   * your Custom User Attributes of type `String`, `Int`, `Float` and `Date`,
+   * the Insight Attributes of type `String`,
+   * the start and renewal dates of the active subscription, and the dates of the expired subscription.
+
+   To declare a new attribute, click **Create new Custom User Attribute** at the bottom of the list.
+
+   <!-- TODO(screenshot): upload tmp/user-attribute-tags/2-choose-attribute.png to ReadMe, then replace this comment with:
+   <Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="PARAM 1 - choose the user attribute" />
+   -->
+
+4. **PARAM 2**: type the default value. The Screen shows this value when the user does not have a value for the attribute. Click **Next**.
+
+   <!-- TODO(screenshot): upload tmp/user-attribute-tags/3-default-value.png to ReadMe, then replace this comment with:
+   <Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="PARAM 2 - type the default value" />
+   -->
+
+5. **PARAM 3** (optional): click one or more formatters to add them to the chain. The **Preview** line shows the result with the default value.
+
+   <!-- TODO(screenshot): upload tmp/user-attribute-tags/4-filters.png to ReadMe, then replace this comment with:
+   <Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="PARAM 3 - a chain of two formatters, round and append, with its preview" />
+   -->
+
+6. Click **Save** to insert the tag with its formatters, or **Skip** to insert it without formatters.
+
+The Console preview has no user, so it shows the default value.
+
+<!-- TODO(screenshot): upload tmp/user-attribute-tags/5-inserted.png to ReadMe, then replace this comment with:
+<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="The tag in the text field, and the result in the Console preview" />
+-->
+
+### Available formatters (filters)
+
+| Type | Filters |
+| :-- | :-- |
+| Text | `capitalize`, `upcase`, `downcase`, `strip`, `reverse` |
+| Format | `truncate`, `truncatewords`, `slice`, `append`, `prepend`, `replace`, `remove` |
+| Number | `round`, `floor`, `ceil`, `abs`, `plus`, `minus`, `times`, `divided_by`, `at_least`, `at_most` |
+| HTML / URL | `escape`, `strip_html`, `newline_to_br`, `url_encode` |
+
+The Composer shows only the formatters that apply to the type of the attribute.
+
+> 🚧 Date attributes
+>
+> The SDK shows a `Date` attribute in the ISO 8601 format, for example `2026-10-07T10:30:00Z`. The `date` filter does not format these values on the device yet. Test a date tag on a real device before you publish the Screen.
+
+### Set the attribute in your app
+
+The SDK reads the value from the user attributes of the device when it displays the Screen. Set the attribute **before** you display the Screen. If you change the value while the Screen is open, the label does not change.
+
+```swift Swift
+Purchasely.setUserAttribute(withStringValue: "julie", forKey: "firstname")
+Purchasely.setUserAttribute(withIntValue: 12, forKey: "articles_read")
+```
+```kotlin Kotlin
+Purchasely.setUserAttribute("firstname", "julie")
+Purchasely.setUserAttribute("articles_read", 12)
+```
+```typescript React Native
+Purchasely.setUserAttributeWithString('firstname', 'julie');
+Purchasely.setUserAttributeWithNumber('articles_read', 12);
+```
+```dart Flutter
+Purchasely.setUserAttributeWithString('firstname', 'julie');
+Purchasely.setUserAttributeWithInt('articles_read', 12);
+```
+```javascript Cordova
+Purchasely.setUserAttributeWithString('firstname', 'julie');
+Purchasely.setUserAttributeWithInt('articles_read', 12);
+```
+
+More information: [Setting Custom User Attributes](custom-user-attributes#setting-custom-user-attributes).
+
+> 🚧 `Purchasely.userLogout()` clears the custom user attributes, unless you call `Purchasely.userLogout(false)`. After a logout, the tags show their default value until your app sets the attributes again.

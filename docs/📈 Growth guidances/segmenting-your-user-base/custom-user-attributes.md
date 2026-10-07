@@ -20,6 +20,10 @@ next:
 >
 > An audience can therefore match on an attribute that the user never set in the app. You target the value of the attribute in the same way, whatever its origin.
 
+> 📘 Show an attribute in a Screen (SDK 6.0.0)
+>
+> You can show the value of an attribute in the text of a Screen, for example `Hello {{ user.firstname | default: "friend" }}`. See [User attribute tags](tags#user-attribute-tags).
+
 # Configuring Custom User Attributes in the Console
 
 ## Creating a new Customer User Attribute
