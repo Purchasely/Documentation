@@ -47,8 +47,8 @@ The v6 native Android SDK is built with Kotlin 2.2.x and `compileSdk 36`; make s
 The Purchasely Cordova SDK is split into two plugins. **Both must be pinned to the exact same version.**
 
 ```shell
-cordova plugin add @purchasely/cordova-plugin-purchasely@6.1.0
-cordova plugin add @purchasely/cordova-plugin-purchasely-google@6.1.0
+cordova plugin add @purchasely/cordova-plugin-purchasely@6.2.0
+cordova plugin add @purchasely/cordova-plugin-purchasely-google@6.2.0
 ```
 
 | Plugin | Purpose |
@@ -60,8 +60,8 @@ These plugins pull the native SDKs:
 
 | Platform | Native artifact |
 |----------|-----------------|
-| iOS | `pod 'Purchasely', '6.1.0'` (CocoaPods) |
-| Android | `io.purchasely:core:6.1.0` + `io.purchasely:google-play:6.1.0` (Maven Central) |
+| iOS | `pod 'Purchasely', '6.2.0'` (CocoaPods) |
+| Android | `io.purchasely:core:6.2.0` + `io.purchasely:google-play:6.2.0` (Maven Central) |
 
 > There is **no video player plugin on Cordova** — the `io.purchasely:player` artifact is not bridged.
 
@@ -111,8 +111,8 @@ allprojects {
 ```json
 // package.json
 "dependencies": {
-  "@purchasely/cordova-plugin-purchasely": "6.1.0",
-  "@purchasely/cordova-plugin-purchasely-google": "6.1.0"
+  "@purchasely/cordova-plugin-purchasely": "6.2.0",
+  "@purchasely/cordova-plugin-purchasely-google": "6.2.0"
 }
 ```
 
@@ -647,7 +647,7 @@ On Android the success callback resolves with `null` (no-op) — promotional off
 | Purchases not working on Android | Install `@purchasely/cordova-plugin-purchasely-google` and keep every `io.purchasely:*` dependency on the same version. |
 | Paywall not displaying | Verify the placement exists in the Console, the SDK is initialized, and the device has network access. |
 | Deeplink does nothing | Ensure `Purchasely.allowDeeplink(true)` and that you forward the URL with `handleDeeplink(...)`. |
-| `NoSuchMethodError` at runtime (Android) | A mismatched `io.purchasely:*` version outranks the pinned one in Gradle; pin every artifact to the same string (`6.1.0`). |
+| `NoSuchMethodError` at runtime (Android) | A mismatched `io.purchasely:*` version outranks the pinned one in Gradle; pin every artifact to the same string (`6.2.0`). |
 
 ### Debug logging
 

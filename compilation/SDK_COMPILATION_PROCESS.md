@@ -12,7 +12,7 @@ The goal is to compile all scattered documentation into a single, comprehensive 
 
 ## Target version & sources of truth (v6)
 
-The compiled docs target the stable v6 SDKs (**6.1.0** on every platform). When compiling or re-compiling, verify every API name, signature, enum case and default against the authoritative sources — **do not guess or rely on the scattered docs alone**:
+The compiled docs target the stable v6 SDKs (**6.2.0** on every platform). When compiling or re-compiling, verify every API name, signature, enum case and default against the authoritative sources — **do not guess or rely on the scattered docs alone**:
 
 | Platform | Migration guide (authoritative) | SDK source to grep |
 |----------|---------------------------------|--------------------|
@@ -164,7 +164,7 @@ Use this standard structure for all platform documentation:
 - Include alternative stores section (Huawei, Amazon)
 - Presentation API: `PLYPresentation { }.preload`, `display(context) { outcome -> }`, `buildView`/`getFragment`, `onCloseRequested` (renamed from `onClose`); presentation types live in `io.purchasely.ext.presentation.*`
 - Include ProGuard rules
-- Dependencies: `io.purchasely:core`, `io.purchasely:google-play`, `io.purchasely:player` (version **6.1.0**); Gradle 9.3.0+, Kotlin 2.2.x, JDK 11, minSdk 23, compileSdk 36
+- Dependencies: `io.purchasely:core`, `io.purchasely:google-play`, `io.purchasely:player` (version **6.2.0**); Gradle 9.3.0+, Kotlin 2.2.x, JDK 11, minSdk 23, compileSdk 36
 
 ### iOS/Swift
 - **Swift only** — do NOT include Objective-C snippets (no longer documented)
@@ -246,9 +246,9 @@ Include a note like this in each platform:
 > Example for React Native (use the matching released version for your platform):
 > ```json
 > "dependencies": {
->   "react-native-purchasely": "6.1.0",
->   "@purchasely/react-native-purchasely-google": "6.1.0",
->   "@purchasely/react-native-purchasely-android-player": "6.1.0"
+>   "react-native-purchasely": "6.2.0",
+>   "@purchasely/react-native-purchasely-google": "6.2.0",
+>   "@purchasely/react-native-purchasely-android-player": "6.2.0"
 > }
 > ```
 
@@ -406,7 +406,7 @@ Before finalizing the documentation:
 - [ ] Consistent formatting throughout
 - [ ] All sections have content
 - [ ] Links to Purchasely Console are correct
-- [ ] Version number is **6.1.0** on every platform
+- [ ] Version number is **6.2.0** on every platform
 - [ ] Table of contents matches actual sections
 
 ---

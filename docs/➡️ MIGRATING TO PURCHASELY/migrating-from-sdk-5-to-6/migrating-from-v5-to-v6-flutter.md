@@ -10,7 +10,7 @@ metadata:
 next:
   description: ''
 ---
-This guide covers the **Flutter SDK** (Dart). Version 6.0.0 adapts the Flutter plugin to the Purchasely 6.0 native SDKs (iOS `Purchasely 6.1.0`, Android `io.purchasely:core 6.1.0`). For the native layers this plugin bridges to, see the [iOS guide](migrating-from-v5-to-v6-ios) or the [Android guide](migrating-from-v5-to-v6-android), or the platform pages listed on the [migration overview](migrating-from-sdk-5-to-6).
+This guide covers the **Flutter SDK** (Dart). Version 6.0.0 adapts the Flutter plugin to the Purchasely 6.0 native SDKs (iOS `Purchasely 6.2.0`, Android `io.purchasely:core 6.2.0`). For the native layers this plugin bridges to, see the [iOS guide](migrating-from-v5-to-v6-ios) or the [Android guide](migrating-from-v5-to-v6-android), or the platform pages listed on the [migration overview](migrating-from-sdk-5-to-6).
 
 Three areas are breaking: **starting the SDK**, **displaying / preloading / closing a presentation**, and the **action interceptor** — they all move to a fluent builder API. Everything else on the `Purchasely` class (purchases, restore, identity, catalog, subscriptions, user attributes, events, dynamic offerings, consent and config) remains source-compatible except for the removed v5 aliases listed below. A paywall is now called a **Presentation** (or *Screen*).
 
@@ -30,9 +30,9 @@ Pin all Purchasely packages to the **exact same** version. Mismatched versions c
 
 ```yaml
 dependencies:
-  purchasely_flutter: 6.1.0
-  purchasely_google: 6.1.0          # required if you distribute on Google Play
-  purchasely_android_player: 6.1.0  # optional, video paywalls on Android
+  purchasely_flutter: 6.2.0
+  purchasely_google: 6.2.0          # required if you distribute on Google Play
+  purchasely_android_player: 6.2.0  # optional, video paywalls on Android
 ```
 
 Host build requirements:
@@ -44,7 +44,7 @@ Host build requirements:
 
 > 📘 Native dependency
 >
-> 6.0.0 targets the published Purchasely 6.0 native releases — Android `io.purchasely:core` / `google-play` / `player` `6.1.0` on **Maven Central**, iOS `Purchasely` `6.1.0` on the **CocoaPods trunk**. The project builds from the public repositories with no `mavenLocal()` and no development pod.
+> 6.0.0 targets the published Purchasely 6.0 native releases — Android `io.purchasely:core` / `google-play` / `player` `6.2.0` on **Maven Central**, iOS `Purchasely` `6.2.0` on the **CocoaPods trunk**. The project builds from the public repositories with no `mavenLocal()` and no development pod.
 
 ***
 

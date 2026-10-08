@@ -352,7 +352,7 @@ The values stay as the backend declared them. The SDK writes these attributes in
   "device" : "iPhone15,2",
   "type" : "PHONE",
   "os_version" : "iOS 18.5",
-  "sdk_version" : "6.1.0",
+  "sdk_version" : "6.2.0",
   "user_id" : "user_1",
   "anonymous_user_id" : "67C77206-F279-4932-B322-69DC4319B517",
   "redemption" : {
@@ -401,7 +401,7 @@ The values stay as the backend declared them. The SDK writes these attributes in
   "device" : "iPhone15,2",
   "type" : "PHONE",
   "os_version" : "iOS 18.5",
-  "sdk_version" : "6.1.0",
+  "sdk_version" : "6.2.0",
   "anonymous_user_id" : "67C77206-F279-4932-B322-69DC4319B517",
   "error_message" : "Redemption link has expired.",
   "redemption" : {
