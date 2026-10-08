@@ -48,6 +48,7 @@ The different types of Actions that can be mapped with these elements are:
 8. [Promo code](#promo-code)
 9. [Close all](https://docs.purchasely.com/docs/action-types#close-all)
 10. [Open placement](https://docs.purchasely.com/docs/action-types#open-placement)
+11. [Track event](#track-event)
 
 <br />
 
@@ -184,3 +185,23 @@ Open placement Action lets your text or button to Open a Placement from your cur
 2. **Placement**: choose the placement from the drop down list. It will be displayed as soon as the user clicks on the CTA button. 
 
    ![](https://files.readme.io/5863eda04fc5211d3b48a167009a1a9bc81dae98edadf1f2d7596199e6116867-image.png)
+
+<br />
+
+## Track event
+
+**Track event** Action sends one of your [Custom Events](custom-events) when the user taps the component. This action requires SDK 6.2.0 or later on iOS and Android.
+
+> 📘 For ex., You can measure a tap on a "Learn more" button as a success KPI of a paywall.
+
+1. **Action**: Track event
+2. **Custom event**: choose a Custom Event that is declared in the Console.
+
+<!-- TODO(screenshot): upload tmp/custom-events/11-track-event-action.png to ReadMe, then replace this comment with:
+<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="A Learn More button that sends ARTICLE_READ and then closes the Screen" />
+-->
+
+The event carries the context of the Screen: presentation, placement, audience, A/B test and variant, campaign, and flow and step.
+
+* Your app cannot intercept this action.
+* This action never blocks the actions next to it. A button that tracks an event and then purchases still closes the paywall after the purchase.

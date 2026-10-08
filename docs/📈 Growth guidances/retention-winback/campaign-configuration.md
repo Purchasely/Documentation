@@ -45,9 +45,9 @@ By default, a campaign starts when the `APP_STARTED` event is triggered. This ev
 * After the app is restarted following termination by the operating system (typically due to prolonged inactivity).
 * When the user manually relaunches the app.
 
-> ℹ️ `APP_STARTED` and other events
+> ℹ️ Custom Events as triggers (SDK 6.2.0 and later)
 >
-> For now, `APP_STARTED` is the only event available as a trigger. New events will be supported in the months to come.
+> From SDK 6.2.0 on iOS and Android, you can also select one of your [Custom Events](custom-events) as the trigger, with optional conditions on its properties. The same dates, capping and consent rules apply. With an older SDK, `APP_STARTED` is the only trigger.
 
 ## Scheduling (start & end date)
 
@@ -93,7 +93,7 @@ _Example: If set to 24 hours, the campaign will only be available to a user for 
 
 > ⚠️ **Capping applies to trigger-based delivery only**
 >
-> Frequency cap, impression cap, and exposure window are enforced only when the campaign is delivered through a trigger (`APP_STARTED`). They do **not** apply when the campaign is delivered through a Placement.
+> Frequency cap, impression cap, and exposure window are enforced only when the campaign is delivered through a trigger (`APP_STARTED` or a Custom Event). They do **not** apply when the campaign is delivered through a Placement.
 
 All the above parameters can be combined to create highly customized campaign behaviors, allowing precise control over timing, frequency, exposure limits, and user experience.
 
