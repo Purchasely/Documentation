@@ -57,10 +57,12 @@ Purchasely.purchaseWithPromotionalOffer(plan: plan,
 ...
 
 // We also offer the possibility to sign your promotional offers 
-// if you want to purchase with your own system
+// if you want to purchase with your own system (SDK 6.2.0 and later)
 Purchasely.signPromotionalOffer(storeProductId: "storeProductId",
-                                storeOfferId: "storeOfferId") { signature in            
-// Success completion
+                                storeOfferId: "storeOfferId",
+                                purchaseContextToken: nil) { signature, token in
+// Success completion: put `token` in appAccountToken (StoreKit 2)
+// or token.uuidString.lowercased() in applicationUsername (StoreKit 1)
 } failure: { error in
 // Failure completion
 }
@@ -111,7 +113,76 @@ When you are using Purchasely in [`observer`](observer-mode) mode, you can:
 
 <br />
 
-Here is a code sample to sign the offer on iOS:
+## iOS - Sign the offer with a purchase context token (SDK 6.2.0 and later)
+
+<Callout icon="📘" theme="info">
+  ### Availability
+
+  `signPromotionalOffer(storeProductId:storeOfferId:purchaseContextToken:success:failure:)` is available from version 6.2.0 of the Purchasely iOS SDK. It replaces the [previous method](#ios---sign-the-offer-with-the-anonymous-user-id-deprecated), which is deprecated.
+</Callout>
+
+This method gives the signature and a **purchase context token**. Purchasely uses the token to attribute the purchase to the paywall, placement, campaign and A/B test that started it.
+
+Apple compares the signature with the value in the account field of the purchase. Put the token in that field. Do not change the token:
+
+* **StoreKit 2**: add `.appAccountToken(token)` to the purchase options.
+* **StoreKit 1**: set `applicationUsername` to `token.uuidString.lowercased()`. Use lowercase letters. If the case is different, Apple rejects the offer.
+
+Give `nil` as `purchaseContextToken` to get a new token. To sign again for the same purchase, for example after an error, give the token that you received before.
+
+```swift Swift
+Purchasely.interceptAction(.purchase) { [weak self] info, params, completion in
+    guard let plan = params?.plan,
+          let appleProductId = plan.appleProductId,
+          let storeOfferId = params?.promoOffer?.storeOfferId else {
+        completion(.success)
+        return
+    }
+
+    Purchasely.signPromotionalOffer(storeProductId: appleProductId,
+                                    storeOfferId: storeOfferId,
+                                    purchaseContextToken: nil,
+                                    success: { signature, token in
+        Task {
+            // StoreKit 2
+            guard let product = try? await Product.products(for: [appleProductId]).first,
+                  let decodedSignature = Data(base64Encoded: signature.signature) else {
+                completion(.failed)
+                return
+            }
+
+            let options: Set<Product.PurchaseOption> = [
+                .appAccountToken(token), // the token from the SDK, not the anonymous user id
+                .promotionalOffer(offerID: signature.identifier,
+                                  keyID: signature.keyIdentifier,
+                                  nonce: signature.nonce,
+                                  signature: decodedSignature,
+                                  timestamp: Int(signature.timestamp))
+            ]
+            _ = try? await product.purchase(options: options)
+
+            // StoreKit 1: set payment.applicationUsername = token.uuidString.lowercased()
+
+            // Finally close the process with Purchasely
+            completion(.success)
+        }
+    }, failure: { error in
+        completion(.failed)
+    })
+}
+```
+
+<br />
+
+## iOS - Sign the offer with the anonymous user id (deprecated)
+
+<Callout icon="⚠️" theme="warn">
+  ### Deprecated since SDK 6.2.0
+
+  The methods `signPromotionalOffer(storeProductId:storeOfferId:success:failure:)` and `signPromotionalOffer(plan:promoOffer:success:failure:)` continue to work, but they are deprecated. Use the [method with a purchase context token](#ios---sign-the-offer-with-a-purchase-context-token-sdk-620-and-later). These methods sign for the anonymous user id and do not attribute the purchase to the paywall. With these methods, do not put a purchase context token in the account field.
+</Callout>
+
+Here is a code sample to sign the offer on iOS with the deprecated method:
 
 <Callout icon="🚧" theme="warn">
   ### iOS applicationUserName or appAccountToken
