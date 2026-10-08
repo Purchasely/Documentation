@@ -16,7 +16,6 @@ next:
       slug: campaign-configuration
       title: Campaign configuration
 ---
-
 <Callout icon="📘" theme="info">
   ### Availability
 
@@ -39,17 +38,16 @@ Open **Targeting > Events** in the [Purchasely Console](https://console.purchase
 
 1. Type the name of the property.
 2. Select its type: `string`, `int`, `float`, `bool`, `date` or `array of strings`.
-3. Click **Add**.
+3. Click **Add**.<br />
 
-<!-- TODO(screenshot): upload tmp/custom-events/2-property-types.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="The Properties tab, with the list of property types" />
--->
+   <Image src="https://files.readme.io/e7fcf7633fc440a3f5985ca849a993ed8ff919e80509be6b10dc0d1f167bc58e-2-property-types.png" align="center" caption="The Properties tab, with the list of property types" border={true} />
 
-The **Events** column shows the events that use each property. In this example, `category` is shared by `ARTICLE_READ` and `ARTICLE_SHARED`.
 
-<!-- TODO(screenshot): upload tmp/custom-events/6-properties-tab.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="The Properties tab: category is linked to two events" />
--->
+The **Events** column shows the events that use each property. In this example, `category` is shared by `ARTICLE_READ` and `ARTICLE_SHARED`.<br />
+
+
+<Image src="https://files.readme.io/1a76baf82d6321fe61a876731bfd33c3353b64189f382ee0b554373b5b4bd3ff-6-properties-tab.png" align="center" caption="The Properties tab: category is linked to two events" border={true} />
+
 
 <Callout icon="🚧" theme="warn">
   ### A change to a property applies to every event
@@ -64,27 +62,26 @@ In **Targeting > Events**, click **New Custom Event**.
 1. Type the **Name** of the event. Use the exact name that your app sends. The SDK compares names exactly, case and spaces included: `ARTICLE_READ` and `article_read` are two different events.
 2. Optionally, click the color button to select the color of the event in the Console, and add **Tags** to sort your events.
 3. In **Event properties**, select **Link an existing property...** to add a property that you declared before.
-4. Click **Create**.
+4. Click **Create**.<br />
 
-<!-- TODO(screenshot): upload tmp/custom-events/4-link-property.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="Link an existing property to the event" />
--->
+   <Image src="https://files.readme.io/a8725d1904c613ab99907d9f034c1c77073b219be0198cbd5eac6a4423045dd8-4-link-property.png" align="center" caption="Link an existing property to the event" border={true} />
 
-<!-- TODO(screenshot): upload tmp/custom-events/3-new-event.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="The ARTICLE_READ event with three linked properties" />
--->
+
+
+<Image src="https://files.readme.io/2a4f27429d1ab67b6fe68e94f3a82ae7d9296a7667dd440f8a4f892a63d7fe70-3-new-event.png" align="center" caption="The ARTICLE_READ event with three linked properties" border={true} />
+
 
 You can also create a new property directly in the event dialog: type its name, select its type and click **Add**. The Console marks it **new**, and adds it to the **Properties** tab when you save the event. In this example, `ARTICLE_SHARED` reuses `category` and creates `share_channel`.
 
-<!-- TODO(screenshot): upload tmp/custom-events/5-new-property-in-event.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="ARTICLE_SHARED reuses category and creates share_channel" />
--->
+
+<Image src="https://files.readme.io/ded71327c760a104ffd2c2b0655d179380304a70a151dd177abde4570778d6d9-5-new-property-in-event.png" align="center" caption="ARTICLE_SHARED reuses category and creates share_channel" border={true} />
+
 
 The **Events** tab shows one card for each event.
 
-<!-- TODO(screenshot): upload tmp/custom-events/1-events-list.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="The Events tab with the ARTICLE_READ and ARTICLE_SHARED cards" />
--->
+
+<Image src="https://files.readme.io/cce1054f1c60439c28d35188a3b7b027425502400a80c3ac93a2b23aa1426465-1-events-list.png" align="center" caption="The Events tab with the ARTICLE_READ and ARTICLE_SHARED cards" border={true} />
+
 
 <Callout icon="🚧" theme="warn">
   ### Only declared events are sent
@@ -158,9 +155,9 @@ There are two ways to start:
 
 The **Trigger** list contains `APP_STARTED`, the SDK events that can be triggers, and your Custom Events. You can select more than one event: the campaign starts when one of them fires.
 
-<!-- TODO(screenshot): upload tmp/custom-events/7-campaign-trigger-list.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="The Trigger list of a campaign, with ARTICLE_READ selected" />
--->
+
+<Image src="https://files.readme.io/d9dc079c05662566b1079f7d6b4a2317faec5423a492ac3bc70b50e8428b5a8f-7-campaign-trigger-list.png" align="center" caption="The Trigger list of a campaign, with ARTICLE_READ selected" border={true} />
+
 
 ## Filter on the properties
 
@@ -171,17 +168,17 @@ Under **Filters**, click **Filter on properties** to start the campaign only whe
 
 In this example, the campaign starts when the user reads a premium article of the `sport` category:
 
-<!-- TODO(screenshot): upload tmp/custom-events/8-campaign-trigger-filters.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="Filters: is_premium is true AND category equals to sport" />
--->
+
+<Image src="https://files.readme.io/bbd19683bb64386006aaeb03b1d40bd545778c56784b1fdcf493099dd2fde7e4-8-campaign-trigger-filters.png" align="center" caption="Filters: is_premium is true AND category equals to sport" border={true} />
+
 
 The operations depend on the type of the property:
 
-| Type     | Operations                                                                                                                                |
-| :------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
-| `string` | equals to, is different from, contains, starts with, ends with, is one of                                                                 |
-| `int`    | equals to, is different from, is greater than, is greater than or equal to, is less than, is less than or equal to, is between          |
-| `bool`   | is true, is false, is true or not set, is false or not set                                                                                |
+| Type     | Operations                                                                                                                     |
+| :------- | :----------------------------------------------------------------------------------------------------------------------------- |
+| `string` | equals to, is different from, contains, starts with, ends with, is one of                                                      |
+| `int`    | equals to, is different from, is greater than, is greater than or equal to, is less than, is less than or equal to, is between |
+| `bool`   | is true, is false, is true or not set, is false or not set                                                                     |
 
 ## Rules of the trigger
 
@@ -201,23 +198,23 @@ The **Track event** [action](action-types#track-event) of the Screen Composer se
 1. In the Screen Composer, select the component, for example a button.
 2. In **On tap > Action**, select **Track event**.
 
-<!-- TODO(screenshot): upload tmp/custom-events/9-action-list.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="The Track event action in the Action list" />
--->
+
+<Image src="https://files.readme.io/15200e381c4a1626c677a1fd91b8350522374da4d2dc5f4c6ebc91b9a54d543e-9-action-list.png" align="center" caption="The Track event action in the Action list" border={true} />
+
 
 3. In **Custom event**, select the event.
 
-<!-- TODO(screenshot): upload tmp/custom-events/10-select-custom-event.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="Select the custom event of the Track event action" />
--->
+
+<Image src="https://files.readme.io/878b5d1d7097049916182e5498a825a39268ed457e517a09336fd26cc088b5c6-10-select-custom-event.png" align="center" caption="Select the custom event of the Track event action" border={true} />
+
 
 4. Optionally, select a **Second action**, for example **Close/Back**.
 
-<!-- TODO(screenshot): upload tmp/custom-events/11-track-event-action.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="A Learn More button that sends ARTICLE_READ and then closes the Screen" />
--->
 
-The event carries the context of the Screen: presentation, placement, audience, A/B test and variant, campaign, and flow and step. You do not set property values in the action.
+<Image src="https://files.readme.io/3326eb19ae01f4d5cfac0cb5a5abe0cb0d411a7c2259de0641d70092e8120a6a-11-track-event-action.png" align="center" caption="A Learn More button that sends ARTICLE_READ and then closes the Screen" border={true} />
+
+
+<br />The event carries the context of the Screen: presentation, placement, audience, A/B test and variant, campaign, and flow and step. You do not set property values in the action.
 
 * Your app cannot intercept this action.
 * This action never blocks the actions next to it. A button that tracks an event and then purchases still closes the paywall after the purchase.
@@ -227,19 +224,10 @@ The event carries the context of the Screen: presentation, placement, audience, 
 
 When you create an experiment, the **Primary KPI** step lists your Custom Events under **Custom Events**. Select one to make it the metric that determines the winner. In this example, the experiment measures the number of shared articles.
 
-<!-- TODO(screenshot): upload tmp/custom-events/12-experiment-kpi.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="The Primary KPI step of an experiment, with ARTICLE_SHARED selected" />
--->
 
-A **Local experiment** can also target your Custom Events in its **When** section, the same way as a campaign trigger. Refer to [Measuring experiment impact](measuring-experiment-impact) for more details.
+<Image src="https://files.readme.io/4e00921ad673124376d5ce62c03f6afdea71b686ff9a8766395f568fb9266ac6-12-experiment-kpi.png" align="center" caption="The Primary KPI step of an experiment, with ARTICLE_SHARED selected" border={true} />
 
-# Built-in attributes
 
-The SDK sends these built-in attributes with the events of the user:
+<br />A **Local experiment** can also target your Custom Events in its **When** section, the same way as a campaign trigger. Refer to [Measuring experiment impact](measuring-experiment-impact) for more details.
 
-| Attribute                        | Platform      | Content                                                 |
-| :------------------------------- | :------------ | :------------------------------------------------------ |
-| `ply_custom_events_tracked`      | iOS           | The number of events sent, for each event name          |
-| `ply_custom_events_last_tracked` | iOS           | The time of the last event sent, for each event name    |
-| `ply_active_subscriptions`       | iOS, Android  | The list of the active subscriptions of the user        |
-| `ply_expired_subscriptions`      | iOS, Android  | The list of the expired subscriptions of the user       |
+<br />
