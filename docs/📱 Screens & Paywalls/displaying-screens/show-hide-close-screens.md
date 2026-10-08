@@ -16,7 +16,7 @@ next:
 ---
 > 🚧 Minimum SDK versions
 >
-> The lifecycle described here is the **v6** display API. Every SDK is at 6.1.0.
+> The lifecycle described here is the **v6** display API. Every SDK is at 6.2.0.
 >
 > * iOS: 6.1.0
 > * Android: 6.1.0

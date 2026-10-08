@@ -54,16 +54,16 @@ Cordova v6 is a **true breaking builder API**, at parity with the React Native a
 Both Cordova plugins must be pinned to the **same** version:
 
 ```shell
-cordova plugin add @purchasely/cordova-plugin-purchasely@6.1.0
-cordova plugin add @purchasely/cordova-plugin-purchasely-google@6.1.0
+cordova plugin add @purchasely/cordova-plugin-purchasely@6.2.0
+cordova plugin add @purchasely/cordova-plugin-purchasely-google@6.2.0
 ```
 
 This pulls the native SDKs:
 
 | Platform | Native artifact |
 |----------|-----------------|
-| iOS | `pod 'Purchasely', '6.1.0'` (CocoaPods) |
-| Android | `io.purchasely:core:6.1.0` + `io.purchasely:google-play:6.1.0` (Maven Central) |
+| iOS | `pod 'Purchasely', '6.2.0'` (CocoaPods) |
+| Android | `io.purchasely:core:6.2.0` + `io.purchasely:google-play:6.2.0` (Maven Central) |
 
 > 📘 6.0.0 is a stable release
 >

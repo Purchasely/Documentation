@@ -46,31 +46,31 @@ The Purchasely SDK follows the version naming convention `x.y.z`:
 * **Minor (y)**: Incremented for new features, compatible with the current major version.
 * **Patch (z)**: Incremented for backward-compatible bug fixes.
 
-The latest version is **6.1.0** on every platform. Pin that exact version, and do not use a floating range. Here is the pin for each platform:
+The latest version is **6.2.0** on every platform. Pin that exact version, and do not use a floating range. Here is the pin for each platform:
 
 * **iOS (Swift, CocoaPods)**
   ```ruby Podfile
-  pod 'Purchasely', '6.1.0'
+  pod 'Purchasely', '6.2.0'
   ```
 * **Android (Kotlin, Gradle)**  
   ```groovy Gradle
-  implementation 'io.purchasely:core:6.1.0'
+  implementation 'io.purchasely:core:6.2.0'
   ```
 * **React Native**  
   ```json package.json
   "dependencies": {  
-    "react-native-purchasely": "6.1.0"  
+    "react-native-purchasely": "6.2.0"  
   }
   ```
 * **Flutter**
   ```yaml pubspec.yaml
   dependencies:  
-    purchasely_flutter: 6.1.0
+    purchasely_flutter: 6.2.0
   ```
 * **Cordova**  
   ```json package.json
   "dependencies": {  
-    "@purchasely/cordova-plugin-purchasely": "6.1.0"  
+    "@purchasely/cordova-plugin-purchasely": "6.2.0"  
   }
   ```
 
