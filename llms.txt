@@ -95,7 +95,8 @@ Documentation/
 │   └── cordova.md
 ├── docs/               # Source documentation pages
 ├── custom_blocks/      # Reusable content components
-├── CLAUDE.md           # Repository context
+├── AGENTS.md           # Repository context
+├── SDK_RELEASE_PROCESS.md  # Procedure to document a new SDK version
 └── llms.txt            # This file
 ```
 

@@ -1,8 +1,35 @@
-# Purchasely Documentation - Claude Context
+# Purchasely Documentation - Agent Context
 
 ## About This Repository
 
 This repository contains the markdown documentation for **Purchasely** (https://www.purchasely.com), hosted at https://docs.purchasely.com using the ReadMe platform (https://readme.com).
+
+---
+
+## Branches
+
+| Branch | Content | Published on |
+| :-- | :-- | :-- |
+| `vX.Y` (for example `v6.2`) | The documentation of SDK version X.Y | ReadMe version X.Y, `https://docs.purchasely.com/docs/<slug>` |
+| `main` | The changelogs only (`changelogs/`) | `https://docs.purchasely.com/changelog` |
+
+- ReadMe syncs each branch in both directions. A change in the ReadMe editor comes back as a commit `Updated "<page>" in docs`. Pull before you edit, and rebase before you push.
+- Push documentation changes directly to the `vX.Y` branch. A pull request is not necessary.
+- Only a human pushes to `main`. Push a branch and give the push command to the human.
+
+---
+
+## New SDK version: required procedure
+
+When a new SDK version is released (for example 6.2.0), **follow `SDK_RELEASE_PROCESS.md` step by step**. It covers the changelog, the new feature pages, the deprecated APIs, the Console screenshots, the default version bump, the publication checks and the Slack summary.
+
+---
+
+## Writing rules
+
+- Write in ASD-STE100 Simplified Technical English: one approved word for one meaning, active voice, short sentences, articles present.
+- Keep technical names unchanged: API names, file names, code identifiers.
+- Take API names and signatures from the SDK sources at the release tag, not from memory.
 
 ---
 
@@ -47,6 +74,8 @@ Documentation/
 ├── custom_pages/            # Special custom pages
 ├── recipes/                 # Implementation recipes
 ├── reference/               # API reference and ReadMe config
+├── AGENTS.md                # Agent context (this file)
+├── SDK_RELEASE_PROCESS.md   # Procedure to document a new SDK version
 └── llms.txt                 # AI assistant guide
 ```
 
@@ -277,7 +306,8 @@ The documentation uses custom MDX components:
 | Purpose | Location |
 |---------|----------|
 | **AI assistant guide** | `llms.txt` |
-| **Claude context file** | `CLAUDE.md` (this file) |
+| **Agent context file** | `AGENTS.md` (this file) |
+| **New SDK version procedure** | `SDK_RELEASE_PROCESS.md` |
 | **Android SDK docs** | `platform/android.md` |
 | **iOS SDK docs** | `platform/ios.md` |
 | **React Native SDK docs** | `platform/react-native.md` |

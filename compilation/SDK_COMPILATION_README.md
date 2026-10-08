@@ -244,7 +244,7 @@ This removes:
 The complete compilation process is documented in:
 
 - **`SDK_COMPILATION_PROCESS.md`** - Full step-by-step process for compiling any platform
-- **`CLAUDE.md`** - General context about the Purchasely documentation repository
+- **`AGENTS.md`** - General context about the Purchasely documentation repository
 
 Both files are referenced by the scripts and used as guides during compilation.
 
@@ -293,7 +293,7 @@ The scripts will warn if output files already exist. You can:
 
 Make sure Claude has access to:
 - `SDK_COMPILATION_PROCESS.md`
-- `CLAUDE.md`
+- `AGENTS.md`
 - `android.md` (as reference)
 - Source documentation files in `docs/` and `custom_blocks/`
 
