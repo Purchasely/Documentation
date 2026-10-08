@@ -197,9 +197,7 @@ Open placement Action lets your text or button to Open a Placement from your cur
 1. **Action**: Track event
 2. **Custom event**: choose a Custom Event that is declared in the Console.
 
-<!-- TODO(screenshot): upload tmp/custom-events/11-track-event-action.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="A Learn More button that sends ARTICLE_READ and then closes the Screen" />
--->
+<Image align="center" className="border" border={true} src="https://files.readme.io/3326eb19ae01f4d5cfac0cb5a5abe0cb0d411a7c2259de0641d70092e8120a6a-11-track-event-action.png" alt="A Learn More button that sends ARTICLE_READ and then closes the Screen" />
 
 The event carries the context of the Screen: presentation, placement, audience, A/B test and variant, campaign, and flow and step.
 
