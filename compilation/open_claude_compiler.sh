@@ -95,7 +95,7 @@ Follow the process documented in \`SDK_COMPILATION_PROCESS.md\` to create compre
 
 - **Process Guide:** \`SDK_COMPILATION_PROCESS.md\`
 - **Reference Example:** \`android.md\` (already completed)
-- **Context:** \`CLAUDE.md\`
+- **Context:** \`AGENTS.md\`
 
 ## Platform Details
 

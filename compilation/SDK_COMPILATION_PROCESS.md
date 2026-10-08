@@ -343,7 +343,7 @@ Documentation/
 │   └── COMPILE_*_INSTRUCTION.md
 ├── docs/                        # Source documentation (input)
 ├── custom_blocks/               # Reusable content blocks (input)
-└── CLAUDE.md                    # Repository context
+└── AGENTS.md                    # Repository context
 ```
 
 ---

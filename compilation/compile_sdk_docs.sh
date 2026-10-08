@@ -144,9 +144,9 @@ main() {
         exit 1
     fi
 
-    # Check if CLAUDE.md exists (in root folder)
-    if [ ! -f "$ROOT_DIR/CLAUDE.md" ]; then
-        echo "Error: CLAUDE.md not found in root directory!"
+    # Check if AGENTS.md exists (in root folder)
+    if [ ! -f "$ROOT_DIR/AGENTS.md" ]; then
+        echo "Error: AGENTS.md not found in root directory!"
         exit 1
     fi
 
