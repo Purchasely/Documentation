@@ -331,6 +331,8 @@ Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.allNonE
 
 * **Effect**: This disables Processing #2, #3, and #4 simultaneously.
 
+> ℹ️ `allNonEssentials` does not include the [Refund Handling](#refund-handling-ios-only) purpose. Add it to the same call when the user refuses it too.
+
 <br />
 
 ## Disabling Forwarding to 3rd-Party Integrations
@@ -361,3 +363,49 @@ Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.allNonE
 > ℹ️ About 3rd party integrations
 >
 > In the Purchasely Console, you can activate 3rd party integrations, to automatically forward subscription lifecycle events (Server Events) and user subscription attributes to them. See [documentation](engagement-crm)
+
+<br />
+
+## Refund Handling (iOS only)
+
+<Callout icon="📘" theme="info">
+  ### Availability
+
+  This purpose is available from SDK **6.2.0** on iOS, and on React Native, Flutter and Cordova for iOS apps. Android has no equivalent, because it concerns App Store refund requests only.
+</Callout>
+
+* **Purpose**: When a user asks Apple for a refund, Apple sends a `CONSUMPTION_REQUEST` notification. Purchasely can answer with the consumption data of the user, to help Apple decide on the refund. Apple accepts this data only with the consent of the user.
+
+<br />
+
+* **When to revoke?** Revoke it when the user refuses to share consumption data with Apple for refund requests.
+
+<br />
+
+* **How to revoke?**
+  ```swift
+  Purchasely.revokeDataProcessingConsent(for: [.refundHandling])
+  ```
+  ```javascript React Native
+  Purchasely.revokeDataProcessingConsent([PLYDataProcessingPurpose.REFUND_HANDLING])
+  ```
+  ```javascript Flutter
+  Purchasely.revokeDataProcessingConsent([PLYDataProcessingPurpose.refundHandling]);
+  ```
+  ```javascript Cordova
+  Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.refundHandling])
+  ```
+
+<br />
+
+* **Effect**: Purchasely does not answer the `CONSUMPTION_REQUEST` notifications of this user. The SDK behavior does not change.
+
+<br />
+
+> 🚧 Pass every refused purpose in the same call
+>
+> `revokeDataProcessingConsent` replaces the full list of refused purposes each time you call it. It does not add to the previous call. `allNonEssentials` does not include `refundHandling`, so pass both when the user refuses everything:
+>
+> ```swift
+> Purchasely.revokeDataProcessingConsent(for: [.allNonEssentials, .refundHandling])
+> ```
