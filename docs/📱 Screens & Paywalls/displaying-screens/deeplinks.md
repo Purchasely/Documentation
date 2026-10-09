@@ -36,14 +36,8 @@ Open your default screen\
 Open a placement\
 `app_scheme://ply/placements/PLACEMENT_ID`
 
-Open your default placement\
+Open your default placement (Android only)\
 `app_scheme://ply/placements`
-
-## Subscriptions
-
-This deeplink will open the subscriptions view inside the app.
-
-`app_scheme://ply/subscriptions`
 
 ## Update billing
 
