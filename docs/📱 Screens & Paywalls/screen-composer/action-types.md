@@ -234,7 +234,7 @@ Open placement Action lets your text or button to Open a Placement from your cur
 
 ## Track event
 
-**Track event** Action sends one of your [Custom Events](custom-events) when the user taps the component. This action requires SDK 6.2.0 or later on iOS and Android.
+**Track event** Action sends one of your [Custom Events](custom-events) when the user taps the component. This action requires SDK 6.2.0 or later on iOS, Android, React Native, Flutter and Cordova.
 
 <Callout icon="📘" theme="info">
   ### Example
