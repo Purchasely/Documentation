@@ -414,7 +414,7 @@ const history = await Purchasely.userSubscriptionsHistory()       // full histor
 All **core** SDK methods are unchanged in name, signature, and behaviour. Only the v5 _paywall_ surface was removed (plus `synchronize`, which gained an awaitable result — see §8). The following keep working exactly as in v5:
 
 - **User**: `userLogin`, `userLogout`, `getAnonymousUserId`, `isAnonymous`.
-- **Products**: `allProducts`, `productWithIdentifier`, `planWithIdentifier`, `purchaseWithPlanVendorId`, `signPromotionalOffer`, `isEligibleForIntroOffer`, and dynamic offerings (`setDynamicOffering`, `getDynamicOfferings`, `removeDynamicOffering`, `clearDynamicOfferings`).
+- **Products**: `allProducts`, `productWithIdentifier`, `planWithIdentifier`, `purchaseWithPlanVendorId`, `signPromotionalOffer` (deprecated in 6.2.0, use `signPromotionalOfferWithToken`), `isEligibleForIntroOffer`, and dynamic offerings (`setDynamicOffering`, `getDynamicOfferings`, `removeDynamicOffering`, `clearDynamicOfferings`).
 - **Subscriptions data**: `userSubscriptions`, `userSubscriptionsHistory`, `restoreAllProducts`, `silentRestoreAllProducts`, `userDidConsumeSubscriptionContent`.
 - **Attributes**: `setUserAttributeWith{String,Number,Int,Double,Boolean,Date,StringArray,NumberArray,IntArray,DoubleArray,BooleanArray}`, `incrementUserAttribute`, `decrementUserAttribute`, `userAttributes`, `userAttribute`, `clearUserAttribute`, `clearUserAttributes`, `clearBuiltInAttributes`, `setAttribute`.
 - **Listeners**: `addEventListener` / `removeEventListener`, `addPurchasedListener` / `removePurchasedListener`, `addUserAttributeSetListener` / `removeUserAttributeSetListener`, `addUserAttributeRemovedListener` / `removeUserAttributeRemovedListener`.
