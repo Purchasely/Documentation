@@ -747,6 +747,17 @@ const purchaseListener = Purchasely.addPurchasedListener(() => {
 purchaseListener.remove();
 ```
 
+### Custom Events (SDK 6.2.0)
+
+Send your own business events to Purchasely with `emit`. Declare each event in the Console, in **Targeting > Events**. The SDK sends only the declared event names, and it compares the names exactly. Custom Events never reach your event listener. See [Custom Events](https://docs.purchasely.com/docs/custom-events).
+
+```typescript
+Purchasely.emit('recipe_viewed', { recipe_id: 42, title: 'Ratatouille' });
+Purchasely.emit('checkout_started');
+```
+
+`emit(name: string, properties?: Record<string, unknown>): void` returns at once. The bridge checks no property type: the backend casts each value to the type that you declare in the Console. Pass a date as an ISO 8601 string.
+
 ### Custom User Attributes Listener
 
 When a user submits answers to a survey configured in the Screen Composer, custom user attributes can be set automatically by the SDK. The `source` property tells you whether the change came from Purchasely or from your own app.
@@ -1043,12 +1054,22 @@ Purchasely.interceptAction('purchase', async (info, payload) => {
 
 ### Promotional Offers (iOS)
 
+Sign the offer over a purchase context token (SDK 6.2.0). iOS only: the result is `null` on Android.
+
 ```typescript
-const signature = await Purchasely.signPromotionalOffer({
+const signature = await Purchasely.signPromotionalOfferWithToken({
     storeProductId: 'my_store_product_id',
     storeOfferId: 'my_store_offer_id',
+    // purchaseContextToken: '...', // optional, a UUID string, to sign again for the same purchase
 });
+
+if (signature != null) {
+    // Lowercase UUID. StoreKit 2: appAccountToken. StoreKit 1: applicationUsername.
+    const token = signature.purchaseContextToken;
+}
 ```
+
+Put `purchaseContextToken` in the account field of the purchase. Apple rejects the offer when the value is different. A token that is not a UUID string rejects the call. `signPromotionalOffer({ storeProductId, storeOfferId })` is deprecated: it signs over the anonymous user id.
 
 ### Dynamic Offerings
 
@@ -1127,7 +1148,9 @@ Purchasely.revokeDataProcessingConsent([
 ]);
 ```
 
-`PLYDataProcessingPurpose` values: `ANALYTICS`, `IDENTIFIED_ANALYTICS`, `CAMPAIGNS`, `PERSONALIZATION`, `THIRD_PARTY_INTEGRATION`, `ALL_NON_ESSENTIALS`.
+`PLYDataProcessingPurpose` values: `ANALYTICS`, `IDENTIFIED_ANALYTICS`, `CAMPAIGNS`, `PERSONALIZATION`, `THIRD_PARTY_INTEGRATION`, `REFUND_HANDLING` (iOS only, SDK 6.2.0), `ALL_NON_ESSENTIALS`.
+
+Each call replaces the full list of refused purposes. Pass every refused purpose in the same call, and pass `[]` to grant all purposes back. `ALL_NON_ESSENTIALS` does not include `REFUND_HANDLING`: add it to the same call when the user refuses it too. Android ignores `REFUND_HANDLING`.
 
 ---
 
