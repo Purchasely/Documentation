@@ -47,7 +47,7 @@ By default, a campaign starts when the `APP_STARTED` event is triggered. This ev
 
 > ℹ️ Custom Events as triggers (SDK 6.2.0 and later)
 >
-> From SDK 6.2.0 on iOS and Android, you can also select one of your [Custom Events](custom-events) as the trigger, with optional conditions on its properties. The same dates, capping and consent rules apply. With an older SDK, `APP_STARTED` is the only trigger.
+> From SDK 6.2.0 on iOS, Android, React Native, Flutter and Cordova, you can also select one of your [Custom Events](custom-events) as the trigger, with optional conditions on its properties. The same dates, capping and consent rules apply. With an older SDK, `APP_STARTED` is the only trigger.
 
 ## Scheduling (start & end date)
 

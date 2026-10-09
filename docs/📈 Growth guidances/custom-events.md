@@ -19,7 +19,7 @@ next:
 <Callout icon="📘" theme="info">
   ### Availability
 
-  Custom Events are available from version **6.2.0** of the Purchasely SDK on **iOS** and **Android**. An older SDK sends no Custom Event and ignores the campaigns and the Screen actions that use them.
+  Custom Events are available from version **6.2.0** of the Purchasely SDK on **iOS**, **Android**, **React Native**, **Flutter** and **Cordova**. An older SDK sends no Custom Event and ignores the campaigns and the Screen actions that use them.
 </Callout>
 
 A Custom Event is a business event of your app, for example `ARTICLE_READ`, `ARTICLE_SHARED` or `CHECKOUT_STARTED`. With Custom Events, you can:
@@ -118,14 +118,38 @@ properties.put("category", "sport");
 properties.put("is_premium", true);
 Purchasely.emit("ARTICLE_READ", properties);
 ```
+```typescript React Native
+Purchasely.emit('ARTICLE_READ', {
+  article_id: 42,
+  category: 'sport',
+  is_premium: true,
+});
+```
+```dart Flutter
+await Purchasely.emit('ARTICLE_READ', {
+  'article_id': 42,
+  'category': 'sport',
+  'is_premium': true,
+});
+```
+```javascript Cordova
+Purchasely.emit('ARTICLE_READ', {
+  article_id: 42,
+  category: 'sport',
+  is_premium: true
+});
+```
 
-The call returns immediately and never throws. You can call `emit` before `start()`.
+The native call returns immediately and never throws. You can call `emit` before `start()`.
+
+On Cordova, you can give a `success` callback and an `error` callback as the third and fourth arguments. Both are optional.
 
 ## Properties
 
 * The name and the property keys are sent as given: no case change and no trim.
 * Supported types are numbers, booleans, strings, dates and lists of strings. On Android: `Int`, `Long`, `Float`, `Double`, `Boolean`, `String`, `Date` and a list of `String`.
-* Dates are sent as ISO 8601 strings.
+* Dates are sent as ISO 8601 strings. On React Native, Flutter and Cordova, pass a date as an ISO 8601 string. On Flutter, a `DateTime` value makes the call fail.
+* On React Native, Flutter and Cordova, the bridge checks no property type. The backend casts each value to the type that you declare in the Console.
 * The SDK drops a value that it cannot send, such as `NaN` or a custom object, and logs a warning. It sends the rest of the event normally.
 
 ## What the event carries
@@ -138,7 +162,7 @@ When the user refuses the `analytics` [data processing purpose](privacy-settings
 
 ## Separate from the SDK events
 
-Custom Events have their own queue and their own retries. They never reach your `PLYEventDelegate` (iOS) or your `EventListener` (Android). The [UI/SDK events](ui-sdk-events-list) of Purchasely keep their content and their delivery.
+Custom Events have their own queue and their own retries. They never reach your `PLYEventDelegate` (iOS), your `EventListener` (Android) or the event listener of your React Native, Flutter or Cordova app. The [UI/SDK events](ui-sdk-events-list) of Purchasely keep their content and their delivery.
 
 <Callout icon="⚠️" theme="warn">
   ### Android: exhaustive `when` on `PLYEvent`
