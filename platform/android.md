@@ -774,6 +774,19 @@ Purchasely.eventListener = eventListener
 
 UI/SDK events are computed by the Purchasely Platform for conversion KPIs but, unlike Server events, cannot be routed to third-party integrations from the Console — forward them yourself from the app if you need them in your analytics.
 
+### Custom Events (SDK 6.2.0)
+
+Send your own business events to Purchasely with `emit`. Declare each event in the Console, in **Targeting > Events**. The SDK sends only the declared event names, and it compares the names exactly. Custom Events never reach your event listener. See [Custom Events](https://docs.purchasely.com/docs/custom-events).
+
+```kotlin
+Purchasely.emit("recipe_viewed", mapOf("recipe_id" to 42, "title" to "Ratatouille"))
+Purchasely.emit("checkout_started")
+```
+
+You can call `emit` before `start()`. Supported property types: `Int`, `Long`, `Float`, `Double`, `Boolean`, `String`, `Date` and a list of `String`. When the user refuses the `analytics` purpose, the SDK sends no new Custom Events.
+
+> 🚧 If your code uses `when (event)` on `PLYEvent` without an `else` branch, add an `else` branch. `PLYEvent` has a new subclass in 6.2.0.
+
 ---
 
 ## Deeplinks & Campaigns

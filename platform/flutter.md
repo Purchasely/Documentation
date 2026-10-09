@@ -647,6 +647,17 @@ Purchasely.stopListeningToEvents();
 
 UI/SDK events are computed by the Purchasely Platform for conversion KPIs but cannot be routed to third-party integrations from the Console — forward them yourself from the app if you need them in your analytics.
 
+### Custom Events (SDK 6.2.0)
+
+Send your own business events to Purchasely with `emit`. Declare each event in the Console, in **Targeting > Events**. The SDK sends only the declared event names, and it compares the names exactly. Custom Events never reach your event listener. See [Custom Events](https://docs.purchasely.com/docs/custom-events).
+
+```dart
+await Purchasely.emit('recipe_viewed', {'recipe_id': 42, 'title': 'Ratatouille'});
+await Purchasely.emit('checkout_started');
+```
+
+The bridge checks no property type: the backend casts each value to the type that you declare in the Console. Use `String`, `num`, `bool`, `List`, `Map` or `null`. Pass a date as an ISO 8601 string: a `DateTime` value makes the call fail.
+
 ### Custom User Attributes Listener
 
 When a user submits answers to a survey configured in the Screen Composer, custom user attributes can be set automatically by the SDK. The `source` parameter tells you whether the change came from Purchasely or from your own app.
@@ -855,6 +866,31 @@ if (defaultTargetPlatform == TargetPlatform.android) {
   final offerToken = payload.subscriptionOffer?.offerToken;
 }
 ```
+
+### Promotional Offers (iOS)
+
+Sign a promotional offer over a purchase context token (SDK 6.2.0). iOS only: the result is an empty map on Android.
+
+```dart
+final signature = await Purchasely.signPromotionalOfferWithToken(
+    'my_store_product_id', 'my_store_offer_id');
+
+// Lowercase UUID. StoreKit 2: appAccountToken. StoreKit 1: applicationUsername.
+final token = signature['purchaseContextToken'];
+```
+
+Put `purchaseContextToken` in the account field of the purchase. Apple rejects the offer when the value is different. To sign again for the same purchase, pass the token with `purchaseContextToken:`. A value that is not a UUID string fails with a `PlatformException`. `signPromotionalOffer` is deprecated: it signs over the anonymous user id.
+
+### Revoking Data-Processing Consent
+
+```dart
+Purchasely.revokeDataProcessingConsent([
+  PLYDataProcessingPurpose.analytics,
+  PLYDataProcessingPurpose.refundHandling, // iOS only, SDK 6.2.0
+]);
+```
+
+Each call replaces the full list of refused purposes. Pass every refused purpose in the same call, and pass `[]` to grant all purposes back. `allNonEssentials` does not include `refundHandling`: add it to the same call when the user refuses it too. Android ignores `refundHandling`.
 
 ### Inline (Embedded) Presentations
 

@@ -751,6 +751,17 @@ extension YourClass: PLYEventDelegate {
 
 These events are sent to the Purchasely Platform to compute conversion KPIs. They cannot be routed server-to-server from the Console, so implement this delegate if you want to forward them to your own analytics.
 
+### Custom Events (SDK 6.2.0)
+
+Send your own business events to Purchasely with `emit`. Declare each event in the Console, in **Targeting > Events**. The SDK sends only the declared event names, and it compares the names exactly. Custom Events never reach your event listener. See [Custom Events](https://docs.purchasely.com/docs/custom-events).
+
+```swift
+Purchasely.emit(name: "recipe_viewed", properties: ["recipe_id": 42, "title": "Ratatouille"])
+Purchasely.emit(name: "checkout_started")
+```
+
+You can call `emit` before `start()`. The SDK sends a date as an ISO 8601 string. When the user refuses the `analytics` purpose, the SDK sends no new Custom Events.
+
 ### Custom User Attributes Listener
 
 Listen for custom user attribute changes (e.g. set from surveys). Implement `PLYUserAttributeDelegate`:
