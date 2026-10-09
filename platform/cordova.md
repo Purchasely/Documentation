@@ -592,7 +592,7 @@ Supported formats (`app_scheme` is your declared URL scheme):
 app_scheme://ply/presentations/PRESENTATION_ID   // a specific Screen
 app_scheme://ply/presentations                   // your default Screen
 app_scheme://ply/placements/PLACEMENT_ID          // a placement
-app_scheme://ply/placements                       // your default placement
+app_scheme://ply/placements                       // your default placement (Android only)
 app_scheme://ply/flows/FLOW_ID                    // a Flow
 ```
 
