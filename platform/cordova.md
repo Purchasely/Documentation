@@ -656,7 +656,7 @@ Purchasely.signPromotionalOfferWithToken('store_product_id', 'store_offer_id',
 );
 ```
 
-Put `purchaseContextToken` in the account field of the purchase. Apple rejects the offer when the value is different. A token that is not a UUID string fails, and the SDK does not sign. On Android the success callback receives no signature (no-op) — promotional offer signing is an Apple-only feature.
+Put `purchaseContextToken` in the account field of the purchase. Apple rejects the offer when the value is different. A token that is not a UUID string fails, and the SDK does not sign. On Android the success callback receives no signature (no-op). Promotional offer signing is an Apple-only feature.
 
 `signPromotionalOffer(storeProductId, storeOfferId, success, error)` is deprecated: it signs over the anonymous user id.
 

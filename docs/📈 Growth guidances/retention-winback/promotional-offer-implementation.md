@@ -143,7 +143,7 @@ Apple compares the signature with the value in the account field of the purchase
 
 Give `nil` as `purchaseContextToken` to get a new token. To sign again for the same purchase, for example after an error, give the token that you received before.
 
-On React Native, Flutter and Cordova, give `null` (or no value) to get a new token. A token that is not a UUID string makes the call fail, and the SDK does not sign.
+On React Native, Flutter and Cordova, give `null` (or no value) to get a new token. On iOS, a token that is not a UUID string makes the call fail, and the SDK does not sign. On Android, the bridges ignore the token and do nothing.
 
 ```swift Swift
 Purchasely.interceptAction(.purchase) { [weak self] info, params, completion in
@@ -419,7 +419,7 @@ Purchasely.interceptAction('purchase', async (info, payload) => {
   if (storeOfferId != null) {
     try {
       // Deprecated since 6.2.0: use signPromotionalOfferWithToken
-      const signature = await Purchasely.signPromotionalOffer(storeProductId, storeOfferId);
+      const signature = await Purchasely.signPromotionalOffer({ storeProductId, storeOfferId });
       const anonymousUserId = await Purchasely.getAnonymousUserId();
       const appTokenUserId = anonymousUserId.toLowerCase();
 

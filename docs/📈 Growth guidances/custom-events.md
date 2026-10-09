@@ -148,9 +148,9 @@ On Cordova, you can give a `success` callback and an `error` callback as the thi
 
 * The name and the property keys are sent as given: no case change and no trim.
 * Supported types are numbers, booleans, strings, dates and lists of strings. On Android: `Int`, `Long`, `Float`, `Double`, `Boolean`, `String`, `Date` and a list of `String`.
-* Dates are sent as ISO 8601 strings. On React Native, Flutter and Cordova, pass a date as an ISO 8601 string. On Flutter, a `DateTime` value makes the call fail.
+* Dates are sent as ISO 8601 strings. On React Native, Flutter and Cordova, pass a date as an ISO 8601 string. On Flutter, a `DateTime` or any value that the platform channel cannot encode makes the call fail.
 * On React Native, Flutter and Cordova, the bridge checks no property type. The backend casts each value to the type that you declare in the Console.
-* The SDK drops a value that it cannot send, such as `NaN` or a custom object, and logs a warning. It sends the rest of the event normally.
+* On iOS and Android, the SDK drops a value that it cannot send, such as `NaN` or a custom object, and logs a warning. It sends the rest of the event normally. This does not apply to Flutter: see the previous bullets.
 
 ## What the event carries
 
