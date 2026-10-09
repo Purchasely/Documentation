@@ -102,6 +102,17 @@ try {
     print(e);
 }
 ```
+```javascript Cordova
+// Purchase with the plan vendor id and promotional offer vendor id
+// set in Purchasely Console
+Purchasely.purchaseWithPlanVendorId(
+  'PURCHASELY_PLUS_YEARLY',
+  'PROMOTIONAL_OFFER_ID',
+  null, // optional content id
+  (plan) => console.log('Purchased plan: ' + plan),
+  (error) => console.error(error)
+);
+```
 
 # `observer` mode - Retrieve the offer to purchase
 
@@ -119,6 +130,8 @@ When you are using Purchasely in [`observer`](observer-mode) mode, you can:
   ### Availability
 
   `signPromotionalOffer(storeProductId:storeOfferId:purchaseContextToken:success:failure:)` is available from version 6.2.0 of the Purchasely iOS SDK. It replaces the [previous method](#ios---sign-the-offer-with-the-anonymous-user-id-deprecated), which is deprecated.
+
+  On React Native, Flutter and Cordova, the method is `signPromotionalOfferWithToken`, from bridge version 6.2.0. It does nothing on Android: the result is `null` on React Native, an empty map on Flutter, and an empty success on Cordova.
 </Callout>
 
 This method gives the signature and a **purchase context token**. Purchasely uses the token to attribute the purchase to the paywall, placement, campaign and A/B test that started it.
@@ -129,6 +142,8 @@ Apple compares the signature with the value in the account field of the purchase
 * **StoreKit 1**: set `applicationUsername` to `token.uuidString.lowercased()`. Use lowercase letters. If the case is different, Apple rejects the offer.
 
 Give `nil` as `purchaseContextToken` to get a new token. To sign again for the same purchase, for example after an error, give the token that you received before.
+
+On React Native, Flutter and Cordova, give `null` (or no value) to get a new token. A token that is not a UUID string makes the call fail, and the SDK does not sign.
 
 ```swift Swift
 Purchasely.interceptAction(.purchase) { [weak self] info, params, completion in
@@ -171,6 +186,86 @@ Purchasely.interceptAction(.purchase) { [weak self] info, params, completion in
     })
 }
 ```
+```typescript React Native
+Purchasely.interceptAction('purchase', async (info, payload) => {
+  if (payload?.kind !== 'purchase') {
+    return 'notHandled';
+  }
+
+  const storeProductId = payload.plan?.productId;
+  const storeOfferId = payload.offer?.storeOfferId;
+
+  if (storeProductId != null && storeOfferId != null) {
+    try {
+      // Pass `purchaseContextToken` to sign again for the same purchase.
+      // iOS only: the result is null on Android.
+      const signature = await Purchasely.signPromotionalOfferWithToken({
+        storeProductId,
+        storeOfferId,
+      });
+
+      if (signature != null) {
+        // Lowercase UUID. StoreKit 2: appAccountToken. StoreKit 1: applicationUsername.
+        const token = signature.purchaseContextToken;
+        // Launch your purchase with the signature and the token
+      }
+    } catch (e) {
+      console.error(e);
+      return 'failed';
+    }
+  }
+
+  // TODO launch your purchase flow
+  return 'success';
+});
+```
+```typescript Flutter
+await Purchasely.interceptAction(
+  PLYPresentationActionKind.purchase,
+  (info, payload) async {
+    if (payload is! PLYPurchasePayload) {
+      return PLYInterceptResult.notHandled;
+    }
+
+    final storeProductId = payload.plan.productId;
+    final storeOfferId = payload.offer?.storeOfferId;
+
+    if (storeProductId != null && storeOfferId != null) {
+      try {
+        // Pass `purchaseContextToken:` to sign again for the same purchase.
+        // iOS only: the result is an empty map on Android.
+        final signature = await Purchasely.signPromotionalOfferWithToken(
+            storeProductId, storeOfferId);
+
+        // Lowercase UUID. StoreKit 2: appAccountToken. StoreKit 1: applicationUsername.
+        final token = signature['purchaseContextToken'];
+        // Launch your purchase with the signature and the token
+      } catch (e) {
+        print(e);
+        return PLYInterceptResult.failed;
+      }
+    }
+
+    // TODO launch your purchase flow
+    return PLYInterceptResult.success;
+  },
+);
+```
+```javascript Cordova
+// Pass a token string instead of null to sign again for the same purchase.
+// iOS only: on Android the success callback receives no signature.
+Purchasely.signPromotionalOfferWithToken(
+  'store_product_id',
+  'store_offer_id',
+  null,
+  (signature) => {
+    // Lowercase UUID. StoreKit 2: appAccountToken. StoreKit 1: applicationUsername.
+    const token = signature.purchaseContextToken;
+    // Launch your purchase with the signature and the token
+  },
+  (error) => console.error(error)
+);
+```
 
 <br />
 
@@ -179,7 +274,7 @@ Purchasely.interceptAction(.purchase) { [weak self] info, params, completion in
 <Callout icon="⚠️" theme="warn">
   ### Deprecated since SDK 6.2.0
 
-  The methods `signPromotionalOffer(storeProductId:storeOfferId:success:failure:)` and `signPromotionalOffer(plan:promoOffer:success:failure:)` continue to work, but they are deprecated. Use the [method with a purchase context token](#ios---sign-the-offer-with-a-purchase-context-token-sdk-620-and-later). These methods sign for the anonymous user id and do not attribute the purchase to the paywall. With these methods, do not put a purchase context token in the account field.
+  The methods `signPromotionalOffer(storeProductId:storeOfferId:success:failure:)` and `signPromotionalOffer(plan:promoOffer:success:failure:)` continue to work, but they are deprecated. Use the [method with a purchase context token](#ios---sign-the-offer-with-a-purchase-context-token-sdk-620-and-later). These methods sign for the anonymous user id and do not attribute the purchase to the paywall. With these methods, do not put a purchase context token in the account field. On React Native, Flutter and Cordova, `signPromotionalOffer` is deprecated in the same way: use `signPromotionalOfferWithToken`.
 </Callout>
 
 Here is a code sample to sign the offer on iOS with the deprecated method:
@@ -323,6 +418,7 @@ Purchasely.interceptAction('purchase', async (info, payload) => {
   // -- APPLE ONLY --
   if (storeOfferId != null) {
     try {
+      // Deprecated since 6.2.0: use signPromotionalOfferWithToken
       const signature = await Purchasely.signPromotionalOffer(storeProductId, storeOfferId);
       const anonymousUserId = await Purchasely.getAnonymousUserId();
       const appTokenUserId = anonymousUserId.toLowerCase();
@@ -372,6 +468,7 @@ await Purchasely.interceptAction(
     // -- APPLE ONLY --
     if (storeProductId != null && storeOfferId != null) {
       try {
+        // Deprecated since 6.2.0: use signPromotionalOfferWithToken
         Map signature = await Purchasely.signPromotionalOffer(storeProductId, storeOfferId);
         String? anonymousUserId = await Purchasely.anonymousUserId;
         String? appTokenUserId = anonymousUserId?.toLowerCase();
