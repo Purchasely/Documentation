@@ -1150,7 +1150,7 @@ Purchasely.revokeDataProcessingConsent([
 
 `PLYDataProcessingPurpose` values: `ANALYTICS`, `IDENTIFIED_ANALYTICS`, `CAMPAIGNS`, `PERSONALIZATION`, `THIRD_PARTY_INTEGRATION`, `REFUND_HANDLING` (iOS only, SDK 6.2.0), `ALL_NON_ESSENTIALS`.
 
-Each call replaces the full list of refused purposes. Pass every refused purpose in the same call, and pass `[]` to grant all purposes back. `ALL_NON_ESSENTIALS` does not include `REFUND_HANDLING`: add it to the same call when the user refuses it too. Android ignores `REFUND_HANDLING`.
+Each call replaces the full list of refused purposes. Pass every refused purpose in the same call, and pass `[]` to grant all purposes back (SDK 6.2.0 and later; 6.1.x ignores an empty list). `ALL_NON_ESSENTIALS` does not include `REFUND_HANDLING`: add it to the same call when the user refuses it too. Android ignores `REFUND_HANDLING`.
 
 ---
 
