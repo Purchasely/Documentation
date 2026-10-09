@@ -370,7 +370,7 @@ These are additive or low-impact, but worth a pass while you're migrating:
 * **`userSubscriptions(success, error, invalidateCache)`** and **`userSubscriptionsHistory(success, error, invalidateCache)`** gained a third `invalidateCache` parameter to force a fresh network fetch instead of a cached list.
 * New read accessors: **`getBuiltInAttribute(key, success, error)`** / **`getBuiltInAttributes(success, error)`**, **`isAnonymous(success, error)`**, **`userAttributes(success, error)`** (bulk read of every custom attribute).
 * **`incrementUserAttribute(key, value)`** / **`decrementUserAttribute(key, value)`** default `value` to `1` when omitted.
-* **`signPromotionalOffer`** is iOS-only; on **Android it is a no-op** that resolves with no signature (no signing is required there).
+* **`signPromotionalOffer`** is iOS-only; on **Android it is a no-op** that resolves with no signature (no signing is required there). The same holds for `signPromotionalOfferWithToken` (SDK 6.2.0), which replaces the deprecated `signPromotionalOffer`.
 * **`Purchasely.Attribute`** gained `ONESIGNAL_USER_ID`.
 * **`Purchasely.PresentationType`**: `normal` (0, the requested Screen), `fallback` (1, a Screen but not the one requested), `deactivated` (2, no paywall configured for this placement — e.g. an inactive A/B test or audience), `client` (3, Build-Your-Own-Screen — use the plan list to build your own UI).
 * **Apple commitment** (iOS 26.4+, Apple only): `Purchasely.BillingPlanType` (`unspecified: 0`, `upFront: 1`, `monthly: 2`) is now the 4th argument of `setDynamicOffering(reference, planVendorId, offerVendorId, billingPlanType, success, error)`. A `plan` may carry a `commitmentInfo` array, and a `subscription` may carry `commitmentProgress` — both absent on Android and on non-commitment plans.
@@ -394,7 +394,7 @@ A few builder-parity features that ship on React Native and/or Flutter are **not
 
 Every other `Purchasely.*` method keeps its v5 name and signature, except the renames called out above:
 
-* **Purchases / restore**: `purchaseWithPlanVendorId`, `signPromotionalOffer`, `restoreAllProducts`, `silentRestoreAllProducts`, `userDidConsumeSubscriptionContent`.
+* **Purchases / restore**: `purchaseWithPlanVendorId`, `signPromotionalOffer` (deprecated in 6.2.0, use `signPromotionalOfferWithToken`), `restoreAllProducts`, `silentRestoreAllProducts`, `userDidConsumeSubscriptionContent`.
 * **Identity**: `userLogin`, `userLogout` (gained an optional param — see [section 10](#10-other-v6-changes-worth-knowing)), `getAnonymousUserId`.
 * **Catalog**: `allProducts`, `productWithIdentifier`, `planWithIdentifier`, `isEligibleForIntroOffer`, `setDynamicOffering`, `getDynamicOfferings`, `removeDynamicOffering`, `clearDynamicOfferings`.
 * **Subscriptions data**: `userSubscriptions`, `userSubscriptionsHistory` (both gained an `invalidateCache` param).

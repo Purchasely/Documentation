@@ -523,7 +523,7 @@ final history = await Purchasely.userSubscriptionsHistory(); // expired subscrip
 
 Only the paywall surface (start, display / preload / close / back, the action interceptor, default dismiss handler) has breaking API changes. Every other `Purchasely.*` method remains source-compatible except the removed v5 aliases:
 
-* **Purchases**: `purchaseWithPlanVendorId`, `signPromotionalOffer`.
+* **Purchases**: `purchaseWithPlanVendorId`, `signPromotionalOffer` (deprecated in 6.2.0, use `signPromotionalOfferWithToken`).
 * **Restore**: `restoreAllProducts`, `silentRestoreAllProducts`, `userDidConsumeSubscriptionContent`.
 * **Identity**: `userLogin`, `userLogout`, `isAnonymous`, `anonymousUserId`.
 * **Catalog**: `allProducts`, `productWithIdentifier`, `planWithIdentifier`, `isEligibleForIntroOffer`.
