@@ -28,9 +28,9 @@ Detailed changelogs are available on each platform's GitHub repository:
 | :--------------- | :----------------------------------------------------------------- |
 | **iOS**          | [6.2.0](https://github.com/Purchasely/Purchasely-iOS/releases)     |
 | **Android**      | [6.2.0](https://github.com/Purchasely/Purchasely-Android/releases) |
-| **Flutter**      | Coming soon                                                        |
-| **React Native** | Coming soon                                                        |
-| **Cordova**      | Coming soon                                                        |
+| **Flutter**      | [6.2.0](https://github.com/Purchasely/Purchasely-Flutter/releases)     |
+| **React Native** | [6.2.0](https://github.com/Purchasely/Purchasely-ReactNative/releases) |
+| **Cordova**      | [6.2.0](https://github.com/Purchasely/Purchasely-Cordova/releases)     |
 
 ***
 
