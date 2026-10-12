@@ -25,7 +25,9 @@ In order to connect your Apple App Store account with Purchasely, you have to pr
 5. [StoreKit 2 - Private key ID](#5-6-7-storekit-2-configuration) - only for subscription apps
 6. [StoreKit 2 - Private key file](#5-6-7-storekit-2-configuration) - only for subscription apps
 7. [StoreKit 2 - Issuer ID](#5-6-7-storekit-2-configuration) - only for subscription apps
-8. [The Server to Server End point](#8-the-server-to-server-end-point) - only for subscription apps
+8. [The Server to Server End point](#8-the-server-to-server-end-point---only-for-subscription-apps) - only for subscription apps
+9. [App Store Connect API - Key ID](#9-10-app-store-connect-api-key-optional) - optional
+10. [App Store Connect API - Private key file](#9-10-app-store-connect-api-key-optional) - optional
 
 <Image align="center" border={true} src="https://files.readme.io/dc034ad-image.png" className="border" />
 
@@ -101,3 +103,39 @@ App Store Connect only allows setting one endpoint url for S2S in production and
 If you are already using S2S notification with your existing Subscription Infrastructure, you can activate [Server to server notifications forwarding](s2s-notifications-forwarding) in the Purchasely Console.
 
 [More details on activating Server to server notifications forwarding](s2s-notifications-forwarding)
+
+<br />
+
+# 9, 10. App Store Connect API key (optional)
+
+This key gives Purchasely read access to Apple data that the StoreKit 2 key cannot reach:
+
+* **Apple catalog through MCP**: list your app's in-app purchases, subscription groups and subscriptions, then associate them with Purchasely products, plans and App Store distributions. Catalog discovery is read-only: it does not import products or start an automatic synchronization.
+* **Apple's Retention Messaging report**: Apple's App Store Retention Messaging analytics report, used by [Apple Retention Messaging](apple-retention-messaging).
+
+> 📘 Separate from StoreKit 2
+>
+> This key is not required to process purchases or validate subscriptions. Keep the StoreKit 2 configuration above. Although both keys use the `.p8` file extension, this key must come from **App Store Connect API**, not **In-App Purchase**.
+
+## Create and download the key in Apple
+
+1. Sign in to [App Store Connect](https://appstoreconnect.apple.com/) as an **Account Holder** or **Admin** to create a team key.
+2. Open **Users and Access → Integrations → App Store Connect API → Team Keys**. If API access has not been enabled, the Account Holder must first use **Request Access**.
+3. Click **Generate API Key** (or **+**) and name it, for example, `Purchasely`.
+4. Under **Access**, select **Admin**. Apple accepts the analytics report request behind the Retention Messaging report only from an Admin key. For catalog access alone, a role that can read the app's in-app purchases and subscriptions is enough.
+5. Generate the key, download its `.p8` private key file, and copy the **Key ID** and **Issuer ID**. Apple allows only one download of the private key, so store it securely.
+
+Use a **team key** for this integration. Apple team keys cover all apps in the account; Purchasely only reads the app configured in Purchasely.
+
+[Apple's guide to creating and managing App Store Connect API keys](https://developer.apple.com/help/app-store-connect/get-started/app-store-connect-api/)
+
+## Configure the key in Purchasely
+
+In the Purchasely Console, select your application and open **Setup → Platforms → Apple App Store**:
+
+1. Check that **App ID** contains the numeric **Apple ID** from App Store Connect and that **Issuer ID** matches the team that issued the key. These fields are shared with the configuration above.
+2. In **App Store Connect API**, enter the new **Key ID** in **App Store Connect Key ID**.
+3. Upload the `.p8` file in **App Store Connect private key (.p8)**, or paste its complete contents, preserving the header, footer, and line breaks.
+4. Save your changes.
+
+Your Purchasely administrator needs **Setup → Platforms → View** to see the credentials and **Edit** to change them. To read the Apple catalog through MCP, grant **Setup → Apple catalog → View (MCP only)** when inviting or configuring the administrator, and include it in the MCP connection's consent. Renew the connection's consent if it was authorized before this permission was granted.
