@@ -118,7 +118,7 @@ Set the user identifier **before** the first paywall is displayed, either via `a
 `start()` returns an error in its completion block and the SDK retries in the background. Practical consequences:
 
 * **Do not gate your app launch on a successful `start()`.** Render your UI, and let paywall display fail gracefully.
-* Always handle the error branch of the fetch/display call and provide a fallback path (skip the paywall, or show a native screen).
+* Always handle the error branch of the fetch/display call and provide a fallback path (skip the paywall, or show a native screen). Refer to [Paywall fallbacks](paywall-fallbacks).
 * Because Screens are fetched from our servers, [pre-fetching](pre-fetching) at launch removes most of the perceived latency on the first display.
 
 <br />

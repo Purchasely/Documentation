@@ -119,6 +119,9 @@ Documentation/
 ### "How do I set up user login?"
 → Read `platform/{platform}.md` section "User Identification"
 
+### "Is there a fallback paywall? What if the device is offline?"
+→ Read https://docs.purchasely.com/docs/paywall-fallbacks. The server falls back to the placement default Screen, then to the app default paywall. Older SDK versions get a fallback Screen. There is no offline paywall: on a network error the SDK returns an error, and the app must show its own paywall.
+
 ---
 
 ## API Key Location

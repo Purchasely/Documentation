@@ -50,7 +50,7 @@ Users who have not updated your app will continue running the SDK version that w
 
 ## Can users on older SDK versions see my new paywalls?
 
-It depends on the SDK version. Screen Composer screens require SDK 5.0.0 or later. Users on older versions will see the legacy fallback screen you configured in the Console (if any). If no fallback is set, those users will not see a paywall at all. Always configure a fallback screen when a significant portion of your user base is still on pre-5.0.0 versions.
+It depends on the SDK version. Screen Composer screens require SDK 5.0.0 or later. Users on older versions see the Screen set in **Fallback screen for SDK versions below 5**, in the settings of the Screen. If this field is empty, they see the default paywall of the app. To give a simpler Screen to a specific range of SDK versions, use an audience on the **SDK version**. Refer to [Paywall fallbacks](paywall-fallbacks).
 
 ## Why does the total user count fluctuate between days?
 
