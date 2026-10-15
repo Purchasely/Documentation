@@ -12,7 +12,7 @@ next:
 ---
 # General overview
 
-Purchasely Screen Composer provides an intuitive and flexible way to design custom screens for your app. 
+Purchasely Screen Composer provides an intuitive and flexible way to design custom screens for your app.
 
 The module integrates a comprehensive library of pre-built components, that users can simply drag and drop into their screen structure and organize in different layouts to best fit their needs.
 
@@ -22,37 +22,37 @@ Once components are placed, they can be easily reordered and individually config
 
 <br />
 
-> 🚧 Retro-compatibility considerations and fallback Screen for old versions of the SDK
->
-> The Screen composer **requires the version 5.0.0 of the Purchasely SDK and above**. 
->
-> This can be a problem as long as old versions of the app, integrating previous versions of the SDK (\< 5.0.0) are in the air.
->
-> Be reassured, when creating a new Screen with the Screen composer, you can select a "legacy Screen" (built with the legacy Paywall Builder) and associate it with the new Screen.
->
-> *Click on the dropdown containing the Screen name is the top bar, then select the fallback presentation / Screen to associate with this new Screen*
->
-> <Image align="center" className="border" border={true} src="https://files.readme.io/d8cf0e26adc327d6fa783373615fada64494f8e3c74a2c73a31b1c0da7fea4d0-ezgif-2-1dbd824932.gif" />
->
-> If an old version of the SDK (\< 5.0.0) tries to fetch the new Screen (built from the Screen composer) from a Placement, the fallback screen, compatible with the old version of the SDK, will be retrieved instead.
->
-> ## Running A/B tests with new Screen
->
-> You can include new Screens built with the Screen composer in A/B tests. In this case, old version of the SDK (5.0.0) will fallback on the legacy Screen associated to the new one and be excluded from the A/B test.
->
-> If you run an A/B test between a legacy Screen and a new Screen, bare in mind that the balance (e.g.: 5°0-50 split) between the two variants might be affected by this fallback and exclusion rule: as old SDKs cannot display the new Screen and are therefore excluded from the A/B test, the new Screen variant is likely to have less unique viewers.
+<Callout icon="🚧" theme="warn">
+  ### Retro-compatibility considerations and fallback Screen for old versions of the SDK
+
+  The Screen composer **requires the version 5.0.0 of the Purchasely SDK and above**.
+
+  This can be a problem as long as old versions of the app, integrating previous versions of the SDK (\< 5.0.0) are in the air.
+
+  Be reassured, when creating a new Screen with the Screen composer, you can select a "legacy Screen" (built with the legacy Paywall Builder) and associate it with the new Screen.
+
+  _Click on the dropdown containing the Screen name is the top bar, then select the fallback presentation / Screen to associate with this new Screen_
+
+
+  <Image src="https://files.readme.io/d8cf0e26adc327d6fa783373615fada64494f8e3c74a2c73a31b1c0da7fea4d0-ezgif-2-1dbd824932.gif" align="center" border={true} />
+
+
+  If an old version of the SDK (\< 5.0.0) tries to fetch the new Screen (built from the Screen composer) from a Placement, the fallback screen, compatible with the old version of the SDK, will be retrieved instead.
+
+  ## Running A/B tests with new Screen
+
+  You can include new Screens built with the Screen composer in A/B tests. In this case, old version of the SDK (5.0.0) will fallback on the legacy Screen associated to the new one and be excluded from the A/B test.
+
+  If you run an A/B test between a legacy Screen and a new Screen, bare in mind that the balance (e.g.: 5°0-50 split) between the two variants might be affected by this fallback and exclusion rule: as old SDKs cannot display the new Screen and are therefore excluded from the A/B test, the new Screen variant is likely to have less unique viewers.
+</Callout>
 
 <br />
 
-> 📘 Is this possible to migrate legacy Screen in the new Screen composer?
->
-> Unfortunately it is not possible to edit your old Screens and Paywalls built with the legacy Screen Builder in the new Screen Composer. You will have to replicate them.
+<Callout icon="📘" theme="info">
+  ### Is this possible to migrate legacy Screen in the new Screen composer?
 
-# Product Tour
-
-<HTMLBlock>{`
-<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/fb7581e87de0480981df20143e2631c1?sid=5cb8fd65-c039-4658-84a2-06b72848dcd4" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
-`}</HTMLBlock>
+  Unfortunately it is not possible to edit your old Screens and Paywalls built with the legacy Screen Builder in the new Screen Composer. You will have to replicate them.
+</Callout>
 
 <br />
 
@@ -60,7 +60,9 @@ Once components are placed, they can be easily reordered and individually config
 
 The Screen Composer can be accessed by clicking on the button `+ Composer` in the [Screens section of your Purchasely Console](https://console.purchasely.io/screens)
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/9b2ab461acaf918351a063f973032fdfc2ff42e0b7a539d2698ff12bbbd9fe7c-image.png" />
+
+<Image src="https://files.readme.io/9b2ab461acaf918351a063f973032fdfc2ff42e0b7a539d2698ff12bbbd9fe7c-image.png" align="center" border={true} />
+
 
 <br />
 
@@ -74,7 +76,9 @@ An Offering includes:
 * `Plan`: choose one from the Plans configured in the Purchasely Console
 * (Optional) `Promotional Offer`: choose one from the Promotional Offers configured in the Purchasely Console
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/b531e1b260bcfbdace0274df4f536de96addf3685124856e9ac816a61e3b1f5c-offerings.gif" />
+
+<Image src="https://files.readme.io/b531e1b260bcfbdace0274df4f536de96addf3685124856e9ac816a61e3b1f5c-offerings.gif" align="center" border={true} />
+
 
 ### Wrapping an Introductory Offer and a Promotional Offer in one unified Paywall
 
@@ -82,15 +86,13 @@ With Offerings, you can wrap an Introductory Offer and fallback on a Promotional
 
 * The Offering is linked to a Plan that includes a Free Trial (via Intro Offer) and an Promotional Offer that mirrors it.
 
-* The SDK will automatically evaluate and apply the appropriate offer:\
-  ➕ If the user is eligible for the Intro Offer, it is applied.\
-  ➖ If the user is not eligible, the Promotional Offer will be applied instead.
+* The SDK will automatically evaluate and apply the appropriate offer:<br />➕ If the user is eligible for the Intro Offer, it is applied.<br />➖ If the user is not eligible, the Promotional Offer will be applied instead.
 
 ### Default Offering
 
 One of the Offerings must be defined as the default one.
 
-* For components which are not specifically mapped with a Plan (like a carousel, or a bulleted list), if Tags are used within the associated Text elements, the SDK will compute the Introductory Offer eligibility based on the default Plan.: 
+* For components which are not specifically mapped with a Plan (like a carousel, or a bulleted list), if Tags are used within the associated Text elements, the SDK will compute the Introductory Offer eligibility based on the default Plan.:
 * It will display the [Offer text](offer-mode) if the user is eligible to the Introductory Offer of the default Plan, and the Regular Offer otherwise.
 
 <br />
@@ -99,7 +101,9 @@ One of the Offerings must be defined as the default one.
 
 Select the desired layout among the ones available
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/0df654dc46cb477d91102a1954974c11fb4ba92c21309b819088085200fe3f37-layout.gif" />
+
+<Image src="https://files.readme.io/0df654dc46cb477d91102a1954974c11fb4ba92c21309b819088085200fe3f37-layout.gif" align="center" border={true} />
+
 
 See [Layouts](#layouts) for more details
 
@@ -109,7 +113,9 @@ See [Layouts](#layouts) for more details
 
 Add the desired components by clicking on the button "Add components" and drag & dropping the component in the Screen structure and reorder them the way you want
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/b88a907e6c857b7483150a4cb337c673446b5b85beb9de227bcebe4679627959-drag__drop.gif" />
+
+<Image src="https://files.readme.io/b88a907e6c857b7483150a4cb337c673446b5b85beb9de227bcebe4679627959-drag__drop.gif" align="center" border={true} />
+
 
 <br />
 
@@ -117,7 +123,9 @@ Add the desired components by clicking on the button "Add components" and drag &
 
 Configure each component individually and integrate your copy, contents and branding (including custom fonts)
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/e5097860677bef53ec7e3047cd09ea8c90f1db820d452c1c398188ed83e55d15-configure.gif" />
+
+<Image src="https://files.readme.io/e5097860677bef53ec7e3047cd09ea8c90f1db820d452c1c398188ed83e55d15-configure.gif" align="center" border={true} />
+
 
 <br />
 
@@ -125,13 +133,17 @@ Configure each component individually and integrate your copy, contents and bran
 
 Each color (font, border, background etc...), image, video or animation can be set for dark mode
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/2e3ef6980123c3f3d74fa9ed8dd508586566ef3e9d855a53675b99867ef4e907-dark_mode.gif" />
+
+<Image src="https://files.readme.io/2e3ef6980123c3f3d74fa9ed8dd508586566ef3e9d855a53675b99867ef4e907-dark_mode.gif" align="center" border={true} />
+
 
 ## 6. Localize your Screen (if necessary)
 
 Localize every text of your Screen
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/a9a1612c8d66419413bbfa15faaa468f35c0e3a63b22d58008fb370e26120d9c-localize.gif" />
+
+<Image src="https://files.readme.io/a9a1612c8d66419413bbfa15faaa468f35c0e3a63b22d58008fb370e26120d9c-localize.gif" align="center" border={true} />
+
 
 <br />
 
@@ -145,52 +157,64 @@ Then hit Publish and you're all set!
 
 Layouts define the way the Purchasely SDK will organise and display the components on the device screen.
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/4a2413960881a5d07b29fe6570c1e9f4f38b3a1d5b72bbfe165a61ea1b5dbc8e-Screen_Recording_2025-07-24_at_19.37.53.gif" />
+
+<Image src="https://files.readme.io/4a2413960881a5d07b29fe6570c1e9f4f38b3a1d5b72bbfe165a61ea1b5dbc8e-Screen_Recording_2025-07-24_at_19.37.53.gif" align="center" border={true} />
+
 
 9 layouts are available (and we keep adding more):
 
-| Layout | How it works | Best for |
-| --- | --- | --- |
-| **Fill height** | Not scrollable — every component must fit the screen; the SDK expands (or shrinks) one component to fill it (right-click → "Expand to fill") | Screens that fit a single viewport |
-| **Fill height multi-groups** | Same fit/expand rules, with components organised in several groups | Survey screens |
-| **Scroll** | Stacks components from the top; no expansion; scrolls when content exceeds the screen | Standard content |
-| **Scroll multi-group** | Same as Scroll, with components organised in several groups | Survey screens |
-| **Sticky button** | Two surfaces: a scrollable **Body** and a **Bottom bar** that stays sticky | Long paywalls keeping the CTA always visible |
-| **Tabs** | Components split across tabs/sections | Comparing multi-tier subscription offers |
-| **Segmented controls** | Like Tabs, but with horizontal segmented controls | Compact switching between tiers |
-| **Carousel** | Up to 20 slides; the component can be expanded (right-click → "Expand to fill") | Onboarding, surveys, quizzes |
-| **Switch** | Works with the Switch component: enable free trials, offer Android instalments, or save user preferences via custom attributes (opt-ins, privacy, T&C) | Boosting conversion with toggles |
+| Layout                       | How it works                                                                                                                                            | Best for                                     |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| **Fill height**              | Not scrollable — every component must fit the screen; the SDK expands (or shrinks) one component to fill it (right-click → "Expand to fill")            | Screens that fit a single viewport           |
+| **Fill height multi-groups** | Same fit/expand rules, with components organised in several groups                                                                                      | Survey screens                               |
+| **Scroll**                   | Stacks components from the top; no expansion; scrolls when content exceeds the screen                                                                   | Standard content                             |
+| **Scroll multi-group**       | Same as Scroll, with components organised in several groups                                                                                             | Survey screens                               |
+| **Sticky button**            | Two surfaces: a scrollable **Body** and a **Bottom bar** that stays sticky                                                                              | Long paywalls keeping the CTA always visible |
+| **Tabs**                     | Components split across tabs/sections                                                                                                                   | Comparing multi-tier subscription offers     |
+| **Segmented controls**       | Like Tabs, but with horizontal segmented controls                                                                                                       | Compact switching between tiers              |
+| **Carousel**                 | Up to 20 slides; the component can be expanded (right-click → "Expand to fill")                                                                         | Onboarding, surveys, quizzes                 |
+| **Switch**                   | Works with the Switch component: enable free trials, offer Android instalments, or save user preferences via custom attributes (opt-ins, privacy, T\&C) | Boosting conversion with toggles             |
 
 ## Surfaces
 
-A layout is composed of 1 or several *surfaces* which are displayed in Bold in the Screen structure.
+A layout is composed of 1 or several _surfaces_ which are displayed in Bold in the Screen structure.
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/98f170bd26e7e7f4ed72f3c8a3e043ecf4a820ffa7173e73924b58b5c2e11072-image.png" />
 
-Components can be dragged and dropped in the *surfaces* and reassigned from one surface to another one. Within a surface they can be reordered.
+<Image src="https://files.readme.io/98f170bd26e7e7f4ed72f3c8a3e043ecf4a820ffa7173e73924b58b5c2e11072-image.png" align="center" border={true} />
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/e6084fc32a1e0a94d3a590a0b13594a0487aab693f6382208e01c72d4602a7ff-assign_surfaces.gif" />
+
+Components can be dragged and dropped in the _surfaces_ and reassigned from one surface to another one. Within a surface they can be reordered.
+
+
+<Image src="https://files.readme.io/e6084fc32a1e0a94d3a590a0b13594a0487aab693f6382208e01c72d4602a7ff-assign_surfaces.gif" align="center" border={true} />
+
 
 Components that haven't been assigned to any surface can be found in the **Unassigned** folder.
 
-You can change the layout even after configuring the components, and reassign them to the different *surfaces* available in the new layout. 
+You can change the layout even after configuring the components, and reassign them to the different _surfaces_ available in the new layout.
 
 When changing layout, all the components are put in the Unassigned folder and you must reassign them one by one to the surfaces of the new.
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/e49c059bc0ceeea9a7b093bf51d374f12658d43f5b4c0842eb74c6ef466ab927-change_layout.gif" />
 
-By clicking on a *surface*, you can change its properties, such as its background and the padding
+<Image src="https://files.readme.io/e49c059bc0ceeea9a7b093bf51d374f12658d43f5b4c0842eb74c6ef466ab927-change_layout.gif" align="center" border={true} />
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/776dd7ef75d5de760c0cbd4b235e11f55c4899ecc14a328ee5786c71466e1f94-image.png" />
+
+By clicking on a _surface_, you can change its properties, such as its background and the padding
+
+
+<Image src="https://files.readme.io/776dd7ef75d5de760c0cbd4b235e11f55c4899ecc14a328ee5786c71466e1f94-image.png" align="center" border={true} />
+
 
 # Padding and margin
 
 Padding and margin can now be adjusted with the Screen Composer. It provides you with much more flexibility to tailor your design as you desire.
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/d7ba88ef555399c6d5dedbeadcd0e46ea10c78ed918f1cd5e26891cc74511318-image.png" />
 
-* **Padding** is the space inside a component, between its content and its border. It adds space around the content within the element. It can be defined for *surfaces* and *components*.
-* **Margin** is the space outside a component, separating it from other elements. It adds space between the component's border and the surrounding elements. It can be defined only for *components*.
+<Image src="https://files.readme.io/d7ba88ef555399c6d5dedbeadcd0e46ea10c78ed918f1cd5e26891cc74511318-image.png" align="center" border={true} />
+
+
+* **Padding** is the space inside a component, between its content and its border. It adds space around the content within the element. It can be defined for _surfaces_ and _components_.
+* **Margin** is the space outside a component, separating it from other elements. It adds space between the component's border and the surrounding elements. It can be defined only for _components_.
 
 ![](https://files.readme.io/b74c4aaaf66f57e8fb1432d9603fae8de2d6bc47a9ff7d5280cd140acc89dd59-image.png)
 
@@ -200,9 +224,11 @@ Both padding and margin control spacing but in different contexts: padding is in
 
 # Library of components
 
-The Screen Composer features a comprehensive list of *components* which can be customized in many different ways. Here is the list of components available (and we will continue adding new ones regularly):
+The Screen Composer features a comprehensive list of _components_ which can be customized in many different ways. Here is the list of components available (and we will continue adding new ones regularly):
 
-<Image align="center" className="border" border={true} src="https://files.readme.io/2f20731a2130c3d5b32e0809d635857b0f462a5822bc069fcd89c364059816bb-Screen_Recording_2025-07-24_at_21.19.44_1.gif" />
+
+<Image src="https://files.readme.io/2f20731a2130c3d5b32e0809d635857b0f462a5822bc069fcd89c364059816bb-Screen_Recording_2025-07-24_at_21.19.44_1.gif" align="center" border={true} />
+
 
 <br />
 
@@ -218,7 +244,7 @@ Here are the capabilities offered by each Component
 * [CTAs for Plan pickers](cta-plan-pickers)
 * [Multiple Choice Questions](mcq)
 * [CTAs for Multiple Choice Questions](mcq#5-configuring-the-cta-associated-to-the-mcq)
-* [Bulleted list](bulleted-lists) 
+* [Bulleted list](bulleted-lists)
 * [Timeline vertical](timeline-vertical)
 * [Footers](footer)
 * [Countdowns](countdown)
