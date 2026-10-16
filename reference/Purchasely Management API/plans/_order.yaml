@@ -1,0 +1,5 @@
+- get_management_v1_applications_application_id_plans
+- post_management_v1_applications_application_id_plans
+- delete_management_v1_applications_application_id_plans_id
+- get_management_v1_applications_application_id_plans_id
+- patch_management_v1_applications_application_id_plans_id

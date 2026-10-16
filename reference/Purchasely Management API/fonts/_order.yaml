@@ -1,0 +1,5 @@
+- get_management_v1_applications_application_id_fonts
+- post_management_v1_applications_application_id_fonts
+- get_management_v1_applications_application_id_fonts_id
+- patch_management_v1_applications_application_id_fonts_id
+- get_management_v1_fonts

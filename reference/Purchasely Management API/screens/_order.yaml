@@ -1,0 +1,5 @@
+- get_management_v1_applications_application_id_screens
+- delete_management_v1_applications_application_id_screens_id
+- get_management_v1_applications_application_id_screens_id
+- put_management_v1_applications_application_id_screens_id_make_default
+- get_management_v1_screens

@@ -1,0 +1,8 @@
+- get_management_v1_applications_application_id_plans_plan_id_distributions
+- post_management_v1_applications_application_id_plans_plan_id_distributions
+- >-
+  delete_management_v1_applications_application_id_plans_plan_id_distributions_store
+- >-
+  get_management_v1_applications_application_id_plans_plan_id_distributions_store
+- >-
+  patch_management_v1_applications_application_id_plans_plan_id_distributions_store

@@ -1,0 +1,4 @@
+- get_management_v1_applications_application_id_platforms
+- post_management_v1_applications_application_id_platforms
+- get_management_v1_applications_application_id_platforms_store
+- patch_management_v1_applications_application_id_platforms_store

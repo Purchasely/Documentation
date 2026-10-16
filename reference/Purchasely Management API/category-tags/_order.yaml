@@ -1,0 +1,5 @@
+- get_management_v1_applications_application_id_category_tags
+- post_management_v1_applications_application_id_category_tags
+- delete_management_v1_applications_application_id_category_tags_id
+- get_management_v1_applications_application_id_category_tags_id
+- get_management_v1_category_tags

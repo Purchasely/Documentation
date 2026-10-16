@@ -1,0 +1,6 @@
+- get_management_v1_applications_application_id_products
+- post_management_v1_applications_application_id_products
+- delete_management_v1_applications_application_id_products_id
+- get_management_v1_applications_application_id_products_id
+- patch_management_v1_applications_application_id_products_id
+- get_management_v1_products

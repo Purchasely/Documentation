@@ -1,0 +1,5 @@
+- get_management_v1_applications_application_id_custom_events
+- post_management_v1_applications_application_id_custom_events
+- get_management_v1_applications_application_id_custom_events_id
+- patch_management_v1_applications_application_id_custom_events_id
+- get_management_v1_custom_events

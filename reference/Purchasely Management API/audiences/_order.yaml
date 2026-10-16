@@ -1,0 +1,5 @@
+- get_management_v1_applications_application_id_audiences
+- post_management_v1_applications_application_id_audiences
+- patch_management_v1_applications_application_id_audiences_id
+- post_management_v1_applications_application_id_audiences_id_discard
+- get_management_v1_audiences
