@@ -1,6 +1,6 @@
 ---
 title: My Requests
-excerpt: Set up the welcome page for your API to help users make their first call.
+excerpt: Request history is not available for this API.
 api_config: my-requests
 deprecated: false
 hidden: true
