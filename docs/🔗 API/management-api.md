@@ -215,9 +215,10 @@ Rate limits apply per API key, with separate counters for each resource (product
 | --- | --- | --- |
 | Standard | Every request | 60 requests per minute |
 | Write | Every `POST`, `PUT`, `PATCH` and `DELETE` request, in addition to the standard tier | 10 requests per minute |
-| Heavy read | Large analytics reads, in addition to the standard tier: every `Dashboard` and `Dashboard V2` endpoint, the subscription and one-time purchase lists, A/B test variant stats, campaign stats and survey results | 10 requests per minute |
+| Heavy read | Large analytics reads, in addition to the standard tier: every `Dashboard` and `Dashboard V2` endpoint except the two listed under Moderate read, the subscription and one-time purchase lists, A/B test variant stats and survey results | 10 requests per minute |
+| Moderate read | Fast analytics reads, in addition to the standard tier, with counters of their own: `GET …/dashboard/mrr_evolution_live`, `GET …/dashboard/one_time_purchases_revenues` (with or without `/applications/{application_id}`) and `GET /applications/{application_id}/campaigns/index_stats` | 30 requests per minute |
 
-Rate-limit headers describe the limit of the request's category: the write limit for a write, the heavy read limit for a heavy read, and the standard limit otherwise. Successful responses and `429` responses carry these headers; other error responses may omit them.
+Rate-limit headers describe the limit of the request's category: the write limit for a write, the heavy read limit for a heavy read, the moderate read limit for a moderate read, and the standard limit otherwise. Successful responses and `429` responses carry these headers; other error responses may omit them.
 
 | Header | Meaning |
 | --- | --- |
