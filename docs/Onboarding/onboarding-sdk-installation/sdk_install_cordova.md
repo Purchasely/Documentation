@@ -10,7 +10,11 @@ metadata:
 next:
   description: ''
 ---
-> 🤖 Use the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) to install the SDK from your AI coding assistant. Run the `purchasely-integrate` skill (`/purchasely:integrate` in Claude Code).
+<Callout icon="🤖" theme="default">
+  ### AI
+
+  Use the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) to install the SDK from your AI coding assistant. Run the `purchasely-integrate` skill (`/purchasely:integrate` in Claude Code).
+</Callout>
 
 We rely on [NPM](https://www.npmjs.com/package/@purchasely/cordova-plugin-purchasely) to distribute our Cordova SDK
 
