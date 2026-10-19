@@ -2,6 +2,8 @@
 
 This guide covers the Purchasely React Native SDK **v6** (`6.2.0`) for JavaScript / TypeScript apps. The bridge wraps the Purchasely 6.2.0 native SDKs (iOS `Purchasely 6.2.0`, Android `io.purchasely:core 6.2.0`) and displays **Presentations** (Screens / paywalls) configured in the Console through placements, direct `screen` lookups, campaigns, deeplinks and Flows.
 
+> 🤖 Install the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) for integration, review, debug and migration. It gives your AI coding assistant the `purchasely-integrate`, `purchasely-review`, `purchasely-debug` and `purchasely-migrate` skills.
+
 > 📘 SDK v6 — what changed
 >
 > v6 is a major release with breaking changes on the **paywall surface only**: **starting the SDK** (`Purchasely.builder(...)`), **displaying / preloading / closing a presentation**, and the **action interceptor**. Everything else on the `Purchasely` object — purchases, restore, identity, catalog, subscriptions, user attributes, events, dynamic offerings, consent and config — keeps its v5 signatures. The one deeplink change: the runtime entry point `Purchasely.isDeeplinkHandled(uri)` was **renamed** to `Purchasely.handleDeeplink(uri)` (same signature) to match the native SDKs — `isDeeplinkHandled` and `readyToOpenDeeplink` no longer exist.

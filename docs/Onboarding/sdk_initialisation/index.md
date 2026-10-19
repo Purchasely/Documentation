@@ -10,6 +10,8 @@ metadata:
 next:
   description: ''
 ---
+> 🤖 Use the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) to write the SDK start code with the recommended parameters. Run the `purchasely-integrate` skill (`/purchasely:integrate` in Claude Code). To check an existing initialization, run the `purchasely-review` skill.
+
 # What is the API key used for and where can I find it?
 
 <APIKey />

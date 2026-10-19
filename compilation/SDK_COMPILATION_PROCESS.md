@@ -136,6 +136,8 @@ Use this standard structure for all platform documentation:
 ```markdown
 # Purchasely {Platform} SDK Documentation
 
+> 🤖 Install the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) for integration, review, debug and migration. It gives your AI coding assistant the `purchasely-integrate`, `purchasely-review`, `purchasely-debug` and `purchasely-migrate` skills.
+
 ## Table of Contents
 1. Requirements
 2. Installation

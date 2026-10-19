@@ -14,6 +14,12 @@ metadata:
     any additional context to help the team resolve the issue efficiently.
   robots: index
 ---
+<Callout icon="🤖" theme="okay">
+  ### Before you contact Support
+
+  Run the `purchasely-debug` skill of the [Purchasely AI Plugin](purchasely-ai-plugin) in your codebase. It finds the cause of many common issues, for example a blank paywall, a screen that closes, a failed purchase or a deeplink that does not open. If the issue continues, send its findings with your report.
+</Callout>
+
 If you’re experiencing an issue with a Screen created in the **Purchasely Screen Composer**, please provide the following details so our support team can investigate and assist you as quickly as possible.
 
 ## 🔗 Screen Reference

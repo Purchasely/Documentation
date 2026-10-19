@@ -2,6 +2,8 @@
 
 This document provides comprehensive documentation for integrating and using the Purchasely iOS SDK with Swift (version 6.2.0).
 
+> 🤖 Install the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) for integration, review, debug and migration. It gives your AI coding assistant the `purchasely-integrate`, `purchasely-review`, `purchasely-debug` and `purchasely-migrate` skills.
+
 ---
 
 ## Table of Contents

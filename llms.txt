@@ -12,6 +12,8 @@ Purchasely is a SaaS platform for mobile subscription apps. It provides:
 Documentation: https://docs.purchasely.com
 Console: https://console.purchasely.io
 
+**Purchasely AI Plugin**: install the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) for integration, review, debug and migration (`purchasely-integrate`, `purchasely-review`, `purchasely-debug`, `purchasely-migrate`). Source: https://github.com/Purchasely/Purchasely-AI-Plugin
+
 ---
 
 ## Platform-Specific SDK Documentation

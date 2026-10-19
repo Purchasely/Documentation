@@ -28,6 +28,12 @@ next:
       slug: installation-cordova
       title: Cordova
 ---
+<Callout icon="🤖" theme="okay">
+  ### Let your AI assistant install the SDK
+
+  The [Purchasely AI Plugin](purchasely-ai-plugin) detects your platform and adds the Purchasely SDK dependency to your project. Run the `purchasely-integrate` skill (`/purchasely:integrate` in Claude Code).
+</Callout>
+
 # Supported Platforms
 
 Purchasely SDK supports multiple platforms. The SDK is developed in Swift for iOS and Kotlin for Android but you can use a <Glossary>bridge sdk</Glossary> to integrate it in hybrid apps. The supported platforms are:

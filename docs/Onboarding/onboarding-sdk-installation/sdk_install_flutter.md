@@ -10,6 +10,8 @@ metadata:
 next:
   description: ''
 ---
+> 🤖 Use the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) to install the SDK from your AI coding assistant. Run the `purchasely-integrate` skill (`/purchasely:integrate` in Claude Code).
+
 We rely on [Pub.dev](https://pub.dev/packages/purchasely_flutter/install) to distribute our Flutter SDK
 
 ## Main dependency

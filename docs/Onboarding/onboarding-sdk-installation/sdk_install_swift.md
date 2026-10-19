@@ -10,6 +10,8 @@ metadata:
 next:
   description: ''
 ---
+> 🤖 Use the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) to install the SDK from your AI coding assistant. Run the `purchasely-integrate` skill (`/purchasely:integrate` in Claude Code).
+
 > 📘 iOS 13.4 or superior is required to install Purchasely iOS SDK
 
 **CocaPods**

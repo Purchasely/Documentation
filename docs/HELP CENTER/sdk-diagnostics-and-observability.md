@@ -53,6 +53,12 @@ Purchasely enables the feature from the backend, with three levels of control:
 
 A client cannot turn the feature on. Purchasely can turn the feature off remotely, and this needs no app release.
 
+## Before you contact Support
+
+<Callout icon="🤖" theme="okay">
+  Run the `purchasely-debug` skill of the [Purchasely AI Plugin](purchasely-ai-plugin) in your codebase. It finds the cause of many common issues, for example a blank paywall, a screen that closes, a failed purchase or a deeplink that does not open. If the issue continues, send its findings with your report.
+</Callout>
+
 ## Privacy
 
 - The SDK sends no personal data.

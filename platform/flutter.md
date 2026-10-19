@@ -2,6 +2,8 @@
 
 This guide covers the Purchasely Flutter SDK **v6** (`6.2.0`) for Dart apps. The plugin bridges to the Purchasely 6.2.0 native SDKs (iOS `Purchasely 6.2.0`, Android `io.purchasely:core 6.2.0`) and displays **Presentations** (Screens / paywalls) configured in the Console through placements, direct `screen` lookups, campaigns, deeplinks and Flows.
 
+> 🤖 Install the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) for integration, review, debug and migration. It gives your AI coding assistant the `purchasely-integrate`, `purchasely-review`, `purchasely-debug` and `purchasely-migrate` skills.
+
 > 📘 SDK v6 — what changed
 >
 > v6 is a major release with breaking changes on the **paywall surface only**: **starting the SDK**, **displaying / preloading / closing a presentation**, and the **action interceptor**. Everything else on the `Purchasely` class — purchases, restore, identity, catalog, subscriptions, user attributes, events, dynamic offerings, consent and config — remains source-compatible. Deeplinks use the v6 names (`allowDeeplink`, `handleDeeplink`); the old v5 names were removed.

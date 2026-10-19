@@ -10,6 +10,12 @@ metadata:
   description: ''
   robots: index
 ---
+<Callout icon="🚀" theme="okay">
+  ### The fastest way to integrate Purchasely
+
+  Install the plugin in your AI coding assistant before you start the integration. The assistant then installs the SDK, starts it, displays your first paywall and configures transaction handling in your codebase. It follows the Purchasely recommendations for your platform, so you spend less time in the documentation and make fewer integration mistakes.
+</Callout>
+
 Full description, capabilities and changelog on <Anchor target="_blank" href="https://github.com/Purchasely/Purchasely-AI-Plugin">Github</Anchor>
 
 The Purchasely AI Plugin helps AI coding assistants understand Purchasely SDK integrations across iOS, Android, React Native, Flutter and Cordova. It gives your assistant Purchasely-specific playbooks, references and commands so it can implement the SDK, review an existing integration, debug common issues and migrate older SDK code.
@@ -160,3 +166,9 @@ For SDK upgrades, ask the assistant to run the migration skill on the files that
 </Tabs>
 
 For the full v5 to v6 checklist, also read the [SDK 5 to 6 migration guide](migrating-from-sdk-5-to-6).
+
+***
+
+## Use it with the Purchasely MCP server
+
+The plugin gives your assistant the integration playbooks. The [Purchasely MCP server](mcp) gives it access to the Purchasely API and documentation. Use both for the best results.

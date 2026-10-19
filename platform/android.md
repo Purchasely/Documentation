@@ -2,6 +2,8 @@
 
 This guide covers the Purchasely Android SDK **v6** API for Kotlin apps. Purchasely displays **Screens** and **Presentations** configured in the Console through placements, direct `screenId` lookups, campaigns, and Flows.
 
+> 🤖 Install the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) for integration, review, debug and migration. It gives your AI coding assistant the `purchasely-integrate`, `purchasely-review`, `purchasely-debug` and `purchasely-migrate` skills.
+
 > 📘 SDK v6 — what changed
 >
 > v6 is a major release with breaking changes. The most impactful one for new integrations is that the **default running mode is now `Observer`** (it was `Full` in v5). If you want Purchasely to handle and validate purchases, you must set `.runningMode(PLYRunningMode.Full)` explicitly. See [SDK Initialization](#sdk-initialization) and the v5→v6 migration guide.

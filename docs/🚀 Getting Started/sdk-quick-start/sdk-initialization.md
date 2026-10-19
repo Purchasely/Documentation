@@ -21,6 +21,12 @@ next:
 ---
 # Start
 
+<Callout icon="🤖" theme="okay">
+  ### Let your AI assistant start the SDK
+
+  The [Purchasely AI Plugin](purchasely-ai-plugin) writes the SDK start code for your platform, with the recommended parameters, for example the running mode. Run the `purchasely-integrate` skill (`/purchasely:integrate` in Claude Code). To check an existing initialization, run the `purchasely-review` skill.
+</Callout>
+
 <SDKInitializationAdvice />
 
 ```swift Swift

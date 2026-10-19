@@ -4,6 +4,10 @@ hidden: true
 ---
 The Purchasely Model Context Protocol (MCP) server enables AI-powered code editors like Cursor and Windsurf, plus general-purpose tools like Claude Desktop, to interact directly with your Purchasely API and documentation.
 
+<Callout icon="🤖" theme="info">
+  The MCP server gives your assistant access to the Purchasely API and documentation. To also give it the Purchasely integration, review, debug and migration playbooks, install the [Purchasely AI Plugin](purchasely-ai-plugin).
+</Callout>
+
 ## What is MCP?
 
 Model Context Protocol (MCP) is an open standard that allows AI applications to securely access external data sources and tools. The Purchasely MCP server provides AI agents with:

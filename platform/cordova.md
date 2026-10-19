@@ -2,6 +2,8 @@
 
 This guide covers the Purchasely **Cordova** SDK **v6** for JavaScript apps. Purchasely displays **Screens** and **Presentations** configured in the Console through placements, direct `presentationId` lookups, campaigns, and deeplinks. The Cordova plugin bridges to the native iOS and Android Purchasely SDKs through `cordova.exec`.
 
+> 🤖 Install the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) for integration, review, debug and migration. It gives your AI coding assistant the `purchasely-integrate`, `purchasely-review`, `purchasely-debug` and `purchasely-migrate` skills.
+
 > 📘 SDK v6 — what changed
 >
 > v6 is a major release with breaking changes, at parity with the React Native and Flutter SDKs: it introduces a **fluent builder API** (`Purchasely.builder(apiKey)`, `Purchasely.presentation`, `Purchasely.interceptAction(kind, handler)`). The v5 flat presentation methods (`fetchPresentation*`, `present*`) and the single global action interceptor are **removed, not deprecated**. Other breaking changes: the **default running mode is now `Observer`** (set `RunningMode.full` to let Purchasely handle purchases), the dismiss outcome is a 5-field object with a string `purchaseResult` (no legacy `result` field), the deeplink methods were renamed (`allowDeeplink` / `handleDeeplink`), `setDefaultPresentationResultHandler` became `setDefaultPresentationDismissHandler`, `synchronize` now reports completion, and `presentSubscriptions` was removed entirely. See the [v5→v6 migration guide](https://docs.purchasely.com/migrating-from-v5-to-v6-cordova).

@@ -10,6 +10,8 @@ metadata:
 next:
   description: ''
 ---
+> 🤖 Use the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) to install the SDK from your AI coding assistant. Run the `purchasely-integrate` skill (`/purchasely:integrate` in Claude Code).
+
 We rely on [NPM](https://www.npmjs.com/package/react-native-purchasely) to distribute our React Native SDK
 
 # Main dependency

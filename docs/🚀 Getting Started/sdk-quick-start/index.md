@@ -37,6 +37,12 @@ next:
       slug: testing
       title: Testing
 ---
+<Callout icon="🤖" theme="okay">
+  ### Integrate faster with the Purchasely AI Plugin
+
+  Use the [Purchasely AI Plugin](purchasely-ai-plugin) with Claude Code, Codex or another AI coding assistant. The `purchasely-integrate` skill reads your app and follows the steps of this guide for your platform. It helps you install the SDK, start it, display paywalls and process transactions. Refer to [Install it](purchasely-ai-plugin#install-it) for the install command of your tool.
+</Callout>
+
 # Technologies available for the SDK
 
 The Purchasely SDK is developed natively on the following platforms:
@@ -61,12 +67,6 @@ For hybrid apps, our <Glossary>bridge sdk</Glossary>s are available for:
 | **Cordova**      | 6.2.0       |
 
 # Implementation process
-
-<Callout icon="💡" theme="default">
-  ### AI Plugin
-
-  You can use the [Purchasely AI Plugin](purchasely-ai-plugin) to guide the implementation in your codebase. The `purchasely-integrate` skill can inspect your app, apply the right platform steps, and help you install, initialize, display paywalls and configure transaction handling.
-</Callout>
 
 Follow these steps to implement the SDK into your app:
 

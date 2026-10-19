@@ -30,6 +30,12 @@ next:
       slug: google-in-app-purchases
       title: Google In-App Purchases
 ---
+<Callout icon="🤖" theme="okay">
+  ### Review your integration before you test
+
+  Before you test purchases in sandbox, run the `purchasely-review` skill of the [Purchasely AI Plugin](purchasely-ai-plugin). It finds missing setup and common integration mistakes in your codebase. If a sandbox purchase fails, run the `purchasely-debug` skill to find the cause.
+</Callout>
+
 # Sandbox Purchases
 
 A sandbox purchase is a type of simulated transaction used in app development for testing In-App Purchases without involving real money. Both Apple StoreKit and Google Play Billing provide sandbox environments where developers can verify the functionality of their In-App Purchase systems before deploying their applications to live users. Here’s a detailed explanation for both platforms:
