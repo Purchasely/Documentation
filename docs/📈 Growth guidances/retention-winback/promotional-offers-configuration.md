@@ -71,6 +71,10 @@ Once created, copy the ID you have set for this offer to paste in [Purchasely Co
 
 # Purchasely Console
 
+> 📘 Web2App Funnels
+>
+> The same Promotional Offer can carry a **Stripe trial** and a **Stripe coupon**, to sell a free trial or an introductory price in a Web Flow. See [Free trials & intro offers with Stripe](web2app-stripe-intro-offers).
+
 ## Mapping your Promotional Offer with a Plan
 
 When your promotional offer has been created on AppStore Connect and/or Google Play Console, the final step is to declare it in Purchasely Console to use it with your paywall
