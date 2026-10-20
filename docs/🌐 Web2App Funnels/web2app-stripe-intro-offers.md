@@ -105,7 +105,7 @@ Switch the component to **Offer mode** to write the copy shown when an offer is 
 | `{{OFFER_DISCOUNT_PERCENTAGE}}` | *30%* | The discount, for a percentage coupon. |
 | `{{OFFER_PRICE_COMPARISON}}` | *€30* | The full price over the duration of the offer, for a strikethrough. |
 
-The full list, including the per-period amounts such as `{{OFFER_MONTHLY_AMOUNT}}`, is on the [Tags](tags) page. Intro tags (`{{INTRO_PRICE}}`, `{{INTRO_AMOUNT}}`) and offer tags can be used indifferently.
+The full list, including the per-period amounts such as `{{OFFER_MONTHLY_AMOUNT}}`, is in the [Offer tags](tags#offer-tags) section of the Tags page. Intro tags (`{{INTRO_PRICE}}`, `{{INTRO_AMOUNT}}`) and offer tags can be used indifferently.
 
 
 <Image src="https://files.readme.io/2bdf6b42fa3a985be8ee7d04ad8b199654ab9134eac7992571c3decacf87f399-intro-offers-03-web-paywall-offer-tags.png" align="center" border={true} />
@@ -121,7 +121,7 @@ Renewals after the offer are charged at the full price by Stripe, as for any sub
 
 ## How the offer is reported
 
-Web subscriptions sold with an offer go through the same offer events as store subscriptions, in your webhooks and in your dashboards:
+When a Stripe offer is configured on the Promotional Offer, a free trial, an intro price or both, Purchasely sends the **usual offer events to your webhook**, exactly as for App Store and Play Store offers. Nothing changes in your integration: the same events, with the same attributes, also feed your dashboards and your analytics integrations.
 
 | Offer | Events |
 | --- | --- |

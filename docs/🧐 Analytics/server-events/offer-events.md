@@ -14,6 +14,8 @@ Offer Events focus on the incentives associated with your subscriptions.
 
 These events cover trials, introductory offers, promo codes, and promotional offers.
 
+They are sent for every store, including **Stripe subscriptions sold in Web2App Funnels**: a free trial or an introductory price configured on a Promotional Offer with Stripe trial days and/or a Stripe coupon emits `TRIAL_STARTED` / `INTRO_OFFER_STARTED` and their `_CONVERTED` counterparts, as described on [Free trials & intro offers with Stripe](web2app-stripe-intro-offers).
+
 # ACTIVATION
 
 <Table align={["left","left","left"]}>

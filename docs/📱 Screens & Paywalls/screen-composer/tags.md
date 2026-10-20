@@ -493,6 +493,8 @@ These tags comes handy for your to calculate percentage difference and the price
 
 These tags can be used to display the price and duration of the both introductory/new user acquisition offers and Winback/retention offers you have created in the stores and declared in the Purchasely console.
 
+They also apply to the **Stripe offers** of your Web Flows: a free trial or an introductory price carried by a Promotional Offer with Stripe trial days and/or a Stripe coupon. `OFFER_PRICE`, `OFFER_AMOUNT`, `OFFER_DURATION`, `OFFER_PRICE_COMPARISON` and `OFFER_DISCOUNT_PERCENTAGE` are computed from the Stripe price and the coupon. See [Free trials & intro offers with Stripe](web2app-stripe-intro-offers).
+
 <TagsPromotionOffersTags />
 
 ## Countdown tag
