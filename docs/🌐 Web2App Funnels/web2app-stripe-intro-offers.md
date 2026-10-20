@@ -5,13 +5,13 @@ excerpt: >-
   coupon in Stripe, declare the promotional offer on the plan, pick it in the
   Screen Composer.
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
   robots: index
 next:
-  description: 'Next, configure your web domain, your email domain and the wallets.'
+  description: Next, configure your web domain, your email domain and the wallets.
   pages:
     - type: basic
       slug: web2app-setup-domains-and-wallets
@@ -35,7 +35,11 @@ Skip this step if you only want a free trial.
 
 In the [Stripe Dashboard](https://dashboard.stripe.com/coupons), open **Product catalog → Coupons** and click **Create coupon**.
 
-<Image align="center" border={true} src="TODO-NICO-UPLOAD/intro-offers-01-stripe-create-coupon.png" alt="Stripe Dashboard: Create coupon form with a 30% discount for 3 months" />
+
+<Image src="https://files.readme.io/af2dcb338d63563edcb2958f82a131ea7cc5ffa09c9d1cd537015d9da3c9f8be-intro-offers-01-stripe-create-coupon.png" border={true} />
+
+
+<br />
 
 1. **Name**: it appears on the customer's receipts and invoices, so write it for them, for example *Intro Offer - 30% off for 3 months*.
 2. **Type**: *Percentage off* or *Fixed amount off*. A fixed amount must be defined in **every currency** of the Stripe prices it applies to; otherwise the offer does not apply to the prices in the missing currencies.
@@ -51,7 +55,8 @@ In the [Stripe Dashboard](https://dashboard.stripe.com/coupons), open **Product 
 
 In the Console, open **Products & Plans**, click the three dots of the plan and **Manage promotional offers**, then **Promotional Offer** to add one. This is the same screen as for App Store and Play Store offers, described on [Configuring promotional offers](promotional-offers-configuration).
 
-<Image align="center" border={true} src="TODO-NICO-UPLOAD/intro-offers-02-console-promo-offer-stripe-coupon.png" alt="Purchasely Console: promotional offer on a plan with the Stripe coupon picker open" />
+
+<Image src="https://files.readme.io/19aa21677a73cf3c9eb2eef49b947bd24c9734d4f0ec4562275be3a887f3a09e-intro-offers-02-console-promo-offer-stripe-coupon.png" border={true} />
 
 | Field | What to enter |
 | --- | --- |
@@ -69,7 +74,8 @@ Three combinations are possible:
 | **Intro price** | empty | 30% off, 3 months | The discounted price for 3 cycles, then the full price. |
 | **Trial then intro price** | 7 | 30% off, 3 months | Nothing for 7 days, then the discounted price for 3 cycles, then the full price. |
 
-<Image align="center" border={true} src="TODO-NICO-UPLOAD/intro-offers-05-console-promo-offer-free-trial.png" alt="Purchasely Console: promotional offer with 7 Stripe trial days and no coupon" />
+
+<Image src="https://files.readme.io/2eb4f8f013e57988c30597936db5ff0662987d9ab811ca9375966ec1a5223fb7-intro-offers-05-console-promo-offer-free-trial.png" align="center" border={true} />
 
 The Console warns you when a coupon has no amount in one of the currencies of the plan's prices, and when a *Multiple months* coupon would end before the trial does, which would leave no discounted cycle.
 
@@ -101,13 +107,15 @@ Switch the component to **Offer mode** to write the copy shown when an offer is 
 
 The full list, including the per-period amounts such as `{{OFFER_MONTHLY_AMOUNT}}`, is on the [Tags](tags) page. Intro tags (`{{INTRO_PRICE}}`, `{{INTRO_AMOUNT}}`) and offer tags can be used indifferently.
 
-<Image align="center" border={true} src="TODO-NICO-UPLOAD/intro-offers-03-web-paywall-offer-tags.png" alt="Web paywall showing a monthly plan at €7 / month during 3 months then €10 / month" />
+
+<Image src="https://files.readme.io/2bdf6b42fa3a985be8ee7d04ad8b199654ab9134eac7992571c3decacf87f399-intro-offers-03-web-paywall-offer-tags.png" align="center" border={true} />
 
 ## What the subscriber sees at checkout
 
 The Stripe checkout shows the full price, the coupon as a line item with its name and the discount, and the total due today. With a free trial, the total due today is zero and the first charge date is displayed.
 
-<Image align="center" border={true} src="TODO-NICO-UPLOAD/intro-offers-04-stripe-checkout-coupon-applied.png" alt="Stripe checkout with the Intro Offer coupon applied: €10 subtotal, -€3 discount, €7 due today" />
+
+<Image src="https://files.readme.io/3065179fd3a054bf8e1063cc91afd5f9d0de2934da819ae5ae57ebdd621d2f5a-image.png" align="center" border={true} />
 
 Renewals after the offer are charged at the full price by Stripe, as for any subscription.
 
