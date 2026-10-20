@@ -254,4 +254,87 @@ When you create an experiment, the **Primary KPI** step lists your Custom Events
 
 <br />A **Local experiment** can also target your Custom Events in its **When** section, the same way as a campaign trigger. Refer to [Measuring experiment impact](measuring-experiment-impact) for more details.
 
+# 7. Best practices with more than one analytics tool
+
+Most apps send the same events to more than one tool, for example [Google Analytics for Firebase](google-analytics-for-firebase), [Amplitude](amplitude), [Piano Analytics](piano-analytics) and Purchasely. These rules keep the events correct in all the tools.
+
+## Send each event from one place
+
+Put all the tracking calls in one class of your app. Your screens call this class, and this class sends the event to each tool. Do not put `Purchasely.emit` calls directly in your screens.
+
+```swift Swift
+enum AppEvent {
+    static let articleRead = "ARTICLE_READ"
+    static let articleShared = "ARTICLE_SHARED"
+}
+
+enum Tracker {
+    static func track(_ name: String, _ properties: [String: Any] = [:]) {
+        // Firebase, Amplitude, Piano: call each SDK here
+        Purchasely.emit(name: name, properties: properties)
+    }
+}
+
+Tracker.track(AppEvent.articleRead, ["article_id": 42, "category": "sport"])
+```
+```kotlin Kotlin
+object AppEvent {
+    const val ARTICLE_READ = "ARTICLE_READ"
+    const val ARTICLE_SHARED = "ARTICLE_SHARED"
+}
+
+object Tracker {
+    fun track(name: String, properties: Map<String, Any> = emptyMap()) {
+        // Firebase, Amplitude, Piano: call each SDK here
+        Purchasely.emit(name, properties)
+    }
+}
+
+Tracker.track(AppEvent.ARTICLE_READ, mapOf("article_id" to 42, "category" to "sport"))
+```
+
+With one class, a new tool needs one change only, and no screen forgets a tool.
+
+## Use one list of event names
+
+* Keep the event names as constants, as in the previous example. Purchasely ignores an event name that is not declared, without an error, so a typo makes the event silent.
+* Select names that all your tools accept. For example, a Firebase event name has a maximum of 40 characters, contains only letters, digits and `_`, starts with a letter, and does not start with `firebase_`, `google_` or `ga_`. `ARTICLE_READ` is correct in Firebase and in Purchasely.
+* If a tool needs a different name, change the name for this tool in the tracking class only. Keep one name in your app code.
+
+## Use the same properties in all the tools
+
+* Use the same property keys and the same types in all the tools. In Purchasely, the types must agree with the types that you declare in the Console.
+* Send dates as ISO 8601 strings.
+* Do not send personal data, such as an email address or a name, in the properties.
+
+## Declare in Purchasely only the events that you use
+
+Declare in the Console only the events that you need for a campaign trigger, a trigger filter or an experiment KPI. The tracking class can send all the events to Purchasely: the SDK sends only the declared events and ignores the other events.
+
+Do not send a Purchasely SDK event again with `emit`. The **Trigger** list of a campaign already contains the SDK events that can be triggers.
+
+## Identify the user in all the tools at the same time
+
+* Call `Purchasely.userLogin` and `Purchasely.userLogout` at the same time as the login and logout calls of your other tools. Refer to [Identifying users](user-identification).
+* Set the same user attributes in all the tools.
+* Give the ids of the other tools to Purchasely, for example the Firebase app instance id or the Amplitude device id. Purchasely then attaches its server events to the same user in these tools. Each integration page gives the attribute to set.
+
+## Apply the same consent to all the tools
+
+Keep one consent choice in your app, and apply it to all the tools. When the user refuses analytics, revoke the `analytics` purpose in Purchasely with `revokeDataProcessingConsent` (refer to [Privacy settings](privacy-settings)), and stop the other tools too. Without the `analytics` purpose, Purchasely sends no Custom Event.
+
+## Count each event one time only
+
+The same action can reach your analytics tool by more than one path:
+
+* Your tracking class (your own events)
+* The Purchasely [UI/SDK events](ui-sdk-events-list) that your event listener sends to your tool
+* The Purchasely [server events](server-events) that an integration sends to your tool, for example a purchase or a renewal
+
+For each event, use one path only. For example, if Purchasely sends the purchase server events to Amplitude, do not also send a purchase event to Amplitude from your app.
+
+## Know the limit of the Track event action
+
+The **Track event** action of a Screen sends the event to Purchasely only. Your app receives no signal: the action does not go to your action interceptor or to your event listener. If you also need this event in another tool, send it from your app with your tracking class, not with this action.
+
 <br />
