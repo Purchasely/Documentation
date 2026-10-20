@@ -204,8 +204,9 @@ This set of attributes are built-in (automatically gathered by the SDK) and conc
       </td>
 
       <td>
-        If the user didn't create an account, Purchasely creates anonymous id.  
-        This attribute is meant to be used rather for testing purposes to target a specific anonymous user.
+        The Purchasely SDK automatically creates an anonymous id for each user.  
+        It is the main identifier Purchasely uses to follow the user activity, except if the user revoked the analytics consent (see [Privacy settings](privacy-settings)).  
+        You can use it to target a user, and also for testing purposes (e.g. to target your own test device).
       </td>
 
       <td>
