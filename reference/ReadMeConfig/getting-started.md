@@ -5,7 +5,7 @@ excerpt: >-
   request
 api_config: getting-started
 deprecated: false
-hidden: false
+hidden: true
 metadata:
   title: ''
   description: ''
