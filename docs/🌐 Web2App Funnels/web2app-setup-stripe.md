@@ -177,10 +177,10 @@ If a price ID carries several amounts for the same currency, Purchasely uses the
 
 In your Stripe dashboard, create **one Stripe Product per Purchasely plan**, with **one recurring Price per billing period** (weekly, monthly, yearly…), in live mode and in test mode. The step-by-step guide, including multi-currency pricing and tax codes, is on [Stripe - Configuring Subscriptions](stripe-configuring-subscriptions).
 
-<Callout icon="🚧" theme="warn">
-  ### Introductory offers and trials
+<Callout icon="📘" theme="info">
+  ### Free trials and introductory prices
 
-  Free trials and introductory prices configured on a Stripe price are not supported yet in Web Flows. Map your plans to prices without a trial period; introductory pricing on the web is on the roadmap.
+  Do not configure trials or discounts on the Stripe price itself. On the web they are carried by a **Promotional Offer** on the plan: a number of trial days and/or a Stripe coupon, then selected with the plan in the Screen Composer. See [Free trials & intro offers with Stripe](web2app-stripe-intro-offers).
 </Callout>
 
 ### Prices changed in Stripe. How do I sync?
