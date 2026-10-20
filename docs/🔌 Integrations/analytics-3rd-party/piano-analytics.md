@@ -41,7 +41,11 @@ The activation requires 6 steps
 
 Initialize the Piano Analytics SDK in your app first. Then give the Piano visitor ID to Purchasely. Purchasely sends it as `idclient` with each event, so Piano attaches the server events to the same visitor as your app events.
 
-> 📘 The Purchasely attribute keeps its historical name (`atInternetIdClient` / `AT_INTERNET_ID_CLIENT`). It contains the Piano Analytics visitor ID.
+<Callout icon="📘" theme="info">
+  ### Historical name
+
+  The Purchasely attribute keeps its historical name (`atInternetIdClient` / `AT_INTERNET_ID_CLIENT`). It contains the Piano Analytics visitor ID.
+</Callout>
 
 ```swift Swift
 import PianoAnalytics
@@ -69,7 +73,11 @@ Purchasely.setAttribute(PLYAttribute.atInternetIdClient, pianoVisitorId);
 Purchasely.setAttribute(Purchasely.Attribute.AT_INTERNET_ID_CLIENT, pianoVisitorId);
 ```
 
-> 🚧 The Piano visitor ID depends on the `visitorIDType` and on the privacy mode configured in the Piano SDK. Set the attribute again when the visitor ID changes. Do not send it if the user did not give consent.
+<Callout icon="🚧" theme="warn">
+  ### Piano SDK configuration
+
+  The Piano visitor ID depends on the `visitorIDType` and on the privacy mode configured in the Piano SDK. Set the attribute again when the visitor ID changes. Do not send it if the user did not give consent.
+</Callout>
 
 See the [Piano Analytics developer documentation](https://developers.piano.io/) for more information on the visitor ID.
 
