@@ -52,10 +52,10 @@ Yes. It keeps its smartphone width, centered on the page. Tablet and desktop lay
 Cards, and Apple Pay and Google Pay once your domains are registered in [Setup 2](web2app-setup-domains-and-wallets). Payments are processed by Stripe only.
 
 **Can I offer a free trial or an introductory price on the web?**
-Yes. Create a coupon in Stripe for the discount, declare a Promotional Offer on the plan with the trial days and/or the coupon, and select the offer with the plan in the Screen Composer. See [Free trials & intro offers with Stripe](web2app-stripe-intro-offers).
+Not yet. Trial and introductory periods configured on a Stripe price are ignored. Price the offer in the Stripe price itself. This is on the roadmap.
 
 **Can I use Stripe promotion codes?**
-Visitors cannot type a code at checkout. Attach the Stripe coupon to a Promotional Offer on the plan instead: it is applied automatically, and you can reveal it with a spin wheel or a scratch card. See [Free trials & intro offers with Stripe](web2app-stripe-intro-offers).
+Not yet. Build the discount into a dedicated plan and price instead, and show it with a spin wheel or a scratch card if you want the reveal effect.
 
 **Can I sell one-time purchases or lifetime plans on the web?**
 Not yet. Only subscriptions are supported.
@@ -104,7 +104,8 @@ Yes, from the A/B tests section: UI variants as well as price variants through d
 
 | Limitation                                                                  | Status                                                                  |
 | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| Customer-typed promotion codes at checkout                                  | Not supported; use a Promotional Offer with a Stripe coupon           |
+| Free trials and introductory prices on web checkouts                        | On the roadmap                                                          |
+| Stripe promotion codes at checkout                                          | Not supported                                                           |
 | One-time purchases and lifetime plans on the web                            | Not supported                                                           |
 | Tablet and desktop layouts                                                  | On the roadmap; funnels render in smartphone width                      |
 | Universal links and App Links for redemption                                | Not supported; custom URL schemes only                                  |

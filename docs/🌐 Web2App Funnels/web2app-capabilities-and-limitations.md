@@ -55,7 +55,6 @@ Screens can be personalized with the attributes collected earlier in the flow (f
 **Monetization**
 
 * Sell any Purchasely plan mapped to a **Stripe price**, with multi-currency support.
-* Offer a **free trial**, an **introductory price** or both, through a Promotional Offer backed by a Stripe coupon.
 * Accept cards, **Apple Pay** and **Google Pay**.
 * Let Stripe act as the merchant of record with **Managed Payments** (tax collection and remittance handled by Stripe).
 * Run each flow on a **live URL** and a **sandbox URL** that uses Stripe test mode.
@@ -80,7 +79,7 @@ Screens can be personalized with the attributes collected earlier in the flow (f
 | Add a custom **sign-in or sign-up** step, or create an account during the funnel.                      | Visitors stay anonymous on the web. The subscription is linked to the app user through the redemption link; you can identify the user in the app afterwards.                                                                                                                            |
 | Publish a Web Flow **without a payment step**.                                                         | Every Web Flow ends with a Stripe checkout followed by the Redeem step. It's possible to link a web landing page created with Purchasely to your app stores product pages, but downloads & effective opening will be tracked only if a subscription is attached to the redemption link. |
 | Use a **payment provider other than Stripe**.                                                          | Connect a Stripe account.                                                                                                                                                                                                                                                               |
-| Let visitors type **Stripe promotion codes** at checkout. | Attach the discount to the plan as a Promotional Offer instead, see [Free trials & intro offers with Stripe](web2app-stripe-intro-offers). |
+| Apply **Stripe promotion codes** or **introductory / trial periods** configured in Stripe.             | Price your offer directly in the Stripe price. Intro and trial periods are on the roadmap.                                                                                                                                                                                              |
 | Display funnels in a **tablet or desktop layout**.                                                     | Web Flows always render in a smartphone layout, whatever the device. On larger screens the funnel keeps its smartphone width and is centered on the page. Tablet and desktop layouts are on the roadmap.                                                                                |
 | Rely on **deferred deep linking or device fingerprinting** to match the web visitor with the app user. | Purchasely uses a redemption link, which is deterministic. See [After the purchase](web2app-redemption).                                                                                                                                                                                |
 

@@ -34,9 +34,9 @@ The plan only has a SANDBOX price. Link its LIVEMODE price too; prices are read 
 
 From the Stripe price. With a multi-currency price, Purchasely charges the currency matching the visitor's browser settings and falls back to the price's default currency. Purchasely never converts amounts. See [Stripe - Configuring Subscriptions](stripe-configuring-subscriptions).
 
-# Can I offer a free trial or an introductory price?
+# Can I use a Stripe price with a free trial or an introductory price?
 
-Yes, but not on the Stripe price itself. Create a coupon in Stripe for the discount, then declare a Promotional Offer on the plan in Products & Plans with the trial days and/or the coupon, and select it with the plan in the Screen Composer. See [Free trials & intro offers with Stripe](web2app-stripe-intro-offers).
+Not yet. Trial and introductory periods set on the Stripe price are ignored in Web Flows. Map plans to prices without a trial period.
 
 # I changed a price in Stripe. When does Purchasely see it?
 

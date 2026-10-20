@@ -58,9 +58,9 @@ In the [Stripe Dashboard](https://dashboard.stripe.com/products), open **Product
 
 <Image align="center" className="border" border={true} src="TODO-NICO-UPLOAD/stripe-products-02-product-page-pricing.png" alt="Stripe Dashboard: product page with the first recurring price" />
 
-> 📘 Free trials and introductory prices
+> 🚧 Free trials and introductory prices
 >
-> Do not configure a trial period or a discount on the Stripe price itself: Purchasely applies them at checkout from a **Promotional Offer** declared on the plan, made of a number of trial days and/or a Stripe **coupon**. See [Free trials & intro offers with Stripe](web2app-stripe-intro-offers).
+> Do not configure a trial period or an introductory price on the Stripe price: they are not supported yet in Web Flows and would be ignored. Introductory pricing on the web is on the roadmap.
 
 ## Adding billing periods and currencies
 

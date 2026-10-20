@@ -47,8 +47,6 @@ Every subscription event of a web subscription, from the first purchase to renew
 }
 ```
 
-Web subscriptions sold with a free trial or an intro price also emit the usual offer events (`TRIAL_STARTED`, `INTRO_OFFER_STARTED`, their `_CONVERTED` counterparts), see [Free trials & intro offers with Stripe](web2app-stripe-intro-offers).
-
 Use `channel` to split your revenue between the web and the stores, and `attribution` to compute the return of each campaign down to the subscription's lifetime, since the same values are repeated on every event of the subscription. The full list of attributes is on [Server events attributes](server-events-attributes). Only the UTM parameters are forwarded; click identifiers such as `gclid` or `fbclid` are used for the [ad platform integrations](web2app-setup-ad-integrations) but not sent in webhooks.
 
 <Callout icon="📘" theme="info">
