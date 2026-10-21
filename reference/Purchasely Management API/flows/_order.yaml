@@ -1,0 +1,5 @@
+- get_management_v1_applications_application_id_flows
+- post_management_v1_applications_application_id_flows
+- delete_management_v1_applications_application_id_flows_id
+- get_management_v1_applications_application_id_flows_id
+- patch_management_v1_applications_application_id_flows_id

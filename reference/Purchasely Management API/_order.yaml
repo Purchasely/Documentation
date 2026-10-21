@@ -11,6 +11,7 @@
 - dashboard
 - dashboard-v2
 - distributions
+- flows
 - fonts
 - one-time-purchases
 - placements
@@ -24,5 +25,6 @@
 - translations
 - users
 - web-activations
+- web-flows
 - webhook-deliveries
 - webhooks

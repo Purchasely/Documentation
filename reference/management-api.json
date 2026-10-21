@@ -6015,19 +6015,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -6063,12 +6071,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -6271,19 +6286,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -6319,12 +6342,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -6512,19 +6542,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -6560,12 +6598,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -6759,19 +6804,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -6807,12 +6860,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -7016,19 +7076,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -7064,12 +7132,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -7271,19 +7346,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -7319,12 +7402,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -7527,19 +7617,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -7575,12 +7673,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -7783,19 +7888,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -7831,12 +7944,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -8039,19 +8159,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -8087,12 +8215,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -8195,6 +8330,12 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "CONSUMABLE",
+                  "NON_CONSUMABLE",
+                  "NON_RENEWING_SUBSCRIPTION",
+                  "RENEWING_SUBSCRIPTION"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -8307,19 +8448,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -8355,12 +8504,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -8562,19 +8718,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -8610,12 +8774,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -8818,19 +8989,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -8866,12 +9045,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -9080,6 +9266,14 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -9152,6 +9346,13 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -9387,6 +9588,14 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -9459,6 +9668,13 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -9615,6 +9831,14 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -9687,6 +9911,13 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -9924,6 +10155,14 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -9996,6 +10235,13 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -10127,6 +10373,14 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -10199,6 +10453,13 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -10332,6 +10593,14 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -10404,6 +10673,13 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -10576,6 +10852,14 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -10648,6 +10932,13 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -10820,6 +11111,14 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -10892,6 +11191,13 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -11002,6 +11308,1287 @@
           "Dashboard V2"
         ],
         "x-required-scope": "analytics.dashboards:view"
+      }
+    },
+    "/management/v1/applications/{application_id}/flows": {
+      "get": {
+        "description": "List the in-app flows of an application, newest first. Web2app flows are not listed here.\n\n**Required scope:** `experiences.flows:view`",
+        "operationId": "get_management_v1_applications_application_id_flows",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "in": "query",
+            "name": "fields",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Page number (1-indexed). Defaults to 1.",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Results per page. Defaults to 25, capped at 100.",
+            "in": "query",
+            "name": "per_page",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "flows": {
+                      "items": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "action_discrepancy": {},
+                          "app_flow": {},
+                          "content": {},
+                          "created_at": {},
+                          "default_presentation_store_id": {},
+                          "draft_content": {},
+                          "id": {},
+                          "name": {},
+                          "preview_url": {},
+                          "public_url": {},
+                          "sandbox_url": {},
+                          "updated_at": {},
+                          "vendor_id": {},
+                          "web_enabled": {},
+                          "web_flow": {},
+                          "web_slug": {},
+                          "web_slug_sandbox": {}
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "flows"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "List the in-app flows of an application, newest first",
+        "tags": [
+          "Flows"
+        ],
+        "x-required-scope": "experiences.flows:view"
+      },
+      "post": {
+        "description": "Create an in-app flow: a graph of steps, each displaying a screen, that the SDK opens through the deeplink ply/flows/<vendor_id>. Send the same content as draft_content to publish it right away.\n\n**Required scope:** `experiences.flows:create`",
+        "operationId": "post_management_v1_applications_application_id_flows",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "in": "query",
+            "name": "fields",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "app_flow": {
+                    "description": "Defaults to true.",
+                    "type": "boolean"
+                  },
+                  "content": {
+                    "additionalProperties": true,
+                    "description": "Published content. Send the same value as draft_content to publish on creation.",
+                    "properties": {
+                      "default_transition": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "allow_back": {
+                            "type": "boolean"
+                          },
+                          "background_colors": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "dark": {
+                                "type": "string"
+                              },
+                              "light": {
+                                "type": "string"
+                              },
+                              "ref": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "display_mode": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin",
+                              "inline_paywall"
+                            ],
+                            "type": "string"
+                          },
+                          "width": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "steps": {
+                        "items": {
+                          "additionalProperties": true,
+                          "properties": {
+                            "actions": {
+                              "description": "Step-opening actions; [] for a step that opens nothing (the runtime groups them).",
+                              "items": {
+                                "additionalProperties": true,
+                                "properties": {
+                                  "action_id": {
+                                    "description": "UUID of the button/action inside the step's screen that triggers this action.",
+                                    "type": "string"
+                                  },
+                                  "audience_ids": {
+                                    "description": "Audience public IDs the user must match for this action to apply.",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "type": "array"
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "priority": {
+                                    "description": "Lower runs first when several actions match the same action_id.",
+                                    "type": "integer"
+                                  },
+                                  "step_id": {
+                                    "description": "step_id (a UUID) of the step to open.",
+                                    "type": "string"
+                                  },
+                                  "transition": {
+                                    "additionalProperties": true,
+                                    "description": "Transition used to reach the target step.",
+                                    "type": "object"
+                                  },
+                                  "type": {
+                                    "enum": [
+                                      "open_flow_step"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "final_step": {
+                              "type": "boolean"
+                            },
+                            "initial_step": {
+                              "description": "Marks the entry step; the first flagged step is used.",
+                              "type": "boolean"
+                            },
+                            "position": {
+                              "additionalProperties": true,
+                              "description": "Node coordinates on the flow canvas.",
+                              "properties": {
+                                "x": {
+                                  "type": "number"
+                                },
+                                "y": {
+                                  "type": "number"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "screen_id": {
+                              "description": "Screen public id (pres_…) displayed by this step.",
+                              "type": "string"
+                            },
+                            "step_id": {
+                              "description": "UUID, unique within the flow.",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "step_id",
+                            "screen_id",
+                            "actions"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "default_presentation_store_public_id": {
+                    "description": "Screen public id (pres_…) shown when a step cannot be resolved.",
+                    "type": "string"
+                  },
+                  "draft_content": {
+                    "additionalProperties": true,
+                    "description": "Draft content edited in the console before publishing.",
+                    "properties": {
+                      "default_transition": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "allow_back": {
+                            "type": "boolean"
+                          },
+                          "background_colors": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "dark": {
+                                "type": "string"
+                              },
+                              "light": {
+                                "type": "string"
+                              },
+                              "ref": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "display_mode": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin",
+                              "inline_paywall"
+                            ],
+                            "type": "string"
+                          },
+                          "width": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "steps": {
+                        "items": {
+                          "additionalProperties": true,
+                          "properties": {
+                            "actions": {
+                              "description": "Step-opening actions; [] for a step that opens nothing (the runtime groups them).",
+                              "items": {
+                                "additionalProperties": true,
+                                "properties": {
+                                  "action_id": {
+                                    "description": "UUID of the button/action inside the step's screen that triggers this action.",
+                                    "type": "string"
+                                  },
+                                  "audience_ids": {
+                                    "description": "Audience public IDs the user must match for this action to apply.",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "type": "array"
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "priority": {
+                                    "description": "Lower runs first when several actions match the same action_id.",
+                                    "type": "integer"
+                                  },
+                                  "step_id": {
+                                    "description": "step_id (a UUID) of the step to open.",
+                                    "type": "string"
+                                  },
+                                  "transition": {
+                                    "additionalProperties": true,
+                                    "description": "Transition used to reach the target step.",
+                                    "type": "object"
+                                  },
+                                  "type": {
+                                    "enum": [
+                                      "open_flow_step"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "final_step": {
+                              "type": "boolean"
+                            },
+                            "initial_step": {
+                              "description": "Marks the entry step; the first flagged step is used.",
+                              "type": "boolean"
+                            },
+                            "position": {
+                              "additionalProperties": true,
+                              "description": "Node coordinates on the flow canvas.",
+                              "properties": {
+                                "x": {
+                                  "type": "number"
+                                },
+                                "y": {
+                                  "type": "number"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "screen_id": {
+                              "description": "Screen public id (pres_…) displayed by this step.",
+                              "type": "string"
+                            },
+                            "step_id": {
+                              "description": "UUID, unique within the flow.",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "step_id",
+                            "screen_id",
+                            "actions"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "name": {
+                    "description": "Display name shown in console.",
+                    "type": "string"
+                  },
+                  "vendor_id": {
+                    "description": "Stable machine identifier used by the SDK deeplink ply/flows/<vendor_id>; unique within the app.",
+                    "type": "string"
+                  },
+                  "web_flow": {
+                    "description": "Must be false: web2app flows are not available on this API.",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "name",
+                  "vendor_id"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "flow": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "action_discrepancy": {},
+                        "app_flow": {},
+                        "content": {},
+                        "created_at": {},
+                        "default_presentation_store_id": {},
+                        "draft_content": {},
+                        "id": {},
+                        "name": {},
+                        "preview_url": {},
+                        "public_url": {},
+                        "sandbox_url": {},
+                        "updated_at": {},
+                        "vendor_id": {},
+                        "web_enabled": {},
+                        "web_flow": {},
+                        "web_slug": {},
+                        "web_slug_sandbox": {}
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "flow"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Create an in-app flow: a graph of steps, each displaying a screen, that the SDK opens through the deeplink ply/flows/<vendor_id>",
+        "tags": [
+          "Flows"
+        ],
+        "x-required-scope": "experiences.flows:create"
+      }
+    },
+    "/management/v1/applications/{application_id}/flows/{id}": {
+      "delete": {
+        "description": "Discard (soft-delete) an in-app flow. Refused while a draft or running A/B test uses it.\n\n**Required scope:** `experiences.flows:delete`",
+        "operationId": "delete_management_v1_applications_application_id_flows_id",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "in": "query",
+            "name": "fields",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "flow": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "action_discrepancy": {},
+                        "app_flow": {},
+                        "content": {},
+                        "created_at": {},
+                        "default_presentation_store_id": {},
+                        "draft_content": {},
+                        "id": {},
+                        "name": {},
+                        "preview_url": {},
+                        "public_url": {},
+                        "sandbox_url": {},
+                        "updated_at": {},
+                        "vendor_id": {},
+                        "web_enabled": {},
+                        "web_flow": {},
+                        "web_slug": {},
+                        "web_slug_sandbox": {}
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "flow"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Discard (soft-delete) an in-app flow",
+        "tags": [
+          "Flows"
+        ],
+        "x-required-scope": "experiences.flows:delete"
+      },
+      "get": {
+        "description": "Show an in-app flow with its published and draft content.\n\n**Required scope:** `experiences.flows:view`",
+        "operationId": "get_management_v1_applications_application_id_flows_id",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "in": "query",
+            "name": "fields",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "flow": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "action_discrepancy": {},
+                        "app_flow": {},
+                        "content": {},
+                        "created_at": {},
+                        "default_presentation_store_id": {},
+                        "draft_content": {},
+                        "id": {},
+                        "name": {},
+                        "preview_url": {},
+                        "public_url": {},
+                        "sandbox_url": {},
+                        "updated_at": {},
+                        "vendor_id": {},
+                        "web_enabled": {},
+                        "web_flow": {},
+                        "web_slug": {},
+                        "web_slug_sandbox": {}
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "flow"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Show an in-app flow with its published and draft content",
+        "tags": [
+          "Flows"
+        ],
+        "x-required-scope": "experiences.flows:view"
+      },
+      "patch": {
+        "description": "Update an in-app flow (partial: omitted fields are left untouched). Sending content publishes it; draft_content only changes the draft edited in the console.\n\n**Required scope:** `experiences.flows:edit`",
+        "operationId": "patch_management_v1_applications_application_id_flows_id",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "in": "query",
+            "name": "fields",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "app_flow": {
+                    "description": "Defaults to true.",
+                    "type": "boolean"
+                  },
+                  "content": {
+                    "additionalProperties": true,
+                    "description": "Published content. Send the same value as draft_content to publish.",
+                    "properties": {
+                      "default_transition": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "allow_back": {
+                            "type": "boolean"
+                          },
+                          "background_colors": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "dark": {
+                                "type": "string"
+                              },
+                              "light": {
+                                "type": "string"
+                              },
+                              "ref": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "display_mode": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin",
+                              "inline_paywall"
+                            ],
+                            "type": "string"
+                          },
+                          "width": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "steps": {
+                        "items": {
+                          "additionalProperties": true,
+                          "properties": {
+                            "actions": {
+                              "description": "Step-opening actions; [] for a step that opens nothing (the runtime groups them).",
+                              "items": {
+                                "additionalProperties": true,
+                                "properties": {
+                                  "action_id": {
+                                    "description": "UUID of the button/action inside the step's screen that triggers this action.",
+                                    "type": "string"
+                                  },
+                                  "audience_ids": {
+                                    "description": "Audience public IDs the user must match for this action to apply.",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "type": "array"
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "priority": {
+                                    "description": "Lower runs first when several actions match the same action_id.",
+                                    "type": "integer"
+                                  },
+                                  "step_id": {
+                                    "description": "step_id (a UUID) of the step to open.",
+                                    "type": "string"
+                                  },
+                                  "transition": {
+                                    "additionalProperties": true,
+                                    "description": "Transition used to reach the target step.",
+                                    "type": "object"
+                                  },
+                                  "type": {
+                                    "enum": [
+                                      "open_flow_step"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "final_step": {
+                              "type": "boolean"
+                            },
+                            "initial_step": {
+                              "description": "Marks the entry step; the first flagged step is used.",
+                              "type": "boolean"
+                            },
+                            "position": {
+                              "additionalProperties": true,
+                              "description": "Node coordinates on the flow canvas.",
+                              "properties": {
+                                "x": {
+                                  "type": "number"
+                                },
+                                "y": {
+                                  "type": "number"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "screen_id": {
+                              "description": "Screen public id (pres_…) displayed by this step.",
+                              "type": "string"
+                            },
+                            "step_id": {
+                              "description": "UUID, unique within the flow.",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "step_id",
+                            "screen_id",
+                            "actions"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "default_presentation_store_public_id": {
+                    "description": "Screen public id (pres_…) shown when a step cannot be resolved.",
+                    "type": "string"
+                  },
+                  "draft_content": {
+                    "additionalProperties": true,
+                    "description": "Draft content edited in the console before publishing.",
+                    "properties": {
+                      "default_transition": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "allow_back": {
+                            "type": "boolean"
+                          },
+                          "background_colors": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "dark": {
+                                "type": "string"
+                              },
+                              "light": {
+                                "type": "string"
+                              },
+                              "ref": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "display_mode": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin",
+                              "inline_paywall"
+                            ],
+                            "type": "string"
+                          },
+                          "width": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "steps": {
+                        "items": {
+                          "additionalProperties": true,
+                          "properties": {
+                            "actions": {
+                              "description": "Step-opening actions; [] for a step that opens nothing (the runtime groups them).",
+                              "items": {
+                                "additionalProperties": true,
+                                "properties": {
+                                  "action_id": {
+                                    "description": "UUID of the button/action inside the step's screen that triggers this action.",
+                                    "type": "string"
+                                  },
+                                  "audience_ids": {
+                                    "description": "Audience public IDs the user must match for this action to apply.",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "type": "array"
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "priority": {
+                                    "description": "Lower runs first when several actions match the same action_id.",
+                                    "type": "integer"
+                                  },
+                                  "step_id": {
+                                    "description": "step_id (a UUID) of the step to open.",
+                                    "type": "string"
+                                  },
+                                  "transition": {
+                                    "additionalProperties": true,
+                                    "description": "Transition used to reach the target step.",
+                                    "type": "object"
+                                  },
+                                  "type": {
+                                    "enum": [
+                                      "open_flow_step"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "final_step": {
+                              "type": "boolean"
+                            },
+                            "initial_step": {
+                              "description": "Marks the entry step; the first flagged step is used.",
+                              "type": "boolean"
+                            },
+                            "position": {
+                              "additionalProperties": true,
+                              "description": "Node coordinates on the flow canvas.",
+                              "properties": {
+                                "x": {
+                                  "type": "number"
+                                },
+                                "y": {
+                                  "type": "number"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "screen_id": {
+                              "description": "Screen public id (pres_…) displayed by this step.",
+                              "type": "string"
+                            },
+                            "step_id": {
+                              "description": "UUID, unique within the flow.",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "step_id",
+                            "screen_id",
+                            "actions"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "name": {
+                    "description": "Display name shown in console.",
+                    "type": "string"
+                  },
+                  "vendor_id": {
+                    "description": "Stable machine identifier used by the SDK deeplink ply/flows/<vendor_id>; unique within the app.",
+                    "type": "string"
+                  },
+                  "web_flow": {
+                    "description": "Must be false: web2app flows are not available on this API.",
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "flow": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "action_discrepancy": {},
+                        "app_flow": {},
+                        "content": {},
+                        "created_at": {},
+                        "default_presentation_store_id": {},
+                        "draft_content": {},
+                        "id": {},
+                        "name": {},
+                        "preview_url": {},
+                        "public_url": {},
+                        "sandbox_url": {},
+                        "updated_at": {},
+                        "vendor_id": {},
+                        "web_enabled": {},
+                        "web_flow": {},
+                        "web_slug": {},
+                        "web_slug_sandbox": {}
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "flow"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Update an in-app flow (partial: omitted fields are left untouched)",
+        "tags": [
+          "Flows"
+        ],
+        "x-required-scope": "experiences.flows:edit"
       }
     },
     "/management/v1/applications/{application_id}/flows/{id}/web_activation": {
@@ -15703,19 +17290,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -15751,12 +17346,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -16385,6 +17987,1360 @@
           "Users"
         ],
         "x-required-scope": "lookups.users:view"
+      }
+    },
+    "/management/v1/applications/{application_id}/web_flows": {
+      "get": {
+        "description": "List the web2app flows (funnels opened in the browser) of an application, newest first.\n\n**Required scope:** `experiences.web2app:view`",
+        "operationId": "get_management_v1_applications_application_id_web_flows",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "in": "query",
+            "name": "fields",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Page number (1-indexed). Defaults to 1.",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Results per page. Defaults to 25, capped at 100.",
+            "in": "query",
+            "name": "per_page",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "flows": {
+                      "items": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "action_discrepancy": {},
+                          "app_flow": {},
+                          "content": {},
+                          "created_at": {},
+                          "default_presentation_store_id": {},
+                          "draft_content": {},
+                          "id": {},
+                          "name": {},
+                          "preview_url": {},
+                          "public_url": {},
+                          "sandbox_url": {},
+                          "updated_at": {},
+                          "vendor_id": {},
+                          "web_enabled": {},
+                          "web_flow": {},
+                          "web_slug": {},
+                          "web_slug_sandbox": {}
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "flows"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "List the web2app flows (funnels opened in the browser) of an application, newest first",
+        "tags": [
+          "Web Flows"
+        ],
+        "x-required-scope": "experiences.web2app:view"
+      },
+      "post": {
+        "description": "Create a web2app flow: a graph of steps, each displaying a screen, served as a funnel in the browser once activated. Send the same content as draft_content to publish it right away.\n\n**Required scope:** `experiences.web2app:create`",
+        "operationId": "post_management_v1_applications_application_id_web_flows",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "in": "query",
+            "name": "fields",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "app_flow": {
+                    "description": "Fixed to false; any other value is refused.",
+                    "type": "boolean"
+                  },
+                  "content": {
+                    "additionalProperties": true,
+                    "description": "Published content. Send the same value as draft_content to publish on creation.",
+                    "properties": {
+                      "default_transition": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "allow_back": {
+                            "type": "boolean"
+                          },
+                          "background_colors": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "dark": {
+                                "type": "string"
+                              },
+                              "light": {
+                                "type": "string"
+                              },
+                              "ref": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "display_mode": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin",
+                              "inline_paywall"
+                            ],
+                            "type": "string"
+                          },
+                          "width": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "steps": {
+                        "items": {
+                          "additionalProperties": true,
+                          "properties": {
+                            "actions": {
+                              "description": "Step-opening actions; [] for a step that opens nothing (the runtime groups them).",
+                              "items": {
+                                "additionalProperties": true,
+                                "properties": {
+                                  "action_id": {
+                                    "description": "UUID of the button/action inside the step's screen that triggers this action.",
+                                    "type": "string"
+                                  },
+                                  "audience_ids": {
+                                    "description": "Audience public IDs the user must match for this action to apply.",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "type": "array"
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "priority": {
+                                    "description": "Lower runs first when several actions match the same action_id.",
+                                    "type": "integer"
+                                  },
+                                  "step_id": {
+                                    "description": "step_id (a UUID) of the step to open.",
+                                    "type": "string"
+                                  },
+                                  "transition": {
+                                    "additionalProperties": true,
+                                    "description": "Transition used to reach the target step.",
+                                    "type": "object"
+                                  },
+                                  "type": {
+                                    "enum": [
+                                      "open_flow_step"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "final_step": {
+                              "type": "boolean"
+                            },
+                            "initial_step": {
+                              "description": "Marks the entry step; the first flagged step is used.",
+                              "type": "boolean"
+                            },
+                            "position": {
+                              "additionalProperties": true,
+                              "description": "Node coordinates on the flow canvas.",
+                              "properties": {
+                                "x": {
+                                  "type": "number"
+                                },
+                                "y": {
+                                  "type": "number"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "screen_id": {
+                              "description": "Screen public id (pres_…) displayed by this step.",
+                              "type": "string"
+                            },
+                            "step_id": {
+                              "description": "UUID, unique within the flow.",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "step_id",
+                            "screen_id",
+                            "actions"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "default_presentation_store_public_id": {
+                    "description": "Screen public id (pres_…) shown when a step cannot be resolved.",
+                    "type": "string"
+                  },
+                  "draft_content": {
+                    "additionalProperties": true,
+                    "description": "Draft content edited in the console before publishing.",
+                    "properties": {
+                      "default_transition": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "allow_back": {
+                            "type": "boolean"
+                          },
+                          "background_colors": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "dark": {
+                                "type": "string"
+                              },
+                              "light": {
+                                "type": "string"
+                              },
+                              "ref": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "display_mode": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin",
+                              "inline_paywall"
+                            ],
+                            "type": "string"
+                          },
+                          "width": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "steps": {
+                        "items": {
+                          "additionalProperties": true,
+                          "properties": {
+                            "actions": {
+                              "description": "Step-opening actions; [] for a step that opens nothing (the runtime groups them).",
+                              "items": {
+                                "additionalProperties": true,
+                                "properties": {
+                                  "action_id": {
+                                    "description": "UUID of the button/action inside the step's screen that triggers this action.",
+                                    "type": "string"
+                                  },
+                                  "audience_ids": {
+                                    "description": "Audience public IDs the user must match for this action to apply.",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "type": "array"
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "priority": {
+                                    "description": "Lower runs first when several actions match the same action_id.",
+                                    "type": "integer"
+                                  },
+                                  "step_id": {
+                                    "description": "step_id (a UUID) of the step to open.",
+                                    "type": "string"
+                                  },
+                                  "transition": {
+                                    "additionalProperties": true,
+                                    "description": "Transition used to reach the target step.",
+                                    "type": "object"
+                                  },
+                                  "type": {
+                                    "enum": [
+                                      "open_flow_step"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "final_step": {
+                              "type": "boolean"
+                            },
+                            "initial_step": {
+                              "description": "Marks the entry step; the first flagged step is used.",
+                              "type": "boolean"
+                            },
+                            "position": {
+                              "additionalProperties": true,
+                              "description": "Node coordinates on the flow canvas.",
+                              "properties": {
+                                "x": {
+                                  "type": "number"
+                                },
+                                "y": {
+                                  "type": "number"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "screen_id": {
+                              "description": "Screen public id (pres_…) displayed by this step.",
+                              "type": "string"
+                            },
+                            "step_id": {
+                              "description": "UUID, unique within the flow.",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "step_id",
+                            "screen_id",
+                            "actions"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "name": {
+                    "description": "Display name shown in console.",
+                    "type": "string"
+                  },
+                  "vendor_id": {
+                    "description": "Stable machine identifier used by the SDK deeplink ply/flows/<vendor_id>; unique within the app.",
+                    "type": "string"
+                  },
+                  "web_flow": {
+                    "description": "Fixed to true; any other value is refused.",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "name",
+                  "vendor_id"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "flow": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "action_discrepancy": {},
+                        "app_flow": {},
+                        "content": {},
+                        "created_at": {},
+                        "default_presentation_store_id": {},
+                        "draft_content": {},
+                        "id": {},
+                        "name": {},
+                        "preview_url": {},
+                        "public_url": {},
+                        "sandbox_url": {},
+                        "updated_at": {},
+                        "vendor_id": {},
+                        "web_enabled": {},
+                        "web_flow": {},
+                        "web_slug": {},
+                        "web_slug_sandbox": {}
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "flow"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Create a web2app flow: a graph of steps, each displaying a screen, served as a funnel in the browser once activated",
+        "tags": [
+          "Web Flows"
+        ],
+        "x-required-scope": "experiences.web2app:create"
+      }
+    },
+    "/management/v1/applications/{application_id}/web_flows/{id}": {
+      "delete": {
+        "description": "Discard (soft-delete) a web2app flow. Refused while a draft or running A/B test uses it.\n\n**Required scope:** `experiences.web2app:delete`",
+        "operationId": "delete_management_v1_applications_application_id_web_flows_id",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "in": "query",
+            "name": "fields",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "flow": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "action_discrepancy": {},
+                        "app_flow": {},
+                        "content": {},
+                        "created_at": {},
+                        "default_presentation_store_id": {},
+                        "draft_content": {},
+                        "id": {},
+                        "name": {},
+                        "preview_url": {},
+                        "public_url": {},
+                        "sandbox_url": {},
+                        "updated_at": {},
+                        "vendor_id": {},
+                        "web_enabled": {},
+                        "web_flow": {},
+                        "web_slug": {},
+                        "web_slug_sandbox": {}
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "flow"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Discard (soft-delete) a web2app flow",
+        "tags": [
+          "Web Flows"
+        ],
+        "x-required-scope": "experiences.web2app:delete"
+      },
+      "get": {
+        "description": "Show a web2app flow with its published and draft content.\n\n**Required scope:** `experiences.web2app:view`",
+        "operationId": "get_management_v1_applications_application_id_web_flows_id",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "in": "query",
+            "name": "fields",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "flow": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "action_discrepancy": {},
+                        "app_flow": {},
+                        "content": {},
+                        "created_at": {},
+                        "default_presentation_store_id": {},
+                        "draft_content": {},
+                        "id": {},
+                        "name": {},
+                        "preview_url": {},
+                        "public_url": {},
+                        "sandbox_url": {},
+                        "updated_at": {},
+                        "vendor_id": {},
+                        "web_enabled": {},
+                        "web_flow": {},
+                        "web_slug": {},
+                        "web_slug_sandbox": {}
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "flow"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Show a web2app flow with its published and draft content",
+        "tags": [
+          "Web Flows"
+        ],
+        "x-required-scope": "experiences.web2app:view"
+      },
+      "patch": {
+        "description": "Update a web2app flow (partial: omitted fields are left untouched). Sending content publishes it; draft_content only changes the draft edited in the console.\n\n**Required scope:** `experiences.web2app:edit`",
+        "operationId": "patch_management_v1_applications_application_id_web_flows_id",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "in": "query",
+            "name": "fields",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "app_flow": {
+                    "description": "Fixed to false; any other value is refused.",
+                    "type": "boolean"
+                  },
+                  "content": {
+                    "additionalProperties": true,
+                    "description": "Published content. Send the same value as draft_content to publish.",
+                    "properties": {
+                      "default_transition": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "allow_back": {
+                            "type": "boolean"
+                          },
+                          "background_colors": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "dark": {
+                                "type": "string"
+                              },
+                              "light": {
+                                "type": "string"
+                              },
+                              "ref": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "display_mode": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin",
+                              "inline_paywall"
+                            ],
+                            "type": "string"
+                          },
+                          "width": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "steps": {
+                        "items": {
+                          "additionalProperties": true,
+                          "properties": {
+                            "actions": {
+                              "description": "Step-opening actions; [] for a step that opens nothing (the runtime groups them).",
+                              "items": {
+                                "additionalProperties": true,
+                                "properties": {
+                                  "action_id": {
+                                    "description": "UUID of the button/action inside the step's screen that triggers this action.",
+                                    "type": "string"
+                                  },
+                                  "audience_ids": {
+                                    "description": "Audience public IDs the user must match for this action to apply.",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "type": "array"
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "priority": {
+                                    "description": "Lower runs first when several actions match the same action_id.",
+                                    "type": "integer"
+                                  },
+                                  "step_id": {
+                                    "description": "step_id (a UUID) of the step to open.",
+                                    "type": "string"
+                                  },
+                                  "transition": {
+                                    "additionalProperties": true,
+                                    "description": "Transition used to reach the target step.",
+                                    "type": "object"
+                                  },
+                                  "type": {
+                                    "enum": [
+                                      "open_flow_step"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "final_step": {
+                              "type": "boolean"
+                            },
+                            "initial_step": {
+                              "description": "Marks the entry step; the first flagged step is used.",
+                              "type": "boolean"
+                            },
+                            "position": {
+                              "additionalProperties": true,
+                              "description": "Node coordinates on the flow canvas.",
+                              "properties": {
+                                "x": {
+                                  "type": "number"
+                                },
+                                "y": {
+                                  "type": "number"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "screen_id": {
+                              "description": "Screen public id (pres_…) displayed by this step.",
+                              "type": "string"
+                            },
+                            "step_id": {
+                              "description": "UUID, unique within the flow.",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "step_id",
+                            "screen_id",
+                            "actions"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "default_presentation_store_public_id": {
+                    "description": "Screen public id (pres_…) shown when a step cannot be resolved.",
+                    "type": "string"
+                  },
+                  "draft_content": {
+                    "additionalProperties": true,
+                    "description": "Draft content edited in the console before publishing.",
+                    "properties": {
+                      "default_transition": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "allow_back": {
+                            "type": "boolean"
+                          },
+                          "background_colors": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "dark": {
+                                "type": "string"
+                              },
+                              "light": {
+                                "type": "string"
+                              },
+                              "ref": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "display_mode": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "dismissible": {
+                            "type": "boolean"
+                          },
+                          "height": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "height_percentage": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "enum": [
+                              "full_screen",
+                              "push",
+                              "modal",
+                              "drawer",
+                              "popin",
+                              "inline_paywall"
+                            ],
+                            "type": "string"
+                          },
+                          "width": {
+                            "additionalProperties": true,
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "pixel",
+                                  "percentage"
+                                ],
+                                "type": "string"
+                              },
+                              "value": {
+                                "description": "Pixels, or a fraction between 0 and 1 for a percentage.",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "steps": {
+                        "items": {
+                          "additionalProperties": true,
+                          "properties": {
+                            "actions": {
+                              "description": "Step-opening actions; [] for a step that opens nothing (the runtime groups them).",
+                              "items": {
+                                "additionalProperties": true,
+                                "properties": {
+                                  "action_id": {
+                                    "description": "UUID of the button/action inside the step's screen that triggers this action.",
+                                    "type": "string"
+                                  },
+                                  "audience_ids": {
+                                    "description": "Audience public IDs the user must match for this action to apply.",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "type": "array"
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "priority": {
+                                    "description": "Lower runs first when several actions match the same action_id.",
+                                    "type": "integer"
+                                  },
+                                  "step_id": {
+                                    "description": "step_id (a UUID) of the step to open.",
+                                    "type": "string"
+                                  },
+                                  "transition": {
+                                    "additionalProperties": true,
+                                    "description": "Transition used to reach the target step.",
+                                    "type": "object"
+                                  },
+                                  "type": {
+                                    "enum": [
+                                      "open_flow_step"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "final_step": {
+                              "type": "boolean"
+                            },
+                            "initial_step": {
+                              "description": "Marks the entry step; the first flagged step is used.",
+                              "type": "boolean"
+                            },
+                            "position": {
+                              "additionalProperties": true,
+                              "description": "Node coordinates on the flow canvas.",
+                              "properties": {
+                                "x": {
+                                  "type": "number"
+                                },
+                                "y": {
+                                  "type": "number"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "screen_id": {
+                              "description": "Screen public id (pres_…) displayed by this step.",
+                              "type": "string"
+                            },
+                            "step_id": {
+                              "description": "UUID, unique within the flow.",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "step_id",
+                            "screen_id",
+                            "actions"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "name": {
+                    "description": "Display name shown in console.",
+                    "type": "string"
+                  },
+                  "vendor_id": {
+                    "description": "Stable machine identifier used by the SDK deeplink ply/flows/<vendor_id>; unique within the app.",
+                    "type": "string"
+                  },
+                  "web_flow": {
+                    "description": "Fixed to true; any other value is refused.",
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "flow": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "action_discrepancy": {},
+                        "app_flow": {},
+                        "content": {},
+                        "created_at": {},
+                        "default_presentation_store_id": {},
+                        "draft_content": {},
+                        "id": {},
+                        "name": {},
+                        "preview_url": {},
+                        "public_url": {},
+                        "sandbox_url": {},
+                        "updated_at": {},
+                        "vendor_id": {},
+                        "web_enabled": {},
+                        "web_flow": {},
+                        "web_slug": {},
+                        "web_slug_sandbox": {}
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "flow"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Update a web2app flow (partial: omitted fields are left untouched)",
+        "tags": [
+          "Web Flows"
+        ],
+        "x-required-scope": "experiences.web2app:edit"
+      }
+    },
+    "/management/v1/applications/{application_id}/web_flows/{id}/activate": {
+      "post": {
+        "description": "Activate a web2app flow: creates or enables its web slug and returns the public and sandbox URLs. Idempotent.\n\n**Required scope:** `experiences.web2app:publish`",
+        "operationId": "post_management_v1_applications_application_id_web_flows_id_activate",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "in": "query",
+            "name": "fields",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "web_activation": {
+                      "additionalProperties": true,
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "web_activation"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Activate a web2app flow: creates or enables its web slug and returns the public and sandbox URLs",
+        "tags": [
+          "Web Activations"
+        ],
+        "x-required-scope": "experiences.web2app:publish"
       }
     },
     "/management/v1/applications/{application_id}/webhook_deliveries/{id}": {
@@ -17321,19 +20277,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -17369,12 +20333,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -17568,19 +20539,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -17616,12 +20595,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -17800,19 +20786,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -17848,12 +20842,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -18048,19 +21049,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -18096,12 +21105,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -18294,19 +21310,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -18342,12 +21366,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -18541,19 +21572,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -18589,12 +21628,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -18788,19 +21834,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -18836,12 +21890,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -19035,19 +22096,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -19083,12 +22152,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -19191,6 +22267,12 @@
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "CONSUMABLE",
+                  "NON_CONSUMABLE",
+                  "NON_RENEWING_SUBSCRIPTION",
+                  "RENEWING_SUBSCRIPTION"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -19294,19 +22376,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -19342,12 +22432,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -19540,19 +22637,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -19588,12 +22693,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -19787,19 +22899,27 @@
             }
           },
           {
-            "description": "Filter by platform name (e.g. ios, android, google_play_billing).",
+            "description": "Filter by platform name.",
             "in": "query",
             "name": "platform_names",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "AMAZON",
+                  "ANDROID",
+                  "HUAWEI",
+                  "IOS",
+                  "STRIPE",
+                  "SWG"
+                ],
                 "type": "string"
               },
               "type": "array"
             }
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, as an ISO 8601 duration (e.g. P1W, P1M, P1Y).",
             "in": "query",
             "name": "period_types",
             "required": false,
@@ -19835,12 +22955,19 @@
             }
           },
           {
-            "description": "Filter by offer type (see PurchaselySubscription::OFFER_TYPES).",
+            "description": "Filter by offer type.",
             "in": "query",
             "name": "offer_types",
             "required": false,
             "schema": {
               "items": {
+                "enum": [
+                  "NONE",
+                  "FREE_TRIAL",
+                  "INTRO_OFFER",
+                  "PROMOTIONAL_OFFER",
+                  "PROMO_CODE"
+                ],
                 "type": "string"
               },
               "type": "array"
@@ -21264,6 +24391,9 @@
       "name": "Distributions"
     },
     {
+      "name": "Flows"
+    },
+    {
       "name": "Fonts"
     },
     {
@@ -21303,6 +24433,9 @@
       "name": "Web Activations"
     },
     {
+      "name": "Web Flows"
+    },
+    {
       "name": "Webhook Deliveries"
     },
     {
@@ -21321,9 +24454,11 @@
       "name": "Experiences",
       "tags": [
         "Category Tags",
+        "Flows",
         "Screen Versions",
         "Screens",
-        "Web Activations"
+        "Web Activations",
+        "Web Flows"
       ]
     },
     {
