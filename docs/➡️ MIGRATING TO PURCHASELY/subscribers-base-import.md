@@ -236,7 +236,6 @@ curl \
 | Airship | `integration_airship_channel_id`, `integration_airship_user_id` |
 | Amplitude | `integration_amplitude_user_id`, `integration_amplitude_device_id`, `integration_amplitude_session_id` |
 | Appsflyer | `integration_appsflyer_id` |
-| AT Internet | `integration_at_internet_id_client` |
 | Batch | `integration_batch_installation_id`, `integration_batch_custom_user_id` |
 | Branch | `integration_branch_user_developer_identity` |
 | CleverTap | `integration_clevertap_id` |
@@ -247,6 +246,7 @@ curl \
 | MoEngage | `integration_moengage_unique_id` |
 | mParticle | `integration_mparticle_user_id` |
 | OneSignal | `integration_one_signal_player_id`, `integration_one_signal_user_id`, `integration_one_signal_external_id`, `integration_one_signal_external_user_id` |
+| Piano Analytics (AT Internet) | `integration_piano_visitor_id`, `integration_at_internet_id_client`. When you set both fields, Purchasely uses `integration_piano_visitor_id`. |
 | Sendinblue (Brevo) | `integration_sendinblue_user_email` |
 
 <br />
