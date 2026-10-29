@@ -10266,7 +10266,7 @@
             }
           },
           {
-            "description": "Split the series by one dimension. Omit for a single, ungrouped series. Values beyond the 10 largest groups are collapsed into one \"Other\" row. sdk_version = SDK version; sdk_running_mode = SDK running mode.",
+            "description": "Split the series by one dimension. Omit for a single, ungrouped series. With sdk_version, a version gets its own series when it reaches 3% of app starts in at least one period. The newest version always gets its own series. At most 8 versions get their own series. The other versions are summed into one \"Other\" series. sdk_running_mode is never collapsed. sdk_version = SDK version; sdk_running_mode = SDK running mode.",
             "in": "query",
             "name": "group_by",
             "required": false,
