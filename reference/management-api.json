@@ -21,6 +21,16 @@
         },
         "description": "FORBIDDEN (missing/insufficient scope, wrong tenant) or, for feature-gated operations, FEATURE_NOT_ENABLED."
       },
+      "QueryTimeout": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "description": "QUERY_TIMEOUT — a database query took too long and was cancelled. Retry with narrower filters, for example a shorter date_range."
+      },
       "RateLimited": {
         "content": {
           "application/json": {
@@ -1337,6 +1347,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Per-dimension conversion + revenue stats (ClickHouse) for the variants of one AB test",
@@ -3235,6 +3248,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Conversion stats (ClickHouse) for campaigns matching the given filters",
@@ -6223,6 +6239,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Subscription composition (by platform/plan/product/state) for an application, or across every application you can access",
@@ -6494,6 +6513,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Event counts per day for an application, or across every application you can access",
@@ -6756,6 +6778,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Flow-paths funnel for a single application",
@@ -7028,6 +7053,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Conversion funnel (views -> purchases) for an application, or across every application you can access",
@@ -7298,6 +7326,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Live header cards (active-subscriptions statuses, live users, inactive-subscriptions causes) for an application, or across every application you can access",
@@ -7554,6 +7585,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Today's header card for an application, or across every application you can access",
@@ -7825,6 +7859,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Live MRR evolution (by day and by month) for an application, or across every application you can access",
@@ -8096,6 +8133,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Daily one-time-purchase revenue by country/plan, for an application or across every application you can access",
@@ -8385,6 +8425,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Live one-time-purchase stats (by store/plan, refunds) for an application, or across every application you can access",
@@ -8656,6 +8699,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Daily subscription revenue by country/plan, for an application or across every application you can access",
@@ -8926,6 +8972,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Live subscriptions revenue/churn/refund stats for an application, or across every application you can access",
@@ -9197,6 +9246,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Trial/intro-offer cohorts and balances for an application, or across every application you can access",
@@ -9452,6 +9504,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Paywall conversion: paywall views and the purchases they led to, from 2024-01-01 onwards",
@@ -9519,6 +9574,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Monthly active users: app starts and distinct users who started the app, per calendar month, over the rolling 12 months ending today (always monthly; takes no date_range, periodicity or filter)",
@@ -9762,6 +9820,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Paid subscription movements: for each period, how many PAYING subscriptions (full price or paid offer) entered the paid base (total_activations_count: direct purchases, trial/intro/promo conversions, reactivations) and how many left it (total_churns_count: voluntary churn, involuntary/billing-failure churn, refunds), plus net_movement_count = total_activations_count - total_churns_count",
@@ -9998,6 +10059,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "ClickHouse paid-subscription retention cohort matrix for a single application",
@@ -10086,6 +10150,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Paywall-serving latency percentiles (p50/p95/p99) for an application, or aggregated across every application you can access",
@@ -10319,6 +10386,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "SDK-version adoption series over time for a single application",
@@ -10524,6 +10594,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Current SDK-version breakdown for a single application",
@@ -10783,6 +10856,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Subscription activations: how many subscriptions started in each period",
@@ -11042,6 +11118,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Active subscription base per period",
@@ -11301,6 +11380,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Subscription reactivations: how many subscriptions came back to life in each period after having lapsed — re-subscribed after expiry/cancellation, recovered from a billing retry, or unpaused (one count per subscription per day; family-shared subscriptions excluded)",
@@ -16039,6 +16121,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "List purchasely one-time purchases for an application (or across every application you can access)",
@@ -16313,6 +16398,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "List purchasely subscriptions for an application (or across every application you can access)",
@@ -17486,6 +17574,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Aggregated results for a survey: answer distribution and total presentation views",
@@ -20485,6 +20576,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Subscription composition (by platform/plan/product/state) for an application, or across every application you can access",
@@ -20747,6 +20841,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Event counts per day for an application, or across every application you can access",
@@ -21010,6 +21107,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Conversion funnel (views -> purchases) for an application, or across every application you can access",
@@ -21271,6 +21371,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Live header cards (active-subscriptions statuses, live users, inactive-subscriptions causes) for an application, or across every application you can access",
@@ -21518,6 +21621,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Today's header card for an application, or across every application you can access",
@@ -21780,6 +21886,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Live MRR evolution (by day and by month) for an application, or across every application you can access",
@@ -22042,6 +22151,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Daily one-time-purchase revenue by country/plan, for an application or across every application you can access",
@@ -22322,6 +22434,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Live one-time-purchase stats (by store/plan, refunds) for an application, or across every application you can access",
@@ -22584,6 +22699,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Daily subscription revenue by country/plan, for an application or across every application you can access",
@@ -22845,6 +22963,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Live subscriptions revenue/churn/refund stats for an application, or across every application you can access",
@@ -23107,6 +23228,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Trial/intro-offer cohorts and balances for an application, or across every application you can access",
@@ -23165,6 +23289,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Monthly active users: app starts and distinct users who started the app, per calendar month, over the rolling 12 months ending today (always monthly; takes no date_range, periodicity or filter)",
@@ -23244,6 +23371,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "Paywall-serving latency percentiles (p50/p95/p99) for an application, or aggregated across every application you can access",
@@ -23644,6 +23774,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "List purchasely one-time purchases for an application (or across every application you can access)",
@@ -23820,6 +23953,9 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          },
+          "504": {
+            "$ref": "#/components/responses/QueryTimeout"
           }
         },
         "summary": "List purchasely subscriptions for an application (or across every application you can access)",
