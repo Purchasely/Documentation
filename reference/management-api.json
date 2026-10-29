@@ -9224,7 +9224,7 @@
             "description": "Two-element [start_date, end_date] window of ISO8601 dates (YYYY-MM-DD); both ends inclusive (the end date's events are counted). Every time-series tool in this namespace needs it.",
             "in": "query",
             "name": "date_range",
-            "required": false,
+            "required": true,
             "schema": {
               "items": {
                 "type": "string"
@@ -9546,7 +9546,7 @@
             "description": "Two-element [start_date, end_date] window of ISO8601 dates (YYYY-MM-DD); both ends inclusive (the end date's events are counted). Every time-series tool in this namespace needs it.",
             "in": "query",
             "name": "date_range",
-            "required": false,
+            "required": true,
             "schema": {
               "items": {
                 "type": "string"
@@ -9789,7 +9789,7 @@
             "description": "Two-element [start_date, end_date] window of ISO8601 dates (YYYY-MM-DD); both ends inclusive (the end date's events are counted). Every time-series tool in this namespace needs it.",
             "in": "query",
             "name": "date_range",
-            "required": false,
+            "required": true,
             "schema": {
               "items": {
                 "type": "string"
@@ -10113,7 +10113,7 @@
             "description": "Two-element [start_date, end_date] window of ISO8601 dates (YYYY-MM-DD); both ends inclusive (the end date's events are counted). Every time-series tool in this namespace needs it.",
             "in": "query",
             "name": "date_range",
-            "required": false,
+            "required": true,
             "schema": {
               "items": {
                 "type": "string"
@@ -10551,7 +10551,7 @@
             "description": "Two-element [start_date, end_date] window of ISO8601 dates (YYYY-MM-DD); both ends inclusive (the end date's events are counted). Every time-series tool in this namespace needs it.",
             "in": "query",
             "name": "date_range",
-            "required": false,
+            "required": true,
             "schema": {
               "items": {
                 "type": "string"
@@ -10810,7 +10810,7 @@
             "description": "Two-element [start_date, end_date] window of ISO8601 dates (YYYY-MM-DD); both ends inclusive (the end date's events are counted). Every time-series tool in this namespace needs it.",
             "in": "query",
             "name": "date_range",
-            "required": false,
+            "required": true,
             "schema": {
               "items": {
                 "type": "string"
@@ -11069,7 +11069,7 @@
             "description": "Two-element [start_date, end_date] window of ISO8601 dates (YYYY-MM-DD); both ends inclusive (the end date's events are counted). Every time-series tool in this namespace needs it.",
             "in": "query",
             "name": "date_range",
-            "required": false,
+            "required": true,
             "schema": {
               "items": {
                 "type": "string"
