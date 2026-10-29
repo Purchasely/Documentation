@@ -10794,7 +10794,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard_v2/subscription_evolution": {
       "get": {
-        "description": "Active subscription base: how many subscriptions were active in each period, i.e. activated in or before that period and not deactivated before it (auto-renewing, cancelled-but-not-expired and grace-period subscriptions all count as active; family-shared subscriptions and transfers are excluded). Returns an array of {period, group_by, group_by_public_id, group_by_name, count} rows, one per period (and per group_by value when set); unit: count of active subscriptions — a stock, not a flow: never sum it across periods, read the last period for the current base. Recommended periodicity: MONTH (WEEK for a close look at the last few months). Single application only.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Active subscription base per period. Each row is the number of subscriptions active at the close of its period, and the last row the number active at the end of date_range (end date included), so a range ending mid-period reads the base on that date (auto-renewing, cancelled-but-not-expired and grace-period subscriptions all count as active; family-shared subscriptions and transfers are excluded). Returns an array of {period, group_by, group_by_public_id, group_by_name, count} rows, one per period (and per group_by value when set); unit: count of active subscriptions — a stock, not a flow: never sum it across periods, read the last period for the current base. Recommended periodicity: MONTH (WEEK for a close look at the last few months). Single application only.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_v2_subscription_evolution",
         "parameters": [
           {
@@ -11044,7 +11044,7 @@
             "$ref": "#/components/responses/RateLimited"
           }
         },
-        "summary": "Active subscription base: how many subscriptions were active in each period, i.e",
+        "summary": "Active subscription base per period",
         "tags": [
           "Dashboard V2"
         ],
