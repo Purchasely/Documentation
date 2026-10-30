@@ -22,6 +22,41 @@ next:
 
 **Offer Mode** is displayed only when the end-user is eligible for the Offer associated with the plan—either an Introductory Offer or a Promotional Offer configured in the Offering. If no specific text has been defined for Offer Mode, the SDK automatically falls back to the Regular Mode text. 
 
+If the user is eligible for the two offers, iOS and Android do not use the same offer. See [Which offer the SDK uses](#which-offer-the-sdk-uses).
+
+<br />
+
+## Which offer the SDK uses
+
+A plan can have an introductory offer (for example a free trial) and a promotional offer in its Offering. The SDK selects one offer. It uses this offer for the Offer mode texts, the offer price tags and the purchase. iOS and Android select the offer in a different order, because the App Store and Google Play give offers to users in different ways.
+
+| Platform | Order | Why |
+| :-- | :-- | :-- |
+| iOS | 1. The introductory offer, if the user is eligible for it.<br />2. If not, the promotional offer of the Offering, if the App Store gives it to the user.<br />3. If not, the Regular mode. | The App Store gives promotional offers only to current and past subscribers. |
+| Android | 1. The offer of the Offering (promotional or developer determined offer), if Google Play gives it to the user.<br />2. If not, the introductory offer (the default offer of the base plan), if the user is eligible for it.<br />3. If not, the Regular mode. | Google Play gives a "New customer acquisition" offer only to an eligible user. Thus the offer of the Offering already follows the eligibility rules of Google Play. |
+
+The default offer of an Android base plan is its first offer without the `ignore-offer` tag.
+
+**Example:** a plan has a 7-day free trial, and its Offering contains a 40% discount offer.
+
+* On Android, a new user sees and buys the 40% discount, not the free trial.
+* On iOS, the same user sees and buys the free trial.
+
+In Observer mode, the SDK sends the selected offer to your purchase interceptor. On Android, the `Purchase` action contains this offer in `offer` and `subscriptionOffer`.
+
+### Developer determined offers (Google Play)
+
+Google Play gives a "Developer determined" offer to all users. Your app decides which users are eligible. Thus, on Android, if the Offering contains a developer determined offer, the SDK shows the Offer mode and buys this offer for all users. `isEligibleToOffer(storeOfferId)` also returns `true` for all users.
+
+To give this offer only to the users that you select, use one of these solutions:
+
+* **A user attribute.** Set a custom [user attribute](conditional-visibility#user-attribute-value) from your app (for example `eligible_promo_offer`). Use it in a conditional visibility rule or in an [Audience](conditional-visibility#audience). Show the purchase button with the Offering only to these users.
+* **The eligibility to the introductory offer.** Use the [Eligibility for an Offer](conditional-visibility#eligibility-for-an-offer) condition. Show a purchase button without Offering to the users who are eligible for the introductory offer. Show the purchase button with the developer determined offer to the users who are not eligible.
+
+> 📘 The "Eligibility for an Offer" condition
+>
+> The [Eligibility for an Offer](conditional-visibility#eligibility-for-an-offer) condition checks only the introductory offer, on iOS and on Android. It does not check the promotional offer of the Offering. Thus, on Android, a component with this condition can stay hidden while the purchase button buys the promotional offer.
+
 <br />
 
 ## How to customize a paywall for offer mode:
