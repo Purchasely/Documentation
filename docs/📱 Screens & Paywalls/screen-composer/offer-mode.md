@@ -30,34 +30,6 @@ If the user is eligible for the two offers, iOS and Android do not use the same 
 
 A plan can have an introductory offer (for example a free trial) and a promotional offer in its Offering. The SDK selects one offer. It uses this offer for the Offer mode texts, the offer price tags and the purchase. iOS and Android select the offer in a different order, because the App Store and Google Play give offers to users in different ways.
 
-```mermaid
-flowchart TB
-  subgraph AND["Android"]
-    direction TB
-    a1{"Does Google Play give<br/>the offer of the Offering<br/>to the user?"}
-    a2{"Is the user eligible for<br/>the introductory offer?"}
-    aPromo(["Offer of the Offering<br/>(promotional or<br/>developer determined)"])
-    aIntro(["Introductory offer"])
-    aReg(["Regular mode"])
-    a1 -- Yes --> aPromo
-    a1 -- No --> a2
-    a2 -- Yes --> aIntro
-    a2 -- No --> aReg
-  end
-  subgraph IOS["iOS"]
-    direction TB
-    i1{"Is the user eligible for<br/>the introductory offer?"}
-    i2{"Does the App Store give<br/>the promotional offer<br/>of the Offering to the user?"}
-    iIntro(["Introductory offer"])
-    iPromo(["Promotional offer<br/>of the Offering"])
-    iReg(["Regular mode"])
-    i1 -- Yes --> iIntro
-    i1 -- No --> i2
-    i2 -- Yes --> iPromo
-    i2 -- No --> iReg
-  end
-```
-
 | Platform | Order | Why |
 | :-- | :-- | :-- |
 | iOS | 1. The introductory offer, if the user is eligible for it.<br />2. If not, the promotional offer of the Offering, if the App Store gives it to the user.<br />3. If not, the Regular mode. | The App Store gives promotional offers only to current and past subscribers. |
