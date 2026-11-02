@@ -11,8 +11,8 @@ metadata:
   description: >-
     Overview of all the data flows between Purchasely and third-party tools:
     Server Events, User Properties, UI / SDK Events, webhooks, user attributes,
-    custom events, the Custom Audiences API and deeplinks. Includes a
-    capability matrix of each integration and end-to-end recipes.
+    custom events, the Custom Audiences API and deeplinks. Includes a capability
+    matrix of each integration and end-to-end recipes.
   robots: index
 next:
   description: ''
@@ -24,26 +24,187 @@ Purchasely exchanges data with your analytics, CDP, CRM and attribution tools in
 - **Out of Purchasely**: subscription events, user properties and screen events go to your tools. Use them to analyze revenue and conversion, and to start CRM campaigns.
 - **Into Purchasely**: user attributes, custom events and segments from your tools come into Purchasely. Use them to select which screen, offer or campaign each user sees.
 
-<Image align="center" border={true} src="TODO-data-stack-overview.png" alt="Purchasely in your data stack: data flows out to your tools and back into Purchasely" />
+
+<Image src="https://files.readme.io/21070cd1b1f0cddc3442c272a9719dc7a19b847b4c94bc6a5ca853b6f0f37c02-data-stack-overview.png" border={true} />
+
+<br />
 
 ## Find the correct mechanism
 
-| You want to... | Mechanism | Who does the work | Page |
-| :-- | :-- | :-- | :-- |
-| Analyze subscriptions and revenue in your analytics tool | Server Events | Console configuration, no app code | [Server Events](#server-events) |
-| Start a CRM campaign when a subscription changes (cancellation, billing issue...) | Server Events and User Properties | Console configuration, no app code | [User Properties](#user-properties) |
-| Analyze screen views and paywall conversion in your analytics tool | UI / SDK Events | Your app (event listener) | [UI / SDK Events](#ui--sdk-events) |
-| Receive subscription events in your own backend | Webhook | Your backend (HTTPS endpoint) | [Webhooks](#webhooks) |
-| Target users with data that your app knows (profile, usage, preferences) | User attributes | Your app | [User attributes](#user-attributes) |
-| Show a screen or start a campaign when the user does something in the app | Custom events | Your app or a Screen button | [Custom events](#custom-events) |
-| Target users with a segment built in your CDP or CRM | Custom Audiences API | Your CDP or CRM vendor, or your backend | [Custom Audiences API](#custom-audiences-api) |
-| Open a Purchasely screen from a push notification, an email or an in-app message | Placement deeplink | Your CRM campaign and your app | [Deeplinks](#deeplinks) |
+<Table align={["left","left","left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ width: "34.5%" }}>
+        You want to...
+      </th>
+
+      <th style={{ width: "22.3%" }}>
+        Mechanism
+      </th>
+
+      <th style={{ width: "25%" }}>
+        Who does the work
+      </th>
+
+      <th style={{ width: "18.1%" }}>
+        Page
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        Analyze subscriptions and revenue in your analytics tool
+      </td>
+
+      <td>
+        Server Events
+      </td>
+
+      <td>
+        Console configuration, no app code
+      </td>
+
+      <td>
+        [Server Events](#server-events)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Start a CRM campaign when a subscription changes (cancellation, billing issue...)
+      </td>
+
+      <td>
+        Server Events and User Properties
+      </td>
+
+      <td>
+        Console configuration, no app code
+      </td>
+
+      <td>
+        [User Properties](#user-properties)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Analyze screen views and paywall conversion in your analytics tool
+      </td>
+
+      <td>
+        UI / SDK Events
+      </td>
+
+      <td>
+        Your app (event listener)
+      </td>
+
+      <td>
+        [UI / SDK Events](#ui--sdk-events)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Receive subscription events in your own backend
+      </td>
+
+      <td>
+        Webhook
+      </td>
+
+      <td>
+        Your backend (HTTPS endpoint)
+      </td>
+
+      <td>
+        [Webhooks](#webhooks)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Target users with data that your app knows (profile, usage, preferences)
+      </td>
+
+      <td>
+        User attributes
+      </td>
+
+      <td>
+        Your app
+      </td>
+
+      <td>
+        [User attributes](#user-attributes)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Show a screen or start a campaign when the user does something in the app
+      </td>
+
+      <td>
+        Custom events
+      </td>
+
+      <td>
+        Your app or a Screen button
+      </td>
+
+      <td>
+        [Custom events](#custom-events)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Target users with a segment built in your CDP or CRM
+      </td>
+
+      <td>
+        Custom Audiences API
+      </td>
+
+      <td>
+        Your CDP or CRM vendor, or your backend
+      </td>
+
+      <td>
+        [Custom Audiences API](#custom-audiences-api)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Open a Purchasely screen from a push notification, an email or an in-app message
+      </td>
+
+      <td>
+        Placement deeplink
+      </td>
+
+      <td>
+        Your CRM campaign and your app
+      </td>
+
+      <td>
+        [Deeplinks](#deeplinks)
+      </td>
+    </tr>
+  </tbody>
+</Table>
 
 <br />
 
 # Data out of Purchasely
 
-<Image align="center" border={true} src="TODO-data-out.png" alt="The four data flows out of Purchasely: Server Events, User Properties, UI / SDK Events and webhooks" />
+
+<Image src="https://files.readme.io/a071b5c80cb7194d7b14c733d4f87ad0910887b377bdf94067ac48031553832d-data-out.png" border={true} />
 
 ## Server Events
 
@@ -89,7 +250,10 @@ The [webhook](webhook) sends the same Server Events to your own backend, as JSON
 
 A tool can join a Purchasely event to a user profile only if both use the same user ID. Most integrations need the user ID of the tool. Your app gets this ID from the SDK of the tool and gives it to Purchasely with `Purchasely.setAttribute`.
 
-<Image align="center" border={true} src="TODO-identity-matching.png" alt="How a tool matches Purchasely data to its users: the app gives the tool user ID to Purchasely, and each Server Event carries it" />
+
+<Image src="https://files.readme.io/232ecc0c12342fce202d1464013f10cb68e858b08b8dc3b8cbe51b4b9e2fbef0-identity-matching.png" border={true} />
+
+<br />
 
 - Set the ID as early as possible, and again each time it changes (for example after a login).
 - If the ID is not set, most integrations do not send the event, because the tool cannot match it.
@@ -128,7 +292,8 @@ UI / SDK Events are not in this matrix: your app forwards them to all tools. Ref
 
 # Data into Purchasely
 
-<Image align="center" border={true} src="TODO-data-in.png" alt="The four data flows into Purchasely: user attributes, custom events, the Custom Audiences API and deeplinks" />
+
+<Image src="https://files.readme.io/962a9e3f30108c3dbb84dcc5026302df2800ff7f8edc16ec2a012c416bb44b64-data-in.png" border={true} />
 
 ## User attributes
 
@@ -191,7 +356,11 @@ The [Server Events attributes](server-events-attributes) tell you the plan and t
 
 Example: a user signed up to the newsletter (an event in mParticle) and installed the app from a specific campaign (an event in Adjust). You want to show a dedicated screen to these users.
 
-<Image align="center" border={true} src="TODO-combine-sources-recipe.png" alt="Recipe: two tools feed a segment in your CDP, the Custom Audiences API sends it to Purchasely, and a placement shows a dedicated screen" />
+
+<Image src="https://files.readme.io/ea023aaa465ca868265ef94eee8f8aa77f5bf72a15a1614b591ccff272561466-combine-sources-recipe.png" border={true} />
+
+
+<br />
 
 1. Build the segment in the tool that has the two data sources: your CDP, your CRM or your data warehouse.
 2. Send the segment to Purchasely with the [Custom Audiences API](custom-audiences-api), from your vendor or from your backend.
