@@ -123,6 +123,12 @@ The CLI does not return the SDK API key of an app. Copy the SDK API key from the
 * In CI, the CLI does not update itself.
 * `purchasely doctor` checks the installation, the key, the network and the version.
 
+# Limits
+
+* The CLI gives access only to what the Management API gives. For example, it does not return the JSON content of a screen.
+* The CLI does not add permissions. A command that needs a scope that your key does not have stops with exit code `4`.
+* The CLI is in beta. Commands and output formats can change between versions.
+
 # Use cases
 
 | Use case | Example |

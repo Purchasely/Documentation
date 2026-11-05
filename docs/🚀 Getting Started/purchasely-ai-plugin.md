@@ -43,6 +43,7 @@ The complete Claude Code plugin includes slash commands, skills, hooks, referenc
 | `purchasely-debug` / `/purchasely:debug`         | Investigate common issues such as blank paywalls, screens closing unexpectedly, purchase failures, deeplink problems or synchronization errors  |
 | `purchasely-migrate` / `/purchasely:migrate`     | Upgrade an existing integration to a newer SDK version, including the v5 to v6 builder APIs                                                     |
 | `purchasely-sdk-expert`                          | Ask SDK questions and get platform-specific implementation guidance                                                                             |
+| `purchasely-cli`                                 | Read the real placements, products, plans, campaigns and custom events of your account with the [Purchasely CLI](cli), so the code uses your real identifiers |
 
 ***
 
@@ -172,3 +173,17 @@ For the full v5 to v6 checklist, also read the [SDK 5 to 6 migration guide](migr
 ## Use it with the Purchasely MCP server
 
 The plugin gives your assistant the integration playbooks. The [Purchasely MCP server](mcp) gives it access to the Purchasely API and documentation. Use both for the best results.
+
+***
+
+## Use it with the Purchasely CLI
+
+The [Purchasely CLI](cli) (beta) gives your assistant read access to your Purchasely account through the Management API. With the CLI, the plugin uses the real placements, products, plans and custom events of your app, not example values.
+
+The CLI can also install the plugin. This command installs it in the coding agents that it finds on your computer:
+
+```shell
+purchasely ai install
+```
+
+The CLI needs a Management API key. See the [CLI](cli) page for the prerequisites.
