@@ -75,6 +75,10 @@ The commands cover the same domains as the Management API: analytics, experience
 * `purchasely reference` prints the full command reference.
 * `purchasely api GET /applications` calls a Management API endpoint directly, with the same safety rules.
 
+![](https://files.readme.io/a674508e5197187f1eea7df1e58028e3494cb02e049cff7fd227d5132e988b4c-cli-search.gif)
+
+<br />
+
 ## Read your key metrics
 
 ```shell
@@ -82,6 +86,8 @@ purchasely dashboard summary --app app_xxx --output table
 ```
 
 This command shows the MRR, the active subscriptions, the paywall viewers and the conversions of an app, with a chart for each metric. Run `purchasely dashboard` alone to choose a dashboard from a menu.
+
+<br />
 
 ![](https://files.readme.io/600e784f489121084c6104af59ae0bbf8098ca507339075ab127e6ff76ee7e0a-cli-dashboard-summary.gif)
 
