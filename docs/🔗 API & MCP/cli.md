@@ -125,7 +125,7 @@ The CLI does not return the SDK API key of an app. Copy the SDK API key from the
 
 # Limits
 
-* The CLI gives access only to what the Management API gives. For example, it does not return the JSON content of a screen.
+* The CLI gives access only to what the Management API gives.
 * The CLI does not add permissions. A command that needs a scope that your key does not have stops with exit code `4`.
 * The CLI is in beta. Commands and output formats can change between versions.
 
