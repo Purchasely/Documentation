@@ -24,6 +24,8 @@ https://api.purchasely.io/management/v1
 
 ## Create an API key
 
+The Management API is available on request. To enable it on your account, contact your Purchasely Customer Success Manager or the Purchasely support team.
+
 Management API keys are created in the Purchasely Console. Open the account menu (your avatar, bottom left) and choose **Management API keys**. Only a team member who holds the **API keys · Manage** permission (`account.api_keys:manage`) can create one. The key is shown only once. Copy it right away and store it in a secret manager.
 
 Each key has scopes that limit what it can do. A key expires after 90 days by default. You can set another expiration date when you create it. The step-by-step, the scope presets and the rotation and revocation of a key are in [Create an API key](https://docs.purchasely.com/docs/management-api#create-an-api-key).
