@@ -1,8 +1,8 @@
 ---
 title: Management API
 excerpt: >-
-  Operate your Purchasely account programmatically: catalog, screens,
-  targeting, experiments, look-ups and analytics, over a REST API
+  Operate your Purchasely account programmatically: catalog, screens, targeting,
+  experiments, look-ups and analytics, over a REST API
 deprecated: false
 hidden: false
 metadata:
@@ -32,9 +32,11 @@ Every endpoint, with its parameters and responses, is listed in the [API Referen
 
 # Prerequisites
 
-> 📘 Access on request
->
-> The Management API is not enabled by default. To enable it on your account, contact your Purchasely Customer Success Manager or the Purchasely support team.
+<Callout icon="📘" theme="info">
+  ### Access on request
+
+  The Management API is **not enabled by default**. To enable it on your account, contact your Purchasely Customer Success Manager or the Purchasely support team.
+</Callout>
 
 Management API keys are created in the Purchasely Console by a team member who holds the **API keys · Manage** permission. The **Editor**, **Developer** and **Full admin** roles include it. See [Roles & permissions](https://docs.purchasely.com/docs/roles-and-permissions) for what each role grants.
 
