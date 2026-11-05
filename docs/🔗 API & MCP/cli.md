@@ -83,6 +83,10 @@ purchasely dashboard summary --app app_xxx --output table
 
 This command shows the MRR, the active subscriptions, the paywall viewers and the conversions of an app, with a chart for each metric. Run `purchasely dashboard` alone to choose a dashboard from a menu.
 
+![](https://files.readme.io/600e784f489121084c6104af59ae0bbf8098ca507339075ab127e6ff76ee7e0a-cli-dashboard-summary.gif)
+
+<br />
+
 ## Give real data to your AI coding agent
 
 ```shell
