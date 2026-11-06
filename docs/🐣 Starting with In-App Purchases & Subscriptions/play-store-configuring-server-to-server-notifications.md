@@ -12,67 +12,81 @@ metadata:
 next:
   description: ''
 ---
-# Connecting the Purchasely Cloud Platform with the App Store
+# Connecting the Purchasely Cloud Platform with Google Play
 
-If you get an error when you click on "Connect to Google" from Purchasely console, it means that you did not set the proper service account or the rights you provided for the service account are not sufficient for Purchasely to set up S2S automatically.
+Use this procedure in these cases:
 
-You can set it up yourself by following this procedure.
+* **Connect to Google** in the Purchasely Console shows an error or does not show.
+* You do not want to give the "Pub/Sub Admin" role to the Purchasely service account.
+
+With this procedure, the Purchasely service account needs no Google Cloud role. You do the steps yourself in Google Cloud and in Google Play Console. Your Google Cloud user must have the right to create topics and to change their permissions. For example, the "Owner" or "Pub/Sub Admin" role on the project gives these rights.
 
 ## Getting the endpoint URL from the Purchasely Console
 
 1. Connect to the Purchasely Console
-2. Access the settings of the application you want to connect
-3. Get the value of the parameter `Google S 2 S Notifications Endpoint`  
-   _Purchasely > Mobile Applications >[YOUR APPLICATION] > Application settings_
+2. Open the settings of the application you want to connect
+3. In the Google Play section, copy the value of the field `Server to server endpoint`\
+   _Purchasely > Mobile Applications > [YOUR APPLICATION] > Application settings_
 
 <Image border={false} src="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FGgUdOzhqa07uh7nB2iZA%2Fuploads%2FAayaLhsAm9GOOp2Fcb6L%2Fimage.png?alt=media&token=80e5051d-6a10-4050-8155-7d5d3b830628" />
 
-## Creating a new Pub/Sub Topic
+## Creating a new Pub/Sub topic
 
-1. Connect to the [Google Cloud Platform Console](https://cloud.google.com/pubsub)
-2. Create new Pub/Sub topic  
-   _Google Cloud Platform > PubSub > Topics >`+ Create new topic`_
-3. Suggested name for the topic `Playstore-S2S-notifications`
-4. Leave the encryption set on `Key managed by Google`
+1. Connect to the [Google Cloud console](https://console.cloud.google.com/cloudpubsub/topic/list) and select the project of your service account
+2. Click `+ Create topic`\
+   _Google Cloud > Pub/Sub > Topics > `+ Create topic`_
+3. Set the Topic ID, for example `Play-Store-Notifications`
+4. Clear `Add a default subscription`
+5. Keep the encryption set to `Google-managed encryption key`
+6. Click `Create`
 
-> 📘 Complex configuration
+> 📘 Several applications
 >
-> If you have multiple applications under the same Google Project, create one topic and one subscription per application.
+> If you have several applications in the same Google Cloud project, create one topic and one subscription for each application. Give each topic and each subscription a different ID, for example with the application name. Use your IDs in the next steps.
 
 ## Creating a subscription on the topic
 
-1. Access the topic you just created
-2. Click on `+ Create a subscription`
-3. Set the `Type of distribution` to `Push`
-4. In the URL field, enter the value of the field Google Play S2S Notifications Endpoint retrieved from the Purchasely Console
-5. Set `no expiration date`
-6. Set the `confirmation delay` to `60 seconds`
-7. Set `Messages conservation` to `7 days`
+1. Open your topic
+2. Click `+ Create subscription`
+3. Set the Subscription ID, for example `Purchasely`
+4. Set `Delivery type` to `Push`
+5. In `Endpoint URL`, paste the `Server to server endpoint` that you copied from the Purchasely Console
+6. Set `Expiration period` to `Never expire`
+7. Set `Acknowledgement deadline` to `60` seconds
+8. Set `Message retention duration` to `7` days
+9. Click `Create`
 
-> 📘 Multiple endpoints
+> 📘 Several endpoints
 >
-> To receive S2S notifications on mutiple endpoints, you can create another subscription linked to the same topic.
+> To also send the notifications to another endpoint, create another subscription on the same topic.
 
-## Adding a publisher to the topic
+## Allowing Google Play to publish to the topic
 
-1. Add a new Pub/Sub Editor to the topic in the [Google Cloud Platform Console](https://cloud.google.com/pubsub)  
-   _Google Cloud Platform > PubSub > Topics >[Playstore-S2S-Notifications] >`+ Add principal`_
-2. Copy & paste the following value `google-play-developer-notifications@system.gserviceaccount.com` in the `member` field
-3. Set the `role` to `Pub/Sub Publisher`
+Google Play sends the notifications to the topic with its own service account. Give this account the right to publish to the topic.
 
-## Play Store configuration
+1. In the topic list, select the checkbox of your topic\
+   _Google Cloud > Pub/Sub > Topics_
+2. In the info panel, open `Permissions` and click `Add principal`. If you do not see the info panel, click `Show info panel`.
+3. In `New principals`, paste `google-play-developer-notifications@system.gserviceaccount.com`
+4. Set the role to `Pub/Sub Publisher`
+5. Click `Save`
 
-1. Connect to the [Google Play Console](https://play.google.com/apps/publish) and go to the following section  
-   _Google Play Console >[YOUR APPLICATION] > Monetization > Setup_
-2. Type the full name of the topic. It shall have the shape `projects/[YOUR PROJECTS]/topics/Playstore-S2S-Notifications`
-3. Click on the button Send test notification.  
-   You can send several notifications at the same time
-4. Click on **Save changes**
-5. Check the good reception of the test notification at the `topic` level
+> 🚧 Domain restricted sharing
+>
+> Google Cloud can show this error:
+>
+> "One or more users named in the policy do not belong to a permitted customer"
+>
+> Then your organization uses the Domain restricted sharing policy (`iam.allowedPolicyMemberDomains`). Ask your Google Cloud administrator to [add an exception](https://cloud.google.com/resource-manager/docs/organization-policy/restricting-domains#configure-exceptions) for `google-play-developer-notifications@system.gserviceaccount.com`.
 
-   in the [Google Cloud Platform Console](https://cloud.google.com)  
-   _Google Cloud Platform > Topics > Googleplay-S2S-Notifications_
-6. Check the good reception of the test notification at the `subscription` level
+## Google Play Console configuration
 
-   in the [Google Cloud Platform Console](https://cloud.google.com)  
-   _Google Cloud Platform > Subscriptions > Purchasely-Subscriptions_
+1. Connect to the [Google Play Console](https://play.google.com/console) and open this section\
+   _Google Play Console > [YOUR APPLICATION] > Monetize > Monetization setup_
+2. In `Real-time developer notifications`, select `Enable real-time notifications`
+3. In `Topic name`, type the full name of your topic: `projects/[YOUR PROJECT ID]/topics/[YOUR TOPIC ID]`
+4. Click `Send Test Message`
+5. Select `Get all notifications for subscriptions and one-time products`. With the other choice, Purchasely gets no notification for one-time product purchases.
+6. Click `Save changes`
+7. Make sure that the test message is in the subscription metrics\
+   _Google Cloud > Pub/Sub > Subscriptions > [YOUR SUBSCRIPTION ID] > Metrics_
