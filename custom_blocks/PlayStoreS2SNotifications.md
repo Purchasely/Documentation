@@ -7,6 +7,11 @@ If you already have it configured with your own server or another provider, afte
 
 > 🚧 Manual configuration
 >
-> If the button is red, it means that we do no have the right to configure Pub/Sub notifications from Google cloud with the Access Key you have provided. In that case, you need to configure [Server to Server notifications](play-store-configuring-server-to-server-notifications) manually
+> **Connect to Google** needs the "Pub/Sub Admin" role on the service account of your Access Key. If the button shows an error or does not show, check these items:
+>
+> * The Access Key is valid.
+> * The service account of the Access Key has the "Pub/Sub Admin" role.
+>
+> You can also configure [Server to Server notifications](play-store-configuring-server-to-server-notifications) manually. After the setup, you can remove the role. The notifications continue to work, but the Console can no longer show the setup status.
 
 <Image align="center" className="border" border={true} src="https://files.readme.io/93da668-image.png" />
