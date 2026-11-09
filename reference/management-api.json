@@ -381,6 +381,10 @@
                           "platforms_configured": {},
                           "redeem_presentation_id": {},
                           "s2s_notifications_endpoints": {},
+                          "sdk_api_key": {
+                            "description": "The SDK API key of the application: give it to the Purchasely SDK `start` method. It ships inside the mobile app, so it is not a secret. It is not a Management API key.",
+                            "type": "string"
+                          },
                           "show_purchasely": {},
                           "stripe_platform": {},
                           "updated_at": {}
@@ -470,6 +474,10 @@
                         "platforms_configured": {},
                         "redeem_presentation_id": {},
                         "s2s_notifications_endpoints": {},
+                        "sdk_api_key": {
+                          "description": "The SDK API key of the application: give it to the Purchasely SDK `start` method. It ships inside the mobile app, so it is not a secret. It is not a Management API key.",
+                          "type": "string"
+                        },
                         "show_purchasely": {},
                         "stripe_platform": {},
                         "updated_at": {}
@@ -591,6 +599,10 @@
                         "platforms_configured": {},
                         "redeem_presentation_id": {},
                         "s2s_notifications_endpoints": {},
+                        "sdk_api_key": {
+                          "description": "The SDK API key of the application: give it to the Purchasely SDK `start` method. It ships inside the mobile app, so it is not a secret. It is not a Management API key.",
+                          "type": "string"
+                        },
                         "show_purchasely": {},
                         "stripe_platform": {},
                         "updated_at": {}
