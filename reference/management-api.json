@@ -1940,18 +1940,43 @@
                             "criterias": {
                               "items": {
                                 "else": {
-                                  "properties": {
-                                    "value": {
-                                      "type": [
-                                        "string",
-                                        "number",
-                                        "boolean"
-                                      ]
+                                  "else": {
+                                    "properties": {
+                                      "value": {
+                                        "type": [
+                                          "string",
+                                          "number",
+                                          "boolean"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "value"
+                                    ]
+                                  },
+                                  "if": {
+                                    "properties": {
+                                      "operation": {
+                                        "enum": [
+                                          "in",
+                                          "not_in"
+                                        ]
+                                      }
                                     }
                                   },
-                                  "required": [
-                                    "value"
-                                  ]
+                                  "then": {
+                                    "properties": {
+                                      "value": {
+                                        "enum": [
+                                          null,
+                                          ""
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "values"
+                                    ]
+                                  }
                                 },
                                 "if": {
                                   "properties": {
@@ -2015,6 +2040,8 @@
                                       "false_or_not_set",
                                       "after",
                                       "before",
+                                      "in",
+                                      "not_in",
                                       "less_than_x_days_ago",
                                       "more_than_x_days_ago",
                                       "less_than_x_days_from_now",
@@ -2027,13 +2054,23 @@
                                     "type": "string"
                                   },
                                   "value": {
-                                    "description": "Comparison value. For empty/not_empty/boolean operations omit it or use null.",
+                                    "description": "Comparison value. For empty/not_empty/boolean/in/not_in operations omit it or use null.",
                                     "type": [
                                       "string",
                                       "number",
                                       "boolean",
                                       "null"
                                     ]
+                                  },
+                                  "values": {
+                                    "description": "Values of the in/not_in operations. `in` matches a user equal to one of them, `not_in` a user different from all of them. Only for string, strict_string, dictionary_string and dictionary_strict_string attributes; omit for other operations.",
+                                    "items": {
+                                      "minLength": 1,
+                                      "pattern": "\\S",
+                                      "type": "string"
+                                    },
+                                    "minItems": 1,
+                                    "type": "array"
                                   }
                                 },
                                 "required": [
@@ -2238,18 +2275,43 @@
                             "criterias": {
                               "items": {
                                 "else": {
-                                  "properties": {
-                                    "value": {
-                                      "type": [
-                                        "string",
-                                        "number",
-                                        "boolean"
-                                      ]
+                                  "else": {
+                                    "properties": {
+                                      "value": {
+                                        "type": [
+                                          "string",
+                                          "number",
+                                          "boolean"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "value"
+                                    ]
+                                  },
+                                  "if": {
+                                    "properties": {
+                                      "operation": {
+                                        "enum": [
+                                          "in",
+                                          "not_in"
+                                        ]
+                                      }
                                     }
                                   },
-                                  "required": [
-                                    "value"
-                                  ]
+                                  "then": {
+                                    "properties": {
+                                      "value": {
+                                        "enum": [
+                                          null,
+                                          ""
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "values"
+                                    ]
+                                  }
                                 },
                                 "if": {
                                   "properties": {
@@ -2313,6 +2375,8 @@
                                       "false_or_not_set",
                                       "after",
                                       "before",
+                                      "in",
+                                      "not_in",
                                       "less_than_x_days_ago",
                                       "more_than_x_days_ago",
                                       "less_than_x_days_from_now",
@@ -2325,13 +2389,23 @@
                                     "type": "string"
                                   },
                                   "value": {
-                                    "description": "Comparison value. For empty/not_empty/boolean operations omit it or use null.",
+                                    "description": "Comparison value. For empty/not_empty/boolean/in/not_in operations omit it or use null.",
                                     "type": [
                                       "string",
                                       "number",
                                       "boolean",
                                       "null"
                                     ]
+                                  },
+                                  "values": {
+                                    "description": "Values of the in/not_in operations. `in` matches a user equal to one of them, `not_in` a user different from all of them. Only for string, strict_string, dictionary_string and dictionary_strict_string attributes; omit for other operations.",
+                                    "items": {
+                                      "minLength": 1,
+                                      "pattern": "\\S",
+                                      "type": "string"
+                                    },
+                                    "minItems": 1,
+                                    "type": "array"
                                   }
                                 },
                                 "required": [
