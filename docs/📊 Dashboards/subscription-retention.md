@@ -121,7 +121,7 @@ Use the **Daily / Weekly / Monthly** selector to control the time resolution of 
 | -------------------- | ---------------------------------------------------------------------------------- |
 | **Platforms**        | iOS, Android, or both                                                              |
 | **Plan periodicity** | Filter by billing cycle (weekly, monthly, yearly, etc.)                            |
-| **Offer types**      | Filter by how the subscription started (trial, intro offer, promo offer, standard) |
+| **Offer types**      | Filter by the most recent offer type of the subscription (trial, intro offer, promo offer, standard). A trial that converts counts as standard. |
 | **Countries**        | Filter by user country                                                             |
 | **Screens**          | Filter by the paywall screen that triggered the subscription                       |
 | **Placements**       | Filter by where in the app the paywall was shown                                   |
