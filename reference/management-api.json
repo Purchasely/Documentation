@@ -1953,63 +1953,99 @@
                               "items": {
                                 "else": {
                                   "else": {
-                                    "properties": {
-                                      "value": {
-                                        "type": [
-                                          "string",
-                                          "number",
-                                          "boolean"
-                                        ]
+                                    "else": {
+                                      "properties": {
+                                        "value": {
+                                          "type": [
+                                            "string",
+                                            "number",
+                                            "boolean"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "value"
+                                      ]
+                                    },
+                                    "if": {
+                                      "properties": {
+                                        "operation": {
+                                          "enum": [
+                                            "in",
+                                            "not_in"
+                                          ]
+                                        }
                                       }
                                     },
-                                    "required": [
-                                      "value"
-                                    ]
+                                    "then": {
+                                      "properties": {
+                                        "value": {
+                                          "enum": [
+                                            null,
+                                            ""
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "values"
+                                      ]
+                                    }
                                   },
                                   "if": {
                                     "properties": {
                                       "operation": {
                                         "enum": [
-                                          "in",
-                                          "not_in"
+                                          "empty",
+                                          "not_empty",
+                                          "true",
+                                          "true_or_not_set",
+                                          "false",
+                                          "false_or_not_set"
                                         ]
                                       }
                                     }
                                   },
+                                  "not": {
+                                    "required": [
+                                      "criterias"
+                                    ]
+                                  },
+                                  "required": [
+                                    "custom_property"
+                                  ],
                                   "then": {
                                     "properties": {
                                       "value": {
                                         "enum": [
                                           null,
-                                          ""
+                                          "",
+                                          false
                                         ]
                                       }
-                                    },
-                                    "required": [
-                                      "values"
-                                    ]
-                                  }
-                                },
-                                "if": {
-                                  "properties": {
-                                    "operation": {
-                                      "enum": [
-                                        "empty",
-                                        "not_empty",
-                                        "true",
-                                        "true_or_not_set",
-                                        "false",
-                                        "false_or_not_set"
-                                      ]
                                     }
                                   }
                                 },
-                                "not": {
+                                "if": {
                                   "required": [
-                                    "criterias"
+                                    "audience"
                                   ]
                                 },
                                 "properties": {
+                                  "audience": {
+                                    "additionalProperties": false,
+                                    "description": "Use instead of custom_property to match the users of another audience: operation `in` matches its users, `not_in` the other users. Omit custom_property, value and values.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "Public ID of an audience (aud_…) or custom audience (caud_…) of this application. The audience it names cannot reference other audiences.",
+                                        "minLength": 1,
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id"
+                                    ],
+                                    "type": "object"
+                                  },
                                   "custom_property": {
                                     "additionalProperties": false,
                                     "properties": {
@@ -2086,16 +2122,39 @@
                                   }
                                 },
                                 "required": [
-                                  "operation",
-                                  "custom_property"
+                                  "operation"
                                 ],
                                 "then": {
+                                  "not": {
+                                    "anyOf": [
+                                      {
+                                        "required": [
+                                          "custom_property"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "values"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "criterias"
+                                        ]
+                                      }
+                                    ]
+                                  },
                                   "properties": {
+                                    "operation": {
+                                      "enum": [
+                                        "in",
+                                        "not_in"
+                                      ]
+                                    },
                                     "value": {
                                       "enum": [
                                         null,
-                                        "",
-                                        false
+                                        ""
                                       ]
                                     }
                                   }
@@ -2288,63 +2347,99 @@
                               "items": {
                                 "else": {
                                   "else": {
-                                    "properties": {
-                                      "value": {
-                                        "type": [
-                                          "string",
-                                          "number",
-                                          "boolean"
-                                        ]
+                                    "else": {
+                                      "properties": {
+                                        "value": {
+                                          "type": [
+                                            "string",
+                                            "number",
+                                            "boolean"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "value"
+                                      ]
+                                    },
+                                    "if": {
+                                      "properties": {
+                                        "operation": {
+                                          "enum": [
+                                            "in",
+                                            "not_in"
+                                          ]
+                                        }
                                       }
                                     },
-                                    "required": [
-                                      "value"
-                                    ]
+                                    "then": {
+                                      "properties": {
+                                        "value": {
+                                          "enum": [
+                                            null,
+                                            ""
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "values"
+                                      ]
+                                    }
                                   },
                                   "if": {
                                     "properties": {
                                       "operation": {
                                         "enum": [
-                                          "in",
-                                          "not_in"
+                                          "empty",
+                                          "not_empty",
+                                          "true",
+                                          "true_or_not_set",
+                                          "false",
+                                          "false_or_not_set"
                                         ]
                                       }
                                     }
                                   },
+                                  "not": {
+                                    "required": [
+                                      "criterias"
+                                    ]
+                                  },
+                                  "required": [
+                                    "custom_property"
+                                  ],
                                   "then": {
                                     "properties": {
                                       "value": {
                                         "enum": [
                                           null,
-                                          ""
+                                          "",
+                                          false
                                         ]
                                       }
-                                    },
-                                    "required": [
-                                      "values"
-                                    ]
-                                  }
-                                },
-                                "if": {
-                                  "properties": {
-                                    "operation": {
-                                      "enum": [
-                                        "empty",
-                                        "not_empty",
-                                        "true",
-                                        "true_or_not_set",
-                                        "false",
-                                        "false_or_not_set"
-                                      ]
                                     }
                                   }
                                 },
-                                "not": {
+                                "if": {
                                   "required": [
-                                    "criterias"
+                                    "audience"
                                   ]
                                 },
                                 "properties": {
+                                  "audience": {
+                                    "additionalProperties": false,
+                                    "description": "Use instead of custom_property to match the users of another audience: operation `in` matches its users, `not_in` the other users. Omit custom_property, value and values.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "Public ID of an audience (aud_…) or custom audience (caud_…) of this application. The audience it names cannot reference other audiences.",
+                                        "minLength": 1,
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id"
+                                    ],
+                                    "type": "object"
+                                  },
                                   "custom_property": {
                                     "additionalProperties": false,
                                     "properties": {
@@ -2421,16 +2516,39 @@
                                   }
                                 },
                                 "required": [
-                                  "operation",
-                                  "custom_property"
+                                  "operation"
                                 ],
                                 "then": {
+                                  "not": {
+                                    "anyOf": [
+                                      {
+                                        "required": [
+                                          "custom_property"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "values"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "criterias"
+                                        ]
+                                      }
+                                    ]
+                                  },
                                   "properties": {
+                                    "operation": {
+                                      "enum": [
+                                        "in",
+                                        "not_in"
+                                      ]
+                                    },
                                     "value": {
                                       "enum": [
                                         null,
-                                        "",
-                                        false
+                                        ""
                                       ]
                                     }
                                   }
