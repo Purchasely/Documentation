@@ -6,7 +6,7 @@ title: Subscription Retention
 The Subscription Retention page helps you measure subscriber loyalty, identify when users tend to churn, and evaluate the long-term impact of your acquisition and retention strategies. It contains two complementary views:
 
 * The **Cohort Retention Table** — a detailed, per-cohort breakdown of how subscriptions retain over time
-* The **Cohort Layer Cake** — a stacked area chart showing the composition and evolution of the active paid subscriptions of the selected cohorts
+* The **Cohort Layer Cake** — a stacked area chart showing the evolution of the active paid subscriptions of the selected cohorts
 
 > 📘 **Cohort entry = first matching payment**
 >
@@ -29,8 +29,8 @@ The Cohort Retention Table is a **cohort retention matrix**. Each row represents
 
 | Column                                           | Description                                                                                                                            |
 | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **Segment**                                      | The time period when the subscriptions in this cohort entered it (e.g., "2026, day 083" in daily view, or "2026, week 12" in weekly view) |
-| **Paid subscriptions (started and reactivated)** | The initial size of the cohort: how many paid subscriptions entered it during that period, at a first matching payment or after a reactivation |
+| **Segment**                                      | The cohort time period (e.g., "2026, day 083" in daily view, or "2026, week 12" in weekly view) |
+| **Paid subscriptions (started and reactivated)** | The initial size of the cohort. It counts paid subscriptions that entered it during that period, at a first matching payment or after a reactivation |
 | **Revenue**                                      | Total revenue of this cohort, counted from the cohort entry until churn                                                              |
 | **ARPPU**                                        | Average Revenue Per Paid Subscription for this cohort (Revenue / Paid subscriptions)                                                   |
 | **Day 0, Day 1, Day 2...**                       | How many subscriptions from this cohort are still active after N periods (or Week 0, Month 0, etc. depending on granularity)           |
@@ -50,7 +50,7 @@ Look for:
 
 ### What it shows
 
-The Cohort Layer Cake is a **stacked area chart** where each colored layer represents a cohort. The X-axis is calendar time, and the Y-axis shows the absolute number of retained subscriptions. All cohorts are stacked on top of each other, so the total height at any point represents the paid subscriptions of the selected cohorts that are still active at that moment. Active free trials are not in the chart. Subscriptions whose cohort is before the selected range are not in the chart.
+The Cohort Layer Cake is a **stacked area chart** where each colored layer represents a cohort. The X-axis is calendar time, and the Y-axis shows the absolute number of retained subscriptions. All cohorts are stacked on top of each other. The total height counts the paid subscriptions of the selected cohorts that are still active. Active free trials are not in the chart. Subscriptions whose cohort is before the selected range are not in the chart.
 
 ### How to read it
 
@@ -136,14 +136,14 @@ Use the **Daily / Weekly / Monthly** selector to control the time resolution of 
 * **Measure the impact of a paywall change** — Filter by Screen or A/B test and compare cohort retention before and after the change.
 * **Identify platform differences** — Filter by Platform to see if iOS and Android subscribers retain differently.
 * **Spot billing cycle issues** — Look for sharp drops at Day 7 (weekly plans), Day 30 (monthly plans), or Day 365 (yearly plans) in the retention table. These indicate renewal failures or intentional cancellations.
-* **Assess subscriber base health at a glance** — Check the Layer Cake to see if the active paid subscriptions of the selected cohorts are growing, flat, or declining — without having to analyze individual cohorts.
+* **Assess subscriber base health at a glance** — Check the Layer Cake. It shows if the active paid subscriptions of the selected cohorts grow, stay flat, or decline. You do not need to analyze each cohort.
 * **Identify problematic cohorts visually** — In the Layer Cake, a layer that thins faster than its neighbors signals a cohort with worse-than-average retention. Cross-reference with the retention table to pinpoint the exact drop-off period.
 
 # Frequently asked questions
 
 ### What is the difference between the Cohort Retention Table and the Cohort Layer Cake?
 
-The retention table shows **how well each cohort retains** (as a percentage or count), period by period. The Layer Cake shows **the combined result** of all cohorts together — the size and composition of the active paid subscriptions of the selected cohorts at any point in time. The table is for diagnosing individual cohort performance; the Layer Cake is for understanding the big picture.
+The retention table shows **how well each cohort retains** (as a percentage or count), period by period. The Layer Cake shows **the combined result** of all cohorts. It shows the size and composition of the active paid subscriptions of the selected cohorts at any point in time. The table is for diagnosing individual cohort performance; the Layer Cake is for understanding the big picture.
 
 ### Why do weekly cohort totals not match the monthly total?
 
