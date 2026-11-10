@@ -5,9 +5,9 @@ title: Subscription Events
 
 The Subscription Events chart is a raw event explorer that plots the volume of server-side subscription lifecycle events over time. Each event type appears as a separate colored line on a time-series chart, letting you compare event volumes side by side. It is designed for deep operational analysis rather than high-level KPI tracking — use it when you need to understand exactly what is happening in your subscription lifecycle at the event level.
 
-Event names correspond to Purchasely server events (the same events delivered via webhooks), making it easy to cross-reference chart data with your backend logs or third-party integrations.
+It counts **events, not subscriptions**: one count per event, on the day Purchasely recorded it, with no deduplication. A subscription that renews contributes one SubscriptionRenewed, one TransactionProcessed and one Activate on the same day. Sandbox events and family-shared subscriptions are excluded.
 
-<DashboardV1CountingChange />
+Event names correspond to Purchasely server events (the same events delivered via webhooks), making it easy to cross-reference chart data with your backend logs or third-party integrations.
 
 # How to read the chart
 
@@ -23,17 +23,17 @@ When many event types are selected, the chart can become dense. Use the category
 
 Events are organized into color-coded categories. Click a category chip to select or deselect all events in that group at once. You can also use the search bar to find a specific event by name.
 
-| Category                                    | Color         | Events                                                                                                                                                                                                                      |
-| ------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Activation / Plan Change / Reactivation** | Blue          | Activate, Deactivate, SubscriptionStarted, SubscriptionReactivated, SubscriptionUpgraded, SubscriptionDowngraded, SubscriptionCrossgraded, SubscriptionDeferred, SubscriptionReceived                                       |
-| **Renewal / Recovery**                      | Green         | SubscriptionRenewed, RenewedAutomatic, RenewalValidated, SubscriptionRecoveredFromBillingRetry, SubscriptionRecoveredFromGracePeriod                                                                                        |
-| **Billing Issue**                           | Yellow/Orange | EnteredBillingRetry, GracePeriodStarted, GracePeriodTerminated                                                                                                                                                              |
-| **Cancellation / Refund / Pause**           | Red           | SubscriptionTerminated, SubscriptionCancelledDuringGracePeriod, SubscriptionCancelledDuringPause, SubscriptionRefundBeforeExpiry, SubscriptionPaused, SubscriptionWithPause, SubscriptionUnpaused, SubscriptionWillNotPause |
+| Category                           | Events                                                                                                                                                                                                                                                       |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Activation / Plan change**       | SubscriptionStarted, SubscriptionReactivated, SubscriptionUpgraded, SubscriptionDowngraded, SubscriptionCrossgraded                                                                                                                                          |
+| **Renewal / Recovery**             | SubscriptionRenewed, InstallmentPaid, SubscriptionUnpaused, SubscriptionRecoveredFromBillingRetry, SubscriptionRecoveredFromGracePeriod, SubscriptionRefundReversed, OneTimePurchaseRefundReversed                                                           |
+| **Billing issue**                  | GracePeriodStarted, GracePeriodTerminated, EnteredBillingRetry                                                                                                                                                                                               |
+| **Cancellation / Refund / Pause**  | RetentionMessageRequested, RenewalEnabled, RenewalDisabled, SubscriptionWillPause, SubscriptionWillNotPause, SubscriptionTerminated, FamilySharedRevoked, SubscriptionRefundedRevoked, InstallmentRefunded, SubscriptionCancelledDuringGracePeriod, SubscriptionCancelledDuringPause, SubscriptionPaused |
+| **Billing information**            | TransactionProcessed                                                                                                                                                                                                                                         |
+| **Entitlement / Transfer**         | Activate, Deactivate, SubscriptionTransferred, SubscriptionReceived, OneTimePurchaseTransferred, OneTimePurchaseReceived                                                                                                                                     |
+| **Trial / Intro / Promo offer**    | TrialStarted, TrialConverted, TrialNotConverted, IntroOfferStarted, IntroOfferConverted, IntroOfferNotConverted, PromoCodeStarted, PromoCodeConverted, PromoCodeNotConverted, PromotionalOfferStarted, PromotionalOfferConverted, PromotionalOfferNotConverted |
 
-> **Note:** Pause-related events (SubscriptionPaused, SubscriptionUnpaused, SubscriptionWithPause, SubscriptionWillNotPause) are **Google Play only**. They will not appear for App Store subscriptions.
-> | **Entitlement / Transfer** | Purple | SubscriptionTransferred |
-> | **Trial / Intro / Promo offer** | Pink/Orange | TrialStarted, TrialConverted, TrialNotConverted, IntroOfferStarted, IntroOfferConverted, IntroOfferNotConverted, PromoCodeStarted, PromoCodeConverted, PromoCodeNotConverted, PromotionalOfferStarted, PromotionalOfferConverted, PromotionalOfferNotConverted |
-> | **Transaction Revenue** | Blue | TransactionProcessed |
+> **Note:** Pause events (SubscriptionPaused, SubscriptionUnpaused, SubscriptionWillPause, SubscriptionWillNotPause, SubscriptionCancelledDuringPause) are **Google Play only**. InstallmentPaid and InstallmentRefunded are **App Store only** (monthly-commitment plans).
 
 Select **ALL** (gray chip) to plot every event type simultaneously.
 
@@ -57,11 +57,12 @@ Use the **Daily / Weekly / Monthly** selector to control the time resolution.
 
 | Filter               | Description                                                              |
 | -------------------- | ------------------------------------------------------------------------ |
-| **Countries**        | Filter by user country                                                   |
+| **Platforms**        | iOS, Android, or both                                                    |
+| **Countries**        | Filter by store country: the country of the store account used for the purchase |
 | **Screens**          | Filter by the paywall screen that triggered the subscription             |
 | **Placements**       | Filter by where in the app the paywall was shown                         |
-| **Audiences**        | Filter by audience segment the user belonged to at the time of the event |
-| **A/B tests**        | Filter by A/B test the user was enrolled in                              |
+| **Audiences**        | Filter by the audience the user matched at purchase time                 |
+| **A/B tests**        | Filter by the A/B test variant attached to the subscription              |
 | **Plans**            | Filter by specific subscription plan                                     |
 | **Plan periodicity** | Filter by billing cycle (weekly, monthly, yearly, etc.)                  |
 
@@ -75,9 +76,10 @@ Click the **Download CSV** button to export the currently displayed data. The ex
 
 * **Monitor trial-to-paid conversion health** — Plot TrialStarted alongside TrialConverted and TrialNotConverted. If TrialNotConverted starts growing faster than TrialConverted, your trial experience may need attention.
 
-* **Validate a new paywall deployment** — After launching a new paywall or A/B test, filter by Screen or A/B test and check that SubscriptionStarted and Activate volumes are in line with expectations.
+* **Validate a new paywall deployment** — After launching a new paywall or A/B test, filter by Screen or A/B test and check that SubscriptionStarted and TrialStarted volumes are in line with expectations.
+* **Watch cancellation intent** — Plot RenewalDisabled against RenewalEnabled to see how many subscribers turn auto-renewal off and how many turn it back on before expiry; add RetentionMessageRequested to see how many reached the App Store cancellation sheet.
 
-* **Track refund trends** — Select SubscriptionRefundBeforeExpiry and monitor it over time. A rising trend could signal product satisfaction issues or policy abuse.
+* **Track refund trends** — Select SubscriptionRefundedRevoked and monitor it over time. A rising trend could signal product satisfaction issues or policy abuse. For a refund rate by cohort, use the Subscription Refunds chart.
 
 * **Diagnose churn by comparing cancellation events** — Plot SubscriptionTerminated, SubscriptionCancelledDuringGracePeriod, and SubscriptionCancelledDuringPause together to understand where in the lifecycle users are dropping off.
 
@@ -95,7 +97,7 @@ Yes. The event names on this chart correspond directly to Purchasely server even
 
 ### Why do I see both "Activate" and "SubscriptionStarted"?
 
-These are distinct events in the Purchasely lifecycle. `Activate` is an entitlement event — it signals that the user should gain access to premium content. `SubscriptionStarted` is a lifecycle event that records the beginning of a new subscription. They typically fire together for new subscriptions, but `Activate` can also fire on its own during recoveries or transfers. Similarly, `Deactivate` and `SubscriptionTerminated` are related but not identical.
+These are distinct events in the Purchasely lifecycle. `Activate` is an entitlement event — it signals that the user should have access to premium content, and it fires on every receipt that grants or keeps access: new subscriptions, renewals, recoveries, transfers. That is why its volume is close to SubscriptionStarted plus SubscriptionRenewed. `SubscriptionStarted` is a lifecycle event that records the beginning of a new subscription only. Similarly, `Deactivate` fires when access is actually removed, which is not every `SubscriptionTerminated`: a subscription already deactivated by a billing retry does not send a second one at its termination.
 
 ### Can I see revenue data in this chart?
 
@@ -104,6 +106,10 @@ The TransactionProcessed event is available under the Transaction Revenue catego
 ### How should I use the category chips vs. the search bar?
 
 Use category chips when you want to explore a functional area (e.g., all billing-related events). Use the search bar when you already know the specific event name you are looking for (e.g., "TrialConverted"). You can combine both — select a category, then use search to add individual events from other categories.
+
+### Do these counts match the other charts?
+
+No. Subscription Activations, Paid Subscription Movements and Retention count subscriptions, deduplicated per day, with lifecycle rules. This chart counts raw events: the same subscription can appear under several event types on the same day.
 
 ### Why does a line disappear or appear flat?
 
