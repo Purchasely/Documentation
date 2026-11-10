@@ -113,7 +113,7 @@
     }
   },
   "info": {
-    "description": "Manage your Purchasely catalog, monetization, targeting, screens, engagement, and webhooks over HTTPS.\n\n## Authentication\n\nEvery request must carry your Management API key as a bearer token:\n\n```\nAuthorization: Bearer pk_mgmt_live_xxx\n```\n\nCreate your keys in the Purchasely console: open the account menu (bottom left, your avatar) and choose **Management API keys**. The page is available to administrators who hold the `account.api_keys:manage` permission (included in the Full, Developer and Editor roles, or granted by a custom role). For each key you choose:\n\n- a **name**;\n- the **applications** it covers: a specific set, or every application you can access, now and in the future;\n- its **scopes** (see below);\n- an optional **expiration** date. Without one, the key expires after 90 days.\n\nThe key is shown only once, when you create it: store it securely. From the same page you can edit a key's scopes, rotate it (a new key is issued and the old one stops working immediately) or revoke it. A missing, invalid, expired or revoked key returns `401` with the code `UNAUTHORIZED`.\n\n## Scopes\n\nEach endpoint requires one scope, listed under **Required scope** on the endpoint. A scope has the form `category.object:verb`, for example `setup.products:view`, `targeting.audiences:edit` or `experiences.screens:publish`. The verbs are `view`, `create`, `edit`, `delete` and `publish`.\n\nA key only holds the scopes you give it, and you can only give a key scopes that you hold yourself. Account scopes (`account.*`: billing, administrators, API keys, app creation) are never available on a key. A request to an endpoint whose scope the key does not hold returns `403`.\n\n## Rate limits\n\nEach key is limited to:\n\n- **60 requests per minute** on every endpoint (the general limit);\n- **10 requests per minute** on writes (`POST`, `PUT`, `PATCH`, `DELETE`), on top of the general limit;\n- **20 requests per minute** on heavy reads (dashboards other than the moderate ones below, subscription and one-time purchase lists, A/B test variant statistics, survey results), on top of the general limit;\n- **30 requests per minute** on moderate reads (`dashboard/mrr_evolution_live`, `dashboard/one_time_purchases_revenues`, `dashboard_v2/sdk_evolution`, `dashboard_v2/paywall_latency`, `dashboard_v2/subscription_reactivations` and `campaigns/index_stats`), on top of the general limit.\n\nCounters are kept per key and per resource. Successful responses and `429` responses carry `X-RateLimit-Limit`, `X-RateLimit-Remaining` and `X-RateLimit-Reset` (a Unix timestamp, in seconds) for the limit of the request's category: writes, heavy reads, moderate reads, or otherwise the general limit; other error responses may omit them. A request can still be refused by another limit that applies to it (for example a heavy read refused by the general limit), so a `429` can show remaining capacity.\n\nOver a limit, the API returns `429` with the code `RATE_LIMITED`. Retry after `X-RateLimit-Reset`; when a `429` shows remaining capacity, slow down across all your requests.\n\n## Your first request\n\nList the applications your key can access:\n\n```\ncurl https://api.purchasely.io/management/v1/applications \\\n  -H \"Authorization: Bearer pk_mgmt_live_xxx\"\n```\n\n## Conventions\n\n- **Array query parameters** — send one bracketed key per value: `date_range[]=2026-10-01&date_range[]=2026-10-25`. A repeated plain key (`date_range=…&date_range=…`) or a comma-joined value is not read as a list.\n- **Field selection** — most endpoints accept a `fields` query parameter (an explicit list of field names, or `[\"*\"]` for every field) to control response size. Omit it for the endpoint's default field set.\n- **Pagination** — list endpoints accept `page` and `per_page`, and responses include pagination metadata.\n- **Errors** — failures return a consistent envelope: `{ \"error\": { \"code\": \"...\", \"messages\": [...] } }`.\n- **Confirmation** — destructive or high-impact writes use a two-step flow: the first call returns `CONFIRMATION_REQUIRED` with a `confirm_token`; resend the identical request with that token. The change is then attempted and can still be rejected, for example with `422` and `VALIDATION_FAILED`.\n- **Live metrics** — a few live metrics take over a minute on large apps: live users, active subscribers and trials. API keys do not get them (`dashboard/trials_live` returns `403`). Read them in the Purchasely console.\n\n_This reference is generated from the live API and always reflects the current surface._",
+    "description": "Manage your Purchasely catalog, monetization, targeting, screens, engagement, and webhooks over HTTPS.\n\n## Authentication\n\nEvery request must carry your Management API key as a bearer token:\n\n```\nAuthorization: Bearer pk_mgmt_live_xxx\n```\n\nCreate your keys in the Purchasely console: open the account menu (bottom left, your avatar) and choose **Management API keys**. The page is available to administrators who hold the `account.api_keys:manage` permission (included in the Full, Developer and Editor roles, or granted by a custom role). For each key you choose:\n\n- a **name**;\n- the **applications** it covers: a specific set, or every application you can access, now and in the future;\n- its **scopes** (see below);\n- an optional **expiration** date. Without one, the key expires after 90 days.\n\nThe key is shown only once, when you create it: store it securely. From the same page you can edit a key's scopes, rotate it (a new key is issued and the old one stops working immediately) or revoke it. A missing, invalid, expired or revoked key returns `401` with the code `UNAUTHORIZED`.\n\n## Scopes\n\nEach endpoint requires one scope, listed under **Required scope** on the endpoint. A scope has the form `category.object:verb`, for example `setup.products:view`, `targeting.audiences:edit` or `experiences.screens:publish`. The verbs are `view`, `create`, `edit`, `delete`, `publish` and `restore`.\n\nA key only holds the scopes you give it, and you can only give a key scopes that you hold yourself. Account scopes (`account.*`: billing, administrators, API keys, app creation) are never available on a key. A request to an endpoint whose scope the key does not hold returns `403`.\n\n## Rate limits\n\nEach key is limited to:\n\n- **60 requests per minute** on every endpoint (the general limit);\n- **10 requests per minute** on writes (`POST`, `PUT`, `PATCH`, `DELETE`), on top of the general limit;\n- **20 requests per minute** on heavy reads (dashboards other than the moderate ones below, subscription and one-time purchase lists, A/B test variant statistics, survey results), on top of the general limit;\n- **30 requests per minute** on moderate reads (`dashboard/mrr_evolution_live`, `dashboard/one_time_purchases_revenues`, `dashboard_v2/sdk_evolution`, `dashboard_v2/paywall_latency`, `dashboard_v2/subscription_reactivations` and `campaigns/index_stats`), on top of the general limit.\n\nCounters are kept per key and per resource. Successful responses and `429` responses carry `X-RateLimit-Limit`, `X-RateLimit-Remaining` and `X-RateLimit-Reset` (a Unix timestamp, in seconds) for the limit of the request's category: writes, heavy reads, moderate reads, or otherwise the general limit; other error responses may omit them. A request can still be refused by another limit that applies to it (for example a heavy read refused by the general limit), so a `429` can show remaining capacity.\n\nOver a limit, the API returns `429` with the code `RATE_LIMITED`. Retry after `X-RateLimit-Reset`; when a `429` shows remaining capacity, slow down across all your requests.\n\n## Your first request\n\nList the applications your key can access:\n\n```\ncurl https://api.purchasely.io/management/v1/applications \\\n  -H \"Authorization: Bearer pk_mgmt_live_xxx\"\n```\n\n## Conventions\n\n- **Array query parameters** — send one bracketed key per value: `date_range[]=2026-10-01&date_range[]=2026-10-25`. A repeated plain key (`date_range=…&date_range=…`) or a comma-joined value is not read as a list.\n- **Field selection** — most endpoints accept a `fields` query parameter (an explicit list of field names, or `[\"*\"]` for every field) to control response size. Omit it for the endpoint's default field set.\n- **Pagination** — list endpoints accept `page` and `per_page`, and responses include pagination metadata.\n- **Errors** — failures return a consistent envelope: `{ \"error\": { \"code\": \"...\", \"messages\": [...] } }`.\n- **Confirmation** — destructive or high-impact writes use a two-step flow: the first call returns `CONFIRMATION_REQUIRED` with a `confirm_token`; resend the identical request with that token. The change is then attempted and can still be rejected, for example with `422` and `VALIDATION_FAILED`.\n- **Live metrics** — a few live metrics take over a minute on large apps: live users, active subscribers and trials. API keys do not get them (`dashboard/trials_live` returns `403`). Read them in the Purchasely console.\n\n_This reference is generated from the live API and always reflects the current surface._",
     "title": "Purchasely Management API",
     "version": "1.0.0"
   },
@@ -17551,9 +17551,14 @@
                         "additionalProperties": true,
                         "properties": {
                           "category_tag_ids": {},
+                          "content": {},
                           "created_at": {},
+                          "discrepant_flow_ids": {},
+                          "draft_content": {},
                           "id": {},
                           "is_default": {},
+                          "is_in_ab_test": {},
+                          "is_in_flow": {},
                           "name": {},
                           "status": {},
                           "template_identifier": {},
@@ -17592,6 +17597,109 @@
           "Screens"
         ],
         "x-required-scope": "experiences.screens:view"
+      },
+      "post": {
+        "description": "Create a screen from a store payload. store.meta.id must be \"composer\". Use only current composer layouts and components: deprecated, staff-only and web-only types are rejected. Inline data: images must be SVG. Fails if the store does not render.\n\n**Required scope:** `experiences.screens:create`",
+        "operationId": "post_management_v1_applications_application_id_screens",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "explode": true,
+            "in": "query",
+            "name": "fields[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "store": {
+                    "additionalProperties": true,
+                    "description": "Screen store payload (same shape as a screen's content).",
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "store"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "screen": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "category_tag_ids": {},
+                        "content": {},
+                        "created_at": {},
+                        "discrepant_flow_ids": {},
+                        "draft_content": {},
+                        "id": {},
+                        "is_default": {},
+                        "is_in_ab_test": {},
+                        "is_in_flow": {},
+                        "name": {},
+                        "status": {},
+                        "template_identifier": {},
+                        "updated_at": {},
+                        "vendor_id": {},
+                        "web_enabled": {},
+                        "web_slug": {},
+                        "web_slug_sandbox": {}
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "screen"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Create a screen",
+        "tags": [
+          "Screens"
+        ],
+        "x-required-scope": "experiences.screens:create"
       }
     },
     "/management/v1/applications/{application_id}/screens/{id}": {
@@ -17651,9 +17759,14 @@
                       "additionalProperties": true,
                       "properties": {
                         "category_tag_ids": {},
+                        "content": {},
                         "created_at": {},
+                        "discrepant_flow_ids": {},
+                        "draft_content": {},
                         "id": {},
                         "is_default": {},
+                        "is_in_ab_test": {},
+                        "is_in_flow": {},
                         "name": {},
                         "status": {},
                         "template_identifier": {},
@@ -17692,7 +17805,7 @@
         "x-required-scope": "experiences.screens:delete"
       },
       "get": {
-        "description": "Show a screen (paywall), metadata only — no content/draft_content.\n\n**Required scope:** `experiences.screens:view`",
+        "description": "Show a screen (paywall). content/draft_content are returned only with the experiences.screens:edit scope.\n\n**Required scope:** `experiences.screens:view`",
         "operationId": "get_management_v1_applications_application_id_screens_id",
         "parameters": [
           {
@@ -17738,9 +17851,14 @@
                       "additionalProperties": true,
                       "properties": {
                         "category_tag_ids": {},
+                        "content": {},
                         "created_at": {},
+                        "discrepant_flow_ids": {},
+                        "draft_content": {},
                         "id": {},
                         "is_default": {},
+                        "is_in_ab_test": {},
+                        "is_in_flow": {},
                         "name": {},
                         "status": {},
                         "template_identifier": {},
@@ -17777,6 +17895,100 @@
           "Screens"
         ],
         "x-required-scope": "experiences.screens:view"
+      }
+    },
+    "/management/v1/applications/{application_id}/screens/{id}/duplicate": {
+      "post": {
+        "description": "Duplicate a screen (content and draft) under a new name and vendor_id.\n\n**Required scope:** `experiences.screens:create`",
+        "operationId": "post_management_v1_applications_application_id_screens_id_duplicate",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "explode": true,
+            "in": "query",
+            "name": "fields[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "screen": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "category_tag_ids": {},
+                        "content": {},
+                        "created_at": {},
+                        "discrepant_flow_ids": {},
+                        "draft_content": {},
+                        "id": {},
+                        "is_default": {},
+                        "is_in_ab_test": {},
+                        "is_in_flow": {},
+                        "name": {},
+                        "status": {},
+                        "template_identifier": {},
+                        "updated_at": {},
+                        "vendor_id": {},
+                        "web_enabled": {},
+                        "web_slug": {},
+                        "web_slug_sandbox": {}
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "screen"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Duplicate a screen",
+        "tags": [
+          "Screens"
+        ],
+        "x-required-scope": "experiences.screens:create"
       }
     },
     "/management/v1/applications/{application_id}/screens/{id}/make_default": {
@@ -17827,9 +18039,14 @@
                       "additionalProperties": true,
                       "properties": {
                         "category_tag_ids": {},
+                        "content": {},
                         "created_at": {},
+                        "discrepant_flow_ids": {},
+                        "draft_content": {},
                         "id": {},
                         "is_default": {},
+                        "is_in_ab_test": {},
+                        "is_in_flow": {},
                         "name": {},
                         "status": {},
                         "template_identifier": {},
@@ -17866,6 +18083,289 @@
           "Screens"
         ],
         "x-required-scope": "experiences.screens:publish"
+      }
+    },
+    "/management/v1/applications/{application_id}/screens/{id}/publish": {
+      "post": {
+        "description": "Publish the draft of a screen as its content. Fails, and changes nothing, if the draft does not render. Does nothing when the screen is published and its draft is its content. discrepant_flow_ids lists the flows that use an action_id the publish removed from the screen. Check is_in_ab_test and is_in_flow first: the screen can be live.\n\n**Required scope:** `experiences.screens:publish`",
+        "operationId": "post_management_v1_applications_application_id_screens_id_publish",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "explode": true,
+            "in": "query",
+            "name": "fields[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "screen": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "category_tag_ids": {},
+                        "content": {},
+                        "created_at": {},
+                        "discrepant_flow_ids": {},
+                        "draft_content": {},
+                        "id": {},
+                        "is_default": {},
+                        "is_in_ab_test": {},
+                        "is_in_flow": {},
+                        "name": {},
+                        "status": {},
+                        "template_identifier": {},
+                        "updated_at": {},
+                        "vendor_id": {},
+                        "web_enabled": {},
+                        "web_slug": {},
+                        "web_slug_sandbox": {}
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "screen"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Publish a screen draft",
+        "tags": [
+          "Screens"
+        ],
+        "x-required-scope": "experiences.screens:publish"
+      }
+    },
+    "/management/v1/applications/{application_id}/screens/{id}/update_draft": {
+      "put": {
+        "description": "Replace the draft of a screen with a store payload. The published content is not changed. store.meta.id must stay the template of the screen. Deprecated, staff-only and web-only layouts and components are rejected unless the screen already uses them. Inline data: images must be SVG. Fails, and changes nothing, if the store does not render.\n\n**Required scope:** `experiences.screens:edit`",
+        "operationId": "put_management_v1_applications_application_id_screens_id_update_draft",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "explode": true,
+            "in": "query",
+            "name": "fields[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "store": {
+                    "additionalProperties": true,
+                    "description": "Screen store payload (same shape as a screen's draft_content).",
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "store"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "screen": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "category_tag_ids": {},
+                        "content": {},
+                        "created_at": {},
+                        "discrepant_flow_ids": {},
+                        "draft_content": {},
+                        "id": {},
+                        "is_default": {},
+                        "is_in_ab_test": {},
+                        "is_in_flow": {},
+                        "name": {},
+                        "status": {},
+                        "template_identifier": {},
+                        "updated_at": {},
+                        "vendor_id": {},
+                        "web_enabled": {},
+                        "web_slug": {},
+                        "web_slug_sandbox": {}
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "screen"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Update a screen draft",
+        "tags": [
+          "Screens"
+        ],
+        "x-required-scope": "experiences.screens:edit"
+      }
+    },
+    "/management/v1/applications/{application_id}/screens/{id}/validate": {
+      "get": {
+        "description": "Render the draft of a screen the way a publish would and return { valid, errors }. Saves nothing. The check samples one non-default language and the logged-in state at random, so two calls can give different results and valid: true is not a guarantee. Run it again before you publish.\n\n**Required scope:** `experiences.screens:view`",
+        "operationId": "get_management_v1_applications_application_id_screens_id_validate",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "explode": true,
+            "in": "query",
+            "name": "fields[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "validation": {
+                      "additionalProperties": true,
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "validation"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Validate a screen draft",
+        "tags": [
+          "Screens"
+        ],
+        "x-required-scope": "experiences.screens:view"
       }
     },
     "/management/v1/applications/{application_id}/screens/{id}/web_activation": {
@@ -17991,6 +18491,7 @@
                       "additionalProperties": true,
                       "properties": {
                         "administrator": {},
+                        "content": {},
                         "created_at": {},
                         "id": {},
                         "status": {},
@@ -18027,7 +18528,7 @@
     },
     "/management/v1/applications/{application_id}/screens/{screen_id}/screen_versions/{id}": {
       "get": {
-        "description": "Show a screen version (version metadata; the raw store content blob is not included).\n\n**Required scope:** `experiences.screens:view`",
+        "description": "Show a screen version (version metadata; the raw store content is returned only with the experiences.screens:edit scope).\n\n**Required scope:** `experiences.screens:view`",
         "operationId": "get_management_v1_applications_application_id_screens_screen_id_screen_versions_id",
         "parameters": [
           {
@@ -18082,6 +18583,7 @@
                       "additionalProperties": true,
                       "properties": {
                         "administrator": {},
+                        "content": {},
                         "created_at": {},
                         "id": {},
                         "status": {},
@@ -18114,6 +18616,109 @@
           "Screen Versions"
         ],
         "x-required-scope": "experiences.screens:view"
+      }
+    },
+    "/management/v1/applications/{application_id}/screens/{screen_id}/screen_versions/{id}/restore": {
+      "post": {
+        "description": "Write the content of an earlier screen version as the draft of the screen. Does not publish.\n\n**Required scope:** `experiences.screens:restore`",
+        "operationId": "post_management_v1_applications_application_id_screens_screen_id_screen_versions_id_restore",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "screen_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "explode": true,
+            "in": "query",
+            "name": "fields[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "screen": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "category_tag_ids": {},
+                        "content": {},
+                        "created_at": {},
+                        "discrepant_flow_ids": {},
+                        "draft_content": {},
+                        "id": {},
+                        "is_default": {},
+                        "is_in_ab_test": {},
+                        "is_in_flow": {},
+                        "name": {},
+                        "status": {},
+                        "template_identifier": {},
+                        "updated_at": {},
+                        "vendor_id": {},
+                        "web_enabled": {},
+                        "web_slug": {},
+                        "web_slug_sandbox": {}
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "screen"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Restore a screen version",
+        "tags": [
+          "Screen Versions"
+        ],
+        "x-required-scope": "experiences.screens:restore"
       }
     },
     "/management/v1/applications/{application_id}/surveys": {
@@ -25480,9 +26085,14 @@
                         "additionalProperties": true,
                         "properties": {
                           "category_tag_ids": {},
+                          "content": {},
                           "created_at": {},
+                          "discrepant_flow_ids": {},
+                          "draft_content": {},
                           "id": {},
                           "is_default": {},
+                          "is_in_ab_test": {},
+                          "is_in_flow": {},
                           "name": {},
                           "status": {},
                           "template_identifier": {},
