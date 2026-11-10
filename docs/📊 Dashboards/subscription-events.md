@@ -5,7 +5,7 @@ title: Subscription Events
 
 The Subscription Events chart is a raw event explorer that plots the volume of server-side subscription lifecycle events over time. Each event type appears as a separate colored line on a time-series chart, letting you compare event volumes side by side. It is designed for deep operational analysis rather than high-level KPI tracking — use it when you need to understand exactly what is happening in your subscription lifecycle at the event level.
 
-It counts **events, not subscriptions**: one count per event, on the day Purchasely recorded it, with no deduplication. A subscription that renews contributes one SubscriptionRenewed, one TransactionProcessed and one Activate on the same day. Sandbox events and family-shared subscriptions are excluded.
+It counts **events, not subscriptions**: one count per event, on the day Purchasely recorded it, with no deduplication. A subscription that renews contributes one SubscriptionRenewed, one TransactionProcessed and one Activate on the same day. Sandbox events are excluded, and so is every event of a family-shared subscription: FamilySharedRevoked, which only ever concerns a shared subscription, therefore always reads zero.
 
 Event names correspond to Purchasely server events (the same events delivered via webhooks), making it easy to cross-reference chart data with your backend logs or third-party integrations.
 
@@ -31,7 +31,7 @@ Events are organized into color-coded categories. Click a category chip to selec
 | **Cancellation / Refund / Pause**  | RetentionMessageRequested, RenewalEnabled, RenewalDisabled, SubscriptionWillPause, SubscriptionWillNotPause, SubscriptionTerminated, FamilySharedRevoked, SubscriptionRefundedRevoked, InstallmentRefunded, SubscriptionCancelledDuringGracePeriod, SubscriptionCancelledDuringPause, SubscriptionPaused |
 | **Billing information**            | TransactionProcessed                                                                                                                                                                                                                                         |
 | **Entitlement / Transfer**         | Activate, Deactivate, SubscriptionTransferred, SubscriptionReceived, OneTimePurchaseTransferred, OneTimePurchaseReceived                                                                                                                                     |
-| **Trial / Intro / Promo offer**    | TrialStarted, TrialConverted, TrialNotConverted, IntroOfferStarted, IntroOfferConverted, IntroOfferNotConverted, PromoCodeStarted, PromoCodeConverted, PromoCodeNotConverted, PromotionalOfferStarted, PromotionalOfferConverted, PromotionalOfferNotConverted |
+| **Trial / Intro / Promo offer**    | TrialStarted, TrialConverted, TrialNotConverted, IntroOfferStarted, IntroOfferConverted, IntroOfferNotConverted, PromoCodeStarted, PromoCodeConverted, PromoCodeNotConverted, PromotionalOfferStarted, PromotionalOfferConverted, PromotionalOfferNotConverted, SubscriptionDeferred |
 
 > **Note:** Pause events (SubscriptionPaused, SubscriptionUnpaused, SubscriptionWillPause, SubscriptionWillNotPause, SubscriptionCancelledDuringPause) are **Google Play only**. InstallmentPaid and InstallmentRefunded are **App Store only** (monthly-commitment plans).
 
@@ -101,7 +101,7 @@ These are distinct events in the Purchasely lifecycle. `Activate` is an entitlem
 
 ### Can I see revenue data in this chart?
 
-The TransactionProcessed event is available under the Transaction Revenue category. While it tracks the occurrence of revenue-generating transactions, the chart plots event counts, not monetary amounts. For actual revenue figures, use the dedicated MRR or Revenue dashboards.
+The TransactionProcessed event is available under the Billing information category. While it tracks the occurrence of revenue-generating transactions, the chart plots event counts, not monetary amounts. For actual revenue figures, use the dedicated MRR or Revenue dashboards.
 
 ### How should I use the category chips vs. the search bar?
 
