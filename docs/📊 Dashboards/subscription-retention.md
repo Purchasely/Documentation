@@ -6,7 +6,7 @@ title: Subscription Retention
 The Subscription Retention page helps you measure subscriber loyalty, identify when users tend to churn, and evaluate the long-term impact of your acquisition and retention strategies. It contains two complementary views:
 
 * The **Cohort Retention Table** — a detailed, per-cohort breakdown of how subscriptions retain over time
-* The **Cohort Layer Cake** — a stacked area chart showing the composition and evolution of your entire subscriber base
+* The **Cohort Layer Cake** — a stacked area chart showing the composition and evolution of the active paid subscriptions of the selected cohorts
 
 > 📘 **Cohort entry = first matching payment**
 >
@@ -50,7 +50,7 @@ Look for:
 
 ### What it shows
 
-The Cohort Layer Cake is a **stacked area chart** where each colored layer represents a cohort. The X-axis is calendar time, and the Y-axis shows the absolute number of retained subscriptions. All cohorts are stacked on top of each other, so the total height at any point represents your entire active subscriber base at that moment.
+The Cohort Layer Cake is a **stacked area chart** where each colored layer represents a cohort. The X-axis is calendar time, and the Y-axis shows the absolute number of retained subscriptions. All cohorts are stacked on top of each other, so the total height at any point represents the paid subscriptions of the selected cohorts that are still active at that moment. Active free trials are not in the chart. Subscriptions whose cohort is before the selected range are not in the chart.
 
 ### How to read it
 
@@ -67,7 +67,7 @@ The Cohort Layer Cake is a **stacked area chart** where each colored layer repre
 
 The Layer Cake answers questions that the retention table cannot easily show:
 
-* **Is my subscriber base actually growing?** The table shows retention rates per cohort, but doesn't give you the big picture. The Layer Cake instantly shows whether your total active base is going up or down.
+* **Is my subscriber base actually growing?** The table shows retention rates per cohort, but doesn't give you the big picture. The Layer Cake instantly shows whether the active paid subscriptions of the selected cohorts are going up or down.
 * **Which cohorts still contribute meaningfully?** Old cohorts that have thinned to a sliver are no longer material. Thick, stable layers at the bottom indicate a healthy, loyal subscriber core.
 * **What's the balance between acquisition and retention?** If the chart keeps growing, new cohort layers are thick enough to compensate for natural churn in older ones. If it shrinks despite large new cohorts, retention is the problem.
 
@@ -91,7 +91,7 @@ Focus on a subset of subscriptions:
 | **All subscriptions**        | All paid subscriptions. A subscription enters its cohort at its first payment, at full price or with a paid offer. A free trial or a free offer is not a payment. |
 | **Full-price subscriptions** | A subscription enters its cohort at its first full-price payment. A trial, an intro offer, or a promo offer that converts to full price enters at the conversion. |
 
-A subscription that already paid full price, takes a promo offer, and returns to full price does not enter a new cohort.
+A subscription can pay full price, take a promo offer, and return to full price. It does not enter a new cohort.
 
 **Examples:**
 
@@ -136,14 +136,14 @@ Use the **Daily / Weekly / Monthly** selector to control the time resolution of 
 * **Measure the impact of a paywall change** — Filter by Screen or A/B test and compare cohort retention before and after the change.
 * **Identify platform differences** — Filter by Platform to see if iOS and Android subscribers retain differently.
 * **Spot billing cycle issues** — Look for sharp drops at Day 7 (weekly plans), Day 30 (monthly plans), or Day 365 (yearly plans) in the retention table. These indicate renewal failures or intentional cancellations.
-* **Assess subscriber base health at a glance** — Check the Layer Cake to see if your total active base is growing, flat, or declining — without having to analyze individual cohorts.
+* **Assess subscriber base health at a glance** — Check the Layer Cake to see if the active paid subscriptions of the selected cohorts are growing, flat, or declining — without having to analyze individual cohorts.
 * **Identify problematic cohorts visually** — In the Layer Cake, a layer that thins faster than its neighbors signals a cohort with worse-than-average retention. Cross-reference with the retention table to pinpoint the exact drop-off period.
 
 # Frequently asked questions
 
 ### What is the difference between the Cohort Retention Table and the Cohort Layer Cake?
 
-The retention table shows **how well each cohort retains** (as a percentage or count), period by period. The Layer Cake shows **the combined result** of all cohorts together — the actual size and composition of your subscriber base at any point in time. The table is for diagnosing individual cohort performance; the Layer Cake is for understanding the big picture.
+The retention table shows **how well each cohort retains** (as a percentage or count), period by period. The Layer Cake shows **the combined result** of all cohorts together — the size and composition of the active paid subscriptions of the selected cohorts at any point in time. The table is for diagnosing individual cohort performance; the Layer Cake is for understanding the big picture.
 
 ### Why do weekly cohort totals not match the monthly total?
 
@@ -192,7 +192,9 @@ This is why you may see a yearly cohort lose subscriptions during months 2, 3, o
 
 ### How do plan changes affect retention cohorts?
 
-When a subscription changes plan (upgrade or downgrade), a new subscription is created in Purchasely. The old subscription will **churn** from its original cohort, and the new subscription will appear in the cohort corresponding to the plan change date. This can reduce retention rates for cohorts that experienced many plan changes, and inflate the size of cohorts during periods with frequent upgrades or downgrades. This is not data loss — the subscriber is still active, just tracked under a different subscription.
+A plan change (upgrade, downgrade, or crossgrade) does not churn the subscription. It does not start a new cohort entry. The chart follows the whole subscription chain. The subscription stays in its cohort and keeps its retention.
+
+One exception exists. The plan change can be the first payment that matches the Segment. For example, a free trial changes to a paid plan. Then the subscription enters its cohort at the plan change.
 
 ### How do Google Play paused subscriptions affect retention?
 
