@@ -5,7 +5,7 @@ title: Subscription Events
 
 The Subscription Events chart is a raw event explorer that plots the volume of server-side subscription lifecycle events over time. Each event type appears as a separate colored line on a time-series chart, letting you compare event volumes side by side. It is designed for deep operational analysis rather than high-level KPI tracking — use it when you need to understand exactly what is happening in your subscription lifecycle at the event level.
 
-It counts **events, not subscriptions**: one count per event, on the day Purchasely recorded it, with no deduplication. A subscription that renews contributes one SubscriptionRenewed, one TransactionProcessed and one Activate on the same day. Sandbox events are excluded, and so is every event of a family-shared subscription: FamilySharedRevoked, which only ever concerns a shared subscription, therefore always reads zero.
+It counts **events, not subscriptions**: one count per event, on the day Purchasely recorded it, with no deduplication. A subscription that renews contributes one SubscriptionRenewed, one TransactionProcessed and one Activate on the same day. Sandbox events are excluded, and so are the events of subscriptions received through Family Sharing (the family members' subscriptions, not the purchaser's own, which is counted normally). FamilySharedRevoked only ever concerns a family member's subscription, so it always reads zero.
 
 Event names correspond to Purchasely server events (the same events delivered via webhooks), making it easy to cross-reference chart data with your backend logs or third-party integrations.
 
