@@ -8,32 +8,32 @@ The Subscription Retention page helps you measure subscriber loyalty, identify w
 * The **Cohort Retention Table** — a detailed, per-cohort breakdown of how subscriptions retain over time
 * The **Cohort Layer Cake** — a stacked area chart showing the evolution of the active paid subscriptions of the selected cohorts
 
-> 📘 **Cohort entry = first matching payment**
+> 📘 **Cohort entry = the subscription starts to pay as the Segment**
 >
-> Each cohort counts **paid subscriptions**. A subscription enters its cohort at its **first payment that matches the Segment**. A free trial or a free offer is not a payment. A failed payment, such as a grace period start or a billing retry, is not a payment. A subscription that never pays is not counted.
+> Each cohort counts **paid subscriptions**. A subscription is in the Segment while its payments match the Segment. It enters a cohort when it starts to match. A free trial or a free offer is not a payment. A failed payment, such as a grace period start or a billing retry, is not a payment. A subscription that never pays is not counted.
 >
-> A reactivation after churn starts a new cohort entry, at its first matching payment. A subscription can enter several cohorts. For example, it churns in March and recovers through billing retry in May. Both cohorts count it.
+> A subscription leaves the Segment when it pays another way or gets a free period. This counts as a churn. If it comes back, it enters a new cohort. A reactivation after churn also starts a new cohort entry. So a subscription can enter several cohorts. For example, it churns in March and recovers through billing retry in May. Both cohorts count it.
 
 <DashboardV1CountingChange />
 
-The **Segment** control sets the payment that starts a cohort entry:
+The **Segment** control sets which payments keep a subscription in the chart:
 
-* **All subscriptions**: the first payment, at full price or with a paid offer
-* **Full-price subscriptions**: the first full-price payment
+* **All subscriptions**: payments at full price or with a paid offer
+* **Full-price subscriptions**: full-price payments only
 
 # Cohort Retention Table
 
 ### What it shows
 
-The Cohort Retention Table is a **cohort retention matrix**. Each row represents a group (cohort) of subscriptions that made their first matching payment during the same time period.
+The Cohort Retention Table is a **cohort retention matrix**. Each row represents a group (cohort) of subscriptions that entered the Segment during the same time period.
 
 | Column                                           | Description                                                                                                                            |
 | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
 | **Segment**                                      | The cohort time period (e.g., "2026, day 083" in daily view, or "2026, week 12" in weekly view) |
-| **Paid subscriptions (started and reactivated)** | The initial size of the cohort. It counts paid subscriptions that entered it during that period, at a first matching payment or after a reactivation |
-| **Revenue**                                      | Total revenue of this cohort, counted from the cohort entry until churn                                                              |
+| **Paid subscriptions (started and reactivated)** | The initial size of the cohort. It counts paid subscriptions that entered the Segment during that period |
+| **Revenue**                                      | Total revenue of this cohort, counted from the cohort entry until the subscription churns or leaves the Segment |
 | **ARPPU**                                        | Average Revenue Per Paid Subscription for this cohort (Revenue / Paid subscriptions)                                                   |
-| **Day 0, Day 1, Day 2...**                       | How many subscriptions from this cohort are still active after N periods (or Week 0, Month 0, etc. depending on granularity)           |
+| **Day 0, Day 1, Day 2...**                       | How many subscriptions from this cohort are still active and still in the Segment after N periods (or Week 0, Month 0, etc. depending on granularity) |
 
 ### How to read it
 
@@ -50,7 +50,7 @@ Look for:
 
 ### What it shows
 
-The Cohort Layer Cake is a **stacked area chart** where each colored layer represents a cohort. The X-axis is calendar time, and the Y-axis shows the absolute number of retained subscriptions. All cohorts are stacked on top of each other. The total height counts the paid subscriptions of the selected cohorts that are still active. Active free trials are not in the chart. Subscriptions whose cohort is before the selected range are not in the chart.
+The Cohort Layer Cake is a **stacked area chart** where each colored layer represents a cohort. The X-axis is calendar time, and the Y-axis shows the absolute number of retained subscriptions. All cohorts are stacked on top of each other. The total height counts the paid subscriptions of the selected cohorts that are still active and still in the Segment. Active free trials are not in the chart. Subscriptions whose cohort is before the selected range are not in the chart.
 
 ### How to read it
 
@@ -88,10 +88,10 @@ Focus on a subset of subscriptions:
 
 | Segment                      | Description                                                                                                         |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **All subscriptions**        | All paid subscriptions. A subscription enters its cohort at its first payment, at full price or with a paid offer. A free trial or a free offer is not a payment. |
-| **Full-price subscriptions** | A subscription enters its cohort at its first full-price payment. A trial, an intro offer, or a promo offer that converts to full price enters at the conversion. |
+| **All subscriptions**        | All paid subscriptions. A subscription is in the chart while it pays, at full price or with a paid offer. A free trial or a free offer is not a payment. |
+| **Full-price subscriptions** | A subscription is in the chart while it pays full price. A trial, an intro offer, or a promo offer that converts to full price enters at the conversion. |
 
-A subscription can pay full price, take a promo offer, and return to full price. It does not enter a new cohort.
+A subscription that changes how it pays can leave the Segment and come back. For example, it pays full price, takes a promo offer, and returns to full price. In "Full-price subscriptions", the promo offer ends its first entry as a churn. The return to full price is a new entry. In "All subscriptions", nothing changes, because a promo offer is also a payment.
 
 **Examples:**
 
@@ -100,8 +100,12 @@ A subscription can pay full price, take a promo offer, and return to full price.
 | Direct full-price start in January | January | January |
 | Free trial on January 28, converts on February 4 | February | February |
 | Paid intro offer in January, converts to full price in April | January | April |
+| Full price in January, promo offer from June, full price again in December | January | January (churns in June), then December |
+| Full price in January, one free month in May, full price again in June | January (churns in May), then June | January (churns in May), then June |
 | Free trial, payment fails, never pays | Not counted | Not counted |
 | Free trial, cancelled before conversion | Not counted | Not counted |
+
+To know if a payment in the selected range is a new entry, the chart uses the payment type before it, as recorded with the payment.
 
 <br />
 
@@ -121,7 +125,7 @@ Use the **Daily / Weekly / Monthly** selector to control the time resolution of 
 | -------------------- | ---------------------------------------------------------------------------------- |
 | **Platforms**        | iOS, Android, or both                                                              |
 | **Plan periodicity** | Filter by billing cycle (weekly, monthly, yearly, etc.)                            |
-| **Offer types**      | Filter by the most recent offer type of the subscription (trial, intro offer, promo offer, standard). A trial that converts counts as standard. |
+| **Offer types**      | Filter by the most recent offer type of the subscription (trial, intro offer, promo offer, standard). A trial that converts counts as standard. All the cohort entries of a subscription use its most recent offer type. |
 | **Countries**        | Filter by user country                                                             |
 | **Screens**          | Filter by the paywall screen that triggered the subscription                       |
 | **Placements**       | Filter by where in the app the paywall was shown                                   |
@@ -132,7 +136,7 @@ Use the **Daily / Weekly / Monthly** selector to control the time resolution of 
 
 # Common use cases
 
-* **Measure the effect of paid offers on retention** — A subscription with a paid intro offer enters "All subscriptions" at the offer payment. It enters "Full-price subscriptions" at the conversion to full price. Switch the Segment dropdown to compare both views. A sharp drop in "All subscriptions" at the first full-price renewal shows users who leave when the offer ends. Free trials do not appear in either segment until they convert.
+* **Measure the effect of paid offers on retention** — A subscription with a paid intro offer enters "All subscriptions" at the offer payment. It enters "Full-price subscriptions" at the conversion to full price. Switch the Segment dropdown to compare both views. A sharp drop in "All subscriptions" at the first full-price renewal shows users who leave when the offer ends. In "Full-price subscriptions", a move to a promo offer counts as a churn, so the retention shows how long subscribers keep paying full price. Free trials do not appear in either segment until they convert.
 * **Measure the impact of a paywall change** — Filter by Screen or A/B test and compare cohort retention before and after the change.
 * **Identify platform differences** — Filter by Platform to see if iOS and Android subscribers retain differently.
 * **Spot billing cycle issues** — Look for sharp drops at Day 7 (weekly plans), Day 30 (monthly plans), or Day 365 (yearly plans) in the retention table. These indicate renewal failures or intentional cancellations.
@@ -192,9 +196,12 @@ This is why you may see a yearly cohort lose subscriptions during months 2, 3, o
 
 ### How do plan changes affect retention cohorts?
 
-A plan change (upgrade, downgrade, or crossgrade) does not churn the subscription. It does not start a new cohort entry. The chart follows the whole subscription chain. The subscription stays in its cohort and keeps its retention.
+A plan change (upgrade, downgrade, or crossgrade) between plans of the same payment type does not churn the subscription. It does not start a new cohort entry. The chart follows the whole subscription chain. The subscription stays in its cohort and keeps its retention.
 
-One exception exists. The plan change can be the first payment that matches the Segment. For example, a free trial changes to a paid plan. Then the subscription enters its cohort at the plan change.
+A plan change that changes how the subscription pays is different:
+
+* A free trial changes to a paid plan. The subscription enters its cohort at the plan change.
+* In "Full-price subscriptions", a full-price plan changes to a plan with a promo offer. The subscription leaves its cohort, and this counts as a churn. A later return to full price is a new entry.
 
 ### How do Google Play paused subscriptions affect retention?
 
