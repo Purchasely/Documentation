@@ -1,7 +1,6 @@
 ---
 api:
   file: management-api.json
-  operationId: >-
-    get_management_v1_applications_application_id_dashboard_v2_paid_subscription_retention
+  operationId: get_management_v1_applications_application_id_dashboard_v2_paid_subscription_retention
 hidden: false
 ---
