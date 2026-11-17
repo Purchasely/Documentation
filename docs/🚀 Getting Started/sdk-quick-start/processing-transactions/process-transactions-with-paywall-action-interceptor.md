@@ -20,6 +20,8 @@ In `observer` mode, your app processes the transactions and Purchasely observes 
 
 This page shows the full flow, what the SDK does after each result, and the code for each platform.
 
+<PaywallActionInterceptorActionsIntercepted />
+
 # How a purchase works in observer mode
 
 ## Who does what
@@ -32,21 +34,21 @@ This page shows the full flow, what the SDK does after each result, and the code
 | Finish the transaction (StoreKit) or acknowledge it (Google Play) | | ✅ |
 | Unlock the content | | ✅ |
 | Return the result to the interceptor (`success`, `failed` or `notHandled`) | | ✅ |
-| Send the transaction to Purchasely (`synchronize()`) | ✅ after `success` on a purchase | ✅ after a purchase on a screen of your app, and after a restore on iOS |
+| Send the transaction to Purchasely (`synchronize()`) | ✅ after `success` on a purchase, and after a restore on Android | ✅ after a purchase on a screen of your app, and after a restore on iOS |
 | Close the screen | ✅ only when the button has a close action after the purchase | ✅ in all other cases, with `Purchasely.closeAllScreens()` |
 
 In observer mode, the SDK never starts a purchase with the store. It also does not finish (StoreKit) or acknowledge (Google Play) a transaction. Your app must do these steps.
 
 The interceptor receives:
 
-* `info` (`PLYInterceptorInfo`): the `contentId` and the `presentation` object of the screen. It also gives the view that displays the screen: `info.controller` on iOS, `info.activity` on Android. Use it to show your own views or error messages above the screen.
+* `info` (`PLYInterceptorInfo`): the `contentId` and the `presentation` object of the screen. With the native SDKs, it also gives the view that displays the screen: `info.controller` on iOS, `info.activity` on Android. Use it to show your own views or error messages above the screen.
 * the parameters of the action: for a purchase, the `plan` that the user selected (and, on Android, the `subscriptionOffer`). A restore has no parameters.
 
 ## Flow 1: purchase on a Purchasely screen
 
-<!-- TODO(screenshot): upload tmp/observer-interceptor/1-storyboard.png to ReadMe, then replace this comment with:
+{/* TODO(screenshot): upload tmp/observer-interceptor/1-storyboard.png to ReadMe, then replace this comment with:
 <Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="A purchase in observer mode: the Purchasely screen, the loading state, the App Store sheet, the confirmation, the unlocked content" />
--->
+*/}
 
 ```mermaid
 sequenceDiagram
@@ -81,6 +83,10 @@ sequenceDiagram
 > 🚧 Return the result only when the purchase is complete
 >
 > The SDK calls `synchronize()` as soon as you return `success`. If you return `success` before the store confirms the purchase, Purchasely receives no new transaction.
+
+> 🚧 React Native: the bridge waits 30 seconds for the result
+>
+> On React Native, the bridge waits 30 seconds for the result of your interceptor. After 30 seconds, it returns `notHandled`: the SDK does not call `synchronize()`, and it runs the next actions of the button. If a purchase ends after this delay, call `Purchasely.synchronize()` yourself.
 
 ## Flow 2: purchase on a screen of your app
 
@@ -168,7 +174,7 @@ The restore flow is the same as Flow 1, with these differences:
 >
 > No `cancelled` result exists. Return `failed` when the user cancels in the store sheet: the screen stays open and no synchronization occurs. With `success` or `notHandled`, the SDK runs the next actions of the button, for example a close.
 
-In observer mode, a purchase or restore button with no registered interceptor does nothing: the SDK stops the loading state and does not start a store purchase.
+In observer mode, if no interceptor is registered for a purchase or restore button, the SDK stops the loading state. It does not start a store purchase.
 
 # Implementing the Action Interceptor
 
@@ -186,20 +192,27 @@ Purchasely.interceptAction(.purchase) { info, params, completion in
         return
     }
 
-    let success = MyPurchaseSystem.purchase(appleProductId)
-    if success {
-        // The SDK synchronizes the transaction after success
-        completion(.success) // notify Purchasely paywall to stop processing action
-    } else {
-        completion(.failed) // also when the user cancels: the screen stays open
+    MyPurchaseSystem.purchase(appleProductId) { success in
+        // Called when your purchase system completes the purchase
+        if success {
+            // The SDK synchronizes the transaction after success
+            completion(.success) // notify Purchasely paywall to stop processing action
+        } else {
+            completion(.failed) // also when the user cancels: the screen stays open
+        }
     }
 }
 
 Purchasely.interceptAction(.restore) { info, params, completion in
-    MyPurchaseSystem.restorePurchases()
-    // iOS: the SDK does not synchronize after a restore. Call it before you return success.
-    Purchasely.synchronize(success: {}, failure: { _ in })
-    completion(.success) // notify Purchasely paywall to stop processing action
+    MyPurchaseSystem.restorePurchases { success in
+        guard success else {
+            completion(.failed)
+            return
+        }
+        // iOS: the SDK does not synchronize after a restore. Call it before you return success.
+        Purchasely.synchronize(success: {}, failure: { _ in })
+        completion(.success) // notify Purchasely paywall to stop processing action
+    }
 }
 ```
 ```kotlin
@@ -221,9 +234,9 @@ Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
 }
 
 Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
-    MyPurchaseSystem.restoreAllPurchases()
+    val success = MyPurchaseSystem.restoreAllPurchases()
     // Android: the SDK synchronizes after SUCCESS
-    PLYInterceptResult.SUCCESS // notify Purchasely paywall to stop processing action
+    if (success) PLYInterceptResult.SUCCESS else PLYInterceptResult.FAILED
 }
 
 // The interceptAction<T> { … } lambda above is a suspend lambda: you RETURN the result.
@@ -336,9 +349,10 @@ Purchasely.interceptAction(Purchasely.PresentationAction.purchase, async (info, 
   // the store product id (sku) the user clicked on in the paywall
   const storeProductId = parameters.plan.productId;
   try {
-    await MyPurchaseSystem.purchase(storeProductId);
-    // The SDK synchronizes the transaction after success
-    return Purchasely.InterceptResult.success;
+    const success = await MyPurchaseSystem.purchase(storeProductId);
+    return success
+      ? Purchasely.InterceptResult.success // the SDK synchronizes the transaction after success
+      : Purchasely.InterceptResult.failed; // also when the user cancels: the screen stays open
   } catch (e) {
     // Error making purchase
     return Purchasely.InterceptResult.failed;
@@ -477,9 +491,11 @@ Purchasely.interceptAction('purchase', async (info, payload) => {
     }
 
     const offerings = await Purchases.getOfferings();
-    if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {
-      // get your package
-      const rcPackage = offerings.current.monthly;
+    // get the RevenueCat package of the plan that the user selected
+    const rcPackage = offerings.current?.availablePackages.find(
+      (p) => p.product.identifier === storeProductId
+    );
+    if (rcPackage) {
 
       // and purchase with RevenueCat (a user cancel throws: see catch)
       const { customerInfo, productIdentifier } = await Purchases.purchasePackage(rcPackage);
@@ -531,10 +547,14 @@ await Purchasely.interceptAction(
       }
 
       Offerings offerings = await Purchases.getOfferings();
-      if (offerings.current != null && offerings.current.monthly != null) {
-        //start the purchase with your RevenueCat package (a user cancel throws: see catch)
-        PurchaserInfo purchaserInfo = await Purchases.purchasePackage(offerings.current.monthly);
-        if (purchaserInfo.entitlements.all["my_entitlement_identifier"].isActive) {
+      // get the RevenueCat package of the plan that the user selected
+      final rcPackage = offerings.current?.availablePackages
+          .where((p) => p.storeProduct.identifier == productId)
+          .firstOrNull;
+      if (rcPackage != null) {
+        //start the purchase (a user cancel throws: see catch)
+        final purchaserInfo = await Purchases.purchasePackage(rcPackage);
+        if (purchaserInfo.entitlements.all["my_entitlement_identifier"]?.isActive == true) {
           // Unlock the content
         }
         // The SDK synchronizes the transaction after success
@@ -573,9 +593,11 @@ Purchasely.interceptAction(Purchasely.PresentationAction.purchase, async (info, 
   const storeProductId = parameters.plan.productId;
   try {
     const offerings = await Purchases.getOfferings();
-    if (offerings.current && offerings.current.monthly) {
-      // get your package from RevenueCat
-      const packageToBuy = offerings.current.monthly;
+    // get the RevenueCat package of the plan that the user selected
+    const packageToBuy = offerings.current?.availablePackages.find(
+      (p) => p.product.identifier === storeProductId
+    );
+    if (packageToBuy) {
       const { purchaserInfo } = await Purchases.purchasePackage(packageToBuy);
       if (typeof purchaserInfo.entitlements.active.my_entitlement_identifier !== 'undefined') {
         // Unlock the content
@@ -615,7 +637,7 @@ Purchasely.interceptAction(Purchasely.PresentationAction.restore, async (info, p
 | No `Purchasely.synchronize()` after a purchase on a screen of your app | Purchasely does not see the transaction | Call `Purchasely.synchronize()` after each transaction outside of a Purchasely screen (Flow 2) |
 | No `Purchasely.synchronize()` in the restore interceptor on iOS | Purchasely does not see the restored purchases | Call `Purchasely.synchronize()` before you return `success` |
 | The app does not finish (StoreKit) or acknowledge (Google Play) the transaction | The SDK does not do it in observer mode | Finish or acknowledge each transaction in your app |
-| The interceptor does not return a result in one of its code paths | The button keeps its loading state, and the SDK writes a warning after 10 seconds | Return exactly one result in each code path |
+| The interceptor does not return a result in one of its code paths | The screen waits: the button keeps its loading state and the other actions do not run. The SDK writes a warning after 10 seconds. On React Native, the bridge returns `notHandled` after 30 seconds | Return exactly one result in each code path |
 
 <br />
 
