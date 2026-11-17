@@ -182,22 +182,23 @@ Here is a code sample using the Action Interceptor to process transactions **wit
 Purchasely.interceptAction(.purchase) { info, params, completion in
     // Grab the plan to purchase
     guard let plan = params?.plan, let appleProductId = plan.appleProductId else {
-        completion(.notHandled)
+        completion(.failed)
         return
     }
 
     let success = MyPurchaseSystem.purchase(appleProductId)
     if success {
-        // SDK auto-synchronizes on success in observer mode
+        // The SDK synchronizes the transaction after success
         completion(.success) // notify Purchasely paywall to stop processing action
     } else {
-        completion(.failed)
+        completion(.failed) // also when the user cancels: the screen stays open
     }
 }
 
 Purchasely.interceptAction(.restore) { info, params, completion in
     MyPurchaseSystem.restorePurchases()
-    // SDK auto-synchronizes on success in observer mode
+    // iOS: the SDK does not synchronize after a restore. Call it before you return success.
+    Purchasely.synchronize(success: {}, failure: { _ in })
     completion(.success) // notify Purchasely paywall to stop processing action
 }
 ```
@@ -212,16 +213,16 @@ Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
     val success = MyPurchaseSystem.purchase(offerToken)
 
     if (success) {
-        // SDK auto-synchronizes on success in observer mode
+        // The SDK synchronizes the purchase after SUCCESS
         PLYInterceptResult.SUCCESS // notify Purchasely paywall to stop processing action
     } else {
-        PLYInterceptResult.FAILED
+        PLYInterceptResult.FAILED // also when the user cancels: the screen stays open
     }
 }
 
 Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
     MyPurchaseSystem.restoreAllPurchases()
-    // SDK auto-synchronizes on success in observer mode
+    // Android: the SDK synchronizes after SUCCESS
     PLYInterceptResult.SUCCESS // notify Purchasely paywall to stop processing action
 }
 
@@ -257,7 +258,7 @@ Purchasely.interceptAction('purchase', async (info, payload) => {
 
     const success = await MyPurchaseSystem.purchase(storeProductId);
     if (success) {
-      // SDK auto-synchronizes on success in observer mode
+      // The SDK synchronizes the transaction after success
       return 'success'; // notify Purchasely paywall to stop processing action
     }
     return 'failed';
@@ -270,7 +271,10 @@ Purchasely.interceptAction('purchase', async (info, payload) => {
 Purchasely.interceptAction('restore', async (info, payload) => {
   try {
     await MyPurchaseSystem.restorePurchases();
-    // SDK auto-synchronizes on success in observer mode
+    if (Platform.OS === 'ios') {
+      // iOS: the SDK does not synchronize after a restore (Android does)
+      Purchasely.synchronize().catch((e) => console.log(e));
+    }
     return 'success'; // notify Purchasely paywall to stop processing action
   } catch (e) {
     return 'failed';
@@ -298,7 +302,7 @@ await Purchasely.interceptAction(
 
       final success = await MyPurchaseSystem.purchase(productId);
       if (success) {
-        // SDK auto-synchronizes on success in observer mode
+        // The SDK synchronizes the transaction after success
         return PLYInterceptResult.success;
       }
       return PLYInterceptResult.failed;
@@ -314,7 +318,10 @@ await Purchasely.interceptAction(
   (info, payload) async {
     try {
       await MyPurchaseSystem.restoreAllPurchases();
-      // SDK auto-synchronizes on success in observer mode
+      if (Platform.isIOS) {
+        // iOS: the SDK does not synchronize after a restore (Android does)
+        Purchasely.synchronize().catchError((_) => false);
+      }
       return PLYInterceptResult.success;
     } on PlatformException {
       // Error restoring purchases
@@ -330,7 +337,7 @@ Purchasely.interceptAction(Purchasely.PresentationAction.purchase, async (info, 
   const storeProductId = parameters.plan.productId;
   try {
     await MyPurchaseSystem.purchase(storeProductId);
-    // SDK auto-synchronizes on success in observer mode
+    // The SDK synchronizes the transaction after success
     return Purchasely.InterceptResult.success;
   } catch (e) {
     // Error making purchase
@@ -341,7 +348,10 @@ Purchasely.interceptAction(Purchasely.PresentationAction.purchase, async (info, 
 Purchasely.interceptAction(Purchasely.PresentationAction.restore, async (info, parameters) => {
   try {
     await MyPurchaseSystem.restoreTransactions();
-    // SDK auto-synchronizes on success in observer mode
+    if (cordova.platformId === 'ios') {
+      // iOS: the SDK does not synchronize after a restore (Android does)
+      Purchasely.synchronize();
+    }
     return Purchasely.InterceptResult.success;
   } catch (e) {
     // Error restoring purchases
@@ -350,9 +360,11 @@ Purchasely.interceptAction(Purchasely.PresentationAction.restore, async (info, p
 });
 ```
 
-> 📘 You don't need to call `synchronize()` yourself here
+> 📘 When to call `synchronize()` yourself
 >
-> When your interceptor returns the success result for a purchase or restore in observer mode, the Purchasely SDK calls `synchronize()` automatically to observe the transaction (fetch the receipt and pass it to the Purchasely Platform without interfering with it). Call `synchronize()` manually only for transactions completed outside the interceptor — see your platform page's "synchronize() with callbacks" section.
+> When your purchase interceptor returns `success`, the SDK calls `synchronize()`. It sends the transaction to Purchasely, and it does not finish or acknowledge the transaction.
+>
+> Call `Purchasely.synchronize()` yourself in two cases only: after a purchase on a screen of your app (Flow 2), and in your restore interceptor on iOS.
 
 ## Processing transaction with RevenueCat
 
@@ -362,81 +374,89 @@ Here is a code sample using the Action Interceptor to process transactions **wit
 Purchasely.interceptAction(.purchase) { info, params, completion in
     // Grab the plan to purchase
     guard let plan = params?.plan, let appleProductId = plan.appleProductId else {
-        completion(.notHandled)
+        completion(.failed)
         return
     }
 
     Purchases.shared.getOfferings { (offerings, error) in
-        if let packages = offerings?.current?.availablePackages {
-            if let package = packages.first(where: { $0.storeProduct.productIdentifier == appleProductId }) {
-                Purchases.shared.purchase(package: package) { (transaction, customerInfo, error, userCancelled) in
-                    /** IMPORTANT for Purchasely **/
-                    // SDK auto-synchronizes on success in observer mode
-                    // notify Purchasely paywall to stop processing action
-                    completion(.success)
-
-                    if customerInfo.entitlements["your_entitlement_id"]?.isActive == true {
-                        // Unlock that great "pro" content              
-                    }
-                }
+        guard let package = offerings?.current?.availablePackages
+            .first(where: { $0.storeProduct.productIdentifier == appleProductId }) else {
+            completion(.failed) // call completion in every code path
+            return
+        }
+        Purchases.shared.purchase(package: package) { (transaction, customerInfo, error, userCancelled) in
+            // Return the result only when RevenueCat completes the purchase
+            guard error == nil, !userCancelled else {
+                completion(.failed) // also when the user cancels: the screen stays open
+                return
             }
+            if customerInfo?.entitlements["your_entitlement_id"]?.isActive == true {
+                // Unlock that great "pro" content
+            }
+            // The SDK synchronizes the transaction after success
+            completion(.success)
         }
     }
 }
 
 Purchasely.interceptAction(.restore) { info, params, completion in
     Purchases.shared.restorePurchases { customerInfo, error in
-        /** IMPORTANT for Purchasely **/
-        // SDK auto-synchronizes on success in observer mode
-        // notify Purchasely paywall to stop processing action
+        guard error == nil else {
+            completion(.failed)
+            return
+        }
+        // iOS: the SDK does not synchronize after a restore. Call it before you return success.
+        Purchasely.synchronize(success: {}, failure: { _ in })
         completion(.success)
     }
 }
 ```
 ```kotlin
-Purchasely.interceptAction<PLYPresentationAction.Purchase> { info, purchase ->
+// RevenueCat reports through callbacks: use the Class-based overload,
+// and call `result` exactly once, when RevenueCat completes.
+Purchasely.interceptAction(PLYPresentationAction.Purchase::class.java) { info, action, result ->
+    val purchase = action as PLYPresentationAction.Purchase
     val subscriptionId = purchase.subscriptionOffer?.subscriptionId
-    val basePlanId = purchase.subscriptionOffer?.basePlanId
-    val offerId = purchase.subscriptionOffer?.offerId
-    val offerToken = purchase.subscriptionOffer?.offerToken
+    val activity = info.activity
 
-    //get RevenueCat package
-    Purchases.sharedInstance.getOfferingsWith({ error ->
-    // An error occurred
-    }) { offerings ->
-        offerings.current
-            ?.availablePackages
-            ?.takeUnless { it.isNullOrEmpty() }
-            ?.let { list ->
-             val rcPackage = list.firstOrNull { it.product.sku == subscriptionId }
+    if (activity == null) {
+        result(PLYInterceptResult.FAILED)
+    } else {
+        // get the RevenueCat package
+        Purchases.sharedInstance.getOfferingsWith({ error ->
+            result(PLYInterceptResult.FAILED)
+        }) { offerings ->
+            val rcPackage = offerings.current?.availablePackages
+                ?.firstOrNull { it.product.sku == subscriptionId }
 
-             Purchases.sharedInstance.purchasePackage(
-                this,
-                rcPackage,
-                onError = { error, userCancelled -> 
-                    /* No purchase */
-                },
-                onSuccess = { product, customerInfo ->
-                    if (customerInfo.entitlements["my_entitlement_identifier"]?.isActive == true) {
-                        // Unlock that content
-                        // SDK auto-synchronizes on success in observer mode
+            if (rcPackage == null) {
+                result(PLYInterceptResult.FAILED)
+            } else {
+                Purchases.sharedInstance.purchasePackage(
+                    activity,
+                    rcPackage,
+                    onError = { error, userCancelled ->
+                        result(PLYInterceptResult.FAILED) // also when the user cancels: the screen stays open
+                    },
+                    onSuccess = { product, customerInfo ->
+                        // Unlock the content, then return SUCCESS: the SDK synchronizes the purchase
+                        result(PLYInterceptResult.SUCCESS)
                     }
-            })
+                )
+            }
         }
     }
-
-    PLYInterceptResult.SUCCESS // notify Purchasely paywall to stop processing action
 }
 
-Purchasely.interceptAction<PLYPresentationAction.Restore> { info, _ ->
-   // restore purchases with RevenueCat
-    Purchases.sharedInstance.restorePurchases(::showError) { customerInfo ->
-        //... check customerInfo to see if entitlement is now active
-
-        // SDK auto-synchronizes on success in observer mode
+Purchasely.interceptAction(PLYPresentationAction.Restore::class.java) { info, action, result ->
+    // restore purchases with RevenueCat
+    Purchases.sharedInstance.restorePurchases({ error ->
+        result(PLYInterceptResult.FAILED)
+    }) { customerInfo ->
+        // ... check customerInfo to see if entitlement is now active
+        // Android: the SDK synchronizes after SUCCESS
+        result(PLYInterceptResult.SUCCESS)
     }
-
-    PLYInterceptResult.SUCCESS // notify Purchasely paywall to stop processing action
 }
 ```
 ```javascript React Native
@@ -459,13 +479,14 @@ Purchasely.interceptAction('purchase', async (info, payload) => {
     const offerings = await Purchases.getOfferings();
     if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {
       // get your package
-      const package = offerings.current.monthly;
+      const rcPackage = offerings.current.monthly;
 
-      // and purchase with RevenueCat
-      const { customerInfo, productIdentifier } = await Purchases.purchasePackage(package);
+      // and purchase with RevenueCat (a user cancel throws: see catch)
+      const { customerInfo, productIdentifier } = await Purchases.purchasePackage(rcPackage);
       if (typeof customerInfo.entitlements.active.my_entitlement_identifier !== 'undefined') {
-        // SDK auto-synchronizes on success in observer mode
+        // Unlock the content
       }
+      // The SDK synchronizes the transaction after success
       return 'success'; // notify Purchasely paywall to stop processing action
     }
     return 'failed';
@@ -480,7 +501,10 @@ Purchasely.interceptAction('restore', async (info, payload) => {
     await Purchases.restorePurchases();
     // ... check restored purchaserInfo to see if entitlement is now active
 
-    // SDK auto-synchronizes on success in observer mode
+    if (Platform.OS === 'ios') {
+      // iOS: the SDK does not synchronize after a restore (Android does)
+      Purchasely.synchronize().catch((e) => console.log(e));
+    }
     return 'success'; // notify Purchasely paywall to stop processing action
   } catch (e) {
     return 'failed';
@@ -508,14 +532,12 @@ await Purchasely.interceptAction(
 
       Offerings offerings = await Purchases.getOfferings();
       if (offerings.current != null && offerings.current.monthly != null) {
-        //get your product from revenuecat
-        Product product = offerings.current.monthly.product;
-
-        //start purchase
-        PurchaserInfo purchaserInfo = await Purchases.purchasePackage(product);
+        //start the purchase with your RevenueCat package (a user cancel throws: see catch)
+        PurchaserInfo purchaserInfo = await Purchases.purchasePackage(offerings.current.monthly);
         if (purchaserInfo.entitlements.all["my_entitlement_identifier"].isActive) {
-          // SDK auto-synchronizes on success in observer mode
+          // Unlock the content
         }
+        // The SDK synchronizes the transaction after success
         return PLYInterceptResult.success;
       }
       return PLYInterceptResult.failed;
@@ -533,7 +555,10 @@ await Purchasely.interceptAction(
       PurchaserInfo restoredInfo = await Purchases.restoreTransactions();
       // ... check restored purchaserInfo to see if entitlement is now active
 
-      // SDK auto-synchronizes on success in observer mode
+      if (Platform.isIOS) {
+        // iOS: the SDK does not synchronize after a restore (Android does)
+        Purchasely.synchronize().catchError((_) => false);
+      }
       return PLYInterceptResult.success;
     } on PlatformException {
       // Error restoring purchases
@@ -553,10 +578,12 @@ Purchasely.interceptAction(Purchasely.PresentationAction.purchase, async (info, 
       const packageToBuy = offerings.current.monthly;
       const { purchaserInfo } = await Purchases.purchasePackage(packageToBuy);
       if (typeof purchaserInfo.entitlements.active.my_entitlement_identifier !== 'undefined') {
-        // SDK auto-synchronizes on success in observer mode
+        // Unlock the content
       }
+      // The SDK synchronizes the transaction after success
+      return Purchasely.InterceptResult.success;
     }
-    return Purchasely.InterceptResult.success;
+    return Purchasely.InterceptResult.failed;
   } catch (e) {
     // Error making purchase
     return Purchasely.InterceptResult.failed;
@@ -566,7 +593,10 @@ Purchasely.interceptAction(Purchasely.PresentationAction.purchase, async (info, 
 Purchasely.interceptAction(Purchasely.PresentationAction.restore, async (info, parameters) => {
   try {
     await Purchases.restoreTransactions();
-    // SDK auto-synchronizes on success in observer mode
+    if (cordova.platformId === 'ios') {
+      // iOS: the SDK does not synchronize after a restore (Android does)
+      Purchasely.synchronize();
+    }
     return Purchasely.InterceptResult.success;
   } catch (e) {
     // Error restoring purchases
