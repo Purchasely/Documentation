@@ -1,8 +1,8 @@
 ---
 title: observer - using the Action Interceptor
 excerpt: >-
-  This sections provides a detailed overview of how to use the Paywall Action
-  Interceptor to process transactions in observer Mode
+  How a purchase works in observer mode, step by step, and how to process
+  transactions with the Paywall Action Interceptor
 deprecated: false
 hidden: false
 metadata:
@@ -16,25 +16,163 @@ next:
       slug: process-transactions-full-mode
       title: full mode
 ---
-<PaywallActionInterceptorWhatIsIt />
+In `observer` mode, your app processes the transactions and Purchasely observes them. The Purchasely SDK displays the screens. When the user taps a purchase or restore button, the SDK gives the action to your app with the <Glossary>Action Interceptor</Glossary>. Your app does the purchase, then tells the SDK the result.
 
-<PaywallActionInterceptorActionsIntercepted />
+This page shows the full flow, what the SDK does after each result, and the code for each platform.
+
+# How a purchase works in observer mode
+
+## Who does what
+
+| Step | Purchasely SDK | Your app |
+| :-- | :-- | :-- |
+| Display the screen | ✅ | |
+| Show the loading state on the button and call your interceptor | ✅ | |
+| Start the purchase or the restore (StoreKit, Google Play Billing, RevenueCat, your own system) | | ✅ |
+| Finish the transaction (StoreKit) or acknowledge it (Google Play) | | ✅ |
+| Unlock the content | | ✅ |
+| Return the result to the interceptor (`success`, `failed` or `notHandled`) | | ✅ |
+| Send the transaction to Purchasely (`synchronize()`) | ✅ after `success` on a purchase | ✅ after a purchase on a screen of your app, and after a restore on iOS |
+| Close the screen | ✅ only when the button has a close action after the purchase | ✅ in all other cases, with `Purchasely.closeAllScreens()` |
+
+In observer mode, the SDK never starts a purchase with the store. It also does not finish (StoreKit) or acknowledge (Google Play) a transaction. Your app must do these steps.
+
+The interceptor receives:
+
+* `info` (`PLYInterceptorInfo`): the `contentId` and the `presentation` object of the screen. It also gives the view that displays the screen: `info.controller` on iOS, `info.activity` on Android. Use it to show your own views or error messages above the screen.
+* the parameters of the action: for a purchase, the `plan` that the user selected (and, on Android, the `subscriptionOffer`). A restore has no parameters.
+
+## Flow 1: purchase on a Purchasely screen
+
+<!-- TODO(screenshot): upload tmp/observer-interceptor/1-storyboard.png to ReadMe, then replace this comment with:
+<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="A purchase in observer mode: the Purchasely screen, the loading state, the App Store sheet, the confirmation, the unlocked content" />
+-->
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant SDK as Purchasely screen (SDK)
+    participant App as Your app
+    participant Store as App Store / Google Play
+    participant PLY as Purchasely backend
+
+    User->>SDK: 1. Taps the purchase button
+    Note over SDK: Loading state, PURCHASE_TAPPED event
+    SDK->>App: 2. Calls the purchase interceptor with info and plan
+    App->>Store: 3. Starts the purchase
+    Store-->>App: 4. Returns the transaction
+    App->>Store: 5. Finishes or acknowledges the transaction
+    Note over App: Unlocks the content
+    App-->>SDK: 6. Returns success
+    SDK->>PLY: 7. synchronize() sends the transaction
+    Note over SDK: 8. Stops the loading state and runs the next actions of the button
+    App->>SDK: 8. Closes the screen with Purchasely.closeAllScreens() if the button has no close action
+```
+
+1. The user taps the purchase button. The SDK shows the loading state on the button and sends the `PURCHASE_TAPPED` event.
+2. The SDK calls your purchase interceptor with `info` and the `plan` (and the `subscriptionOffer` on Android).
+3. Your app starts the purchase with its system: StoreKit, Google Play Billing, RevenueCat or your own system.
+4. The store returns the transaction to your app.
+5. Your app finishes (StoreKit) or acknowledges (Google Play) the transaction, and unlocks the content.
+6. Your app returns `success` to the interceptor.
+7. The SDK calls `synchronize()`. It sends the transaction to the Purchasely backend, which updates the subscription, the events and the dashboards.
+8. The SDK stops the loading state and runs the next actions of the button. If the button has no close action after the purchase, your app closes the screen with `Purchasely.closeAllScreens()`.
+
+> 🚧 Return the result only when the purchase is complete
+>
+> The SDK calls `synchronize()` as soon as you return `success`. If you return `success` before the store confirms the purchase, Purchasely receives no new transaction.
+
+## Flow 2: purchase on a screen of your app
+
+When the user buys from a screen of your app (not a Purchasely screen), no interceptor runs. The SDK does not know about the purchase. Your app must call `Purchasely.synchronize()` after the transaction.
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant App as Your app (your own screen)
+    participant Store as App Store / Google Play
+    participant SDK as Purchasely SDK
+    participant PLY as Purchasely backend
+
+    User->>App: 1. Taps the purchase button of your screen
+    App->>Store: 2. Starts the purchase
+    Store-->>App: 3. Returns the transaction
+    App->>Store: 4. Finishes or acknowledges the transaction
+    App->>SDK: 5. Calls Purchasely.synchronize()
+    SDK->>PLY: 6. Sends the transaction
+```
+
+Call `Purchasely.synchronize()` after each transaction that your app completes outside of a Purchasely screen:
+
+```swift
+// After the transaction is complete (and finished) in your app
+Purchasely.synchronize(success: {
+    // Purchasely received the transaction
+}, failure: { error in
+    // Log the error: the purchase itself is not affected
+})
+```
+```kotlin
+// After the purchase is complete (and acknowledged) in your app
+Purchasely.synchronize(
+    onSuccess = { /* Purchasely received the purchase */ },
+    onError = { error -> /* Log the error: the purchase itself is not affected */ }
+)
+```
+```javascript React Native
+// After the purchase is complete in your app
+try {
+  await Purchasely.synchronize();
+} catch (e) {
+  // Log the error: the purchase itself is not affected
+}
+```
+```javascript Flutter
+// After the purchase is complete in your app
+try {
+  await Purchasely.synchronize();
+} on PlatformException catch (e) {
+  // Log the error: the purchase itself is not affected
+}
+```
+```javascript Cordova
+// After the purchase is complete in your app
+Purchasely.synchronize(
+  () => { /* Purchasely received the purchase */ },
+  (error) => { /* Log the error: the purchase itself is not affected */ }
+);
+```
+
+## Restore
+
+The restore flow is the same as Flow 1, with these differences:
+
+* The SDK sends the `RESTORE_TAPPED` event and calls your restore interceptor. A restore has no parameters.
+* Your app restores the purchases with its system, then returns `success` or `failed`.
+
+> 🚧 On iOS, call `Purchasely.synchronize()` in your restore interceptor
+>
+> On iOS (SDK 6.2), the SDK does not call `synchronize()` after a restore that returns `success`. Call `Purchasely.synchronize()` in your restore interceptor, before you return `success`. On Android, the SDK calls it for you.
+>
+> This also applies to React Native, Flutter and Cordova apps on iOS.
+
+## What the SDK does after each result
+
+| Result | Purchase | Restore | Loading state | Next actions of the button |
+| :-- | :-- | :-- | :-- | :-- |
+| `success` | The SDK calls `synchronize()` | Android: the SDK calls `synchronize()`. iOS: no call, call it yourself | Stops | The SDK runs them (for example a close) |
+| `failed` | No synchronization | No synchronization | Stops | Cancelled: the screen stays open. The SDK shows no error message: show your own if necessary |
+| `notHandled` | Nothing: in observer mode, the SDK does not start a store purchase | Nothing | Stops | The SDK runs them |
+
+> 📘 The user cancels the purchase
+>
+> No `cancelled` result exists. Return `failed` when the user cancels in the store sheet: the screen stays open and no synchronization occurs. With `success` or `notHandled`, the SDK runs the next actions of the button, for example a close.
+
+In observer mode, a purchase or restore button with no registered interceptor does nothing: the SDK stops the loading state and does not start a store purchase.
 
 # Implementing the Action Interceptor
 
-You register one interceptor per action with `Purchasely.interceptAction`. Each interceptor receives:
-
-* `info`: the `PLYInterceptorInfo` object containing the controller of the paywall to dismiss it or display content / error messages above it, and the presentation id and content id associated to this paywall
-* the typed action object (like a native `Purchase`, or Flutter's `PLYPurchasePayload`, carrying a real `plan` object and, on Android, a real nullable `subscriptionOffer` object) that contains the objects needed to perform the action
-* `completion` (iOS) / a returned `PLYInterceptResult` (Android): tells Purchasely how the action was handled. Returning the "not handled" result on a purchase action will lead the Purchasely SDK to trigger the native in-app purchase flow itself
-
-> ⚠️ Which result should you return after handling the action?
->
-> On a `login` action, return `completion(.notHandled)` (iOS) / `PLYInterceptResult.NOT_HANDLED` (Android) to refresh the paywall if the user has logged in
->
-> On a `purchase` action, if you've successfully handled the transaction, return `completion(.success)` (iOS) / `PLYInterceptResult.SUCCESS` (Android) to avoid a second trigger of the native in-app purchase flow by the SDK
->
-> Actions you do not register an interceptor for are handled automatically by the SDK, so the button will not keep spinning.
+You register one interceptor per action with `Purchasely.interceptAction`. The samples below show the `purchase` and `restore` interceptors.
 
 ## Processing transactions with your in-house system
 
@@ -436,6 +574,18 @@ Purchasely.interceptAction(Purchasely.PresentationAction.restore, async (info, p
   }
 });
 ```
+
+## Common errors
+
+| Error | Result | Correction |
+| :-- | :-- | :-- |
+| The interceptor returns `success` before the store confirms the purchase | Purchasely receives no new transaction | Return the result only when the purchase is complete |
+| The interceptor returns `success` when the user cancels | The SDK runs the next actions of the button (for example a close) | Return `failed` |
+| The screen stays open after the purchase | The button has no close action, and the SDK does not close the screen in observer mode | Call `Purchasely.closeAllScreens()`, or add a close action after the purchase |
+| No `Purchasely.synchronize()` after a purchase on a screen of your app | Purchasely does not see the transaction | Call `Purchasely.synchronize()` after each transaction outside of a Purchasely screen (Flow 2) |
+| No `Purchasely.synchronize()` in the restore interceptor on iOS | Purchasely does not see the restored purchases | Call `Purchasely.synchronize()` before you return `success` |
+| The app does not finish (StoreKit) or acknowledge (Google Play) the transaction | The SDK does not do it in observer mode | Finish or acknowledge each transaction in your app |
+| The interceptor does not return a result in one of its code paths | The button keeps its loading state, and the SDK writes a warning after 10 seconds | Return exactly one result in each code path |
 
 <br />
 
