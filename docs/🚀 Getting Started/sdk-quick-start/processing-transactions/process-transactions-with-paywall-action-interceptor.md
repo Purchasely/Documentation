@@ -47,7 +47,7 @@ The interceptor receives:
 ## Flow 1: purchase on a Purchasely screen
 
 {/* TODO(screenshot): upload tmp/observer-interceptor/1-storyboard.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="A purchase in observer mode: the Purchasely screen, the loading state, the App Store sheet, the confirmation, the unlocked content" />
+<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="A purchase in observer mode, steps 1 to 4: the Purchasely screen, the loading state, the App Store purchase sheet, the store confirmation" />
 */}
 
 ```mermaid
