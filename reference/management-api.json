@@ -29,7 +29,7 @@
             }
           }
         },
-        "description": "QUERY_TIMEOUT — a database query took too long and was cancelled. Retry with narrower filters, for example a shorter date_range."
+        "description": "QUERY_TIMEOUT — a database query took too long and was cancelled. Retry with narrower filters."
       },
       "RateLimited": {
         "content": {
@@ -16625,7 +16625,7 @@
             "style": "form"
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, case-insensitive: ISO 8601 billing periods such as P1D, P3D, P1W, P2W, P4W, P1M, P2M, P3M, P4M, P6M, P8M, P1Y, P2Y (aliases: DAY, WEEK, MONTH, YEAR).",
             "explode": true,
             "in": "query",
             "name": "period_types[]",
@@ -16667,7 +16667,7 @@
             "style": "form"
           },
           {
-            "description": "Filter by subscription status.",
+            "description": "Filter by subscription status, case-insensitive (ACTIVE, EXPIRED, BILLING_RETRY_PERIOD, BILLING_GRACE_PERIOD, PAUSED, REVOKED, UNPAID).",
             "explode": true,
             "in": "query",
             "name": "status[]",
@@ -24108,7 +24108,7 @@
             "style": "form"
           },
           {
-            "description": "Filter by plan period type (e.g. WEEK, MONTH, YEAR).",
+            "description": "Filter by plan billing period, case-insensitive: ISO 8601 billing periods such as P1D, P3D, P1W, P2W, P4W, P1M, P2M, P3M, P4M, P6M, P8M, P1Y, P2Y (aliases: DAY, WEEK, MONTH, YEAR).",
             "explode": true,
             "in": "query",
             "name": "period_types[]",
@@ -24150,7 +24150,7 @@
             "style": "form"
           },
           {
-            "description": "Filter by subscription status.",
+            "description": "Filter by subscription status, case-insensitive (ACTIVE, EXPIRED, BILLING_RETRY_PERIOD, BILLING_GRACE_PERIOD, PAUSED, REVOKED, UNPAID).",
             "explode": true,
             "in": "query",
             "name": "status[]",
