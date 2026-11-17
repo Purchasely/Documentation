@@ -1,7 +1,7 @@
 ---
 name: Action Interceptor - actions intercepted
 ---
-# What Paywall Actions can be intercepted?
+# What Screen Actions can be intercepted?
 
 You can intercept the following buttons being tapped:
 
