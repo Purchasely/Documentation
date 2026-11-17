@@ -33,9 +33,9 @@ The Cohort Retention Table is a **cohort retention matrix**. Each row represents
 | Column                                           | Description                                                                                                                            |
 | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
 | **Segment**                                      | The cohort time period (e.g., "2026, day 083" in daily view, or "2026, week 12" in weekly view) |
-| **Paid subscriptions (started and reactivated)** | The initial size of the cohort. It counts the subscriptions that entered the Segment during that period |
+| **Subscriptions (started and reactivated)**      | The initial size of the cohort. It counts the subscriptions that entered the Segment during that period |
 | **Revenue**                                      | Total revenue of this cohort, counted from the cohort entry until the subscription churns or leaves the Segment |
-| **ARPPU**                                        | Average Revenue Per Paid Subscription for this cohort (Revenue / Paid subscriptions)                                                   |
+| **ARPPU**                                        | Average Revenue Per Paid Subscription for this cohort (Revenue / Subscriptions)                                                   |
 | **Day 0, Day 1, Day 2...**                       | How many subscriptions from this cohort are still active and still in the Segment after N periods (or Week 0, Month 0, etc. depending on granularity). A subscription that starts and churns in the same period counts in the cohort of that period. It is not retained at Month 0. |
 
 ### How to read it
@@ -161,7 +161,7 @@ The retention table shows **how well each cohort retains** (as a percentage or c
 
 ### Why do weekly cohort totals not match the monthly total?
 
-When you add up the "Paid subscriptions" column across all weekly cohorts for a given month, the total may be **higher** than the single monthly cohort for the same period. This is not a data error.
+When you add up the "Subscriptions" column across all weekly cohorts for a given month, the total may be **higher** than the single monthly cohort for the same period. This is not a data error.
 
 **The reason:** when a subscription payment fails, it enters a **billing retry period** — the app store retries the charge over several days. If the subscription churns in week 10 and recovers in week 11, it appears as "started" in one cohort and "reactivated" in the other. The same subscription is counted **twice** across two weekly cohorts. In monthly view, both events fall within the same month, so it is counted only **once**.
 
