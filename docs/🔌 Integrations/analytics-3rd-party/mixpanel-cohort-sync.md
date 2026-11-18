@@ -63,23 +63,53 @@ The webhook uses Basic authentication:
 
 ## 3 - Adding the webhook destination in Mixpanel
 
-1. In Mixpanel, go to **Data > Destinations**.
-2. Click **Add Destination**, select **Webhook**, then click **Connect**.
-3. Paste the webhook URL of step 2.
-4. Enable Basic authentication. Type any username, and use your Client API key as the password.
-5. Save the destination.
+1. In Mixpanel, go to **Data > Destinations**, then open the **Destination Library**.
+
+<!-- TODO(screenshot): upload tmp/mixpanel-cohort-sync/1-destination-library.png to ReadMe, then replace this comment with:
+<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="Mixpanel Destination Library" />
+-->
+
+2. In **Category**, select **Webhooks**, then select **Custom Webhook**.
+
+<!-- TODO(screenshot): upload tmp/mixpanel-cohort-sync/2-webhooks-category.png to ReadMe, then replace this comment with:
+<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="Custom Webhook in the Webhooks category" />
+-->
+
+3. Fill in the **Connect to Custom Webhook** form:
+   - **Connector Name**: a name of your choice, for example `Purchasely`.
+   - **URL**: the webhook URL of step 2.
+   - **Properties To Export**: leave empty. Purchasely does not read them.
+   - **Username**: any value.
+   - **Password**: your Client API key.
+4. Click **Continue**.
+
+<!-- TODO(screenshot): upload tmp/mixpanel-cohort-sync/3-connect-custom-webhook.png to ReadMe, then replace this comment with:
+<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="Connect to Custom Webhook form" />
+-->
+
+The **Configuration** tab of the destination shows the status **Connected**.
+
+<!-- TODO(screenshot): upload tmp/mixpanel-cohort-sync/4-destination-configuration.png to ReadMe, then replace this comment with:
+<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="Custom Webhook destination connected" />
+-->
 
 ## 4 - Syncing a cohort
 
-1. Open the **Webhook** destination, then open the **Syncs** tab.
+1. Open the **Custom Webhook** destination, then open the **Syncs** tab.
 2. Click **Add Cohort Sync** and select the cohort.
 3. Select a recurring sync.
+
+The **Syncs** tab shows each cohort sync, the number of exported user profiles and the status.
+
+<!-- TODO(screenshot): upload tmp/mixpanel-cohort-sync/5-cohort-syncs.png to ReadMe, then replace this comment with:
+<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="Cohort syncs of the Custom Webhook destination" />
+-->
 
 Add one recurring sync for each cohort. Each cohort gives one Custom Audience in Purchasely.
 
 > 📘 Sync from Lexicon
 >
-> You can also start a sync from **Lexicon > Cohorts**. Open the menu of the cohort, then select **Export to... > Webhook**.
+> You can also start a sync from **Lexicon > Cohorts**. Open the menu of the cohort, select **Export to...**, then select your Custom Webhook connection.
 
 # Data freshness
 
