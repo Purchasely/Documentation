@@ -26,7 +26,7 @@ The CLI has its own website, with the installation, the full command reference a
 
 * **Access to the Management API.** The CLI sends its requests to the [Management API](https://docs.purchasely.com/docs/management-api), and this API is not enabled by default. Ask your Purchasely Customer Success Manager or the Purchasely support team to enable it on your account.
 * **A Management API key.** Create the key in the Purchasely Console, as the [Management API](https://docs.purchasely.com/docs/management-api#create-an-api-key) page explains. The scopes and the applications of the key set what the CLI can read and change.
-* **Node.js 22.12 or newer** on your computer or CI runner.
+* **macOS or Linux**, on Apple silicon, Intel, x64 or ARM. The CLI is a native program: you do not need Node.js.
 
 # Install and log in
 
@@ -37,6 +37,18 @@ curl -fsSL https://cli.purchasely.com/install.sh | sh
 ```
 
 The installer does not use `sudo`. Open a new terminal if the shell does not find the `purchasely` command.
+
+You can also install the CLI with Homebrew:
+
+```shell
+brew tap purchasely/cli https://github.com/Purchasely/cli
+brew trust purchasely/cli
+brew install purchasely
+```
+
+Homebrew 7 and later refuses a formula from a tap that you did not trust. Older versions do not have the `brew trust` command: skip it.
+
+Homebrew then updates the CLI with `brew upgrade purchasely`.
 
 Log in with your Management API key. On macOS, the CLI keeps the key in the keychain. On other systems, it keeps the key in a file that only your user can read:
 
