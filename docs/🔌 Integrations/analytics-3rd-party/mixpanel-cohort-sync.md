@@ -65,15 +65,13 @@ The webhook uses Basic authentication:
 
 1. In Mixpanel, go to **Data > Destinations**, then open the **Destination Library**.
 
-<!-- TODO(screenshot): upload tmp/mixpanel-cohort-sync/1-destination-library.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="Mixpanel Destination Library" />
--->
+![](https://files.readme.io/07172f5fb3b51894f83caa132d18cc8e779eb8caf0611239274872f59ed3f3f1-1-destination-library.png)
 
 2. In **Category**, select **Webhooks**, then select **Custom Webhook**.
 
-<!-- TODO(screenshot): upload tmp/mixpanel-cohort-sync/2-webhooks-category.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="Custom Webhook in the Webhooks category" />
--->
+![](https://files.readme.io/a0093cb7fdb7595a229ae1e3736b98025983935935c17735d9b0a079781f88e0-2-webhooks-category.png)
+
+<br />
 
 3. Fill in the **Connect to Custom Webhook** form:
    - **Connector Name**: a name of your choice, for example `Purchasely`.
@@ -83,15 +81,11 @@ The webhook uses Basic authentication:
    - **Password**: your Client API key.
 4. Click **Continue**.
 
-<!-- TODO(screenshot): upload tmp/mixpanel-cohort-sync/3-connect-custom-webhook.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="Connect to Custom Webhook form" />
--->
+![](https://files.readme.io/4e37118124b5370be027b8399ed7842b953b3b7cbc946cf2dc97964e7b6a1374-3-connect-custom-webhook.png)
 
 The **Configuration** tab of the destination shows the status **Connected**.
 
-<!-- TODO(screenshot): upload tmp/mixpanel-cohort-sync/4-destination-configuration.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="Custom Webhook destination connected" />
--->
+![](https://files.readme.io/396e2a86f997dd7ffaac639763856c650120204344a5a0d03a53a3bdd9d851ad-4-destination-configuration.png)
 
 ## 4 - Syncing a cohort
 
@@ -101,9 +95,7 @@ The **Configuration** tab of the destination shows the status **Connected**.
 
 The **Syncs** tab shows each cohort sync, the number of exported user profiles and the status.
 
-<!-- TODO(screenshot): upload tmp/mixpanel-cohort-sync/5-cohort-syncs.png to ReadMe, then replace this comment with:
-<Image align="center" className="border" border={true} src="REPLACE_WITH_FILES_README_IO_URL" alt="Cohort syncs of the Custom Webhook destination" />
--->
+![](https://files.readme.io/8c064fcbdcfd20c4fc401d578a076f2545c6fa0dbd16a2e60dfe3ce7e28e46f9-5-cohort-syncs.png)
 
 Add one recurring sync for each cohort. Each cohort gives one Custom Audience in Purchasely.
 
