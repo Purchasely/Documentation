@@ -9974,7 +9974,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard_v2/paid_subscription_retention": {
       "get": {
-        "description": "Paid-subscription retention cohort matrix for a single application.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Subscription retention cohort matrix for a single application.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_v2_paid_subscription_retention",
         "parameters": [
           {
@@ -10165,7 +10165,7 @@
             }
           },
           {
-            "description": "Restrict to a revenue segment. all = every subscription (default); paid = paying, at full price or on a paid (discounted) offer; full_price = paying the regular price; discounted = paying a reduced introductory/promotional price; free = on a free trial or free offer.",
+            "description": "Restrict to a payment segment. all = paid and free subscriptions (default). In all, a free trial start is an entry, and a conversion to paid continues that entry. paid = paid subscriptions only; a free trial is not an entry. full_price = subscriptions that pay the regular price. A subscription enters a cohort when its last payment starts to match the segment. A payment that does not match ends the entry, counted as a churn. A return is a new entry.",
             "in": "query",
             "name": "segment",
             "required": false,
@@ -10173,9 +10173,7 @@
               "enum": [
                 "all",
                 "paid",
-                "full_price",
-                "discounted",
-                "free"
+                "full_price"
               ],
               "type": "string"
             }
