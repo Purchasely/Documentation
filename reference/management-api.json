@@ -16706,6 +16706,24 @@
             }
           },
           {
+            "description": "Only subscriptions created in Purchasely at or after this time, ISO 8601 (2026-10-17 or 2026-10-17T00:00:00Z, UTC when no offset). Use it to reach older subscriptions instead of requesting a high page number. The creation date is when Purchasely started to track the subscription, not when the user subscribed in the store: the user can have held it for much longer.",
+            "in": "query",
+            "name": "created_after",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only subscriptions created in Purchasely before this time, ISO 8601 (2026-10-17 or 2026-10-17T00:00:00Z, UTC when no offset). Use it to reach older subscriptions instead of requesting a high page number. The creation date is when Purchasely started to track the subscription, not when the user subscribed in the store: the user can have held it for much longer.",
+            "in": "query",
+            "name": "created_before",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
             "explode": true,
             "in": "query",
@@ -24183,6 +24201,24 @@
             "description": "Filter by placement public_id.",
             "in": "query",
             "name": "placement",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only subscriptions created in Purchasely at or after this time, ISO 8601 (2026-10-17 or 2026-10-17T00:00:00Z, UTC when no offset). Use it to reach older subscriptions instead of requesting a high page number. The creation date is when Purchasely started to track the subscription, not when the user subscribed in the store: the user can have held it for much longer.",
+            "in": "query",
+            "name": "created_after",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only subscriptions created in Purchasely before this time, ISO 8601 (2026-10-17 or 2026-10-17T00:00:00Z, UTC when no offset). Use it to reach older subscriptions instead of requesting a high page number. The creation date is when Purchasely started to track the subscription, not when the user subscribed in the store: the user can have held it for much longer.",
+            "in": "query",
+            "name": "created_before",
             "required": false,
             "schema": {
               "type": "string"
