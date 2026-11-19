@@ -83,17 +83,6 @@ The SDK sends two events to your [event listener](ui-sdk-events-list):
 
 The two events carry `experiment_id` and `experiment_variant_id`, with the `placement_id` or the triggering event of the campaign.
 
-## Built-in attributes
-
-The SDK keeps the experiments of the user and sends them with the built-in attributes:
-
-| Attribute | Content |
-| :-- | :-- |
-| `ply_experiments` | The list of the experiments of the user. Each item has `experiment_id`, `experiment_variant_id`, `assigned_at` and `is_active`. |
-| `ply_holdout` | `in_holdout` and `version`. A user in the holdout gets no campaign. |
-
-The SDK clears the two attributes at the logout of a logged-in user, at a login from one identified user to another, and when you call `clearBuiltInAttributes()`. A login from an anonymous user keeps them.
-
 ## Inline view of a deactivated presentation
 
 When the SDK shows the Screen, or when you call `display()`, the SDK sends `EXPERIMENT_EXPOSED` itself. Do not call `exposed()` in these cases: the SDK then counts the view two times.
