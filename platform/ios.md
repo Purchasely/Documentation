@@ -1,6 +1,6 @@
 # Purchasely iOS SDK Documentation
 
-This document provides comprehensive documentation for integrating and using the Purchasely iOS SDK with Swift (version 6.2.0).
+This document provides comprehensive documentation for integrating and using the Purchasely iOS SDK with Swift (version 6.3.0).
 
 > 🤖 Install the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) for integration, review, debug and migration. It gives your AI coding assistant the `purchasely-integrate`, `purchasely-review`, `purchasely-debug` and `purchasely-migrate` skills.
 
@@ -33,7 +33,7 @@ This document provides comprehensive documentation for integrating and using the
 | iOS | 13.4+ |
 | Xcode | 14.0+ |
 | Swift | 5.5+ |
-| Purchasely SDK | 6.2.0 |
+| Purchasely SDK | 6.3.0 |
 
 > 📘 SwiftUI integration requires iOS 13.4 or later.
 
@@ -48,7 +48,7 @@ Purchasely supports three installation methods: CocoaPods, Carthage, and Swift P
 Add Purchasely to your `Podfile`:
 
 ```ruby
-pod 'Purchasely', '6.2.0'
+pod 'Purchasely', '6.3.0'
 ```
 
 Then run:
@@ -78,7 +78,7 @@ carthage update
    ```
    https://github.com/Purchasely/Purchasely-iOS
    ```
-3. Select the version you want to use (6.2.0 or later)
+3. Select the version you want to use (6.3.0 or later)
 4. Click **Add Package**
 
 ---
@@ -1171,4 +1171,4 @@ Purchasely
 
 ---
 
-*This documentation is for Purchasely iOS SDK version 6.2.0*
+*This documentation is for Purchasely iOS SDK version 6.3.0*

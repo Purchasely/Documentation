@@ -23,6 +23,8 @@ next:
 | `APP_STARTED` | The app was launched | `.appStarted` / `AppStarted` |
 | `APP_UPDATED` | The application version changed since last launch | `.appUpdated` / `AppUpdated` |
 | `STORE_PRODUCT_FETCH_FAILED` | The Purchasely SDK couldn't fetch the product from the store | `.productFetchError` / `ProductFetchError` |
+| `EXPERIMENT_ASSIGNED` | A campaign assigned the user to an arm of an experiment. It carries `experiment_id` and `experiment_variant_id` *(>= SDK v6.3)* | `.experimentAssigned` / `ExperimentAssigned` |
+| `EXPERIMENT_EXPOSED` | The user reached the arm of an experiment: the SDK showed its Screen, or the arm has no Screen (`DEACTIVATED`). It carries `experiment_id` and `experiment_variant_id` *(>= SDK v6.3)* | `.experimentExposed` / `ExperimentExposed` |
 
 # UI & User Behavioral Events
 
@@ -32,7 +34,8 @@ next:
 | `PRESENTATION_VIEWED` | The Screen was opened | `.presentationViewed` / `PresentationViewed` |
 | `PRESENTATION_CLOSED` | The Screen was closed | `.presentationClosed` / `PresentationClosed` |
 | `PRESENTATION_SELECTED` | The user selected a different tab / tile in the Screen | `.presentationSelected` / `PresentationSelected` |
-| `PRESENTATION_OPENED` | The user opened a different tab / tile in the Screen | `.presentationOpened` / `PresentationOpened` |
+| `PRESENTATION_OPENED` | The user tapped a button with the **Open Screen** action. On iOS, the **Open Placement** action also sends this event | `.presentationOpened` / `PresentationOpened` |
+| `PLACEMENT_OPENED` | Android only: the user tapped a button with the **Open Placement** action. It carries `placement_id` *(>= SDK v6.3)* | - / `PlacementOpened` |
 | `PLAN_SELECTED` | The user selected a Plan on the Screen<br>*Deprecated with SDK versions 5.0+, replaced by `OPTIONS_SELECTED`* | `.planSelected` / `PlanSelected` |
 | `PURCHASE_TAPPED` | The user tapped on a purchase button | `.purchaseTapped` / `PurchaseTapped` |
 | `PURCHASE_CANCELLED` | The user cancelled the purchase action | `.purchaseCancelled` / `PurchaseCancelled` |

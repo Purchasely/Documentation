@@ -55,11 +55,11 @@ For hybrid apps, our <Glossary>bridge sdk</Glossary>s are available for:
 
 | Platform         | SDK Version |
 | :--------------- | :---------- |
-| **iOS**          | 6.2.0       |
-| **Android**      | 6.2.0       |
-| **Flutter**      | 6.2.0       |
-| **React Native** | 6.2.0       |
-| **Cordova**      | 6.2.0       |
+| **iOS**          | 6.3.0       |
+| **Android**      | 6.3.0       |
+| **Flutter**      | 6.3.0       |
+| **React Native** | 6.3.0       |
+| **Cordova**      | 6.3.0       |
 
 # Implementation process
 

@@ -1,6 +1,6 @@
 # Purchasely React Native SDK Documentation
 
-This guide covers the Purchasely React Native SDK **v6** (`6.2.0`) for JavaScript / TypeScript apps. The bridge wraps the Purchasely 6.2.0 native SDKs (iOS `Purchasely 6.2.0`, Android `io.purchasely:core 6.2.0`) and displays **Presentations** (Screens / paywalls) configured in the Console through placements, direct `screen` lookups, campaigns, deeplinks and Flows.
+This guide covers the Purchasely React Native SDK **v6** (`6.3.0`) for JavaScript / TypeScript apps. The bridge wraps the Purchasely 6.3.0 native SDKs (iOS `Purchasely 6.3.0`, Android `io.purchasely:core 6.3.0`) and displays **Presentations** (Screens / paywalls) configured in the Console through placements, direct `screen` lookups, campaigns, deeplinks and Flows.
 
 > 🤖 Install the [Purchasely AI Plugin](https://docs.purchasely.com/docs/purchasely-ai-plugin) for integration, review, debug and migration. It gives your AI coding assistant the `purchasely-integrate`, `purchasely-review`, `purchasely-debug` and `purchasely-migrate` skills.
 
@@ -43,7 +43,7 @@ This guide covers the Purchasely React Native SDK **v6** (`6.2.0`) for JavaScrip
 | compileSdkVersion | - | 36 |
 | targetSdkVersion | - | 35 |
 
-The SDK packages are pinned to `6.2.0`. Pin every Purchasely package to that **exact** version, and do **not** use a floating range (`^6.2.0`, `6.x`, …).
+The SDK packages are pinned to `6.3.0`. Pin every Purchasely package to that **exact** version, and do **not** use a floating range (`^6.3.0`, `6.x`, …).
 
 ---
 
@@ -54,7 +54,7 @@ We rely on [NPM](https://www.npmjs.com/package/react-native-purchasely) to distr
 ### Main Dependency
 
 ```shell
-npm install react-native-purchasely@6.2.0 --save
+npm install react-native-purchasely@6.3.0 --save
 ```
 
 Don't forget to change the minimum OS versions to match Purchasely requirements (iOS 13.4 / Android minSdk 23).
@@ -79,7 +79,7 @@ Then run:
 cd ios && pod install
 ```
 
-The iOS native dependency (`Purchasely 6.2.0`) is published on the CocoaPods trunk, so it resolves from the public repositories with no extra configuration.
+The iOS native dependency (`Purchasely 6.3.0`) is published on the CocoaPods trunk, so it resolves from the public repositories with no extra configuration.
 
 ### Android Setup
 
@@ -102,7 +102,7 @@ allprojects {
 }
 ```
 
-The Android native dependencies (`io.purchasely:core` / `google-play` / `player` `6.2.0`) are published on **Maven Central**, so they resolve from the public repositories with no extra configuration.
+The Android native dependencies (`io.purchasely:core` / `google-play` / `player` `6.3.0`) are published on **Maven Central**, so they resolve from the public repositories with no extra configuration.
 
 ### Android Dependencies
 
@@ -115,7 +115,7 @@ With Android, you can choose to use Google Play Store and/or Huawei AppGallery a
 If your app is distributed on the **Google Play Store**, you **must** install the Google Play Billing dependency:
 
 ```shell
-npm install @purchasely/react-native-purchasely-google@6.2.0 --save
+npm install @purchasely/react-native-purchasely-google@6.3.0 --save
 ```
 
 **Why is this required?**
@@ -131,7 +131,7 @@ npm install @purchasely/react-native-purchasely-google@6.2.0 --save
 If your paywalls contain videos, you **must** install the Android video player dependency:
 
 ```shell
-npm install @purchasely/react-native-purchasely-android-player@6.2.0 --save
+npm install @purchasely/react-native-purchasely-android-player@6.3.0 --save
 ```
 
 **Why is this required?**
@@ -141,22 +141,22 @@ npm install @purchasely/react-native-purchasely-android-player@6.2.0 --save
 
 #### Version Matching (Critical)
 
-> ⚠️ **All Purchasely packages must be pinned to the exact same version.** Mismatched versions cause runtime errors. Pin each package to `6.2.0` — do **not** use a floating range.
+> ⚠️ **All Purchasely packages must be pinned to the exact same version.** Mismatched versions cause runtime errors. Pin each package to `6.3.0` — do **not** use a floating range.
 
 ```json
 // package.json
 "dependencies": {
-  "react-native-purchasely": "6.2.0",
-  "@purchasely/react-native-purchasely-google": "6.2.0",
-  "@purchasely/react-native-purchasely-android-player": "6.2.0"
+  "react-native-purchasely": "6.3.0",
+  "@purchasely/react-native-purchasely-google": "6.3.0",
+  "@purchasely/react-native-purchasely-android-player": "6.3.0"
 }
 ```
 
 The two remaining alternative stores follow the same pattern:
 
 ```shell
-npm install @purchasely/react-native-purchasely-amazon@6.2.0 --save
-npm install @purchasely/react-native-purchasely-huawei@6.2.0 --save
+npm install @purchasely/react-native-purchasely-amazon@6.3.0 --save
+npm install @purchasely/react-native-purchasely-huawei@6.3.0 --save
 ```
 
 #### Complete Android Installation Example
@@ -165,9 +165,9 @@ For a typical app distributed on Google Play Store with video paywalls:
 
 ```shell
 # Install all required dependencies (same exact version)
-npm install react-native-purchasely@6.2.0 --save
-npm install @purchasely/react-native-purchasely-google@6.2.0 --save
-npm install @purchasely/react-native-purchasely-android-player@6.2.0 --save
+npm install react-native-purchasely@6.3.0 --save
+npm install @purchasely/react-native-purchasely-google@6.3.0 --save
+npm install @purchasely/react-native-purchasely-android-player@6.3.0 --save
 ```
 
 Then initialize with the Google store:
@@ -1164,7 +1164,7 @@ Each call replaces the full list of refused purposes. Pass every refused purpose
 
 2. **Purchases not validating / paywall does not auto-close after purchase**: You are likely in the new default `'observer'` mode. Pass `.runningMode('full')` for Purchasely to own the purchase flow. In observer mode, presentations do not auto-close — dismiss them yourself with `request.close()`.
 
-3. **Purchases not working on Android**: Verify that you've added `@purchasely/react-native-purchasely-google` and that all Purchasely packages are pinned to the exact same version (`6.2.0`).
+3. **Purchases not working on Android**: Verify that you've added `@purchasely/react-native-purchasely-google` and that all Purchasely packages are pinned to the exact same version (`6.3.0`).
 
 4. **Paywall not displaying**: Check that:
    - The placement / screen exists in your Purchasely Console

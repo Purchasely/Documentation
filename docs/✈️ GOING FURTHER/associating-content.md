@@ -90,10 +90,14 @@ Purchasely.purchase(plan: plan,	contentId: "my_content_id", success: {
 }
 ```
 ```kotlin Kotlin
-Purchasely.purchase(this@MainActivity, plan, offer, "content_id", object: PurchaseListener {
-    override fun onPurchaseStateChanged(state: State) {
+Purchasely.purchase(this@MainActivity, plan, offer, "content_id",
+    onSuccess = { plan ->
+        // Unlock / reload content and display a success / thank you message to user
+    },
+    onError = { error ->
+        // Display error
     }
-})
+)
 ```
 ```typescript React Native
 try {

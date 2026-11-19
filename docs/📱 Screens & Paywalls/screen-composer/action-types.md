@@ -153,6 +153,12 @@ Add text to display in the button:
 * On iOS, the URL will be open in the default web browser
 * On Android, it will be open in a webview inside the application
 
+On Android, from SDK 6.3.0, the scheme of the URL selects what opens:
+
+* `http` and `https` links open in the web view.
+* Other links (for example `mailto:`, `tel:` or a deeplink of your app) open with the app that handles them.
+* The SDK blocks `javascript`, `file`, `content`, `intent` and `data` links. It logs an error and opens nothing.
+
 <Callout icon="📘" theme="info">
   ### For ex., You can provide a link to Q\&A / Survey questionnaire / Terms and Conditions.
 </Callout>

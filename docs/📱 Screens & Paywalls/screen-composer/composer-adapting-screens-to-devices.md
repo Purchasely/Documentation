@@ -118,3 +118,19 @@ Each device (Smartphone, Tablet, TV) has its own display mode setting that can b
 > 📘 Display mode is per device, not per orientation
 >
 > Unlike layouts, the display mode cannot be customized per orientation (Portrait vs Landscape). It applies to the device regardless of orientation.
+
+# Ignore device text size
+
+> 📘 Availability
+>
+> SDK 6.3.0 and later, on iOS, Android, React Native, Flutter and Cordova.
+
+By default, the text of a Screen follows the text size that the user sets in the device settings. A very large text size can break the layout of a Screen: the text can be cut or can overlap.
+
+Turn on **Ignore device text size** in the layout settings of the Screen. The text of this Screen then keeps the size that you set in the Screen Composer, also when the user selects a large text size.
+
+> 🚧 Accessibility
+>
+> This setting reduces the accessibility of the Screen. Users who need large text cannot enlarge it. Use it only on a Screen that you cannot adapt to large text.
+
+An older SDK ignores this setting: the text follows the device text size.

@@ -71,14 +71,14 @@ Add the Purchasely artifacts to your app module. **All Purchasely dependencies m
 ```kotlin
 dependencies {
     // Core SDK — required. Contains everything except the store and the video player.
-    implementation("io.purchasely:core:6.2.0")
+    implementation("io.purchasely:core:6.3.0")
 
     // Google Play Billing — required for purchases on the Google Play Store.
     // Provides the GoogleStore class added to Purchasely.Builder.
-    implementation("io.purchasely:google-play:6.2.0")
+    implementation("io.purchasely:google-play:6.3.0")
 
     // Optional — video support for Screens containing video components.
-    implementation("io.purchasely:player:6.2.0")
+    implementation("io.purchasely:player:6.3.0")
 }
 ```
 
@@ -94,9 +94,9 @@ For Huawei or Amazon stores, add their Purchasely store artifact instead of, or 
 >
 > Mismatched versions cause runtime errors. Keep every Purchasely artifact on the same version:
 > ```kotlin
-> implementation("io.purchasely:core:6.2.0")
-> implementation("io.purchasely:google-play:6.2.0")
-> implementation("io.purchasely:player:6.2.0")
+> implementation("io.purchasely:core:6.3.0")
+> implementation("io.purchasely:google-play:6.3.0")
+> implementation("io.purchasely:player:6.3.0")
 > ```
 
 > 📘 Google Play Billing

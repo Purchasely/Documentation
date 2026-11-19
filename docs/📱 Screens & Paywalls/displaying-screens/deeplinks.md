@@ -45,6 +45,18 @@ This deeplink will open the App Store / Play Store setttings for the user to upd
 
 `app_scheme://ply/update_billing`
 
+## Restore purchases
+
+This deeplink restores the purchases of the user, as the **Restore** button of a paywall does.
+
+`app_scheme://ply/restore`
+
+> 📘 Availability
+>
+> SDK 6.3.0 and later, on iOS and Android. The deeplink works in [full mode](full-mode) only. In [observer mode](observer-mode), the SDK ignores it.
+
+When the restore finds a subscription, the [subscription status listener](subscription-status-listener) receives a change with the reason `RESTORED`.
+
 # Be notified of purchase from a deeplink paywall
 
 Usually when a paywall / screen is instantiated by the app, a closure is called back to inform the app of what has happened with the paywall . However, when a deeplink is called, as you don't instantiate the paywall yourself, no closure will be called.

@@ -32,6 +32,14 @@ If you want to leverage these analytics and gain real-time insights on how users
 
 <br />
 
+# Subscription Status Delegate / Listener
+
+From SDK 6.3.0, the SDK tells your app if the user has an active subscription: at start, and each time a subscription is purchased, restored, redeemed from the web or expires.
+
+Read [Subscription status listener](subscription-status-listener) for the implementation.
+
+<br />
+
 # Web2App Redemption Delegate / Listener
 
 When a user opens a `ply/redeem/TOKEN` deeplink, the Purchasely SDK redeems the web subscription. The SDK reports the outcome to your app. Your app can also draw the result screen itself, instead of the built-in alert.

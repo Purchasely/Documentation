@@ -35,6 +35,11 @@ The Purchasely SDK manages deeplinks for:
 
 <br />
 
+* **Restore purchases**\
+  This deeplink `app_scheme://ply/restore` restores the purchases of the user, as the Restore button of a paywall does. It works in Full mode only, from SDK 6.3.0.
+
+<br />
+
 * **Web2App redemption**\
   This deeplink `{app_scheme}://ply/redeem/{token}?auid={anonymous_user_id}` transfers a subscription bought on the web to the app
 

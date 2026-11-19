@@ -46,6 +46,7 @@ Below is a summary (excerpt) of the categories of processing conducted by Purcha
 | **Processing #2** | All the operations enabling the statistical analysis, audience measurement and optimization of the User Journey | Data Controller's legitimate interest _or_ with user consent | Yes       |
 | **Processing #3** | All the operations enabling the customization of the User journey and of the commercial offers presented        | Data Controller's legitimate interest _or_ with user consent | Yes       |
 | **Processing #4** | All the operations enabling the recommendation of commercial offers displayed spontaneously                     | Data Controller's legitimate interest _or_ with user consent | Yes       |
+| **Processing #5** | Technical support and incident investigation at the level of the user                                           | Data Controller's legitimate interest _or_ with user consent | Yes       |
 
 More details on each processing are provided in the [Data Processing Agreement](https://www.purchasely.com/hubfs/PURCHASELY-DATA-PROCESSING-AGREEMENT.pdf).
 
@@ -329,9 +330,50 @@ Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.allNonE
 
 <br />
 
-* **Effect**: This disables Processing #2, #3, and #4 simultaneously.
+* **Effect**: This disables Processing #2, #3, #4 and #5 simultaneously.
+
+> ℹ️ From SDK 6.3.0, `allNonEssentials` also includes the [Support Investigation](#support-investigation) purpose. A refusal that an older SDK version stored does not change after the update. Call `revokeDataProcessingConsent` again to send it with the new purposes.
 
 > ℹ️ `allNonEssentials` does not include the [Refund Handling](#refund-handling-ios-only) purpose. Add it to the same call when the user refuses it too.
+
+<br />
+
+## Support Investigation
+
+<Callout icon="📘" theme="info">
+  ### Availability
+
+  This purpose is available from SDK **6.3.0** on iOS, Android, React Native, Flutter and Cordova.
+</Callout>
+
+* **Purpose**: Processing #5 of the Data Processing Agreement. Purchasely can investigate a technical problem or an incident at the level of one user.
+
+<br />
+
+* **When to revoke?** Revoke it when the user refuses that Purchasely uses their data for support investigations.
+
+<br />
+
+* **How to revoke?**
+  ```swift
+  Purchasely.revokeDataProcessingConsent(for: [.supportInvestigation])
+  ```
+  ```kotlin
+  Purchasely.revokeDataProcessingConsent(setOf(PLYDataProcessingPurpose.SupportInvestigation))
+  ```
+  ```javascript React Native
+  Purchasely.revokeDataProcessingConsent([PLYDataProcessingPurpose.SUPPORT_INVESTIGATION])
+  ```
+  ```javascript Flutter
+  Purchasely.revokeDataProcessingConsent([PLYDataProcessingPurpose.supportInvestigation]);
+  ```
+  ```javascript Cordova
+  Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.supportInvestigation])
+  ```
+
+<br />
+
+* **Effect**: The SDK sends `support-investigation` in the list of refused purposes. Purchasely then leaves this user out of the support investigations at the level of the user. The SDK behavior on the device does not change.
 
 <br />
 

@@ -300,6 +300,13 @@ Each store has its own dependency that you must install. Read our [installation 
 
 <UserType />
 
+## Start in the background (Android)
+
+From SDK 6.3.0, the Android SDK starts only when a screen of your app is open. When you call `start()` in the background (for example in a push handler or a job), the SDK waits for the next screen of your app.
+
+- A user attribute or a dynamic offering that you set while the start waits is dropped. Set it again after `start()` succeeds.
+- The SDK sends `APP_STARTED` only after a successful start. The count of app sessions on Android can decrease.
+
 ## Callback on initialization
 
 If you **rely on a specific user subscription status**, such as eligibility for an introductory offer or current active subscription, **wait for the start method callback**. At that point, the SDK will have gathered all the necessary information to provide an accurate answer.<br />This **also applies when you want to display a placement** with an [Audience](segmenting-your-user-base) based on current or past subscription status.

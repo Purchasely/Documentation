@@ -64,6 +64,68 @@ Campaigns associated with [Placements](displaying-screens-placements) do **not**
 
 In other words, if your app already calls Placements, Placement-based campaigns will work out of the box with no code change.
 
+# Campaign experiments
+
+> 📘 Availability
+>
+> SDK 6.3.0 and later, on iOS, Android, React Native, Flutter and Cordova.
+
+A campaign can run an experiment: Purchasely assigns each user to one arm of the experiment. An arm can have no Screen. The SDK then gets a presentation of type `DEACTIVATED` and shows nothing.
+
+## SDK events
+
+The SDK sends two events to your [event listener](ui-sdk-events-list):
+
+| Event | When the SDK sends it |
+| :-- | :-- |
+| `EXPERIMENT_ASSIGNED` | A campaign answer assigns the user to a new experiment. One event for each new experiment. |
+| `EXPERIMENT_EXPOSED` | The user reaches the arm: the SDK shows its Screen, or `display()` gets a `DEACTIVATED` presentation. |
+
+The two events carry `experiment_id` and `experiment_variant_id`, with the `placement_id` or the triggering event of the campaign.
+
+## Built-in attributes
+
+The SDK keeps the experiments of the user and sends them with the built-in attributes:
+
+| Attribute | Content |
+| :-- | :-- |
+| `ply_experiments` | The list of the experiments of the user. Each item has `experiment_id`, `experiment_variant_id`, `assigned_at` and `is_active`. |
+| `ply_holdout` | `in_holdout` and `version`. A user in the holdout gets no campaign. |
+
+The SDK clears the two attributes at the logout of a logged-in user, at a login from one identified user to another, and when you call `clearBuiltInAttributes()`. A login from an anonymous user keeps them.
+
+## Inline view of a deactivated presentation
+
+When the SDK shows the Screen, or when you call `display()`, the SDK sends `EXPERIMENT_EXPOSED` itself. Do not call `exposed()` in these cases: the SDK then counts the view two times.
+
+When you fetch a placement for an inline view and the presentation is `DEACTIVATED`, the SDK does not build a view. Call `exposed()` once, at the moment the user would have seen the Screen:
+
+```swift Swift
+let presentation = try await PLYPresentationBuilder
+    .forPlacementId("<PLACEMENT_ID>")
+    .build()
+    .preload()
+
+if presentation.type == .deactivated {
+    // No Screen to show: tell Purchasely that the user reached the arm
+    presentation.exposed()
+} else {
+    // Show the inline view of the presentation
+}
+```
+```kotlin Kotlin
+val presentation = PLYPresentation { placementId("<PLACEMENT_ID>") }.preload()
+
+if (presentation.type == PLYPresentationType.DEACTIVATED) {
+    // No Screen to show: tell Purchasely that the user reached the arm
+    presentation.exposed()
+} else {
+    // Show the inline view of the presentation
+}
+```
+
+On React Native, Flutter and Cordova, call `exposed()` on the presentation that `preload()` gives.
+
 # Summary
 
 | Delivery method | SDK requirement |

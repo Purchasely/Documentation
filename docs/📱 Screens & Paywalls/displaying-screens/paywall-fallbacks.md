@@ -60,7 +60,7 @@ These fallbacks are automatic. You do not need to change your app.
 A Screen can use a component that an older SDK version cannot show. To give a simpler Screen to these users, use an [audience](audiences) on the SDK version:
 
 1. Duplicate the Screen, then remove the components that the older SDK cannot show.
-2. Create an audience with the criterion **SDK version** **is lower than** the minimum version (for example `6.2.0`).
+2. Create an audience with the criterion **SDK version** **is lower than** the minimum version (for example `6.3.0`).
 3. In the placement, add this audience above the other audiences, and associate it with the simpler Screen.
 
 The SDK sends its version with each request, so the server selects the correct Screen. The [SDK versions](sdk-versions) dashboard shows how many of your users have each SDK version.
