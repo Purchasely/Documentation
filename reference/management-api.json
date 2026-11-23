@@ -6294,7 +6294,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard/events": {
       "get": {
-        "description": "Event counts per day for an application, or across every application you can access.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Server-side events recorded by Purchasely, counted per period and per event type: the raw layer under every other chart, with the webhook event names.\n\n- Returns `{data: {\"<period>\": {period, Activate: n, SubscriptionStarted: n, SubscriptionRenewed: n, TransactionProcessed: n, ...}}}`: one object per period, one key per event type that occurred, names in CamelCase (`SUBSCRIPTION_STARTED` → `SubscriptionStarted`). Every event type is returned, there is no event selection.\n- Definition: one count per backend event, dated on the day Purchasely created it. No deduplication and no lifecycle logic: a renewal counts one `SubscriptionRenewed`, one `TransactionProcessed` and one `Activate` the same day. `Activate` / `Deactivate` are entitlement events (access granted or removed) and fire on every receipt; the others are lifecycle events.\n- Counted: production events, one-time purchase events included, every listed event type included (`RetentionMessageRequested`, `InstallmentPaid`, `RenewalDisabled`, `SubscriptionDeferred`, ...). Not counted: sandbox, SDK events, future-dated events, and the events of subscriptions received through Family Sharing (family members' subscriptions; the purchaser's own is counted), so `FamilySharedRevoked` is always 0 here.\n- Unit: count of events. A flow: summable across periods, never comparable to subscription counts (`subscription_activations`, `paid_subscription_movements` dedup per subscription and apply rules).\n- Filters applied: platform_names, plans, period_types, countries (store country), audiences, placements, screens, ab_test_variants. Declared but NOT applied: campaigns, offer_types, family_sharing, promotional_offers. Omitting `application_id` blends every app you can access.\n- Not this tool: activations, movements, retention, revenue; use the dedicated tools. Use this one to audit volumes (billing retries, grace periods, refunds, pauses) and to reconcile with webhooks.\n- Store specifics: pause events are Google Play only; `InstallmentPaid` / `InstallmentRefunded` are App Store monthly-commitment plans only.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/subscription-events\n- Recommended periodicity: DAY for ranges up to ~60 days, WEEK up to ~6 months, MONTH beyond.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_events",
         "parameters": [
           {
@@ -6591,7 +6591,7 @@
             "$ref": "#/components/responses/QueryTimeout"
           }
         },
-        "summary": "Event counts by period",
+        "summary": "Server-side event counts by period",
         "tags": [
           "Dashboard"
         ],
@@ -6897,7 +6897,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard/funnel": {
       "get": {
-        "description": "Conversion funnel (views -> purchases) for an application, or across every application you can access.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Subscription funnel for the subscriptions that **started** in the date range, grouped by one `dimension` (platform, country, plan, placement, screen). Distinct subscriptions per step; the console draws it as a Sankey diagram with a table.\n\n- Returns `{data: [{name, results: {subscription_started_count, trial_started_count, trial_converted_count, trial_not_converted_count, first_renewals_count, subscription_terminated_count}}]}`: one entry per dimension value. No periods: one funnel for the whole range.\n- Cohort: subscriptions whose original purchase date falls in `date_range` (both ends inclusive). Their later events count whatever their date, so a recent cohort shows few conversions and renewals yet, and a past cohort keeps moving.\n- Steps: `subscription_started_count` = started (or reactivated) directly at full price, without offer. `trial_started_count` = started with an offer of any kind: free trial, intro offer, promo code, promotional offer (the console labels it \"Trial started\"). `trial_converted_count` / `trial_not_converted_count` = those offers converted to paid, or ended without converting (the rest are still running). `first_renewals_count` = subscriptions with at least one renewal following a full-price period, converted offers included. `subscription_terminated_count` = full-price direct starts that ended without ever renewing; a converted offer that churns later is not counted here.\n- Reactivations: a lapsed subscriber who comes back on the same subscription counts as a start in the cohort of the original purchase date, not of the comeback.\n- Not counted: sandbox, subscriptions received through Family Sharing (the purchaser's own is counted), one-time purchases. Data exists since 2024 (the start date varies per app); older cohorts are partial.\n- Dimension values: `screen`, `placement` and `plan` are the ones attached to the subscription at purchase (\"Unknown\" when none); `country` = store country (\"Unknown\" = blank); `platform` in upper case (IOS, ANDROID, ...).\n- Filters applied: platform_names, plans, period_types (through the plan distributions), countries (store country). Declared but NOT applied: screens, placements, audiences, campaigns, ab_test_variants, offer_types, family_sharing, promotional_offers. Omitting `application_id` blends every app you can access.\n- Not this tool: paywall views and view-to-purchase conversion (`dashboard_v2_conversion`), subscription counts per period (`dashboard_v2_subscription_activations`), raw event volumes (`dashboard_events`).\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/funnel\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_funnel",
         "parameters": [
           {
@@ -7195,7 +7195,7 @@
             "$ref": "#/components/responses/QueryTimeout"
           }
         },
-        "summary": "Conversion funnel",
+        "summary": "Subscription funnel by start cohort",
         "tags": [
           "Dashboard"
         ],
@@ -7495,7 +7495,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard/mrr_evolution_live": {
       "get": {
-        "description": "Live MRR evolution (by day and by month) for an application, or across every application you can access.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "MRR: monthly recurring revenue as a snapshot on each date, in the app's dashboard currency.\n\n- Returns `{data: {mrr: {values: {by_day: [...], by_month: [...]}, variations: []}}}`. `by_day`: one `{period, value}` per period boundary of `date_range` (the first day of each month in MONTH periodicity, each Monday in WEEK). `by_month`: four snapshots tagged in `date_kinds`: `selected_date` (the range end date, capped at today) and `one_month_before`, `three_months_before`, `six_months_before`, taken from the calendar boundary of the last period, not from the end date. `variations` is always empty: compute changes from `by_month`.\n- Definition: on a date, the sum over every paid subscription transaction whose service period covers that date of its amount divided by the days of that period, times 30, converted at that date's rate, rounded. A weekly plan at 7 counts 30; a yearly plan at 100 counts about 8.2; a free trial counts 0; a paid intro offer counts its real price over its real period. Based on transaction amounts and service dates, not on entitlement: a pause or a billing retry changes nothing until the paid period ends.\n- Refunds: the refund is spread over the service period it refunds, so MRR is restated back to that period's start; it does not drop on the refund date.\n- Unit: amount in the app's dashboard currency. A stock, never a flow: never sum points, never average them; read one date. For a month-end figure, read `selected_date` with `date_range` ending on the last day of the month, or use `periodicity=DAY`.\n- Filters applied: platform_names, countries (store country), plans, period_types, screens, placements, audiences, ab_test_variants, offer_types. There is no campaign filter: an MRR per campaign has no meaning here. Omitting `application_id` blends every app the caller can access, converted in one dashboard currency.\n- Not this tool: cash revenue by day (`subscriptions_revenues`), the paying base (`subscription_evolution` with segment=paid), entries and exits (`paid_subscription_movements`).\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/mrr\n- Recommended periodicity: MONTH for trends, DAY for a precise date.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_mrr_evolution_live",
         "parameters": [
           {
@@ -7668,20 +7668,6 @@
             "style": "form"
           },
           {
-            "description": "Filter by campaign public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "campaigns[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
             "description": "Filter by placement public_id.",
             "explode": true,
             "in": "query",
@@ -7801,7 +7787,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard/one_time_purchases_revenues": {
       "get": {
-        "description": "Daily one-time-purchase revenue by country/plan, for an application or across every application you can access.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "One-time purchase revenue: gross money paid by users for consumables and non-consumables, tax included, before store commission, in the app's dashboard currency. Slow, and scheduled to be rebuilt on the faster analytics stack.\n\n- Returns `{data: {revenue: {values: [{period, apple, google, ...}]}, revenue_by_country: {values: [{period, <country name>: amount, ...}]}, revenue_by_plan: {values: [{period, <plan name>: amount, ...}]}}}`. Three views of the same total; amounts in the dashboard currency, with up to two decimals.\n- Cash on the day of the purchase; an App Store refund is a negative amount on the day Apple processed it. A Google Play voided purchase creates no negative amount today.\n- Converted from USD at the exchange rate of the day before the transaction. Estimated when the store gives no price.\n- Filters applied: platform_names, plans, countries (store country). Declared but not meaningful or not applied here: period_types, offer_types, screens, placements, audiences, campaigns, ab_test_variants, family_sharing.\n- Not this tool: subscription revenue (`subscriptions_revenues`), purchase counts and refund rate (`one_time_purchases_stats`).\n- Omitting `application_id` blends every app you can access, in the currency of the oldest one.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/revenue\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_one_time_purchases_revenues",
         "parameters": [
           {
@@ -8107,7 +8093,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard/one_time_purchases_stats": {
       "get": {
-        "description": "Live one-time-purchase stats (by store/plan, refunds) for an application, or across every application you can access.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "One-time purchases (consumables, non-consumables) made in each period, by store and by plan, and the share since refunded. Slow, and scheduled to be rebuilt together with subscription refunds.\n\n- Returns `{data: {otp_by_store: {values: [{period, apple, google, ...}]}, otp_by_plan: {values: [{period, <plan name>: count, ...}]}, otp_refunds: {values: [{period, percent}]}}}`. Counts of purchases, dated at the purchase.\n- `otp_refunds.percent`: among the purchases made in the period, the share now in the REFUNDED_REVOKED state (App Store refund or revoke, Huawei refund). A purchase counts once. Past periods rise when a refund arrives. Only the rate is returned, not the counts.\n- Google Play is NOT covered by the refund rate: a voided purchase ends in the CANCELLED state, which this chart ignores on both sides of the ratio. Pending and cancelled purchases are never counted.\n- Filters applied: platform_names, plans, countries (store country), product_types (CONSUMABLE, NON_CONSUMABLE). Declared but not read by this query: screens, placements, audiences, campaigns, ab_test_variants, offer_types, period_types, family_sharing (purchases received through Family Sharing always excluded; the purchaser's own is counted).\n- Not this tool: one-time purchase revenue (`one_time_purchases_revenues`), subscription refunds (`subscriptions_stats`).\n- Latency: prefer MONTH and ranges under a year. Omitting `application_id` blends every app you can access.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/iap-refunds\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_one_time_purchases_stats",
         "parameters": [
           {
@@ -8424,7 +8410,7 @@
             "$ref": "#/components/responses/QueryTimeout"
           }
         },
-        "summary": "One-time purchase sales and refunds",
+        "summary": "One-time purchase counts and refunds",
         "tags": [
           "Dashboard"
         ],
@@ -8433,7 +8419,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard/subscriptions_revenues": {
       "get": {
-        "description": "Daily subscription revenue by country/plan, for an application or across every application you can access.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Subscription revenue: gross money paid by users for subscriptions (purchases and renewals), tax included, before store commission, in the app's dashboard currency. Slow, and scheduled to be rebuilt on the faster analytics stack.\n\n- Returns `{data: {revenue: {values: [{period, apple, google, stripe, ...}]}, revenue_by_country: {values: [{period, <country name>: amount, ...}]}, revenue_by_plan: {values: [{period, <plan name>: amount, ...}]}}}`. Three views of the same total; amounts in the dashboard currency, with up to two decimals.\n- Cash on the day of the transaction: a yearly plan shows its full price on its purchase day; a refund is a negative amount on the day the store processed it. Not MRR (`mrr_evolution_live` spreads and normalises). Intro and promotional offers count at their real price; free trials count nothing.\n- Converted from USD at the exchange rate of the day before the transaction. Estimated when the store gives no price (guessed from the plan pricing). Subscriptions received through Family Sharing (family members' subscriptions; the purchaser's own is counted) excluded unless `family_sharing` asks for them.\n- Filters applied: platform_names, plans, period_types, countries (store country), offer_types, family_sharing. Declared but NOT applied by the query: screens, placements, audiences, campaigns, ab_test_variants.\n- Not this tool: one-time purchase revenue (`one_time_purchases_revenues`), the recurring run rate (`mrr_evolution_live`), refund rates (`subscriptions_stats`).\n- Latency: prefer MONTH and ranges under a year. Omitting `application_id` blends every app you can access, in the currency of the oldest one.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/revenue\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_subscriptions_revenues",
         "parameters": [
           {
@@ -8739,7 +8725,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard/subscriptions_stats": {
       "get": {
-        "description": "Live subscriptions revenue/churn/refund stats for an application, or across every application you can access. Active subscriber counts are available in the Purchasely console (including Ask your data) and to Purchasely staff. API keys and third-party MCP clients do not get them. They take up to 80 s on large apps.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Subscription refunds by start cohort. Slow, and scheduled to be rebuilt; some rules below will change then.\n\n- Returns `{data: {new_churn: {values: [{period, new, churn, sum}], variations: []}, refund: {values: [{period, refund_count, subscription_count, percent}]}}}`. `active` (active subscribers per store) is only returned to the console and to Purchasely staff.\n- `refund`: for the subscriptions that STARTED in each period (cohort dated at the original purchase, never at the refund), `subscription_count` = subscriptions started, free trials included; `refund_count` = refund events (SUBSCRIPTION_REFUNDED_REVOKED) received so far on them, a subscription refunded twice counts twice; `percent` = refund_count / subscription_count × 100. Past periods rise when a refund arrives; recent periods read low.\n- A refund is counted when the store revokes the subscription: Apple refund, Google revoke or voided purchase, Google expiry with a developer-initiated cancellation. Not counted: an Apple refund of a past instalment of a monthly-commitment plan, refund reversals, Amazon refunds.\n- Filters applied: platform_names, plans, period_types, countries (store country), offer_types, family_sharing (subscriptions received through Family Sharing excluded by default; the purchaser's own is counted). Declared but NOT applied by the refund query: screens, placements, audiences, campaigns, ab_test_variants.\n- Not this tool: refunded amounts (`subscriptions_revenues`), entries and exits (`dashboard_v2_subscription_activations`, `dashboard_v2_paid_subscription_movements`: prefer them for new and churn), one-time purchase refunds (`one_time_purchases_stats`).\n- Latency: up to 80 s on large apps, times out on wide ranges. Use MONTH and ranges under a year. Omitting `application_id` blends every app you can access.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/subscription-refunds\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_subscriptions_stats",
         "parameters": [
           {
@@ -9035,7 +9021,7 @@
             "$ref": "#/components/responses/QueryTimeout"
           }
         },
-        "summary": "Subscription counts, churn and refunds",
+        "summary": "Subscription refunds by start cohort",
         "tags": [
           "Dashboard"
         ],
@@ -9044,7 +9030,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard/trials_live": {
       "get": {
-        "description": "Trial/intro-offer cohorts and balances for an application, or across every application you can access. Available in the Purchasely console (including Ask your data) and to Purchasely staff. API keys and third-party MCP clients get a 403. It takes up to 70 s on large apps.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Free trials and introductory offers by **start cohort**: for the subscriptions that started with a free trial, or with an intro offer, in each period, how many have converted to paid, how many ended without converting, and how many are still running, split by renewal status. The console page \"Subscription Intro Offers\" draws two stacked-column charts from it: \"New free trials\" and \"New paid trials\" (paid trial = intro offer).\n\n- Available in the Purchasely console (including Ask your data) and to Purchasely staff. API keys and third-party MCP clients get a 403. It takes up to 70 s on large apps: prefer MONTH and ranges under a year.\n- Returns `{data: {trials: {values}, intro_offers: {values}, trials_balance: {values}, intro_offers_balance: {values}}}`. `trials` and `intro_offers` are the cohorts: one row per period of subscription start with `*_converted`, `*_not_converted`, `*_ongoing_auto_renewing`, `*_ongoing_non_auto_renewing`, `*_ongoing_billing_retry`, `*_ongoing_grace_period`. The values drawn below the axis in the console are negative in the response (not converted, billing retry, grace period, ongoing non-renewing).\n- Cohort rows read the subscription's **current** state: \"ongoing auto-renewing\" = offers started in the period, still running, renewal on; \"ongoing non auto-renewing\" = still running but renewal already turned off (they will not convert); billing retry and grace period = still running, payment failing. Converted and not converted are the offers that ended. Conversion rate in the console = converted / (converted + not converted + billing retry).\n- `trials_balance` and `intro_offers_balance` count events by **event date** (started, converted, not converted, and a running balance), not by cohort. The console no longer draws them.\n- Scope: free trials (`TrialStarted/Converted/NotConverted` events) and intro offers (`IntroOffer*` events) only. Promo codes and promotional offers are not on this page: promotional offers have their own console endpoint, not exposed here.\n- Not counted: sandbox, subscriptions received through Family Sharing (the purchaser's own is counted), one-time purchases. Counts are events, not distinct subscriptions. On iOS, a subscription that changed plan is attached to one record: filtering on a plan can miss it.\n- Filters applied: platform_names, plans, period_types (through the plan distributions), countries (store country), offer_types and family_sharing (cohorts only). Declared but NOT applied: screens, placements, audiences, campaigns, ab_test_variants, promotional_offers. Omitting `application_id` blends every app you can access.\n- Not this tool: offer starts per period across every offer type (`dashboard_events`), trial-to-paid in a funnel by dimension (`dashboard_funnel`), paywall conversion (`dashboard_v2_conversion`).\n- Recommended periodicity: MONTH; a recent cohort reads mostly \"ongoing\" until its offers end.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_trials_live",
         "parameters": [
           {
@@ -9341,7 +9327,7 @@
             "$ref": "#/components/responses/QueryTimeout"
           }
         },
-        "summary": "Trials and intro offers",
+        "summary": "Free trial and intro offer cohorts",
         "tags": [
           "Dashboard"
         ],
@@ -9523,24 +9509,6 @@
             "style": "form"
           },
           {
-            "description": "Restrict to unique users (\"true\"/\"false\").",
-            "in": "query",
-            "name": "unique_users",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Filter by survey identifier.",
-            "in": "query",
-            "name": "survey",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "description": "Split the paywall views / unique viewers (primary metric) by one dimension. Omit for a single, ungrouped series. Values beyond the 10 largest groups are collapsed into one \"Other\" row. platform = store platform (ios, android, …); screen = paywall screen the subscription was purchased from; placement = placement the paywall was shown at; audience = audience the user matched; ab_test_variant = A/B test variant; country = store country (ISO code).",
             "in": "query",
             "name": "primary_metric_group_by",
@@ -9704,7 +9672,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard_v2/paid_subscription_movements": {
       "get": {
-        "description": "Paid subscription movements: for each period, how many PAYING subscriptions (full price or paid offer) entered the paid base and how many left it.\n\n- Returns an array of `{period, group_by, group_by_public_id, group_by_name, total_activations_count, total_churns_count, net_movement_count}` rows.\n- `total_activations_count`: subscriptions that entered the paid base (direct purchases, trial/intro/promo conversions, reactivations).\n- `total_churns_count`: subscriptions that left it (voluntary churn, involuntary/billing-failure churn, refunds).\n- `net_movement_count`: `total_activations_count - total_churns_count`.\n- Unit: count of subscriptions. A flow: summable across periods.\n- Always restricted to the paid segment (no `segment` parameter). This is the paid counterpart of `subscription_activations`.\n- These movements do not reconcile exactly with `subscription_evolution`: a close is not the previous close plus `net_movement_count`, because the two follow different rules. Movements count only classified store events and apply the paid filter to each event. ENTERED_BILLING_RETRY and GRACE_PERIOD_TERMINATED count as involuntary churn on their date, and a switch from paid to free without DEACTIVATE counts no churn.\n- For the exact base on a date, use `subscription_evolution` (its last row on the `date_range` end date, or `periodicity=DAY`), not a close minus movements.\n- Recommended periodicity: MONTH.\n- Single application only.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Paid subscription movements: for each period, how many PAYING subscriptions (full price or paid offer) entered the paid base and how many left it.\n\n- Returns an array of `{period, group_by, group_by_public_id, group_by_name, total_activations_count, total_churns_count, net_movement_count}` rows.\n- `total_activations_count`: subscriptions that entered the paid base (direct purchases, paid offer starts, trial/intro/promo conversions, reactivations). Despite the name, this includes reactivations: read it as \"entries into the paid base\", not as the activations of `subscription_activations`. A paid offer enters on the day it starts, never again when it converts to full price.\n- `total_churns_count`: subscriptions that left it (voluntary churn incl. Google Play pause, involuntary/billing-failure churn, refunds).\n- Not a movement: a paid-to-paid plan change, a grace period (access kept), a paid offer converting to full price. Entering billing retry is an exit and the recovery an entry, so a recovered payment failure shows as one churn and one entry; same for pause and resume.\n- Entries are comparable across stores: a returning iOS customer is a REACTIVATION, a returning Android customer an ACTIVATION (Google does not link a purchase to an expired one), both counted here.\n- `net_movement_count`: `total_activations_count - total_churns_count`.\n- Unit: count of subscriptions. A flow: summable across periods.\n- Always restricted to the paid segment (no `segment` parameter). This is the paid counterpart of `subscription_activations`.\n- These movements do not reconcile exactly with `subscription_evolution`: a close is not the previous close plus `net_movement_count`, because the two follow different rules. Movements count only classified store events and apply the paid filter to each event. ENTERED_BILLING_RETRY and GRACE_PERIOD_TERMINATED count as involuntary churn on their date, and a switch from paid to free without DEACTIVATE counts no churn.\n- For the exact base on a date, use `subscription_evolution` (its last row on the `date_range` end date, or `periodicity=DAY`), not a close minus movements.\n- Recommended periodicity: MONTH.\n- Single application only.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_v2_paid_subscription_movements",
         "parameters": [
           {
@@ -9877,22 +9845,32 @@
             "style": "form"
           },
           {
-            "description": "Restrict to unique users (\"true\"/\"false\").",
+            "description": "Filter by subscription plan public_id.",
+            "explode": true,
             "in": "query",
-            "name": "unique_users",
+            "name": "plans[]",
             "required": false,
             "schema": {
-              "type": "string"
-            }
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
           },
           {
-            "description": "Filter by survey identifier.",
+            "description": "Filter by plan billing period, ISO 8601 (P1W, P1M, P3M, P1Y, ...).",
+            "explode": true,
             "in": "query",
-            "name": "survey",
+            "name": "period_types[]",
             "required": false,
             "schema": {
-              "type": "string"
-            }
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
           },
           {
             "description": "Split the movements by one dimension. Omit for a single, ungrouped series. Values beyond the 10 largest groups are collapsed into one \"Other\" row. platform = store platform (ios, android, …); screen = paywall screen the subscription was purchased from; placement = placement the paywall was shown at; audience = audience the user matched; ab_test_variant = A/B test variant; plan = subscription plan; country = store country (ISO code); offer_types = offer type (NONE, FREE_TRIAL, INTRO_OFFER, PROMO_CODE, PROMOTIONAL_OFFER); payment_types = payment type (FULL_PRICE, PAID_OFFER, FREE_OFFER); period_types = plan billing period (P1W, P1M, P1Y, …); campaign = campaign; event_types = movement type — entries: ACTIVATION, TRIAL_CONVERTED, INTRO_OFFER_STARTED/CONVERTED, PROMO_CODE_STARTED/CONVERTED, PROMOTIONAL_OFFER_STARTED/CONVERTED, REACTIVATION; exits: VOLUNTARY_CHURN, INVOLUNTARY_CHURN, REFUND (each row then carries only the count that applies).",
@@ -9974,7 +9952,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard_v2/paid_subscription_retention": {
       "get": {
-        "description": "Subscription retention cohort matrix for a single application.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Subscription retention: a cohort matrix. Subscriptions are grouped by the period in which they entered the selected segment, and each cohort is followed period after period to see how many are still in it, with the revenue each cohort has generated.\n\n- Returns `{rows, totals, grand_total}`. `rows`: one per (`cohort_date`, `period_date`), with `period_name` (\"MONTH 3\"), `retained_count`, `retained_ratio` (a 0 to 1 fraction, not a percentage) and `is_partial` (the period is still running). `totals`: one per cohort, with `total_count`, `total_revenue_in_dashboard_currency` and `revenue_per_subscription_in_dashboard_currency`. `grand_total`: the \"Total\" row of the console, where each period's ratio is computed only over the cohorts old enough to have reached it (not an average of the rows).\n- The segment is a payment state: a subscription is in it while its last payment matches it. `all` (default, console \"All subscriptions\"): full price, paid offers and free periods. A free trial enters at its start and its conversion to paid continues the same entry; a trial that never pays churns at its end. `paid`: full price and paid intro or promotional offers. A free trial enters at its first payment (a trial started on January 28 that converts on February 4 joins the February cohort) and a trial that never pays is in no cohort. `full_price`: full-price payments only; a paid intro offer started in January that converts in April enters January under `paid` and April under `full_price`. There is no `free` or `discounted` segment.\n- Cohort entry: the period in which the subscription starts to match the segment, after no payment or after a payment that does not match. Cohort exit, counted as churn: the first of a churn of the subscription (termination at expiry, cancellation during a grace period, Google Play pause, entering billing retry, grace period ended unpaid, refund, refund of the first payment after an offer) or a later payment that no longer matches the segment (under `paid`, a free period; under `full_price`, a paid offer or a free period). A return is a new entry: a reactivation, a billing retry recovery, an unpause, or a payment that matches the segment again. So one subscription can have several entries, and `total_count` counts entries, not unique subscribers.\n- Retained in period N: the entry has not ended by the end of period N. An entry that ends during period N is not retained in period N, so period 0 can be below 1; a subscription that starts and churns in the same period is in that cohort and not retained in period 0. A grace period keeps the entry retained. A plan change is not a churn, but under `paid` or `full_price` it ends the entry, or starts one, when it changes the payment type.\n- Cohorts are the entries inside `date_range`, from the start of its first period; the retention periods run until today (100 at most). Events before the first cohort period are not read: a subscription that already matched the segment before it is in no cohort until it returns after an exit, so this is not the active base.\n- Revenue: the transactions of the cohort's entries from their entry until their exit (the payment that ends an entry counts in that entry) or today, refunds deducted, including transactions after the `date_range` end date, converted to the app's dashboard currency (app settings) at the rate of the cohort date. `revenue_per_subscription` divides it by the cohort size.\n- Unit: counts of subscriptions and 0 to 1 ratios; revenue in the app's dashboard currency. Never sum cohorts across periods, and never reconcile totals across periodicities: monthly cohorts hide churn-and-recovery pairs that weekly cohorts show twice.\n- Not this tool: the active base per period (`subscription_evolution`), entries and exits per period (`paid_subscription_movements`, `subscription_activations`), the conversion of trials and intro offers (no v2 tool yet).\n- How each number is computed and the edge cases (subscriptions already active before the range, same-period churn, reactivations across weekly cohorts, currency conversion): https://docs.purchasely.com/docs/subscription-retention\n- Recommended periodicity: MONTH, matched to the plans' billing period with `period_types`. Filters apply to the latest state of each subscription's lifecycle, not to its state at entry. Single application only.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_v2_paid_subscription_retention",
         "parameters": [
           {
@@ -10147,22 +10125,32 @@
             "style": "form"
           },
           {
-            "description": "Restrict to unique users (\"true\"/\"false\").",
+            "description": "Filter by subscription plan public_id.",
+            "explode": true,
             "in": "query",
-            "name": "unique_users",
+            "name": "plans[]",
             "required": false,
             "schema": {
-              "type": "string"
-            }
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
           },
           {
-            "description": "Filter by survey identifier.",
+            "description": "Filter by plan billing period, ISO 8601 (P1W, P1M, P3M, P1Y, ...).",
+            "explode": true,
             "in": "query",
-            "name": "survey",
+            "name": "period_types[]",
             "required": false,
             "schema": {
-              "type": "string"
-            }
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
           },
           {
             "description": "Restrict to a payment segment. all = paid and free subscriptions (default). In all, a free trial start is an entry, and a conversion to paid continues that entry. paid = paid subscriptions only; a free trial is not an entry. full_price = subscriptions that pay the regular price. A subscription enters a cohort when its last payment starts to match the segment. A payment that does not match ends the entry, counted as a churn. A return is a new entry.",
@@ -10503,24 +10491,6 @@
             "style": "form"
           },
           {
-            "description": "Restrict to unique users (\"true\"/\"false\").",
-            "in": "query",
-            "name": "unique_users",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Filter by survey identifier.",
-            "in": "query",
-            "name": "survey",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "description": "Split the series by one dimension. Omit for a single, ungrouped series. With sdk_version, a version gets its own series when it reaches 3% of app starts in at least one period. The newest version always gets its own series. At most 8 versions get their own series. The other versions are summed into one \"Other\" series. sdk_running_mode is never collapsed. sdk_version = SDK version; sdk_running_mode = SDK running mode.",
             "in": "query",
             "name": "group_by",
@@ -10748,24 +10718,6 @@
             "style": "form"
           },
           {
-            "description": "Restrict to unique users (\"true\"/\"false\").",
-            "in": "query",
-            "name": "unique_users",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Filter by survey identifier.",
-            "in": "query",
-            "name": "survey",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
             "explode": true,
             "in": "query",
@@ -10822,7 +10774,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard_v2/subscription_activations": {
       "get": {
-        "description": "Subscription activations: how many subscriptions started in each period.\n\n- Returns an array of `{period, group_by, group_by_public_id, group_by_name, total_activations_count}` rows, one per period (and per `group_by` value when set).\n- Each subscription counts once, on its first activation event inside the chosen segment: direct purchase, free-trial/intro/promo start, or trial/intro/promo conversion to paid.\n- For `segment=paid`, only the first PAYING activation counts.\n- Reactivations, transfers and family-shared subscriptions are excluded.\n- Unit: count of subscriptions. A flow: summable across periods.\n- Recommended periodicity: MONTH, or WEEK for ranges under ~6 months.\n- Single application only.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Subscription activations: how many subscriptions started in each period.\n\n- Returns an array of `{period, group_by, group_by_public_id, group_by_name, total_activations_count}` rows, one per period (and per `group_by` value when set).\n- Each subscription counts once, on its first activation event inside the chosen segment: direct purchase, free-trial/intro/promo start, or trial/intro/promo conversion to paid.\n- For `segment=paid`, only the first PAYING activation counts.\n- Reactivations, billing-retry recoveries and unpauses are never counted, but they take part in choosing a subscription's earliest event and can hide a later start. Family-shared subscriptions are excluded.\n- Store asymmetry: on iOS a customer who resubscribes in the same subscription group continues the same subscription (a reactivation, not an activation); on Android a purchase after full expiry is a new subscription (Google does not link it to the old one), so a returning Android customer IS an activation, usually at full price. Do not compare iOS and Android activations one to one; `paid_subscription_movements` entries are comparable across stores.\n- Filter order: `platform_names`, `countries` and `segment` apply before the earliest event is chosen; `plans`, `period_types`, `screens`, `placements`, `audiences`, `campaigns`, `ab_test_variants` and `offer_types` apply after and can only remove activations. `offer_types` is the offer of the earliest event (FREE_TRIAL returns subscriptions that started with a trial).\n- Unit: count of subscriptions, not people. Dated on the day Purchasely recorded the event, not the store purchase date. A flow: summable across periods.\n- Recommended periodicity: MONTH, or WEEK for ranges under ~6 months.\n- Single application only.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_v2_subscription_activations",
         "parameters": [
           {
@@ -10995,22 +10947,32 @@
             "style": "form"
           },
           {
-            "description": "Restrict to unique users (\"true\"/\"false\").",
+            "description": "Filter by subscription plan public_id.",
+            "explode": true,
             "in": "query",
-            "name": "unique_users",
+            "name": "plans[]",
             "required": false,
             "schema": {
-              "type": "string"
-            }
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
           },
           {
-            "description": "Filter by survey identifier.",
+            "description": "Filter by plan billing period, ISO 8601 (P1W, P1M, P3M, P1Y, ...).",
+            "explode": true,
             "in": "query",
-            "name": "survey",
+            "name": "period_types[]",
             "required": false,
             "schema": {
-              "type": "string"
-            }
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
           },
           {
             "description": "Split the series by one dimension. Omit for a single, ungrouped series. Values beyond the 10 largest groups are collapsed into one \"Other\" row. platform = store platform (ios, android, …); screen = paywall screen the subscription was purchased from; placement = placement the paywall was shown at; audience = audience the user matched; ab_test_variant = A/B test variant; plan = subscription plan; country = store country (ISO code); offer_types = offer type (NONE, FREE_TRIAL, INTRO_OFFER, PROMO_CODE, PROMOTIONAL_OFFER); payment_types = payment type (FULL_PRICE, PAID_OFFER, FREE_OFFER); period_types = plan billing period (P1W, P1M, P1Y, …); campaign = campaign; event_types = activation event (SUBSCRIPTION_STARTED, TRIAL_STARTED, TRIAL_CONVERTED, INTRO_OFFER_STARTED/CONVERTED, PROMO_CODE_STARTED/CONVERTED, PROMOTIONAL_OFFER_STARTED/CONVERTED).",
@@ -11108,7 +11070,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard_v2/subscription_evolution": {
       "get": {
-        "description": "Active subscription base per period.\n\n- Returns an array of `{period, group_by, group_by_public_id, group_by_name, count}` rows, one per period (and per `group_by` value when set).\n- `count`: the number of subscriptions active at the close of the period. The last row is the number active at the end of `date_range` (end date included), so a range ending mid-period reads the base on that date.\n- Auto-renewing, cancelled-but-not-expired and grace-period subscriptions all count as active. Family-shared subscriptions and transfers are excluded.\n- Unit: count of active subscriptions. A stock, not a flow: never sum it across periods. Read the last period for the current base.\n- The `paid_subscription_movements` flows do not reconcile exactly with this base: a close is not the previous close plus `net_movement_count`, because the two follow different rules. This base counts every ACTIVATE and DEACTIVATE, keeps a grace-period subscription active until its DEACTIVATE, and ends a paid segment when the offer changes from paid to free.\n- For the exact base on a date, read the last row of a `date_range` that ends on that date, or use `periodicity=DAY`, not a close plus movements.\n- Recommended periodicity: MONTH (WEEK for a close look at the last few months).\n- Single application only.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Active subscription base per period.\n\n- Returns an array of `{period, group_by, group_by_public_id, group_by_name, count}` rows, one per period (and per `group_by` value when set).\n- `count`: the number of subscriptions active at the close of the period. The last row is the number active at the end of `date_range` (end date included), so a range ending mid-period reads the base on that date.\n- Auto-renewing, cancelled-but-not-expired and grace-period subscriptions all count as active. Not active: billing retry (on hold), paused, expired, revoked, refunded. Family-shared subscriptions and transfers are excluded.\n- The console's \"Subscription Status\" chart is this tool with `group_by=subscription_status` (AUTO_RENEWING, AUTO_RENEWING_CANCELED, IN_GRACE_PERIOD); there is no separate status tool.\n- `segment` reads the price at which the subscription's current segment opened: a free trial moves from `free` to `paid` on the day it converts, so a drop of the free base is usually conversions, not churn.\n- Unit: count of active subscriptions. A stock, not a flow: never sum it across periods. Read the last period for the current base.\n- The `paid_subscription_movements` flows do not reconcile exactly with this base: a close is not the previous close plus `net_movement_count`, because the two follow different rules. This base counts every ACTIVATE and DEACTIVATE, keeps a grace-period subscription active until its DEACTIVATE, and ends a paid segment when the offer changes from paid to free.\n- For the exact base on a date, read the last row of a `date_range` that ends on that date, or use `periodicity=DAY`, not a close plus movements.\n- Recommended periodicity: MONTH (WEEK for a close look at the last few months).\n- Single application only.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_v2_subscription_evolution",
         "parameters": [
           {
@@ -11281,22 +11243,32 @@
             "style": "form"
           },
           {
-            "description": "Restrict to unique users (\"true\"/\"false\").",
+            "description": "Filter by subscription plan public_id.",
+            "explode": true,
             "in": "query",
-            "name": "unique_users",
+            "name": "plans[]",
             "required": false,
             "schema": {
-              "type": "string"
-            }
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
           },
           {
-            "description": "Filter by survey identifier.",
+            "description": "Filter by plan billing period, ISO 8601 (P1W, P1M, P3M, P1Y, ...).",
+            "explode": true,
             "in": "query",
-            "name": "survey",
+            "name": "period_types[]",
             "required": false,
             "schema": {
-              "type": "string"
-            }
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
           },
           {
             "description": "Split the active base by one dimension. Omit for a single, ungrouped series. Values beyond the 10 largest groups are collapsed into one \"Other\" row. platform = store platform (ios, android, …); screen = paywall screen the subscription was purchased from; placement = placement the paywall was shown at; audience = audience the user matched; ab_test_variant = A/B test variant; plan = subscription plan; country = store country (ISO code); offer_types = offer type (NONE, FREE_TRIAL, INTRO_OFFER, PROMO_CODE, PROMOTIONAL_OFFER); payment_types = payment type (FULL_PRICE, PAID_OFFER, FREE_OFFER); period_types = plan billing period (P1W, P1M, P1Y, …); subscription_status = subscription status (AUTO_RENEWING, AUTO_RENEWING_CANCELED, IN_GRACE_PERIOD); campaign = campaign.",
@@ -11394,7 +11366,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard_v2/subscription_reactivations": {
       "get": {
-        "description": "Subscription reactivations: how many subscriptions came back to life in each period after having lapsed.\n\n- Returns an array of `{period, group_by, group_by_public_id, group_by_name, total_reactivations_count}` rows, one per period (and per `group_by` value when set).\n- A reactivation is a re-subscription after expiry or cancellation, a recovery from a billing retry, or an unpause.\n- One count per subscription per day. Family-shared subscriptions are excluded.\n- Unit: count of subscriptions. A flow: summable across periods.\n- Recommended periodicity: MONTH.\n- Single application only.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Subscription reactivations: how many subscriptions known to Purchasely regained access in each period after having lost it.\n\n- Returns an array of `{period, group_by, group_by_public_id, group_by_name, total_reactivations_count}` rows, one per period (and per `group_by` value when set).\n- Counted, for the SAME store subscription: a re-subscription after expiry or cancellation (iOS: any product of the same subscription group, identified by Apple's original transaction id; Android: the same purchase token, or a token Google linked to it, which only happens before the previous subscription expired), a recovery after a billing retry, a resume after a Google Play pause.\n- Not counted: a grace-period recovery (access was never lost), a refund reversal, a plan change, and any return with a NEW store subscription. On Android a purchase after full expiry always gets a new, unlinked token: it is an activation in `subscription_activations`, even when the customer is known. Android reactivations are therefore structurally low and are not a win-back measure; most Android SUBSCRIPTION_REACTIVATED events are renewals confirmed by Google just after Purchasely terminated the subscription at its expiry time.\n- `group_by=event_types`: SUBSCRIPTION_REACTIVATED (re-subscription), SUBSCRIPTION_RECOVERED_FROM_BILLING_RETRY, SUBSCRIPTION_UNPAUSED. When the offer changed at the reactivation (a trial converting during a billing retry recovery), the row is labelled TRIAL_CONVERTED, INTRO_OFFER_CONVERTED, PROMO_CODE_CONVERTED or PROMOTIONAL_OFFER_CONVERTED instead. Use it to separate voluntary returns from billing recoveries.\n- `segment` is the price the subscription came back at: `free` (a free win-back offer; the stores rarely grant a second free trial), `discounted` (paid offer), `full_price`, `paid`.\n- One count per subscription per day. Family-shared subscriptions and transfers are excluded.\n- Unit: count of subscriptions. A flow: summable across periods. A reactivation is never an activation; a reactivation at a paid price is also an entry in `paid_subscription_movements`. To compare stores, add activations and reactivations.\n- Recommended periodicity: MONTH; DAY to read the days after a win-back campaign.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/subscription-reactivations\n- Single application only.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_v2_subscription_reactivations",
         "parameters": [
           {
@@ -11567,22 +11539,32 @@
             "style": "form"
           },
           {
-            "description": "Restrict to unique users (\"true\"/\"false\").",
+            "description": "Filter by subscription plan public_id.",
+            "explode": true,
             "in": "query",
-            "name": "unique_users",
+            "name": "plans[]",
             "required": false,
             "schema": {
-              "type": "string"
-            }
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
           },
           {
-            "description": "Filter by survey identifier.",
+            "description": "Filter by plan billing period, ISO 8601 (P1W, P1M, P3M, P1Y, ...).",
+            "explode": true,
             "in": "query",
-            "name": "survey",
+            "name": "period_types[]",
             "required": false,
             "schema": {
-              "type": "string"
-            }
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
           },
           {
             "description": "Split the series by one dimension. Omit for a single, ungrouped series. Values beyond the 10 largest groups are collapsed into one \"Other\" row. platform = store platform (ios, android, …); screen = paywall screen the subscription was purchased from; placement = placement the paywall was shown at; audience = audience the user matched; ab_test_variant = A/B test variant; plan = subscription plan; country = store country (ISO code); offer_types = offer type (NONE, FREE_TRIAL, INTRO_OFFER, PROMO_CODE, PROMOTIONAL_OFFER); payment_types = payment type (FULL_PRICE, PAID_OFFER, FREE_OFFER); period_types = plan billing period (P1W, P1M, P1Y, …); campaign = campaign; event_types = reactivation cause (SUBSCRIPTION_REACTIVATED, SUBSCRIPTION_RECOVERED_FROM_BILLING_RETRY, SUBSCRIPTION_UNPAUSED), or the offer conversion it revealed (TRIAL_CONVERTED, INTRO_OFFER_CONVERTED, PROMO_CODE_CONVERTED, PROMOTIONAL_OFFER_CONVERTED).",
@@ -20951,7 +20933,7 @@
     },
     "/management/v1/dashboard/events": {
       "get": {
-        "description": "Event counts per day for an application, or across every application you can access.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Server-side events recorded by Purchasely, counted per period and per event type: the raw layer under every other chart, with the webhook event names.\n\n- Returns `{data: {\"<period>\": {period, Activate: n, SubscriptionStarted: n, SubscriptionRenewed: n, TransactionProcessed: n, ...}}}`: one object per period, one key per event type that occurred, names in CamelCase (`SUBSCRIPTION_STARTED` → `SubscriptionStarted`). Every event type is returned, there is no event selection.\n- Definition: one count per backend event, dated on the day Purchasely created it. No deduplication and no lifecycle logic: a renewal counts one `SubscriptionRenewed`, one `TransactionProcessed` and one `Activate` the same day. `Activate` / `Deactivate` are entitlement events (access granted or removed) and fire on every receipt; the others are lifecycle events.\n- Counted: production events, one-time purchase events included, every listed event type included (`RetentionMessageRequested`, `InstallmentPaid`, `RenewalDisabled`, `SubscriptionDeferred`, ...). Not counted: sandbox, SDK events, future-dated events, and the events of subscriptions received through Family Sharing (family members' subscriptions; the purchaser's own is counted), so `FamilySharedRevoked` is always 0 here.\n- Unit: count of events. A flow: summable across periods, never comparable to subscription counts (`subscription_activations`, `paid_subscription_movements` dedup per subscription and apply rules).\n- Filters applied: platform_names, plans, period_types, countries (store country), audiences, placements, screens, ab_test_variants. Declared but NOT applied: campaigns, offer_types, family_sharing, promotional_offers. Omitting `application_id` blends every app you can access.\n- Not this tool: activations, movements, retention, revenue; use the dedicated tools. Use this one to audit volumes (billing retries, grace periods, refunds, pauses) and to reconcile with webhooks.\n- Store specifics: pause events are Google Play only; `InstallmentPaid` / `InstallmentRefunded` are App Store monthly-commitment plans only.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/subscription-events\n- Recommended periodicity: DAY for ranges up to ~60 days, WEEK up to ~6 months, MONTH beyond.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_dashboard_events",
         "parameters": [
           {
@@ -21239,7 +21221,7 @@
             "$ref": "#/components/responses/QueryTimeout"
           }
         },
-        "summary": "Event counts by period (all apps)",
+        "summary": "Server-side event counts by period (all apps)",
         "tags": [
           "Dashboard"
         ],
@@ -21248,7 +21230,7 @@
     },
     "/management/v1/dashboard/funnel": {
       "get": {
-        "description": "Conversion funnel (views -> purchases) for an application, or across every application you can access.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Subscription funnel for the subscriptions that **started** in the date range, grouped by one `dimension` (platform, country, plan, placement, screen). Distinct subscriptions per step; the console draws it as a Sankey diagram with a table.\n\n- Returns `{data: [{name, results: {subscription_started_count, trial_started_count, trial_converted_count, trial_not_converted_count, first_renewals_count, subscription_terminated_count}}]}`: one entry per dimension value. No periods: one funnel for the whole range.\n- Cohort: subscriptions whose original purchase date falls in `date_range` (both ends inclusive). Their later events count whatever their date, so a recent cohort shows few conversions and renewals yet, and a past cohort keeps moving.\n- Steps: `subscription_started_count` = started (or reactivated) directly at full price, without offer. `trial_started_count` = started with an offer of any kind: free trial, intro offer, promo code, promotional offer (the console labels it \"Trial started\"). `trial_converted_count` / `trial_not_converted_count` = those offers converted to paid, or ended without converting (the rest are still running). `first_renewals_count` = subscriptions with at least one renewal following a full-price period, converted offers included. `subscription_terminated_count` = full-price direct starts that ended without ever renewing; a converted offer that churns later is not counted here.\n- Reactivations: a lapsed subscriber who comes back on the same subscription counts as a start in the cohort of the original purchase date, not of the comeback.\n- Not counted: sandbox, subscriptions received through Family Sharing (the purchaser's own is counted), one-time purchases. Data exists since 2024 (the start date varies per app); older cohorts are partial.\n- Dimension values: `screen`, `placement` and `plan` are the ones attached to the subscription at purchase (\"Unknown\" when none); `country` = store country (\"Unknown\" = blank); `platform` in upper case (IOS, ANDROID, ...).\n- Filters applied: platform_names, plans, period_types (through the plan distributions), countries (store country). Declared but NOT applied: screens, placements, audiences, campaigns, ab_test_variants, offer_types, family_sharing, promotional_offers. Omitting `application_id` blends every app you can access.\n- Not this tool: paywall views and view-to-purchase conversion (`dashboard_v2_conversion`), subscription counts per period (`dashboard_v2_subscription_activations`), raw event volumes (`dashboard_events`).\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/funnel\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_dashboard_funnel",
         "parameters": [
           {
@@ -21537,7 +21519,7 @@
             "$ref": "#/components/responses/QueryTimeout"
           }
         },
-        "summary": "Conversion funnel (all apps)",
+        "summary": "Subscription funnel by start cohort (all apps)",
         "tags": [
           "Dashboard"
         ],
@@ -21828,7 +21810,7 @@
     },
     "/management/v1/dashboard/mrr_evolution_live": {
       "get": {
-        "description": "Live MRR evolution (by day and by month) for an application, or across every application you can access.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "MRR: monthly recurring revenue as a snapshot on each date, in the app's dashboard currency.\n\n- Returns `{data: {mrr: {values: {by_day: [...], by_month: [...]}, variations: []}}}`. `by_day`: one `{period, value}` per period boundary of `date_range` (the first day of each month in MONTH periodicity, each Monday in WEEK). `by_month`: four snapshots tagged in `date_kinds`: `selected_date` (the range end date, capped at today) and `one_month_before`, `three_months_before`, `six_months_before`, taken from the calendar boundary of the last period, not from the end date. `variations` is always empty: compute changes from `by_month`.\n- Definition: on a date, the sum over every paid subscription transaction whose service period covers that date of its amount divided by the days of that period, times 30, converted at that date's rate, rounded. A weekly plan at 7 counts 30; a yearly plan at 100 counts about 8.2; a free trial counts 0; a paid intro offer counts its real price over its real period. Based on transaction amounts and service dates, not on entitlement: a pause or a billing retry changes nothing until the paid period ends.\n- Refunds: the refund is spread over the service period it refunds, so MRR is restated back to that period's start; it does not drop on the refund date.\n- Unit: amount in the app's dashboard currency. A stock, never a flow: never sum points, never average them; read one date. For a month-end figure, read `selected_date` with `date_range` ending on the last day of the month, or use `periodicity=DAY`.\n- Filters applied: platform_names, countries (store country), plans, period_types, screens, placements, audiences, ab_test_variants, offer_types. There is no campaign filter: an MRR per campaign has no meaning here. Omitting `application_id` blends every app the caller can access, converted in one dashboard currency.\n- Not this tool: cash revenue by day (`subscriptions_revenues`), the paying base (`subscription_evolution` with segment=paid), entries and exits (`paid_subscription_movements`).\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/mrr\n- Recommended periodicity: MONTH for trends, DAY for a precise date.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_dashboard_mrr_evolution_live",
         "parameters": [
           {
@@ -21992,20 +21974,6 @@
             "style": "form"
           },
           {
-            "description": "Filter by campaign public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "campaigns[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
             "description": "Filter by placement public_id.",
             "explode": true,
             "in": "query",
@@ -22125,7 +22093,7 @@
     },
     "/management/v1/dashboard/one_time_purchases_revenues": {
       "get": {
-        "description": "Daily one-time-purchase revenue by country/plan, for an application or across every application you can access.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "One-time purchase revenue: gross money paid by users for consumables and non-consumables, tax included, before store commission, in the app's dashboard currency. Slow, and scheduled to be rebuilt on the faster analytics stack.\n\n- Returns `{data: {revenue: {values: [{period, apple, google, ...}]}, revenue_by_country: {values: [{period, <country name>: amount, ...}]}, revenue_by_plan: {values: [{period, <plan name>: amount, ...}]}}}`. Three views of the same total; amounts in the dashboard currency, with up to two decimals.\n- Cash on the day of the purchase; an App Store refund is a negative amount on the day Apple processed it. A Google Play voided purchase creates no negative amount today.\n- Converted from USD at the exchange rate of the day before the transaction. Estimated when the store gives no price.\n- Filters applied: platform_names, plans, countries (store country). Declared but not meaningful or not applied here: period_types, offer_types, screens, placements, audiences, campaigns, ab_test_variants, family_sharing.\n- Not this tool: subscription revenue (`subscriptions_revenues`), purchase counts and refund rate (`one_time_purchases_stats`).\n- Omitting `application_id` blends every app you can access, in the currency of the oldest one.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/revenue\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_dashboard_one_time_purchases_revenues",
         "parameters": [
           {
@@ -22422,7 +22390,7 @@
     },
     "/management/v1/dashboard/one_time_purchases_stats": {
       "get": {
-        "description": "Live one-time-purchase stats (by store/plan, refunds) for an application, or across every application you can access.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "One-time purchases (consumables, non-consumables) made in each period, by store and by plan, and the share since refunded. Slow, and scheduled to be rebuilt together with subscription refunds.\n\n- Returns `{data: {otp_by_store: {values: [{period, apple, google, ...}]}, otp_by_plan: {values: [{period, <plan name>: count, ...}]}, otp_refunds: {values: [{period, percent}]}}}`. Counts of purchases, dated at the purchase.\n- `otp_refunds.percent`: among the purchases made in the period, the share now in the REFUNDED_REVOKED state (App Store refund or revoke, Huawei refund). A purchase counts once. Past periods rise when a refund arrives. Only the rate is returned, not the counts.\n- Google Play is NOT covered by the refund rate: a voided purchase ends in the CANCELLED state, which this chart ignores on both sides of the ratio. Pending and cancelled purchases are never counted.\n- Filters applied: platform_names, plans, countries (store country), product_types (CONSUMABLE, NON_CONSUMABLE). Declared but not read by this query: screens, placements, audiences, campaigns, ab_test_variants, offer_types, period_types, family_sharing (purchases received through Family Sharing always excluded; the purchaser's own is counted).\n- Not this tool: one-time purchase revenue (`one_time_purchases_revenues`), subscription refunds (`subscriptions_stats`).\n- Latency: prefer MONTH and ranges under a year. Omitting `application_id` blends every app you can access.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/iap-refunds\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_dashboard_one_time_purchases_stats",
         "parameters": [
           {
@@ -22730,7 +22698,7 @@
             "$ref": "#/components/responses/QueryTimeout"
           }
         },
-        "summary": "One-time purchase sales and refunds (all apps)",
+        "summary": "One-time purchase counts and refunds (all apps)",
         "tags": [
           "Dashboard"
         ],
@@ -22739,7 +22707,7 @@
     },
     "/management/v1/dashboard/subscriptions_revenues": {
       "get": {
-        "description": "Daily subscription revenue by country/plan, for an application or across every application you can access.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Subscription revenue: gross money paid by users for subscriptions (purchases and renewals), tax included, before store commission, in the app's dashboard currency. Slow, and scheduled to be rebuilt on the faster analytics stack.\n\n- Returns `{data: {revenue: {values: [{period, apple, google, stripe, ...}]}, revenue_by_country: {values: [{period, <country name>: amount, ...}]}, revenue_by_plan: {values: [{period, <plan name>: amount, ...}]}}}`. Three views of the same total; amounts in the dashboard currency, with up to two decimals.\n- Cash on the day of the transaction: a yearly plan shows its full price on its purchase day; a refund is a negative amount on the day the store processed it. Not MRR (`mrr_evolution_live` spreads and normalises). Intro and promotional offers count at their real price; free trials count nothing.\n- Converted from USD at the exchange rate of the day before the transaction. Estimated when the store gives no price (guessed from the plan pricing). Subscriptions received through Family Sharing (family members' subscriptions; the purchaser's own is counted) excluded unless `family_sharing` asks for them.\n- Filters applied: platform_names, plans, period_types, countries (store country), offer_types, family_sharing. Declared but NOT applied by the query: screens, placements, audiences, campaigns, ab_test_variants.\n- Not this tool: one-time purchase revenue (`one_time_purchases_revenues`), the recurring run rate (`mrr_evolution_live`), refund rates (`subscriptions_stats`).\n- Latency: prefer MONTH and ranges under a year. Omitting `application_id` blends every app you can access, in the currency of the oldest one.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/revenue\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_dashboard_subscriptions_revenues",
         "parameters": [
           {
@@ -23036,7 +23004,7 @@
     },
     "/management/v1/dashboard/subscriptions_stats": {
       "get": {
-        "description": "Live subscriptions revenue/churn/refund stats for an application, or across every application you can access. Active subscriber counts are available in the Purchasely console (including Ask your data) and to Purchasely staff. API keys and third-party MCP clients do not get them. They take up to 80 s on large apps.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Subscription refunds by start cohort. Slow, and scheduled to be rebuilt; some rules below will change then.\n\n- Returns `{data: {new_churn: {values: [{period, new, churn, sum}], variations: []}, refund: {values: [{period, refund_count, subscription_count, percent}]}}}`. `active` (active subscribers per store) is only returned to the console and to Purchasely staff.\n- `refund`: for the subscriptions that STARTED in each period (cohort dated at the original purchase, never at the refund), `subscription_count` = subscriptions started, free trials included; `refund_count` = refund events (SUBSCRIPTION_REFUNDED_REVOKED) received so far on them, a subscription refunded twice counts twice; `percent` = refund_count / subscription_count × 100. Past periods rise when a refund arrives; recent periods read low.\n- A refund is counted when the store revokes the subscription: Apple refund, Google revoke or voided purchase, Google expiry with a developer-initiated cancellation. Not counted: an Apple refund of a past instalment of a monthly-commitment plan, refund reversals, Amazon refunds.\n- Filters applied: platform_names, plans, period_types, countries (store country), offer_types, family_sharing (subscriptions received through Family Sharing excluded by default; the purchaser's own is counted). Declared but NOT applied by the refund query: screens, placements, audiences, campaigns, ab_test_variants.\n- Not this tool: refunded amounts (`subscriptions_revenues`), entries and exits (`dashboard_v2_subscription_activations`, `dashboard_v2_paid_subscription_movements`: prefer them for new and churn), one-time purchase refunds (`one_time_purchases_stats`).\n- Latency: up to 80 s on large apps, times out on wide ranges. Use MONTH and ranges under a year. Omitting `application_id` blends every app you can access.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/subscription-refunds\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_dashboard_subscriptions_stats",
         "parameters": [
           {
@@ -23323,7 +23291,7 @@
             "$ref": "#/components/responses/QueryTimeout"
           }
         },
-        "summary": "Subscription counts, churn and refunds (all apps)",
+        "summary": "Subscription refunds by start cohort (all apps)",
         "tags": [
           "Dashboard"
         ],
@@ -23332,7 +23300,7 @@
     },
     "/management/v1/dashboard/trials_live": {
       "get": {
-        "description": "Trial/intro-offer cohorts and balances for an application, or across every application you can access. Available in the Purchasely console (including Ask your data) and to Purchasely staff. API keys and third-party MCP clients get a 403. It takes up to 70 s on large apps.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Free trials and introductory offers by **start cohort**: for the subscriptions that started with a free trial, or with an intro offer, in each period, how many have converted to paid, how many ended without converting, and how many are still running, split by renewal status. The console page \"Subscription Intro Offers\" draws two stacked-column charts from it: \"New free trials\" and \"New paid trials\" (paid trial = intro offer).\n\n- Available in the Purchasely console (including Ask your data) and to Purchasely staff. API keys and third-party MCP clients get a 403. It takes up to 70 s on large apps: prefer MONTH and ranges under a year.\n- Returns `{data: {trials: {values}, intro_offers: {values}, trials_balance: {values}, intro_offers_balance: {values}}}`. `trials` and `intro_offers` are the cohorts: one row per period of subscription start with `*_converted`, `*_not_converted`, `*_ongoing_auto_renewing`, `*_ongoing_non_auto_renewing`, `*_ongoing_billing_retry`, `*_ongoing_grace_period`. The values drawn below the axis in the console are negative in the response (not converted, billing retry, grace period, ongoing non-renewing).\n- Cohort rows read the subscription's **current** state: \"ongoing auto-renewing\" = offers started in the period, still running, renewal on; \"ongoing non auto-renewing\" = still running but renewal already turned off (they will not convert); billing retry and grace period = still running, payment failing. Converted and not converted are the offers that ended. Conversion rate in the console = converted / (converted + not converted + billing retry).\n- `trials_balance` and `intro_offers_balance` count events by **event date** (started, converted, not converted, and a running balance), not by cohort. The console no longer draws them.\n- Scope: free trials (`TrialStarted/Converted/NotConverted` events) and intro offers (`IntroOffer*` events) only. Promo codes and promotional offers are not on this page: promotional offers have their own console endpoint, not exposed here.\n- Not counted: sandbox, subscriptions received through Family Sharing (the purchaser's own is counted), one-time purchases. Counts are events, not distinct subscriptions. On iOS, a subscription that changed plan is attached to one record: filtering on a plan can miss it.\n- Filters applied: platform_names, plans, period_types (through the plan distributions), countries (store country), offer_types and family_sharing (cohorts only). Declared but NOT applied: screens, placements, audiences, campaigns, ab_test_variants, promotional_offers. Omitting `application_id` blends every app you can access.\n- Not this tool: offer starts per period across every offer type (`dashboard_events`), trial-to-paid in a funnel by dimension (`dashboard_funnel`), paywall conversion (`dashboard_v2_conversion`).\n- Recommended periodicity: MONTH; a recent cohort reads mostly \"ongoing\" until its offers end.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_dashboard_trials_live",
         "parameters": [
           {
@@ -23620,7 +23588,7 @@
             "$ref": "#/components/responses/QueryTimeout"
           }
         },
-        "summary": "Trials and intro offers (all apps)",
+        "summary": "Free trial and intro offer cohorts (all apps)",
         "tags": [
           "Dashboard"
         ],
