@@ -71,7 +71,7 @@ Purchasely tags the Stripe objects it creates so you can recognize them in your 
 | ------------------------------- | --------------------------------------------------------- |
 | `ply_provider`                  | `purchasely`                                              |
 | `ply_channel`                   | `web2app`                                                 |
-| `utm_source`, `utm_campaign`, … | The UTM parameters of the landing URL, up to 48 pairs.    |
+| `utm_source`, `utm_campaign`, … | The UTM parameters of the landing URL.    |
 | `web_session_id`                | The identifier of the web session that made the purchase. |
 
 Stripe subscriptions created on your own website by your backend do not carry these keys.

@@ -24,7 +24,7 @@ It routes your subdomain to Purchasely, proves you own it, and lets Purchasely i
 
 # How long does verification take?
 
-Usually within minutes; DNS propagation can take a few hours. Purchasely re-checks every five minutes, or immediately when you click **Check now**. Until the domain is Active, your funnels keep running on the default domain.
+Usually less than half an hour. Purchasely checks automatically. Click **Check now** to check at once. Until the domain is Active, your funnels keep running on the default domain.
 
 # I use Cloudflare for my DNS. Anything special?
 

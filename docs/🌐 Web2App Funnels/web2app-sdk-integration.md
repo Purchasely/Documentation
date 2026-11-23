@@ -67,7 +67,7 @@ override fun onNewIntent(intent: Intent) {
 
 ### Cold start: pass the launch deeplink at initialization
 
-When the app is launched by the link, the URL is available before the SDK is started. Hand it to the **start builder** with `handleDeeplink`, as shown in [SDK initialization](sdk-initialization). This is what guarantees that a redemption link opened on a cold start is consumed, and it lets the SDK adopt the web visitor's identity before its first network call, so the analytics of the journey stay continuous.
+When the app is launched by the link, the URL is available before the SDK is started. Hand it to the **start builder** with `handleDeeplink`, as shown in [SDK initialization](sdk-initialization). This makes sure that a redemption link opened on a cold start is consumed.
 
 ```swift
 Purchasely.apiKey("YOUR_API_KEY")
@@ -106,7 +106,7 @@ The result carries:
 | Success or failure          | `isSuccess` on iOS, `Success` / `Failure` subclasses on Android.                                                                                                                          |
 | `context.subscription`      | The activated subscription, with its plan and product. Same type as the ones returned by the SDK's subscription methods.                                                                  |
 | `replay`                    | `true` when the link had already been consumed by this user; the entitlements were simply refreshed.                                                                                      |
-| `errorCode`, `errorMessage` | On failure: `EXPIRED_REDEMPTION_TOKEN` (a new link was emailed; the message contains the masked address), `INVALID_REDEMPTION_TOKEN`, or `nil` when the request never reached the server. |
+| `errorCode`, `errorMessage` | On failure: `EXPIRED_REDEMPTION_TOKEN` (a new link was emailed; the message contains the masked address), `INVALID_REDEMPTION_TOKEN`, or `nil` on a network error. |
 
 ### Who owns the subscription: identify the user before the link is consumed
 
@@ -252,7 +252,7 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-`Session`, `Router` and `Redemption.isRedemptionLink` are placeholders for your own code; a redemption link is the only Purchasely deeplink that opens your app right after a web checkout, so a simple check on the URL path is enough. The delegate must be registered before `start`: there is no runtime setter. The app schemes must be declared as described in [Setup 3](web2app-setup-mobile-app).
+`Session`, `Router` and `Redemption.isRedemptionLink` are placeholders for your own code. A redemption link has the form `<your_scheme>://ply/redeem/<token>`. `isRedemptionLink` only checks that the host is `ply` and the path starts with `/redeem/`. The delegate must be registered before `start`: there is no runtime setter. The app schemes must be declared as described in [Setup 3](web2app-setup-mobile-app).
 
 ### If the subscription was activated anonymously
 
@@ -292,7 +292,7 @@ Every redemption also emits exactly one event to your Purchasely event listener:
 | `REDEMPTION_CONSUMED` | The subscription was activated (or re-confirmed, with `replay: true`). | `redemption.subscriptions`, `redemption.purchase_context` with the `utm_*` attributes and the user attributes collected in the funnel. |
 | `REDEMPTION_FAILED`   | The link could not be consumed.                                        | `error_message`, `redemption.error_code`.                                                                                              |
 
-`REDEMPTION_CONSUMED` fires after the funnel's context has been restored, so the UTM parameters are readable through the SDK's built-in attributes and the quiz answers through the user attributes, without parsing the event.
+When `REDEMPTION_CONSUMED` fires, the UTM parameters are readable through the SDK's built-in attributes. The quiz answers are readable through the user attributes.
 
 From SDK **6.2**, `REDEMPTION_CONSUMED` is also available as a **Campaign trigger** in the Console. Use it to display a welcome Screen or an onboarding Flow to web subscribers without writing the delegate above: create a Campaign, choose _Redemption consumed_ as trigger, and pick the Screen or Flow to display. See [Campaigns](campaigns).
 

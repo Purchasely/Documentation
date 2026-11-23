@@ -129,7 +129,7 @@ When a Stripe offer is configured on the Promotional Offer, a free trial, an int
 | Intro price | `INTRO_OFFER_STARTED` at purchase, then `INTRO_OFFER_CONVERTED` at the first full-price invoice. |
 | Trial then intro price | `TRIAL_STARTED`, then `TRIAL_CONVERTED` and `INTRO_OFFER_STARTED` at the first discounted invoice, then `INTRO_OFFER_CONVERTED`. |
 
-The subscription carries the offer's vendor ID, and the Stripe subscription carries the offer in its metadata. See [Offer events](offer-events) and [Events, attribution & webhooks](web2app-events-and-webhooks).
+The subscription carries the offer's vendor ID. See [Offer events](offer-events) and [Events, attribution & webhooks](web2app-events-and-webhooks).
 
 ## Testing
 

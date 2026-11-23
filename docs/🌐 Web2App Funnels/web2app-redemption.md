@@ -32,7 +32,7 @@ The payment is only half of a Web2App Funnel. The other half is the **handover**
 
 ## The redemption link
 
-The link is unique to the subscription and works **once**: when it is consumed, the subscription is attached to the app user who opened it. If the subscriber later opens a link that has **expired** or has **already been used**, Purchasely automatically emails a **new redemption link** to the address entered at the Stripe checkout. Opening the link again on the device where it was already redeemed simply confirms the subscription.
+The link is unique to the subscription and works **once**: when it is consumed, the subscription is attached to the app user who opened it.
 
 | Rule | Detail |
 | --- | --- |
@@ -52,8 +52,8 @@ To turn it on, open the **Email domain** step of your Web2App Funnels setup in t
 
 * Purchasely sends a reminder only for an active subscription that nobody has redeemed yet. It sends the reminder to the email address entered at checkout.
 * A reminder uses the same layout as the receipt email: app name, icon, store links and redemption link. It has its own subject and intro.
-* Purchasely schedules the reminders at the purchase and checks the switch when each reminder is due. If you turn it off, the reminders not sent yet stop. If you turn it on, only the reminders still due are sent. Reminders that came due while it was off are not sent.
-* A reminder sends the current link and moves its expiry to 3 days from the reminder. If no link is valid, Purchasely issues a new one.
+* The switch applies to the reminders not sent yet.
+* The link in each reminder is valid for 3 days.
 
 ## Get the redemption link from your backend
 
@@ -63,7 +63,7 @@ To send the redemption link in your own emails, CRM or support tools, call the M
 POST /management/v1/applications/{application_id}/purchasely_subscriptions/{id}/redemption_link
 ```
 
-`{id}` is the ID of the subscription.
+`{id}` is the subscription `id` that the subscriptions list returns.
 
 In the API key permissions, under **Look-ups**, turn on **Edit** for **Subscriptions**. This grants the scope `lookups.subscriptions:edit`. See [Management API](https://docs.purchasely.com/docs/management-api). The full contract is in the [API Reference](https://docs.purchasely.com/reference/post_management_v1_applications_application_id_purchasely_subscriptions_id_redemption_link).
 
@@ -78,7 +78,7 @@ In the API key permissions, under **Look-ups**, turn on **Edit** for **Subscript
 ```
 
 * `url` is the same web link as in the email. A deeplink is `null` when the platform or its app scheme is not set.
-* If the subscription has a valid link, the call returns it. It moves the expiry to 3 days from the call. Otherwise, the call issues a new link.
+* The returned link is valid for 3 days from the call.
 * Purchasely sends no email for this call.
 * Anyone who opens a valid link can redeem the subscription. Send the link only to the buyer.
 
@@ -87,14 +87,14 @@ In the API key permissions, under **Look-ups**, turn on **Edit** for **Subscript
 | `404 NOT_FOUND` | The application has no subscription with this ID. |
 | `409 ALREADY_REDEEMED` | Someone already redeemed the subscription. |
 | `422 NOT_REDEEMABLE` | The subscription is not active, does not come from a Web2App Funnel, or has no redemption link. |
-| `422 LINK_LIMIT_REACHED` | A new link is necessary, but the subscription already had 24 links in the last 90 days. |
+| `422 LINK_LIMIT_REACHED` | Too many redemption links were created for this subscription. Try again later. |
 
 ## Find buyers who have not redeemed
 
 * **Console:** in the **Subscriptions** list, use the **Redemption** filter. The values are **Redeemed**, **Not redeemed** and **All redemption statuses**.
 * **Management API:** add `redemption_status=redeemed` or `redemption_status=not_redeemed` to `GET /management/v1/applications/{application_id}/purchasely_subscriptions`.
 
-A subscription without a redemption link, for example one that does not come from a Web2App Funnel, matches neither value. **Not redeemed** also lists subscriptions that are no longer active.
+**Not redeemed** also lists subscriptions that are no longer active.
 
 ## What happens to the subscription
 

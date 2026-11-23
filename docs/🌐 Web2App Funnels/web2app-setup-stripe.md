@@ -39,7 +39,7 @@ Both screens edit the same configuration.
 
 ## 1.1 Stripe connection
 
-Purchasely connects to Stripe through the **Purchasely app on the Stripe App Marketplace**. There are no API keys to copy: you install the app on your Stripe account, sign in with your Purchasely credentials and pick the Purchasely app to attach. Purchasely then reads your prices and follows your subscriptions through webhooks.
+Purchasely connects to Stripe through the **Purchasely app on the Stripe App Marketplace**. There are no API keys to copy: you install the app on your Stripe account, sign in with your Purchasely credentials and pick the Purchasely app to attach. Purchasely then reads your prices and follows your subscriptions.
 
 ### Live mode and test mode
 
@@ -126,8 +126,6 @@ The permissions requested by the app are the ones needed to run and follow a web
 | Customer Portal                                                    | Let subscribers manage their web subscription.                               |
 | Webhooks and events                                                | Receive subscription events in real time.                                    |
 
-Purchasely listens to the following Stripe events: `checkout.session.completed`, `invoice.paid`, `invoice.payment_failed`, `customer.subscription.updated`, `customer.subscription.deleted`, and `account.application.deauthorized`.
-
 ### Disconnect
 
 To disconnect a mode, open the Purchasely app from **Installed apps** in your Stripe dashboard and click **Sign out**, or uninstall the app from Stripe. Purchasely stops receiving events for that mode immediately.
@@ -171,7 +169,7 @@ Stripe supports two ways of pricing in several currencies. Purchasely handles bo
 | **Multi-currency price** (recommended) | One price ID with several currencies, using Stripe's [multi-currency prices](https://docs.stripe.com/products-prices/pricing-models#multicurrency). | One price ID per mode. Purchasely picks the currency from the visitor's browser settings: EUR for a visitor in France, USD for a visitor in the US. If the visitor's currency is not configured on the price, the price's default currency is used. |
 | **One price per currency** (legacy)    | One price ID per currency, the only model Stripe supported before multi-currency prices. Common in catalogs created several years ago.              | All the price IDs of the plan. This is why a plan accepts several Stripe prices.                                                                                                                                                                    |
 
-If a price ID carries several amounts for the same currency, Purchasely uses the **most recently created** one. Purchasely never converts amounts itself.
+A plan can have several price IDs. Each price ID has one amount per currency. If several price IDs of a plan set the same currency, Purchasely uses the **most recently created** one. Visitors in other currencies see the base currency of the oldest price ID. Purchasely never converts amounts.
 
 ### How do I create the products and prices in Stripe?
 
