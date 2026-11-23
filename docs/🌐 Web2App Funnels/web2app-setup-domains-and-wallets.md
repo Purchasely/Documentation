@@ -57,9 +57,9 @@ Use a **first-level subdomain** of a domain you own, for example `start.yourapp.
 | ----- | -------------------------------------------------------------------------- | ------------------- |
 | CNAME | `start` (or the full name `start.yourapp.com`, depending on your provider) | `web.purchasely.io` |
 
-3. Wait for propagation. Purchasely re-checks the record **every five minutes**; click **Check now** to force a check. Once the record resolves, the SSL certificate is issued automatically and the status becomes **Active**.
+3. Wait for propagation. Purchasely checks automatically. Click **Check now** to check at once. Once the record resolves, the SSL certificate is issued automatically and the status becomes **Active**.
 
-Verification usually completes within 10 to 20 minutes, but DNS propagation can take a few hours. Until the domain is active, your funnels keep working on `web.purchasely.io`.
+Verification usually takes less than half an hour. Until the domain is active, your funnels keep working on `web.purchasely.io`.
 
 ### Statuses
 
@@ -101,9 +101,9 @@ This step also holds the **Send redemption reminders** switch, off by default. W
 | TXT   | `bounce.email.yourapp.com`              | `v=spf1 include:amazonses.com ~all`         | MAIL FROM: SPF passes for your domain (recommended) |
 | TXT   | `_dmarc.email.yourapp.com`              | `v=DMARC1; p=none;`                         | DMARC policy (recommended)                      |
 
-The exact names and values are displayed in the step, with a copy button for each. For the MX record, enter the priority in its own field (Cloudflare and most providers have one). Only the three DKIM records are required: they are enough for your emails to pass DMARC. The MAIL FROM records also make SPF pass for your domain. Gmail and Yahoo require a DMARC record from senders of more than 5,000 emails a day. A domain can have only one DMARC record: if yours already has one, on this name or on your main domain, skip it. The row then shows as verified, and your policy keeps applying. What are [DKIM, SPF and DMARC](https://www.cloudflare.com/learning/email-security/dmarc-dkim-spf/)?
+The exact names and values are displayed in the step, with a copy button for each. For the MX record, enter the priority in its own field (Cloudflare and most providers have one). Only the three DKIM records are required: they are enough for your emails to pass DMARC. Gmail and Yahoo require a DMARC record from senders of more than 5,000 emails a day. A domain can have only one DMARC record: if yours already has one, on this name or on your main domain, skip it. The row then shows as verified, and your policy keeps applying. What are [DKIM, SPF and DMARC](https://www.cloudflare.com/learning/email-security/dmarc-dkim-spf/)?
 
-4. Purchasely re-checks the records every five minutes; click **Check now** to force a check. The status switches to **Verified** once the three DKIM records resolve. Verification is attempted for 72 hours; after that, **Retry verification** generates three new DKIM records (the MAIL FROM and DMARC records do not change).
+4. Purchasely checks automatically. Click **Check now** to check at once. The status switches to **Verified** once the three DKIM records resolve. Verification is attempted for 72 hours; after that, **Retry verification** generates three new DKIM records (the MAIL FROM and DMARC records do not change).
 
 Until the domain is verified, emails are sent from the Purchasely address. You can change the sending domain or the mailbox at any time: a new mailbox applies right away, a new domain needs its own verification.
 
@@ -137,4 +137,3 @@ When your custom web domain becomes active, its registration is triggered automa
 | _This domain is not available._                                    | The subdomain is an apex domain, has several levels, or is already attached to another Purchasely app.                                                                                                        |
 | The email domain stays unverified.                                 | One of the three records is missing or has the wrong name. Some providers add your domain automatically: enter only the part before it. After 72 hours, click **Retry verification** and add the new records. |
 | Apple Pay does not appear in the checkout.                         | Register the hosts in step 2.3 and test in Safari on an iPhone or a Mac with a card in Wallet.                                                                                                                |
-| The wallets appear on `web.purchasely.io` but not on my subdomain. | The subdomain was activated after the registration. Click **Register** again.                                                                                                                                 |

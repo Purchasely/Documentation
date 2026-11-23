@@ -16,7 +16,7 @@ The icon appears on the success screen, the download prompts and the receipt ema
 
 # Do I have to upload an icon?
 
-No. Your funnels use the app icon from App settings → General by default. Upload one here only if you want a different visual on the web; it updates your app settings as well.
+No. Your funnels use the app icon from App settings → General. Changing it here changes it there too.
 
 # What formats and sizes?
 

@@ -30,7 +30,7 @@ Click **Verify sending domain** to see them. Names are shown in full; if your pr
 
 # The domain stays unverified
 
-A DKIM record is missing or has the wrong name, often because the provider appended your domain a second time. Purchasely re-checks every five minutes; click **Check now** after fixing. Verification is attempted for 72 hours: the status then turns to **DNS records missing**, and **Retry verification** generates three new DKIM records to add (the MAIL FROM and DMARC records do not change). A **Paused** status means the email provider paused sending after too many bounces or complaints; emails use the Purchasely address while Purchasely support reviews it with you.
+A DKIM record is missing or has the wrong name, often because the provider appended your domain a second time. Purchasely checks automatically. Click **Check now** after fixing. Verification is attempted for 72 hours: the status then turns to **DNS records missing**, and **Retry verification** generates three new DKIM records to add (the MAIL FROM and DMARC records do not change). A **Paused** status means the email provider paused sending after too many bounces or complaints; emails use the Purchasely address while Purchasely support reviews it with you.
 
 # A record shows "Action needed"
 

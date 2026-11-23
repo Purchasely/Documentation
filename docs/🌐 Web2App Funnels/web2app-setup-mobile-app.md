@@ -104,10 +104,10 @@ Your funnels display your app's identity at several places: the browser tab and 
 
 | Image        | Where it appears                                | Requirements                                                                                    |
 | ------------ | ----------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| **App icon** | Success screen, download prompts, receipt email | Square PNG or SVG, at least 512×512 px. By default, the icon set in **App settings → General**. |
+| **App icon** | Success screen, download prompts, receipt email | Square PNG or SVG, at least 512×512 px. The icon of **App settings → General**. Changing it here changes it there too. |
 | **Favicon**  | Browser tab and bookmarks of your funnels       | Square PNG or SVG, at least 48×48 px.                                                           |
 
-Upload a dedicated image if you want your funnels to use a different visual than your app. Purchasely generates every size it needs from the file you upload.
+Purchasely generates every size it needs from the file you upload.
 
 ## Troubleshooting
 
