@@ -42,13 +42,65 @@ The link is unique to the subscription and works **once**: when it is consumed, 
 
 | Rule | Detail |
 | --- | --- |
-| **Validity** | A link is valid for **4 hours** after it is issued. |
+| **Validity** | A link is valid for **3 days** after it is issued. |
 | **Expired or already-used link** | When the subscriber opens an expired or already-used link, from the email or from the success screen, Purchasely **automatically emails a new link** to the address entered at checkout and tells the subscriber to check their inbox. Nothing to do on your side. |
 | **Any device** | The link works on the device where the purchase was made and on any other one, for example a purchase on desktop and an activation on the phone, from the email. |
 | **App not installed** | Step 1 of the success screen links to the App Store and Play Store; the email carries the same store links. Once the app is installed, the subscriber taps the redemption button, or opens the link from the email, to activate. |
 | **Subscription no longer active** | If the subscription was cancelled or refunded before activation, the link shows an *unavailable* page and no email is sent. |
 
 The receipt email is sent from `redemption@purchasely.io` with your app name as sender, or from your own address once your [email domain](web2app-setup-domains-and-wallets) is verified. For sandbox purchases, its subject starts with `[Sandbox]`.
+
+## Reminder emails
+
+Some buyers close the receipt email and never open the app. Purchasely can email the redemption link again. This feature is optional and is **off by default**.
+
+To turn it on, open the **Email domain** step of your Web2App Funnels setup in the Console. Switch on **Send redemption reminders**, then click **Save** on the step. Purchasely emails the redemption link again 1 day and 3 days after the purchase. It targets buyers who have not redeemed yet.
+
+* Purchasely sends a reminder only for an active subscription that nobody has redeemed yet. It sends the reminder to the email address entered at checkout.
+* A reminder uses the same layout as the receipt email: app name, icon, store links and redemption link. It has its own subject and intro.
+* Purchasely schedules the reminders at the purchase and checks the switch when each reminder is due. If you turn it off, the reminders not sent yet stop. If you turn it on, only the reminders still due are sent. Reminders that came due while it was off are not sent.
+* A reminder sends the current link and moves its expiry to 3 days from the reminder. If no link is valid, Purchasely issues a new one. At the limit of 24 new links in 90 days, it skips the reminder.
+
+## Get the redemption link from your backend
+
+To send the redemption link in your own emails, CRM or support tools, call the Management API:
+
+```http
+POST /management/v1/applications/{application_id}/purchasely_subscriptions/{id}/redemption_link
+```
+
+`{id}` is the ID of the subscription.
+
+In the API key permissions, under **Look-ups**, turn on **Edit** for **Subscriptions**. This grants the scope `lookups.subscriptions:edit`. See [Management API](https://docs.purchasely.com/docs/management-api). The full contract is in the [API Reference](https://docs.purchasely.com/reference/post_management_v1_applications_application_id_purchasely_subscriptions_id_redemption_link).
+
+```json
+{
+  "redemption_link": {
+    "url": "...",
+    "deeplinks": { "ios": "...", "android": "..." },
+    "expires_at": "..."
+  }
+}
+```
+
+* `url` is the same web link as in the email. A deeplink is `null` when the platform or its app scheme is not set.
+* If the subscription has a valid link, the call returns it. It moves the expiry to 3 days from the call. Otherwise, the call issues a new link.
+* Purchasely sends no email for this call.
+* Anyone who opens a valid link can redeem the subscription. Send the link only to the buyer.
+
+| Error | Meaning |
+| --- | --- |
+| `404 NOT_FOUND` | The application has no subscription with this ID. |
+| `409 ALREADY_REDEEMED` | Someone already redeemed the subscription. |
+| `422 NOT_REDEEMABLE` | The subscription is not active, does not come from a Web2App Funnel, or has no redemption link. |
+| `422 LINK_LIMIT_REACHED` | A new link is necessary, but the subscription already had 24 links in the last 90 days. |
+
+## Find buyers who have not redeemed
+
+* **Console:** in the **Subscriptions** list, use the **Redemption** filter. The values are **Redeemed**, **Not redeemed** and **All redemption statuses**.
+* **Management API:** add `redemption_status=redeemed` or `redemption_status=not_redeemed` to `GET /management/v1/applications/{application_id}/purchasely_subscriptions`.
+
+A subscription without a redemption link, for example one that does not come from a Web2App Funnel, matches neither value. **Not redeemed** also lists subscriptions that are no longer active.
 
 ## What happens to the subscription
 
@@ -83,5 +135,6 @@ Along with the subscription, the app receives the **context of the web journey**
 | The button on the success screen does nothing. | The app is not installed, or the app scheme in the Console does not match the one declared in the app. See [Setup 3](web2app-setup-mobile-app). |
 | The app opens but nothing happens. | The app runs an SDK older than 6.1, or the URL is not forwarded to the SDK. See [SDK integration](web2app-sdk-integration). |
 | The subscriber says the link has expired or was already used. | Expected: a new email was sent automatically to the checkout address. Ask them to open the latest email. |
+| A buyer paid but never opened the app. | Select **Not redeemed** in the **Redemption** filter. Get the link with the Management API, then send it to the buyer. Turn on [reminder emails](#reminder-emails) for the next buyers. |
 | The subscriber never received the email. | Check the spam folder and the address typed at checkout. The email is sent within a minute of the purchase. |
 | The subscription is on the wrong account, or on no account. | The link was consumed while another user, or no user, was signed in on the device. Have the subscriber open a fresh redemption link from the email while signed in with the right account. |

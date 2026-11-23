@@ -80,6 +80,8 @@ Verification usually completes within 10 to 20 minutes, but DNS propagation can 
 
 After a purchase, Purchasely emails the customer a receipt containing the link that activates the subscription in your app. By default it comes from `redemption@purchasely.io`, with your app name as sender. With an email domain, it comes from your brand, for example `welcome@yourapp.com`, which improves trust and deliverability.
 
+This step also holds the **Send redemption reminders** switch, off by default. When it is on, Purchasely reminds buyers who have not redeemed, 1 day and 3 days after the purchase. See [After the purchase](web2app-redemption#reminder-emails).
+
 
 <Image src="https://files.readme.io/4e4ac6180f1c2c45adbb4fdb886d715bab760be63376e6546757067aad619ccb-Screenshot_2026-09-30_at_17.01.01.png" border={true} />
 
