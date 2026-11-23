@@ -5,7 +5,7 @@ excerpt: >-
   success screen, the receipt email, the redemption link and what happens in the
   app.
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
