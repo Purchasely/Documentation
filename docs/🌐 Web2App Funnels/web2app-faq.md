@@ -72,7 +72,7 @@ They happen in Stripe and are reflected in Purchasely like any subscription: sam
 ## After the purchase
 
 **How long is the redemption link valid?**
-Four hours. Opening an expired or already-used link automatically sends a new one to the checkout email address. See [After the purchase](web2app-redemption).
+Three days after it is issued. See [After the purchase](web2app-redemption) for expired or used links.
 
 **The subscriber bought on desktop. How do they activate on their phone?**
 From the receipt email: it carries the store links and the redemption link. The link works on any device.

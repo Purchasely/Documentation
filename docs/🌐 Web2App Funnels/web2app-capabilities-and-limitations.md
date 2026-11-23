@@ -67,6 +67,7 @@ Screens can be personalized with the attributes collected earlier in the flow (f
 * Keep UTM parameters and click IDs from the first visit to the purchase, and get them back in webhooks.
 * **A/B test** Web Flows: UI variants as well as price variants.
 * Send the purchase receipt email from your own **email domain**.
+* Send optional [redemption reminders](web2app-redemption#reminder-emails) to buyers who have not redeemed.
 
 **In the app**
 

@@ -12,7 +12,7 @@ next:
 ---
 # Which emails does Purchasely send to my subscribers?
 
-After a web purchase, a receipt with the store links and the redemption link that activates the subscription in your app. It is the subscriber's backup path when they close the success screen or change device. See [After the purchase](web2app-redemption).
+After a web purchase, a receipt with the store links and the redemption link that activates the subscription in your app. It is the subscriber's backup path when they close the success screen or change device. Purchasely can also remind buyers who have not redeemed, 1 day and 3 days after the purchase. Turn on **Send redemption reminders** to send them. See [After the purchase](web2app-redemption).
 
 # Why configure an email domain?
 
