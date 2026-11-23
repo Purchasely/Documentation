@@ -26,12 +26,6 @@ The payment is only half of a Web2App Funnel. The other half is the **handover**
 3. **Receipt email.** In parallel, Purchasely emails the customer a receipt at the email address typed at checkout. It carries your app name and icon, the plan, and the same two steps as the success screen: the **App Store and Play Store links** to download the app, then the **redemption link** to activate the subscription. The subscriber can use it later, on any device.
 4. **The app opens.** The SDK detects the redemption link, calls Purchasely, activates the subscription for this app user and refreshes their entitlements. It shows a confirmation, and your app can react to it.
 
-<Image align="center" border={true} src="TODO-NICO-UPLOAD/redeem-01-success-screen-phone.png" alt="Success screen of a Web Flow on a phone: step 1 store links, step 2 redemption button" />
-
-<Image align="center" border={true} src="TODO-NICO-UPLOAD/redeem-02-receipt-email.png" alt="Receipt email with the plan, the store links to download the app and the button to activate the subscription" />
-
-<Image align="center" border={true} src="TODO-NICO-UPLOAD/redeem-03-app-confirmation.png" alt="The app opened from the link, with the SDK confirmation that the subscription is active" />
-
 > 📘 No sign-in required, but identify first if you have accounts
 >
 > The subscriber does not need an account to activate the subscription: the link is enough, and Purchasely attaches the subscription to the app user who opened it. If your app has accounts, make sure the user is **signed in before the link is consumed**: the subscription is then attached to their account, or transferred to it automatically if it was created for an anonymous web visitor, and your webhooks report the transfer, exactly as for in-app subscriptions. A link consumed while the user is anonymous leaves the subscription on the anonymous user, and a later sign-in does not move it. See [SDK integration](web2app-sdk-integration) for the recommended pattern.
