@@ -138,10 +138,12 @@ Use the **Daily / Weekly / Monthly** selector to control the time resolution of 
 | **Countries**        | Filter by user country                                                             |
 | **Screens**          | Filter by the paywall screen that triggered the subscription                       |
 | **Placements**       | Filter by where in the app the paywall was shown                                   |
-| **Audiences**        | Filter by audience segment the user belonged to at purchase time                   |
+| **Audiences**        | Filter by the audience the user matched                                            |
 | **Plans**            | Filter by specific subscription plan                                               |
 | **A/B tests**        | Filter by A/B test the user was enrolled in                                        |
 | **Campaigns**        | Filter by campaign attribution                                                     |
+
+> 📘 Filters apply to the latest known attributes of each subscription (its current offer, country, screen...), not to its attributes on the day it entered the cohort.
 
 # Common use cases
 
