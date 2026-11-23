@@ -53,7 +53,7 @@ To turn it on, open the **Email domain** step of your Web2App Funnels setup in t
 * Purchasely sends a reminder only for an active subscription that nobody has redeemed yet. It sends the reminder to the email address entered at checkout.
 * A reminder uses the same layout as the receipt email: app name, icon, store links and redemption link. It has its own subject and intro.
 * Purchasely schedules the reminders at the purchase and checks the switch when each reminder is due. If you turn it off, the reminders not sent yet stop. If you turn it on, only the reminders still due are sent. Reminders that came due while it was off are not sent.
-* A reminder sends the current link and moves its expiry to 3 days from the reminder. If no link is valid, Purchasely issues a new one. At the limit of 24 new links in 90 days, it skips the reminder.
+* A reminder sends the current link and moves its expiry to 3 days from the reminder. If no link is valid, Purchasely issues a new one.
 
 ## Get the redemption link from your backend
 
