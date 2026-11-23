@@ -16697,6 +16697,15 @@
             }
           },
           {
+            "description": "Filter web2app subscriptions by redemption, case-insensitive (redeemed, not_redeemed). A subscription without a redemption link matches neither value.",
+            "in": "query",
+            "name": "redemption_status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "description": "Filter by placement public_id.",
             "in": "query",
             "name": "placement",
@@ -16911,6 +16920,86 @@
           "Subscriptions"
         ],
         "x-required-scope": "lookups.subscriptions:view"
+      }
+    },
+    "/management/v1/applications/{application_id}/purchasely_subscriptions/{id}/redemption_link": {
+      "post": {
+        "description": "Return the URL, app deeplinks, and expiry date for an active web2app subscription. Return a live link with its expiry set to 3 days from the call. If the last link has expired, create a new link without sending an email. Errors: ALREADY_REDEEMED (409), NOT_REDEEMABLE (422), LINK_LIMIT_REACHED (422).\n\n**Required scope:** `lookups.subscriptions:edit`",
+        "operationId": "post_management_v1_applications_application_id_purchasely_subscriptions_id_redemption_link",
+        "parameters": [
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "application_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public ID of the resource.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
+            "explode": true,
+            "in": "query",
+            "name": "fields[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "redemption_link": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "deeplinks": {},
+                        "expires_at": {},
+                        "url": {}
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "redemption_link"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success."
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "summary": "Create a redemption link",
+        "tags": [
+          "Subscriptions"
+        ],
+        "x-required-scope": "lookups.subscriptions:edit"
       }
     },
     "/management/v1/applications/{application_id}/screens": {
@@ -24192,6 +24281,15 @@
             "description": "Filter by audience public_id.",
             "in": "query",
             "name": "audience",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter web2app subscriptions by redemption, case-insensitive (redeemed, not_redeemed). A subscription without a redemption link matches neither value.",
+            "in": "query",
+            "name": "redemption_status",
             "required": false,
             "schema": {
               "type": "string"
