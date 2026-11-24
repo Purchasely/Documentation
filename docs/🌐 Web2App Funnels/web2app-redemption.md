@@ -65,7 +65,7 @@ POST /management/v1/applications/{application_id}/purchasely_subscriptions/{id}/
 
 `{id}` is the subscription `id` that the subscriptions list returns.
 
-In the API key permissions, under **Look-ups**, turn on **Edit** for **Subscriptions**. This grants the scope `lookups.subscriptions:edit`. See [Management API](https://docs.purchasely.com/docs/management-api). The full contract is in the [API Reference](https://docs.purchasely.com/reference/post_management_v1_applications_application_id_purchasely_subscriptions_id_redemption_link).
+In the API key permissions, under **Customers**, turn on **Create** for **Redemption links**. This grants the scope `customers.redemption_links:create`. See [Management API](https://docs.purchasely.com/docs/management-api). The full contract is in the [API Reference](https://docs.purchasely.com/reference/post_management_v1_applications_application_id_purchasely_subscriptions_id_redemption_link).
 
 ```json
 {
