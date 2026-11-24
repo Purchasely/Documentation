@@ -106,15 +106,14 @@ Internally each permission is identified by a `category.object:action` string �
 | Experiments · Edit | — | — | ✓ | ✓ | ✓ |
 | **Experiments · Delete** | — | — | ✓ | ✓ | ✓ |
 
-## Look-ups
+## Customers
 
 | Permission | Read-only | Support | Editor | Developer | Full admin |
 | --- | :-: | :-: | :-: | :-: | :-: |
 | Users · View | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Subscriptions · View | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Redemption links · Create | — | — | — | ✓ | ✓ |
 | One-time purchases · View | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Client errors · View | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Client errors · Edit | — | ✓ | ✓ | ✓ | ✓ |
 
 ## Setup
 
@@ -151,6 +150,8 @@ Internally each permission is identified by a `category.object:action` string �
 | Web domains · Create | — | — | — | ✓ | ✓ |
 | Web domains · Edit | — | — | — | ✓ | ✓ |
 | **Web domains · Delete** | — | — | — | ✓ | ✓ |
+| Client errors · View | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Client errors · Edit | — | ✓ | ✓ | ✓ | ✓ |
 
 ## Integrations
 

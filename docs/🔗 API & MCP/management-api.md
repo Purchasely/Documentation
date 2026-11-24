@@ -2,7 +2,7 @@
 title: Management API
 excerpt: >-
   Operate your Purchasely account programmatically: catalog, screens, targeting,
-  experiments, look-ups and analytics, over a REST API
+  experiments, customers and analytics, over a REST API
 deprecated: false
 hidden: false
 metadata:
@@ -20,8 +20,8 @@ It covers seven domains:
 * **Experiences**: manage your screens and what surrounds them (`Screens`, `Screen Versions`, `Category Tags`, `Web Activations`).
 * **Targeting**: decide who sees what and where (`Placements`, `Audiences`, `Campaigns`).
 * **Experimentation**: create, start and terminate your A/B tests, and read their results (`A/B Tests`).
-* **Look-ups**: find a user, a subscription or a purchase, and triage SDK errors (`Users`, `Subscriptions`, `One-Time Purchases`, `Client Errors`).
-* **Setup**: configure your applications and their catalog (`Applications`, `Products`, `Plans`, `Distributions`, `Platforms`, `Custom Events`, `Custom Event Properties`, `Custom Properties`, `Surveys`, `Answers`, `Fonts`, `Translations`).
+* **Customers**: find a user, a subscription or a purchase, and create redemption links (`Users`, `Subscriptions`, `One-Time Purchases`).
+* **Setup**: configure your applications and their catalog (`Applications`, `Products`, `Plans`, `Distributions`, `Platforms`, `Custom Events`, `Custom Event Properties`, `Custom Properties`, `Surveys`, `Answers`, `Fonts`, `Translations`, `Client Errors`).
 * **Integrations**: configure your webhooks and inspect their deliveries (`Webhooks`, `Webhook Deliveries`).
 
 Every endpoint, with its parameters and responses, is listed in the [API Reference](https://docs.purchasely.com/reference). This page explains how to get a key and the rules every endpoint follows.
@@ -87,7 +87,7 @@ https://api.purchasely.io/management/v1
 
 A scope is one permission on one type of object, written `category.object:verb`:
 
-* the **category** is one of the domains above: `analytics`, `experiences`, `targeting`, `experimentation`, `lookups`, `setup`, `integrations`;
+* the **category** is one of the domains above: `analytics`, `experiences`, `targeting`, `experimentation`, `customers`, `setup`, `integrations`;
 * the **object** is what the endpoint acts on, for example `products`, `placements` or `screens`;
 * the **verb** is what it does: `view`, `create`, `edit`, `delete` or `publish`.
 

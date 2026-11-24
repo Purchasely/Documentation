@@ -80,7 +80,7 @@ purchasely placements get --app app_xxx --id <placement_id>
 purchasely products list --app app_xxx --output table
 ```
 
-The commands cover the same domains as the Management API: analytics, experiences, targeting, experimentation, look-ups, setup and integrations. The scopes of your key apply to each command.
+The commands cover the same domains as the Management API: analytics, experiences, targeting, experimentation, customers, setup and integrations. The scopes of your key apply to each command.
 
 * `purchasely --help` and `purchasely <resource> --help` show the commands and their options.
 * `purchasely search "<words>"` finds the command for a task.

@@ -24,7 +24,7 @@ next:
 
 Purchasely offers two APIs to interact with your Purchasely data programmatically:
 
-* The **Management API** operates your account: your applications and catalog, your screens, your targeting (placements, audiences, campaigns), your A/B tests, user and subscription look-ups, and your analytics. See the [Management API](/docs/management-api) guide to create a key and send your first request, and the [API Reference](https://docs.purchasely.com/reference) for every endpoint. To use the Management API from a terminal, a CI job or an AI coding agent, see the [CLI](/docs/cli) (beta).
+* The **Management API** operates your account: your applications and catalog, your screens, your targeting (placements, audiences, campaigns), your A/B tests, customer data, and your analytics. See the [Management API](/docs/management-api) guide to create a key and send your first request, and the [API Reference](https://docs.purchasely.com/reference) for every endpoint. To use the Management API from a terminal, a CI job or an AI coding agent, see the [CLI](/docs/cli) (beta).
 * The **Client API** syncs data from your CRM, CDP, or backend systems, such as the audiences you build there. It is described below.
 
 # Client API
