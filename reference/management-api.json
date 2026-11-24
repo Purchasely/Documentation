@@ -6294,7 +6294,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard/events": {
       "get": {
-        "description": "Server-side events recorded by Purchasely, counted per period and per event type: the raw layer under every other chart, with the webhook event names.\n\n- Returns `{data: {\"<period>\": {period, Activate: n, SubscriptionStarted: n, SubscriptionRenewed: n, TransactionProcessed: n, ...}}}`: one object per period, one key per event type that occurred, names in CamelCase (`SUBSCRIPTION_STARTED` → `SubscriptionStarted`). Every event type is returned, there is no event selection.\n- Definition: one count per backend event, dated on the day Purchasely created it. No deduplication and no lifecycle logic: a renewal counts one `SubscriptionRenewed`, one `TransactionProcessed` and one `Activate` the same day. `Activate` / `Deactivate` are entitlement events (access granted or removed) and fire on every receipt; the others are lifecycle events.\n- Counted: production events, one-time purchase events included, every listed event type included (`RetentionMessageRequested`, `InstallmentPaid`, `RenewalDisabled`, `SubscriptionDeferred`, ...). Not counted: sandbox, SDK events, future-dated events, and the events of subscriptions received through Family Sharing (family members' subscriptions; the purchaser's own is counted), so `FamilySharedRevoked` is always 0 here.\n- Unit: count of events. A flow: summable across periods, never comparable to subscription counts (`subscription_activations`, `paid_subscription_movements` dedup per subscription and apply rules).\n- Filters applied: platform_names, plans, period_types, countries (store country), audiences, placements, screens, ab_test_variants. Declared but NOT applied: campaigns, offer_types, family_sharing, promotional_offers. Omitting `application_id` blends every app you can access.\n- Not this tool: activations, movements, retention, revenue; use the dedicated tools. Use this one to audit volumes (billing retries, grace periods, refunds, pauses) and to reconcile with webhooks.\n- Store specifics: pause events are Google Play only; `InstallmentPaid` / `InstallmentRefunded` are App Store monthly-commitment plans only.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/subscription-events\n- Recommended periodicity: DAY for ranges up to ~60 days, WEEK up to ~6 months, MONTH beyond.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Server-side events recorded by Purchasely, counted per period and per event type: the raw layer under every other chart, with the webhook event names.\n\n- Returns `{data: {\"<period>\": {period, Activate: n, SubscriptionStarted: n, SubscriptionRenewed: n, TransactionProcessed: n, ...}}}`: one object per period, one key per event type that occurred, names in CamelCase (`SUBSCRIPTION_STARTED` → `SubscriptionStarted`). Every event type is returned, there is no event selection.\n- Definition: one count per backend event, dated on the day Purchasely created it. No deduplication and no lifecycle logic: a renewal counts one `SubscriptionRenewed`, one `TransactionProcessed` and one `Activate` the same day. `Activate` / `Deactivate` are entitlement events (access granted or removed) and fire on every receipt; the others are lifecycle events.\n- Counted: production events, one-time purchase events included, every listed event type included (`RetentionMessageRequested`, `InstallmentPaid`, `RenewalDisabled`, `SubscriptionDeferred`, ...). Not counted: sandbox, SDK events, future-dated events, and the events of subscriptions received through Family Sharing (family members' subscriptions; the purchaser's own is counted), so `FamilySharedRevoked` is always 0 here.\n- Unit: count of events. A flow: summable across periods, never comparable to subscription counts (`subscription_activations`, `paid_subscription_movements` dedup per subscription and apply rules).\n- Filters applied: platform_names, plans, period_types, countries (store country), audiences, placements, screens, campaigns, ab_test_variants. The table has no offer type, promotional offer or family-sharing column, so those filters are not offered. Omitting `application_id` blends every app you can access.\n- Not this tool: activations, movements, retention, revenue; use the dedicated tools. Use this one to audit volumes (billing retries, grace periods, refunds, pauses) and to reconcile with webhooks.\n- Store specifics: pause events are Google Play only; `InstallmentPaid` / `InstallmentRefunded` are App Store monthly-commitment plans only.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/subscription-events\n- Recommended periodicity: DAY for ranges up to ~60 days, WEEK up to ~6 months, MONTH beyond.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_events",
         "parameters": [
           {
@@ -6404,55 +6404,6 @@
             "style": "form"
           },
           {
-            "description": "Filter by family-sharing flag (\"true\"/\"false\" strings).",
-            "explode": true,
-            "in": "query",
-            "name": "family_sharing[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by offer type.",
-            "explode": true,
-            "in": "query",
-            "name": "offer_types[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "enum": [
-                  "NONE",
-                  "FREE_TRIAL",
-                  "INTRO_OFFER",
-                  "PROMOTIONAL_OFFER",
-                  "PROMO_CODE"
-                ],
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by promotional offer public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "promotional_offers[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
             "description": "Filter by audience public_id.",
             "explode": true,
             "in": "query",
@@ -6521,24 +6472,6 @@
               "type": "array"
             },
             "style": "form"
-          },
-          {
-            "description": "Restrict to unique users (\"true\"/\"false\").",
-            "in": "query",
-            "name": "unique_users",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Filter by survey identifier.",
-            "in": "query",
-            "name": "survey",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
           },
           {
             "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
@@ -9030,7 +8963,7 @@
     },
     "/management/v1/applications/{application_id}/dashboard/trials_live": {
       "get": {
-        "description": "Free trials and introductory offers by **start cohort**: for the subscriptions that started with a free trial, or with an intro offer, in each period, how many have converted to paid, how many ended without converting, and how many are still running, split by renewal status. The console page \"Subscription Intro Offers\" draws two stacked-column charts from it: \"New free trials\" and \"New paid trials\" (paid trial = intro offer).\n\n- Available in the Purchasely console (including Ask your data) and to Purchasely staff. API keys and third-party MCP clients get a 403. It takes up to 70 s on large apps: prefer MONTH and ranges under a year.\n- Returns `{data: {trials: {values}, intro_offers: {values}, trials_balance: {values}, intro_offers_balance: {values}}}`. `trials` and `intro_offers` are the cohorts: one row per period of subscription start with `*_converted`, `*_not_converted`, `*_ongoing_auto_renewing`, `*_ongoing_non_auto_renewing`, `*_ongoing_billing_retry`, `*_ongoing_grace_period`. The values drawn below the axis in the console are negative in the response (not converted, billing retry, grace period, ongoing non-renewing).\n- Cohort rows read the subscription's **current** state: \"ongoing auto-renewing\" = offers started in the period, still running, renewal on; \"ongoing non auto-renewing\" = still running but renewal already turned off (they will not convert); billing retry and grace period = still running, payment failing. Converted and not converted are the offers that ended. Conversion rate in the console = converted / (converted + not converted + billing retry).\n- `trials_balance` and `intro_offers_balance` count events by **event date** (started, converted, not converted, and a running balance), not by cohort. The console no longer draws them.\n- Scope: free trials (`TrialStarted/Converted/NotConverted` events) and intro offers (`IntroOffer*` events) only. Promo codes and promotional offers are not on this page: promotional offers have their own console endpoint, not exposed here.\n- Not counted: sandbox, subscriptions received through Family Sharing (the purchaser's own is counted), one-time purchases. Counts are events, not distinct subscriptions. On iOS, a subscription that changed plan is attached to one record: filtering on a plan can miss it.\n- Filters applied: platform_names, plans, period_types (through the plan distributions), countries (store country), offer_types and family_sharing (cohorts only). Declared but NOT applied: screens, placements, audiences, campaigns, ab_test_variants, promotional_offers. Omitting `application_id` blends every app you can access.\n- Not this tool: offer starts per period across every offer type (`dashboard_events`), trial-to-paid in a funnel by dimension (`dashboard_funnel`), paywall conversion (`dashboard_v2_conversion`).\n- Recommended periodicity: MONTH; a recent cohort reads mostly \"ongoing\" until its offers end.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Free trials and introductory offers by **start cohort**: for the subscriptions that started with a free trial, or with an intro offer, in each period, how many have converted to paid, how many ended without converting, and how many are still running, split by renewal status. The console page \"Subscription Intro Offers\" draws two stacked-column charts from it: \"New free trials\" and \"New paid trials\" (paid trial = intro offer).\n\n- Available in the Purchasely console (including Ask your data) and to Purchasely staff. API keys and third-party MCP clients get a 403. It takes up to 70 s on large apps: prefer MONTH and ranges under a year.\n- Returns `{data: {trials: {values}, intro_offers: {values}, trials_balance: {values}, intro_offers_balance: {values}}}`. `trials` and `intro_offers` are the cohorts: one row per period of subscription start with `*_converted`, `*_not_converted`, `*_ongoing_auto_renewing`, `*_ongoing_non_auto_renewing`, `*_ongoing_billing_retry`, `*_ongoing_grace_period`. The values drawn below the axis in the console are negative in the response (not converted, billing retry, grace period, ongoing non-renewing). Use their absolute value.\n- Cohort rows read the subscription's **current** state: \"ongoing auto-renewing\" = offers started in the period, still running, renewal on; \"ongoing non auto-renewing\" = still running but renewal already turned off (they will not convert); billing retry and grace period = still running, payment failing. Converted and not converted are the offers that ended. Conversion rate in the console = converted / (converted + not converted + billing retry): `trials_converted / (trials_converted + |trials_not_converted| + |trials_ongoing_billing_retry|)`, and the same with the `intro_offers_*` fields.\n- `*_ongoing_auto_renewing` and `*_ongoing_non_auto_renewing` are floored at 0 (absolute value). When TrialStarted or IntroOfferStarted events are missing, they show 0, not the real count.\n- `trials_balance` and `intro_offers_balance` count events by **event date** (started, converted, not converted, and a running balance), not by cohort. The console no longer draws them.\n- Scope: free trials (`TrialStarted/Converted/NotConverted` events) and intro offers (`IntroOffer*` events) only. Promo codes and promotional offers are not on this page: promotional offers have their own console endpoint, not exposed here.\n- Not counted: sandbox, subscriptions received through Family Sharing (the purchaser's own is counted), one-time purchases. Counts are events, not distinct subscriptions. On iOS, a subscription that changed plan is attached to one record: filtering on a plan can miss it.\n- Filters applied: platform_names, plans, period_types (through the plan distributions), countries (store country). Attribution filters (screens, placements, audiences, campaigns, ab_test_variants), offer_types, promotional_offers and family_sharing are not offered: the balances cannot apply them. Omitting `application_id` blends every app you can access.\n- Not this tool: offer starts per period across every offer type (`dashboard_events`), trial-to-paid in a funnel by dimension (`dashboard_funnel`), paywall conversion (`dashboard_v2_conversion`).\n- Recommended periodicity: MONTH; a recent cohort reads mostly \"ongoing\" until its offers end.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_applications_application_id_dashboard_trials_live",
         "parameters": [
           {
@@ -9138,143 +9071,6 @@
               "type": "array"
             },
             "style": "form"
-          },
-          {
-            "description": "Filter by family-sharing flag (\"true\"/\"false\" strings).",
-            "explode": true,
-            "in": "query",
-            "name": "family_sharing[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by offer type.",
-            "explode": true,
-            "in": "query",
-            "name": "offer_types[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "enum": [
-                  "NONE",
-                  "FREE_TRIAL",
-                  "INTRO_OFFER",
-                  "PROMOTIONAL_OFFER",
-                  "PROMO_CODE"
-                ],
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by promotional offer public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "promotional_offers[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by audience public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "audiences[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by campaign public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "campaigns[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by placement public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "placements[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by screen (paywall) public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "screens[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by A/B test variant public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "ab_test_variants[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Restrict to unique users (\"true\"/\"false\").",
-            "in": "query",
-            "name": "unique_users",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Filter by survey identifier.",
-            "in": "query",
-            "name": "survey",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
           },
           {
             "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
@@ -16715,6 +16511,75 @@
             }
           },
           {
+            "description": "Filter by the public_id of the screen (paywall) of the purchase. A deleted screen still matches.",
+            "explode": true,
+            "in": "query",
+            "name": "screens[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "description": "Filter by offer type, case-insensitive (NONE, FREE_TRIAL, INTRO_OFFER, PROMOTIONAL_OFFER, PROMO_CODE).",
+            "explode": true,
+            "in": "query",
+            "name": "offer_types[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "description": "Filter by promotional offer public_id.",
+            "explode": true,
+            "in": "query",
+            "name": "promotional_offers[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "description": "Filter on the store's auto-renewal flag. An expired subscription can keep true: add status ACTIVE for live subscriptions.",
+            "in": "query",
+            "name": "auto_renew",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Two-element [start_date, end_date] window of ISO 8601 dates on the first purchase date (original_purchased_at), both ends inclusive. Over REST, send it as purchase_date_range[]=2026-10-01&purchase_date_range[]=2026-10-25.",
+            "example": [
+              "2026-10-01",
+              "2026-10-25"
+            ],
+            "explode": true,
+            "in": "query",
+            "name": "purchase_date_range[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
             "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
             "explode": true,
             "in": "query",
@@ -20933,7 +20798,7 @@
     },
     "/management/v1/dashboard/events": {
       "get": {
-        "description": "Server-side events recorded by Purchasely, counted per period and per event type: the raw layer under every other chart, with the webhook event names.\n\n- Returns `{data: {\"<period>\": {period, Activate: n, SubscriptionStarted: n, SubscriptionRenewed: n, TransactionProcessed: n, ...}}}`: one object per period, one key per event type that occurred, names in CamelCase (`SUBSCRIPTION_STARTED` → `SubscriptionStarted`). Every event type is returned, there is no event selection.\n- Definition: one count per backend event, dated on the day Purchasely created it. No deduplication and no lifecycle logic: a renewal counts one `SubscriptionRenewed`, one `TransactionProcessed` and one `Activate` the same day. `Activate` / `Deactivate` are entitlement events (access granted or removed) and fire on every receipt; the others are lifecycle events.\n- Counted: production events, one-time purchase events included, every listed event type included (`RetentionMessageRequested`, `InstallmentPaid`, `RenewalDisabled`, `SubscriptionDeferred`, ...). Not counted: sandbox, SDK events, future-dated events, and the events of subscriptions received through Family Sharing (family members' subscriptions; the purchaser's own is counted), so `FamilySharedRevoked` is always 0 here.\n- Unit: count of events. A flow: summable across periods, never comparable to subscription counts (`subscription_activations`, `paid_subscription_movements` dedup per subscription and apply rules).\n- Filters applied: platform_names, plans, period_types, countries (store country), audiences, placements, screens, ab_test_variants. Declared but NOT applied: campaigns, offer_types, family_sharing, promotional_offers. Omitting `application_id` blends every app you can access.\n- Not this tool: activations, movements, retention, revenue; use the dedicated tools. Use this one to audit volumes (billing retries, grace periods, refunds, pauses) and to reconcile with webhooks.\n- Store specifics: pause events are Google Play only; `InstallmentPaid` / `InstallmentRefunded` are App Store monthly-commitment plans only.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/subscription-events\n- Recommended periodicity: DAY for ranges up to ~60 days, WEEK up to ~6 months, MONTH beyond.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Server-side events recorded by Purchasely, counted per period and per event type: the raw layer under every other chart, with the webhook event names.\n\n- Returns `{data: {\"<period>\": {period, Activate: n, SubscriptionStarted: n, SubscriptionRenewed: n, TransactionProcessed: n, ...}}}`: one object per period, one key per event type that occurred, names in CamelCase (`SUBSCRIPTION_STARTED` → `SubscriptionStarted`). Every event type is returned, there is no event selection.\n- Definition: one count per backend event, dated on the day Purchasely created it. No deduplication and no lifecycle logic: a renewal counts one `SubscriptionRenewed`, one `TransactionProcessed` and one `Activate` the same day. `Activate` / `Deactivate` are entitlement events (access granted or removed) and fire on every receipt; the others are lifecycle events.\n- Counted: production events, one-time purchase events included, every listed event type included (`RetentionMessageRequested`, `InstallmentPaid`, `RenewalDisabled`, `SubscriptionDeferred`, ...). Not counted: sandbox, SDK events, future-dated events, and the events of subscriptions received through Family Sharing (family members' subscriptions; the purchaser's own is counted), so `FamilySharedRevoked` is always 0 here.\n- Unit: count of events. A flow: summable across periods, never comparable to subscription counts (`subscription_activations`, `paid_subscription_movements` dedup per subscription and apply rules).\n- Filters applied: platform_names, plans, period_types, countries (store country), audiences, placements, screens, campaigns, ab_test_variants. The table has no offer type, promotional offer or family-sharing column, so those filters are not offered. Omitting `application_id` blends every app you can access.\n- Not this tool: activations, movements, retention, revenue; use the dedicated tools. Use this one to audit volumes (billing retries, grace periods, refunds, pauses) and to reconcile with webhooks.\n- Store specifics: pause events are Google Play only; `InstallmentPaid` / `InstallmentRefunded` are App Store monthly-commitment plans only.\n- How it is computed and the edge cases: https://docs.purchasely.com/docs/subscription-events\n- Recommended periodicity: DAY for ranges up to ~60 days, WEEK up to ~6 months, MONTH beyond.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_dashboard_events",
         "parameters": [
           {
@@ -21034,55 +20899,6 @@
             "style": "form"
           },
           {
-            "description": "Filter by family-sharing flag (\"true\"/\"false\" strings).",
-            "explode": true,
-            "in": "query",
-            "name": "family_sharing[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by offer type.",
-            "explode": true,
-            "in": "query",
-            "name": "offer_types[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "enum": [
-                  "NONE",
-                  "FREE_TRIAL",
-                  "INTRO_OFFER",
-                  "PROMOTIONAL_OFFER",
-                  "PROMO_CODE"
-                ],
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by promotional offer public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "promotional_offers[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
             "description": "Filter by audience public_id.",
             "explode": true,
             "in": "query",
@@ -21151,24 +20967,6 @@
               "type": "array"
             },
             "style": "form"
-          },
-          {
-            "description": "Restrict to unique users (\"true\"/\"false\").",
-            "in": "query",
-            "name": "unique_users",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Filter by survey identifier.",
-            "in": "query",
-            "name": "survey",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
           },
           {
             "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
@@ -23300,7 +23098,7 @@
     },
     "/management/v1/dashboard/trials_live": {
       "get": {
-        "description": "Free trials and introductory offers by **start cohort**: for the subscriptions that started with a free trial, or with an intro offer, in each period, how many have converted to paid, how many ended without converting, and how many are still running, split by renewal status. The console page \"Subscription Intro Offers\" draws two stacked-column charts from it: \"New free trials\" and \"New paid trials\" (paid trial = intro offer).\n\n- Available in the Purchasely console (including Ask your data) and to Purchasely staff. API keys and third-party MCP clients get a 403. It takes up to 70 s on large apps: prefer MONTH and ranges under a year.\n- Returns `{data: {trials: {values}, intro_offers: {values}, trials_balance: {values}, intro_offers_balance: {values}}}`. `trials` and `intro_offers` are the cohorts: one row per period of subscription start with `*_converted`, `*_not_converted`, `*_ongoing_auto_renewing`, `*_ongoing_non_auto_renewing`, `*_ongoing_billing_retry`, `*_ongoing_grace_period`. The values drawn below the axis in the console are negative in the response (not converted, billing retry, grace period, ongoing non-renewing).\n- Cohort rows read the subscription's **current** state: \"ongoing auto-renewing\" = offers started in the period, still running, renewal on; \"ongoing non auto-renewing\" = still running but renewal already turned off (they will not convert); billing retry and grace period = still running, payment failing. Converted and not converted are the offers that ended. Conversion rate in the console = converted / (converted + not converted + billing retry).\n- `trials_balance` and `intro_offers_balance` count events by **event date** (started, converted, not converted, and a running balance), not by cohort. The console no longer draws them.\n- Scope: free trials (`TrialStarted/Converted/NotConverted` events) and intro offers (`IntroOffer*` events) only. Promo codes and promotional offers are not on this page: promotional offers have their own console endpoint, not exposed here.\n- Not counted: sandbox, subscriptions received through Family Sharing (the purchaser's own is counted), one-time purchases. Counts are events, not distinct subscriptions. On iOS, a subscription that changed plan is attached to one record: filtering on a plan can miss it.\n- Filters applied: platform_names, plans, period_types (through the plan distributions), countries (store country), offer_types and family_sharing (cohorts only). Declared but NOT applied: screens, placements, audiences, campaigns, ab_test_variants, promotional_offers. Omitting `application_id` blends every app you can access.\n- Not this tool: offer starts per period across every offer type (`dashboard_events`), trial-to-paid in a funnel by dimension (`dashboard_funnel`), paywall conversion (`dashboard_v2_conversion`).\n- Recommended periodicity: MONTH; a recent cohort reads mostly \"ongoing\" until its offers end.\n\n**Required scope:** `analytics.dashboards:view`",
+        "description": "Free trials and introductory offers by **start cohort**: for the subscriptions that started with a free trial, or with an intro offer, in each period, how many have converted to paid, how many ended without converting, and how many are still running, split by renewal status. The console page \"Subscription Intro Offers\" draws two stacked-column charts from it: \"New free trials\" and \"New paid trials\" (paid trial = intro offer).\n\n- Available in the Purchasely console (including Ask your data) and to Purchasely staff. API keys and third-party MCP clients get a 403. It takes up to 70 s on large apps: prefer MONTH and ranges under a year.\n- Returns `{data: {trials: {values}, intro_offers: {values}, trials_balance: {values}, intro_offers_balance: {values}}}`. `trials` and `intro_offers` are the cohorts: one row per period of subscription start with `*_converted`, `*_not_converted`, `*_ongoing_auto_renewing`, `*_ongoing_non_auto_renewing`, `*_ongoing_billing_retry`, `*_ongoing_grace_period`. The values drawn below the axis in the console are negative in the response (not converted, billing retry, grace period, ongoing non-renewing). Use their absolute value.\n- Cohort rows read the subscription's **current** state: \"ongoing auto-renewing\" = offers started in the period, still running, renewal on; \"ongoing non auto-renewing\" = still running but renewal already turned off (they will not convert); billing retry and grace period = still running, payment failing. Converted and not converted are the offers that ended. Conversion rate in the console = converted / (converted + not converted + billing retry): `trials_converted / (trials_converted + |trials_not_converted| + |trials_ongoing_billing_retry|)`, and the same with the `intro_offers_*` fields.\n- `*_ongoing_auto_renewing` and `*_ongoing_non_auto_renewing` are floored at 0 (absolute value). When TrialStarted or IntroOfferStarted events are missing, they show 0, not the real count.\n- `trials_balance` and `intro_offers_balance` count events by **event date** (started, converted, not converted, and a running balance), not by cohort. The console no longer draws them.\n- Scope: free trials (`TrialStarted/Converted/NotConverted` events) and intro offers (`IntroOffer*` events) only. Promo codes and promotional offers are not on this page: promotional offers have their own console endpoint, not exposed here.\n- Not counted: sandbox, subscriptions received through Family Sharing (the purchaser's own is counted), one-time purchases. Counts are events, not distinct subscriptions. On iOS, a subscription that changed plan is attached to one record: filtering on a plan can miss it.\n- Filters applied: platform_names, plans, period_types (through the plan distributions), countries (store country). Attribution filters (screens, placements, audiences, campaigns, ab_test_variants), offer_types, promotional_offers and family_sharing are not offered: the balances cannot apply them. Omitting `application_id` blends every app you can access.\n- Not this tool: offer starts per period across every offer type (`dashboard_events`), trial-to-paid in a funnel by dimension (`dashboard_funnel`), paywall conversion (`dashboard_v2_conversion`).\n- Recommended periodicity: MONTH; a recent cohort reads mostly \"ongoing\" until its offers end.\n\n**Required scope:** `analytics.dashboards:view`",
         "operationId": "get_management_v1_dashboard_trials_live",
         "parameters": [
           {
@@ -23399,143 +23197,6 @@
               "type": "array"
             },
             "style": "form"
-          },
-          {
-            "description": "Filter by family-sharing flag (\"true\"/\"false\" strings).",
-            "explode": true,
-            "in": "query",
-            "name": "family_sharing[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by offer type.",
-            "explode": true,
-            "in": "query",
-            "name": "offer_types[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "enum": [
-                  "NONE",
-                  "FREE_TRIAL",
-                  "INTRO_OFFER",
-                  "PROMOTIONAL_OFFER",
-                  "PROMO_CODE"
-                ],
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by promotional offer public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "promotional_offers[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by audience public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "audiences[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by campaign public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "campaigns[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by placement public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "placements[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by screen (paywall) public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "screens[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Filter by A/B test variant public_id.",
-            "explode": true,
-            "in": "query",
-            "name": "ab_test_variants[]",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "style": "form"
-          },
-          {
-            "description": "Restrict to unique users (\"true\"/\"false\").",
-            "in": "query",
-            "name": "unique_users",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Filter by survey identifier.",
-            "in": "query",
-            "name": "survey",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
           },
           {
             "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
@@ -24289,6 +23950,75 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "description": "Filter by the public_id of the screen (paywall) of the purchase. A deleted screen still matches.",
+            "explode": true,
+            "in": "query",
+            "name": "screens[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "description": "Filter by offer type, case-insensitive (NONE, FREE_TRIAL, INTRO_OFFER, PROMOTIONAL_OFFER, PROMO_CODE).",
+            "explode": true,
+            "in": "query",
+            "name": "offer_types[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "description": "Filter by promotional offer public_id.",
+            "explode": true,
+            "in": "query",
+            "name": "promotional_offers[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "description": "Filter on the store's auto-renewal flag. An expired subscription can keep true: add status ACTIVE for live subscriptions.",
+            "in": "query",
+            "name": "auto_renew",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Two-element [start_date, end_date] window of ISO 8601 dates on the first purchase date (original_purchased_at), both ends inclusive. Over REST, send it as purchase_date_range[]=2026-10-01&purchase_date_range[]=2026-10-25.",
+            "example": [
+              "2026-10-01",
+              "2026-10-25"
+            ],
+            "explode": true,
+            "in": "query",
+            "name": "purchase_date_range[]",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
           },
           {
             "description": "Field selection for token economy: an explicit list of field names to include in the response, or [\"*\"] for every field. Omit for this endpoint's own default field set.",
