@@ -4690,7 +4690,7 @@
     },
     "/management/v1/applications/{application_id}/client_errors": {
       "get": {
-        "description": "List active, actionable client integration errors for an application (or across every application you can access).\n\n**Required scope:** `lookups.client_errors:view`",
+        "description": "List active, actionable client integration errors for an application (or across every application you can access).\n\n**Required scope:** `setup.client_errors:view`",
         "operationId": "get_management_v1_applications_application_id_client_errors",
         "parameters": [
           {
@@ -4787,12 +4787,12 @@
         "tags": [
           "Client Errors"
         ],
-        "x-required-scope": "lookups.client_errors:view"
+        "x-required-scope": "setup.client_errors:view"
       }
     },
     "/management/v1/applications/{application_id}/client_errors/update_collection": {
       "put": {
-        "description": "Bulk-update client errors (mark read/unread, or resolved). Scoped to the applications you can access.\n\n**Required scope:** `lookups.client_errors:edit`",
+        "description": "Bulk-update client errors (mark read/unread, or resolved). Scoped to the applications you can access.\n\n**Required scope:** `setup.client_errors:edit`",
         "operationId": "put_management_v1_applications_application_id_client_errors_update_collection",
         "parameters": [
           {
@@ -4891,7 +4891,7 @@
         "tags": [
           "Client Errors"
         ],
-        "x-required-scope": "lookups.client_errors:edit"
+        "x-required-scope": "setup.client_errors:edit"
       }
     },
     "/management/v1/applications/{application_id}/colors_palette": {
@@ -16335,7 +16335,7 @@
     },
     "/management/v1/applications/{application_id}/purchasely_one_time_purchases": {
       "get": {
-        "description": "List one-time purchases for an application (or across every application you can access).\n\n**Required scope:** `lookups.one_time_purchases:view`",
+        "description": "List one-time purchases for an application (or across every application you can access).\n\n**Required scope:** `customers.one_time_purchases:view`",
         "operationId": "get_management_v1_applications_application_id_purchasely_one_time_purchases",
         "parameters": [
           {
@@ -16482,12 +16482,12 @@
         "tags": [
           "One-Time Purchases"
         ],
-        "x-required-scope": "lookups.one_time_purchases:view"
+        "x-required-scope": "customers.one_time_purchases:view"
       }
     },
     "/management/v1/applications/{application_id}/purchasely_one_time_purchases/{id}": {
       "get": {
-        "description": "Show a one-time purchase, including its webhook delivery history.\n\n**Required scope:** `lookups.one_time_purchases:view`",
+        "description": "Show a one-time purchase, including its webhook delivery history.\n\n**Required scope:** `customers.one_time_purchases:view`",
         "operationId": "get_management_v1_applications_application_id_purchasely_one_time_purchases_id",
         "parameters": [
           {
@@ -16573,12 +16573,12 @@
         "tags": [
           "One-Time Purchases"
         ],
-        "x-required-scope": "lookups.one_time_purchases:view"
+        "x-required-scope": "customers.one_time_purchases:view"
       }
     },
     "/management/v1/applications/{application_id}/purchasely_subscriptions": {
       "get": {
-        "description": "List subscriptions for an application (or across every application you can access).\n\n**Required scope:** `lookups.subscriptions:view`",
+        "description": "List subscriptions for an application (or across every application you can access).\n\n**Required scope:** `customers.subscriptions:view`",
         "operationId": "get_management_v1_applications_application_id_purchasely_subscriptions",
         "parameters": [
           {
@@ -16800,12 +16800,12 @@
         "tags": [
           "Subscriptions"
         ],
-        "x-required-scope": "lookups.subscriptions:view"
+        "x-required-scope": "customers.subscriptions:view"
       }
     },
     "/management/v1/applications/{application_id}/purchasely_subscriptions/{id}": {
       "get": {
-        "description": "Show a subscription, including its webhook delivery history.\n\n**Required scope:** `lookups.subscriptions:view`",
+        "description": "Show a subscription, including its webhook delivery history.\n\n**Required scope:** `customers.subscriptions:view`",
         "operationId": "get_management_v1_applications_application_id_purchasely_subscriptions_id",
         "parameters": [
           {
@@ -16901,12 +16901,12 @@
         "tags": [
           "Subscriptions"
         ],
-        "x-required-scope": "lookups.subscriptions:view"
+        "x-required-scope": "customers.subscriptions:view"
       }
     },
     "/management/v1/applications/{application_id}/purchasely_subscriptions/{id}/redemption_link": {
       "post": {
-        "description": "Return the URL, app deeplinks, and expiry date for an active web2app subscription. Return a live link with its expiry set to 3 days from the call. If the last link has expired, create a new link without sending an email. Errors: ALREADY_REDEEMED (409), NOT_REDEEMABLE (422), LINK_LIMIT_REACHED (422).\n\n**Required scope:** `lookups.subscriptions:edit`",
+        "description": "Return the URL, app deeplinks, and expiry date for an active web2app subscription. Return a live link with its expiry set to 3 days from the call. If the last link has expired, create a new link without sending an email. Errors: ALREADY_REDEEMED (409), NOT_REDEEMABLE (422), LINK_LIMIT_REACHED (422).\n\n**Required scope:** `customers.redemption_links:create`",
         "operationId": "post_management_v1_applications_application_id_purchasely_subscriptions_id_redemption_link",
         "parameters": [
           {
@@ -16981,7 +16981,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "x-required-scope": "lookups.subscriptions:edit"
+        "x-required-scope": "customers.redemption_links:create"
       }
     },
     "/management/v1/applications/{application_id}/screens": {
@@ -18482,7 +18482,7 @@
     },
     "/management/v1/applications/{application_id}/users": {
       "get": {
-        "description": "Search for an end user by anonymous_id or vendor_id (returns 0 or 1 result).\n\n**Required scope:** `lookups.users:view`",
+        "description": "Search for an end user by anonymous_id or vendor_id (returns 0 or 1 result).\n\n**Required scope:** `customers.users:view`",
         "operationId": "get_management_v1_applications_application_id_users",
         "parameters": [
           {
@@ -18561,12 +18561,12 @@
         "tags": [
           "Users"
         ],
-        "x-required-scope": "lookups.users:view"
+        "x-required-scope": "customers.users:view"
       }
     },
     "/management/v1/applications/{application_id}/users/{id}": {
       "get": {
-        "description": "Show a full end-user profile, including transaction/event history and devices.\n\n**Required scope:** `lookups.users:view`",
+        "description": "Show a full end-user profile, including transaction/event history and devices.\n\n**Required scope:** `customers.users:view`",
         "operationId": "get_management_v1_applications_application_id_users_id",
         "parameters": [
           {
@@ -18636,7 +18636,7 @@
         "tags": [
           "Users"
         ],
-        "x-required-scope": "lookups.users:view"
+        "x-required-scope": "customers.users:view"
       }
     },
     "/management/v1/applications/{application_id}/web_flows": {
@@ -20556,7 +20556,7 @@
     },
     "/management/v1/client_errors": {
       "get": {
-        "description": "List active, actionable client integration errors for an application (or across every application you can access).\n\n**Required scope:** `lookups.client_errors:view`",
+        "description": "List active, actionable client integration errors for an application (or across every application you can access).\n\n**Required scope:** `setup.client_errors:view`",
         "operationId": "get_management_v1_client_errors",
         "parameters": [
           {
@@ -20644,7 +20644,7 @@
         "tags": [
           "Client Errors"
         ],
-        "x-required-scope": "lookups.client_errors:view"
+        "x-required-scope": "setup.client_errors:view"
       }
     },
     "/management/v1/custom_event_properties": {
@@ -24020,7 +24020,7 @@
     },
     "/management/v1/purchasely_one_time_purchases": {
       "get": {
-        "description": "List one-time purchases for an application (or across every application you can access).\n\n**Required scope:** `lookups.one_time_purchases:view`",
+        "description": "List one-time purchases for an application (or across every application you can access).\n\n**Required scope:** `customers.one_time_purchases:view`",
         "operationId": "get_management_v1_purchasely_one_time_purchases",
         "parameters": [
           {
@@ -24158,12 +24158,12 @@
         "tags": [
           "One-Time Purchases"
         ],
-        "x-required-scope": "lookups.one_time_purchases:view"
+        "x-required-scope": "customers.one_time_purchases:view"
       }
     },
     "/management/v1/purchasely_subscriptions": {
       "get": {
-        "description": "List subscriptions for an application (or across every application you can access).\n\n**Required scope:** `lookups.subscriptions:view`",
+        "description": "List subscriptions for an application (or across every application you can access).\n\n**Required scope:** `customers.subscriptions:view`",
         "operationId": "get_management_v1_purchasely_subscriptions",
         "parameters": [
           {
@@ -24376,7 +24376,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "x-required-scope": "lookups.subscriptions:view"
+        "x-required-scope": "customers.subscriptions:view"
       }
     },
     "/management/v1/screens": {
@@ -24736,7 +24736,7 @@
     },
     "/management/v1/users": {
       "get": {
-        "description": "Search for an end user by anonymous_id or vendor_id (returns 0 or 1 result).\n\n**Required scope:** `lookups.users:view`",
+        "description": "Search for an end user by anonymous_id or vendor_id (returns 0 or 1 result).\n\n**Required scope:** `customers.users:view`",
         "operationId": "get_management_v1_users",
         "parameters": [
           {
@@ -24806,7 +24806,7 @@
         "tags": [
           "Users"
         ],
-        "x-required-scope": "lookups.users:view"
+        "x-required-scope": "customers.users:view"
       }
     },
     "/management/v1/users/{user_id}/webhook_deliveries": {
@@ -25043,9 +25043,8 @@
       ]
     },
     {
-      "name": "Look-ups",
+      "name": "Customers",
       "tags": [
-        "Client Errors",
         "One-Time Purchases",
         "Subscriptions",
         "Users"
@@ -25056,6 +25055,7 @@
       "tags": [
         "Answers",
         "Applications",
+        "Client Errors",
         "Custom Event Properties",
         "Custom Events",
         "Custom Properties",
