@@ -48,7 +48,13 @@ Purchasely.userLogin(with: userId)
 
 ## 2 - Creating a Client API key
 
-Amplitude authenticates its calls with a Client API key of your Purchasely app. Create a key for Amplitude:
+Amplitude authenticates its calls with a Client API key of your Purchasely app.
+
+> 📘 Not the SDK API key
+>
+> A Client API key is not the API key that you give to the Purchasely SDK when you start it. The webhook refuses the SDK API key with `401`.
+
+Create a key for Amplitude:
 
 1. In the Purchasely Console, go to **Settings > API keys**.
 2. In the **Client API keys** section, click **Create API key**.
