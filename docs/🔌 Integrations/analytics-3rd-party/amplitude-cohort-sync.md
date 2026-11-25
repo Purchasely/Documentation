@@ -46,14 +46,33 @@ Purchasely.userLogin(with: userId)
 >
 > Purchasely does not sync anonymous users. A cohort member without a user ID does not go to the Custom Audience.
 
-## 2 - Getting the setup values from the Purchasely Console
+## 2 - Creating a Client API key
+
+Amplitude authenticates its calls with a Client API key of your Purchasely app. Create a key for Amplitude:
+
+1. In the Purchasely Console, go to **Settings > API keys**.
+2. In the **Client API keys** section, click **Create API key**.
+3. In **Name**, type a name, for example `Amplitude Cohort Sync`.
+4. Click **Create API key**.
+5. Copy the token and keep it in a safe place.
+6. Click **Done, I've copied the token**.
+
+> 🚧 The token is shown only once
+>
+> The Console does not show the token again. If you lose it, create a new key.
+
+Each Purchasely app has its own Client API keys. Create one key in each app that you sync. A key of another app gives `403`.
+
+If you revoke the key, Amplitude gets `401` and Purchasely stops receiving the cohort changes. Create a new key, then update the header of the webhook destination in Amplitude.
+
+## 3 - Getting the setup values from the Purchasely Console
 
 In the Purchasely Console, go to **Settings > API keys**. The **Amplitude Cohort Sync** card shows the three values that you need in Amplitude:
 
 | Value | Use in Amplitude |
 | :-- | :-- |
 | **Webhook URL** | The URL of the webhook destination. Each app has its own URL. |
-| **Header name** | The name of a custom header: `X-Purchasely-Api-Key`. Its value is a Client API key of the app. |
+| **Header name** | The name of a custom header: `X-Purchasely-Api-Key`. Its value is the Client API key of step 2. |
 | **Payload template** | The FreeMarker template of the webhook destination. Paste it as it is. |
 
 ![Amplitude Cohort Sync card in Settings > API keys](https://files.readme.io/ab93618e9350a27655c75120b6b2e5a054071d40f1971d131e40a5f523eb4929-amplitude-cohort-sync-console.png)
@@ -64,16 +83,15 @@ The webhook URL of your app is:
 https://api.purchasely.io/client/mobile_applications/<app_public_id>/custom_audiences/webhook/amplitude
 ```
 
-If the app has no Client API key, create one in the **Client API keys** section of the same page.
 
-## 3 - Adding the webhook destination in Amplitude
+## 4 - Adding the webhook destination in Amplitude
 
 1. In Amplitude Data, click **Catalog**, then select the **Destinations** tab.
 2. In the **Cohorts** section, click **Webhook**.
 3. Fill in the destination:
-   - **URL**: the webhook URL of step 2.
-   - **Headers**: add one header. The name is `X-Purchasely-Api-Key`. The value is your Client API key.
-   - **Payload**: select the FreeMarker template option, then paste the payload template of step 2.
+   - **URL**: the webhook URL of step 3.
+   - **Headers**: add one header. The name is `X-Purchasely-Api-Key`. The value is the Client API key of step 2.
+   - **Payload**: select the FreeMarker template option, then paste the payload template of step 3.
 4. Click **Save**.
 
 The payload template is:
@@ -93,11 +111,11 @@ The payload template is:
 >
 > Do not use the default Amplitude payload. Purchasely reads only the fields of this template.
 
-## 4 - Syncing a cohort
+## 5 - Syncing a cohort
 
 1. In Amplitude, open the cohort.
 2. Click **Sync**, then select **Webhook**.
-3. Select the webhook destination of step 3.
+3. Select the webhook destination of step 4.
 4. Do not select user properties. Purchasely does not read them.
 5. Select the sync cadence.
 6. Click **Sync**.
@@ -148,7 +166,7 @@ Two causes are possible:
 
 Two causes are possible:
 
-- The payload does not use the Purchasely template. Paste the payload template of step 2 again.
+- The payload does not use the Purchasely template. Paste the payload template of step 3 again.
 - The Custom Audience `amplitude_<cohort_id>` already has members. Remove all its members, then remove the cohort sync in Amplitude and add it again.
 
 ## The Custom Audience misses members
