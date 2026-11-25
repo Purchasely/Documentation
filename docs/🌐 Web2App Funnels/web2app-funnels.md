@@ -65,7 +65,7 @@ Seamless propagation of the subscription and of everything the user told you is 
 
 **A handover that just works.** After the Stripe checkout, the user opens your app from the success screen or from an email. The subscription is activated in the app in one tap, without any sign-in, and the SDK confirms it to the user. If the link has expired, a new one is sent automatically. See [After the purchase](web2app-redemption).
 
-**The context travels with the user.** Quiz answers and text inputs are stored as user attributes, can be forwarded to your backend and are available in the app the moment the subscription is redeemed, alongside the campaign UTM parameters. Use them to skip the questions already answered, personalize the first session, or trigger a dedicated welcome [Campaign](web2app-sdk-integration) on the `REDEMPTION_CONSUMED` event.
+**The context travels with the user.** Quiz answers and text inputs are stored as user attributes, can be forwarded to your backend and are available in the app the moment the subscription is redeemed, alongside the campaign UTM parameters. Use them to skip the questions already answered, personalize the first session, or trigger a dedicated welcome [Campaign](web2app-sdk-integration) on the `REDEMPTION_CONSUMED` event. Because the app experience runs on the same platform, you can target Audiences, branch In-App Flows and personalize Screens with what the funnel learned: see [Continue the web journey in the app](web2app-continue-in-the-app).
 
 **Everything a growth team needs, no code required.**
 

@@ -13,10 +13,10 @@ metadata:
   description: ''
   robots: index
 next:
-  description: Next, the events and webhooks that report web purchases.
+  description: Next, use the context of the funnel to tailor the in-app experience.
   pages:
-    - slug: web2app-events-and-webhooks
-      title: Events, attribution & webhooks
+    - slug: web2app-continue-in-the-app
+      title: Continue the web journey in the app
       type: basic
 ---
 The Purchasely SDK activates web subscriptions on its own: it recognizes the redemption link, calls Purchasely, refreshes the user's entitlements and confirms the outcome to the user. In most apps, **no code is needed beyond the deeplink handling you already have**, with one condition: the deeplink that opened the app must be **passed to the SDK when it is initialized**, as described in [SDK initialization](sdk-initialization) and [Deeplinks management](deeplinks-management). The way to pass it changed in SDK 6, so check your integration against those pages if you migrated from v5.
@@ -295,6 +295,8 @@ Every redemption also emits exactly one event to your Purchasely event listener:
 When `REDEMPTION_CONSUMED` fires, the UTM parameters are readable through the SDK's built-in attributes. The quiz answers are readable through the user attributes.
 
 From SDK **6.2**, `REDEMPTION_CONSUMED` is also available as a **Campaign trigger** in the Console. Use it to display a welcome Screen or an onboarding Flow to web subscribers without writing the delegate above: create a Campaign, choose _Redemption consumed_ as trigger, and pick the Screen or Flow to display. See [Campaigns](campaigns).
+
+📚 [Continue the web journey in the app](web2app-continue-in-the-app) shows how to use the restored attributes in Audiences, In-App Flows and Screens.
 
 ## Cross-platform SDKs
 

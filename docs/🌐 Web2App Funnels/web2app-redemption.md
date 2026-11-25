@@ -120,7 +120,7 @@ You can replace these messages with your own experience, for example a welcome S
 
 ## The context follows the user
 
-Along with the subscription, the app receives the **context of the web journey**: the UTM parameters of the campaign, the click identifiers and the user attributes collected in the funnel that you chose to keep. They are available in the SDK right after the activation, so the first session can skip the questions already answered and start where the funnel stopped.
+Along with the subscription, the app receives the **context of the web journey**: the UTM parameters of the campaign, the click identifiers and the user attributes collected in the funnel that you chose to keep. They are available in the SDK right after the activation, so the first session can skip the questions already answered and start where the funnel stopped. See [Continue the web journey in the app](web2app-continue-in-the-app).
 
 ## Troubleshooting
 

@@ -211,6 +211,14 @@ Yes, that is **BYOS** (Bring Your Own Screen). Purchasely hands control to your 
 
 <br />
 
+# Can I create a Screen or a Flow with AI?
+
+Yes. Describe the Screen or the Flow in the Console Chat, or attach a screenshot to recreate it. The result is a standard Screen or Flow that you can edit in the Composer.
+
+📚 [Creating Screens & Flows: prompt, Figma or Composer](creating-screens)
+
+<br />
+
 # Can I design in Figma and import into the Composer?
 
 Yes, via the Figma plugin.

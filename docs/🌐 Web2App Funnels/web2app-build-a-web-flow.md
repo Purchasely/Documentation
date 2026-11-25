@@ -42,7 +42,7 @@ The flow gets its **live URL** and **sandbox URL** as soon as it is saved. Both 
 
 ## 2. Add your Screens
 
-Add a step from the editor, then either **pick an existing Screen**, **create one in the Composer** or **generate one from a prompt**. When you create a Screen from a Web Flow, the Composer opens on its **Web** platform tab, with a web preview.
+Add a step from the editor, then either **pick an existing Screen**, **create one in the Composer** or **generate one from a prompt**. You can also ask the Console Chat to generate the whole Web Flow, or import your Screens from Figma: see [Creating Screens & Flows](creating-screens). When you create a Screen from a Web Flow, the Composer opens on its **Web** platform tab, with a web preview.
 
 A typical funnel chains:
 
@@ -51,7 +51,7 @@ A typical funnel chains:
 3. a **loading** or "building your plan" Screen that makes the personalization visible,
 4. a **paywall** Screen with one or more purchase actions.
 
-Quiz answers and text inputs are stored as **user attributes**. Use them to branch the flow with conditional transitions, exactly as in an In-App Flow (see [Tailoring Flows to the user insights](tailoring-flows-to-user-insights)), and to personalize later Screens with dynamic text. They follow the user into the app once the subscription is redeemed.
+Quiz answers and text inputs are stored as **user attributes**. Use them to branch the flow with conditional transitions, exactly as in an In-App Flow (see [Tailoring Flows to the user insights](tailoring-flows-to-user-insights)), and to personalize later Screens with dynamic text. They follow the user into the app once the subscription is redeemed: see [Continue the web journey in the app](web2app-continue-in-the-app).
 
 <Callout icon="📘" theme="info">
   ### Keep the answers you want to use later

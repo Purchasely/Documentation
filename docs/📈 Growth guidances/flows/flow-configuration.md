@@ -24,6 +24,14 @@ next:
 
 # Building a Flow
 
+A Flow can be created in three ways:
+
+* **From a prompt.** Describe the journey in the Console Chat (_"a 5-step onboarding with two quiz questions, then the paywall"_). The assistant generates the Screens, saves quiz answers in user attributes, links the steps and creates the Flow.
+* **From Figma.** Export several frames at once with the [Purchasely Figma plugin](figma-plugin).
+* **With the Flow Composer**, described on this page.
+
+Whatever the starting point, the Flow opens in the Flow Composer, where you adjust Screens, transitions and conditions. See [Creating Screens & Flows: prompt, Figma or Composer](creating-screens).
+
 Let’s explore how to build a Flow with Purchasely.
 
 <HTMLBlock>{`
