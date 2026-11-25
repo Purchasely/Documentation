@@ -22,7 +22,7 @@ In order to connect your Apple App Store account with Purchasely, you have to pr
 2. [App ID](#2-app-id)
 3. [App scheme](#3-app-scheme-optional)
 4. [Shared App Secret](#4-shared-app-secret) - only for subscription apps
-5. [StoreKit 2 - Private key ID](#5-6-7-storekit-2-configuration) - only for subscription apps
+5. [StoreKit 2 - Key ID](#5-6-7-storekit-2-configuration) - only for subscription apps
 6. [StoreKit 2 - Private key file](#5-6-7-storekit-2-configuration) - only for subscription apps
 7. [StoreKit 2 - Issuer ID](#5-6-7-storekit-2-configuration) - only for subscription apps
 8. [The Server to Server End point](#8-the-server-to-server-end-point---only-for-subscription-apps) - only for subscription apps
@@ -76,7 +76,7 @@ Enter your `App scheme`  (without the `://`) in the Purchasely Console in the fi
 
 Then, in the Purchasely Console:
 
-1. Paste the value of the Key ID generated in the field `Private Key ID`
+1. Paste the value of the Key ID generated in the field `Key ID`
 2. Upload the API Key file (`.p8`) previously downloaded in the field `Private Key File`
 3. Paste the value of the `Issuer ID` in the field `Issuer ID`
 

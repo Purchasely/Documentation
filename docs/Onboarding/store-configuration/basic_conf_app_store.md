@@ -57,7 +57,7 @@ The `Shared App Secret` is used by Purchasely Platform and required to decode an
 
 To make StoreKit 2 work, you need to grant the Purchasely Platform with a specific access.
 
-The Private key Id, Private key file and the Issuer Id are required by Apple APIs. We use them for :
+Apple APIs require three values. They are the Key ID, the private key file (`.p8`) and the Issuer ID of an In-App Purchase key. We use them for:
 
 * StoreKit 2 APIs: to allow our server to verify your purchases
 * Promotional offers: to generate the signature allowing the purchase
@@ -66,9 +66,9 @@ The configuration of StoreKit 2 requires to follow a few steps:
 
 1. Open App Store Connect
 2. Go to the section Users and Access > Integrations > In-App Purchase
-3. Click on the *+* button to generate a new API key
+3. Click on the *+* button to generate a new In-App Purchase key
 4. Choose a name for the key and click "Generate"
-5. Download the API key file (.p8), and note the Key ID and Issuer ID.\
+5. Download the key file (.p8), and note the Key ID and Issuer ID.\
    Keep the file secure, as you won't be able to download it again
 
 <Image align="center" className="border" border={true} src="https://files.readme.io/14c8dcf-image.png" />

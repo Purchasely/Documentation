@@ -18,14 +18,14 @@ However, if you wish to only use StoreKit 1, you can set that parameter with [Pu
 
 Configuring StoreKit 2 with App Store Connect to allow Purchasely to verify transactions requires a [few steps](https://developer.apple.com/documentation/appstoreserverapi/creating_api_keys_to_authorize_api_requests). Once completed, you can update your application settings in Purchasely console. This configuration is essential for using StoreKit 2 with Purchasely SDK.
 
-## Enable App Store Connect API access
+## Create an In-App Purchase key
 
 * Sign in to [App Store Connect](https://appstoreconnect.apple.com/access/api/subs)
 * Go to "Users and Access"
 * Select "Keys" under the "In-App Purchase" section
-* Click on the "+" button to generate a new API key
+* Click on the "+" button to generate a new In-App Purchase key
 * Choose a name for the key and click "Generate"
-* Download the API key file (`.p8`), and note the **Key ID** and **Issuer ID**. Keep the file secure, as you won't be able to download it again
+* Download the key file (`.p8`), and note the **Key ID** and **Issuer ID**. Keep the file secure, as you won't be able to download it again
 
 <Image align="center" className="border" border={true} src="https://files.readme.io/78c6635-SCR-20230403-nktk.png" />
 
@@ -36,9 +36,9 @@ Configuring StoreKit 2 with App Store Connect to allow Purchasely to verify tran
 * Connect to [Purchasely Console](https://console.purchasely.io/)
 * Go to "App Settings"
 * Select Apple App Store" under the "Store configuration" section
-* Fill in the **Private Key Id** from the key you generated
+* Fill in the **Key ID** of the key you generated
 * Upload your Private Key File (.p8)
-* Fill your **Issuer Id**
+* Fill in the **Issuer ID**
 * Click on **Save** in the top right corner
 
 <Image align="center" className="border" border={true} src="https://files.readme.io/d4fcacd-SCR-20230403-nefu.png" />
