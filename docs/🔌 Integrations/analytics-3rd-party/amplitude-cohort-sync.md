@@ -56,7 +56,7 @@ In the Purchasely Console, go to **Settings > API keys**. The **Amplitude Cohort
 | **Header name** | The name of a custom header: `X-Purchasely-Api-Key`. Its value is a Client API key of the app. |
 | **Payload template** | The FreeMarker template of the webhook destination. Paste it as it is. |
 
-<!-- TODO(screenshot): Amplitude Cohort Sync card of the Console -->
+![Amplitude Cohort Sync card in Settings > API keys](https://files.readme.io/ab93618e9350a27655c75120b6b2e5a054071d40f1971d131e40a5f523eb4929-amplitude-cohort-sync-console.png)
 
 The webhook URL of your app is:
 
