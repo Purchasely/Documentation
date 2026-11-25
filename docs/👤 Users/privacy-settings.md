@@ -45,8 +45,8 @@ Below is a summary (excerpt) of the categories of processing conducted by Purcha
 | **Processing #1** | All the operations are strictly mandatory to allow the Services to be managed technically and operationally     | Performance of contract (or action at user request)          | No        |
 | **Processing #2** | All the operations enabling the statistical analysis, audience measurement and optimization of the User Journey | Data Controller's legitimate interest _or_ with user consent | Yes       |
 | **Processing #3** | All the operations enabling the customization of the User journey and of the commercial offers presented        | Data Controller's legitimate interest _or_ with user consent | Yes       |
-| **Processing #4** | All the operations enabling the recommendation of commercial offers displayed spontaneously                     | Data Controller's legitimate interest _or_ with user consent | Yes       |
-| **Processing #5** | Technical support and incident investigation at the level of the user                                           | Data Controller's legitimate interest _or_ with user consent | Yes       |
+| **Processing #4** | All the operations enabling the proactive recommendation of commercial campaigns                                | Data Controller's legitimate interest _or_ with user consent | Yes       |
+| **Processing #5** | All the operations enabling technical support, incident investigation and troubleshooting of the Services       | Data Controller's legitimate interest                        | Yes       |
 
 More details on each processing are provided in the [Data Processing Agreement](https://www.purchasely.com/hubfs/PURCHASELY-DATA-PROCESSING-AGREEMENT.pdf).
 
@@ -61,7 +61,7 @@ More details on each processing are provided in the [Data Processing Agreement](
 
 > ℹ️ SDK diagnostics fall under Processing #1
 >
-> From SDK 6.1.0 the iOS SDK can report its own traces, logs and crashes to Purchasely, so the support team can find the cause of a paywall problem without a reproduction. That collection falls under **Processing #1** and is therefore **not revocable**: it exists to keep the Services working technically and operationally, and it is not audience measurement.
+> From SDK 6.1.0 the iOS SDK can report its own traces, logs and crashes to Purchasely, so the support team can find the cause of a paywall problem without a reproduction. That collection falls under **Processing #1** and is therefore **not revocable**: it exists to keep the Services working technically and operationally, and it is not audience measurement. It involves no personal data and is therefore distinct from [Processing #5](#processing-5---technical-support--incident-investigation), which covers investigations on User-level data.
 >
 > The data is performance data, other diagnostic data and crash data, all declared in the iOS SDK privacy manifest with the `AppFunctionality` purpose. Purchasely does not link it to the user and does not use it for tracking. The SDK collects no personal data and sanitizes free text from a crash report.
 >
@@ -172,7 +172,7 @@ Purchasely.revokeDataProcessingConsent([])
 <br />
 
 * **Effect**
-  * [UI / SDK events](ui-sdk-events) will continue but only with the `anonymous_user_id` (randomly generate identifier), making them unlinkable to a real user
+  * [UI / SDK events](ui-sdk-events) will continue but only with the `anonymous_user_id` (randomly generated identifier), making them unlinkable to a real user
   * Non-essential built-in user attributes (e.g. optional navigation counters) will be disabled.
   * Local trackers used for analytics are cleared.
 
@@ -182,7 +182,7 @@ Purchasely.revokeDataProcessingConsent([])
 >
 > In certain sensitive contexts — such as apps targeting children or privacy-focused apps like VPNs — you may choose to completely disable all UI and SDK event tracking.
 >
-> When this option is enabled, UI / SDK events will be triggered (and collected) by the SDK, making it impossible for the Purchasely Platform to:
+> When this option is enabled, UI / SDK events will not be triggered (nor collected) by the SDK, making it impossible for the Purchasely Platform to:
 >
 > *  measure Screens or Paywalls displayed
 > * measure conversion rates
@@ -219,7 +219,7 @@ Purchasely.revokeDataProcessingConsent([])
 <br />
 
 * **When to revoke?**
-  * if the Processing is necessary for the purposes of your legitimate interest => revoke it if only if the user has _opted-out_.
+  * if the Processing is necessary for the purposes of your legitimate interest => revoke it only if the user has _opted-out_.
   * if the Processing requires the User explicit consent => revoke it if the user _has not given their consent_.
 
 <br />
@@ -276,7 +276,7 @@ Purchasely.revokeDataProcessingConsent([])
 <br />
 
 * **When to revoke?**
-  * if the Processing is necessary for the purposes of your legitimate interest => revoke it if only if the user has _opted-out_.
+  * if the Processing is necessary for the purposes of your legitimate interest => revoke it only if the user has _opted-out_.
   * if the Processing requires the User explicit consent => revoke it if the user _has not given their consent_.
 
 <br />
@@ -304,41 +304,7 @@ Purchasely.revokeDataProcessingConsent([])
 
 <br />
 
-## Disabling All Non-Essential Processing
-
-* **Purpose**: Revoking all non essential processing at once when user chose to reject non essential processing
-
-<br />
-
-* **How to revoke**: You can opt to revoke all revokable processing in one go::
-
-```swift
-Purchasely.revokeDataProcessingConsent(for: [.allNonEssentials])
-```
-```kotlin
-Purchasely.revokeDataProcessingConsent(setOf(PLYDataProcessingPurpose.AllNonEssentials))
-```
-```javascript React Native
-Purchasely.revokeDataProcessingConsent([PLYDataProcessingPurpose.ALL_NON_ESSENTIALS])
-```
-```javascript Flutter
-Purchasely.revokeDataProcessingConsent([PLYDataProcessingPurpose.allNonEssentials]);
-```
-```javascript Cordova
-Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.allNonEssentials])
-```
-
-<br />
-
-* **Effect**: This disables Processing #2, #3, #4 and #5 simultaneously.
-
-> ℹ️ From SDK 6.3.0, `allNonEssentials` also includes the [Support Investigation](#support-investigation) purpose. A refusal that an older SDK version stored does not change after the update. Call `revokeDataProcessingConsent` again to send it with the new purposes.
-
-> ℹ️ `allNonEssentials` does not include the [Refund Handling](#refund-handling-ios-only) purpose. Add it to the same call when the user refuses it too.
-
-<br />
-
-## Support Investigation
+## Processing #5 - Technical Support / Incident Investigation
 
 <Callout icon="📘" theme="info">
   ### Availability
@@ -346,11 +312,14 @@ Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.allNonE
   This purpose is available from SDK **6.3.0** on iOS, Android, React Native, Flutter and Cordova.
 </Callout>
 
-* **Purpose**: Processing #5 of the Data Processing Agreement. Purchasely can investigate a technical problem or an incident at the level of one user.
+* **Purpose**: Investigate and resolve the issues you report, or the anomalies that affect the Services. Investigations use aggregated data whenever possible. Purchasely accesses User-level data (identifiers, events, transactions, properties) only when the issue cannot be resolved otherwise, and only for the Users concerned by that issue.
+
+  Authorised Purchasely personnel or automated support agents carry out the investigations. The automated support agents use a large language model provider (OpenAI) as a sub-processor. The data stays in the European Union, is never used for model training, and is deleted within 30 days.
 
 <br />
 
-* **When to revoke?** Revoke it when the user refuses that Purchasely uses their data for support investigations.
+* **When to revoke?**
+  * This Processing is necessary for the purposes of your legitimate interest and is active by default => revoke it only if the user has _opted-out_.
 
 <br />
 
@@ -373,7 +342,51 @@ Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.allNonE
 
 <br />
 
-* **Effect**: The SDK sends `support-investigation` in the list of refused purposes. Purchasely then leaves this user out of the support investigations at the level of the user. The SDK behavior on the device does not change.
+* **Effect**
+  * The SDK sends `support-investigation` in the list of refused purposes.
+  * Investigations that concern this user use aggregated data only.
+  * Issues specific to this user (for example, a subscription that does not unlock or an unexpected paywall) can take longer to resolve, or cannot be resolved.
+  * The SDK behavior does not change.
+
+<br />
+
+> 💡 Reduce the data without revoking
+>
+> To minimise the data involved in an investigation without revoking this Processing, hash your external user identifiers before you pass them to the SDK.
+
+<br />
+
+## Disabling All Non-Essential Processing
+
+* **Purpose**: Revoking all non essential processing at once when user chose to reject non essential processing
+
+<br />
+
+* **How to revoke**: You can opt to revoke all revokable processing in one go:
+
+```swift
+Purchasely.revokeDataProcessingConsent(for: [.allNonEssentials])
+```
+```kotlin
+Purchasely.revokeDataProcessingConsent(setOf(PLYDataProcessingPurpose.AllNonEssentials))
+```
+```javascript React Native
+Purchasely.revokeDataProcessingConsent([PLYDataProcessingPurpose.ALL_NON_ESSENTIALS])
+```
+```javascript Flutter
+Purchasely.revokeDataProcessingConsent([PLYDataProcessingPurpose.allNonEssentials]);
+```
+```javascript Cordova
+Purchasely.revokeDataProcessingConsent([Purchasely.DataProcessingPurpose.allNonEssentials])
+```
+
+<br />
+
+* **Effect**: This disables Processing #2, #3, #4 and #5 simultaneously.
+
+> ℹ️ From SDK 6.3.0, `allNonEssentials` also includes [Processing #5](#processing-5---technical-support--incident-investigation). A refusal that an older SDK version stored does not change after the update. Call `revokeDataProcessingConsent` again to send it with the new purposes.
+
+> ℹ️ `allNonEssentials` does not include the [Refund Handling](#refund-handling-ios-only) purpose. Add it to the same call when the user refuses it too.
 
 <br />
 
