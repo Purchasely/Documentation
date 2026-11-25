@@ -110,7 +110,7 @@ Test each generated component in the web preview or on your phone: the Composer 
 
 ## Generating a whole Screen from a prompt
 
-Beyond components, you can also **generate an entire Screen from a prompt** in the Console, from the Screens list or when adding a step to a Web Flow. Describe the Screen, its role in the funnel and your brand, and iterate on the result in the Composer. Generated Screens are standard Screens: they render on web and in the app alike.
+Beyond components, you can also **generate an entire Screen from a prompt** in the Console, from the Screens list or when adding a step to a Web Flow. Describe the Screen, its role in the funnel and your brand, and iterate on the result in the Composer. Generated Screens are standard Screens: they render on web and in the app alike. See [Creating Screens & Flows: prompt, Figma or Composer](creating-screens).
 
 ## Custom JavaScript on a Screen
 

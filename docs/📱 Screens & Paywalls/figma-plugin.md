@@ -19,12 +19,22 @@ Purchasely's Figma plugin offers unbeatable features that you need:
 
 <br />
 
+# Connect the plugin to your app
+
+1. Install the [Purchasely plugin](https://www.figma.com/community/plugin/1600830924110318702/purchasely) from the Figma Community.
+2. In the Purchasely Console, open your app settings, then **API keys**, and copy the **Token** of the **Figma Plugin** section.
+3. Paste the token in the plugin. Regenerating the token in the Console disconnects the plugins that use the previous one.
+
 # Your first export
 
 1. Select one frame or multiple frames (screens) to export
 2. Open Purchasely plugin
 3. Export
 4. Enjoy ☕️
+
+The exported Screens appear in the Purchasely Console as standard Screens: open them in the [Screen Composer](screen-composer) to adjust them, map your plans and localize them, and chain them in the [Flow Composer](flow-configuration).
+
+Importing from Figma is one of three ways to create Screens and Flows, along with prompts and the Composers: see [Creating Screens & Flows](creating-screens).
 
 <br />
 

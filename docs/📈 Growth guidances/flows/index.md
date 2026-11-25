@@ -101,7 +101,7 @@ Prefetch the Flow presentation associated to a Placement, then call the new `dis
 
 # Build sequences of Screens with Flows
 
-A Flow is composed of a sequence of Screens crafted with Purchasely Screen Composer. Here is a short video tutorial that explains how to build a Flow.
+A Flow is composed of a sequence of Screens. You can generate a whole Flow from a prompt in the Console Chat, import it from Figma with the [Purchasely plugin](figma-plugin), or build it by hand with the Screen Composer and the Flow Composer: see [Creating Screens & Flows](creating-screens). Here is a short video tutorial that explains how to build a Flow in the Flow Composer.
 
 📚 For more details, follow the [step by step Flow and configuration guide](flow-configuration)
 

@@ -10,13 +10,21 @@ metadata:
 next:
   description: ''
 ---
+<Callout icon="✨" theme="info">
+  ### Three ways to create a Screen
+
+  The Screen Composer is one of three ways to create a Screen. You can also **describe it in a prompt** in the Console Chat, or **import it from Figma** with the Purchasely plugin. In both cases the result opens in the Screen Composer, where you fine-tune it. See [Creating Screens & Flows: prompt, Figma or Composer](creating-screens).
+</Callout>
+
 # General overview
 
 Purchasely Screen Composer provides an intuitive and flexible way to design custom screens for your app.
 
 The module integrates a comprehensive library of pre-built components, that users can simply drag and drop into their screen structure and organize in different layouts to best fit their needs.
 
-Screens can be created either from a white slate or from a pre-configured template that can be customized as desired, and on which components can be added / removed or reordered.
+Screens can be created from a white slate, from a pre-configured template, from a prompt or from a Figma design. Whatever the starting point, they can be customized as desired, and components can be added / removed or reordered.
+
+From the Composer, you can also open the Chat and describe a change in plain words (_"add a reviews carousel above the CTA"_), optionally with a reference image: the assistant edits the Screen for you.
 
 Once components are placed, they can be easily reordered and individually configured to match the desired design and branding. The layout can be adjusted at any time, providing full flexibility to adapt your design as your needs evolve. This ensures a seamless and dynamic experience in creating personalized app screens.
 

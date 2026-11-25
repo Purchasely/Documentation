@@ -18,7 +18,7 @@ Purchasely helps mobile teams build, personalize, automate, and measure native i
 
 ### In-App Experience builder (Screens)
 
-Create and iterate on native Screens in no-code with the [Screen Composer](screen-composer) (including surveys and Quizzes).
+Create and iterate on native Screens in no-code (including surveys and Quizzes). [Three ways to create them](creating-screens): describe the Screen in a prompt and let the AI design it, import it from Figma with the [Purchasely plugin](figma-plugin), or build it in the [Screen Composer](screen-composer).
 
 ### Display & In-App orchestration (Placements, priorities, deeplinks)
 
@@ -26,7 +26,7 @@ Deliver the right In-App Experience at the right time by associating content to 
 
 ### Personalized journeys (Flows)
 
-Build multi-step [Flows](flows) to guide users through onboarding, activation, feature discovery, and engagement paths. Flows can branch dynamically based on user insights and conditions.
+Build multi-step [Flows](flows) to guide users through onboarding, activation, feature discovery, and engagement paths. Flows can branch dynamically based on user insights and conditions. Like Screens, a Flow can be generated from a prompt, imported from Figma or built in the Flow Composer.
 
 You can also use [Conditional Visibility](conditional-visibility) to show or hide components within each Screen (inside a Flow) based on user data or Screen interactions, for deeper personalization without duplicating Screens.
 
