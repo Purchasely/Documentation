@@ -29,7 +29,7 @@ next:
 > **Existing integrations:**
 >
 > * ✅ [Dinmo](https://www.dinmo.com) — native integration available ([setup guide](https://docs.dinmo.io/integrations/destination-platforms/purchasely))
-> * ✅ Amplitude
+> * ✅ Amplitude ([setup guide](https://docs.purchasely.com/docs/amplitude-cohort-sync))
 > * ✅ Mixpanel
 
 # Benefits
