@@ -76,11 +76,12 @@ Enter your `App scheme`  (without the `://`) in the Purchasely Console in the fi
 
 Then, in the Purchasely Console:
 
-1. Paste the value of the Key ID generated in the field `Key ID`
-2. Upload the API Key file (`.p8`) previously downloaded in the field `Private Key File`
-3. Paste the value of the `Issuer ID` in the field `Issuer ID`
+1. Paste the Issuer ID in the field `Issuer ID`
+2. Paste the Key ID of the In-App Purchase key in the field `Key ID`
+3. In the field `Private key file`, upload the key file (`.p8`) from App Store Connect
+4. Click **Save**
 
-<Image align="center" border={true} src="https://files.readme.io/4979bcc-image.png" className="border" />
+<Image align="center" border={true} src="https://files.readme.io/2f18a16f63ce975c22dce86526a076be4898569d6dea9ac3174e08531df29576-app-store-in-app-purchase-key.png" className="border" />
 
 [More details on StoreKit 2](app-store-storekit-1-vs-storekit-2)
 
